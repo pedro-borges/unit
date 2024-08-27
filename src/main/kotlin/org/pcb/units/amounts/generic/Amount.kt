@@ -1,31 +1,31 @@
-package org.pcb.units.amounts.domain
+package org.pcb.units.amounts.generic
 
 import java.math.BigDecimal
+import java.math.RoundingMode.HALF_EVEN
 import java.util.Objects
 import org.pcb.units.domain.Domain
 import org.pcb.units.unit.CompositeUnit
-import org.pcb.units.unit.Unit
 
 open class Amount<D : Domain>(val amount: BigDecimal,
                               val unit: CompositeUnit<D>)
 {
     operator fun plus(that: Amount<D>) =
-        Amount(amount = this.amount + that.amount * that.unit.cannon / this.unit.cannon,
+        Amount(amount = amount + that.amount * that.unit.cannon / unit.cannon,
                unit = unit)
 
     operator fun minus(that: Amount<D>) =
-        Amount(amount = this.amount - that.amount * that.unit.cannon / this.unit.cannon,
+        Amount(amount = amount - that.amount * that.unit.cannon / unit.cannon,
                unit = unit)
 
     operator fun times(that: Amount<*>) =
-        Amount(amount = this.amount * that.amount,
+        Amount(amount = amount * that.amount,
                unit = unit * that.unit)
 
     operator fun div(that: Amount<D>) =
         ScalarAmount(amount = amount * unit.cannon / that.amount / that.unit.cannon)
 
-    fun using(unit: Unit<D>) =
-        Amount(amount = this.amount * this.unit.cannon / unit.cannon,
+    fun using(unit: CompositeUnit<D>) =
+        Amount(amount = amount * unit.cannon / unit.cannon,
                unit = unit)
 
     override fun equals(other: Any?) =
@@ -42,6 +42,6 @@ open class Amount<D : Domain>(val amount: BigDecimal,
 
     override fun toString(): String
     {
-        return "${amount.stripTrailingZeros().toPlainString()}$unit"
+        return "${amount.setScale(33, HALF_EVEN).stripTrailingZeros().toPlainString()}$unit (${unit.domain.simpleName})"
     }
 }

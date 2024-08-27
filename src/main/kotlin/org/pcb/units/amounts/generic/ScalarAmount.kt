@@ -1,7 +1,6 @@
-package org.pcb.units.amounts.domain
+package org.pcb.units.amounts.generic
 
 import org.pcb.units.domain.Scalar
-import org.pcb.units.domain.Space
 import org.pcb.units.toBigDecimal
 import org.pcb.units.unit.CompositeUnit
 
@@ -10,5 +9,3 @@ open class ScalarAmount(amount: Number)
                      unit = CompositeUnit(
                          units = mapOf(),
                          domain = Scalar::class))
-{
-}

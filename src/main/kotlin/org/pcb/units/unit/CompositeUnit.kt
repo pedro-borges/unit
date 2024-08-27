@@ -1,10 +1,12 @@
 package org.pcb.units.unit
 
-import java.math.BigDecimal
 import java.math.BigDecimal.ONE
+import java.math.MathContext.DECIMAL128
 import kotlin.reflect.KClass
 import org.pcb.units.display.Renderer
 import org.pcb.units.domain.Domain
+import org.pcb.units.power
+import org.pcb.units.putOrRemove
 
 open class CompositeUnit<D : Domain>(val units: Map<Unit<*>, Int>, domain: KClass<D>)
     : Unit<D>(domain)
@@ -12,7 +14,12 @@ open class CompositeUnit<D : Domain>(val units: Map<Unit<*>, Int>, domain: KClas
     constructor(unit: Unit<D>, domain: KClass<D>) : this(mapOf(unit to 1), domain)
 
     override val symbol = Renderer.render(units)
-    override val cannon = units.entries.fold(ONE) { acc, entry -> acc * (entry.key.cannon.power(entry.value)) }
+    override val cannon
+        get() =
+            units.entries
+                .fold(ONE) { acc, entry ->
+                    acc.multiply(entry.key.cannon.power(entry.value), DECIMAL128)
+                }
 
     operator fun times(unit: Unit<*>) =
         CompositeUnit(units.toMutableMap()
@@ -44,21 +51,4 @@ open class CompositeUnit<D : Domain>(val units: Map<Unit<*>, Int>, domain: KClas
                       Domain::class)
 
     override fun toString() = symbol
-
-    private fun MutableMap<Unit<*>, Int>.putOrRemove(unit: Unit<*>, value: Int)
-    {
-        if (value == 0) this.remove(unit)
-        else this.put(unit, value)
-    }
-
-    private fun BigDecimal.power(power: Int): BigDecimal
-    {
-        var result = ONE
-        for (a in 1..kotlin.math.abs(power))
-        {
-            if (power > 0) result *= this
-            if (power < 0) result /= this
-        }
-        return result
-    }
 }

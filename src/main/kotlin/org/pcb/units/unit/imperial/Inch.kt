@@ -6,11 +6,11 @@ import org.pcb.units.unit.Unit
 
 class Inch : Unit<Space>(Space::class)
 {
-    override val symbol = "\""
+    override val symbol = "in"
     override val cannon = 0.0254.toBigDecimal()
 
     companion object
     {
-        val INCHES = Inch()
+        val INCH = Inch()
     }
 }

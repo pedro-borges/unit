@@ -1,16 +1,16 @@
 package org.pcb.units.unit.metric
 
-import java.math.BigDecimal.ONE
 import org.pcb.units.domain.Time
+import org.pcb.units.toBigDecimal
 import org.pcb.units.unit.Unit
 
 class Second : Unit<Time>(Time::class)
 {
     override val symbol = "s"
-    override val cannon = ONE
+    override val cannon = 1.0.toBigDecimal()
 
     companion object
     {
-        val SECONDS = Second()
+        val SECOND = Second()
     }
 }

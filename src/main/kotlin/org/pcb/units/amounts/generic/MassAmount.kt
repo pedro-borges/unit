@@ -1,4 +1,4 @@
-package org.pcb.units.amounts.domain
+package org.pcb.units.amounts.generic
 
 import org.pcb.units.domain.Mass
 import org.pcb.units.toBigDecimal
@@ -12,10 +12,16 @@ open class MassAmount(amount: Number,
                        unit = mass,
                        domain = Mass::class))
 {
+    operator fun times(that: SpeedAmount) =
+        MomentumAmount(amount = that.amount * that.amount,
+                       mass = mass,
+                       space = that.space,
+                       time = that.time)
+
     operator fun times(that: AccelerationAmount) =
         ForceAmount(amount = that.amount * that.amount,
+                    mass = mass,
                     space = that.space,
                     time1 = that.time1,
-                    time2 = that.time2,
-                    mass = mass)
+                    time2 = that.time2)
 }

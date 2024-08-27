@@ -1,4 +1,4 @@
-package org.pcb.units.amounts.domain
+package org.pcb.units.amounts.generic
 
 import org.pcb.units.domain.Space
 import org.pcb.units.toBigDecimal
@@ -13,7 +13,7 @@ open class SpaceAmount(amount: Number,
                         domain = Space::class))
 {
     operator fun div(that: TimeAmount) =
-        SpeedAmount(amount = this.amount / that.amount,
+        SpeedAmount(amount = amount / that.amount,
                     space = space,
                     time = that.unit)
 }

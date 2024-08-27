@@ -4,21 +4,20 @@ import org.pcb.units.unit.Unit
 
 object Renderer
 {
-    var superscriptPowers = true
+    var separator = "﹒"
 
     fun render(units: Map<Unit<*>, Int>) =
         units.asSequence()
             .sortedByDescending { it.value }
-            .fold("") { accumulator, domainPower ->
-                accumulator + "﹒" + domainPower.key.symbol + domainPower.value.toPowerString()
-            }
+            .map { it.key.symbol + it.value.toPowerString() }
+            .joinToString(separator = separator)
 
     private fun Int.toPowerString() =
         when
         {
             this == 1 -> ""
             this == 0 -> throw IllegalStateException("Unexpected power of 0")
-            else      -> if (superscriptPowers) toSuperscript() else this
+            else      -> toSuperscript()
         }
 
     private fun Int.toSuperscript() =
@@ -34,5 +33,4 @@ object Renderer
             .replace('7', '⁷')
             .replace('8', '⁸')
             .replace('9', '⁹')
-
 }

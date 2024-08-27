@@ -1,4 +1,4 @@
-package org.pcb.units.amounts.domain
+package org.pcb.units.amounts.generic
 
 import org.pcb.units.domain.Space
 import org.pcb.units.domain.Speed
@@ -17,11 +17,11 @@ open class SpeedAmount(amount: Number,
                         domain = Speed::class))
 {
     operator fun times(that: TimeAmount) =
-        SpaceAmount(amount = this.amount / this.time.cannon * that.amount * that.unit.cannon,
+        SpaceAmount(amount = amount / time.cannon * that.amount * that.unit.cannon,
                     space = space)
 
     operator fun div(that: TimeAmount) =
-        AccelerationAmount(amount = this.amount / that.amount,
+        AccelerationAmount(amount = amount / that.amount,
                            space = space,
                            time1 = time,
                            time2 = that.unit)

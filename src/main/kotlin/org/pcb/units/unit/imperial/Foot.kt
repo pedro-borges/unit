@@ -6,11 +6,11 @@ import org.pcb.units.unit.Unit
 
 class Foot : Unit<Space>(Space::class)
 {
-    override val symbol = "'"
+    override val symbol = "ft"
     override val cannon = 0.3048.toBigDecimal()
 
     companion object
     {
-        val FEET = Foot()
+        val FOOT = Foot()
     }
 }

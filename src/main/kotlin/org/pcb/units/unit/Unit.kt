@@ -26,6 +26,4 @@ abstract class Unit<D : Domain>(val domain: KClass<D>)
         result = 31 * result + cannon.hashCode()
         return result
     }
-
-
 }

@@ -1,10 +1,10 @@
 package org.pcb.units.amounts.imperial
 
-import org.pcb.units.amounts.domain.SpaceAmount
+import org.pcb.units.amounts.generic.SpaceAmount
 import org.pcb.units.toBigDecimal
-import org.pcb.units.unit.imperial.Inch.Companion.INCHES
+import org.pcb.units.unit.imperial.Inch.Companion.INCH
 
 class Inches(amount: Number)
-    : SpaceAmount(amount.toBigDecimal(), INCHES)
+    : SpaceAmount(amount.toBigDecimal(), INCH)
 {
 }

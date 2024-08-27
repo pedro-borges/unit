@@ -5,11 +5,11 @@ import org.pcb.units.unit.Unit
 
 class Minute : Unit<Time>(Time::class)
 {
-    override val symbol = "m"
-    override val cannon = 60.toBigDecimal()
+    override val symbol = "min"
+    override val cannon = 60.0.toBigDecimal()
 
     companion object
     {
-        val MINUTES = Minute()
+        val MINUTE = Minute()
     }
 }
