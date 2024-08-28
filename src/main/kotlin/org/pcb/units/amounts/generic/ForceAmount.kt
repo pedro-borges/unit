@@ -7,16 +7,13 @@ import org.pcb.units.domain.Time
 import org.pcb.units.toBigDecimal
 import org.pcb.units.unit.CompositeUnit
 import org.pcb.units.unit.Unit
-import org.pcb.units.unit.mechanics.Kilogram.Companion.KILOGRAM
-import org.pcb.units.unit.mechanics.Newton
-import org.pcb.units.unit.metric.Meter.Companion.METER
-import org.pcb.units.unit.metric.Second.Companion.SECOND
 
-open class ForceAmount(amount: Number,
-                       val mass: Unit<Mass>,
-                       val space: Unit<Space>,
-                       val time1: Unit<Time>,
-                       val time2: Unit<Time>)
+open class ForceAmount<M : Unit<Mass>, S : Unit<Space>, T1 : Unit<Time>, T2 : Unit<Time>>(
+        amount: Number,
+        val mass: M,
+        val space: S,
+        val time1: T1,
+        val time2: T2)
     : Amount<Force>(amount = amount.toBigDecimal(),
                     unit = CompositeUnit(
                         units =
@@ -31,51 +28,50 @@ open class ForceAmount(amount: Number,
                                   time2 to -1),
                         domain = Force::class))
 {
-    constructor(amount: Number, unit: Newton) : this(amount, KILOGRAM, METER, SECOND, SECOND)
+    operator fun div(that: MassAmount<*>) =
+        AccelerationAmount(amount = amount * mass.cannon / that.amount / that.unit.cannon,
+                           space = space,
+                           time1 = time1,
+                           time2 = time2)
 
-    operator fun div(that: MassAmount) =
-        when
-        {
-            mass.cannon == that.unit.cannon ->
-                AccelerationAmount(amount = amount / that.amount,
-                                   space = space,
-                                   time1 = time1,
-                                   time2 = time2)
-            else                            ->
-                AccelerationAmount(amount = amount * mass.cannon / that.amount / that.unit.cannon,
-                                   space = space,
-                                   time1 = time1,
-                                   time2 = time2)
-        }
+    @JvmName("divM")
+    operator fun div(that: MassAmount<M>) =
+        AccelerationAmount(amount = amount / that.amount,
+                           space = space,
+                           time1 = time1,
+                           time2 = time2)
 
-    operator fun div(that: AccelerationAmount) =
-        when
-        {
-            space.cannon / time1.cannon / time2.cannon == that.unit.cannon ->
-                MassAmount(amount = amount / that.amount,
-                           mass = mass)
-            else                                                           ->
-                MassAmount(amount = amount * space.cannon * time1.cannon * time2.cannon / that.amount / that.unit.cannon,
-                           mass = mass)
-        }
+    operator fun div(that: AccelerationAmount<*, *, *>) =
+        MassAmount(amount = amount * space.cannon * time1.cannon * time2.cannon / that.amount / that.unit.cannon,
+                   mass = mass)
 
-    operator fun times(that: TimeAmount) =
-        when
-        {
-            time1.cannon == that.unit.cannon ->
-                MomentumAmount(amount = amount * that.amount,
-                               mass = mass,
-                               space = space,
-                               time = time2)
-            time2.cannon == that.unit.cannon ->
-                MomentumAmount(amount = amount * that.amount,
-                               mass = mass,
-                               space = space,
-                               time = time1)
-            else                             ->
-                MomentumAmount(amount = amount / time2.cannon * that.amount * that.unit.cannon,
-                               mass = mass,
-                               space = space,
-                               time = time1)
-        }
+    @JvmName("divST1T2")
+    operator fun div(that: AccelerationAmount<S, T1, T2>) =
+        MassAmount(amount = amount / that.amount,
+                   mass = mass)
+
+    @JvmName("divST2T1")
+    operator fun div(that: AccelerationAmount<S, T2, T1>) =
+        MassAmount(amount = amount / that.amount,
+                   mass = mass)
+
+    operator fun times(that: TimeAmount<*>) =
+        MomentumAmount(amount = amount / time2.cannon * that.amount * that.unit.cannon,
+                       mass = mass,
+                       space = space,
+                       time = time1)
+
+    @JvmName("timesT1")
+    operator fun times(that: TimeAmount<T1>) =
+        MomentumAmount(amount = amount * that.amount,
+                       mass = mass,
+                       space = space,
+                       time = time2)
+
+    @JvmName("timesT2")
+    operator fun times(that: TimeAmount<T2>) =
+        MomentumAmount(amount = amount * that.amount,
+                       mass = mass,
+                       space = space,
+                       time = time1)
 }

@@ -7,23 +7,22 @@ import org.pcb.units.toBigDecimal
 import org.pcb.units.unit.CompositeUnit
 import org.pcb.units.unit.Unit
 
-open class RentAmount(amount: Number,
-                      val currency: Unit<Currency>,
-                      val time: Unit<Time>)
+open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
+        amount: Number,
+        val currency: C,
+        val time: T)
     : Amount<Rent>(amount = amount.toBigDecimal(),
                    unit = CompositeUnit(
                        units = mapOf(currency to 1,
                                      time to -1),
                        domain = Rent::class))
 {
-    operator fun times(that: TimeAmount) =
-        when
-        {
-            time.cannon == that.unit.cannon ->
-                CurrencyAmount(amount = amount * that.amount,
-                               currency = currency)
-            else                            ->
-                CurrencyAmount(amount = amount / time.cannon * that.amount * that.unit.cannon,
-                               currency = currency)
-        }
+    operator fun times(that: TimeAmount<*>) =
+        CurrencyAmount(amount = amount / time.cannon * that.amount * that.unit.cannon,
+                       currency = currency)
+
+    @JvmName("timesT")
+    operator fun times(that: TimeAmount<T>) =
+        CurrencyAmount(amount = amount * that.amount,
+                       currency = currency)
 }

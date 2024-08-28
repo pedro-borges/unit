@@ -2,6 +2,7 @@ package org.pcb.units
 
 import java.math.BigDecimal
 import java.math.MathContext.DECIMAL128
+import org.pcb.units.domain.Domain
 import org.pcb.units.unit.Unit
 
 fun Number.toBigDecimal() =
@@ -27,3 +28,7 @@ fun BigDecimal.power(power: Int): BigDecimal
     }
     return result
 }
+
+infix fun <D : Domain> Unit<D>.or(other: Unit<D>) =
+    if (this == other) this
+    else throw IllegalArgumentException("$this and $other are not the same")

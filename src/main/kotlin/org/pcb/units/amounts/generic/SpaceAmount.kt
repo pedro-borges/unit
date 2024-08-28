@@ -5,14 +5,15 @@ import org.pcb.units.toBigDecimal
 import org.pcb.units.unit.CompositeUnit
 import org.pcb.units.unit.Unit
 
-open class SpaceAmount(amount: Number,
-                       val space: Unit<Space>)
+open class SpaceAmount<S : Unit<Space>>(
+        amount: Number,
+        val space: S)
     : Amount<Space>(amount = amount.toBigDecimal(),
                     unit = CompositeUnit(
                         unit = space,
                         domain = Space::class))
 {
-    operator fun div(that: TimeAmount) =
+    operator fun div(that: TimeAmount<*>) =
         SpeedAmount(amount = amount / that.amount,
                     space = space,
                     time = that.unit)

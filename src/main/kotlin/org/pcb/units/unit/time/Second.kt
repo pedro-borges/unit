@@ -1,4 +1,4 @@
-package org.pcb.units.unit.metric
+package org.pcb.units.unit.time
 
 import org.pcb.units.domain.Time
 import org.pcb.units.toBigDecimal

@@ -7,20 +7,21 @@ import org.pcb.units.toBigDecimal
 import org.pcb.units.unit.CompositeUnit
 import org.pcb.units.unit.Unit
 
-open class SpeedAmount(amount: Number,
-                       val space: Unit<Space>,
-                       val time: Unit<Time>)
+open class SpeedAmount<S : Unit<Space>, T : Unit<Time>>(
+        amount: Number,
+        val space: S,
+        val time: T)
     : Amount<Speed>(amount = amount.toBigDecimal(),
                     unit = CompositeUnit(
                         units = mapOf(space to 1,
                                       time to -1),
                         domain = Speed::class))
 {
-    operator fun times(that: TimeAmount) =
+    operator fun times(that: TimeAmount<*>) =
         SpaceAmount(amount = amount / time.cannon * that.amount * that.unit.cannon,
                     space = space)
 
-    operator fun div(that: TimeAmount) =
+    operator fun div(that: TimeAmount<*>) =
         AccelerationAmount(amount = amount / that.amount,
                            space = space,
                            time1 = time,

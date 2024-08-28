@@ -1,3 +1,5 @@
+package org.pcb.units.unit.finance
+
 import org.pcb.units.domain.Currency
 import org.pcb.units.toBigDecimal
 import org.pcb.units.unit.Unit

@@ -7,23 +7,22 @@ import org.pcb.units.toBigDecimal
 import org.pcb.units.unit.CompositeUnit
 import org.pcb.units.unit.Unit
 
-open class PaceAmount(amount: Number,
-                      val time: Unit<Time>,
-                      val space: Unit<Space>)
+open class PaceAmount<T : Unit<Time>, S : Unit<Space>>(
+        amount: Number,
+        val time: T,
+        val space: S)
     : Amount<Pace>(amount = amount.toBigDecimal(),
                    unit = CompositeUnit(
                        units = mapOf(time to 1,
                                      space to -1),
                        domain = Pace::class))
 {
-    operator fun times(that: SpaceAmount) =
-        when
-        {
-            space.cannon == that.unit.cannon ->
-                TimeAmount(amount = amount * that.amount,
-                           time = time)
-            else                             ->
-                TimeAmount(amount = amount / space.cannon * that.amount * that.unit.cannon,
-                           time = time)
-        }
+    operator fun times(that: SpaceAmount<*>) =
+        TimeAmount(amount = amount / space.cannon * that.amount * that.unit.cannon,
+                   time = time)
+
+    @JvmName("timesS")
+    operator fun times(that: SpaceAmount<S>) =
+        TimeAmount(amount = amount * that.amount,
+                   time = time)
 }
