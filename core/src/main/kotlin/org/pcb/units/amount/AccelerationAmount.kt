@@ -83,6 +83,7 @@ open class AccelerationAmount<S : Unit<Space>, T : Unit<Time>>(
 
     operator fun <S : Unit<Space>, T : Unit<Time>> times(that: SpeedAmount<S, T>) =
         FrequencyAmount(amount = amount * that.amount * convert(that.space to space,
+                                                                time to that.time,
                                                                 time to that.time),
                         time = time)
 

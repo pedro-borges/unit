@@ -31,7 +31,7 @@ class AcceleartionAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(1, FOOT, SECOND),
-            actual = AccelerationAmount(0, FOOT, SECOND) + AccelerationAmount(43200, INCH, SECOND))
+            actual = AccelerationAmount(0, FOOT, SECOND) + AccelerationAmount(43200, INCH, MINUTE))
     }
 
     @Test
@@ -94,8 +94,8 @@ class AcceleartionAmountTest
     fun timesOtherSpeed()
     {
         assertEquals(
-            expected = FrequencyAmount(4, MINUTE),
-            actual = AccelerationAmount(2, FOOT, MINUTE) * SpeedAmount(86400, INCH, SECOND))
+            expected = FrequencyAmount(4, SECOND),
+            actual = AccelerationAmount(2, FOOT, SECOND) * SpeedAmount(86400, INCH, MINUTE))
     }
 
     @Test
