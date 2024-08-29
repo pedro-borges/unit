@@ -1,7 +1,5 @@
 package org.pcb.units
 
-import java.math.BigDecimal.ONE
-import java.math.MathContext.DECIMAL128
 import java.util.Objects
 import kotlin.reflect.KClass
 import org.pcb.units.display.Renderer
@@ -19,8 +17,8 @@ open class CompositeUnit<D : Domain>(domain: KClass<D>,
     override val cannon
         get() =
             units.entries
-                .fold(ONE) { acc, entry ->
-                    acc.multiply(entry.key.cannon.power(entry.value), DECIMAL128)
+                .fold(1.toBigDecimal()) { acc, entry ->
+                    acc * entry.key.cannon.power(entry.value)
                 }
 
     operator fun times(unit: Unit<*>) =

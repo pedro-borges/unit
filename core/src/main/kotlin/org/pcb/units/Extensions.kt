@@ -4,7 +4,7 @@ import java.math.BigDecimal
 import java.math.MathContext.DECIMAL128
 import java.math.RoundingMode.HALF_EVEN
 
-fun Number.toBigBigDecimal() =
+fun Number.toBigBigDecimal(): BigDecimal =
     when
     {
         this is BigDecimal -> this.setScale(33, HALF_EVEN)
