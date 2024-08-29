@@ -10,7 +10,7 @@ import org.pcb.units.amount.SpaceAmount
 import org.pcb.units.amount.SpeedAmount
 import org.pcb.units.amount.finance.Gbp.GBP
 import org.pcb.units.amount.scalar.NaturalAmount
-import org.pcb.units.amount.space.metric.Meter.METER
+import org.pcb.units.amount.space.Meter.METER
 import org.pcb.units.amount.time.Day.DAY
 import org.pcb.units.amount.time.Minute.MINUTE
 import org.pcb.units.amount.time.Second.SECOND

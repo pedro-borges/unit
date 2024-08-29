@@ -1,8 +1,8 @@
-package org.pcb.units.amount.mechanics
+package org.pcb.units.amount.mass
 
 import org.pcb.units.Unit
 import org.pcb.units.amount.MassAmount
-import org.pcb.units.amount.mechanics.Stone.STONE
+import org.pcb.units.amount.mass.Stone.STONE
 import org.pcb.units.domain.Mass
 import org.pcb.units.toBigBigDecimal
 

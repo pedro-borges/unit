@@ -1,8 +1,8 @@
-package org.pcb.units.amount.space.metric
+package org.pcb.units.amount.space
 
 import org.pcb.units.Unit
 import org.pcb.units.amount.SpaceAmount
-import org.pcb.units.amount.space.metric.Meter.METER
+import org.pcb.units.amount.space.Meter.METER
 import org.pcb.units.domain.Space
 import org.pcb.units.toBigBigDecimal
 

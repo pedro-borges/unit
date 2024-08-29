@@ -3,13 +3,13 @@ package org.pcb.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.units.amount.MomentumAmount
-import org.pcb.units.amount.mechanics.Gram.GRAM
-import org.pcb.units.amount.mechanics.Ounce.OUNCE
-import org.pcb.units.amount.mechanics.Pound.POUND
+import org.pcb.units.amount.mass.Gram.GRAM
+import org.pcb.units.amount.mass.Ounce.OUNCE
+import org.pcb.units.amount.mass.Pound.POUND
 import org.pcb.units.amount.scalar.NaturalAmount
-import org.pcb.units.amount.space.imperial.Foot.FOOT
-import org.pcb.units.amount.space.imperial.Inch.INCH
-import org.pcb.units.amount.space.metric.Meter.METER
+import org.pcb.units.amount.space.Foot.FOOT
+import org.pcb.units.amount.space.Inch.INCH
+import org.pcb.units.amount.space.Meter.METER
 import org.pcb.units.amount.time.Minute.MINUTE
 import org.pcb.units.amount.time.Second.SECOND
 

@@ -7,11 +7,11 @@ import org.pcb.units.amount.ForceAmount
 import org.pcb.units.amount.MassAmount
 import org.pcb.units.amount.MomentumAmount
 import org.pcb.units.amount.SpeedAmount
-import org.pcb.units.amount.mechanics.Gram.GRAM
-import org.pcb.units.amount.mechanics.Ounce.OUNCE
-import org.pcb.units.amount.mechanics.Pound.POUND
+import org.pcb.units.amount.mass.Gram.GRAM
+import org.pcb.units.amount.mass.Ounce.OUNCE
+import org.pcb.units.amount.mass.Pound.POUND
 import org.pcb.units.amount.scalar.NaturalAmount
-import org.pcb.units.amount.space.metric.Meter.METER
+import org.pcb.units.amount.space.Meter.METER
 import org.pcb.units.amount.time.Second.SECOND
 
 class MassAmountTest
