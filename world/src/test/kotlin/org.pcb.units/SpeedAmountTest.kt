@@ -8,11 +8,11 @@ import org.pcb.units.amount.ScalarAmount
 import org.pcb.units.amount.SpaceAmount
 import org.pcb.units.amount.SpeedAmount
 import org.pcb.units.amount.TimeAmount
-import org.pcb.units.unit.imperial.Foot
-import org.pcb.units.unit.imperial.Inch
-import org.pcb.units.unit.metric.Meter
-import org.pcb.units.unit.time.Minute
-import org.pcb.units.unit.time.Second
+import org.pcb.units.amount.imperial.Foot.FOOT
+import org.pcb.units.amount.imperial.Inch.INCH
+import org.pcb.units.amount.metric.Meters.METER
+import org.pcb.units.amount.time.Minute.MINUTE
+import org.pcb.units.amount.time.Second.SECOND
 
 class SpeedAmountTest
 {
@@ -20,32 +20,32 @@ class SpeedAmountTest
     fun plusSameSpeed()
     {
         assertEquals(
-            expected = SpeedAmount(3, Meter, Second),
-            actual = SpeedAmount(1, Meter, Second) + SpeedAmount(2, Meter, Second))
+            expected = SpeedAmount(3, METER, SECOND),
+            actual = SpeedAmount(1, METER, SECOND) + SpeedAmount(2, METER, SECOND))
     }
 
     @Test
     fun plusOtherSpeed()
     {
         assertEquals(
-            expected = SpeedAmount(3, Meter, Second),
-            actual = SpeedAmount(2, Meter, Second) + SpeedAmount(60, Meter, Minute))
+            expected = SpeedAmount(3, METER, SECOND),
+            actual = SpeedAmount(2, METER, SECOND) + SpeedAmount(60, METER, MINUTE))
     }
 
     @Test
     fun minusSameSpeed()
     {
         assertEquals(
-            expected = SpeedAmount(1, Meter, Second),
-            actual = SpeedAmount(3, Meter, Second) - SpeedAmount(2, Meter, Second))
+            expected = SpeedAmount(1, METER, SECOND),
+            actual = SpeedAmount(3, METER, SECOND) - SpeedAmount(2, METER, SECOND))
     }
 
     @Test
     fun minusOtherSpeed()
     {
         assertEquals(
-            expected = SpeedAmount(2, Meter, Second),
-            actual = SpeedAmount(3, Meter, Second) - SpeedAmount(60, Meter, Minute))
+            expected = SpeedAmount(2, METER, SECOND),
+            actual = SpeedAmount(3, METER, SECOND) - SpeedAmount(60, METER, MINUTE))
     }
 
     @Test
@@ -53,7 +53,7 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = ScalarAmount(2),
-            actual = SpeedAmount(8, Meter, Second) / SpeedAmount(4, Meter, Second))
+            actual = SpeedAmount(8, METER, SECOND) / SpeedAmount(4, METER, SECOND))
     }
 
     @Test
@@ -61,55 +61,55 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = ScalarAmount(2),
-            actual = SpeedAmount(2, Meter, Second) / SpeedAmount(60, Meter, Minute))
+            actual = SpeedAmount(2, METER, SECOND) / SpeedAmount(60, METER, MINUTE))
     }
 
     @Test
     fun timesSameTime()
     {
         assertEquals(
-            expected = SpaceAmount(6, Meter),
-            actual = SpeedAmount(2, Meter, Second) * TimeAmount(3, Second))
+            expected = SpaceAmount(6, METER),
+            actual = SpeedAmount(2, METER, SECOND) * TimeAmount(3, SECOND))
     }
 
     @Test
     fun timesOtherTime()
     {
         assertEquals(
-            expected = SpaceAmount(120, Meter),
-            actual = SpeedAmount(2, Meter, Second) * TimeAmount(1, Minute))
+            expected = SpaceAmount(120, METER),
+            actual = SpeedAmount(2, METER, SECOND) * TimeAmount(1, MINUTE))
     }
 
     @Test
     fun divSameTime()
     {
         assertEquals(
-            expected = AccelerationAmount(2, Meter, Second, Second),
-            actual = SpeedAmount(6, Meter, Second) / TimeAmount(3, Second))
+            expected = AccelerationAmount(2, METER, SECOND, SECOND),
+            actual = SpeedAmount(6, METER, SECOND) / TimeAmount(3, SECOND))
     }
 
     @Test
     fun divOtherTime()
     {
         assertEquals(
-            expected = AccelerationAmount(2, Meter, Second, Minute),
-            actual = SpeedAmount(6, Meter, Second) / TimeAmount(3, Minute))
+            expected = AccelerationAmount(2, METER, SECOND, MINUTE),
+            actual = SpeedAmount(6, METER, SECOND) / TimeAmount(3, MINUTE))
     }
 
     @Test
     fun divSameSpace()
     {
         assertEquals(
-            expected = FrequencyAmount(2, Second),
-            actual = SpeedAmount(6, Meter, Second) / SpaceAmount(3, Meter))
+            expected = FrequencyAmount(2, SECOND),
+            actual = SpeedAmount(6, METER, SECOND) / SpaceAmount(3, METER))
     }
 
     @Test
     fun divOtherSpace()
     {
         assertEquals(
-            expected = FrequencyAmount(6, Second),
-            actual = SpeedAmount(1, Foot, Second) / SpaceAmount(2, Inch))
+            expected = FrequencyAmount(6, SECOND),
+            actual = SpeedAmount(1, FOOT, SECOND) / SpaceAmount(2, INCH))
     }
 
     // ... continue

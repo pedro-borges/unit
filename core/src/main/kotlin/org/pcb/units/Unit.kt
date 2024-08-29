@@ -4,7 +4,7 @@ import java.math.BigDecimal
 import kotlin.reflect.KClass
 import org.pcb.units.domain.Domain
 
-abstract class Unit<D : Domain>(val domain: KClass<D>)
+abstract class Unit<D : Domain>(val domain: KClass<out D>)
 {
     abstract val symbol: String
     abstract val cannon: BigDecimal

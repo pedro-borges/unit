@@ -1,0 +1,20 @@
+package org.pcb.units.amount.mechanics
+
+import org.pcb.units.Unit
+import org.pcb.units.amount.ForceAmount
+import org.pcb.units.amount.mechanics.Gram.GRAM
+import org.pcb.units.amount.metric.Meters.METER
+import org.pcb.units.amount.time.Second.SECOND
+import org.pcb.units.domain.Force
+import org.pcb.units.toBigBigDecimal
+
+@Suppress("unused")
+class Newton(amount: Number)
+    : ForceAmount<GRAM, METER, SECOND, SECOND>(amount.toBigBigDecimal(), GRAM, METER, SECOND, SECOND)
+{
+    object NEWTON : Unit<Force>(Force::class)
+    {
+        override val symbol = "N"
+        override val cannon = 1.toBigBigDecimal()
+    }
+}

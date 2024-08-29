@@ -21,8 +21,8 @@ open class Amount<D : Domain>(val amount: BigDecimal,
         when
         {
             this === other     -> true
-            other is Amount<*> -> amount.stripTrailingZeros().toPlainString() == other.amount.stripTrailingZeros().toPlainString() &&
-                                  unit == other.unit
+            other is Amount<*> -> amount * unit.cannon == other.amount * other.unit.cannon &&
+                                  unit.domain == other.unit.domain
             else               -> false
         }
 
