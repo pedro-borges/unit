@@ -19,7 +19,7 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
 {
     // region Mass
 
-    operator fun plus(that: MassAmount<*>) =
+    operator fun <M : Unit<Mass>> plus(that: MassAmount<M>) =
         MassAmount(amount = amount + that.amount * convert(that.mass to mass),
                    mass = mass)
 
@@ -28,7 +28,7 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
         MassAmount(amount = amount + that.amount,
                    mass = mass)
 
-    operator fun minus(that: MassAmount<*>) =
+    operator fun <M : Unit<Mass>> minus(that: MassAmount<M>) =
         MassAmount(amount = amount - that.amount * convert(that.mass to mass),
                    mass = mass)
 
@@ -41,7 +41,7 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
 
     // region Scalar
 
-    operator fun div(that: MassAmount<*>) =
+    operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
         NaturalAmount(amount = amount / that.amount / convert(that.mass to mass))
 
     @JvmName("divMass")

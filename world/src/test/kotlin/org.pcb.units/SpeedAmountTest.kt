@@ -28,8 +28,8 @@ class SpeedAmountTest
     fun plusOtherSpeed()
     {
         assertEquals(
-            expected = SpeedAmount(1, FOOT, MINUTE),
-            actual = SpeedAmount(0, FOOT, MINUTE) + SpeedAmount(0.2, INCH, SECOND))
+            expected = SpeedAmount(1, FOOT, SECOND),
+            actual = SpeedAmount(0, FOOT, SECOND) + SpeedAmount(720, INCH, MINUTE))
     }
 
     @Test
@@ -44,8 +44,8 @@ class SpeedAmountTest
     fun minusOtherSpeed()
     {
         assertEquals(
-            expected = SpeedAmount(0, FOOT, MINUTE),
-            actual = SpeedAmount(1, FOOT, MINUTE) - SpeedAmount(0.2, INCH, SECOND))
+            expected = SpeedAmount(0, FOOT, SECOND),
+            actual = SpeedAmount(1, FOOT, SECOND) - SpeedAmount(720, INCH, MINUTE))
     }
 
     @Test
@@ -61,7 +61,7 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = SpeedAmount(2, FOOT, MINUTE) / SpeedAmount(0.4, INCH, SECOND))
+            actual = SpeedAmount(2, FOOT, SECOND) / SpeedAmount(1440, INCH, MINUTE))
     }
 
     @Test

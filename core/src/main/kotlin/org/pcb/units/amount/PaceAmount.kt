@@ -22,7 +22,7 @@ open class PaceAmount<T : Unit<Time>, S : Unit<Space>>(
 {
     // region Pace
 
-    operator fun plus(that: PaceAmount<*, *>) =
+    operator fun <T : Unit<Time>, S : Unit<Space>> plus(that: PaceAmount<T, S>) =
         PaceAmount(amount = amount + that.amount * convert(that.time to time,
                                                            space to that.space),
                    time = time,
@@ -34,7 +34,7 @@ open class PaceAmount<T : Unit<Time>, S : Unit<Space>>(
                    time = time,
                    space = space)
 
-    operator fun minus(that: PaceAmount<*, *>) =
+    operator fun <T : Unit<Time>, S : Unit<Space>> minus(that: PaceAmount<T, S>) =
         PaceAmount(amount = amount - that.amount * convert(that.time to time,
                                                            space to that.space),
                    time = time,
@@ -50,7 +50,7 @@ open class PaceAmount<T : Unit<Time>, S : Unit<Space>>(
 
     // region Scalar
 
-    operator fun div(that: PaceAmount<*, *>) =
+    operator fun <T : Unit<Time>, S : Unit<Space>> div(that: PaceAmount<T, S>) =
         NaturalAmount(amount = amount / that.amount / convert(that.time to time,
                                                               space to that.space))
 
@@ -58,7 +58,7 @@ open class PaceAmount<T : Unit<Time>, S : Unit<Space>>(
     operator fun div(that: PaceAmount<T, S>) =
         NaturalAmount(amount = amount / that.amount)
 
-    operator fun times(that: SpeedAmount<*, *>) =
+    operator fun <S : Unit<Space>, T : Unit<Time>> times(that: SpeedAmount<S, T>) =
         NaturalAmount(amount = amount * that.amount * convert(that.time to time,
                                                               space to that.space))
 

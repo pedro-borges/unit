@@ -22,7 +22,7 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
 {
     // region Debt
 
-    operator fun plus(that: DebtAmount<C, *>) =
+    operator fun <T : Unit<Time>> plus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount + that.amount * convert(that.time to time),
                    currency = currency,
                    time = time)
@@ -33,7 +33,7 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
                    currency = currency,
                    time = time)
 
-    operator fun minus(that: DebtAmount<C, *>) =
+    operator fun <T : Unit<Time>> minus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount - that.amount * convert(that.time to time),
                    currency = currency,
                    time = time)
@@ -48,7 +48,7 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     // region Scalar
 
-    operator fun div(that: DebtAmount<C, *>) =
+    operator fun <T : Unit<Time>> div(that: DebtAmount<C, T>) =
         NaturalAmount(amount = amount / that.amount / convert(that.time to time))
 
     @JvmName("divDebt")
@@ -59,7 +59,7 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     // region Currency
 
-    operator fun div(that: TimeAmount<*>) =
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         CurrencyAmount(amount = amount * that.amount * convert(that.time to time),
                        currency = currency)
 

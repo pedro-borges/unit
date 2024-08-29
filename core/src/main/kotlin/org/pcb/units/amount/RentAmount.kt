@@ -22,7 +22,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 {
     // region Rent    
 
-    operator fun plus(that: RentAmount<C, *>) =
+    operator fun <T : Unit<Time>> plus(that: RentAmount<C, T>) =
         RentAmount(amount = amount + that.amount * convert(that.time to time),
                    currency = currency,
                    time = time)
@@ -33,7 +33,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
                    currency = currency,
                    time = time)
 
-    operator fun minus(that: RentAmount<C, *>) =
+    operator fun <T : Unit<Time>> minus(that: RentAmount<C, T>) =
         RentAmount(amount = amount - that.amount * convert(that.time to time),
                    currency = currency,
                    time = time)
@@ -48,7 +48,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     // region Scalar
 
-    operator fun div(that: RentAmount<C, *>) =
+    operator fun <T : Unit<Time>> div(that: RentAmount<C, T>) =
         NaturalAmount(amount = amount / that.amount / convert(that.time to time))
 
     @JvmName("divRent")
@@ -59,7 +59,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     // region Currency
 
-    operator fun times(that: TimeAmount<*>) =
+    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         CurrencyAmount(amount = amount * that.amount * convert(that.time to time),
                        currency = currency)
 

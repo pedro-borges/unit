@@ -76,7 +76,7 @@ open class ForceAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
 
     // region Acceleration
 
-    operator fun div(that: MassAmount<*>) =
+    operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
         AccelerationAmount(amount = amount / that.amount / convert(that.mass to mass),
                            space = space,
                            time = time)
@@ -91,7 +91,7 @@ open class ForceAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
 
     // region Mass
 
-    operator fun div(that: AccelerationAmount<*, *>) =
+    operator fun <S : Unit<Space>, T : Unit<Time>> div(that: AccelerationAmount<S, T>) =
         MassAmount(amount = amount / that.amount / convert(that.space to space,
                                                            time to that.time,
                                                            time to that.time),

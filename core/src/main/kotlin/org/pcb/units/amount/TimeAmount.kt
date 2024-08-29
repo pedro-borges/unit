@@ -19,7 +19,7 @@ open class TimeAmount<T : Unit<Time>>(
 {
     // region Time
 
-    operator fun plus(that: TimeAmount<*>) =
+    operator fun <T : Unit<Time>> plus(that: TimeAmount<T>) =
         TimeAmount(amount = amount + that.amount * convert(that.time to time),
                    time = time)
 
@@ -28,7 +28,7 @@ open class TimeAmount<T : Unit<Time>>(
         TimeAmount(amount = amount + that.amount,
                    time = time)
 
-    operator fun minus(that: TimeAmount<*>) =
+    operator fun <T : Unit<Time>> minus(that: TimeAmount<T>) =
         TimeAmount(amount = amount - that.amount * convert(that.time to time),
                    time = time)
 
@@ -41,7 +41,7 @@ open class TimeAmount<T : Unit<Time>>(
 
     // region Scalar
 
-    operator fun div(that: TimeAmount<*>) =
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         NaturalAmount(amount = amount / that.amount / convert(that.time to time))
 
     @JvmName("divTime")

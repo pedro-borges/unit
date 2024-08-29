@@ -25,7 +25,7 @@ open class EnergyAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
 {
     // region Energy
 
-    operator fun plus(that: EnergyAmount<*, *, *>) =
+    operator fun <M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>> plus(that: EnergyAmount<M, S, T>) =
         EnergyAmount(amount = amount + that.amount * convert(that.mass to mass,
                                                              that.space to space,
                                                              that.space to space,
@@ -43,7 +43,7 @@ open class EnergyAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
                      time = time)
 
 
-    operator fun minus(that: EnergyAmount<*, *, *>) =
+    operator fun <M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>> minus(that: EnergyAmount<M, S, T>) =
         EnergyAmount(amount = amount - that.amount * convert(that.mass to mass,
                                                              that.space to space,
                                                              that.space to space,
@@ -64,7 +64,7 @@ open class EnergyAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
 
     // region Scalar
 
-    operator fun div(that: EnergyAmount<*, *, *>) =
+    operator fun <M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>> div(that: EnergyAmount<M, S, T>) =
         NaturalAmount(amount = amount / that.amount / convert(that.mass to mass,
                                                               that.space to space,
                                                               that.space to space,
@@ -79,7 +79,7 @@ open class EnergyAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
 
     // region Force
 
-    operator fun div(that: SpaceAmount<*>) =
+    operator fun <S : Unit<Space>> div(that: SpaceAmount<S>) =
         ForceAmount(amount = amount / that.amount / convert(that.space to space),
                     mass = mass,
                     space = space,
@@ -96,7 +96,7 @@ open class EnergyAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
 
     // region Space
 
-    operator fun div(that: ForceAmount<*, *, *>) =
+    operator fun <M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>> div(that: ForceAmount<M, S, T>) =
         SpaceAmount(amount = amount / that.amount / convert(that.mass to mass,
                                                             that.space to space,
                                                             time to that.time,

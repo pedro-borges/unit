@@ -22,7 +22,7 @@ open class SpeedAmount<S : Unit<Space>, T : Unit<Time>>(
 {
     // region Speed
 
-    operator fun plus(that: SpeedAmount<*, *>) =
+    operator fun <S : Unit<Space>, T : Unit<Time>> plus(that: SpeedAmount<S, T>) =
         SpeedAmount(amount = amount + that.amount * convert(that.space to space,
                                                             time to that.time),
                     space = space,
@@ -34,7 +34,7 @@ open class SpeedAmount<S : Unit<Space>, T : Unit<Time>>(
                     space = space,
                     time = time)
 
-    operator fun minus(that: SpeedAmount<*, *>) =
+    operator fun <S : Unit<Space>, T : Unit<Time>> minus(that: SpeedAmount<S, T>) =
         SpeedAmount(amount = amount - that.amount * convert(that.space to space,
                                                             time to that.time),
                     space = space,
@@ -49,7 +49,7 @@ open class SpeedAmount<S : Unit<Space>, T : Unit<Time>>(
     // endregion
 
     // region Scalar
-    operator fun div(that: SpeedAmount<*, *>) =
+    operator fun <S : Unit<Space>, T : Unit<Time>> div(that: SpeedAmount<S, T>) =
         NaturalAmount(amount = amount / that.amount / convert(that.space to space, time to that.time))
 
     @JvmName("divSpeed")
@@ -60,7 +60,7 @@ open class SpeedAmount<S : Unit<Space>, T : Unit<Time>>(
 
     // region Space
 
-    operator fun times(that: TimeAmount<*>) =
+    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         SpaceAmount(amount = amount * that.amount * convert(that.time to time),
                     space = space)
 
@@ -82,7 +82,7 @@ open class SpeedAmount<S : Unit<Space>, T : Unit<Time>>(
 
     // region Frequency
 
-    operator fun div(that: SpaceAmount<*>) =
+    operator fun <S : Unit<Space>> div(that: SpaceAmount<S>) =
         FrequencyAmount(amount = amount / that.amount / convert(that.space to space),
                         time = time)
 

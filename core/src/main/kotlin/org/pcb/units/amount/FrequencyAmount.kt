@@ -20,7 +20,7 @@ open class FrequencyAmount<T : Unit<Time>>(
 {
     // region Frequency
 
-    operator fun plus(that: FrequencyAmount<*>) =
+    operator fun <T : Unit<Time>> plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount * convert(that.time to time),
                         time = time)
 
@@ -29,7 +29,7 @@ open class FrequencyAmount<T : Unit<Time>>(
         FrequencyAmount(amount = amount + that.amount,
                         time = time)
 
-    operator fun minus(that: FrequencyAmount<*>) =
+    operator fun <T : Unit<Time>> minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount * convert(that.time to time),
                         time = time)
 
@@ -42,14 +42,14 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // region Scalar
 
-    operator fun div(that: FrequencyAmount<*>) =
+    operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
         NaturalAmount(amount = amount / that.amount / convert(that.time to time))
 
     @JvmName("divFrequency")
     operator fun div(that: FrequencyAmount<T>) =
         NaturalAmount(amount = amount / that.amount)
 
-    operator fun times(that: TimeAmount<*>) =
+    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         NaturalAmount(amount = amount * that.amount * convert(that.time to time))
 
     @JvmName("timesTime")

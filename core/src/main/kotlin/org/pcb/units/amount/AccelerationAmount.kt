@@ -6,6 +6,7 @@ import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Acceleration
+import org.pcb.units.domain.Mass
 import org.pcb.units.domain.Space
 import org.pcb.units.domain.Time
 import org.pcb.units.toBigBigDecimal
@@ -22,7 +23,7 @@ open class AccelerationAmount<S : Unit<Space>, T : Unit<Time>>(
 {
     // region Acceleration
 
-    operator fun plus(that: AccelerationAmount<*, *>) =
+    operator fun <S : Unit<Space>, T : Unit<Time>> plus(that: AccelerationAmount<S, T>) =
         AccelerationAmount(amount = amount + that.amount * convert(that.space to space,
                                                                    time to that.time,
                                                                    time to that.time),
@@ -35,7 +36,7 @@ open class AccelerationAmount<S : Unit<Space>, T : Unit<Time>>(
                            space = space,
                            time = time)
 
-    operator fun minus(that: AccelerationAmount<*, *>) =
+    operator fun <S : Unit<Space>, T : Unit<Time>> minus(that: AccelerationAmount<S, T>) =
         AccelerationAmount(amount = amount - that.amount * convert(that.space to space,
                                                                    time to that.time,
                                                                    time to that.time),
@@ -52,7 +53,7 @@ open class AccelerationAmount<S : Unit<Space>, T : Unit<Time>>(
 
     // region Scalar
 
-    operator fun div(that: AccelerationAmount<*, *>) =
+    operator fun <S : Unit<Space>, T : Unit<Time>> div(that: AccelerationAmount<S, T>) =
         NaturalAmount(amount = amount / that.amount / convert(that.space to space,
                                                               time to that.time,
                                                               time to that.time))
@@ -65,7 +66,7 @@ open class AccelerationAmount<S : Unit<Space>, T : Unit<Time>>(
 
     // region Speed
 
-    operator fun times(that: TimeAmount<*>) =
+    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         SpeedAmount(amount = amount * that.amount * convert(that.time to time),
                     space = space,
                     time = time)
@@ -80,7 +81,7 @@ open class AccelerationAmount<S : Unit<Space>, T : Unit<Time>>(
 
     // region Frequency
 
-    operator fun times(that: SpeedAmount<*, *>) =
+    operator fun <S : Unit<Space>, T : Unit<Time>> times(that: SpeedAmount<S, T>) =
         FrequencyAmount(amount = amount * that.amount * convert(that.space to space,
                                                                 time to that.time),
                         time = time)
@@ -94,7 +95,7 @@ open class AccelerationAmount<S : Unit<Space>, T : Unit<Time>>(
 
     // region Force
 
-    operator fun times(that: MassAmount<*>) =
+    operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
         ForceAmount(amount = amount * that.amount,
                     mass = that.mass,
                     space = space,

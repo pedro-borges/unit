@@ -19,7 +19,7 @@ open class SpaceAmount<S : Unit<Space>>(
 {
     // region Space
 
-    operator fun plus(that: SpaceAmount<*>) =
+    operator fun <S : Unit<Space>> plus(that: SpaceAmount<S>) =
         SpaceAmount(amount = amount + that.amount * convert(that.space to space),
                     space = space)
 
@@ -28,7 +28,7 @@ open class SpaceAmount<S : Unit<Space>>(
         SpaceAmount(amount = amount + that.amount,
                     space = space)
 
-    operator fun minus(that: SpaceAmount<*>) =
+    operator fun <S : Unit<Space>> minus(that: SpaceAmount<S>) =
         SpaceAmount(amount = amount - that.amount * convert(that.space to space),
                     space = space)
 
@@ -41,7 +41,7 @@ open class SpaceAmount<S : Unit<Space>>(
 
     // region Scalar
 
-    operator fun div(that: SpaceAmount<*>) =
+    operator fun <S : Unit<Space>> div(that: SpaceAmount<S>) =
         NaturalAmount(amount = amount / that.amount / convert(that.space to space))
 
     @JvmName("divSpace")

@@ -25,7 +25,7 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
 {
     // region Momentum
 
-    operator fun plus(that: MomentumAmount<*, *, *>) =
+    operator fun <M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>> plus(that: MomentumAmount<M, S, T>) =
         MomentumAmount(amount = amount + that.amount * convert(that.mass to mass,
                                                                that.space to space,
                                                                time to that.time),
@@ -40,7 +40,7 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
                        space = space,
                        time = time)
 
-    operator fun minus(that: MomentumAmount<*, *, *>) =
+    operator fun <M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>> minus(that: MomentumAmount<M, S, T>) =
         MomentumAmount(amount = amount - that.amount * convert(that.mass to mass,
                                                                that.space to space,
                                                                time to that.time),
@@ -59,7 +59,7 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
 
     // region Scalar
 
-    operator fun div(that: MomentumAmount<*, *, *>) =
+    operator fun <M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>> div(that: MomentumAmount<M, S, T>) =
         NaturalAmount(amount = amount / that.amount / convert(that.mass to mass,
                                                               that.space to space,
                                                               time to that.time))
@@ -72,7 +72,7 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
 
     // region Speed
 
-    operator fun div(that: MassAmount<*>) =
+    operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
         SpeedAmount(amount = amount / that.amount / convert(that.mass to mass),
                     space = space,
                     time = time)
@@ -101,7 +101,7 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
 
     // region Force
 
-    operator fun div(that: TimeAmount<*>) =
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount / convert(that.time to time),
                     mass = mass,
                     space = space,
