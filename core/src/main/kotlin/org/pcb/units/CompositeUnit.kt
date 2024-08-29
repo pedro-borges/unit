@@ -2,7 +2,6 @@ package org.pcb.units
 
 import java.util.Objects
 import kotlin.reflect.KClass
-import org.pcb.units.display.Renderer
 import org.pcb.units.domain.Domain
 
 open class CompositeUnit<D : Domain>(domain: KClass<D>,

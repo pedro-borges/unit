@@ -1,10 +1,7 @@
-package org.pcb.units.display
-
-import org.pcb.units.Unit
+package org.pcb.units
 
 object Renderer
 {
-    @Suppress("MemberVisibilityCanBePrivate")
     var separator = "﹒"
 
     fun render(units: Map<Unit<*>, Int>) =
