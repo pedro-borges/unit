@@ -6,6 +6,8 @@ import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Mass
+import org.pcb.units.domain.Space
+import org.pcb.units.domain.Time
 import org.pcb.units.toBigBigDecimal
 
 open class MassAmount<M : Unit<Mass>>(amount: Number,
@@ -50,7 +52,7 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
 
     // region Momentum
 
-    operator fun times(that: SpeedAmount<*, *>) =
+    operator fun <S : Unit<Space>, T : Unit<Time>> times(that: SpeedAmount<S, T>) =
         MomentumAmount(amount = that.amount * that.amount,
                        mass = mass,
                        space = that.space,
@@ -60,7 +62,7 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
 
     // region Force
 
-    operator fun times(that: AccelerationAmount<*, *, *>) =
+    operator fun <S : Unit<Space>, T1 : Unit<Time>, T2 : Unit<Time>> times(that: AccelerationAmount<S, T1, T2>) =
         ForceAmount(amount = that.amount * that.amount,
                     mass = mass,
                     space = that.space,
