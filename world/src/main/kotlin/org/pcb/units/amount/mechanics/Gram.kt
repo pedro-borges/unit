@@ -13,6 +13,6 @@ class Gram(amount: Number)
     object GRAM : Unit<Mass>(Mass::class)
     {
         override val symbol = "g"
-        override val cannon = 0.001.toBigBigDecimal()
+        override val cannon = 1.toBigBigDecimal()
     }
 }

@@ -1,13 +1,13 @@
-package org.pcb.units.amount.metric
+package org.pcb.units.amount.space.metric
 
 import org.pcb.units.Unit
 import org.pcb.units.amount.SpaceAmount
-import org.pcb.units.amount.metric.Meters.METER
+import org.pcb.units.amount.space.metric.Meter.METER
 import org.pcb.units.domain.Space
 import org.pcb.units.toBigBigDecimal
 
 @Suppress("unused")
-class Meters(amount: Number)
+class Meter(amount: Number)
     : SpaceAmount<METER>(amount.toBigBigDecimal(), METER)
 {
     object METER : Unit<Space>(Space::class)

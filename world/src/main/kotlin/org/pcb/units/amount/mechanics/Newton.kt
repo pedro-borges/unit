@@ -3,7 +3,7 @@ package org.pcb.units.amount.mechanics
 import org.pcb.units.Unit
 import org.pcb.units.amount.ForceAmount
 import org.pcb.units.amount.mechanics.Gram.GRAM
-import org.pcb.units.amount.metric.Meters.METER
+import org.pcb.units.amount.space.metric.Meter.METER
 import org.pcb.units.amount.time.Second.SECOND
 import org.pcb.units.domain.Force
 import org.pcb.units.toBigBigDecimal
@@ -15,6 +15,6 @@ class Newton(amount: Number)
     object NEWTON : Unit<Force>(Force::class)
     {
         override val symbol = "N"
-        override val cannon = 1.toBigBigDecimal()
+        override val cannon = 0.001.toBigBigDecimal()
     }
 }

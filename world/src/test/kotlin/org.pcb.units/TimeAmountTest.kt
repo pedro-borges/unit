@@ -5,8 +5,8 @@ import kotlin.test.assertEquals
 import org.pcb.units.amount.PaceAmount
 import org.pcb.units.amount.SpaceAmount
 import org.pcb.units.amount.TimeAmount
-import org.pcb.units.amount.metric.Meters.METER
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.amount.space.metric.Meter.METER
 import org.pcb.units.amount.time.Minute.MINUTE
 import org.pcb.units.amount.time.Second.SECOND
 

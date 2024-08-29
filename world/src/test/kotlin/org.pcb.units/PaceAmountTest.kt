@@ -6,10 +6,10 @@ import org.pcb.units.amount.PaceAmount
 import org.pcb.units.amount.SpaceAmount
 import org.pcb.units.amount.SpeedAmount
 import org.pcb.units.amount.TimeAmount
-import org.pcb.units.amount.imperial.Foot.FOOT
-import org.pcb.units.amount.imperial.Inch.INCH
-import org.pcb.units.amount.metric.Meters.METER
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.amount.space.imperial.Foot.FOOT
+import org.pcb.units.amount.space.imperial.Inch.INCH
+import org.pcb.units.amount.space.metric.Meter.METER
 import org.pcb.units.amount.time.Minute.MINUTE
 import org.pcb.units.amount.time.Second.SECOND
 
@@ -94,6 +94,4 @@ class PaceAmountTest
             expected = TimeAmount(4, SECOND),
             actual = PaceAmount(2, SECOND, FOOT) * SpaceAmount(24, INCH))
     }
-
-    // ... continue
 }

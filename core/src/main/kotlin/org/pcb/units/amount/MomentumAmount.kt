@@ -21,14 +21,14 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
                            domain = Momentum::class,
                            units = listOf(mass to 1,
                                           space to 1,
-                                          time to 1)))
+                                          time to -1)))
 {
     // region Momentum
 
     operator fun plus(that: MomentumAmount<*, *, *>) =
         MomentumAmount(amount = amount + that.amount * convert(that.mass to mass,
                                                                that.space to space,
-                                                               that.time to time),
+                                                               time to that.time),
                        mass = mass,
                        space = space,
                        time = time)
@@ -43,7 +43,7 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
     operator fun minus(that: MomentumAmount<*, *, *>) =
         MomentumAmount(amount = amount - that.amount * convert(that.mass to mass,
                                                                that.space to space,
-                                                               that.time to time),
+                                                               time to that.time),
                        mass = mass,
                        space = space,
                        time = time)
@@ -62,7 +62,7 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
     operator fun div(that: MomentumAmount<*, *, *>) =
         NaturalAmount(amount = amount / that.amount / convert(that.mass to mass,
                                                              that.space to space,
-                                                             that.time to time))
+                                                             time to that.time))
 
     @JvmName("divMST")
     operator fun div(that: MomentumAmount<M, S, T>) =
@@ -87,7 +87,7 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
 
     operator fun div(that: SpeedAmount<*, *>) =
         MassAmount(amount = amount / that.amount / convert(that.space to space,
-                                                           that.time to time),
+                                                           time to that.time),
                    mass = mass)
 
     @JvmName("divST")

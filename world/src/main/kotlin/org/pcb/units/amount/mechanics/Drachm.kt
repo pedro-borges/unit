@@ -1,0 +1,18 @@
+package org.pcb.units.amount.mechanics
+
+import org.pcb.units.Unit
+import org.pcb.units.amount.MassAmount
+import org.pcb.units.amount.mechanics.Drachm.DRACHM
+import org.pcb.units.domain.Mass
+import org.pcb.units.toBigBigDecimal
+
+@Suppress("unused")
+class Drachm(amount: Number)
+    : MassAmount<DRACHM>(amount.toBigBigDecimal(), DRACHM)
+{
+    object DRACHM : Unit<Mass>(Mass::class)
+    {
+        override val symbol = "dr"
+        override val cannon = 1.7718451953125.toBigBigDecimal()
+    }
+}
