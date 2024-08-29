@@ -23,39 +23,39 @@ open class CompositeUnit<D : Domain>(domain: KClass<D>,
     operator fun times(unit: Unit<*>) =
         CompositeUnit(Domain::class,
                       units.toMutableMap()
-                                        .also { it.putOrRemove(unit, (it[unit] ?: 0) + 1) }
-                                        .entries
-                                        .map { Pair(it.key, it.value) })
+                          .also { it.putOrRemove(unit, (it[unit] ?: 0) + 1) }
+                          .entries
+                          .map { Pair(it.key, it.value) })
 
     operator fun div(unit: Unit<*>) =
         CompositeUnit(Domain::class,
                       units.toMutableMap()
-                                        .also { it.putOrRemove(unit, (it[unit] ?: 0) - 1) }
-                                        .entries
-                                        .map { Pair(it.key, it.value) })
+                          .also { it.putOrRemove(unit, (it[unit] ?: 0) - 1) }
+                          .entries
+                          .map { Pair(it.key, it.value) })
 
     operator fun times(composite: CompositeUnit<*>) =
         CompositeUnit(Domain::class,
                       units.toMutableMap()
-                                        .also {
-                                            composite.units.forEach { that ->
-                                                it.putOrRemove(that.key,
-                                                               (it[that.key] ?: 0) + that.value)
-                                            }
-                                        }
-                                        .entries
-                                        .map { Pair(it.key, it.value) })
+                          .also {
+                              composite.units.forEach { that ->
+                                  it.putOrRemove(that.key,
+                                                 (it[that.key] ?: 0) + that.value)
+                              }
+                          }
+                          .entries
+                          .map { Pair(it.key, it.value) })
 
     operator fun div(composite: CompositeUnit<*>) =
         CompositeUnit(Domain::class,
                       units.toMutableMap()
-                                        .also {
-                                            composite.units.forEach { that ->
-                                                it.putOrRemove(that.key, (it[that.key] ?: 0) - that.value)
-                                            }
-                                        }
-                                        .entries
-                                        .map { Pair(it.key, it.value) })
+                          .also {
+                              composite.units.forEach { that ->
+                                  it.putOrRemove(that.key, (it[that.key] ?: 0) - that.value)
+                              }
+                          }
+                          .entries
+                          .map { Pair(it.key, it.value) })
 
     override fun equals(other: Any?): Boolean
     {

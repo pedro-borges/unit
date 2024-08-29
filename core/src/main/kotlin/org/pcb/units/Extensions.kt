@@ -28,7 +28,7 @@ fun BigDecimal.power(power: Int): BigDecimal
     return result
 }
 
-fun Collection<Pair<Unit<*>, Int>>.sumToMap() : Map<Unit<*>, Int>
+fun Collection<Pair<Unit<*>, Int>>.sumToMap(): Map<Unit<*>, Int>
 {
     val result = HashMap<Unit<*>, Int>()
 
