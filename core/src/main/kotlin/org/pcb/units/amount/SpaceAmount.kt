@@ -3,8 +3,10 @@ package org.pcb.units.amount
 import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
+import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Space
+import org.pcb.units.domain.Time
 import org.pcb.units.toBigBigDecimal
 
 open class SpaceAmount<S : Unit<Space>>(
@@ -20,7 +22,7 @@ open class SpaceAmount<S : Unit<Space>>(
     operator fun plus(that: SpaceAmount<*>) =
         SpaceAmount(amount = amount + that.amount * convert(that.space to space),
                     space = space)
-        
+
     @JvmName("plusS")
     operator fun plus(that: SpaceAmount<S>) =
         SpaceAmount(amount = amount + that.amount,
@@ -29,29 +31,31 @@ open class SpaceAmount<S : Unit<Space>>(
     operator fun minus(that: SpaceAmount<*>) =
         SpaceAmount(amount = amount - that.amount * convert(that.space to space),
                     space = space)
-        
+
     @JvmName("minusS")
     operator fun minus(that: SpaceAmount<S>) =
         SpaceAmount(amount = amount - that.amount,
                     space = space)
-        
+
     // endregion
 
+    // region Scalar
+
     operator fun div(that: SpaceAmount<*>) =
-        ScalarAmount(amount = amount / that.amount / convert(that.space to space))
+        NaturalAmount(amount = amount / that.amount / convert(that.space to space))
 
     @JvmName("divS")
     operator fun div(that: SpaceAmount<S>) =
-        ScalarAmount(amount = amount / that.amount)
-        
+        NaturalAmount(amount = amount / that.amount)
+
     // endregion
-    
+
     // region Speed
-    
-    operator fun div(that: TimeAmount<*>) =
+
+    operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
         SpeedAmount(amount = amount / that.amount,
                     space = space,
                     time = that.time)
-    
+
     // endregion
 }

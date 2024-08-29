@@ -3,6 +3,7 @@ package org.pcb.units.amount
 import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
+import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Currency
 import org.pcb.units.domain.Rent
@@ -48,11 +49,11 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
     // region Scalar
 
     operator fun div(that: RentAmount<C, *>) =
-        ScalarAmount(amount = amount / that.amount / convert(that.time to time))
+        NaturalAmount(amount = amount / that.amount / convert(that.time to time))
 
     @JvmName("divCT")
     operator fun div(that: RentAmount<C, T>) =
-        ScalarAmount(amount = amount / that.amount)
+        NaturalAmount(amount = amount / that.amount)
 
     // endregion
 

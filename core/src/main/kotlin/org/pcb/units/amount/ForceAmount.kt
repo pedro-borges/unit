@@ -3,6 +3,7 @@ package org.pcb.units.amount
 import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
+import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Force
 import org.pcb.units.domain.Mass
@@ -83,18 +84,18 @@ open class ForceAmount<M : Unit<Mass>, S : Unit<Space>, T1 : Unit<Time>, T2 : Un
     // region Scalar
 
     operator fun div(that: ForceAmount<*, *, *, *>) =
-        ScalarAmount(amount = amount / that.amount / convert(that.mass to mass,
+        NaturalAmount(amount = amount / that.amount / convert(that.mass to mass,
                                                              that.space to space,
                                                              that.time1 to time1,
                                                              that.time2 to time2))
 
     @JvmName("divMST1T2")
     operator fun div(that: ForceAmount<M, S, T1, T2>) =
-        ScalarAmount(amount = amount / that.amount)
+        NaturalAmount(amount = amount / that.amount)
 
     @JvmName("divMST2T1")
     operator fun div(that: ForceAmount<M, S, T2, T1>) =
-        ScalarAmount(amount = amount / that.amount)
+        NaturalAmount(amount = amount / that.amount)
 
     // endregion
 

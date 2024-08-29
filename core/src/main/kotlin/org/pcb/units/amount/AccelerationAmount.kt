@@ -3,6 +3,7 @@ package org.pcb.units.amount
 import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
+import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Acceleration
 import org.pcb.units.domain.Space
@@ -72,17 +73,17 @@ open class AccelerationAmount<S : Unit<Space>, T1 : Unit<Time>, T2 : Unit<Time>>
     // region Scalar
 
     operator fun div(that: AccelerationAmount<*, *, *>) =
-        ScalarAmount(amount = amount / that.amount / convert(that.space to space,
+        NaturalAmount(amount = amount / that.amount / convert(that.space to space,
                                                              that.time1 to time1,
                                                              that.time2 to time2))
 
     @JvmName("divST1T2")
     operator fun div(that: AccelerationAmount<S, T1, T2>) =
-        ScalarAmount(amount = amount / that.amount)
+        NaturalAmount(amount = amount / that.amount)
 
     @JvmName("divST2T1")
     operator fun div(that: AccelerationAmount<S, T2, T1>) =
-        ScalarAmount(amount = amount / that.amount)
+        NaturalAmount(amount = amount / that.amount)
 
     // endregion
 

@@ -3,6 +3,7 @@ package org.pcb.units.amount
 import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
+import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Mass
 import org.pcb.units.toBigBigDecimal
@@ -39,11 +40,11 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
     // region Scalar
 
     operator fun div(that: MassAmount<*>) =
-        ScalarAmount(amount = amount / that.amount / convert(that.mass to mass))
+        NaturalAmount(amount = amount / that.amount / convert(that.mass to mass))
 
     @JvmName("divM")
     operator fun div(that: MassAmount<M>) =
-        ScalarAmount(amount = amount / that.amount)
+        NaturalAmount(amount = amount / that.amount)
 
     // endregion
 

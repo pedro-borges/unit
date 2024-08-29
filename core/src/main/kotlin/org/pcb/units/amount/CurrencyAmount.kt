@@ -3,6 +3,7 @@ package org.pcb.units.amount
 import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
+import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Currency
 import org.pcb.units.domain.Time
@@ -31,7 +32,7 @@ open class CurrencyAmount<C : Unit<Currency>>(
     // region Scalar
 
     operator fun div(that: CurrencyAmount<C>) =
-        ScalarAmount(amount = amount / that.amount)
+        NaturalAmount(amount = amount / that.amount)
 
     // endregion
 

@@ -3,6 +3,7 @@ package org.pcb.units.amount
 import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
+import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Mass
 import org.pcb.units.domain.Momentum
@@ -59,13 +60,13 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
     // region Scalar
 
     operator fun div(that: MomentumAmount<*, *, *>) =
-        ScalarAmount(amount = amount / that.amount / convert(that.mass to mass,
+        NaturalAmount(amount = amount / that.amount / convert(that.mass to mass,
                                                              that.space to space,
                                                              that.time to time))
 
     @JvmName("divMST")
     operator fun div(that: MomentumAmount<M, S, T>) =
-        ScalarAmount(amount = amount / that.amount)
+        NaturalAmount(amount = amount / that.amount)
 
     // endregion
 

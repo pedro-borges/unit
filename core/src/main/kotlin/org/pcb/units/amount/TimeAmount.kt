@@ -3,6 +3,7 @@ package org.pcb.units.amount
 import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
+import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Space
 import org.pcb.units.domain.Time
@@ -41,11 +42,11 @@ open class TimeAmount<T : Unit<Time>>(
     // region Scalar
 
     operator fun div(that: TimeAmount<*>) =
-        ScalarAmount(amount = amount / that.amount / convert(that.time to time))
+        NaturalAmount(amount = amount / that.amount / convert(that.time to time))
 
     @JvmName("divT")
     operator fun div(that: TimeAmount<T>) =
-        ScalarAmount(amount = amount / that.amount)
+        NaturalAmount(amount = amount / that.amount)
 
     // endregion
 

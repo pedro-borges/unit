@@ -3,6 +3,7 @@ package org.pcb.units.amount
 import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
+import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Force
 import org.pcb.units.domain.Mass
@@ -129,7 +130,7 @@ open class EnergyAmount<M : Unit<Mass>, S1 : Unit<Space>, S2 : Unit<Space>, T1 :
     // region Scalar
 
     operator fun div(that: EnergyAmount<*, *, *, *, *>) =
-        ScalarAmount(amount = amount / that.amount / convert(that.mass to mass,
+        NaturalAmount(amount = amount / that.amount / convert(that.mass to mass,
                                                              that.space1 to space1,
                                                              that.space2 to space2,
                                                              that.time1 to time1,
@@ -137,19 +138,19 @@ open class EnergyAmount<M : Unit<Mass>, S1 : Unit<Space>, S2 : Unit<Space>, T1 :
 
     @JvmName("divMS1S2T1T2")
     operator fun div(that: EnergyAmount<M, S1, S2, T1, T2>) =
-        ScalarAmount(amount = amount / that.amount)
+        NaturalAmount(amount = amount / that.amount)
 
     @JvmName("divMS1S2T2T1")
     operator fun div(that: EnergyAmount<M, S1, S2, T2, T1>) =
-        ScalarAmount(amount = amount / that.amount)
+        NaturalAmount(amount = amount / that.amount)
 
     @JvmName("divMS2S1T1T2")
     operator fun div(that: EnergyAmount<M, S2, S1, T1, T2>) =
-        ScalarAmount(amount = amount / that.amount)
+        NaturalAmount(amount = amount / that.amount)
 
     @JvmName("divMS2S1T2T1")
     operator fun div(that: EnergyAmount<M, S2, S1, T2, T1>) =
-        ScalarAmount(amount = amount / that.amount)
+        NaturalAmount(amount = amount / that.amount)
 
     // endregion
 

@@ -1,20 +1,15 @@
 package org.pcb.units
 
 import java.math.BigDecimal
-import java.math.MathContext.DECIMAL128
 import java.util.Objects
 import org.pcb.units.domain.Domain
 
 open class Amount<D : Domain>(val amount: BigDecimal,
                               val unit: CompositeUnit<D>)
 {
-    fun using(unit: CompositeUnit<D>) =
-        Amount(amount = amount * unit.cannon / unit.cannon,
-               unit = unit)
-
     fun convert(vararg units: Pair<Unit<*>, Unit<*>>): BigDecimal =
         units.fold(1.toBigBigDecimal()) { acc, unit ->
-            acc.multiply(unit.first.cannon, DECIMAL128).divide(unit.second.cannon, DECIMAL128)
+            acc * unit.first.cannon / unit.second.cannon
         }
 
     override fun equals(other: Any?) =
