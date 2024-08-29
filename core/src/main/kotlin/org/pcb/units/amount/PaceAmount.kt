@@ -28,7 +28,7 @@ open class PaceAmount<T : Unit<Time>, S : Unit<Space>>(
                    time = time,
                    space = space)
 
-    @JvmName("plusTS")
+    @JvmName("plusPace")
     operator fun plus(that: PaceAmount<T, S>) =
         PaceAmount(amount = amount + that.amount,
                    time = time,
@@ -40,7 +40,7 @@ open class PaceAmount<T : Unit<Time>, S : Unit<Space>>(
                    time = time,
                    space = space)
 
-    @JvmName("minusTS")
+    @JvmName("minusPace")
     operator fun minus(that: PaceAmount<T, S>) =
         PaceAmount(amount = amount - that.amount,
                    time = time,
@@ -54,7 +54,7 @@ open class PaceAmount<T : Unit<Time>, S : Unit<Space>>(
         NaturalAmount(amount = amount / that.amount / convert(that.time to time,
                                                               space to that.space))
 
-    @JvmName("divTS")
+    @JvmName("divPace")
     operator fun div(that: PaceAmount<T, S>) =
         NaturalAmount(amount = amount / that.amount)
 
@@ -62,7 +62,7 @@ open class PaceAmount<T : Unit<Time>, S : Unit<Space>>(
         NaturalAmount(amount = amount * that.amount * convert(that.time to time,
                                                               space to that.space))
 
-    @JvmName("timesST")
+    @JvmName("timesSpeed")
     operator fun div(that: SpeedAmount<S, T>) =
         NaturalAmount(amount = amount / that.amount)
 
@@ -74,7 +74,7 @@ open class PaceAmount<T : Unit<Time>, S : Unit<Space>>(
         TimeAmount(amount = amount * that.amount * convert(that.space to space),
                    time = time)
 
-    @JvmName("timesS")
+    @JvmName("timesSpace")
     operator fun times(that: SpaceAmount<S>) =
         TimeAmount(amount = amount * that.amount,
                    time = time)

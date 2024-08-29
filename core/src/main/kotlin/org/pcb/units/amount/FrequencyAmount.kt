@@ -24,7 +24,7 @@ open class FrequencyAmount<T : Unit<Time>>(
         FrequencyAmount(amount = amount + that.amount * convert(that.time to time),
                         time = time)
 
-    @JvmName("plusT")
+    @JvmName("plusFrequency")
     operator fun plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount,
                         time = time)
@@ -33,7 +33,7 @@ open class FrequencyAmount<T : Unit<Time>>(
         FrequencyAmount(amount = amount - that.amount * convert(that.time to time),
                         time = time)
 
-    @JvmName("minusT")
+    @JvmName("minusFrequency")
     operator fun minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount,
                         time = time)
@@ -45,14 +45,14 @@ open class FrequencyAmount<T : Unit<Time>>(
     operator fun div(that: FrequencyAmount<*>) =
         NaturalAmount(amount = amount / that.amount / convert(that.time to time))
 
-    @JvmName("divT")
+    @JvmName("divFrequency")
     operator fun div(that: FrequencyAmount<T>) =
         NaturalAmount(amount = amount / that.amount)
 
     operator fun times(that: TimeAmount<*>) =
         NaturalAmount(amount = amount * that.amount * convert(that.time to time))
 
-    @JvmName("timesT")
+    @JvmName("timesTime")
     operator fun times(that: TimeAmount<T>) =
         NaturalAmount(amount = amount * that.amount)
 
@@ -70,10 +70,9 @@ open class FrequencyAmount<T : Unit<Time>>(
     // region Acceleration
 
     operator fun <S : Unit<Space>, T : Unit<Time>> times(that: SpeedAmount<S, T>) =
-        AccelerationAmount(amount = amount * that.amount,
+        AccelerationAmount(amount = amount * that.amount * convert(that.time to time),
                            space = that.space,
-                           time1 = that.time,
-                           time2 = time)
+                           time = that.time)
 
     // endregion
 

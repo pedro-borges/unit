@@ -84,7 +84,7 @@ class SpeedAmountTest
     fun divSameTime()
     {
         assertEquals(
-            expected = AccelerationAmount(1, METER, SECOND, SECOND),
+            expected = AccelerationAmount(1, METER, SECOND),
             actual = SpeedAmount(2, METER, SECOND) / TimeAmount(2, SECOND))
     }
 
@@ -92,8 +92,8 @@ class SpeedAmountTest
     fun divOtherTime()
     {
         assertEquals(
-            expected = AccelerationAmount(1, METER, SECOND, MINUTE),
-            actual = SpeedAmount(2, METER, SECOND) / TimeAmount(2, MINUTE))
+            expected = AccelerationAmount(1, METER, MINUTE),
+            actual = SpeedAmount(2, METER, MINUTE) / TimeAmount(120, SECOND))
     }
 
     @Test

@@ -76,7 +76,7 @@ class MassAmountTest
     fun timesAcceleration()
     {
         assertEquals(
-            expected = ForceAmount(4, GRAM, METER, SECOND, SECOND),
-            actual = MassAmount(2, GRAM) * AccelerationAmount(2, METER, SECOND, SECOND))
+            expected = ForceAmount(4, GRAM, METER, SECOND),
+            actual = MassAmount(2, GRAM) * AccelerationAmount(2, METER, SECOND))
     }
 }

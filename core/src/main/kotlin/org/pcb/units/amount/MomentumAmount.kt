@@ -33,7 +33,7 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
                        space = space,
                        time = time)
 
-    @JvmName("plusMST")
+    @JvmName("plusMomentum")
     operator fun plus(that: MomentumAmount<M, S, T>) =
         MomentumAmount(amount = amount + that.amount,
                        mass = mass,
@@ -48,7 +48,7 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
                        space = space,
                        time = time)
 
-    @JvmName("minusMST")
+    @JvmName("minusMomentum")
     operator fun minus(that: MomentumAmount<M, S, T>) =
         MomentumAmount(amount = amount - that.amount,
                        mass = mass,
@@ -61,10 +61,10 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
 
     operator fun div(that: MomentumAmount<*, *, *>) =
         NaturalAmount(amount = amount / that.amount / convert(that.mass to mass,
-                                                             that.space to space,
-                                                             time to that.time))
+                                                              that.space to space,
+                                                              time to that.time))
 
-    @JvmName("divMST")
+    @JvmName("divMomentum")
     operator fun div(that: MomentumAmount<M, S, T>) =
         NaturalAmount(amount = amount / that.amount)
 
@@ -77,7 +77,7 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
                     space = space,
                     time = time)
 
-    @JvmName("divM")
+    @JvmName("divMass")
     operator fun div(that: MassAmount<M>) =
         SpeedAmount(amount = amount / that.amount,
                     space = space,
@@ -85,20 +85,34 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
 
     // endregion
 
-    operator fun div(that: SpeedAmount<*, *>) =
+    // region Mass
+
+    operator fun <S : Unit<Space>, T : Unit<Time>> div(that: SpeedAmount<S, T>) =
         MassAmount(amount = amount / that.amount / convert(that.space to space,
                                                            time to that.time),
                    mass = mass)
 
-    @JvmName("divST")
+    @JvmName("divSpeed")
     operator fun div(that: SpeedAmount<S, T>) =
         MassAmount(amount = amount / that.amount,
                    mass = mass)
 
+    // endregion
+
+    // region Force
+
     operator fun div(that: TimeAmount<*>) =
+        ForceAmount(amount = amount / that.amount / convert(that.time to time),
+                    mass = mass,
+                    space = space,
+                    time = time)
+
+    @JvmName("divTime")
+    operator fun div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount,
                     mass = mass,
                     space = space,
-                    time1 = time,
-                    time2 = that.time)
+                    time = time)
+
+    // endregion
 }

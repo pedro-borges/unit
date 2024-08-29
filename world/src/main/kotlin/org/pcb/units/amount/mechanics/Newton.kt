@@ -10,7 +10,7 @@ import org.pcb.units.toBigBigDecimal
 
 @Suppress("unused")
 class Newton(amount: Number)
-    : ForceAmount<GRAM, METER, SECOND, SECOND>(amount.toBigBigDecimal(), GRAM, METER, SECOND, SECOND)
+    : ForceAmount<GRAM, METER, SECOND>(amount.toBigBigDecimal(), GRAM, METER, SECOND)
 {
     object NEWTON : Unit<Force>(Force::class)
     {

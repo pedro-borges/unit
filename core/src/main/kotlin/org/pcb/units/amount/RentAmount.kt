@@ -27,7 +27,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
                    currency = currency,
                    time = time)
 
-    @JvmName("plusCT")
+    @JvmName("plusRent")
     operator fun plus(that: RentAmount<C, T>) =
         RentAmount(amount = amount + that.amount,
                    currency = currency,
@@ -38,7 +38,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
                    currency = currency,
                    time = time)
 
-    @JvmName("minusCT")
+    @JvmName("minusRent")
     operator fun minus(that: RentAmount<C, T>) =
         RentAmount(amount = amount - that.amount,
                    currency = currency,
@@ -51,7 +51,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
     operator fun div(that: RentAmount<C, *>) =
         NaturalAmount(amount = amount / that.amount / convert(that.time to time))
 
-    @JvmName("divCT")
+    @JvmName("divRent")
     operator fun div(that: RentAmount<C, T>) =
         NaturalAmount(amount = amount / that.amount)
 
@@ -63,7 +63,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
         CurrencyAmount(amount = amount * that.amount * convert(that.time to time),
                        currency = currency)
 
-    @JvmName("timesT")
+    @JvmName("timesTime")
     operator fun times(that: TimeAmount<T>) =
         CurrencyAmount(amount = amount * that.amount,
                        currency = currency)

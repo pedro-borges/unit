@@ -23,7 +23,7 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
         MassAmount(amount = amount + that.amount * convert(that.mass to mass),
                    mass = mass)
 
-    @JvmName("plusM")
+    @JvmName("plusMass")
     operator fun plus(that: MassAmount<M>) =
         MassAmount(amount = amount + that.amount,
                    mass = mass)
@@ -32,7 +32,7 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
         MassAmount(amount = amount - that.amount * convert(that.mass to mass),
                    mass = mass)
 
-    @JvmName("minusM")
+    @JvmName("minusMass")
     operator fun minus(that: MassAmount<M>) =
         MassAmount(amount = amount - that.amount,
                    mass = mass)
@@ -44,7 +44,7 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
     operator fun div(that: MassAmount<*>) =
         NaturalAmount(amount = amount / that.amount / convert(that.mass to mass))
 
-    @JvmName("divM")
+    @JvmName("divMass")
     operator fun div(that: MassAmount<M>) =
         NaturalAmount(amount = amount / that.amount)
 
@@ -62,12 +62,11 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
 
     // region Force
 
-    operator fun <S : Unit<Space>, T1 : Unit<Time>, T2 : Unit<Time>> times(that: AccelerationAmount<S, T1, T2>) =
+    operator fun <S : Unit<Space>, T : Unit<Time>> times(that: AccelerationAmount<S, T>) =
         ForceAmount(amount = that.amount * that.amount,
                     mass = mass,
                     space = that.space,
-                    time1 = that.time1,
-                    time2 = that.time2)
+                    time = that.time)
 
     // endregion
 }

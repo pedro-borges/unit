@@ -27,7 +27,7 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
                    currency = currency,
                    time = time)
 
-    @JvmName("plusCT")
+    @JvmName("plusDebt")
     operator fun plus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount + that.amount,
                    currency = currency,
@@ -38,7 +38,7 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
                    currency = currency,
                    time = time)
 
-    @JvmName("minusCT")
+    @JvmName("minusDebt")
     operator fun minus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount - that.amount,
                    currency = currency,
@@ -51,7 +51,7 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
     operator fun div(that: DebtAmount<C, *>) =
         NaturalAmount(amount = amount / that.amount / convert(that.time to time))
 
-    @JvmName("divCT")
+    @JvmName("divDebt")
     operator fun div(that: DebtAmount<C, T>) =
         NaturalAmount(amount = amount / that.amount)
 
@@ -63,7 +63,7 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
         CurrencyAmount(amount = amount * that.amount * convert(that.time to time),
                        currency = currency)
 
-    @JvmName("divT")
+    @JvmName("divTime")
     operator fun div(that: TimeAmount<T>) =
         CurrencyAmount(amount = amount * that.amount,
                        currency = currency)

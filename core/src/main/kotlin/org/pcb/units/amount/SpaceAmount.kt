@@ -23,7 +23,7 @@ open class SpaceAmount<S : Unit<Space>>(
         SpaceAmount(amount = amount + that.amount * convert(that.space to space),
                     space = space)
 
-    @JvmName("plusS")
+    @JvmName("plusSpace")
     operator fun plus(that: SpaceAmount<S>) =
         SpaceAmount(amount = amount + that.amount,
                     space = space)
@@ -32,7 +32,7 @@ open class SpaceAmount<S : Unit<Space>>(
         SpaceAmount(amount = amount - that.amount * convert(that.space to space),
                     space = space)
 
-    @JvmName("minusS")
+    @JvmName("minusSpace")
     operator fun minus(that: SpaceAmount<S>) =
         SpaceAmount(amount = amount - that.amount,
                     space = space)
@@ -44,7 +44,7 @@ open class SpaceAmount<S : Unit<Space>>(
     operator fun div(that: SpaceAmount<*>) =
         NaturalAmount(amount = amount / that.amount / convert(that.space to space))
 
-    @JvmName("divS")
+    @JvmName("divSpace")
     operator fun div(that: SpaceAmount<S>) =
         NaturalAmount(amount = amount / that.amount)
 

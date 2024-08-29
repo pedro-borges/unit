@@ -23,7 +23,7 @@ open class TimeAmount<T : Unit<Time>>(
         TimeAmount(amount = amount + that.amount * convert(that.time to time),
                    time = time)
 
-    @JvmName("plusT")
+    @JvmName("plusTime")
     operator fun plus(that: TimeAmount<T>) =
         TimeAmount(amount = amount + that.amount,
                    time = time)
@@ -32,7 +32,7 @@ open class TimeAmount<T : Unit<Time>>(
         TimeAmount(amount = amount - that.amount * convert(that.time to time),
                    time = time)
 
-    @JvmName("minusT")
+    @JvmName("minusTime")
     operator fun minus(that: TimeAmount<T>) =
         TimeAmount(amount = amount - that.amount,
                    time = time)
@@ -44,7 +44,7 @@ open class TimeAmount<T : Unit<Time>>(
     operator fun div(that: TimeAmount<*>) =
         NaturalAmount(amount = amount / that.amount / convert(that.time to time))
 
-    @JvmName("divT")
+    @JvmName("divTime")
     operator fun div(that: TimeAmount<T>) =
         NaturalAmount(amount = amount / that.amount)
 

@@ -77,7 +77,7 @@ class FrequencyAmountTest
     fun timesSpeed()
     {
         assertEquals(
-            expected = AccelerationAmount(4, METER, SECOND, SECOND),
+            expected = AccelerationAmount(4, METER, SECOND),
             actual = FrequencyAmount(2, SECOND) * SpeedAmount(2, METER, SECOND))
     }
 

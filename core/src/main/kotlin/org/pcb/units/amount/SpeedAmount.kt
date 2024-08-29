@@ -28,7 +28,7 @@ open class SpeedAmount<S : Unit<Space>, T : Unit<Time>>(
                     space = space,
                     time = time)
 
-    @JvmName("plusST")
+    @JvmName("plusSpeed")
     operator fun plus(that: SpeedAmount<S, T>) =
         SpeedAmount(amount = amount + that.amount,
                     space = space,
@@ -40,7 +40,7 @@ open class SpeedAmount<S : Unit<Space>, T : Unit<Time>>(
                     space = space,
                     time = time)
 
-    @JvmName("minusST")
+    @JvmName("minusSpeed")
     operator fun minus(that: SpeedAmount<S, T>) =
         SpeedAmount(amount = amount - that.amount,
                     space = space,
@@ -52,7 +52,7 @@ open class SpeedAmount<S : Unit<Space>, T : Unit<Time>>(
     operator fun div(that: SpeedAmount<*, *>) =
         NaturalAmount(amount = amount / that.amount / convert(that.space to space, time to that.time))
 
-    @JvmName("divST")
+    @JvmName("divSpeed")
     operator fun div(that: SpeedAmount<S, T>) =
         NaturalAmount(amount = amount / that.amount)
 
@@ -64,7 +64,7 @@ open class SpeedAmount<S : Unit<Space>, T : Unit<Time>>(
         SpaceAmount(amount = amount * that.amount * convert(that.time to time),
                     space = space)
 
-    @JvmName("timesT")
+    @JvmName("timesTime")
     operator fun times(that: TimeAmount<T>) =
         SpaceAmount(amount = amount * that.amount,
                     space = space)
@@ -74,10 +74,9 @@ open class SpeedAmount<S : Unit<Space>, T : Unit<Time>>(
     // region Acceleration
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
-        AccelerationAmount(amount = amount / that.amount,
+        AccelerationAmount(amount = amount / that.amount / convert(that.time to time),
                            space = space,
-                           time1 = time,
-                           time2 = that.time)
+                           time = time)
 
     // endregion
 
@@ -87,7 +86,7 @@ open class SpeedAmount<S : Unit<Space>, T : Unit<Time>>(
         FrequencyAmount(amount = amount / that.amount / convert(that.space to space),
                         time = time)
 
-    @JvmName("divS")
+    @JvmName("divSpace")
     operator fun div(that: SpaceAmount<S>) =
         FrequencyAmount(amount = amount / that.amount,
                         time = time)

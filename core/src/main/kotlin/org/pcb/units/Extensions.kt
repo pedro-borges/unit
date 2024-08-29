@@ -37,6 +37,6 @@ fun Collection<Pair<Unit<*>, Int>>.sumToMap() : Map<Unit<*>, Int>
     return result
 }
 
-operator fun BigDecimal.div(other: BigDecimal): BigDecimal = divide(other, 36, HALF_EVEN)
+operator fun BigDecimal.div(other: BigDecimal): BigDecimal = divide(other, 40, HALF_EVEN)
 
 operator fun BigDecimal.times(other: BigDecimal): BigDecimal = multiply(other, DECIMAL128)
