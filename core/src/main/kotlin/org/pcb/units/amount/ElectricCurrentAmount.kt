@@ -7,6 +7,8 @@ import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.convert
 import org.pcb.units.div
 import org.pcb.units.domain.ElectricCurrent
+import org.pcb.units.domain.Length
+import org.pcb.units.domain.Mass
 import org.pcb.units.domain.Scalar
 import org.pcb.units.domain.Time
 import org.pcb.units.times
@@ -67,6 +69,31 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
         ElectricChargeAmount(amount = amount * that.amount,
                              electricCurrent = electricCurrent,
                              time = that.time)
+
+    // endregion
+
+    // region ElectricTension
+
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: ElectricResistanceAmount<M, L, T, EC>) =
+        ElectricTensionAmount(amount = amount * that.amount * convert(electricCurrent to that.electricCurrent),
+                              mass = that.mass,
+                              length = that.length,
+                              length2 = that.length,
+                              time = that.time,
+                              time2 = that.time,
+                              time3 = that.time,
+                              electricCurrent = electricCurrent)
+
+    @JvmName("timesElectricResistance")
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> times(that: ElectricResistanceAmount<M, L, T, EC>) =
+        ElectricTensionAmount(amount = amount * that.amount,
+                              mass = that.mass,
+                              length = that.length,
+                              length2 = that.length,
+                              time = that.time,
+                              time2 = that.time,
+                              time3 = that.time,
+                              electricCurrent = electricCurrent)
 
     // endregion
 }

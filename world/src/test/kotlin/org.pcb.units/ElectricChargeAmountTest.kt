@@ -38,7 +38,7 @@ class ElectricChargeAmountTest
     }
 
     @Test
-    fun plusSameElectricalCharge()
+    fun plusSameElectricCharge()
     {
         assertEquals(
             expected = ElectricChargeAmount(1, AMPERE, SECOND),
@@ -46,13 +46,13 @@ class ElectricChargeAmountTest
     }
 
     @Test
-    fun plusOtherElectricalCharge()
+    fun plusOtherElectricCharge()
     {
-        // No other known electrical current unit
+        // No other known electric current unit
     }
 
     @Test
-    fun minusSameElectricalCharge()
+    fun minusSameElectricCharge()
     {
         assertEquals(
             expected = ElectricChargeAmount(0, AMPERE, SECOND),
@@ -60,13 +60,13 @@ class ElectricChargeAmountTest
     }
 
     @Test
-    fun minusOtherElectricalCharge()
+    fun minusOtherElectricCharge()
     {
-        // No other known electrical current unit
+        // No other known electric current unit
     }
 
     @Test
-    fun divSameElectricalCharge()
+    fun divSameElectricCharge()
     {
         assertEquals(
             expected = NaturalAmount(1),
@@ -74,9 +74,9 @@ class ElectricChargeAmountTest
     }
 
     @Test
-    fun divOtherElectricalCharge()
+    fun divOtherElectricCharge()
     {
-        // No other known electrical current unit
+        // No other known electric current unit
     }
 
     @Test

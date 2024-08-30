@@ -4,9 +4,13 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.units.amount.ElectricChargeAmount
 import org.pcb.units.amount.ElectricCurrentAmount
+import org.pcb.units.amount.ElectricResistanceAmount
+import org.pcb.units.amount.ElectricTensionAmount
 import org.pcb.units.amount.TimeAmount
 import org.pcb.units.amount.cannon.Ampere.AMPERE
 import org.pcb.units.amount.cannon.Second.SECOND
+import org.pcb.units.amount.electromagnetism.Ohm.OHM
+import org.pcb.units.amount.electromagnetism.Volt.VOLT
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.amount.scalar.PercentAmount
 
@@ -29,7 +33,7 @@ class ElectricCurrentAmountTest
     }
 
     @Test
-    fun plusSameElectricalCurrent()
+    fun plusSameElectricCurrent()
     {
         assertEquals(
             expected = ElectricCurrentAmount(1, AMPERE),
@@ -37,13 +41,13 @@ class ElectricCurrentAmountTest
     }
 
     @Test
-    fun plusOtherElectricalCurrent()
+    fun plusOtherElectricCurrent()
     {
-        // No other known electrical current unit
+        // No other known electric current unit
     }
 
     @Test
-    fun minusSameElectricalCurrent()
+    fun minusSameElectricCurrent()
     {
         assertEquals(
             expected = ElectricCurrentAmount(0, AMPERE),
@@ -51,13 +55,13 @@ class ElectricCurrentAmountTest
     }
 
     @Test
-    fun minusOtherElectricalCurrent()
+    fun minusOtherElectricCurrent()
     {
-        // No other known electrical current unit
+        // No other known electric current unit
     }
 
     @Test
-    fun divSameElectricalCurrent()
+    fun divSameElectricCurrent()
     {
         assertEquals(
             expected = NaturalAmount(1),
@@ -65,9 +69,9 @@ class ElectricCurrentAmountTest
     }
 
     @Test
-    fun divOtherElectricalCurrent()
+    fun divOtherElectricCurrent()
     {
-        // No other known electrical current unit
+        // No other known electric current unit
     }
 
     @Test
@@ -76,5 +80,19 @@ class ElectricCurrentAmountTest
         assertEquals(
             expected = ElectricChargeAmount(4, AMPERE, SECOND),
             actual = ElectricCurrentAmount(2, AMPERE) * TimeAmount(2, SECOND))
+    }
+
+    @Test
+    fun timesSameElectricResistance()
+    {
+        assertEquals(
+            expected = ElectricTensionAmount(4, VOLT),
+            actual = ElectricCurrentAmount(2, AMPERE) * ElectricResistanceAmount(2, OHM))
+    }
+
+    @Test
+    fun timesOtherElectricResistance()
+    {
+        // No other known electric current unit
     }
 }

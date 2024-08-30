@@ -148,7 +148,7 @@ open class ElectricTensionAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time
 
     // region Energy
 
-    operator fun <EC: Unit<ElectricCurrent>, T: Unit<Time>> times(that: ElectricChargeAmount<EC, T>) =
+    operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricChargeAmount<EC, T>) =
         EnergyAmount(amount = amount * that.amount * convert(that.time to time,
                                                              that.electricCurrent to electricCurrent),
                      mass = mass,
@@ -165,6 +165,52 @@ open class ElectricTensionAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time
                      length2 = length,
                      time = time,
                      time2 = time)
+
+    // endregion
+
+    // region ElectricCurrent
+
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
+        ElectricCurrentAmount(amount = amount / that.amount / convert(that.mass to mass,
+                                                                      that.length to length,
+                                                                      that.length to length,
+                                                                      time to that.time,
+                                                                      time to that.time,
+                                                                      time to that.time,
+                                                                      electricCurrent to that.electricCurrent),
+                              electricCurrent = electricCurrent)
+
+    @JvmName("divElectricResistance")
+    operator fun div(that: ElectricResistanceAmount<M, L, T, EC>) =
+        ElectricCurrentAmount(amount = amount / that.amount,
+                              electricCurrent = electricCurrent)
+
+    // endregion
+
+    // region ElectricResistance
+
+    operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
+        ElectricResistanceAmount(amount = amount / that.amount / convert(electricCurrent to that.electricCurrent),
+                                 mass = mass,
+                                 length = length,
+                                 length2 = length,
+                                 time = time,
+                                 time2 = time,
+                                 time3 = time,
+                                 electricCurrent = electricCurrent,
+                                 electricCurrent2 = electricCurrent)
+
+    @JvmName("divElectricCurrent")
+    operator fun div(that: ElectricCurrentAmount<EC>) =
+        ElectricResistanceAmount(amount = amount / that.amount,
+                                 mass = mass,
+                                 length = length,
+                                 length2 = length,
+                                 time = time,
+                                 time2 = time,
+                                 time3 = time,
+                                 electricCurrent = electricCurrent,
+                                 electricCurrent2 = electricCurrent)
 
     // endregion
 }

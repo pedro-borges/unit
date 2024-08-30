@@ -3,6 +3,8 @@ package org.pcb.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.units.amount.ElectricChargeAmount
+import org.pcb.units.amount.ElectricCurrentAmount
+import org.pcb.units.amount.ElectricResistanceAmount
 import org.pcb.units.amount.ElectricTensionAmount
 import org.pcb.units.amount.EnergyAmount
 import org.pcb.units.amount.cannon.Ampere.AMPERE
@@ -10,6 +12,7 @@ import org.pcb.units.amount.cannon.Kilogram.KILOGRAM
 import org.pcb.units.amount.cannon.Meter.METER
 import org.pcb.units.amount.cannon.Second.SECOND
 import org.pcb.units.amount.electromagnetism.Coulomb.COULOMB
+import org.pcb.units.amount.electromagnetism.Ohm.OHM
 import org.pcb.units.amount.electromagnetism.Volt.VOLT
 import org.pcb.units.amount.length.Foot.FOOT
 import org.pcb.units.amount.length.Inch.INCH
@@ -58,7 +61,7 @@ class ElectricTensionAmountTest
     }
 
     @Test
-    fun plusSameElectricalTension()
+    fun plusSameElectricTension()
     {
         assertEquals(
             expected = ElectricTensionAmount(1, VOLT),
@@ -66,7 +69,7 @@ class ElectricTensionAmountTest
     }
 
     @Test
-    fun plusOtherElectricalTension()
+    fun plusOtherElectricTension()
     {
         assertEquals(
             expected = ElectricTensionAmount(1, POUND, FOOT, FOOT, SECOND, SECOND, SECOND, AMPERE),
@@ -75,7 +78,7 @@ class ElectricTensionAmountTest
     }
 
     @Test
-    fun minusSameElectricalTension()
+    fun minusSameElectricTension()
     {
         assertEquals(
             expected = ElectricTensionAmount(0, VOLT),
@@ -83,7 +86,7 @@ class ElectricTensionAmountTest
     }
 
     @Test
-    fun minusOtherElectricalTension()
+    fun minusOtherElectricTension()
     {
         assertEquals(
             expected = ElectricTensionAmount(0, POUND, FOOT, FOOT, SECOND, SECOND, SECOND, AMPERE),
@@ -92,7 +95,7 @@ class ElectricTensionAmountTest
     }
 
     @Test
-    fun divSameElectricalTension()
+    fun divSameElectricTension()
     {
         assertEquals(
             expected = NaturalAmount(1),
@@ -100,7 +103,7 @@ class ElectricTensionAmountTest
     }
 
     @Test
-    fun divOtherElectricalTension()
+    fun divOtherElectricTension()
     {
         assertEquals(
             expected = NaturalAmount(1),
@@ -123,5 +126,36 @@ class ElectricTensionAmountTest
             expected = EnergyAmount(4, KILOGRAM, METER, METER, MINUTE, MINUTE),
             actual = ElectricTensionAmount(2, KILOGRAM, METER, METER, MINUTE, MINUTE, MINUTE, AMPERE) *
                      ElectricChargeAmount(120, AMPERE, SECOND))
+    }
+
+    @Test
+    fun divSameElectricCurrent()
+    {
+        assertEquals(
+            expected = ElectricResistanceAmount(1, OHM),
+            actual = ElectricTensionAmount(2, VOLT) / ElectricCurrentAmount(2, AMPERE))
+    }
+
+    @Test
+    fun divOtherElectricCurrent()
+    {
+        // No other known electric current unit
+    }
+
+    @Test
+    fun divSameElectricResistance()
+    {
+        assertEquals(
+            expected = ElectricCurrentAmount(1, AMPERE),
+            actual = ElectricTensionAmount(2, VOLT) / ElectricResistanceAmount(2, OHM))
+    }
+
+    @Test
+    fun divOtherElectricResistance()
+    {
+        assertEquals(
+            expected = ElectricCurrentAmount(1, AMPERE),
+            actual = ElectricTensionAmount(2, POUND, FOOT, FOOT, SECOND, SECOND, SECOND, AMPERE) /
+                     ElectricResistanceAmount(2 * 16 * 12 * 12 * 60 * 60 * 60, OUNCE, INCH, INCH, MINUTE, MINUTE, MINUTE, AMPERE, AMPERE))
     }
 }
