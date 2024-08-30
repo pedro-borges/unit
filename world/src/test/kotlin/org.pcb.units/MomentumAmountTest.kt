@@ -11,6 +11,7 @@ import org.pcb.units.amount.mass.Gram.GRAM
 import org.pcb.units.amount.mass.Ounce.OUNCE
 import org.pcb.units.amount.mass.Pound.POUND
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.space.Foot.FOOT
 import org.pcb.units.amount.space.Inch.INCH
 import org.pcb.units.amount.space.Meter.METER
@@ -19,6 +20,22 @@ import org.pcb.units.amount.time.Second.SECOND
 
 class MomentumAmountTest
 {
+    @Test
+    fun timesScalar()
+    {
+        assertEquals(
+            expected = MomentumAmount(4, GRAM, METER, SECOND),
+            actual = MomentumAmount(2, GRAM, METER, SECOND) * PercentAmount(2 * 100))
+    }
+
+    @Test
+    fun divScalar()
+    {
+        assertEquals(
+            expected = MomentumAmount(1, GRAM, METER, SECOND),
+            actual = MomentumAmount(2, GRAM, METER, SECOND) / PercentAmount(2 * 100))
+    }
+
     @Test
     fun plusSameMomentum()
     {

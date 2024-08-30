@@ -13,6 +13,6 @@ class Pound(amount: Number)
     object POUND : Unit<Mass>(Mass::class)
     {
         override val symbol = "lb"
-        override val cannon = 453.59237.toBigBigDecimal()
+        override val scale = 453.59237.toBigBigDecimal()
     }
 }

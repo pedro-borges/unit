@@ -6,6 +6,7 @@ import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Currency
+import org.pcb.units.domain.Scalar
 import org.pcb.units.domain.Space
 import org.pcb.units.domain.Time
 import org.pcb.units.toBigBigDecimal
@@ -19,6 +20,14 @@ open class FrequencyAmount<T : Unit<Time>>(
                        units = listOf(time to -1)))
 {
     // region Frequency
+
+    override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
+        FrequencyAmount(amount = amount * that.amount * that.unit.scale,
+                        time = time)
+
+    override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
+        FrequencyAmount(amount = amount / that.amount / that.unit.scale,
+                        time = time)
 
     operator fun <T : Unit<Time>> plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount * convert(that.time to time),

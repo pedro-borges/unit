@@ -7,7 +7,7 @@ import org.pcb.units.domain.Domain
 abstract class Unit<D : Domain>(val domain: KClass<out D>)
 {
     abstract val symbol: String
-    abstract val cannon: BigDecimal
+    abstract val scale: BigDecimal
 
     override fun equals(other: Any?): Boolean
     {
@@ -15,7 +15,7 @@ abstract class Unit<D : Domain>(val domain: KClass<out D>)
         {
             this === other   -> true
             other is Unit<*> -> symbol == other.symbol &&
-                                cannon == other.cannon
+                                scale == other.scale
             else             -> false
         }
     }
@@ -23,7 +23,7 @@ abstract class Unit<D : Domain>(val domain: KClass<out D>)
     override fun hashCode(): Int
     {
         var result = symbol.hashCode()
-        result = 31 * result + cannon.hashCode()
+        result = 31 * result + scale.hashCode()
         return result
     }
 }

@@ -10,14 +10,31 @@ import org.pcb.units.amount.SpeedAmount
 import org.pcb.units.amount.TimeAmount
 import org.pcb.units.amount.mass.Gram.GRAM
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.space.Foot.FOOT
 import org.pcb.units.amount.space.Inch.INCH
 import org.pcb.units.amount.space.Meter.METER
 import org.pcb.units.amount.time.Minute.MINUTE
 import org.pcb.units.amount.time.Second.SECOND
 
-class AcceleartionAmountTest
+class AccelerationAmountTest
 {
+    @Test
+    fun timesScalar()
+    {
+        assertEquals(
+            expected = AccelerationAmount(4, METER, SECOND, SECOND),
+            actual = AccelerationAmount(2, METER, SECOND, SECOND) * PercentAmount(2 * 100))
+    }
+
+    @Test
+    fun divScalar()
+    {
+        assertEquals(
+            expected = AccelerationAmount(1, METER, SECOND, SECOND),
+            actual = AccelerationAmount(2, METER, SECOND, SECOND) / PercentAmount(2 * 100))
+    }
+
     @Test
     fun plusSameAcceleration()
     {

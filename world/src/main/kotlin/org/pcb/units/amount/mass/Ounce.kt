@@ -13,6 +13,6 @@ class Ounce(amount: Number)
     object OUNCE : Unit<Mass>(Mass::class)
     {
         override val symbol = "oz"
-        override val cannon = 28.349523125.toBigBigDecimal()
+        override val scale = 28.349523125.toBigBigDecimal()
     }
 }

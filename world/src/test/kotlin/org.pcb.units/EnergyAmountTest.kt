@@ -1,7 +1,7 @@
 package org.pcb.units
 
+import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.junit.jupiter.api.Test
 import org.pcb.units.amount.EnergyAmount
 import org.pcb.units.amount.ForceAmount
 import org.pcb.units.amount.SpaceAmount
@@ -9,6 +9,7 @@ import org.pcb.units.amount.mass.Gram.GRAM
 import org.pcb.units.amount.mass.Ounce.OUNCE
 import org.pcb.units.amount.mass.Pound.POUND
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.space.Foot.FOOT
 import org.pcb.units.amount.space.Inch.INCH
 import org.pcb.units.amount.space.Meter.METER
@@ -17,6 +18,22 @@ import org.pcb.units.amount.time.Second.SECOND
 
 class EnergyAmountTest
 {
+    @Test
+    fun timesScalar()
+    {
+        assertEquals(
+            expected = EnergyAmount(4, GRAM, METER, METER, SECOND, SECOND),
+            actual = EnergyAmount(2, GRAM, METER, METER, SECOND, SECOND) * PercentAmount(2 * 100))
+    }
+
+    @Test
+    fun divScalar()
+    {
+        assertEquals(
+            expected = EnergyAmount(1, GRAM, METER, METER, SECOND, SECOND),
+            actual = EnergyAmount(2, GRAM, METER, METER, SECOND, SECOND) / PercentAmount(2 * 100))
+    }
+
     @Test
     fun plusSameEnergy()
     {

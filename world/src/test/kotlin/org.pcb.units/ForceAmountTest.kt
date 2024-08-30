@@ -13,6 +13,7 @@ import org.pcb.units.amount.mass.Gram.GRAM
 import org.pcb.units.amount.mass.Ounce.OUNCE
 import org.pcb.units.amount.mass.Pound.POUND
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.space.Foot.FOOT
 import org.pcb.units.amount.space.Inch.INCH
 import org.pcb.units.amount.space.Meter.METER
@@ -21,6 +22,22 @@ import org.pcb.units.amount.time.Second.SECOND
 
 class ForceAmountTest
 {
+    @Test
+    fun timesScalar()
+    {
+        assertEquals(
+            expected = ForceAmount(4, GRAM, METER, SECOND, SECOND),
+            actual = ForceAmount(2, GRAM, METER, SECOND, SECOND) * PercentAmount(2 * 100))
+    }
+
+    @Test
+    fun divScalar()
+    {
+        assertEquals(
+            expected = ForceAmount(1, GRAM, METER, SECOND, SECOND),
+            actual = ForceAmount(2, GRAM, METER, SECOND, SECOND) / PercentAmount(2 * 100))
+    }
+
     @Test
     fun plusSameForce()
     {

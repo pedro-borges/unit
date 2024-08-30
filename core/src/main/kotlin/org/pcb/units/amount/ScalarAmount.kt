@@ -13,9 +13,17 @@ open class ScalarAmount<S : Unit<Scalar>>(amount: Number,
     : Amount<Scalar>(amount = amount.toBigBigDecimal(),
                      unit = CompositeUnit(
                          domain = Scalar::class,
-                         units = listOf()))
+                         units = listOf(scalar to 1)))
 {
     // region Scalar
+
+    override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
+        ScalarAmount(amount = amount * that.amount * that.unit.scale,
+                     scalar = scalar)
+
+    override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
+        ScalarAmount(amount = amount / that.amount / that.unit.scale,
+                     scalar = scalar)
 
     operator fun <S : Unit<Scalar>> plus(that: ScalarAmount<S>) =
         ScalarAmount(amount = amount + that.amount * convert(that.scalar to scalar),
@@ -35,21 +43,12 @@ open class ScalarAmount<S : Unit<Scalar>>(amount: Number,
         ScalarAmount(amount = amount - that.amount,
                      scalar = scalar)
 
-    operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        ScalarAmount(amount = amount / that.amount / convert(that.scalar to scalar),
-                     scalar = scalar)
-
-    @JvmName("divScalar")
-    operator fun div(that: ScalarAmount<S>) =
-        ScalarAmount(amount = amount / that.amount,
-                     scalar = scalar)
-
     // endregion
 
     // region Frequency
 
     operator fun <T: Unit<Time>> div(that: TimeAmount<T>) =
-        FrequencyAmount(amount = amount * unit.cannon / that.amount,
+        FrequencyAmount(amount = amount * unit.scale / that.amount,
                         time = that.time)
 
     // endregion
@@ -57,8 +56,8 @@ open class ScalarAmount<S : Unit<Scalar>>(amount: Number,
     // region Time
 
     operator fun <T: Unit<Time>> div(that: FrequencyAmount<T>) =
-        TimeAmount(amount = amount * unit.cannon / that.amount,
-                        time = that.time)
+        TimeAmount(amount = amount * unit.scale / that.amount,
+                   time = that.time)
 
     // endregion
 }

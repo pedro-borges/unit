@@ -13,6 +13,6 @@ class Inch(amount: Number)
     object INCH : Unit<Space>(Space::class)
     {
         override val symbol = "in"
-        override val cannon = 0.0254.toBigBigDecimal()
+        override val scale = 0.0254.toBigBigDecimal()
     }
 }

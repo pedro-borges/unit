@@ -7,9 +7,11 @@ import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Acceleration
 import org.pcb.units.domain.Mass
+import org.pcb.units.domain.Scalar
 import org.pcb.units.domain.Space
 import org.pcb.units.domain.Time
 import org.pcb.units.or
+import org.pcb.units.times
 import org.pcb.units.toBigBigDecimal
 
 open class AccelerationAmount<S : Unit<Space>, T : Unit<Time>>(
@@ -25,6 +27,18 @@ open class AccelerationAmount<S : Unit<Space>, T : Unit<Time>>(
                                               time2 to -1)))
 {
     // region Acceleration
+
+    override operator fun <U : Unit<Scalar>> times(that: ScalarAmount<U>): AccelerationAmount<S, T> =
+        AccelerationAmount(amount = amount * that.amount * that.unit.scale,
+                           space = space,
+                           time1 = time1,
+                           time2 = time2)
+
+    override operator fun <U : Unit<Scalar>> div(that: ScalarAmount<U>): AccelerationAmount<S, T> =
+        AccelerationAmount(amount = amount / that.amount / that.unit.scale,
+                           space = space,
+                           time1 = time1,
+                           time2 = time2)
 
     operator fun <S : Unit<Space>, T : Unit<Time>> plus(that: AccelerationAmount<S, T>) =
         AccelerationAmount(amount = amount + that.amount * convert(that.space to space,

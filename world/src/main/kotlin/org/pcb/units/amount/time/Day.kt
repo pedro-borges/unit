@@ -13,6 +13,6 @@ class Day(amount: Number)
     object DAY : Unit<Time>(Time::class)
     {
         override val symbol = "D"
-        override val cannon = 86400.toBigBigDecimal()
+        override val scale = 86400.toBigBigDecimal()
     }
 }

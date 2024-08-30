@@ -6,6 +6,7 @@ import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Mass
+import org.pcb.units.domain.Scalar
 import org.pcb.units.domain.Space
 import org.pcb.units.domain.Time
 import org.pcb.units.toBigBigDecimal
@@ -18,6 +19,14 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
                        units = listOf(mass to 1)))
 {
     // region Mass
+
+    override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
+        MassAmount(amount = amount * that.amount * that.unit.scale,
+                   mass = mass)
+
+    override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
+        MassAmount(amount = amount / that.amount / that.unit.scale,
+                   mass = mass)
 
     operator fun <M : Unit<Mass>> plus(that: MassAmount<M>) =
         MassAmount(amount = amount + that.amount * convert(that.mass to mass),

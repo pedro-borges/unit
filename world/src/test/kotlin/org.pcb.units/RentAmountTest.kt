@@ -8,11 +8,29 @@ import org.pcb.units.amount.RentAmount
 import org.pcb.units.amount.TimeAmount
 import org.pcb.units.amount.finance.Gbp.GBP
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.time.Day.DAY
 import org.pcb.units.amount.time.Hour.HOUR
+import org.pcb.units.amount.time.Second.SECOND
 
 class RentAmountTest
 {
+    @Test
+    fun timesScalar()
+    {
+        assertEquals(
+            expected = RentAmount(4, GBP, SECOND),
+            actual = RentAmount(2, GBP, SECOND) * PercentAmount(2 * 100))
+    }
+
+    @Test
+    fun divScalar()
+    {
+        assertEquals(
+            expected = RentAmount(1, GBP, SECOND),
+            actual = RentAmount(2, GBP, SECOND) / PercentAmount(2 * 100))
+    }
+
     @Test
     fun plusSameRent()
     {

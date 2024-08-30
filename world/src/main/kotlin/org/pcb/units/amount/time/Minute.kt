@@ -13,6 +13,6 @@ class Minute(amount: Number)
     object MINUTE : Unit<Time>(Time::class)
     {
         override val symbol = "min"
-        override val cannon = 60.toBigBigDecimal()
+        override val scale = 60.toBigBigDecimal()
     }
 }

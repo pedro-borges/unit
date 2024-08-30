@@ -7,6 +7,7 @@ import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Force
 import org.pcb.units.domain.Mass
+import org.pcb.units.domain.Scalar
 import org.pcb.units.domain.Space
 import org.pcb.units.domain.Time
 import org.pcb.units.or
@@ -29,6 +30,22 @@ open class EnergyAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
                                        time2 to -1),))
 {
     // region Energy
+
+    override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
+        EnergyAmount(amount = amount * that.amount * that.unit.scale,
+                     mass = mass,
+                     space1 = space1,
+                     space2 = space2,
+                     time1 = time1,
+                     time2 = time2)
+
+    override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
+        EnergyAmount(amount = amount / that.amount / that.unit.scale,
+                     mass = mass,
+                     space1 = space1,
+                     space2 = space2,
+                     time1 = time1,
+                     time2 = time2)
 
     operator fun <M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>> plus(that: EnergyAmount<M, S, T>) =
         EnergyAmount(amount = amount + that.amount * convert(that.mass to mass,

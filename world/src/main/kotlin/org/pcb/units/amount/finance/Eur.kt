@@ -13,6 +13,6 @@ class Eur(amount: Number)
     object EUR : Unit<Currency>(Currency::class)
     {
         override val symbol = "EUR"
-        override val cannon = 1.toBigBigDecimal()
+        override val scale = 1.toBigBigDecimal()
     }
 }

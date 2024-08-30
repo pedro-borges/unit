@@ -15,6 +15,6 @@ class Newton(amount: Number)
     object NEWTON : Unit<Force>(Force::class)
     {
         override val symbol = "N"
-        override val cannon = 0.001.toBigBigDecimal()
+        override val scale = 0.001.toBigBigDecimal()
     }
 }

@@ -11,6 +11,7 @@ import org.pcb.units.amount.SpaceAmount
 import org.pcb.units.amount.SpeedAmount
 import org.pcb.units.amount.finance.Gbp.GBP
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.space.Meter.METER
 import org.pcb.units.amount.time.Day.DAY
 import org.pcb.units.amount.time.Minute.MINUTE
@@ -18,6 +19,22 @@ import org.pcb.units.amount.time.Second.SECOND
 
 class FrequencyAmountTest
 {
+    @Test
+    fun timesScalar()
+    {
+        assertEquals(
+            expected = FrequencyAmount(4, SECOND),
+            actual = FrequencyAmount(2, SECOND) * PercentAmount(2 * 100))
+    }
+
+    @Test
+    fun divScalar()
+    {
+        assertEquals(
+            expected = FrequencyAmount(1, SECOND),
+            actual = FrequencyAmount(2, SECOND) / PercentAmount(2 * 100))
+    }
+
     @Test
     fun plusSameFrequency()
     {

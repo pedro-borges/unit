@@ -13,6 +13,6 @@ class Drachm(amount: Number)
     object DRACHM : Unit<Mass>(Mass::class)
     {
         override val symbol = "dr"
-        override val cannon = 1.7718451953125.toBigBigDecimal()
+        override val scale = 1.7718451953125.toBigBigDecimal()
     }
 }

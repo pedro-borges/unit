@@ -7,6 +7,7 @@ import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Currency
 import org.pcb.units.domain.Rent
+import org.pcb.units.domain.Scalar
 import org.pcb.units.domain.Time
 import org.pcb.units.toBigBigDecimal
 
@@ -20,7 +21,17 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
                        units = listOf(currency to 1,
                                       time to -1)))
 {
-    // region Rent    
+    // region Rent
+
+    override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
+        RentAmount(amount = amount * that.amount * that.unit.scale,
+                   currency = currency,
+                   time = time)
+
+    override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
+        RentAmount(amount = amount / that.amount / that.unit.scale,
+                   currency = currency,
+                   time = time)
 
     operator fun <T : Unit<Time>> plus(that: RentAmount<C, T>) =
         RentAmount(amount = amount + that.amount * convert(that.time to time),

@@ -1,18 +1,35 @@
 package org.pcb.units
 
+import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.junit.jupiter.api.Test
 import org.pcb.units.amount.CurrencyAmount
 import org.pcb.units.amount.DebtAmount
 import org.pcb.units.amount.FrequencyAmount
 import org.pcb.units.amount.TimeAmount
 import org.pcb.units.amount.finance.Gbp.GBP
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.time.Minute.MINUTE
 import org.pcb.units.amount.time.Second.SECOND
 
 class DebtAmountTest
 {
+    @Test
+    fun timesScalar()
+    {
+        assertEquals(
+            expected = DebtAmount(4, GBP, SECOND),
+            actual = DebtAmount(2, GBP, SECOND) * PercentAmount(2 * 100))
+    }
+
+    @Test
+    fun divScalar()
+    {
+        assertEquals(
+            expected = DebtAmount(1, GBP, SECOND),
+            actual = DebtAmount(2, GBP, SECOND) / PercentAmount(2 * 100))
+    }
+
     @Test
     fun plusSameDebt()
     {

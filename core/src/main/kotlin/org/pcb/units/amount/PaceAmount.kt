@@ -6,6 +6,7 @@ import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Pace
+import org.pcb.units.domain.Scalar
 import org.pcb.units.domain.Space
 import org.pcb.units.domain.Time
 import org.pcb.units.toBigBigDecimal
@@ -21,6 +22,16 @@ open class PaceAmount<T : Unit<Time>, S : Unit<Space>>(
                                       space to -1)))
 {
     // region Pace
+
+    override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
+        PaceAmount(amount = amount * that.amount * that.unit.scale,
+                   time = time,
+                   space = space)
+
+    override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
+        PaceAmount(amount = amount / that.amount / that.unit.scale,
+                   time = time,
+                   space = space)
 
     operator fun <T : Unit<Time>, S : Unit<Space>> plus(that: PaceAmount<T, S>) =
         PaceAmount(amount = amount + that.amount * convert(that.time to time,

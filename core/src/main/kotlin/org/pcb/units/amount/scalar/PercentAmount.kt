@@ -13,6 +13,6 @@ class PercentAmount(amount: Number)
     object PERCENT : Unit<Scalar>(Scalar::class)
     {
         override val symbol = "%"
-        override val cannon = 0.01.toBigBigDecimal()
+        override val scale = 0.01.toBigBigDecimal()
     }
 }

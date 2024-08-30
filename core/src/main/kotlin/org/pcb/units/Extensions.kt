@@ -39,7 +39,7 @@ fun Collection<Pair<Unit<*>, Int>>.sumToMap(): Map<Unit<*>, Int>
 }
 
 infix fun <D : Domain, U: Unit<D>> U.or(that: U): U =
-    if (cannon == that.cannon) this
+    if (scale == that.scale) this
     else throw IllegalStateException("$this and $that differ")
 
 operator fun BigDecimal.div(other: BigDecimal): BigDecimal = divide(other, 40, HALF_EVEN)

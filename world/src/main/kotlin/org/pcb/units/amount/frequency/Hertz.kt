@@ -13,6 +13,6 @@ class Hertz(amount: Number)
     object HERTZ : Unit<Time>(Time::class)
     {
         override val symbol = "Hz"
-        override val cannon = 1.toBigBigDecimal()
+        override val scale = 1.toBigBigDecimal()
     }
 }

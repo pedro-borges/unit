@@ -8,8 +8,24 @@ import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.time.Second.SECOND
 
-class NaturalAmountTest
+class ScalarAmountTest
 {
+    @Test
+    fun timesScalar()
+    {
+        assertEquals(
+            expected = NaturalAmount(4),
+            actual = NaturalAmount(2) * PercentAmount(2 * 100))
+    }
+
+    @Test
+    fun divScalar()
+    {
+        assertEquals(
+            expected = NaturalAmount(1),
+            actual = NaturalAmount(2) / PercentAmount(2 * 100))
+    }
+
     @Test
     fun plusSameScalar()
     {
@@ -40,22 +56,6 @@ class NaturalAmountTest
         assertEquals(
             expected = NaturalAmount(0),
             actual = NaturalAmount(1) - PercentAmount(100))
-    }
-
-    @Test
-    fun divSameScalar()
-    {
-        assertEquals(
-            expected = NaturalAmount(1),
-            actual = NaturalAmount(2) / NaturalAmount(2))
-    }
-
-    @Test
-    fun divOtherScalar()
-    {
-        assertEquals(
-            expected = NaturalAmount(1),
-            actual = NaturalAmount(2) / PercentAmount(2 * 100))
     }
 
     @Test

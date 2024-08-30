@@ -7,6 +7,7 @@ import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Force
 import org.pcb.units.domain.Mass
+import org.pcb.units.domain.Scalar
 import org.pcb.units.domain.Space
 import org.pcb.units.domain.Time
 import org.pcb.units.or
@@ -28,6 +29,20 @@ open class ForceAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
                                        time2 to -1)))
 {
     // region Force
+
+    override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
+        ForceAmount(amount = amount * that.amount * that.unit.scale,
+                    mass = mass,
+                    space = space,
+                    time1 = time1,
+                    time2 = time2)
+
+    override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
+        ForceAmount(amount = amount / that.amount / that.unit.scale,
+                    mass = mass,
+                    space = space,
+                    time1 = time1,
+                    time2 = time2)
 
     operator fun <M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>> plus(that: ForceAmount<M, S, T>) =
         ForceAmount(amount = amount + that.amount * convert(that.mass to mass,

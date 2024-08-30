@@ -6,6 +6,7 @@ import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Currency
+import org.pcb.units.domain.Scalar
 import org.pcb.units.domain.Time
 import org.pcb.units.toBigBigDecimal
 
@@ -18,6 +19,14 @@ open class CurrencyAmount<C : Unit<Currency>>(
                            units = listOf(currency to 1)))
 {
     // region Currency
+
+    override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
+        CurrencyAmount(amount = amount * that.amount * that.unit.scale,
+                       currency = currency)
+
+    override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
+        CurrencyAmount(amount = amount / that.amount / that.unit.scale,
+                       currency = currency)
 
     operator fun plus(that: CurrencyAmount<C>) =
         CurrencyAmount(amount = this.amount + that.amount,

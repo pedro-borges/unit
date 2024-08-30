@@ -13,6 +13,6 @@ class Gbp(amount: Number)
     object GBP : Unit<Currency>(Currency::class)
     {
         override val symbol = "GBP"
-        override val cannon = 1.toBigBigDecimal()
+        override val scale = 1.toBigBigDecimal()
     }
 }

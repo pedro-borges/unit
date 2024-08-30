@@ -6,12 +6,29 @@ import org.pcb.units.amount.PaceAmount
 import org.pcb.units.amount.SpaceAmount
 import org.pcb.units.amount.TimeAmount
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.space.Meter.METER
 import org.pcb.units.amount.time.Minute.MINUTE
 import org.pcb.units.amount.time.Second.SECOND
 
 class TimeAmountTest
 {
+    @Test
+    fun timesScalar()
+    {
+        assertEquals(
+            expected = TimeAmount(4, SECOND),
+            actual = TimeAmount(2, SECOND) * PercentAmount(2 * 100))
+    }
+
+    @Test
+    fun divScalar()
+    {
+        assertEquals(
+            expected = TimeAmount(1, SECOND),
+            actual = TimeAmount(2, SECOND) / PercentAmount(2 * 100))
+    }
+
     @Test
     fun plusSameTime()
     {

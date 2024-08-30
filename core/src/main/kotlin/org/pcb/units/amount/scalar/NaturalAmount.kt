@@ -12,6 +12,6 @@ class NaturalAmount(amount: Number)
     object NATURAL : Unit<Scalar>(Scalar::class)
     {
         override val symbol = ""
-        override val cannon = 1.toBigBigDecimal()
+        override val scale = 1.toBigBigDecimal()
     }
 }

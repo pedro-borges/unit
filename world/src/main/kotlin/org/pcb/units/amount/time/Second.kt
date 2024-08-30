@@ -13,6 +13,6 @@ class Second(amount: Number)
     object SECOND : Unit<Time>(Time::class)
     {
         override val symbol = "s"
-        override val cannon = 1.toBigBigDecimal()
+        override val scale = 1.toBigBigDecimal()
     }
 }

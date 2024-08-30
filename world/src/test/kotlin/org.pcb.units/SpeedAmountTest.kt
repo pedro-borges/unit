@@ -8,6 +8,7 @@ import org.pcb.units.amount.SpaceAmount
 import org.pcb.units.amount.SpeedAmount
 import org.pcb.units.amount.TimeAmount
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.space.Foot.FOOT
 import org.pcb.units.amount.space.Inch.INCH
 import org.pcb.units.amount.space.Meter.METER
@@ -16,6 +17,22 @@ import org.pcb.units.amount.time.Second.SECOND
 
 class SpeedAmountTest
 {
+    @Test
+    fun timesScalar()
+    {
+        assertEquals(
+            expected = SpeedAmount(4, METER, SECOND),
+            actual = SpeedAmount(2, METER, SECOND) * PercentAmount(2 * 100))
+    }
+
+    @Test
+    fun divScalar()
+    {
+        assertEquals(
+            expected = SpeedAmount(1, METER, SECOND),
+            actual = SpeedAmount(2, METER, SECOND) / PercentAmount(2 * 100))
+    }
+
     @Test
     fun plusSameSpeed()
     {

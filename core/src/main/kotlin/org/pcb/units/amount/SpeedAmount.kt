@@ -5,6 +5,7 @@ import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
+import org.pcb.units.domain.Scalar
 import org.pcb.units.domain.Space
 import org.pcb.units.domain.Speed
 import org.pcb.units.domain.Time
@@ -21,6 +22,16 @@ open class SpeedAmount<S : Unit<Space>, T : Unit<Time>>(
                                        time to -1)))
 {
     // region Speed
+
+    override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
+        SpeedAmount(amount = amount * that.amount * that.unit.scale,
+                    space = space,
+                    time = time)
+
+    override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
+        SpeedAmount(amount = amount / that.amount / that.unit.scale,
+                    space = space,
+                    time = time)
 
     operator fun <S : Unit<Space>, T : Unit<Time>> plus(that: SpeedAmount<S, T>) =
         SpeedAmount(amount = amount + that.amount * convert(that.space to space,

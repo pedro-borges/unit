@@ -13,11 +13,11 @@ open class CompositeUnit<D : Domain>(domain: KClass<D>,
     override val symbol
         get() =
             Renderer.render(this.units)
-    override val cannon
+    override val scale
         get() =
             units.entries
                 .fold(1.toBigDecimal()) { acc, entry ->
-                    acc * entry.key.cannon.power(entry.value)
+                    acc * entry.key.scale.power(entry.value)
                 }
 
     operator fun times(unit: Unit<*>) =

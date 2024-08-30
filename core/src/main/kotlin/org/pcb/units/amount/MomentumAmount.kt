@@ -7,6 +7,7 @@ import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Mass
 import org.pcb.units.domain.Momentum
+import org.pcb.units.domain.Scalar
 import org.pcb.units.domain.Space
 import org.pcb.units.domain.Time
 import org.pcb.units.toBigBigDecimal
@@ -24,6 +25,18 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
                                           time to -1)))
 {
     // region Momentum
+
+    override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
+        MomentumAmount(amount = amount * that.amount * that.unit.scale,
+                       mass = mass,
+                       space = space,
+                       time = time)
+
+    override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
+        MomentumAmount(amount = amount / that.amount / that.unit.scale,
+                       mass = mass,
+                       space = space,
+                       time = time)
 
     operator fun <M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>> plus(that: MomentumAmount<M, S, T>) =
         MomentumAmount(amount = amount + that.amount * convert(that.mass to mass,

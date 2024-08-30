@@ -13,6 +13,6 @@ class Foot(amount: Number)
     object FOOT : Unit<Space>(Space::class)
     {
         override val symbol = "ft"
-        override val cannon = 0.3048.toBigBigDecimal()
+        override val scale = 0.3048.toBigBigDecimal()
     }
 }

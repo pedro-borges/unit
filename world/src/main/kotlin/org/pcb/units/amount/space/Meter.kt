@@ -13,6 +13,6 @@ class Meter(amount: Number)
     object METER : Unit<Space>(Space::class)
     {
         override val symbol = "m"
-        override val cannon = 1.toBigBigDecimal()
+        override val scale = 1.toBigBigDecimal()
     }
 }

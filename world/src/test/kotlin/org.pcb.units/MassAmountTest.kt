@@ -11,11 +11,28 @@ import org.pcb.units.amount.mass.Gram.GRAM
 import org.pcb.units.amount.mass.Ounce.OUNCE
 import org.pcb.units.amount.mass.Pound.POUND
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.space.Meter.METER
 import org.pcb.units.amount.time.Second.SECOND
 
 class MassAmountTest
 {
+    @Test
+    fun timesScalar()
+    {
+        assertEquals(
+            expected = MassAmount(4, GRAM),
+            actual = MassAmount(2, GRAM) * PercentAmount(2 * 100))
+    }
+
+    @Test
+    fun divScalar()
+    {
+        assertEquals(
+            expected = MassAmount(1, GRAM),
+            actual = MassAmount(2, GRAM) / PercentAmount(2 * 100))
+    }
+
     @Test
     fun plusSameMass()
     {
