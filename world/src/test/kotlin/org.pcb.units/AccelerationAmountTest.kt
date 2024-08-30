@@ -8,14 +8,14 @@ import org.pcb.units.amount.FrequencyAmount
 import org.pcb.units.amount.MassAmount
 import org.pcb.units.amount.SpeedAmount
 import org.pcb.units.amount.TimeAmount
+import org.pcb.units.amount.cannon.Kilogram.KILOGRAM
+import org.pcb.units.amount.cannon.Meter.METER
+import org.pcb.units.amount.cannon.Second.SECOND
 import org.pcb.units.amount.length.Foot.FOOT
 import org.pcb.units.amount.length.Inch.INCH
-import org.pcb.units.amount.length.Meter.METER
-import org.pcb.units.amount.mass.Gram.GRAM
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.time.Minute.MINUTE
-import org.pcb.units.amount.time.Second.SECOND
 import org.pcb.units.domain.Time
 
 class AccelerationAmountTest
@@ -128,7 +128,7 @@ class AccelerationAmountTest
     fun timesMass()
     {
         assertEquals(
-            expected = ForceAmount(4, GRAM, METER, SECOND, SECOND),
-            actual = AccelerationAmount(2, METER, SECOND, SECOND) * MassAmount(2, GRAM))
+            expected = ForceAmount(4, KILOGRAM, METER, SECOND, SECOND),
+            actual = AccelerationAmount(2, METER, SECOND, SECOND) * MassAmount(2, KILOGRAM))
     }
 }

@@ -7,13 +7,13 @@ import org.pcb.units.amount.ForceAmount
 import org.pcb.units.amount.MassAmount
 import org.pcb.units.amount.MomentumAmount
 import org.pcb.units.amount.SpeedAmount
-import org.pcb.units.amount.length.Meter.METER
-import org.pcb.units.amount.mass.Gram.GRAM
+import org.pcb.units.amount.cannon.Kilogram.KILOGRAM
+import org.pcb.units.amount.cannon.Meter.METER
+import org.pcb.units.amount.cannon.Second.SECOND
 import org.pcb.units.amount.mass.Ounce.OUNCE
 import org.pcb.units.amount.mass.Pound.POUND
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.amount.scalar.PercentAmount
-import org.pcb.units.amount.time.Second.SECOND
 
 class MassAmountTest
 {
@@ -21,24 +21,24 @@ class MassAmountTest
     fun timesScalar()
     {
         assertEquals(
-            expected = MassAmount(4, GRAM),
-            actual = MassAmount(2, GRAM) * PercentAmount(2 * 100))
+            expected = MassAmount(4, KILOGRAM),
+            actual = MassAmount(2, KILOGRAM) * PercentAmount(2 * 100))
     }
 
     @Test
     fun divScalar()
     {
         assertEquals(
-            expected = MassAmount(1, GRAM),
-            actual = MassAmount(2, GRAM) / PercentAmount(2 * 100))
+            expected = MassAmount(1, KILOGRAM),
+            actual = MassAmount(2, KILOGRAM) / PercentAmount(2 * 100))
     }
 
     @Test
     fun plusSameMass()
     {
         assertEquals(
-            expected = MassAmount(1, GRAM),
-            actual = MassAmount(0, GRAM) + MassAmount(1, GRAM))
+            expected = MassAmount(1, KILOGRAM),
+            actual = MassAmount(0, KILOGRAM) + MassAmount(1, KILOGRAM))
     }
 
     @Test
@@ -53,8 +53,8 @@ class MassAmountTest
     fun minusSameMass()
     {
         assertEquals(
-            expected = MassAmount(0, GRAM),
-            actual = MassAmount(1, GRAM) - MassAmount(1, GRAM))
+            expected = MassAmount(0, KILOGRAM),
+            actual = MassAmount(1, KILOGRAM) - MassAmount(1, KILOGRAM))
     }
 
     @Test
@@ -70,7 +70,7 @@ class MassAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = MassAmount(2, GRAM) / MassAmount(2, GRAM))
+            actual = MassAmount(2, KILOGRAM) / MassAmount(2, KILOGRAM))
     }
 
     @Test
@@ -85,15 +85,15 @@ class MassAmountTest
     fun timesSpeed()
     {
         assertEquals(
-            expected = MomentumAmount(4, GRAM, METER, SECOND),
-            actual = MassAmount(2, GRAM) * SpeedAmount(2, METER, SECOND))
+            expected = MomentumAmount(4, KILOGRAM, METER, SECOND),
+            actual = MassAmount(2, KILOGRAM) * SpeedAmount(2, METER, SECOND))
     }
 
     @Test
     fun timesAcceleration()
     {
         assertEquals(
-            expected = ForceAmount(4, GRAM, METER, SECOND, SECOND),
-            actual = MassAmount(2, GRAM) * AccelerationAmount(2, METER, SECOND, SECOND))
+            expected = ForceAmount(4, KILOGRAM, METER, SECOND, SECOND),
+            actual = MassAmount(2, KILOGRAM) * AccelerationAmount(2, METER, SECOND, SECOND))
     }
 }

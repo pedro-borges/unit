@@ -1,8 +1,8 @@
-package org.pcb.units.amount.time
+package org.pcb.units.amount.cannon
 
 import org.pcb.units.Unit
 import org.pcb.units.amount.TimeAmount
-import org.pcb.units.amount.time.Second.SECOND
+import org.pcb.units.amount.cannon.Second.SECOND
 import org.pcb.units.domain.Time
 import org.pcb.units.toBigBigDecimal
 

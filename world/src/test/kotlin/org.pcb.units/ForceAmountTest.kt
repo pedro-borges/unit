@@ -9,16 +9,17 @@ import org.pcb.units.amount.LengthAmount
 import org.pcb.units.amount.MassAmount
 import org.pcb.units.amount.MomentumAmount
 import org.pcb.units.amount.TimeAmount
+import org.pcb.units.amount.cannon.Kilogram.KILOGRAM
+import org.pcb.units.amount.cannon.Meter.METER
+import org.pcb.units.amount.cannon.Second.SECOND
 import org.pcb.units.amount.length.Foot.FOOT
 import org.pcb.units.amount.length.Inch.INCH
-import org.pcb.units.amount.length.Meter.METER
-import org.pcb.units.amount.mass.Gram.GRAM
 import org.pcb.units.amount.mass.Ounce.OUNCE
 import org.pcb.units.amount.mass.Pound.POUND
+import org.pcb.units.amount.mechanics.Newton.NEWTON
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.time.Minute.MINUTE
-import org.pcb.units.amount.time.Second.SECOND
 import org.pcb.units.domain.Time
 
 class ForceAmountTest
@@ -26,33 +27,41 @@ class ForceAmountTest
     @Test
     fun construct()
     {
-        assertEquals<ForceAmount<GRAM, METER, out Unit<Time>>>(
-            expected = ForceAmount(1, GRAM, METER, SECOND, SECOND),
-            actual = ForceAmount(60, GRAM, METER, SECOND, MINUTE))
+        assertEquals<ForceAmount<KILOGRAM, METER, out Unit<Time>>>(
+            expected = ForceAmount(1, KILOGRAM, METER, SECOND, SECOND),
+            actual = ForceAmount(60, KILOGRAM, METER, SECOND, MINUTE))
+    }
+
+    @Test
+    fun ownUnit()
+    {
+        assertEquals(
+            expected = ForceAmount(1, KILOGRAM, METER, SECOND, SECOND),
+            actual = ForceAmount(1, NEWTON))
     }
 
     @Test
     fun timesScalar()
     {
         assertEquals(
-            expected = ForceAmount(4, GRAM, METER, SECOND, SECOND),
-            actual = ForceAmount(2, GRAM, METER, SECOND, SECOND) * PercentAmount(2 * 100))
+            expected = ForceAmount(4, KILOGRAM, METER, SECOND, SECOND),
+            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) * PercentAmount(2 * 100))
     }
 
     @Test
     fun divScalar()
     {
         assertEquals(
-            expected = ForceAmount(1, GRAM, METER, SECOND, SECOND),
-            actual = ForceAmount(2, GRAM, METER, SECOND, SECOND) / PercentAmount(2 * 100))
+            expected = ForceAmount(1, KILOGRAM, METER, SECOND, SECOND),
+            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) / PercentAmount(2 * 100))
     }
 
     @Test
     fun plusSameForce()
     {
         assertEquals(
-            expected = ForceAmount(1, GRAM, METER, SECOND, SECOND),
-            actual = ForceAmount(0, GRAM, METER, SECOND, SECOND) + ForceAmount(1, GRAM, METER, SECOND, SECOND))
+            expected = ForceAmount(1, KILOGRAM, METER, SECOND, SECOND),
+            actual = ForceAmount(0, KILOGRAM, METER, SECOND, SECOND) + ForceAmount(1, KILOGRAM, METER, SECOND, SECOND))
     }
 
     @Test
@@ -67,8 +76,8 @@ class ForceAmountTest
     fun minusSameForce()
     {
         assertEquals(
-            expected = ForceAmount(0, GRAM, METER, SECOND, SECOND),
-            actual = ForceAmount(1, GRAM, METER, SECOND, SECOND) - ForceAmount(1, GRAM, METER, SECOND, SECOND))
+            expected = ForceAmount(0, KILOGRAM, METER, SECOND, SECOND),
+            actual = ForceAmount(1, KILOGRAM, METER, SECOND, SECOND) - ForceAmount(1, KILOGRAM, METER, SECOND, SECOND))
     }
 
     @Test
@@ -84,7 +93,7 @@ class ForceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = ForceAmount(2, GRAM, METER, SECOND, SECOND) / ForceAmount(2, GRAM, METER, SECOND, SECOND))
+            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) / ForceAmount(2, KILOGRAM, METER, SECOND, SECOND))
     }
 
     @Test
@@ -100,7 +109,7 @@ class ForceAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(1, METER, SECOND, SECOND),
-            actual = ForceAmount(2, GRAM, METER, SECOND, SECOND) / MassAmount(2, GRAM))
+            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) / MassAmount(2, KILOGRAM))
     }
 
     @Test
@@ -115,47 +124,47 @@ class ForceAmountTest
     fun divSameAcceleration()
     {
         assertEquals(
-            expected = MassAmount(1, GRAM),
-            actual = ForceAmount(2, GRAM, METER, SECOND, SECOND) / AccelerationAmount(2, METER, SECOND, SECOND))
+            expected = MassAmount(1, KILOGRAM),
+            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) / AccelerationAmount(2, METER, SECOND, SECOND))
     }
 
     @Test
     fun divOtherAcceleration()
     {
         assertEquals(
-            expected = MassAmount(1, GRAM),
-            actual = ForceAmount(2, GRAM, FOOT, SECOND, SECOND) / AccelerationAmount(2 * 12 * 60 * 60, INCH, MINUTE, MINUTE))
+            expected = MassAmount(1, KILOGRAM),
+            actual = ForceAmount(2, KILOGRAM, FOOT, SECOND, SECOND) / AccelerationAmount(2 * 12 * 60 * 60, INCH, MINUTE, MINUTE))
     }
 
     @Test
     fun timesSameTime()
     {
         assertEquals(
-            expected = MomentumAmount(4, GRAM, METER, SECOND),
-            actual = ForceAmount(2, GRAM, METER, SECOND, SECOND) * TimeAmount(2, SECOND))
+            expected = MomentumAmount(4, KILOGRAM, METER, SECOND),
+            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) * TimeAmount(2, SECOND))
     }
 
     @Test
     fun timesOtherTime()
     {
         assertEquals(
-            expected = MomentumAmount(4, GRAM, FOOT, MINUTE),
-            actual = ForceAmount(2, GRAM, FOOT, MINUTE, MINUTE) * TimeAmount(2 * 60, SECOND))
+            expected = MomentumAmount(4, KILOGRAM, FOOT, MINUTE),
+            actual = ForceAmount(2, KILOGRAM, FOOT, MINUTE, MINUTE) * TimeAmount(2 * 60, SECOND))
     }
 
     @Test
     fun timesSameSpace()
     {
         assertEquals(
-            expected = EnergyAmount(4, GRAM, METER, METER, SECOND, SECOND),
-            actual = ForceAmount(2, GRAM, METER, SECOND, SECOND) * LengthAmount(2, METER))
+            expected = EnergyAmount(4, KILOGRAM, METER, METER, SECOND, SECOND),
+            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) * LengthAmount(2, METER))
     }
 
     @Test
     fun timesOtherSpace()
     {
         assertEquals(
-            expected = EnergyAmount(4, GRAM, FOOT, FOOT, SECOND, SECOND),
-            actual = ForceAmount(2, GRAM, FOOT, SECOND, SECOND) * LengthAmount(2 * 12, INCH))
+            expected = EnergyAmount(4, KILOGRAM, FOOT, FOOT, SECOND, SECOND),
+            actual = ForceAmount(2, KILOGRAM, FOOT, SECOND, SECOND) * LengthAmount(2 * 12, INCH))
     }
 }

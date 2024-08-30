@@ -6,11 +6,11 @@ import org.pcb.units.amount.CurrencyAmount
 import org.pcb.units.amount.DebtAmount
 import org.pcb.units.amount.FrequencyAmount
 import org.pcb.units.amount.TimeAmount
+import org.pcb.units.amount.cannon.Second.SECOND
 import org.pcb.units.amount.finance.Gbp.GBP
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.time.Minute.MINUTE
-import org.pcb.units.amount.time.Second.SECOND
 
 class DebtAmountTest
 {

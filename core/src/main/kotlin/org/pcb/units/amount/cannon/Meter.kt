@@ -1,8 +1,8 @@
-package org.pcb.units.amount.length
+package org.pcb.units.amount.cannon
 
 import org.pcb.units.Unit
 import org.pcb.units.amount.LengthAmount
-import org.pcb.units.amount.length.Meter.METER
+import org.pcb.units.amount.cannon.Meter.METER
 import org.pcb.units.domain.Length
 import org.pcb.units.toBigBigDecimal
 

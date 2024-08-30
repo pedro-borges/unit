@@ -3,6 +3,9 @@ package org.pcb.units.amount
 import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
+import org.pcb.units.amount.cannon.Kilogram.KILOGRAM
+import org.pcb.units.amount.cannon.Meter.METER
+import org.pcb.units.amount.cannon.Second.SECOND
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.convert
 import org.pcb.units.div
@@ -27,6 +30,16 @@ open class ForceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                                        length to 1,
                                        time to -2)))
 {
+    companion object
+    {
+        operator fun invoke(amount: Number, force: Unit<Force>) =
+            ForceAmount(amount = amount.toBigBigDecimal() * force.scale,
+                        mass = KILOGRAM,
+                        length = METER,
+                        time = SECOND,
+                        time2 = SECOND)
+    }
+
     // region Force
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =

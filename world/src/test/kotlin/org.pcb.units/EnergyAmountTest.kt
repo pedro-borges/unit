@@ -5,16 +5,16 @@ import kotlin.test.assertEquals
 import org.pcb.units.amount.EnergyAmount
 import org.pcb.units.amount.ForceAmount
 import org.pcb.units.amount.LengthAmount
+import org.pcb.units.amount.cannon.Kilogram.KILOGRAM
+import org.pcb.units.amount.cannon.Meter.METER
+import org.pcb.units.amount.cannon.Second.SECOND
 import org.pcb.units.amount.length.Foot.FOOT
 import org.pcb.units.amount.length.Inch.INCH
-import org.pcb.units.amount.length.Meter.METER
-import org.pcb.units.amount.mass.Gram.GRAM
 import org.pcb.units.amount.mass.Ounce.OUNCE
 import org.pcb.units.amount.mass.Pound.POUND
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.time.Minute.MINUTE
-import org.pcb.units.amount.time.Second.SECOND
 import org.pcb.units.domain.Length
 import org.pcb.units.domain.Time
 
@@ -23,33 +23,33 @@ class EnergyAmountTest
     @Test
     fun construct()
     {
-        assertEquals<EnergyAmount<GRAM, out Unit<Length>, out Unit<Time>>>(
-            expected = EnergyAmount(1, GRAM, FOOT, FOOT, SECOND, SECOND),
-            actual = EnergyAmount(12 * 60, GRAM, FOOT, INCH, SECOND, MINUTE))
+        assertEquals<EnergyAmount<KILOGRAM, out Unit<Length>, out Unit<Time>>>(
+            expected = EnergyAmount(1, KILOGRAM, FOOT, FOOT, SECOND, SECOND),
+            actual = EnergyAmount(12 * 60, KILOGRAM, FOOT, INCH, SECOND, MINUTE))
     }
 
     @Test
     fun timesScalar()
     {
         assertEquals(
-            expected = EnergyAmount(4, GRAM, METER, METER, SECOND, SECOND),
-            actual = EnergyAmount(2, GRAM, METER, METER, SECOND, SECOND) * PercentAmount(2 * 100))
+            expected = EnergyAmount(4, KILOGRAM, METER, METER, SECOND, SECOND),
+            actual = EnergyAmount(2, KILOGRAM, METER, METER, SECOND, SECOND) * PercentAmount(2 * 100))
     }
 
     @Test
     fun divScalar()
     {
         assertEquals(
-            expected = EnergyAmount(1, GRAM, METER, METER, SECOND, SECOND),
-            actual = EnergyAmount(2, GRAM, METER, METER, SECOND, SECOND) / PercentAmount(2 * 100))
+            expected = EnergyAmount(1, KILOGRAM, METER, METER, SECOND, SECOND),
+            actual = EnergyAmount(2, KILOGRAM, METER, METER, SECOND, SECOND) / PercentAmount(2 * 100))
     }
 
     @Test
     fun plusSameEnergy()
     {
         assertEquals(
-            expected = EnergyAmount(1, GRAM, METER, METER, SECOND, SECOND),
-            actual = EnergyAmount(0, GRAM, METER, METER, SECOND, SECOND) + EnergyAmount(1, GRAM, METER, METER, SECOND, SECOND))
+            expected = EnergyAmount(1, KILOGRAM, METER, METER, SECOND, SECOND),
+            actual = EnergyAmount(0, KILOGRAM, METER, METER, SECOND, SECOND) + EnergyAmount(1, KILOGRAM, METER, METER, SECOND, SECOND))
     }
 
     @Test
@@ -64,8 +64,8 @@ class EnergyAmountTest
     fun minusSameEnergy()
     {
         assertEquals(
-            expected = EnergyAmount(0, GRAM, METER, METER, SECOND, SECOND),
-            actual = EnergyAmount(1, GRAM, METER, METER, SECOND, SECOND) - EnergyAmount(1, GRAM, METER, METER, SECOND, SECOND))
+            expected = EnergyAmount(0, KILOGRAM, METER, METER, SECOND, SECOND),
+            actual = EnergyAmount(1, KILOGRAM, METER, METER, SECOND, SECOND) - EnergyAmount(1, KILOGRAM, METER, METER, SECOND, SECOND))
     }
 
     @Test
@@ -81,7 +81,7 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = EnergyAmount(2, GRAM, METER, METER, SECOND, SECOND) / EnergyAmount(2, GRAM, METER, METER, SECOND, SECOND))
+            actual = EnergyAmount(2, KILOGRAM, METER, METER, SECOND, SECOND) / EnergyAmount(2, KILOGRAM, METER, METER, SECOND, SECOND))
     }
 
     @Test
@@ -96,16 +96,16 @@ class EnergyAmountTest
     fun divSameSpace()
     {
         assertEquals(
-            expected = ForceAmount(1, GRAM, METER, SECOND, SECOND),
-            actual = EnergyAmount(2, GRAM, METER, METER, SECOND, SECOND) / LengthAmount(2, METER))
+            expected = ForceAmount(1, KILOGRAM, METER, SECOND, SECOND),
+            actual = EnergyAmount(2, KILOGRAM, METER, METER, SECOND, SECOND) / LengthAmount(2, METER))
     }
 
     @Test
     fun divOtherSpace()
     {
         assertEquals(
-            expected = ForceAmount(1, GRAM, FOOT, SECOND, SECOND),
-            actual = EnergyAmount(2, GRAM, FOOT, FOOT, SECOND, SECOND) / LengthAmount(2 * 12, INCH))
+            expected = ForceAmount(1, KILOGRAM, FOOT, SECOND, SECOND),
+            actual = EnergyAmount(2, KILOGRAM, FOOT, FOOT, SECOND, SECOND) / LengthAmount(2 * 12, INCH))
     }
 
     @Test
@@ -113,7 +113,7 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = LengthAmount(1, METER),
-            actual = EnergyAmount(2, GRAM, METER, METER, SECOND, SECOND) / ForceAmount(2, GRAM, METER, SECOND, SECOND))
+            actual = EnergyAmount(2, KILOGRAM, METER, METER, SECOND, SECOND) / ForceAmount(2, KILOGRAM, METER, SECOND, SECOND))
     }
 
     @Test
