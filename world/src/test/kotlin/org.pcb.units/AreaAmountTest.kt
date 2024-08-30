@@ -18,7 +18,8 @@ class AreaAmountTest
     {
         assertEquals(
             expected = AreaAmount(4, METER, METER),
-            actual = AreaAmount(2, METER, METER) * PercentAmount(2 * 100))
+            actual = AreaAmount(2, METER, METER) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -26,7 +27,8 @@ class AreaAmountTest
     {
         assertEquals(
             expected = AreaAmount(1, METER, METER),
-            actual = AreaAmount(2, METER, METER) / PercentAmount(2 * 100))
+            actual = AreaAmount(2, METER, METER) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -34,7 +36,8 @@ class AreaAmountTest
     {
         assertEquals(
             expected = AreaAmount(1, METER, METER),
-            actual = AreaAmount(0, METER, METER) + AreaAmount(1, METER, METER))
+            actual = AreaAmount(0, METER, METER) +
+                     AreaAmount(1, METER, METER))
     }
 
     @Test
@@ -42,7 +45,8 @@ class AreaAmountTest
     {
         assertEquals(
             expected = AreaAmount(1, FOOT, FOOT),
-            actual = AreaAmount(0, FOOT, FOOT) + AreaAmount(12 * 12, INCH, INCH))
+            actual = AreaAmount(0, FOOT, FOOT) +
+                     AreaAmount(12 * 12, INCH, INCH))
     }
 
     @Test
@@ -50,7 +54,8 @@ class AreaAmountTest
     {
         assertEquals(
             expected = AreaAmount(0, METER, METER),
-            actual = AreaAmount(1, METER, METER) - AreaAmount(1, METER, METER))
+            actual = AreaAmount(1, METER, METER) -
+                     AreaAmount(1, METER, METER))
     }
 
     @Test
@@ -58,7 +63,8 @@ class AreaAmountTest
     {
         assertEquals(
             expected = AreaAmount(0, FOOT, FOOT),
-            actual = AreaAmount(1, FOOT, FOOT) - AreaAmount(12 * 12, INCH, INCH))
+            actual = AreaAmount(1, FOOT, FOOT) -
+                     AreaAmount(12 * 12, INCH, INCH))
     }
 
     @Test
@@ -66,7 +72,8 @@ class AreaAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = AreaAmount(2, METER, METER) / AreaAmount(2, METER, METER))
+            actual = AreaAmount(2, METER, METER) /
+                     AreaAmount(2, METER, METER))
     }
 
     @Test
@@ -74,7 +81,8 @@ class AreaAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = AreaAmount(2, FOOT, FOOT) / AreaAmount(2 * 12 * 12, INCH, INCH))
+            actual = AreaAmount(2, FOOT, FOOT) /
+                     AreaAmount(2 * 12 * 12, INCH, INCH))
     }
 
     @Test
@@ -82,7 +90,8 @@ class AreaAmountTest
     {
         assertEquals(
             expected = LengthAmount(1, METER),
-            actual = AreaAmount(2, METER, METER) / LengthAmount(2, METER))
+            actual = AreaAmount(2, METER, METER) /
+                     LengthAmount(2, METER))
     }
 
     @Test
@@ -90,7 +99,8 @@ class AreaAmountTest
     {
         assertEquals(
             expected = LengthAmount(1, FOOT),
-            actual = AreaAmount(2, FOOT, FOOT) / LengthAmount(2 * 12, INCH))
+            actual = AreaAmount(2, FOOT, FOOT) /
+                     LengthAmount(2 * 12, INCH))
     }
 
     @Test
@@ -98,7 +108,8 @@ class AreaAmountTest
     {
         assertEquals(
             expected = VolumeAmount(4, METER, METER, METER),
-            actual = AreaAmount(2, METER, METER) * LengthAmount(2, METER))
+            actual = AreaAmount(2, METER, METER) *
+                     LengthAmount(2, METER))
     }
 
     @Test
@@ -106,6 +117,7 @@ class AreaAmountTest
     {
         assertEquals(
             expected = VolumeAmount(4, FOOT, FOOT, FOOT),
-            actual = AreaAmount(2, FOOT, FOOT) * LengthAmount(2 * 12, INCH))
+            actual = AreaAmount(2, FOOT, FOOT) *
+                     LengthAmount(2 * 12, INCH))
     }
 }

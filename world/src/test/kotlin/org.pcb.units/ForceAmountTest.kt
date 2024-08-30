@@ -45,7 +45,8 @@ class ForceAmountTest
     {
         assertEquals(
             expected = ForceAmount(4, NEWTON),
-            actual = ForceAmount(2, NEWTON) * PercentAmount(2 * 100))
+            actual = ForceAmount(2, NEWTON) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -53,7 +54,8 @@ class ForceAmountTest
     {
         assertEquals(
             expected = ForceAmount(1, NEWTON),
-            actual = ForceAmount(2, NEWTON) / PercentAmount(2 * 100))
+            actual = ForceAmount(2, NEWTON) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -61,7 +63,8 @@ class ForceAmountTest
     {
         assertEquals(
             expected = ForceAmount(1, NEWTON),
-            actual = ForceAmount(0, NEWTON) + ForceAmount(1, NEWTON))
+            actual = ForceAmount(0, NEWTON) +
+                     ForceAmount(1, NEWTON))
     }
 
     @Test
@@ -78,7 +81,8 @@ class ForceAmountTest
     {
         assertEquals(
             expected = ForceAmount(0, NEWTON),
-            actual = ForceAmount(1, NEWTON) - ForceAmount(1, NEWTON))
+            actual = ForceAmount(1, NEWTON) -
+                     ForceAmount(1, NEWTON))
     }
 
     @Test
@@ -95,7 +99,8 @@ class ForceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = ForceAmount(2, NEWTON) / ForceAmount(2, NEWTON))
+            actual = ForceAmount(2, NEWTON) /
+                     ForceAmount(2, NEWTON))
     }
 
     @Test
@@ -112,7 +117,8 @@ class ForceAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(1, METER, SECOND, SECOND),
-            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) / MassAmount(2, KILOGRAM))
+            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) /
+                     MassAmount(2, KILOGRAM))
     }
 
     @Test
@@ -120,7 +126,8 @@ class ForceAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(1, METER, SECOND, SECOND),
-            actual = ForceAmount(2, POUND, METER, SECOND, SECOND) / MassAmount(2 * 16, OUNCE))
+            actual = ForceAmount(2, POUND, METER, SECOND, SECOND) /
+                     MassAmount(2 * 16, OUNCE))
     }
 
     @Test
@@ -128,7 +135,8 @@ class ForceAmountTest
     {
         assertEquals(
             expected = MassAmount(1, KILOGRAM),
-            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) / AccelerationAmount(2, METER, SECOND, SECOND))
+            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) /
+                     AccelerationAmount(2, METER, SECOND, SECOND))
     }
 
     @Test
@@ -136,7 +144,8 @@ class ForceAmountTest
     {
         assertEquals(
             expected = MassAmount(1, KILOGRAM),
-            actual = ForceAmount(2, KILOGRAM, FOOT, SECOND, SECOND) / AccelerationAmount(2 * 12 * 60 * 60, INCH, MINUTE, MINUTE))
+            actual = ForceAmount(2, KILOGRAM, FOOT, SECOND, SECOND) /
+                     AccelerationAmount(2 * 12 * 60 * 60, INCH, MINUTE, MINUTE))
     }
 
     @Test
@@ -144,7 +153,8 @@ class ForceAmountTest
     {
         assertEquals(
             expected = MomentumAmount(4, KILOGRAM, METER, SECOND),
-            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) * TimeAmount(2, SECOND))
+            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) *
+                     TimeAmount(2, SECOND))
     }
 
     @Test
@@ -152,7 +162,8 @@ class ForceAmountTest
     {
         assertEquals(
             expected = MomentumAmount(4, KILOGRAM, FOOT, MINUTE),
-            actual = ForceAmount(2, KILOGRAM, FOOT, MINUTE, MINUTE) * TimeAmount(2 * 60, SECOND))
+            actual = ForceAmount(2, KILOGRAM, FOOT, MINUTE, MINUTE) *
+                     TimeAmount(2 * 60, SECOND))
     }
 
     @Test
@@ -160,7 +171,8 @@ class ForceAmountTest
     {
         assertEquals(
             expected = EnergyAmount(4, KILOGRAM, METER, METER, SECOND, SECOND),
-            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) * LengthAmount(2, METER))
+            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) *
+                     LengthAmount(2, METER))
     }
 
     @Test
@@ -168,6 +180,7 @@ class ForceAmountTest
     {
         assertEquals(
             expected = EnergyAmount(4, KILOGRAM, FOOT, FOOT, SECOND, SECOND),
-            actual = ForceAmount(2, KILOGRAM, FOOT, SECOND, SECOND) * LengthAmount(2 * 12, INCH))
+            actual = ForceAmount(2, KILOGRAM, FOOT, SECOND, SECOND) *
+                     LengthAmount(2 * 12, INCH))
     }
 }

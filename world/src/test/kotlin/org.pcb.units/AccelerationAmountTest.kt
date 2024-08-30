@@ -33,7 +33,8 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(4, METER, SECOND, SECOND),
-            actual = AccelerationAmount(2, METER, SECOND, SECOND) * PercentAmount(2 * 100))
+            actual = AccelerationAmount(2, METER, SECOND, SECOND) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -41,7 +42,8 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(1, METER, SECOND, SECOND),
-            actual = AccelerationAmount(2, METER, SECOND, SECOND) / PercentAmount(2 * 100))
+            actual = AccelerationAmount(2, METER, SECOND, SECOND) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -49,7 +51,8 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(1, METER, SECOND, SECOND),
-            actual = AccelerationAmount(0, METER, SECOND, SECOND) + AccelerationAmount(1, METER, SECOND, SECOND))
+            actual = AccelerationAmount(0, METER, SECOND, SECOND) +
+                     AccelerationAmount(1, METER, SECOND, SECOND))
     }
 
     @Test
@@ -57,7 +60,8 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(1, FOOT, SECOND, SECOND),
-            actual = AccelerationAmount(0, FOOT, SECOND, SECOND) + AccelerationAmount(12 * 60 * 60, INCH, MINUTE, MINUTE))
+            actual = AccelerationAmount(0, FOOT, SECOND, SECOND) +
+                     AccelerationAmount(12 * 60 * 60, INCH, MINUTE, MINUTE))
     }
 
     @Test
@@ -65,7 +69,8 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(0, METER, SECOND, SECOND),
-            actual = AccelerationAmount(1, METER, SECOND, SECOND) - AccelerationAmount(1, METER, SECOND, SECOND))
+            actual = AccelerationAmount(1, METER, SECOND, SECOND) -
+                     AccelerationAmount(1, METER, SECOND, SECOND))
     }
 
     @Test
@@ -73,7 +78,8 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(0, FOOT, SECOND, SECOND),
-            actual = AccelerationAmount(1, FOOT, SECOND, SECOND) - AccelerationAmount(12 * 60 * 60, INCH, MINUTE, MINUTE))
+            actual = AccelerationAmount(1, FOOT, SECOND, SECOND) -
+                     AccelerationAmount(12 * 60 * 60, INCH, MINUTE, MINUTE))
     }
 
     @Test
@@ -81,7 +87,8 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = AccelerationAmount(2, METER, SECOND, SECOND) / AccelerationAmount(2, METER, SECOND, SECOND))
+            actual = AccelerationAmount(2, METER, SECOND, SECOND) /
+                     AccelerationAmount(2, METER, SECOND, SECOND))
     }
 
     @Test
@@ -89,7 +96,8 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = AccelerationAmount(2, FOOT, SECOND, SECOND) / AccelerationAmount(2 * 12 * 60 * 60, INCH, MINUTE, MINUTE))
+            actual = AccelerationAmount(2, FOOT, SECOND, SECOND) /
+                     AccelerationAmount(2 * 12 * 60 * 60, INCH, MINUTE, MINUTE))
     }
 
     @Test
@@ -97,7 +105,8 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = SpeedAmount(4, METER, SECOND),
-            actual = AccelerationAmount(2, METER, SECOND, SECOND) * TimeAmount(2, SECOND))
+            actual = AccelerationAmount(2, METER, SECOND, SECOND) *
+                     TimeAmount(2, SECOND))
     }
 
     @Test
@@ -105,7 +114,8 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = SpeedAmount(240, METER, SECOND),
-            actual = AccelerationAmount(2, METER, SECOND, SECOND) * TimeAmount(2, MINUTE))
+            actual = AccelerationAmount(2, METER, SECOND, SECOND) *
+                     TimeAmount(2, MINUTE))
     }
 
     @Test
@@ -113,7 +123,8 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(1, SECOND),
-            actual = AccelerationAmount(2, METER, SECOND, SECOND) / SpeedAmount(2, METER, SECOND))
+            actual = AccelerationAmount(2, METER, SECOND, SECOND) /
+                     SpeedAmount(2, METER, SECOND))
     }
 
     @Test
@@ -121,7 +132,8 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(1, SECOND),
-            actual = AccelerationAmount(2, FOOT, SECOND, SECOND) / SpeedAmount(2 * 12 * 60, INCH, MINUTE))
+            actual = AccelerationAmount(2, FOOT, SECOND, SECOND) /
+                     SpeedAmount(2 * 12 * 60, INCH, MINUTE))
     }
 
     @Test
@@ -129,6 +141,7 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = ForceAmount(4, KILOGRAM, METER, SECOND, SECOND),
-            actual = AccelerationAmount(2, METER, SECOND, SECOND) * MassAmount(2, KILOGRAM))
+            actual = AccelerationAmount(2, METER, SECOND, SECOND) *
+                     MassAmount(2, KILOGRAM))
     }
 }

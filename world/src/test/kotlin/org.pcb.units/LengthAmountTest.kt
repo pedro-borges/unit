@@ -21,7 +21,8 @@ class LengthAmountTest
     {
         assertEquals(
             expected = LengthAmount(4, METER),
-            actual = LengthAmount(2, METER) * PercentAmount(2 * 100))
+            actual = LengthAmount(2, METER) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -29,7 +30,8 @@ class LengthAmountTest
     {
         assertEquals(
             expected = LengthAmount(1, METER),
-            actual = LengthAmount(2, METER) / PercentAmount(2 * 100))
+            actual = LengthAmount(2, METER) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -37,7 +39,8 @@ class LengthAmountTest
     {
         assertEquals(
             expected = LengthAmount(1, METER),
-            actual = LengthAmount(0, METER) + LengthAmount(1, METER))
+            actual = LengthAmount(0, METER) +
+                     LengthAmount(1, METER))
     }
 
     @Test
@@ -45,7 +48,8 @@ class LengthAmountTest
     {
         assertEquals(
             expected = LengthAmount(1, FOOT),
-            actual = LengthAmount(0, FOOT) + LengthAmount(12, INCH))
+            actual = LengthAmount(0, FOOT) +
+                     LengthAmount(12, INCH))
     }
 
     @Test
@@ -53,7 +57,8 @@ class LengthAmountTest
     {
         assertEquals(
             expected = LengthAmount(0, METER),
-            actual = LengthAmount(1, METER) - LengthAmount(1, METER))
+            actual = LengthAmount(1, METER) -
+                     LengthAmount(1, METER))
     }
 
     @Test
@@ -61,7 +66,8 @@ class LengthAmountTest
     {
         assertEquals(
             expected = LengthAmount(0, FOOT),
-            actual = LengthAmount(1, FOOT) - LengthAmount(12, INCH))
+            actual = LengthAmount(1, FOOT) -
+                     LengthAmount(12, INCH))
     }
 
     @Test
@@ -69,7 +75,8 @@ class LengthAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = LengthAmount(2, METER) / LengthAmount(2, METER))
+            actual = LengthAmount(2, METER) /
+                     LengthAmount(2, METER))
     }
 
     @Test
@@ -77,7 +84,8 @@ class LengthAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = LengthAmount(2, FOOT) / LengthAmount(2 * 12, INCH))
+            actual = LengthAmount(2, FOOT) /
+                     LengthAmount(2 * 12, INCH))
     }
 
     @Test
@@ -85,7 +93,8 @@ class LengthAmountTest
     {
         assertEquals(
             expected = SpeedAmount(1, METER, SECOND),
-            actual = LengthAmount(2, METER) / TimeAmount(2, SECOND))
+            actual = LengthAmount(2, METER) /
+                     TimeAmount(2, SECOND))
     }
 
     @Test
@@ -93,7 +102,8 @@ class LengthAmountTest
     {
         assertEquals(
             expected = AreaAmount(4, METER, METER),
-            actual = LengthAmount(2, METER) * LengthAmount(2, METER))
+            actual = LengthAmount(2, METER) *
+                     LengthAmount(2, METER))
     }
 
     @Test
@@ -101,7 +111,8 @@ class LengthAmountTest
     {
         assertEquals(
             expected = AreaAmount(4, FOOT, FOOT),
-            actual = LengthAmount(2, FOOT) * LengthAmount(2 * 12, INCH))
+            actual = LengthAmount(2, FOOT) *
+                     LengthAmount(2 * 12, INCH))
     }
 
     @Test
@@ -109,7 +120,8 @@ class LengthAmountTest
     {
         assertEquals(
             expected = VolumeAmount(4, METER, METER, METER),
-            actual = LengthAmount(2, METER) * AreaAmount(2, METER, METER))
+            actual = LengthAmount(2, METER) *
+                     AreaAmount(2, METER, METER))
     }
 
     @Test
@@ -117,6 +129,7 @@ class LengthAmountTest
     {
         assertEquals(
             expected = VolumeAmount(4, FOOT, FOOT, FOOT),
-            actual = LengthAmount(2, FOOT) * AreaAmount(2 * 12 * 12, INCH, INCH))
+            actual = LengthAmount(2, FOOT) *
+                     AreaAmount(2 * 12 * 12, INCH, INCH))
     }
 }

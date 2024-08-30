@@ -7,6 +7,7 @@ import org.pcb.units.amount.ElectricCurrentAmount
 import org.pcb.units.amount.ElectricResistanceAmount
 import org.pcb.units.amount.ElectricTensionAmount
 import org.pcb.units.amount.EnergyAmount
+import org.pcb.units.amount.PowerAmount
 import org.pcb.units.amount.cannon.Ampere.AMPERE
 import org.pcb.units.amount.cannon.Kilogram.KILOGRAM
 import org.pcb.units.amount.cannon.Meter.METER
@@ -19,6 +20,7 @@ import org.pcb.units.amount.length.Inch.INCH
 import org.pcb.units.amount.mass.Ounce.OUNCE
 import org.pcb.units.amount.mass.Pound.POUND
 import org.pcb.units.amount.mechanics.Joule.JOULE
+import org.pcb.units.amount.mechanics.Watt.WATT
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.time.Hour.HOUR
@@ -49,7 +51,8 @@ class ElectricTensionAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(4, VOLT),
-            actual = ElectricTensionAmount(2, VOLT) * PercentAmount(2 * 100))
+            actual = ElectricTensionAmount(2, VOLT) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -57,7 +60,8 @@ class ElectricTensionAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(1, VOLT),
-            actual = ElectricTensionAmount(2, VOLT) / PercentAmount(2 * 100))
+            actual = ElectricTensionAmount(2, VOLT) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -65,7 +69,8 @@ class ElectricTensionAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(1, VOLT),
-            actual = ElectricTensionAmount(0, VOLT) + ElectricTensionAmount(1, VOLT))
+            actual = ElectricTensionAmount(0, VOLT) +
+                     ElectricTensionAmount(1, VOLT))
     }
 
     @Test
@@ -82,7 +87,8 @@ class ElectricTensionAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(0, VOLT),
-            actual = ElectricTensionAmount(1, VOLT) - ElectricTensionAmount(1, VOLT))
+            actual = ElectricTensionAmount(1, VOLT) -
+                     ElectricTensionAmount(1, VOLT))
     }
 
     @Test
@@ -99,7 +105,8 @@ class ElectricTensionAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = ElectricTensionAmount(2, VOLT) / ElectricTensionAmount(2, VOLT))
+            actual = ElectricTensionAmount(2, VOLT) /
+                     ElectricTensionAmount(2, VOLT))
     }
 
     @Test
@@ -116,7 +123,8 @@ class ElectricTensionAmountTest
     {
         assertEquals(
             expected = EnergyAmount(4, JOULE),
-            actual = ElectricTensionAmount(2, VOLT) * ElectricChargeAmount(2, COULOMB))
+            actual = ElectricTensionAmount(2, VOLT) *
+                     ElectricChargeAmount(2, COULOMB))
     }
 
     @Test
@@ -133,7 +141,8 @@ class ElectricTensionAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(1, OHM),
-            actual = ElectricTensionAmount(2, VOLT) / ElectricCurrentAmount(2, AMPERE))
+            actual = ElectricTensionAmount(2, VOLT) /
+                     ElectricCurrentAmount(2, AMPERE))
     }
 
     @Test
@@ -147,7 +156,8 @@ class ElectricTensionAmountTest
     {
         assertEquals(
             expected = ElectricCurrentAmount(1, AMPERE),
-            actual = ElectricTensionAmount(2, VOLT) / ElectricResistanceAmount(2, OHM))
+            actual = ElectricTensionAmount(2, VOLT) /
+                     ElectricResistanceAmount(2, OHM))
     }
 
     @Test
@@ -157,5 +167,21 @@ class ElectricTensionAmountTest
             expected = ElectricCurrentAmount(1, AMPERE),
             actual = ElectricTensionAmount(2, POUND, FOOT, FOOT, SECOND, SECOND, SECOND, AMPERE) /
                      ElectricResistanceAmount(2 * 16 * 12 * 12 * 60 * 60 * 60, OUNCE, INCH, INCH, MINUTE, MINUTE, MINUTE, AMPERE, AMPERE))
+    }
+
+
+    @Test
+    fun timesSameElectricCurrent()
+    {
+        assertEquals(
+            expected = PowerAmount(4, WATT),
+            actual = ElectricTensionAmount(2, VOLT) *
+                     ElectricCurrentAmount(2, AMPERE))
+    }
+
+    @Test
+    fun timesOtherElectricCurrent()
+    {
+        // No other known electric current unit
     }
 }

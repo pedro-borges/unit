@@ -22,7 +22,8 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = SpeedAmount(4, METER, SECOND),
-            actual = SpeedAmount(2, METER, SECOND) * PercentAmount(2 * 100))
+            actual = SpeedAmount(2, METER, SECOND) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -30,7 +31,8 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = SpeedAmount(1, METER, SECOND),
-            actual = SpeedAmount(2, METER, SECOND) / PercentAmount(2 * 100))
+            actual = SpeedAmount(2, METER, SECOND) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -38,7 +40,8 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = SpeedAmount(1, METER, SECOND),
-            actual = SpeedAmount(0, METER, SECOND) + SpeedAmount(1, METER, SECOND))
+            actual = SpeedAmount(0, METER, SECOND) +
+                     SpeedAmount(1, METER, SECOND))
     }
 
     @Test
@@ -46,7 +49,8 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = SpeedAmount(1, FOOT, SECOND),
-            actual = SpeedAmount(0, FOOT, SECOND) + SpeedAmount(720, INCH, MINUTE))
+            actual = SpeedAmount(0, FOOT, SECOND) +
+                     SpeedAmount(720, INCH, MINUTE))
     }
 
     @Test
@@ -54,7 +58,8 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = SpeedAmount(0, METER, SECOND),
-            actual = SpeedAmount(1, METER, SECOND) - SpeedAmount(1, METER, SECOND))
+            actual = SpeedAmount(1, METER, SECOND) -
+                     SpeedAmount(1, METER, SECOND))
     }
 
     @Test
@@ -62,7 +67,8 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = SpeedAmount(0, FOOT, SECOND),
-            actual = SpeedAmount(1, FOOT, SECOND) - SpeedAmount(720, INCH, MINUTE))
+            actual = SpeedAmount(1, FOOT, SECOND) -
+                     SpeedAmount(720, INCH, MINUTE))
     }
 
     @Test
@@ -70,7 +76,8 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = SpeedAmount(2, METER, SECOND) / SpeedAmount(2, METER, SECOND))
+            actual = SpeedAmount(2, METER, SECOND) /
+                     SpeedAmount(2, METER, SECOND))
     }
 
     @Test
@@ -78,7 +85,8 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = SpeedAmount(2, FOOT, SECOND) / SpeedAmount(1440, INCH, MINUTE))
+            actual = SpeedAmount(2, FOOT, SECOND) /
+                     SpeedAmount(1440, INCH, MINUTE))
     }
 
     @Test
@@ -86,7 +94,8 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = LengthAmount(4, METER),
-            actual = SpeedAmount(2, METER, SECOND) * TimeAmount(2, SECOND))
+            actual = SpeedAmount(2, METER, SECOND) *
+                     TimeAmount(2, SECOND))
     }
 
     @Test
@@ -94,7 +103,8 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = LengthAmount(240, METER),
-            actual = SpeedAmount(2, METER, SECOND) * TimeAmount(2, MINUTE))
+            actual = SpeedAmount(2, METER, SECOND) *
+                     TimeAmount(2, MINUTE))
     }
 
     @Test
@@ -102,7 +112,8 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(1, METER, SECOND, SECOND),
-            actual = SpeedAmount(2, METER, SECOND) / TimeAmount(2, SECOND))
+            actual = SpeedAmount(2, METER, SECOND) /
+                     TimeAmount(2, SECOND))
     }
 
     @Test
@@ -110,7 +121,8 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(1, METER, MINUTE, MINUTE),
-            actual = SpeedAmount(2, METER, MINUTE) / TimeAmount(120, SECOND))
+            actual = SpeedAmount(2, METER, MINUTE) /
+                     TimeAmount(120, SECOND))
     }
 
     @Test
@@ -118,7 +130,8 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(1, SECOND),
-            actual = SpeedAmount(2, METER, SECOND) / LengthAmount(2, METER))
+            actual = SpeedAmount(2, METER, SECOND) /
+                     LengthAmount(2, METER))
     }
 
     @Test
@@ -126,6 +139,7 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(1, SECOND),
-            actual = SpeedAmount(2, FOOT, SECOND) / LengthAmount(24, INCH))
+            actual = SpeedAmount(2, FOOT, SECOND) /
+                     LengthAmount(24, INCH))
     }
 }

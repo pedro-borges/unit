@@ -24,7 +24,8 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(4, SECOND),
-            actual = FrequencyAmount(2, SECOND) * PercentAmount(2 * 100))
+            actual = FrequencyAmount(2, SECOND) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -32,7 +33,8 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(1, SECOND),
-            actual = FrequencyAmount(2, SECOND) / PercentAmount(2 * 100))
+            actual = FrequencyAmount(2, SECOND) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -40,7 +42,8 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(1, SECOND),
-            actual = FrequencyAmount(0, SECOND) + FrequencyAmount(1, SECOND))
+            actual = FrequencyAmount(0, SECOND) +
+                     FrequencyAmount(1, SECOND))
     }
 
     @Test
@@ -48,7 +51,8 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(60, SECOND),
-            actual = FrequencyAmount(0, SECOND) + FrequencyAmount(1, MINUTE))
+            actual = FrequencyAmount(0, SECOND) +
+                     FrequencyAmount(1, MINUTE))
     }
 
     @Test
@@ -56,7 +60,8 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(0, SECOND),
-            actual = FrequencyAmount(1, SECOND) - FrequencyAmount(1, SECOND))
+            actual = FrequencyAmount(1, SECOND) -
+                     FrequencyAmount(1, SECOND))
     }
 
     @Test
@@ -64,7 +69,8 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(0, SECOND),
-            actual = FrequencyAmount(60, SECOND) - FrequencyAmount(1, MINUTE))
+            actual = FrequencyAmount(60, SECOND) -
+                     FrequencyAmount(1, MINUTE))
     }
 
     @Test
@@ -72,7 +78,8 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = FrequencyAmount(2, SECOND) / FrequencyAmount(2, SECOND))
+            actual = FrequencyAmount(2, SECOND) /
+                     FrequencyAmount(2, SECOND))
     }
 
     @Test
@@ -80,7 +87,8 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = FrequencyAmount(120, SECOND) / FrequencyAmount(2, MINUTE))
+            actual = FrequencyAmount(120, SECOND) /
+                     FrequencyAmount(2, MINUTE))
     }
 
     @Test
@@ -88,7 +96,8 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = SpeedAmount(4, METER, SECOND),
-            actual = FrequencyAmount(2, SECOND) * LengthAmount(2, METER))
+            actual = FrequencyAmount(2, SECOND) *
+                     LengthAmount(2, METER))
     }
 
     @Test
@@ -96,7 +105,8 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(4, METER, SECOND, SECOND),
-            actual = FrequencyAmount(2, SECOND) * SpeedAmount(2, METER, SECOND))
+            actual = FrequencyAmount(2, SECOND) *
+                     SpeedAmount(2, METER, SECOND))
     }
 
     @Test
@@ -104,7 +114,8 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(4, METER, MINUTE, MINUTE),
-            actual = FrequencyAmount(2, MINUTE) * SpeedAmount(2 * 60, METER, SECOND))
+            actual = FrequencyAmount(2, MINUTE) *
+                     SpeedAmount(2 * 60, METER, SECOND))
     }
 
     @Test
@@ -112,7 +123,8 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(1, GBP),
-            actual = FrequencyAmount(2, SECOND) * DebtAmount(2, GBP, SECOND))
+            actual = FrequencyAmount(2, SECOND) *
+                     DebtAmount(2, GBP, SECOND))
     }
 
     @Test
@@ -120,7 +132,8 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(1, GBP),
-            actual = FrequencyAmount(2 * 60, MINUTE) * DebtAmount(2, GBP, SECOND))
+            actual = FrequencyAmount(2 * 60, MINUTE) *
+                     DebtAmount(2, GBP, SECOND))
     }
 
     @Test
@@ -128,6 +141,7 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = RentAmount(4, GBP, DAY),
-            actual = FrequencyAmount(2, DAY) * CurrencyAmount(2, GBP))
+            actual = FrequencyAmount(2, DAY) *
+                     CurrencyAmount(2, GBP))
     }
 }

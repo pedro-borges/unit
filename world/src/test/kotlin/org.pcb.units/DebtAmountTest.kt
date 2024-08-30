@@ -19,7 +19,8 @@ class DebtAmountTest
     {
         assertEquals(
             expected = DebtAmount(4, GBP, SECOND),
-            actual = DebtAmount(2, GBP, SECOND) * PercentAmount(2 * 100))
+            actual = DebtAmount(2, GBP, SECOND) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -27,7 +28,8 @@ class DebtAmountTest
     {
         assertEquals(
             expected = DebtAmount(1, GBP, SECOND),
-            actual = DebtAmount(2, GBP, SECOND) / PercentAmount(2 * 100))
+            actual = DebtAmount(2, GBP, SECOND) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -35,7 +37,8 @@ class DebtAmountTest
     {
         assertEquals(
             expected = DebtAmount(1, GBP, SECOND),
-            actual = DebtAmount(0, GBP, SECOND) + DebtAmount(1, GBP, SECOND))
+            actual = DebtAmount(0, GBP, SECOND) +
+                     DebtAmount(1, GBP, SECOND))
     }
 
     @Test
@@ -43,7 +46,8 @@ class DebtAmountTest
     {
         assertEquals(
             expected = DebtAmount(1, GBP, MINUTE),
-            actual = DebtAmount(0, GBP, MINUTE) + DebtAmount(60, GBP, SECOND))
+            actual = DebtAmount(0, GBP, MINUTE) +
+                     DebtAmount(60, GBP, SECOND))
     }
 
     @Test
@@ -51,7 +55,8 @@ class DebtAmountTest
     {
         assertEquals(
             expected = DebtAmount(0, GBP, SECOND),
-            actual = DebtAmount(1, GBP, SECOND) - DebtAmount(1, GBP, SECOND))
+            actual = DebtAmount(1, GBP, SECOND) -
+                     DebtAmount(1, GBP, SECOND))
     }
 
     @Test
@@ -59,7 +64,8 @@ class DebtAmountTest
     {
         assertEquals(
             expected = DebtAmount(0, GBP, MINUTE),
-            actual = DebtAmount(1, GBP, MINUTE) - DebtAmount(60, GBP, SECOND))
+            actual = DebtAmount(1, GBP, MINUTE) -
+                     DebtAmount(60, GBP, SECOND))
     }
 
     @Test
@@ -67,7 +73,8 @@ class DebtAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = DebtAmount(2, GBP, SECOND) / DebtAmount(2, GBP, SECOND))
+            actual = DebtAmount(2, GBP, SECOND) /
+                     DebtAmount(2, GBP, SECOND))
     }
 
     @Test
@@ -75,7 +82,8 @@ class DebtAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = DebtAmount(2, GBP, MINUTE) / DebtAmount(2 * 60, GBP, SECOND))
+            actual = DebtAmount(2, GBP, MINUTE) /
+                     DebtAmount(2 * 60, GBP, SECOND))
     }
 
     @Test
@@ -83,7 +91,8 @@ class DebtAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(1, GBP),
-            actual = DebtAmount(2, GBP, SECOND) / TimeAmount(2, SECOND))
+            actual = DebtAmount(2, GBP, SECOND) /
+                     TimeAmount(2, SECOND))
     }
 
     @Test
@@ -91,7 +100,8 @@ class DebtAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(1, GBP),
-            actual = DebtAmount(2, GBP, MINUTE) / TimeAmount(2 * 60, SECOND))
+            actual = DebtAmount(2, GBP, MINUTE) /
+                     TimeAmount(2 * 60, SECOND))
     }
 
     @Test
@@ -99,7 +109,8 @@ class DebtAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(1, GBP),
-            actual = DebtAmount(2, GBP, SECOND) * FrequencyAmount(2, SECOND))
+            actual = DebtAmount(2, GBP, SECOND) *
+                     FrequencyAmount(2, SECOND))
     }
 
     @Test
@@ -107,6 +118,7 @@ class DebtAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(1, GBP),
-            actual = DebtAmount(2, GBP, MINUTE) * FrequencyAmount(2 * 60, SECOND))
+            actual = DebtAmount(2, GBP, MINUTE) *
+                     FrequencyAmount(2 * 60, SECOND))
     }
 }

@@ -18,7 +18,8 @@ class TimeAmountTest
     {
         assertEquals(
             expected = TimeAmount(4, SECOND),
-            actual = TimeAmount(2, SECOND) * PercentAmount(2 * 100))
+            actual = TimeAmount(2, SECOND) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -26,7 +27,8 @@ class TimeAmountTest
     {
         assertEquals(
             expected = TimeAmount(1, SECOND),
-            actual = TimeAmount(2, SECOND) / PercentAmount(2 * 100))
+            actual = TimeAmount(2, SECOND) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -34,7 +36,8 @@ class TimeAmountTest
     {
         assertEquals(
             expected = TimeAmount(1, SECOND),
-            actual = TimeAmount(0, SECOND) + TimeAmount(1, SECOND))
+            actual = TimeAmount(0, SECOND) +
+                     TimeAmount(1, SECOND))
     }
 
     @Test
@@ -42,7 +45,8 @@ class TimeAmountTest
     {
         assertEquals(
             expected = TimeAmount(60, SECOND),
-            actual = TimeAmount(0, SECOND) + TimeAmount(1, MINUTE))
+            actual = TimeAmount(0, SECOND) +
+                     TimeAmount(1, MINUTE))
     }
 
     @Test
@@ -50,7 +54,8 @@ class TimeAmountTest
     {
         assertEquals(
             expected = TimeAmount(0, SECOND),
-            actual = TimeAmount(1, SECOND) - TimeAmount(1, SECOND))
+            actual = TimeAmount(1, SECOND) -
+                     TimeAmount(1, SECOND))
     }
 
     @Test
@@ -58,7 +63,8 @@ class TimeAmountTest
     {
         assertEquals(
             expected = TimeAmount(0, SECOND),
-            actual = TimeAmount(60, SECOND) - TimeAmount(1, MINUTE))
+            actual = TimeAmount(60, SECOND) -
+                     TimeAmount(1, MINUTE))
     }
 
     @Test
@@ -66,7 +72,8 @@ class TimeAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = TimeAmount(2, SECOND) / TimeAmount(2, SECOND))
+            actual = TimeAmount(2, SECOND) /
+                     TimeAmount(2, SECOND))
     }
 
     @Test
@@ -74,7 +81,8 @@ class TimeAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = TimeAmount(120, SECOND) / TimeAmount(2, MINUTE))
+            actual = TimeAmount(120, SECOND) /
+                     TimeAmount(2, MINUTE))
     }
 
     @Test
@@ -82,6 +90,7 @@ class TimeAmountTest
     {
         assertEquals(
             expected = PaceAmount(1, SECOND, METER),
-            actual = TimeAmount(2, SECOND) / LengthAmount(2, METER))
+            actual = TimeAmount(2, SECOND) /
+                     LengthAmount(2, METER))
     }
 }

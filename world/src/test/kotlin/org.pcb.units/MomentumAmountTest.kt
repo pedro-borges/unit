@@ -25,7 +25,8 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(4, KILOGRAM, METER, SECOND),
-            actual = MomentumAmount(2, KILOGRAM, METER, SECOND) * PercentAmount(2 * 100))
+            actual = MomentumAmount(2, KILOGRAM, METER, SECOND) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -33,7 +34,8 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(1, KILOGRAM, METER, SECOND),
-            actual = MomentumAmount(2, KILOGRAM, METER, SECOND) / PercentAmount(2 * 100))
+            actual = MomentumAmount(2, KILOGRAM, METER, SECOND) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -41,7 +43,8 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(1, KILOGRAM, METER, SECOND),
-            actual = MomentumAmount(0, KILOGRAM, METER, SECOND) + MomentumAmount(1, KILOGRAM, METER, SECOND))
+            actual = MomentumAmount(0, KILOGRAM, METER, SECOND) +
+                     MomentumAmount(1, KILOGRAM, METER, SECOND))
     }
 
     @Test
@@ -49,7 +52,8 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(1, POUND, FOOT, SECOND),
-            actual = MomentumAmount(0, POUND, FOOT, SECOND) + MomentumAmount(16 * 12 * 60, OUNCE, INCH, MINUTE))
+            actual = MomentumAmount(0, POUND, FOOT, SECOND) +
+                     MomentumAmount(16 * 12 * 60, OUNCE, INCH, MINUTE))
     }
 
     @Test
@@ -57,7 +61,8 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(0, KILOGRAM, METER, SECOND),
-            actual = MomentumAmount(1, KILOGRAM, METER, SECOND) - MomentumAmount(1, KILOGRAM, METER, SECOND))
+            actual = MomentumAmount(1, KILOGRAM, METER, SECOND) -
+                     MomentumAmount(1, KILOGRAM, METER, SECOND))
     }
 
     @Test
@@ -65,7 +70,8 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(0, POUND, FOOT, SECOND),
-            actual = MomentumAmount(1, POUND, FOOT, SECOND) - MomentumAmount(16 * 12 * 60, OUNCE, INCH, MINUTE))
+            actual = MomentumAmount(1, POUND, FOOT, SECOND) -
+                     MomentumAmount(16 * 12 * 60, OUNCE, INCH, MINUTE))
     }
 
     @Test
@@ -73,7 +79,8 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = MomentumAmount(2, KILOGRAM, METER, SECOND) / MomentumAmount(2, KILOGRAM, METER, SECOND))
+            actual = MomentumAmount(2, KILOGRAM, METER, SECOND) /
+                     MomentumAmount(2, KILOGRAM, METER, SECOND))
     }
 
     @Test
@@ -81,7 +88,8 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = MomentumAmount(2, POUND, FOOT, SECOND) / MomentumAmount(2 * 16 * 12 * 60, OUNCE, INCH, MINUTE))
+            actual = MomentumAmount(2, POUND, FOOT, SECOND) /
+                     MomentumAmount(2 * 16 * 12 * 60, OUNCE, INCH, MINUTE))
     }
 
     @Test
@@ -89,7 +97,8 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = SpeedAmount(1, METER, SECOND),
-            actual = MomentumAmount(2, KILOGRAM, METER, SECOND) / MassAmount(2, KILOGRAM))
+            actual = MomentumAmount(2, KILOGRAM, METER, SECOND) /
+                     MassAmount(2, KILOGRAM))
     }
 
     @Test
@@ -97,7 +106,8 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = SpeedAmount(1, METER, SECOND),
-            actual = MomentumAmount(2, POUND, METER, SECOND) / MassAmount(2 * 16, OUNCE))
+            actual = MomentumAmount(2, POUND, METER, SECOND) /
+                     MassAmount(2 * 16, OUNCE))
     }
 
     @Test
@@ -105,7 +115,8 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MassAmount(1, KILOGRAM),
-            actual = MomentumAmount(2, KILOGRAM, METER, SECOND) / SpeedAmount(2, METER, SECOND))
+            actual = MomentumAmount(2, KILOGRAM, METER, SECOND) /
+                     SpeedAmount(2, METER, SECOND))
     }
 
     @Test
@@ -113,7 +124,8 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MassAmount(1, KILOGRAM),
-            actual = MomentumAmount(2, KILOGRAM, FOOT, SECOND) / SpeedAmount(2 * 12 * 60, INCH, MINUTE))
+            actual = MomentumAmount(2, KILOGRAM, FOOT, SECOND) /
+                     SpeedAmount(2 * 12 * 60, INCH, MINUTE))
     }
 
     @Test
@@ -121,7 +133,8 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = ForceAmount(1, KILOGRAM, METER, SECOND, SECOND),
-            actual = MomentumAmount(2, KILOGRAM, METER, SECOND) / TimeAmount(2, SECOND))
+            actual = MomentumAmount(2, KILOGRAM, METER, SECOND) /
+                     TimeAmount(2, SECOND))
     }
 
     @Test
@@ -129,6 +142,7 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = ForceAmount(1, KILOGRAM, METER, MINUTE, MINUTE),
-            actual = MomentumAmount(2, KILOGRAM, METER, MINUTE) / TimeAmount(2 * 60, SECOND))
+            actual = MomentumAmount(2, KILOGRAM, METER, MINUTE) /
+                     TimeAmount(2 * 60, SECOND))
     }
 }

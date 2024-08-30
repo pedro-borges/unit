@@ -22,7 +22,8 @@ class MassAmountTest
     {
         assertEquals(
             expected = MassAmount(4, KILOGRAM),
-            actual = MassAmount(2, KILOGRAM) * PercentAmount(2 * 100))
+            actual = MassAmount(2, KILOGRAM) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -30,7 +31,8 @@ class MassAmountTest
     {
         assertEquals(
             expected = MassAmount(1, KILOGRAM),
-            actual = MassAmount(2, KILOGRAM) / PercentAmount(2 * 100))
+            actual = MassAmount(2, KILOGRAM) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -38,7 +40,8 @@ class MassAmountTest
     {
         assertEquals(
             expected = MassAmount(1, KILOGRAM),
-            actual = MassAmount(0, KILOGRAM) + MassAmount(1, KILOGRAM))
+            actual = MassAmount(0, KILOGRAM) +
+                     MassAmount(1, KILOGRAM))
     }
 
     @Test
@@ -46,7 +49,8 @@ class MassAmountTest
     {
         assertEquals(
             expected = MassAmount(1, POUND),
-            actual = MassAmount(0, POUND) + MassAmount(16, OUNCE))
+            actual = MassAmount(0, POUND) +
+                     MassAmount(16, OUNCE))
     }
 
     @Test
@@ -54,7 +58,8 @@ class MassAmountTest
     {
         assertEquals(
             expected = MassAmount(0, KILOGRAM),
-            actual = MassAmount(1, KILOGRAM) - MassAmount(1, KILOGRAM))
+            actual = MassAmount(1, KILOGRAM) -
+                     MassAmount(1, KILOGRAM))
     }
 
     @Test
@@ -62,7 +67,8 @@ class MassAmountTest
     {
         assertEquals(
             expected = MassAmount(0, POUND),
-            actual = MassAmount(1, POUND) - MassAmount(16, OUNCE))
+            actual = MassAmount(1, POUND) -
+                     MassAmount(16, OUNCE))
     }
 
     @Test
@@ -70,7 +76,8 @@ class MassAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = MassAmount(2, KILOGRAM) / MassAmount(2, KILOGRAM))
+            actual = MassAmount(2, KILOGRAM) /
+                     MassAmount(2, KILOGRAM))
     }
 
     @Test
@@ -78,7 +85,8 @@ class MassAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = MassAmount(2, POUND) / MassAmount(32, OUNCE))
+            actual = MassAmount(2, POUND) /
+                     MassAmount(32, OUNCE))
     }
 
     @Test
@@ -86,7 +94,8 @@ class MassAmountTest
     {
         assertEquals(
             expected = MomentumAmount(4, KILOGRAM, METER, SECOND),
-            actual = MassAmount(2, KILOGRAM) * SpeedAmount(2, METER, SECOND))
+            actual = MassAmount(2, KILOGRAM) *
+                     SpeedAmount(2, METER, SECOND))
     }
 
     @Test
@@ -94,6 +103,7 @@ class MassAmountTest
     {
         assertEquals(
             expected = ForceAmount(4, KILOGRAM, METER, SECOND, SECOND),
-            actual = MassAmount(2, KILOGRAM) * AccelerationAmount(2, METER, SECOND, SECOND))
+            actual = MassAmount(2, KILOGRAM) *
+                     AccelerationAmount(2, METER, SECOND, SECOND))
     }
 }

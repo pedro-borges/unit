@@ -26,7 +26,8 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricChargeAmount(4, AMPERE, SECOND),
-            actual = ElectricChargeAmount(2, AMPERE, SECOND) * PercentAmount(2 * 100))
+            actual = ElectricChargeAmount(2, AMPERE, SECOND) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -34,7 +35,8 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricChargeAmount(1, AMPERE, SECOND),
-            actual = ElectricChargeAmount(2, AMPERE, SECOND) / PercentAmount(2 * 100))
+            actual = ElectricChargeAmount(2, AMPERE, SECOND) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -42,7 +44,8 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricChargeAmount(1, AMPERE, SECOND),
-            actual = ElectricChargeAmount(0, AMPERE, SECOND) + ElectricChargeAmount(1, AMPERE, SECOND))
+            actual = ElectricChargeAmount(0, AMPERE, SECOND) +
+                     ElectricChargeAmount(1, AMPERE, SECOND))
     }
 
     @Test
@@ -56,7 +59,8 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricChargeAmount(0, AMPERE, SECOND),
-            actual = ElectricChargeAmount(1, AMPERE, SECOND) - ElectricChargeAmount(1, AMPERE, SECOND))
+            actual = ElectricChargeAmount(1, AMPERE, SECOND) -
+                     ElectricChargeAmount(1, AMPERE, SECOND))
     }
 
     @Test
@@ -70,7 +74,8 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = ElectricChargeAmount(2, AMPERE, SECOND) / ElectricChargeAmount(2, AMPERE, SECOND))
+            actual = ElectricChargeAmount(2, AMPERE, SECOND) /
+                     ElectricChargeAmount(2, AMPERE, SECOND))
     }
 
     @Test
@@ -84,6 +89,7 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricCurrentAmount(1, AMPERE),
-            actual = ElectricChargeAmount(2, AMPERE, SECOND) / TimeAmount(2, SECOND))
+            actual = ElectricChargeAmount(2, AMPERE, SECOND) /
+                     TimeAmount(2, SECOND))
     }
 }

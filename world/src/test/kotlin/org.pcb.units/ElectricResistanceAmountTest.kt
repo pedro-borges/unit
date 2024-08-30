@@ -45,7 +45,8 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(4, OHM),
-            actual = ElectricResistanceAmount(2, OHM) * PercentAmount(2 * 100))
+            actual = ElectricResistanceAmount(2, OHM) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -53,7 +54,8 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(1, OHM),
-            actual = ElectricResistanceAmount(2, OHM) / PercentAmount(2 * 100))
+            actual = ElectricResistanceAmount(2, OHM) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -61,7 +63,8 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(1, OHM),
-            actual = ElectricResistanceAmount(0, OHM) + ElectricResistanceAmount(1, OHM))
+            actual = ElectricResistanceAmount(0, OHM) +
+                     ElectricResistanceAmount(1, OHM))
     }
 
     @Test
@@ -78,7 +81,8 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(0, OHM),
-            actual = ElectricResistanceAmount(1, OHM) - ElectricResistanceAmount(1, OHM))
+            actual = ElectricResistanceAmount(1, OHM) -
+                     ElectricResistanceAmount(1, OHM))
     }
 
     @Test
@@ -95,7 +99,8 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = ElectricResistanceAmount(2, OHM) / ElectricResistanceAmount(2, OHM))
+            actual = ElectricResistanceAmount(2, OHM) /
+                     ElectricResistanceAmount(2, OHM))
     }
 
     @Test
@@ -112,7 +117,8 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(4, VOLT),
-            actual = ElectricResistanceAmount(2, OHM) * ElectricCurrentAmount(2, AMPERE))
+            actual = ElectricResistanceAmount(2, OHM) *
+                     ElectricCurrentAmount(2, AMPERE))
     }
 
     @Test

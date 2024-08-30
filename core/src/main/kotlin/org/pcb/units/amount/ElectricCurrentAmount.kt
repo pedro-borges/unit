@@ -96,4 +96,27 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
                               electricCurrent = electricCurrent)
 
     // endregion
+
+    // region Power
+
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T: Unit<Time>, EC : Unit<ElectricCurrent>> times(that: ElectricTensionAmount<M, L, T, EC>) =
+        PowerAmount(amount = amount * that.amount * convert(electricCurrent to that.electricCurrent),
+                    mass = that.mass,
+                    length = that.length,
+                    length2 = that.length,
+                    time = that.time,
+                    time2 = that.time,
+                    time3 = that.time)
+
+    @JvmName("timesElectricTension")
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T: Unit<Time>> times(that: ElectricTensionAmount<M, L, T, EC>) =
+        PowerAmount(amount = amount * that.amount,
+                                 mass = that.mass,
+                                 length = that.length,
+                                 length2 = that.length,
+                                 time = that.time,
+                                 time2 = that.time,
+                                 time3 = that.time)
+
+    // endregion
 }

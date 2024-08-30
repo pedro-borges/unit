@@ -18,7 +18,8 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(4, GBP),
-            actual = CurrencyAmount(2, GBP) * PercentAmount(2 * 100))
+            actual = CurrencyAmount(2, GBP) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -26,7 +27,8 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(1, GBP),
-            actual = CurrencyAmount(2, GBP) / PercentAmount(2 * 100))
+            actual = CurrencyAmount(2, GBP) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -34,7 +36,8 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(1, GBP),
-            actual = CurrencyAmount(0, GBP) + CurrencyAmount(1, GBP))
+            actual = CurrencyAmount(0, GBP) +
+                     CurrencyAmount(1, GBP))
     }
 
     @Test
@@ -42,7 +45,8 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(0, GBP),
-            actual = CurrencyAmount(1, GBP) - CurrencyAmount(1, GBP))
+            actual = CurrencyAmount(1, GBP) -
+                     CurrencyAmount(1, GBP))
     }
 
     @Test
@@ -50,7 +54,8 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = CurrencyAmount(2, GBP) / CurrencyAmount(2, GBP))
+            actual = CurrencyAmount(2, GBP) /
+                     CurrencyAmount(2, GBP))
     }
 
     @Test
@@ -58,7 +63,8 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = DebtAmount(4, GBP, SECOND),
-            actual = CurrencyAmount(2, GBP) * TimeAmount(2, SECOND))
+            actual = CurrencyAmount(2, GBP) *
+                     TimeAmount(2, SECOND))
     }
 
     @Test
@@ -66,6 +72,7 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = RentAmount(1, GBP, SECOND),
-            actual = CurrencyAmount(2, GBP) / TimeAmount(2, SECOND))
+            actual = CurrencyAmount(2, GBP) /
+                     TimeAmount(2, SECOND))
     }
 }

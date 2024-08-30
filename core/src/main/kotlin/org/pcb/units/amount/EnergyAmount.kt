@@ -158,6 +158,29 @@ open class EnergyAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // endregion
 
+    // region Power
+
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        PowerAmount(amount = amount / that.amount / convert(that.time to time),
+                    mass = mass,
+                    length = length,
+                    length2 = length,
+                    time = time,
+                    time2 = time,
+                    time3 = time)
+
+    @JvmName("divTime")
+    operator fun div(that: TimeAmount<T>) =
+        PowerAmount(amount = amount / that.amount,
+                    mass = mass,
+                    length = length,
+                    length2 = length,
+                    time = time,
+                    time2 = time,
+                    time3 = time)
+
+    // endregion
+
     // region ElectricTension
 
     operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricChargeAmount<EC, T>) =

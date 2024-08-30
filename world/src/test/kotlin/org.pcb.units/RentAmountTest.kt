@@ -20,7 +20,8 @@ class RentAmountTest
     {
         assertEquals(
             expected = RentAmount(4, GBP, SECOND),
-            actual = RentAmount(2, GBP, SECOND) * PercentAmount(2 * 100))
+            actual = RentAmount(2, GBP, SECOND) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -28,7 +29,8 @@ class RentAmountTest
     {
         assertEquals(
             expected = RentAmount(1, GBP, SECOND),
-            actual = RentAmount(2, GBP, SECOND) / PercentAmount(2 * 100))
+            actual = RentAmount(2, GBP, SECOND) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -36,7 +38,8 @@ class RentAmountTest
     {
         assertEquals(
             expected = RentAmount(1, GBP, DAY),
-            actual = RentAmount(0, GBP, DAY) + RentAmount(1, GBP, DAY))
+            actual = RentAmount(0, GBP, DAY) +
+                     RentAmount(1, GBP, DAY))
     }
 
     @Test
@@ -44,7 +47,8 @@ class RentAmountTest
     {
         assertEquals(
             expected = RentAmount(1, GBP, DAY),
-            actual = RentAmount(0, GBP, DAY) + RentAmount(24, GBP, HOUR))
+            actual = RentAmount(0, GBP, DAY) +
+                     RentAmount(24, GBP, HOUR))
     }
 
     @Test
@@ -52,7 +56,8 @@ class RentAmountTest
     {
         assertEquals(
             expected = RentAmount(0, GBP, DAY),
-            actual = RentAmount(1, GBP, DAY) - RentAmount(1, GBP, DAY))
+            actual = RentAmount(1, GBP, DAY) -
+                     RentAmount(1, GBP, DAY))
     }
 
     @Test
@@ -60,7 +65,8 @@ class RentAmountTest
     {
         assertEquals(
             expected = RentAmount(0, GBP, DAY),
-            actual = RentAmount(1, GBP, DAY) - RentAmount(24, GBP, HOUR))
+            actual = RentAmount(1, GBP, DAY) -
+                     RentAmount(24, GBP, HOUR))
     }
 
     @Test
@@ -68,7 +74,8 @@ class RentAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = RentAmount(2, GBP, DAY) / RentAmount(2, GBP, DAY))
+            actual = RentAmount(2, GBP, DAY) /
+                     RentAmount(2, GBP, DAY))
     }
 
     @Test
@@ -76,7 +83,8 @@ class RentAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = RentAmount(2, GBP, DAY) / RentAmount(48, GBP, HOUR))
+            actual = RentAmount(2, GBP, DAY) /
+                     RentAmount(48, GBP, HOUR))
     }
 
     @Test
@@ -84,7 +92,8 @@ class RentAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(4, GBP),
-            actual = RentAmount(2, GBP, DAY) * TimeAmount(2, DAY))
+            actual = RentAmount(2, GBP, DAY) *
+                     TimeAmount(2, DAY))
     }
 
     @Test
@@ -92,7 +101,8 @@ class RentAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(4, GBP),
-            actual = RentAmount(2, GBP, DAY) * TimeAmount(48, HOUR))
+            actual = RentAmount(2, GBP, DAY) *
+                     TimeAmount(48, HOUR))
     }
 
     @Test
@@ -100,6 +110,7 @@ class RentAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(1, DAY),
-            actual = RentAmount(2, GBP, DAY) / CurrencyAmount(2, GBP))
+            actual = RentAmount(2, GBP, DAY) /
+                     CurrencyAmount(2, GBP))
     }
 }

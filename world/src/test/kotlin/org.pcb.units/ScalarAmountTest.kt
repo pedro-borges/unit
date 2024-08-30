@@ -15,7 +15,8 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = NaturalAmount(4),
-            actual = NaturalAmount(2) * PercentAmount(2 * 100))
+            actual = NaturalAmount(2) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -23,7 +24,8 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = NaturalAmount(2) / PercentAmount(2 * 100))
+            actual = NaturalAmount(2) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -31,7 +33,8 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = NaturalAmount(0) + NaturalAmount(1))
+            actual = NaturalAmount(0) +
+                     NaturalAmount(1))
     }
 
     @Test
@@ -39,7 +42,8 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = NaturalAmount(0) + PercentAmount(100))
+            actual = NaturalAmount(0) +
+                     PercentAmount(100))
     }
 
     @Test
@@ -47,7 +51,8 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = NaturalAmount(0),
-            actual = NaturalAmount(1) - NaturalAmount(1))
+            actual = NaturalAmount(1) -
+                     NaturalAmount(1))
     }
 
     @Test
@@ -55,7 +60,8 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = NaturalAmount(0),
-            actual = NaturalAmount(1) - PercentAmount(100))
+            actual = NaturalAmount(1) -
+                     PercentAmount(100))
     }
 
     @Test
@@ -63,7 +69,8 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(1, SECOND),
-            actual = NaturalAmount(2) / TimeAmount(2, SECOND))
+            actual = NaturalAmount(2) /
+                     TimeAmount(2, SECOND))
     }
 
     @Test
@@ -71,6 +78,7 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = TimeAmount(1, SECOND),
-            actual = NaturalAmount(2) / FrequencyAmount(2, SECOND))
+            actual = NaturalAmount(2) /
+                     FrequencyAmount(2, SECOND))
     }
 }

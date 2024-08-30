@@ -18,7 +18,8 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = VolumeAmount(4, METER, METER, METER),
-            actual = VolumeAmount(2, METER, METER, METER) * PercentAmount(2 * 100))
+            actual = VolumeAmount(2, METER, METER, METER) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -26,7 +27,8 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = VolumeAmount(1, METER, METER, METER),
-            actual = VolumeAmount(2, METER, METER, METER) / PercentAmount(2 * 100))
+            actual = VolumeAmount(2, METER, METER, METER) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -34,7 +36,8 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = VolumeAmount(1, METER, METER, METER),
-            actual = VolumeAmount(0, METER, METER, METER) + VolumeAmount(1, METER, METER, METER))
+            actual = VolumeAmount(0, METER, METER, METER) +
+                     VolumeAmount(1, METER, METER, METER))
     }
 
     @Test
@@ -42,7 +45,8 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = VolumeAmount(1, FOOT, FOOT, FOOT),
-            actual = VolumeAmount(0, FOOT, FOOT, FOOT) + VolumeAmount(12 * 12 * 12, INCH, INCH, INCH))
+            actual = VolumeAmount(0, FOOT, FOOT, FOOT) +
+                     VolumeAmount(12 * 12 * 12, INCH, INCH, INCH))
     }
 
     @Test
@@ -50,7 +54,8 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = VolumeAmount(0, METER, METER, METER),
-            actual = VolumeAmount(1, METER, METER, METER) - VolumeAmount(1, METER, METER, METER))
+            actual = VolumeAmount(1, METER, METER, METER) -
+                     VolumeAmount(1, METER, METER, METER))
     }
 
     @Test
@@ -58,7 +63,8 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = VolumeAmount(0, FOOT, FOOT, FOOT),
-            actual = VolumeAmount(1, FOOT, FOOT, FOOT) - VolumeAmount(12 * 12 * 12, INCH, INCH, INCH))
+            actual = VolumeAmount(1, FOOT, FOOT, FOOT) -
+                     VolumeAmount(12 * 12 * 12, INCH, INCH, INCH))
     }
 
     @Test
@@ -66,7 +72,8 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = VolumeAmount(2, METER, METER, METER) / VolumeAmount(2, METER, METER, METER))
+            actual = VolumeAmount(2, METER, METER, METER) /
+                     VolumeAmount(2, METER, METER, METER))
     }
 
     @Test
@@ -74,7 +81,8 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = VolumeAmount(2, FOOT, FOOT, FOOT) / VolumeAmount(2 * 12 * 12 * 12, INCH, INCH, INCH))
+            actual = VolumeAmount(2, FOOT, FOOT, FOOT) /
+                     VolumeAmount(2 * 12 * 12 * 12, INCH, INCH, INCH))
     }
 
     @Test
@@ -82,7 +90,8 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = AreaAmount(1, METER, METER),
-            actual = VolumeAmount(2, METER, METER, METER) / LengthAmount(2, METER))
+            actual = VolumeAmount(2, METER, METER, METER) /
+                     LengthAmount(2, METER))
     }
 
     @Test
@@ -90,7 +99,8 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = AreaAmount(1, FOOT, FOOT),
-            actual = VolumeAmount(2, FOOT, FOOT, FOOT) / LengthAmount(2 * 12, INCH))
+            actual = VolumeAmount(2, FOOT, FOOT, FOOT) /
+                     LengthAmount(2 * 12, INCH))
     }
 
     @Test
@@ -98,7 +108,8 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = LengthAmount(1, METER),
-            actual = VolumeAmount(2, METER, METER, METER) / AreaAmount(2, METER, METER))
+            actual = VolumeAmount(2, METER, METER, METER) /
+                     AreaAmount(2, METER, METER))
     }
 
     @Test
@@ -106,6 +117,7 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = LengthAmount(1, FOOT),
-            actual = VolumeAmount(2, FOOT, FOOT, FOOT) / AreaAmount(2 * 12 * 12, INCH, INCH))
+            actual = VolumeAmount(2, FOOT, FOOT, FOOT) /
+                     AreaAmount(2 * 12 * 12, INCH, INCH))
     }
 }

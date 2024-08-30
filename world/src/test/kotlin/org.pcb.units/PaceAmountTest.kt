@@ -21,7 +21,8 @@ class PaceAmountTest
     {
         assertEquals(
             expected = PaceAmount(4, SECOND, METER),
-            actual = PaceAmount(2, SECOND, METER) * PercentAmount(2 * 100))
+            actual = PaceAmount(2, SECOND, METER) *
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -29,7 +30,8 @@ class PaceAmountTest
     {
         assertEquals(
             expected = PaceAmount(1, SECOND, METER),
-            actual = PaceAmount(2, SECOND, METER) / PercentAmount(2 * 100))
+            actual = PaceAmount(2, SECOND, METER) /
+                     PercentAmount(2 * 100))
     }
 
     @Test
@@ -37,7 +39,8 @@ class PaceAmountTest
     {
         assertEquals(
             expected = PaceAmount(1, SECOND, METER),
-            actual = PaceAmount(0, SECOND, METER) + PaceAmount(1, SECOND, METER))
+            actual = PaceAmount(0, SECOND, METER) +
+                     PaceAmount(1, SECOND, METER))
     }
 
     @Test
@@ -45,7 +48,8 @@ class PaceAmountTest
     {
         assertEquals(
             expected = PaceAmount(1, MINUTE, FOOT),
-        actual = PaceAmount(0, MINUTE, FOOT) + PaceAmount(60 / 12, SECOND, INCH))
+        actual = PaceAmount(0, MINUTE, FOOT) +
+                 PaceAmount(60 / 12, SECOND, INCH))
     }
 
     @Test
@@ -53,7 +57,8 @@ class PaceAmountTest
     {
         assertEquals(
             expected = PaceAmount(0, SECOND, METER),
-            actual = PaceAmount(1, SECOND, METER) - PaceAmount(1, SECOND, METER))
+            actual = PaceAmount(1, SECOND, METER) -
+                     PaceAmount(1, SECOND, METER))
     }
 
     @Test
@@ -61,7 +66,8 @@ class PaceAmountTest
     {
         assertEquals(
             expected = PaceAmount(0, MINUTE, FOOT),
-            actual = PaceAmount(1, MINUTE, FOOT) - PaceAmount(60 / 12, SECOND, INCH))
+            actual = PaceAmount(1, MINUTE, FOOT) -
+                     PaceAmount(60 / 12, SECOND, INCH))
     }
 
     @Test
@@ -69,7 +75,8 @@ class PaceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = PaceAmount(2, SECOND, METER) / PaceAmount(2, SECOND, METER))
+            actual = PaceAmount(2, SECOND, METER) /
+                     PaceAmount(2, SECOND, METER))
     }
 
     @Test
@@ -77,7 +84,8 @@ class PaceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = PaceAmount(2, MINUTE, FOOT) / PaceAmount(2 * 60 / 12, SECOND, INCH))
+            actual = PaceAmount(2, MINUTE, FOOT) /
+                     PaceAmount(2 * 60 / 12, SECOND, INCH))
     }
 
     @Test
@@ -85,7 +93,8 @@ class PaceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = PaceAmount(2, SECOND, METER) * SpeedAmount(2, METER, SECOND))
+            actual = PaceAmount(2, SECOND, METER) *
+                     SpeedAmount(2, METER, SECOND))
     }
 
     @Test
@@ -93,7 +102,8 @@ class PaceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = PaceAmount(2, MINUTE, FOOT) * SpeedAmount(2 * 60 / 12, INCH, SECOND))
+            actual = PaceAmount(2, MINUTE, FOOT) *
+                     SpeedAmount(2 * 60 / 12, INCH, SECOND))
     }
 
     @Test
@@ -101,7 +111,8 @@ class PaceAmountTest
     {
         assertEquals(
             expected = TimeAmount(4, SECOND),
-            actual = PaceAmount(2, SECOND, METER) * LengthAmount(2, METER))
+            actual = PaceAmount(2, SECOND, METER) *
+                     LengthAmount(2, METER))
     }
 
     @Test
@@ -109,6 +120,7 @@ class PaceAmountTest
     {
         assertEquals(
             expected = TimeAmount(4, SECOND),
-            actual = PaceAmount(2, SECOND, FOOT) * LengthAmount(24, INCH))
+            actual = PaceAmount(2, SECOND, FOOT) *
+                     LengthAmount(24, INCH))
     }
 }
