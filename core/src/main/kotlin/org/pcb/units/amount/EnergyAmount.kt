@@ -6,139 +6,138 @@ import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Force
+import org.pcb.units.domain.Length
 import org.pcb.units.domain.Mass
 import org.pcb.units.domain.Scalar
-import org.pcb.units.domain.Space
 import org.pcb.units.domain.Time
-import org.pcb.units.or
+import org.pcb.units.times
 import org.pcb.units.toBigBigDecimal
 
-open class EnergyAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
+open class EnergyAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
         val mass: M,
-        val space1: S,
-        val space2: S,
-        val time1: T,
-        val time2: T)
-    : Amount<Force>(amount = amount.toBigBigDecimal(),
+        val length: L,
+        length2: L,
+        val time: T,
+        time2: T)
+    : Amount<Force>(amount = amount.toBigBigDecimal() * convert(length2 to length,
+                                                                time to time2),
                     unit = CompositeUnit(
                         domain = Force::class,
                         units = listOf(mass to 1,
-                                       space1 to 1,
-                                       space2 to 1,
-                                       time1 to -1,
-                                       time2 to -1),))
+                                       length to 2,
+                                       time to -2)))
 {
     // region Energy
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         EnergyAmount(amount = amount * that.amount * that.unit.scale,
                      mass = mass,
-                     space1 = space1,
-                     space2 = space2,
-                     time1 = time1,
-                     time2 = time2)
+                     length = length,
+                     length2 = length,
+                     time = time,
+                     time2 = time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         EnergyAmount(amount = amount / that.amount / that.unit.scale,
                      mass = mass,
-                     space1 = space1,
-                     space2 = space2,
-                     time1 = time1,
-                     time2 = time2)
+                     length = length,
+                     length2 = length,
+                     time = time,
+                     time2 = time)
 
-    operator fun <M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>> plus(that: EnergyAmount<M, S, T>) =
-        EnergyAmount(amount = amount + that.amount * convert(that.mass to mass,
-                                                             that.space1 to space1,
-                                                             that.space2 to space2,
-                                                             time1 to that.time1,
-                                                             time2 to that.time2),
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> plus(that: EnergyAmount<M, L, T>) =
+        EnergyAmount(amount = amount + that.amount * Companion.convert(that.mass to mass,
+                                                                       that.length to length,
+                                                                       that.length to length,
+                                                                       time to that.time,
+                                                                       time to that.time),
                      mass = mass,
-                     space1 = space1,
-                     space2 = space2,
-                     time1 = time1,
-                     time2 = time2)
+                     length = length,
+                     length2 = length,
+                     time = time,
+                     time2 = time)
 
     @JvmName("plusEnergy")
-    operator fun plus(that: EnergyAmount<M, S, T>) =
+    operator fun plus(that: EnergyAmount<M, L, T>) =
         EnergyAmount(amount = amount + that.amount,
                      mass = mass,
-                     space1 = space1,
-                     space2 = space2,
-                     time1 = time1,
-                     time2 = time2)
+                     length = length,
+                     length2 = length,
+                     time = time,
+                     time2 = time)
 
 
-    operator fun <M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>> minus(that: EnergyAmount<M, S, T>) =
-        EnergyAmount(amount = amount - that.amount * convert(that.mass to mass,
-                                                             that.space1 to space1,
-                                                             that.space2 to space2,
-                                                             time1 to that.time1,
-                                                             time2 to that.time2),
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> minus(that: EnergyAmount<M, L, T>) =
+        EnergyAmount(amount = amount - that.amount * Companion.convert(that.mass to mass,
+                                                                       that.length to length,
+                                                                       that.length to length,
+                                                                       time to that.time,
+                                                                       time to that.time),
                      mass = mass,
-                     space1 = space1,
-                     space2 = space2,
-                     time1 = time1,
-                     time2 = time2)
+                     length = length,
+                     length2 = length,
+                     time = time,
+                     time2 = time)
 
     @JvmName("minusEnergy")
-    operator fun minus(that: EnergyAmount<M, S, T>) =
+    operator fun minus(that: EnergyAmount<M, L, T>) =
         EnergyAmount(amount = amount - that.amount,
                      mass = mass,
-                     space1 = space1,
-                     space2 = space2,
-                     time1 = time1,
-                     time2 = time2)
+                     length = length,
+                     length2 = length,
+                     time = time,
+                     time2 = time)
 
     // endregion
 
     // region Scalar
 
-    operator fun <M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>> div(that: EnergyAmount<M, S, T>) =
-        NaturalAmount(amount = amount / that.amount / convert(that.mass to mass,
-                                                              that.space1 to space1,
-                                                              that.space2 to space2,
-                                                              time1 to that.time1,
-                                                              time2 to that.time2))
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> div(that: EnergyAmount<M, L, T>) =
+        NaturalAmount(amount = amount / that.amount / Companion.convert(that.mass to mass,
+                                                                        that.length to length,
+                                                                        that.length to length,
+                                                                        time to that.time,
+                                                                        time to that.time))
 
     @JvmName("divEnergy")
-    operator fun div(that: EnergyAmount<M, S, T>) =
+    operator fun div(that: EnergyAmount<M, L, T>) =
         NaturalAmount(amount = amount / that.amount)
 
     // endregion
 
     // region Force
 
-    operator fun <S : Unit<Space>> div(that: SpaceAmount<S>) =
-        ForceAmount(amount = amount / that.amount / convert(that.space to (space1 or space2)),
+    operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
+        ForceAmount(amount = amount / that.amount / Companion.convert(that.length to length),
                     mass = mass,
-                    space = space1 or space2,
-                    time1 = time1,
-                    time2 = time2)
+                    length = length,
+                    time = time,
+                    time2 = time)
 
-    @JvmName("divSpace")
-    operator fun div(that: SpaceAmount<S>) =
+    @JvmName("divLength")
+    operator fun div(that: LengthAmount<L>) =
         ForceAmount(amount = amount / that.amount,
                     mass = mass,
-                    space = space1 or space2,
-                    time1 = time1,
-                    time2 = time2)
+                    length = length,
+                    time = time,
+                    time2 = time)
 
     // endregion
 
-    // region Space
+    // region Length
 
-    operator fun <M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>> div(that: ForceAmount<M, S, T>) =
-        SpaceAmount(amount = amount / that.amount / convert(that.mass to mass,
-                                                            that.space to (space1 or space2),
-                                                            time1 to that.time1,
-                                                            time2 to that.time2),
-                    space = space1 or space2)
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> div(that: ForceAmount<M, L, T>) =
+        LengthAmount(amount = amount / that.amount / Companion.convert(that.mass to mass,
+                                                                       that.length to length,
+                                                                       time to that.time,
+                                                                       time to that.time),
+                     length = length)
 
     @JvmName("divForce")
-    operator fun div(that: ForceAmount<M, S, T>) =
-        SpaceAmount(amount = amount / that.amount,
-                    space = space1 or space2)
+    operator fun div(that: ForceAmount<M, L, T>) =
+        LengthAmount(amount = amount / that.amount,
+                     length = length)
 
     // endregion
 }

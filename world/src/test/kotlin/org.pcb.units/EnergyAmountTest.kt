@@ -4,7 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.units.amount.EnergyAmount
 import org.pcb.units.amount.ForceAmount
-import org.pcb.units.amount.SpaceAmount
+import org.pcb.units.amount.LengthAmount
 import org.pcb.units.amount.mass.Gram.GRAM
 import org.pcb.units.amount.mass.Ounce.OUNCE
 import org.pcb.units.amount.mass.Pound.POUND
@@ -15,9 +15,19 @@ import org.pcb.units.amount.space.Inch.INCH
 import org.pcb.units.amount.space.Meter.METER
 import org.pcb.units.amount.time.Minute.MINUTE
 import org.pcb.units.amount.time.Second.SECOND
+import org.pcb.units.domain.Length
+import org.pcb.units.domain.Time
 
 class EnergyAmountTest
 {
+    @Test
+    fun construct()
+    {
+        assertEquals<EnergyAmount<GRAM, out Unit<Length>, out Unit<Time>>>(
+            expected = EnergyAmount(1, GRAM, FOOT, FOOT, SECOND, SECOND),
+            actual = EnergyAmount(12 * 60, GRAM, FOOT, INCH, SECOND, MINUTE))
+    }
+
     @Test
     fun timesScalar()
     {
@@ -87,7 +97,7 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = ForceAmount(1, GRAM, METER, SECOND, SECOND),
-            actual = EnergyAmount(2, GRAM, METER, METER, SECOND, SECOND) / SpaceAmount(2, METER))
+            actual = EnergyAmount(2, GRAM, METER, METER, SECOND, SECOND) / LengthAmount(2, METER))
     }
 
     @Test
@@ -95,14 +105,14 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = ForceAmount(1, GRAM, FOOT, SECOND, SECOND),
-            actual = EnergyAmount(2, GRAM, FOOT, FOOT, SECOND, SECOND) / SpaceAmount(2 * 12, INCH))
+            actual = EnergyAmount(2, GRAM, FOOT, FOOT, SECOND, SECOND) / LengthAmount(2 * 12, INCH))
     }
 
     @Test
     fun divSameForce()
     {
         assertEquals(
-            expected = SpaceAmount(1, METER),
+            expected = LengthAmount(1, METER),
             actual = EnergyAmount(2, GRAM, METER, METER, SECOND, SECOND) / ForceAmount(2, GRAM, METER, SECOND, SECOND))
     }
 
@@ -110,7 +120,7 @@ class EnergyAmountTest
     fun divOtherForce()
     {
         assertEquals(
-            expected = SpaceAmount(1, FOOT),
+            expected = LengthAmount(1, FOOT),
             actual = EnergyAmount(2, POUND, FOOT, FOOT, SECOND, SECOND) / ForceAmount(2 * 16 * 12 * 60 * 60, OUNCE, INCH, MINUTE, MINUTE))
     }
 }

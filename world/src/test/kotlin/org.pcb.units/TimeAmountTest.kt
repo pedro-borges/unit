@@ -2,8 +2,8 @@ package org.pcb.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.units.amount.LengthAmount
 import org.pcb.units.amount.PaceAmount
-import org.pcb.units.amount.SpaceAmount
 import org.pcb.units.amount.TimeAmount
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.amount.scalar.PercentAmount
@@ -82,6 +82,6 @@ class TimeAmountTest
     {
         assertEquals(
             expected = PaceAmount(1, SECOND, METER),
-            actual = TimeAmount(2, SECOND) / SpaceAmount(2, METER))
+            actual = TimeAmount(2, SECOND) / LengthAmount(2, METER))
     }
 }

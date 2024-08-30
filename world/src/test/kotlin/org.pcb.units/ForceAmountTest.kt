@@ -5,9 +5,9 @@ import kotlin.test.assertEquals
 import org.pcb.units.amount.AccelerationAmount
 import org.pcb.units.amount.EnergyAmount
 import org.pcb.units.amount.ForceAmount
+import org.pcb.units.amount.LengthAmount
 import org.pcb.units.amount.MassAmount
 import org.pcb.units.amount.MomentumAmount
-import org.pcb.units.amount.SpaceAmount
 import org.pcb.units.amount.TimeAmount
 import org.pcb.units.amount.mass.Gram.GRAM
 import org.pcb.units.amount.mass.Ounce.OUNCE
@@ -19,9 +19,18 @@ import org.pcb.units.amount.space.Inch.INCH
 import org.pcb.units.amount.space.Meter.METER
 import org.pcb.units.amount.time.Minute.MINUTE
 import org.pcb.units.amount.time.Second.SECOND
+import org.pcb.units.domain.Time
 
 class ForceAmountTest
 {
+    @Test
+    fun construct()
+    {
+        assertEquals<ForceAmount<GRAM, METER, out Unit<Time>>>(
+            expected = ForceAmount(1, GRAM, METER, SECOND, SECOND),
+            actual = ForceAmount(60, GRAM, METER, SECOND, MINUTE))
+    }
+
     @Test
     fun timesScalar()
     {
@@ -139,7 +148,7 @@ class ForceAmountTest
     {
         assertEquals(
             expected = EnergyAmount(4, GRAM, METER, METER, SECOND, SECOND),
-            actual = ForceAmount(2, GRAM, METER, SECOND, SECOND) * SpaceAmount(2, METER))
+            actual = ForceAmount(2, GRAM, METER, SECOND, SECOND) * LengthAmount(2, METER))
     }
 
     @Test
@@ -147,6 +156,6 @@ class ForceAmountTest
     {
         assertEquals(
             expected = EnergyAmount(4, GRAM, FOOT, FOOT, SECOND, SECOND),
-            actual = ForceAmount(2, GRAM, FOOT, SECOND, SECOND) * SpaceAmount(2 * 12, INCH))
+            actual = ForceAmount(2, GRAM, FOOT, SECOND, SECOND) * LengthAmount(2 * 12, INCH))
     }
 }

@@ -9,11 +9,6 @@ import org.pcb.units.domain.Scalar
 abstract class Amount<D : Domain>(val amount: BigDecimal,
                               val unit: CompositeUnit<D>)
 {
-    fun convert(vararg units: Pair<Unit<*>, Unit<*>>): BigDecimal =
-        units.fold(1.toBigBigDecimal()) { acc, unit ->
-            acc * unit.first.scale / unit.second.scale
-        }
-
     abstract operator fun<S : Unit<Scalar>> times(that: ScalarAmount<S>) : Amount<D>
 
     abstract operator fun<S : Unit<Scalar>> div(that: ScalarAmount<S>) : Amount<D>
@@ -33,5 +28,13 @@ abstract class Amount<D : Domain>(val amount: BigDecimal,
     override fun toString(): String
     {
         return "${amount.stripTrailingZeros().toPlainString()}$unit (${unit.domain.simpleName})"
+    }
+
+    companion object
+    {
+        fun convert(vararg units: Pair<Unit<*>, Unit<*>>): BigDecimal =
+            units.fold(1.toBigBigDecimal()) { acc, unit ->
+                acc * unit.first.scale / unit.second.scale
+            }
     }
 }

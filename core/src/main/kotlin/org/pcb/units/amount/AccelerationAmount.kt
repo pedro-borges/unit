@@ -6,81 +6,79 @@ import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Acceleration
+import org.pcb.units.domain.Length
 import org.pcb.units.domain.Mass
 import org.pcb.units.domain.Scalar
-import org.pcb.units.domain.Space
 import org.pcb.units.domain.Time
-import org.pcb.units.or
 import org.pcb.units.times
 import org.pcb.units.toBigBigDecimal
 
-open class AccelerationAmount<S : Unit<Space>, T : Unit<Time>>(
+open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
-        val space: S,
-        val time1: T,
-        val time2: T)
-    : Amount<Acceleration>(amount = amount.toBigBigDecimal(),
+        val length: L,
+        val time: T,
+        time2: T)
+    : Amount<Acceleration>(amount = amount.toBigBigDecimal() * convert(time to time2),
                            unit = CompositeUnit(
                                domain = Acceleration::class,
-                               units = listOf(space to 1,
-                                              time1 to -1,
-                                              time2 to -1)))
+                               units = listOf(length to 1,
+                                              time to -2)))
 {
     // region Acceleration
 
-    override operator fun <U : Unit<Scalar>> times(that: ScalarAmount<U>): AccelerationAmount<S, T> =
+    override operator fun <U : Unit<Scalar>> times(that: ScalarAmount<U>): AccelerationAmount<L, T> =
         AccelerationAmount(amount = amount * that.amount * that.unit.scale,
-                           space = space,
-                           time1 = time1,
-                           time2 = time2)
+                           length = length,
+                           time = time,
+                           time2 = time)
 
-    override operator fun <U : Unit<Scalar>> div(that: ScalarAmount<U>): AccelerationAmount<S, T> =
+    override operator fun <U : Unit<Scalar>> div(that: ScalarAmount<U>): AccelerationAmount<L, T> =
         AccelerationAmount(amount = amount / that.amount / that.unit.scale,
-                           space = space,
-                           time1 = time1,
-                           time2 = time2)
+                           length = length,
+                           time = time,
+                           time2 = time)
 
-    operator fun <S : Unit<Space>, T : Unit<Time>> plus(that: AccelerationAmount<S, T>) =
-        AccelerationAmount(amount = amount + that.amount * convert(that.space to space,
-                                                                   time1 to that.time1,
-                                                                   time2 to that.time2),
-                           space = space,
-                           time1 = time1,
-                           time2 = time2)
+    operator fun <L : Unit<Length>, T : Unit<Time>> plus(that: AccelerationAmount<L, T>) =
+        AccelerationAmount(amount = amount + that.amount * Companion.convert(that.length to length,
+                                                                             time to that.time,
+                                                                             time to that.time),
+                           length = length,
+                           time = time,
+                           time2 = time)
 
     @JvmName("plusAcceleration")
-    operator fun plus(that: AccelerationAmount<S, T>) =
+    operator fun plus(that: AccelerationAmount<L, T>) =
         AccelerationAmount(amount = amount + that.amount,
-                           space = space,
-                           time1 = time1,
-                           time2 = time2)
+                           length = length,
+                           time = time,
+                           time2 = time)
 
-    operator fun <S : Unit<Space>, T : Unit<Time>> minus(that: AccelerationAmount<S, T>) =
-        AccelerationAmount(amount = amount - that.amount * convert(that.space to space,
-                                                                   time1 to that.time1,
-                                                                   time2 to that.time2),
-                           space = space,
-                           time1 = time1,
-                           time2 = time2)
+    operator fun <L : Unit<Length>, T : Unit<Time>> minus(that: AccelerationAmount<L, T>) =
+        AccelerationAmount(amount = amount - that.amount * Companion.convert(that.length to length,
+                                                                             time to that.time,
+                                                                             time to that.time),
+                           length = length,
+                           time = time,
+                           time2 = time)
 
     @JvmName("minusAcceleration")
-    operator fun minus(that: AccelerationAmount<S, T>) =
+    operator fun minus(that: AccelerationAmount<L, T>) =
         AccelerationAmount(amount = amount - that.amount,
-                           space = space,
-                           time1 = time1,
-                           time2 = time2)
+                           length = length,
+                           time = time,
+                           time2 = time)
 
     // endregion
 
     // region Scalar
 
-    operator fun <S : Unit<Space>, T : Unit<Time>> div(that: AccelerationAmount<S, T>) =
-        NaturalAmount(amount = amount / that.amount / convert(that.space to space,
-                                                              time1 to that.time1,
-                                                              time2 to that.time2))
+    operator fun <L : Unit<Length>, T : Unit<Time>> div(that: AccelerationAmount<L, T>) =
+        NaturalAmount(amount = amount / that.amount / Companion.convert(that.length to length,
+                                                                        time to that.time,
+                                                                        time to that.time))
 
     @JvmName("divAcceleration")
-    operator fun div(that: AccelerationAmount<S, T>) =
+    operator fun div(that: AccelerationAmount<L, T>) =
         NaturalAmount(amount = amount / that.amount)
 
     // endregion
@@ -88,29 +86,29 @@ open class AccelerationAmount<S : Unit<Space>, T : Unit<Time>>(
     // region Speed
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
-        SpeedAmount(amount = amount * that.amount * convert(that.time to (time1 or time2)),
-                    space = space,
-                    time = time1 or time2)
+        SpeedAmount(amount = amount * that.amount * Companion.convert(that.time to time),
+                    length = length,
+                    time = time)
 
     @JvmName("timesTime")
     operator fun times(that: TimeAmount<T>) =
         SpeedAmount(amount = amount * that.amount,
-                    space = space,
-                    time = time1 or time2)
+                    length = length,
+                    time = time)
 
     // endregion
 
     // region Frequency
 
-    operator fun <S : Unit<Space>, T : Unit<Time>> div(that: SpeedAmount<S, T>) =
-        FrequencyAmount(amount = amount / that.amount * convert(space to that.space,
-                                                                that.time to (time1 or time2)),
-                        time = time1 or time2)
+    operator fun <L : Unit<Length>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
+        FrequencyAmount(amount = amount / that.amount * Companion.convert(length to that.length,
+                                                                          that.time to time),
+                        time = time)
 
     @JvmName("divSpeed")
-    operator fun div(that: SpeedAmount<S, T>) =
+    operator fun div(that: SpeedAmount<L, T>) =
         FrequencyAmount(amount = amount / that.amount,
-                        time = time1 or time2)
+                        time = time)
 
     // endregion
 
@@ -119,9 +117,9 @@ open class AccelerationAmount<S : Unit<Space>, T : Unit<Time>>(
     operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
         ForceAmount(amount = amount * that.amount,
                     mass = that.mass,
-                    space = space,
-                    time1 = time1,
-                    time2 = time2)
+                    length = length,
+                    time = time,
+                    time2 = time)
 
     // endregion
 }

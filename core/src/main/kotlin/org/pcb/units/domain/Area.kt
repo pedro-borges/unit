@@ -1,3 +1,3 @@
 package org.pcb.units.domain
 
-interface Space : Domain
+interface Area : Domain

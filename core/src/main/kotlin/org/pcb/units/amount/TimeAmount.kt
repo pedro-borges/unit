@@ -5,9 +5,10 @@ import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
+import org.pcb.units.domain.Length
 import org.pcb.units.domain.Scalar
-import org.pcb.units.domain.Space
 import org.pcb.units.domain.Time
+import org.pcb.units.times
 import org.pcb.units.toBigBigDecimal
 
 open class TimeAmount<T : Unit<Time>>(
@@ -29,7 +30,7 @@ open class TimeAmount<T : Unit<Time>>(
                    time = time)
 
     operator fun <T : Unit<Time>> plus(that: TimeAmount<T>) =
-        TimeAmount(amount = amount + that.amount * convert(that.time to time),
+        TimeAmount(amount = amount + that.amount * Companion.convert(that.time to time),
                    time = time)
 
     @JvmName("plusTime")
@@ -38,7 +39,7 @@ open class TimeAmount<T : Unit<Time>>(
                    time = time)
 
     operator fun <T : Unit<Time>> minus(that: TimeAmount<T>) =
-        TimeAmount(amount = amount - that.amount * convert(that.time to time),
+        TimeAmount(amount = amount - that.amount * Companion.convert(that.time to time),
                    time = time)
 
     @JvmName("minusTime")
@@ -51,7 +52,7 @@ open class TimeAmount<T : Unit<Time>>(
     // region Scalar
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
-        NaturalAmount(amount = amount / that.amount / convert(that.time to time))
+        NaturalAmount(amount = amount / that.amount / Companion.convert(that.time to time))
 
     @JvmName("divTime")
     operator fun div(that: TimeAmount<T>) =
@@ -61,10 +62,10 @@ open class TimeAmount<T : Unit<Time>>(
 
     // region Pace
 
-    operator fun <U : Unit<Space>> div(that: SpaceAmount<U>) =
+    operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         PaceAmount(amount = amount / that.amount,
                    time = time,
-                   space = that.space)
+                   length = that.length)
 
     // endregion
 }

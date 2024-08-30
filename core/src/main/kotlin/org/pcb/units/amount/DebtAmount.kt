@@ -9,6 +9,7 @@ import org.pcb.units.domain.Currency
 import org.pcb.units.domain.Debt
 import org.pcb.units.domain.Scalar
 import org.pcb.units.domain.Time
+import org.pcb.units.times
 import org.pcb.units.toBigBigDecimal
 
 open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
@@ -34,7 +35,7 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
                    time = time)
 
     operator fun <T : Unit<Time>> plus(that: DebtAmount<C, T>) =
-        DebtAmount(amount = amount + that.amount * convert(that.time to time),
+        DebtAmount(amount = amount + that.amount * Companion.convert(that.time to time),
                    currency = currency,
                    time = time)
 
@@ -45,7 +46,7 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
                    time = time)
 
     operator fun <T : Unit<Time>> minus(that: DebtAmount<C, T>) =
-        DebtAmount(amount = amount - that.amount * convert(that.time to time),
+        DebtAmount(amount = amount - that.amount * Companion.convert(that.time to time),
                    currency = currency,
                    time = time)
 
@@ -60,7 +61,7 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
     // region Scalar
 
     operator fun <T : Unit<Time>> div(that: DebtAmount<C, T>) =
-        NaturalAmount(amount = amount / that.amount / convert(that.time to time))
+        NaturalAmount(amount = amount / that.amount / Companion.convert(that.time to time))
 
     @JvmName("divDebt")
     operator fun div(that: DebtAmount<C, T>) =
@@ -71,7 +72,7 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
     // region Currency
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
-        CurrencyAmount(amount = amount / that.amount / convert(that.time to time),
+        CurrencyAmount(amount = amount / that.amount / Companion.convert(that.time to time),
                        currency = currency)
 
     @JvmName("divTime")
@@ -80,7 +81,7 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
                        currency = currency)
 
     operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
-        CurrencyAmount(amount = amount / that.amount / convert(that.time to time),
+        CurrencyAmount(amount = amount / that.amount / Companion.convert(that.time to time),
                        currency = currency)
 
     @JvmName("timesFrequency")

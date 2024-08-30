@@ -4,7 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.units.amount.AccelerationAmount
 import org.pcb.units.amount.FrequencyAmount
-import org.pcb.units.amount.SpaceAmount
+import org.pcb.units.amount.LengthAmount
 import org.pcb.units.amount.SpeedAmount
 import org.pcb.units.amount.TimeAmount
 import org.pcb.units.amount.scalar.NaturalAmount
@@ -85,7 +85,7 @@ class SpeedAmountTest
     fun timesSameTime()
     {
         assertEquals(
-            expected = SpaceAmount(4, METER),
+            expected = LengthAmount(4, METER),
             actual = SpeedAmount(2, METER, SECOND) * TimeAmount(2, SECOND))
     }
 
@@ -93,7 +93,7 @@ class SpeedAmountTest
     fun timesOtherTime()
     {
         assertEquals(
-            expected = SpaceAmount(240, METER),
+            expected = LengthAmount(240, METER),
             actual = SpeedAmount(2, METER, SECOND) * TimeAmount(2, MINUTE))
     }
 
@@ -118,7 +118,7 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(1, SECOND),
-            actual = SpeedAmount(2, METER, SECOND) / SpaceAmount(2, METER))
+            actual = SpeedAmount(2, METER, SECOND) / LengthAmount(2, METER))
     }
 
     @Test
@@ -126,6 +126,6 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(1, SECOND),
-            actual = SpeedAmount(2, FOOT, SECOND) / SpaceAmount(24, INCH))
+            actual = SpeedAmount(2, FOOT, SECOND) / LengthAmount(24, INCH))
     }
 }

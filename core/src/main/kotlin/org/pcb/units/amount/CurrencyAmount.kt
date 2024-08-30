@@ -8,6 +8,7 @@ import org.pcb.units.div
 import org.pcb.units.domain.Currency
 import org.pcb.units.domain.Scalar
 import org.pcb.units.domain.Time
+import org.pcb.units.times
 import org.pcb.units.toBigBigDecimal
 
 open class CurrencyAmount<C : Unit<Currency>>(

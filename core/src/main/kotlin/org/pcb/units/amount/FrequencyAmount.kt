@@ -6,9 +6,10 @@ import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
 import org.pcb.units.domain.Currency
+import org.pcb.units.domain.Length
 import org.pcb.units.domain.Scalar
-import org.pcb.units.domain.Space
 import org.pcb.units.domain.Time
+import org.pcb.units.times
 import org.pcb.units.toBigBigDecimal
 
 open class FrequencyAmount<T : Unit<Time>>(
@@ -30,7 +31,7 @@ open class FrequencyAmount<T : Unit<Time>>(
                         time = time)
 
     operator fun <T : Unit<Time>> plus(that: FrequencyAmount<T>) =
-        FrequencyAmount(amount = amount + that.amount * convert(that.time to time),
+        FrequencyAmount(amount = amount + that.amount * Companion.convert(that.time to time),
                         time = time)
 
     @JvmName("plusFrequency")
@@ -39,7 +40,7 @@ open class FrequencyAmount<T : Unit<Time>>(
                         time = time)
 
     operator fun <T : Unit<Time>> minus(that: FrequencyAmount<T>) =
-        FrequencyAmount(amount = amount - that.amount * convert(that.time to time),
+        FrequencyAmount(amount = amount - that.amount * Companion.convert(that.time to time),
                         time = time)
 
     @JvmName("minusFrequency")
@@ -52,14 +53,14 @@ open class FrequencyAmount<T : Unit<Time>>(
     // region Scalar
 
     operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
-        NaturalAmount(amount = amount / that.amount / convert(that.time to time))
+        NaturalAmount(amount = amount / that.amount / Companion.convert(that.time to time))
 
     @JvmName("divFrequency")
     operator fun div(that: FrequencyAmount<T>) =
         NaturalAmount(amount = amount / that.amount)
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
-        NaturalAmount(amount = amount * that.amount * convert(that.time to time))
+        NaturalAmount(amount = amount * that.amount * Companion.convert(that.time to time))
 
     @JvmName("timesTime")
     operator fun times(that: TimeAmount<T>) =
@@ -69,26 +70,26 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // region Speed
 
-    operator fun <S : Unit<Space>> times(that: SpaceAmount<S>) =
+    operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         SpeedAmount(amount = amount * that.amount,
-                    space = that.space,
+                    length = that.length,
                     time = time)
 
     // endregion
 
     // region Acceleration
 
-    operator fun <S : Unit<Space>, T : Unit<Time>> times(that: SpeedAmount<S, T>) =
-        AccelerationAmount(amount = amount * that.amount * convert(that.time to time),
-                           space = that.space,
-                           time1 = time,
+    operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
+        AccelerationAmount(amount = amount * that.amount * Companion.convert(that.time to time),
+                           length = that.length,
+                           time = time,
                            time2 = time)
 
     @JvmName("timesSpeed")
-    operator fun <S : Unit<Space>> times(that: SpeedAmount<S, T>) =
+    operator fun <L : Unit<Length>> times(that: SpeedAmount<L, T>) =
         AccelerationAmount(amount = amount * that.amount,
-                           space = that.space,
-                           time1 = time,
+                           length = that.length,
+                           time = time,
                            time2 = time)
 
     // endregion
@@ -96,7 +97,7 @@ open class FrequencyAmount<T : Unit<Time>>(
     // region Currency
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> times(that: DebtAmount<C, T>) =
-        CurrencyAmount(amount = that.amount / amount / convert(that.time to time),
+        CurrencyAmount(amount = that.amount / amount / Companion.convert(that.time to time),
                        currency = that.currency)
 
     @JvmName("timesDebt")

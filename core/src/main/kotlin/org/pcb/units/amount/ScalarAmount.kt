@@ -6,6 +6,7 @@ import org.pcb.units.Unit
 import org.pcb.units.div
 import org.pcb.units.domain.Scalar
 import org.pcb.units.domain.Time
+import org.pcb.units.times
 import org.pcb.units.toBigBigDecimal
 
 open class ScalarAmount<S : Unit<Scalar>>(amount: Number,
@@ -26,7 +27,7 @@ open class ScalarAmount<S : Unit<Scalar>>(amount: Number,
                      scalar = scalar)
 
     operator fun <S : Unit<Scalar>> plus(that: ScalarAmount<S>) =
-        ScalarAmount(amount = amount + that.amount * convert(that.scalar to scalar),
+        ScalarAmount(amount = amount + that.amount * Companion.convert(that.scalar to scalar),
                      scalar = scalar)
 
     @JvmName("plusScalar")
@@ -35,7 +36,7 @@ open class ScalarAmount<S : Unit<Scalar>>(amount: Number,
                      scalar = scalar)
 
     operator fun <S : Unit<Scalar>> minus(that: ScalarAmount<S>) =
-        ScalarAmount(amount = amount - that.amount * convert(that.scalar to scalar),
+        ScalarAmount(amount = amount - that.amount * Companion.convert(that.scalar to scalar),
                      scalar = scalar)
 
     @JvmName("minusScalar")

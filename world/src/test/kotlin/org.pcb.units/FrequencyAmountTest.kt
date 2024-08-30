@@ -6,8 +6,8 @@ import org.pcb.units.amount.AccelerationAmount
 import org.pcb.units.amount.CurrencyAmount
 import org.pcb.units.amount.DebtAmount
 import org.pcb.units.amount.FrequencyAmount
+import org.pcb.units.amount.LengthAmount
 import org.pcb.units.amount.RentAmount
-import org.pcb.units.amount.SpaceAmount
 import org.pcb.units.amount.SpeedAmount
 import org.pcb.units.amount.finance.Gbp.GBP
 import org.pcb.units.amount.scalar.NaturalAmount
@@ -88,7 +88,7 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = SpeedAmount(4, METER, SECOND),
-            actual = FrequencyAmount(2, SECOND) * SpaceAmount(2, METER))
+            actual = FrequencyAmount(2, SECOND) * LengthAmount(2, METER))
     }
 
     @Test

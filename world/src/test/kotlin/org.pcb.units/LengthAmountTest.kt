@@ -2,7 +2,7 @@ package org.pcb.units
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
-import org.pcb.units.amount.SpaceAmount
+import org.pcb.units.amount.LengthAmount
 import org.pcb.units.amount.SpeedAmount
 import org.pcb.units.amount.TimeAmount
 import org.pcb.units.amount.scalar.NaturalAmount
@@ -12,54 +12,54 @@ import org.pcb.units.amount.space.Inch.INCH
 import org.pcb.units.amount.space.Meter.METER
 import org.pcb.units.amount.time.Second.SECOND
 
-class SpaceAmountTest
+class LengthAmountTest
 {
     @Test
     fun timesScalar()
     {
         assertEquals(
-            expected = SpaceAmount(4, METER),
-            actual = SpaceAmount(2, METER) * PercentAmount(2 * 100))
+            expected = LengthAmount(4, METER),
+            actual = LengthAmount(2, METER) * PercentAmount(2 * 100))
     }
 
     @Test
     fun divScalar()
     {
         assertEquals(
-            expected = SpaceAmount(1, METER),
-            actual = SpaceAmount(2, METER) / PercentAmount(2 * 100))
+            expected = LengthAmount(1, METER),
+            actual = LengthAmount(2, METER) / PercentAmount(2 * 100))
     }
 
     @Test
     fun plusSameSpace()
     {
         assertEquals(
-            expected = SpaceAmount(1, METER),
-            actual = SpaceAmount(0, METER) + SpaceAmount(1, METER))
+            expected = LengthAmount(1, METER),
+            actual = LengthAmount(0, METER) + LengthAmount(1, METER))
     }
 
     @Test
     fun plusOtherSpace()
     {
         assertEquals(
-            expected = SpaceAmount(1, FOOT),
-            actual = SpaceAmount(0, FOOT) + SpaceAmount(12, INCH))
+            expected = LengthAmount(1, FOOT),
+            actual = LengthAmount(0, FOOT) + LengthAmount(12, INCH))
     }
 
     @Test
     fun minusSameSpace()
     {
         assertEquals(
-            expected = SpaceAmount(0, METER),
-            actual = SpaceAmount(1, METER) - SpaceAmount(1, METER))
+            expected = LengthAmount(0, METER),
+            actual = LengthAmount(1, METER) - LengthAmount(1, METER))
     }
 
     @Test
     fun minusOtherSpace()
     {
         assertEquals(
-            expected = SpaceAmount(0, FOOT),
-            actual = SpaceAmount(1, FOOT) - SpaceAmount(12, INCH))
+            expected = LengthAmount(0, FOOT),
+            actual = LengthAmount(1, FOOT) - LengthAmount(12, INCH))
     }
 
     @Test
@@ -67,7 +67,7 @@ class SpaceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = SpaceAmount(2, METER) / SpaceAmount(2, METER))
+            actual = LengthAmount(2, METER) / LengthAmount(2, METER))
     }
 
     @Test
@@ -75,7 +75,7 @@ class SpaceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = SpaceAmount(2, FOOT) / SpaceAmount(24, INCH))
+            actual = LengthAmount(2, FOOT) / LengthAmount(24, INCH))
     }
 
     @Test
@@ -83,6 +83,6 @@ class SpaceAmountTest
     {
         assertEquals(
             expected = SpeedAmount(1, METER, SECOND),
-            actual = SpaceAmount(2, METER) / TimeAmount(2, SECOND))
+            actual = LengthAmount(2, METER) / TimeAmount(2, SECOND))
     }
 }

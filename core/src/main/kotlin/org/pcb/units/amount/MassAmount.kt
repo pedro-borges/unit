@@ -5,10 +5,11 @@ import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.div
+import org.pcb.units.domain.Length
 import org.pcb.units.domain.Mass
 import org.pcb.units.domain.Scalar
-import org.pcb.units.domain.Space
 import org.pcb.units.domain.Time
+import org.pcb.units.times
 import org.pcb.units.toBigBigDecimal
 
 open class MassAmount<M : Unit<Mass>>(amount: Number,
@@ -29,7 +30,7 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
                    mass = mass)
 
     operator fun <M : Unit<Mass>> plus(that: MassAmount<M>) =
-        MassAmount(amount = amount + that.amount * convert(that.mass to mass),
+        MassAmount(amount = amount + that.amount * Companion.convert(that.mass to mass),
                    mass = mass)
 
     @JvmName("plusMass")
@@ -38,7 +39,7 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
                    mass = mass)
 
     operator fun <M : Unit<Mass>> minus(that: MassAmount<M>) =
-        MassAmount(amount = amount - that.amount * convert(that.mass to mass),
+        MassAmount(amount = amount - that.amount * Companion.convert(that.mass to mass),
                    mass = mass)
 
     @JvmName("minusMass")
@@ -51,7 +52,7 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
     // region Scalar
 
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
-        NaturalAmount(amount = amount / that.amount / convert(that.mass to mass))
+        NaturalAmount(amount = amount / that.amount / Companion.convert(that.mass to mass))
 
     @JvmName("divMass")
     operator fun div(that: MassAmount<M>) =
@@ -61,22 +62,22 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
 
     // region Momentum
 
-    operator fun <S : Unit<Space>, T : Unit<Time>> times(that: SpeedAmount<S, T>) =
+    operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
         MomentumAmount(amount = that.amount * that.amount,
                        mass = mass,
-                       space = that.space,
+                       length = that.length,
                        time = that.time)
 
     // endregion
 
     // region Force
 
-    operator fun <S : Unit<Space>, T : Unit<Time>> times(that: AccelerationAmount<S, T>) =
+    operator fun <L : Unit<Length>, T : Unit<Time>> times(that: AccelerationAmount<L, T>) =
         ForceAmount(amount = that.amount * that.amount,
                     mass = mass,
-                    space = that.space,
-                    time1 = that.time1,
-                    time2 = that.time2)
+                    length = that.length,
+                    time = that.time,
+                    time2 = that.time)
 
     // endregion
 }

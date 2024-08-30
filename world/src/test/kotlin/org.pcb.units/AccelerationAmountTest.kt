@@ -16,9 +16,18 @@ import org.pcb.units.amount.space.Inch.INCH
 import org.pcb.units.amount.space.Meter.METER
 import org.pcb.units.amount.time.Minute.MINUTE
 import org.pcb.units.amount.time.Second.SECOND
+import org.pcb.units.domain.Time
 
 class AccelerationAmountTest
 {
+    @Test
+    fun construct()
+    {
+        assertEquals<AccelerationAmount<METER, out Unit<Time>>>(
+            expected = AccelerationAmount(1, METER, SECOND, SECOND),
+            actual = AccelerationAmount(60, METER, SECOND, MINUTE))
+    }
+
     @Test
     fun timesScalar()
     {
