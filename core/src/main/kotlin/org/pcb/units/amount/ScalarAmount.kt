@@ -3,6 +3,7 @@ package org.pcb.units.amount
 import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
+import org.pcb.units.convert
 import org.pcb.units.div
 import org.pcb.units.domain.Scalar
 import org.pcb.units.domain.Time
@@ -27,7 +28,7 @@ open class ScalarAmount<S : Unit<Scalar>>(amount: Number,
                      scalar = scalar)
 
     operator fun <S : Unit<Scalar>> plus(that: ScalarAmount<S>) =
-        ScalarAmount(amount = amount + that.amount * Companion.convert(that.scalar to scalar),
+        ScalarAmount(amount = amount + that.amount * convert(that.scalar to scalar),
                      scalar = scalar)
 
     @JvmName("plusScalar")
@@ -36,7 +37,7 @@ open class ScalarAmount<S : Unit<Scalar>>(amount: Number,
                      scalar = scalar)
 
     operator fun <S : Unit<Scalar>> minus(that: ScalarAmount<S>) =
-        ScalarAmount(amount = amount - that.amount * Companion.convert(that.scalar to scalar),
+        ScalarAmount(amount = amount - that.amount * convert(that.scalar to scalar),
                      scalar = scalar)
 
     @JvmName("minusScalar")
@@ -48,7 +49,7 @@ open class ScalarAmount<S : Unit<Scalar>>(amount: Number,
 
     // region Frequency
 
-    operator fun <T: Unit<Time>> div(that: TimeAmount<T>) =
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         FrequencyAmount(amount = amount * unit.scale / that.amount,
                         time = that.time)
 
@@ -56,7 +57,7 @@ open class ScalarAmount<S : Unit<Scalar>>(amount: Number,
 
     // region Time
 
-    operator fun <T: Unit<Time>> div(that: FrequencyAmount<T>) =
+    operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
         TimeAmount(amount = amount * unit.scale / that.amount,
                    time = that.time)
 

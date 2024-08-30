@@ -4,6 +4,7 @@ import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.convert
 import org.pcb.units.div
 import org.pcb.units.domain.Length
 import org.pcb.units.domain.Mass
@@ -30,7 +31,7 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
                    mass = mass)
 
     operator fun <M : Unit<Mass>> plus(that: MassAmount<M>) =
-        MassAmount(amount = amount + that.amount * Companion.convert(that.mass to mass),
+        MassAmount(amount = amount + that.amount * convert(that.mass to mass),
                    mass = mass)
 
     @JvmName("plusMass")
@@ -39,7 +40,7 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
                    mass = mass)
 
     operator fun <M : Unit<Mass>> minus(that: MassAmount<M>) =
-        MassAmount(amount = amount - that.amount * Companion.convert(that.mass to mass),
+        MassAmount(amount = amount - that.amount * convert(that.mass to mass),
                    mass = mass)
 
     @JvmName("minusMass")
@@ -52,7 +53,7 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
     // region Scalar
 
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
-        NaturalAmount(amount = amount / that.amount / Companion.convert(that.mass to mass))
+        NaturalAmount(amount = amount / that.amount / convert(that.mass to mass))
 
     @JvmName("divMass")
     operator fun div(that: MassAmount<M>) =

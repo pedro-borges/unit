@@ -4,6 +4,7 @@ import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.convert
 import org.pcb.units.div
 import org.pcb.units.domain.Length
 import org.pcb.units.domain.Pace
@@ -35,8 +36,8 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
                    length = length)
 
     operator fun <T : Unit<Time>, L : Unit<Length>> plus(that: PaceAmount<T, L>) =
-        PaceAmount(amount = amount + that.amount * Companion.convert(that.time to time,
-                                                                     length to that.length),
+        PaceAmount(amount = amount + that.amount * convert(that.time to time,
+                                                           length to that.length),
                    time = time,
                    length = length)
 
@@ -47,8 +48,8 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
                    length = length)
 
     operator fun <T : Unit<Time>, L : Unit<Length>> minus(that: PaceAmount<T, L>) =
-        PaceAmount(amount = amount - that.amount * Companion.convert(that.time to time,
-                                                                     length to that.length),
+        PaceAmount(amount = amount - that.amount * convert(that.time to time,
+                                                           length to that.length),
                    time = time,
                    length = length)
 
@@ -63,16 +64,16 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
     // region Scalar
 
     operator fun <T : Unit<Time>, L : Unit<Length>> div(that: PaceAmount<T, L>) =
-        NaturalAmount(amount = amount / that.amount / Companion.convert(that.time to time,
-                                                                        length to that.length))
+        NaturalAmount(amount = amount / that.amount / convert(that.time to time,
+                                                              length to that.length))
 
     @JvmName("divPace")
     operator fun div(that: PaceAmount<T, L>) =
         NaturalAmount(amount = amount / that.amount)
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
-        NaturalAmount(amount = amount / that.amount / Companion.convert(that.time to time,
-                                                                        length to that.length))
+        NaturalAmount(amount = amount / that.amount / convert(that.time to time,
+                                                              length to that.length))
 
     @JvmName("timesSpeed")
     operator fun times(that: SpeedAmount<L, T>) =
@@ -83,7 +84,7 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
     // region Time
 
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
-        TimeAmount(amount = amount * that.amount * Companion.convert(that.length to length),
+        TimeAmount(amount = amount * that.amount * convert(that.length to length),
                    time = time)
 
     @JvmName("timesLength")

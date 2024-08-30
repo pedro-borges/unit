@@ -4,6 +4,7 @@ import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.convert
 import org.pcb.units.div
 import org.pcb.units.domain.Force
 import org.pcb.units.domain.Length
@@ -47,11 +48,11 @@ open class EnergyAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                      time2 = time)
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> plus(that: EnergyAmount<M, L, T>) =
-        EnergyAmount(amount = amount + that.amount * Companion.convert(that.mass to mass,
-                                                                       that.length to length,
-                                                                       that.length to length,
-                                                                       time to that.time,
-                                                                       time to that.time),
+        EnergyAmount(amount = amount + that.amount * convert(that.mass to mass,
+                                                             that.length to length,
+                                                             that.length to length,
+                                                             time to that.time,
+                                                             time to that.time),
                      mass = mass,
                      length = length,
                      length2 = length,
@@ -69,11 +70,11 @@ open class EnergyAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> minus(that: EnergyAmount<M, L, T>) =
-        EnergyAmount(amount = amount - that.amount * Companion.convert(that.mass to mass,
-                                                                       that.length to length,
-                                                                       that.length to length,
-                                                                       time to that.time,
-                                                                       time to that.time),
+        EnergyAmount(amount = amount - that.amount * convert(that.mass to mass,
+                                                             that.length to length,
+                                                             that.length to length,
+                                                             time to that.time,
+                                                             time to that.time),
                      mass = mass,
                      length = length,
                      length2 = length,
@@ -94,11 +95,11 @@ open class EnergyAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
     // region Scalar
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> div(that: EnergyAmount<M, L, T>) =
-        NaturalAmount(amount = amount / that.amount / Companion.convert(that.mass to mass,
-                                                                        that.length to length,
-                                                                        that.length to length,
-                                                                        time to that.time,
-                                                                        time to that.time))
+        NaturalAmount(amount = amount / that.amount / convert(that.mass to mass,
+                                                              that.length to length,
+                                                              that.length to length,
+                                                              time to that.time,
+                                                              time to that.time))
 
     @JvmName("divEnergy")
     operator fun div(that: EnergyAmount<M, L, T>) =
@@ -109,7 +110,7 @@ open class EnergyAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
     // region Force
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
-        ForceAmount(amount = amount / that.amount / Companion.convert(that.length to length),
+        ForceAmount(amount = amount / that.amount / convert(that.length to length),
                     mass = mass,
                     length = length,
                     time = time,
@@ -128,10 +129,10 @@ open class EnergyAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
     // region Length
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> div(that: ForceAmount<M, L, T>) =
-        LengthAmount(amount = amount / that.amount / Companion.convert(that.mass to mass,
-                                                                       that.length to length,
-                                                                       time to that.time,
-                                                                       time to that.time),
+        LengthAmount(amount = amount / that.amount / convert(that.mass to mass,
+                                                             that.length to length,
+                                                             time to that.time,
+                                                             time to that.time),
                      length = length)
 
     @JvmName("divForce")

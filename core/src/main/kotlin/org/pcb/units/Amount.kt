@@ -29,12 +29,4 @@ abstract class Amount<D : Domain>(val amount: BigDecimal,
     {
         return "${amount.stripTrailingZeros().toPlainString()}$unit (${unit.domain.simpleName})"
     }
-
-    companion object
-    {
-        fun convert(vararg units: Pair<Unit<*>, Unit<*>>): BigDecimal =
-            units.fold(1.toBigBigDecimal()) { acc, unit ->
-                acc * unit.first.scale / unit.second.scale
-            }
-    }
 }

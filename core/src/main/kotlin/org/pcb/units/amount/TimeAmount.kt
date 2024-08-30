@@ -4,6 +4,7 @@ import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.convert
 import org.pcb.units.div
 import org.pcb.units.domain.Length
 import org.pcb.units.domain.Scalar
@@ -30,7 +31,7 @@ open class TimeAmount<T : Unit<Time>>(
                    time = time)
 
     operator fun <T : Unit<Time>> plus(that: TimeAmount<T>) =
-        TimeAmount(amount = amount + that.amount * Companion.convert(that.time to time),
+        TimeAmount(amount = amount + that.amount * convert(that.time to time),
                    time = time)
 
     @JvmName("plusTime")
@@ -39,7 +40,7 @@ open class TimeAmount<T : Unit<Time>>(
                    time = time)
 
     operator fun <T : Unit<Time>> minus(that: TimeAmount<T>) =
-        TimeAmount(amount = amount - that.amount * Companion.convert(that.time to time),
+        TimeAmount(amount = amount - that.amount * convert(that.time to time),
                    time = time)
 
     @JvmName("minusTime")
@@ -52,7 +53,7 @@ open class TimeAmount<T : Unit<Time>>(
     // region Scalar
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
-        NaturalAmount(amount = amount / that.amount / Companion.convert(that.time to time))
+        NaturalAmount(amount = amount / that.amount / convert(that.time to time))
 
     @JvmName("divTime")
     operator fun div(that: TimeAmount<T>) =

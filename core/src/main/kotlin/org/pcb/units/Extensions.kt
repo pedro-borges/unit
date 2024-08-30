@@ -42,6 +42,11 @@ infix fun <D : Domain, U: Unit<D>> U.or(that: U): U =
     if (scale == that.scale) this
     else throw IllegalStateException("$this and $that differ")
 
+fun convert(vararg units: Pair<Unit<*>, Unit<*>>): BigDecimal =
+    units.fold(1.toBigBigDecimal()) { acc, unit ->
+        acc * unit.first.scale / unit.second.scale
+    }
+
 operator fun BigDecimal.div(other: BigDecimal): BigDecimal = divide(other, 40, HALF_EVEN)
 
 operator fun BigDecimal.times(other: BigDecimal): BigDecimal = multiply(other, DECIMAL128)

@@ -4,6 +4,7 @@ import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.convert
 import org.pcb.units.div
 import org.pcb.units.domain.Length
 import org.pcb.units.domain.Mass
@@ -40,9 +41,9 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                        time = time)
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> plus(that: MomentumAmount<M, L, T>) =
-        MomentumAmount(amount = amount + that.amount * Companion.convert(that.mass to mass,
-                                                                         that.length to length,
-                                                                         time to that.time),
+        MomentumAmount(amount = amount + that.amount * convert(that.mass to mass,
+                                                               that.length to length,
+                                                               time to that.time),
                        mass = mass,
                        length = length,
                        time = time)
@@ -55,9 +56,9 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                        time = time)
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> minus(that: MomentumAmount<M, L, T>) =
-        MomentumAmount(amount = amount - that.amount * Companion.convert(that.mass to mass,
-                                                                         that.length to length,
-                                                                         time to that.time),
+        MomentumAmount(amount = amount - that.amount * convert(that.mass to mass,
+                                                               that.length to length,
+                                                               time to that.time),
                        mass = mass,
                        length = length,
                        time = time)
@@ -74,9 +75,9 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
     // region Scalar
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> div(that: MomentumAmount<M, L, T>) =
-        NaturalAmount(amount = amount / that.amount / Companion.convert(that.mass to mass,
-                                                                        that.length to length,
-                                                                        time to that.time))
+        NaturalAmount(amount = amount / that.amount / convert(that.mass to mass,
+                                                              that.length to length,
+                                                              time to that.time))
 
     @JvmName("divMomentum")
     operator fun div(that: MomentumAmount<M, L, T>) =
@@ -87,7 +88,7 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
     // region Speed
 
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
-        SpeedAmount(amount = amount / that.amount / Companion.convert(that.mass to mass),
+        SpeedAmount(amount = amount / that.amount / convert(that.mass to mass),
                     length = length,
                     time = time)
 
@@ -102,8 +103,8 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
     // region Mass
 
     operator fun <L : Unit<Length>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
-        MassAmount(amount = amount / that.amount / Companion.convert(that.length to length,
-                                                                     time to that.time),
+        MassAmount(amount = amount / that.amount / convert(that.length to length,
+                                                           time to that.time),
                    mass = mass)
 
     @JvmName("divSpeed")
@@ -116,7 +117,7 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
     // region Force
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
-        ForceAmount(amount = amount / that.amount / Companion.convert(that.time to time),
+        ForceAmount(amount = amount / that.amount / convert(that.time to time),
                     mass = mass,
                     length = length,
                     time = time,

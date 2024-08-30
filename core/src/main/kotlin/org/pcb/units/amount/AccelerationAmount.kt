@@ -4,6 +4,7 @@ import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.convert
 import org.pcb.units.div
 import org.pcb.units.domain.Acceleration
 import org.pcb.units.domain.Length
@@ -39,9 +40,9 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
                            time2 = time)
 
     operator fun <L : Unit<Length>, T : Unit<Time>> plus(that: AccelerationAmount<L, T>) =
-        AccelerationAmount(amount = amount + that.amount * Companion.convert(that.length to length,
-                                                                             time to that.time,
-                                                                             time to that.time),
+        AccelerationAmount(amount = amount + that.amount * convert(that.length to length,
+                                                                   time to that.time,
+                                                                   time to that.time),
                            length = length,
                            time = time,
                            time2 = time)
@@ -54,9 +55,9 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
                            time2 = time)
 
     operator fun <L : Unit<Length>, T : Unit<Time>> minus(that: AccelerationAmount<L, T>) =
-        AccelerationAmount(amount = amount - that.amount * Companion.convert(that.length to length,
-                                                                             time to that.time,
-                                                                             time to that.time),
+        AccelerationAmount(amount = amount - that.amount * convert(that.length to length,
+                                                                   time to that.time,
+                                                                   time to that.time),
                            length = length,
                            time = time,
                            time2 = time)
@@ -73,9 +74,9 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
     // region Scalar
 
     operator fun <L : Unit<Length>, T : Unit<Time>> div(that: AccelerationAmount<L, T>) =
-        NaturalAmount(amount = amount / that.amount / Companion.convert(that.length to length,
-                                                                        time to that.time,
-                                                                        time to that.time))
+        NaturalAmount(amount = amount / that.amount / convert(that.length to length,
+                                                              time to that.time,
+                                                              time to that.time))
 
     @JvmName("divAcceleration")
     operator fun div(that: AccelerationAmount<L, T>) =
@@ -86,7 +87,7 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
     // region Speed
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
-        SpeedAmount(amount = amount * that.amount * Companion.convert(that.time to time),
+        SpeedAmount(amount = amount * that.amount * convert(that.time to time),
                     length = length,
                     time = time)
 
@@ -101,8 +102,8 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
     // region Frequency
 
     operator fun <L : Unit<Length>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
-        FrequencyAmount(amount = amount / that.amount * Companion.convert(length to that.length,
-                                                                          that.time to time),
+        FrequencyAmount(amount = amount / that.amount * convert(length to that.length,
+                                                                that.time to time),
                         time = time)
 
     @JvmName("divSpeed")

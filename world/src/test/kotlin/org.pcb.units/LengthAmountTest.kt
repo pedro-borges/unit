@@ -2,9 +2,11 @@ package org.pcb.units
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
+import org.pcb.units.amount.AreaAmount
 import org.pcb.units.amount.LengthAmount
 import org.pcb.units.amount.SpeedAmount
 import org.pcb.units.amount.TimeAmount
+import org.pcb.units.amount.VolumeAmount
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.space.Foot.FOOT
@@ -31,7 +33,7 @@ class LengthAmountTest
     }
 
     @Test
-    fun plusSameSpace()
+    fun plusSameLength()
     {
         assertEquals(
             expected = LengthAmount(1, METER),
@@ -39,7 +41,7 @@ class LengthAmountTest
     }
 
     @Test
-    fun plusOtherSpace()
+    fun plusOtherLength()
     {
         assertEquals(
             expected = LengthAmount(1, FOOT),
@@ -47,7 +49,7 @@ class LengthAmountTest
     }
 
     @Test
-    fun minusSameSpace()
+    fun minusSameLength()
     {
         assertEquals(
             expected = LengthAmount(0, METER),
@@ -55,7 +57,7 @@ class LengthAmountTest
     }
 
     @Test
-    fun minusOtherSpace()
+    fun minusOtherLength()
     {
         assertEquals(
             expected = LengthAmount(0, FOOT),
@@ -63,7 +65,7 @@ class LengthAmountTest
     }
 
     @Test
-    fun divSameSpace()
+    fun divSameLength()
     {
         assertEquals(
             expected = NaturalAmount(1),
@@ -71,11 +73,11 @@ class LengthAmountTest
     }
 
     @Test
-    fun divOtherSpace()
+    fun divOtherLength()
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = LengthAmount(2, FOOT) / LengthAmount(24, INCH))
+            actual = LengthAmount(2, FOOT) / LengthAmount(2 * 12, INCH))
     }
 
     @Test
@@ -84,5 +86,37 @@ class LengthAmountTest
         assertEquals(
             expected = SpeedAmount(1, METER, SECOND),
             actual = LengthAmount(2, METER) / TimeAmount(2, SECOND))
+    }
+
+    @Test
+    fun timesSameLength()
+    {
+        assertEquals(
+            expected = AreaAmount(4, METER, METER),
+            actual = LengthAmount(2, METER) * LengthAmount(2, METER))
+    }
+
+    @Test
+    fun timesOtherLength()
+    {
+        assertEquals(
+            expected = AreaAmount(4, FOOT, FOOT),
+            actual = LengthAmount(2, FOOT) * LengthAmount(2 * 12, INCH))
+    }
+
+    @Test
+    fun timesSameArea()
+    {
+        assertEquals(
+            expected = VolumeAmount(4, METER, METER, METER),
+            actual = LengthAmount(2, METER) * AreaAmount(2, METER, METER))
+    }
+
+    @Test
+    fun timesOtherArea()
+    {
+        assertEquals(
+            expected = VolumeAmount(4, FOOT, FOOT, FOOT),
+            actual = LengthAmount(2, FOOT) * AreaAmount(2 * 12 * 12, INCH, INCH))
     }
 }

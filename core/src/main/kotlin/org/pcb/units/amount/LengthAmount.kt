@@ -4,6 +4,7 @@ import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.convert
 import org.pcb.units.div
 import org.pcb.units.domain.Length
 import org.pcb.units.domain.Scalar
@@ -30,7 +31,7 @@ open class LengthAmount<L : Unit<Length>>(
                      length = length)
 
     operator fun <L : Unit<Length>> plus(that: LengthAmount<L>) =
-        LengthAmount(amount = amount + that.amount * Companion.convert(that.length to length),
+        LengthAmount(amount = amount + that.amount * convert(that.length to length),
                      length = length)
 
     @JvmName("plusLength")
@@ -39,7 +40,7 @@ open class LengthAmount<L : Unit<Length>>(
                      length = length)
 
     operator fun <L : Unit<Length>> minus(that: LengthAmount<L>) =
-        LengthAmount(amount = amount - that.amount * Companion.convert(that.length to length),
+        LengthAmount(amount = amount - that.amount * convert(that.length to length),
                      length = length)
 
     @JvmName("minusLength")
@@ -52,7 +53,7 @@ open class LengthAmount<L : Unit<Length>>(
     // region Scalar
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
-        NaturalAmount(amount = amount / that.amount / Companion.convert(that.length to length))
+        NaturalAmount(amount = amount / that.amount / convert(that.length to length))
 
     @JvmName("divLength")
     operator fun div(that: LengthAmount<L>) =
@@ -66,6 +67,39 @@ open class LengthAmount<L : Unit<Length>>(
         SpeedAmount(amount = amount / that.amount,
                     length = length,
                     time = that.time)
+
+    // endregion
+
+    // region Area
+
+    operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
+        AreaAmount(amount = amount * that.amount * convert(that.length to length),
+                   length = length,
+                   length2 = length)
+
+    @JvmName("timesLength")
+    operator fun times(that: LengthAmount<L>) =
+        AreaAmount(amount = amount * that.amount,
+                   length = length,
+                   length2 = length)
+
+    // endregion
+
+    // region Volume
+
+    operator fun <L : Unit<Length>> times(that: AreaAmount<L>) =
+        VolumeAmount(amount = amount * that.amount * convert(that.length to length,
+                                                             that.length to length),
+                     length = length,
+                     length2 = length,
+                     length3 = length)
+
+    @JvmName("timesArea")
+    operator fun times(that: AreaAmount<L>) =
+        VolumeAmount(amount = amount * that.amount,
+                     length = length,
+                     length2 = length,
+                     length3 = length)
 
     // endregion
 }

@@ -4,6 +4,7 @@ import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.convert
 import org.pcb.units.div
 import org.pcb.units.domain.Currency
 import org.pcb.units.domain.Rent
@@ -35,7 +36,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
                    time = time)
 
     operator fun <T : Unit<Time>> plus(that: RentAmount<C, T>) =
-        RentAmount(amount = amount + that.amount * Companion.convert(that.time to time),
+        RentAmount(amount = amount + that.amount * convert(that.time to time),
                    currency = currency,
                    time = time)
 
@@ -46,7 +47,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
                    time = time)
 
     operator fun <T : Unit<Time>> minus(that: RentAmount<C, T>) =
-        RentAmount(amount = amount - that.amount * Companion.convert(that.time to time),
+        RentAmount(amount = amount - that.amount * convert(that.time to time),
                    currency = currency,
                    time = time)
 
@@ -61,7 +62,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
     // region Scalar
 
     operator fun <T : Unit<Time>> div(that: RentAmount<C, T>) =
-        NaturalAmount(amount = amount / that.amount / Companion.convert(that.time to time))
+        NaturalAmount(amount = amount / that.amount / convert(that.time to time))
 
     @JvmName("divRent")
     operator fun div(that: RentAmount<C, T>) =
@@ -72,7 +73,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
     // region Currency
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
-        CurrencyAmount(amount = amount * that.amount * Companion.convert(that.time to time),
+        CurrencyAmount(amount = amount * that.amount * convert(that.time to time),
                        currency = currency)
 
     @JvmName("timesTime")

@@ -4,6 +4,7 @@ import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.convert
 import org.pcb.units.div
 import org.pcb.units.domain.Length
 import org.pcb.units.domain.Scalar
@@ -35,8 +36,8 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
                     time = time)
 
     operator fun <L : Unit<Length>, T : Unit<Time>> plus(that: SpeedAmount<L, T>) =
-        SpeedAmount(amount = amount + that.amount * Companion.convert(that.length to length,
-                                                                      time to that.time),
+        SpeedAmount(amount = amount + that.amount * convert(that.length to length,
+                                                            time to that.time),
                     length = length,
                     time = time)
 
@@ -47,8 +48,8 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
                     time = time)
 
     operator fun <L : Unit<Length>, T : Unit<Time>> minus(that: SpeedAmount<L, T>) =
-        SpeedAmount(amount = amount - that.amount * Companion.convert(that.length to length,
-                                                                      time to that.time),
+        SpeedAmount(amount = amount - that.amount * convert(that.length to length,
+                                                            time to that.time),
                     length = length,
                     time = time)
 
@@ -62,7 +63,7 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
 
     // region Scalar
     operator fun <L : Unit<Length>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
-        NaturalAmount(amount = amount / that.amount / Companion.convert(that.length to length, time to that.time))
+        NaturalAmount(amount = amount / that.amount / convert(that.length to length, time to that.time))
 
     @JvmName("divSpeed")
     operator fun div(that: SpeedAmount<L, T>) =
@@ -73,7 +74,7 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
     // region Length
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
-        LengthAmount(amount = amount * that.amount * Companion.convert(that.time to time),
+        LengthAmount(amount = amount * that.amount * convert(that.time to time),
                      length = length)
 
     @JvmName("timesTime")
@@ -86,7 +87,7 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
     // region Acceleration
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
-        AccelerationAmount(amount = amount / that.amount / Companion.convert(that.time to time),
+        AccelerationAmount(amount = amount / that.amount / convert(that.time to time),
                            length = length,
                            time = time,
                            time2 = time)
@@ -96,7 +97,7 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
     // region Frequency
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
-        FrequencyAmount(amount = amount / that.amount / Companion.convert(that.length to length),
+        FrequencyAmount(amount = amount / that.amount / convert(that.length to length),
                         time = time)
 
     @JvmName("divLength")
