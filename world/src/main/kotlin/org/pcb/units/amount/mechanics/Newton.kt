@@ -2,8 +2,8 @@ package org.pcb.units.amount.mechanics
 
 import org.pcb.units.Unit
 import org.pcb.units.amount.ForceAmount
+import org.pcb.units.amount.length.Meter.METER
 import org.pcb.units.amount.mass.Gram.GRAM
-import org.pcb.units.amount.space.Meter.METER
 import org.pcb.units.amount.time.Second.SECOND
 import org.pcb.units.domain.Force
 import org.pcb.units.toBigBigDecimal

@@ -1,8 +1,8 @@
-package org.pcb.units.amount.space
+package org.pcb.units.amount.length
 
 import org.pcb.units.Unit
 import org.pcb.units.amount.LengthAmount
-import org.pcb.units.amount.space.Foot.FOOT
+import org.pcb.units.amount.length.Foot.FOOT
 import org.pcb.units.domain.Length
 import org.pcb.units.toBigBigDecimal
 

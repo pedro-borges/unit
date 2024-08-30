@@ -6,11 +6,11 @@ import org.pcb.units.amount.LengthAmount
 import org.pcb.units.amount.PaceAmount
 import org.pcb.units.amount.SpeedAmount
 import org.pcb.units.amount.TimeAmount
+import org.pcb.units.amount.length.Foot.FOOT
+import org.pcb.units.amount.length.Inch.INCH
+import org.pcb.units.amount.length.Meter.METER
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.amount.scalar.PercentAmount
-import org.pcb.units.amount.space.Foot.FOOT
-import org.pcb.units.amount.space.Inch.INCH
-import org.pcb.units.amount.space.Meter.METER
 import org.pcb.units.amount.time.Minute.MINUTE
 import org.pcb.units.amount.time.Second.SECOND
 

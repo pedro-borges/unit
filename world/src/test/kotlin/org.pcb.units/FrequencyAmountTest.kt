@@ -10,9 +10,9 @@ import org.pcb.units.amount.LengthAmount
 import org.pcb.units.amount.RentAmount
 import org.pcb.units.amount.SpeedAmount
 import org.pcb.units.amount.finance.Gbp.GBP
+import org.pcb.units.amount.length.Meter.METER
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.amount.scalar.PercentAmount
-import org.pcb.units.amount.space.Meter.METER
 import org.pcb.units.amount.time.Day.DAY
 import org.pcb.units.amount.time.Minute.MINUTE
 import org.pcb.units.amount.time.Second.SECOND
