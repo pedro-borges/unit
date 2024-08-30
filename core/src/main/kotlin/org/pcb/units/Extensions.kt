@@ -47,6 +47,6 @@ fun convert(vararg units: Pair<Unit<*>, Unit<*>>): BigDecimal =
         acc * unit.first.scale / unit.second.scale
     }
 
-operator fun BigDecimal.div(other: BigDecimal): BigDecimal = divide(other, 40, HALF_EVEN)
+operator fun BigDecimal.div(other: BigDecimal): BigDecimal = divide(other, 42, HALF_EVEN)
 
 operator fun BigDecimal.times(other: BigDecimal): BigDecimal = multiply(other, DECIMAL128)

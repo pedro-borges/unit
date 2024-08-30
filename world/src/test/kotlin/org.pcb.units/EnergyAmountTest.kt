@@ -2,16 +2,21 @@ package org.pcb.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.units.amount.ElectricChargeAmount
+import org.pcb.units.amount.ElectricTensionAmount
 import org.pcb.units.amount.EnergyAmount
 import org.pcb.units.amount.ForceAmount
 import org.pcb.units.amount.LengthAmount
 import org.pcb.units.amount.cannon.Kilogram.KILOGRAM
 import org.pcb.units.amount.cannon.Meter.METER
 import org.pcb.units.amount.cannon.Second.SECOND
+import org.pcb.units.amount.electromagnetism.Coulomb.COULOMB
+import org.pcb.units.amount.electromagnetism.Volt.VOLT
 import org.pcb.units.amount.length.Foot.FOOT
 import org.pcb.units.amount.length.Inch.INCH
 import org.pcb.units.amount.mass.Ounce.OUNCE
 import org.pcb.units.amount.mass.Pound.POUND
+import org.pcb.units.amount.mechanics.Joule.JOULE
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.amount.scalar.PercentAmount
 import org.pcb.units.amount.time.Minute.MINUTE
@@ -29,27 +34,35 @@ class EnergyAmountTest
     }
 
     @Test
+    fun ownUnit()
+    {
+        assertEquals(
+            expected = EnergyAmount(1, KILOGRAM, METER, METER, SECOND, SECOND),
+            actual = EnergyAmount(1, JOULE))
+    }
+
+    @Test
     fun timesScalar()
     {
         assertEquals(
-            expected = EnergyAmount(4, KILOGRAM, METER, METER, SECOND, SECOND),
-            actual = EnergyAmount(2, KILOGRAM, METER, METER, SECOND, SECOND) * PercentAmount(2 * 100))
+            expected = EnergyAmount(4, JOULE),
+            actual = EnergyAmount(2, JOULE) * PercentAmount(2 * 100))
     }
 
     @Test
     fun divScalar()
     {
         assertEquals(
-            expected = EnergyAmount(1, KILOGRAM, METER, METER, SECOND, SECOND),
-            actual = EnergyAmount(2, KILOGRAM, METER, METER, SECOND, SECOND) / PercentAmount(2 * 100))
+            expected = EnergyAmount(1, JOULE),
+            actual = EnergyAmount(2, JOULE) / PercentAmount(2 * 100))
     }
 
     @Test
     fun plusSameEnergy()
     {
         assertEquals(
-            expected = EnergyAmount(1, KILOGRAM, METER, METER, SECOND, SECOND),
-            actual = EnergyAmount(0, KILOGRAM, METER, METER, SECOND, SECOND) + EnergyAmount(1, KILOGRAM, METER, METER, SECOND, SECOND))
+            expected = EnergyAmount(1, JOULE),
+            actual = EnergyAmount(0, JOULE) + EnergyAmount(1, JOULE))
     }
 
     @Test
@@ -64,8 +77,8 @@ class EnergyAmountTest
     fun minusSameEnergy()
     {
         assertEquals(
-            expected = EnergyAmount(0, KILOGRAM, METER, METER, SECOND, SECOND),
-            actual = EnergyAmount(1, KILOGRAM, METER, METER, SECOND, SECOND) - EnergyAmount(1, KILOGRAM, METER, METER, SECOND, SECOND))
+            expected = EnergyAmount(0, JOULE),
+            actual = EnergyAmount(1, JOULE) - EnergyAmount(1, JOULE))
     }
 
     @Test
@@ -81,7 +94,7 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = EnergyAmount(2, KILOGRAM, METER, METER, SECOND, SECOND) / EnergyAmount(2, KILOGRAM, METER, METER, SECOND, SECOND))
+            actual = EnergyAmount(2, JOULE) / EnergyAmount(2, JOULE))
     }
 
     @Test
@@ -122,5 +135,13 @@ class EnergyAmountTest
         assertEquals(
             expected = LengthAmount(1, FOOT),
             actual = EnergyAmount(2, POUND, FOOT, FOOT, SECOND, SECOND) / ForceAmount(2 * 16 * 12 * 60 * 60, OUNCE, INCH, MINUTE, MINUTE))
+    }
+
+    @Test
+    fun divElectricCharge()
+    {
+        assertEquals(
+            expected = ElectricTensionAmount(1, VOLT),
+            actual = EnergyAmount(2, JOULE) / ElectricChargeAmount(2, COULOMB))
     }
 }

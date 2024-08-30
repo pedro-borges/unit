@@ -3,9 +3,14 @@ package org.pcb.units.amount
 import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
+import org.pcb.units.amount.cannon.Kilogram.KILOGRAM
+import org.pcb.units.amount.cannon.Meter.METER
+import org.pcb.units.amount.cannon.Second.SECOND
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.convert
 import org.pcb.units.div
+import org.pcb.units.domain.ElectricCurrent
+import org.pcb.units.domain.Energy
 import org.pcb.units.domain.Force
 import org.pcb.units.domain.Length
 import org.pcb.units.domain.Mass
@@ -29,6 +34,17 @@ open class EnergyAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                                        length to 2,
                                        time to -2)))
 {
+    companion object
+    {
+        operator fun invoke(amount: Number, energy: Unit<Energy>) =
+            EnergyAmount(amount = amount.toBigBigDecimal() * energy.scale,
+                         mass = KILOGRAM,
+                         length = METER,
+                         length2 = METER,
+                         time = SECOND,
+                         time2 = SECOND)
+    }
+
     // region Energy
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
@@ -139,6 +155,20 @@ open class EnergyAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
     operator fun div(that: ForceAmount<M, L, T>) =
         LengthAmount(amount = amount / that.amount,
                      length = length)
+
+    // endregion
+
+    // region ElectricTension
+
+    operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricChargeAmount<EC, T>) =
+        ElectricTensionAmount(amount = amount / that.amount / convert(that.time to time),
+                              mass = mass,
+                              length = length,
+                              length2 = length,
+                              time = time,
+                              time2 = time,
+                              time3 = time,
+                              electricCurrent = that.electricCurrent)
 
     // endregion
 }

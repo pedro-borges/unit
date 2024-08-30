@@ -44,24 +44,24 @@ class ForceAmountTest
     fun timesScalar()
     {
         assertEquals(
-            expected = ForceAmount(4, KILOGRAM, METER, SECOND, SECOND),
-            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) * PercentAmount(2 * 100))
+            expected = ForceAmount(4, NEWTON),
+            actual = ForceAmount(2, NEWTON) * PercentAmount(2 * 100))
     }
 
     @Test
     fun divScalar()
     {
         assertEquals(
-            expected = ForceAmount(1, KILOGRAM, METER, SECOND, SECOND),
-            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) / PercentAmount(2 * 100))
+            expected = ForceAmount(1, NEWTON),
+            actual = ForceAmount(2, NEWTON) / PercentAmount(2 * 100))
     }
 
     @Test
     fun plusSameForce()
     {
         assertEquals(
-            expected = ForceAmount(1, KILOGRAM, METER, SECOND, SECOND),
-            actual = ForceAmount(0, KILOGRAM, METER, SECOND, SECOND) + ForceAmount(1, KILOGRAM, METER, SECOND, SECOND))
+            expected = ForceAmount(1, NEWTON),
+            actual = ForceAmount(0, NEWTON) + ForceAmount(1, NEWTON))
     }
 
     @Test
@@ -69,15 +69,16 @@ class ForceAmountTest
     {
         assertEquals(
             expected = ForceAmount(1, POUND, FOOT, SECOND, SECOND),
-            actual = ForceAmount(0, POUND, FOOT, SECOND, SECOND) + ForceAmount(16 * 12 * 60 * 60, OUNCE, INCH, MINUTE, MINUTE))
+            actual = ForceAmount(0, POUND, FOOT, SECOND, SECOND) +
+                     ForceAmount(16 * 12 * 60 * 60, OUNCE, INCH, MINUTE, MINUTE))
     }
 
     @Test
     fun minusSameForce()
     {
         assertEquals(
-            expected = ForceAmount(0, KILOGRAM, METER, SECOND, SECOND),
-            actual = ForceAmount(1, KILOGRAM, METER, SECOND, SECOND) - ForceAmount(1, KILOGRAM, METER, SECOND, SECOND))
+            expected = ForceAmount(0, NEWTON),
+            actual = ForceAmount(1, NEWTON) - ForceAmount(1, NEWTON))
     }
 
     @Test
@@ -85,7 +86,8 @@ class ForceAmountTest
     {
         assertEquals(
             expected = ForceAmount(0, POUND, FOOT, SECOND, SECOND),
-            actual = ForceAmount(1, POUND, FOOT, SECOND, SECOND) - ForceAmount(16 * 12 * 60 * 60, OUNCE, INCH, MINUTE, MINUTE))
+            actual = ForceAmount(1, POUND, FOOT, SECOND, SECOND) -
+                     ForceAmount(16 * 12 * 60 * 60, OUNCE, INCH, MINUTE, MINUTE))
     }
 
     @Test
@@ -93,7 +95,7 @@ class ForceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = ForceAmount(2, KILOGRAM, METER, SECOND, SECOND) / ForceAmount(2, KILOGRAM, METER, SECOND, SECOND))
+            actual = ForceAmount(2, NEWTON) / ForceAmount(2, NEWTON))
     }
 
     @Test
@@ -101,7 +103,8 @@ class ForceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = ForceAmount(2, POUND, FOOT, SECOND, SECOND) / ForceAmount(2 * 16 * 12 * 60 * 60, OUNCE, INCH, MINUTE, MINUTE))
+            actual = ForceAmount(2, POUND, FOOT, SECOND, SECOND) /
+                     ForceAmount(2 * 16 * 12 * 60 * 60, OUNCE, INCH, MINUTE, MINUTE))
     }
 
     @Test

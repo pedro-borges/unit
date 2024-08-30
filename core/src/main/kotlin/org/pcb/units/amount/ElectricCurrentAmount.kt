@@ -20,7 +20,7 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
                                   domain = ElectricCurrent::class,
                                   units = listOf(electricCurrent to 1)))
 {
-    // region Time
+    // region ElectricCurrent
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricCurrentAmount(amount = amount * that.amount * that.unit.scale,

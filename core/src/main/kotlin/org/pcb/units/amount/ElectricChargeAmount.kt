@@ -33,7 +33,7 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
                                  time = SECOND)
     }
 
-    // region Time
+    // region ElectricCharge
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricChargeAmount(amount = amount * that.amount * that.unit.scale,
