@@ -66,7 +66,8 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
         ForceAmount(amount = that.amount * that.amount,
                     mass = mass,
                     space = that.space,
-                    time = that.time)
+                    time1 = that.time1,
+                    time2 = that.time2)
 
     // endregion
 }

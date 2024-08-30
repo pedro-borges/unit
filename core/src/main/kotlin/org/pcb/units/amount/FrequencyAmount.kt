@@ -72,7 +72,28 @@ open class FrequencyAmount<T : Unit<Time>>(
     operator fun <S : Unit<Space>, T : Unit<Time>> times(that: SpeedAmount<S, T>) =
         AccelerationAmount(amount = amount * that.amount * convert(that.time to time),
                            space = that.space,
-                           time = that.time)
+                           time1 = time,
+                           time2 = time)
+
+    @JvmName("timesSpeed")
+    operator fun <S : Unit<Space>> times(that: SpeedAmount<S, T>) =
+        AccelerationAmount(amount = amount * that.amount,
+                           space = that.space,
+                           time1 = time,
+                           time2 = time)
+
+    // endregion
+
+    // region Currency
+
+    operator fun <C : Unit<Currency>, T : Unit<Time>> times(that: DebtAmount<C, T>) =
+        CurrencyAmount(amount = that.amount / amount / convert(that.time to time),
+                       currency = that.currency)
+
+    @JvmName("timesDebt")
+    operator fun <C : Unit<Currency>> times(that: DebtAmount<C, T>) =
+        CurrencyAmount(amount = that.amount / amount,
+                       currency = that.currency)
 
     // endregion
 

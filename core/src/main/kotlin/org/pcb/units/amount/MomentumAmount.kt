@@ -105,14 +105,16 @@ open class MomentumAmount<M : Unit<Mass>, S : Unit<Space>, T : Unit<Time>>(
         ForceAmount(amount = amount / that.amount / convert(that.time to time),
                     mass = mass,
                     space = space,
-                    time = time)
+                    time1 = time,
+                    time2 = time)
 
     @JvmName("divTime")
     operator fun div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount,
                     mass = mass,
                     space = space,
-                    time = time)
+                    time1 = time,
+                    time2 = time)
 
     // endregion
 }

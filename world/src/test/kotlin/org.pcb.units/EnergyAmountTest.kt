@@ -1,0 +1,99 @@
+package org.pcb.units
+
+import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
+import org.pcb.units.amount.EnergyAmount
+import org.pcb.units.amount.ForceAmount
+import org.pcb.units.amount.SpaceAmount
+import org.pcb.units.amount.mass.Gram.GRAM
+import org.pcb.units.amount.mass.Ounce.OUNCE
+import org.pcb.units.amount.mass.Pound.POUND
+import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.amount.space.Foot.FOOT
+import org.pcb.units.amount.space.Inch.INCH
+import org.pcb.units.amount.space.Meter.METER
+import org.pcb.units.amount.time.Minute.MINUTE
+import org.pcb.units.amount.time.Second.SECOND
+
+class EnergyAmountTest
+{
+    @Test
+    fun plusSameEnergy()
+    {
+        assertEquals(
+            expected = EnergyAmount(1, GRAM, METER, METER, SECOND, SECOND),
+            actual = EnergyAmount(0, GRAM, METER, METER, SECOND, SECOND) + EnergyAmount(1, GRAM, METER, METER, SECOND, SECOND))
+    }
+
+    @Test
+    fun plusOtherEnergy()
+    {
+        assertEquals(
+            expected = EnergyAmount(1, POUND, FOOT, FOOT, SECOND, SECOND),
+            actual = EnergyAmount(0, POUND, FOOT, FOOT, SECOND, SECOND) + EnergyAmount(16 * 12 * 12 * 60 * 60, OUNCE, INCH, INCH, MINUTE, MINUTE))
+    }
+
+    @Test
+    fun minusSameEnergy()
+    {
+        assertEquals(
+            expected = EnergyAmount(0, GRAM, METER, METER, SECOND, SECOND),
+            actual = EnergyAmount(1, GRAM, METER, METER, SECOND, SECOND) - EnergyAmount(1, GRAM, METER, METER, SECOND, SECOND))
+    }
+
+    @Test
+    fun minusOtherEnergy()
+    {
+        assertEquals(
+            expected = EnergyAmount(0, POUND, FOOT, FOOT, SECOND, SECOND),
+            actual = EnergyAmount(1, POUND, FOOT, FOOT, SECOND, SECOND) - EnergyAmount(16 * 12 * 12 * 60 * 60, OUNCE, INCH, INCH, MINUTE, MINUTE))
+    }
+
+    @Test
+    fun divSameEnergy()
+    {
+        assertEquals(
+            expected = NaturalAmount(1),
+            actual = EnergyAmount(2, GRAM, METER, METER, SECOND, SECOND) / EnergyAmount(2, GRAM, METER, METER, SECOND, SECOND))
+    }
+
+    @Test
+    fun divOtherEnergy()
+    {
+        assertEquals(
+            expected = NaturalAmount(1),
+            actual = EnergyAmount(2, POUND, FOOT, FOOT, SECOND, SECOND) / EnergyAmount(2 * 16 * 12 * 12 * 60 * 60, OUNCE, INCH, INCH, MINUTE, MINUTE))
+    }
+
+    @Test
+    fun divSameSpace()
+    {
+        assertEquals(
+            expected = ForceAmount(1, GRAM, METER, SECOND, SECOND),
+            actual = EnergyAmount(2, GRAM, METER, METER, SECOND, SECOND) / SpaceAmount(2, METER))
+    }
+
+    @Test
+    fun divOtherSpace()
+    {
+        assertEquals(
+            expected = ForceAmount(1, GRAM, FOOT, SECOND, SECOND),
+            actual = EnergyAmount(2, GRAM, FOOT, FOOT, SECOND, SECOND) / SpaceAmount(2 * 12, INCH))
+    }
+
+    @Test
+    fun divSameForce()
+    {
+        assertEquals(
+            expected = SpaceAmount(1, METER),
+            actual = EnergyAmount(2, GRAM, METER, METER, SECOND, SECOND) / ForceAmount(2, GRAM, METER, SECOND, SECOND))
+    }
+
+    @Test
+    fun divOtherForce()
+    {
+        assertEquals(
+            expected = SpaceAmount(1, FOOT),
+            actual = EnergyAmount(2, POUND, FOOT, FOOT, SECOND, SECOND) / ForceAmount(2 * 16 * 12 * 60 * 60, OUNCE, INCH, MINUTE, MINUTE))
+    }
+}

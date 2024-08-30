@@ -60,12 +60,21 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
     // region Currency
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
-        CurrencyAmount(amount = amount * that.amount * convert(that.time to time),
+        CurrencyAmount(amount = amount / that.amount / convert(that.time to time),
                        currency = currency)
 
     @JvmName("divTime")
     operator fun div(that: TimeAmount<T>) =
-        CurrencyAmount(amount = amount * that.amount,
+        CurrencyAmount(amount = amount / that.amount,
+                       currency = currency)
+
+    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
+        CurrencyAmount(amount = amount / that.amount / convert(that.time to time),
+                       currency = currency)
+
+    @JvmName("timesFrequency")
+    operator fun times(that: FrequencyAmount<T>) =
+        CurrencyAmount(amount = amount / that.amount,
                        currency = currency)
 
     // endregion

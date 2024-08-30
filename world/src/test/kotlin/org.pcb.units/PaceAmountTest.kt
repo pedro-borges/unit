@@ -28,7 +28,7 @@ class PaceAmountTest
     {
         assertEquals(
             expected = PaceAmount(1, MINUTE, FOOT),
-            actual = PaceAmount(0, MINUTE, FOOT) + PaceAmount(5, SECOND, INCH))
+        actual = PaceAmount(0, MINUTE, FOOT) + PaceAmount(60 / 12, SECOND, INCH))
     }
 
     @Test
@@ -44,7 +44,7 @@ class PaceAmountTest
     {
         assertEquals(
             expected = PaceAmount(0, MINUTE, FOOT),
-            actual = PaceAmount(1, MINUTE, FOOT) - PaceAmount(5, SECOND, INCH))
+            actual = PaceAmount(1, MINUTE, FOOT) - PaceAmount(60 / 12, SECOND, INCH))
     }
 
     @Test
@@ -60,14 +60,14 @@ class PaceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = PaceAmount(2, MINUTE, FOOT) / PaceAmount(10, SECOND, INCH))
+            actual = PaceAmount(2, MINUTE, FOOT) / PaceAmount(2 * 60 / 12, SECOND, INCH))
     }
 
     @Test
     fun timesSameSpeed()
     {
         assertEquals(
-            expected = NaturalAmount(4),
+            expected = NaturalAmount(1),
             actual = PaceAmount(2, SECOND, METER) * SpeedAmount(2, METER, SECOND))
     }
 
@@ -75,8 +75,8 @@ class PaceAmountTest
     fun timesOtherSpeed()
     {
         assertEquals(
-            expected = NaturalAmount(4),
-            actual = PaceAmount(2, MINUTE, FOOT) * SpeedAmount(10, INCH, SECOND))
+            expected = NaturalAmount(1),
+            actual = PaceAmount(2, MINUTE, FOOT) * SpeedAmount(2 * 60 / 12, INCH, SECOND))
     }
 
     @Test

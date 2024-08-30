@@ -3,6 +3,7 @@ package org.pcb.units
 import java.math.BigDecimal
 import java.math.MathContext.DECIMAL128
 import java.math.RoundingMode.HALF_EVEN
+import org.pcb.units.domain.Domain
 
 fun Number.toBigBigDecimal(): BigDecimal =
     when
@@ -36,6 +37,10 @@ fun Collection<Pair<Unit<*>, Int>>.sumToMap(): Map<Unit<*>, Int>
 
     return result
 }
+
+infix fun <D : Domain, U: Unit<D>> U.or(that: U): U =
+    if (cannon == that.cannon) this
+    else throw IllegalStateException("$this and $that differ")
 
 operator fun BigDecimal.div(other: BigDecimal): BigDecimal = divide(other, 40, HALF_EVEN)
 

@@ -31,8 +31,8 @@ class MomentumAmountTest
     fun plusOtherMomentum()
     {
         assertEquals(
-            expected = MomentumAmount(1, POUND, FOOT, MINUTE),
-            actual = MomentumAmount(0, POUND, FOOT, MINUTE) + MomentumAmount(3.2, OUNCE, INCH, SECOND))
+            expected = MomentumAmount(1, POUND, FOOT, SECOND),
+            actual = MomentumAmount(0, POUND, FOOT, SECOND) + MomentumAmount(16 * 12 * 60, OUNCE, INCH, MINUTE))
     }
 
     @Test
@@ -47,8 +47,8 @@ class MomentumAmountTest
     fun minusOtherMomentum()
     {
         assertEquals(
-            expected = MomentumAmount(0, POUND, FOOT, MINUTE),
-            actual = MomentumAmount(1, POUND, FOOT, MINUTE) - MomentumAmount(3.2, OUNCE, INCH, SECOND))
+            expected = MomentumAmount(0, POUND, FOOT, SECOND),
+            actual = MomentumAmount(1, POUND, FOOT, SECOND) - MomentumAmount(16 * 12 * 60, OUNCE, INCH, MINUTE))
     }
 
     @Test
@@ -64,7 +64,7 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = MomentumAmount(2, POUND, FOOT, MINUTE) / MomentumAmount(6.4, OUNCE, INCH, SECOND))
+            actual = MomentumAmount(2, POUND, FOOT, SECOND) / MomentumAmount(2 * 16 * 12 * 60, OUNCE, INCH, MINUTE))
     }
 
     @Test
@@ -80,7 +80,7 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = SpeedAmount(1, METER, SECOND),
-            actual = MomentumAmount(2, POUND, METER, SECOND) / MassAmount(32, OUNCE))
+            actual = MomentumAmount(2, POUND, METER, SECOND) / MassAmount(2 * 16, OUNCE))
     }
 
     @Test
@@ -96,14 +96,14 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MassAmount(1, GRAM),
-            actual = MomentumAmount(2, GRAM, FOOT, SECOND) / SpeedAmount(1440, INCH, MINUTE))
+            actual = MomentumAmount(2, GRAM, FOOT, SECOND) / SpeedAmount(2 * 12 * 60, INCH, MINUTE))
     }
 
     @Test
     fun divSameTime()
     {
         assertEquals(
-            expected = ForceAmount(1, GRAM, METER, SECOND),
+            expected = ForceAmount(1, GRAM, METER, SECOND, SECOND),
             actual = MomentumAmount(2, GRAM, METER, SECOND) / TimeAmount(2, SECOND))
     }
 
@@ -111,7 +111,7 @@ class MomentumAmountTest
     fun divOtherTime()
     {
         assertEquals(
-            expected = ForceAmount(1, GRAM, METER, MINUTE),
-            actual = MomentumAmount(2, GRAM, METER, MINUTE) / TimeAmount(120, SECOND))
+            expected = ForceAmount(1, GRAM, METER, MINUTE, MINUTE),
+            actual = MomentumAmount(2, GRAM, METER, MINUTE) / TimeAmount(2 * 60, SECOND))
     }
 }

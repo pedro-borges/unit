@@ -59,11 +59,11 @@ open class PaceAmount<T : Unit<Time>, S : Unit<Space>>(
         NaturalAmount(amount = amount / that.amount)
 
     operator fun <S : Unit<Space>, T : Unit<Time>> times(that: SpeedAmount<S, T>) =
-        NaturalAmount(amount = amount * that.amount * convert(that.time to time,
+        NaturalAmount(amount = amount / that.amount / convert(that.time to time,
                                                               space to that.space))
 
     @JvmName("timesSpeed")
-    operator fun div(that: SpeedAmount<S, T>) =
+    operator fun times(that: SpeedAmount<S, T>) =
         NaturalAmount(amount = amount / that.amount)
 
     // endregion

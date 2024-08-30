@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.units.amount.AccelerationAmount
 import org.pcb.units.amount.CurrencyAmount
+import org.pcb.units.amount.DebtAmount
 import org.pcb.units.amount.FrequencyAmount
 import org.pcb.units.amount.RentAmount
 import org.pcb.units.amount.SpaceAmount
@@ -74,11 +75,35 @@ class FrequencyAmountTest
     }
 
     @Test
-    fun timesSpeed()
+    fun timesSameSpeed()
     {
         assertEquals(
-            expected = AccelerationAmount(4, METER, SECOND),
+            expected = AccelerationAmount(4, METER, SECOND, SECOND),
             actual = FrequencyAmount(2, SECOND) * SpeedAmount(2, METER, SECOND))
+    }
+
+    @Test
+    fun timesOtherSpeed()
+    {
+        assertEquals(
+            expected = AccelerationAmount(4, METER, MINUTE, MINUTE),
+            actual = FrequencyAmount(2, MINUTE) * SpeedAmount(2 * 60, METER, SECOND))
+    }
+
+    @Test
+    fun timesSameDebt()
+    {
+        assertEquals(
+            expected = CurrencyAmount(1, GBP),
+            actual = FrequencyAmount(2, SECOND) * DebtAmount(2, GBP, SECOND))
+    }
+
+    @Test
+    fun timesOtherDebt()
+    {
+        assertEquals(
+            expected = CurrencyAmount(1, GBP),
+            actual = FrequencyAmount(2 * 60, MINUTE) * DebtAmount(2, GBP, SECOND))
     }
 
     @Test

@@ -22,32 +22,32 @@ class AcceleartionAmountTest
     fun plusSameAcceleration()
     {
         assertEquals(
-            expected = AccelerationAmount(1, METER, SECOND),
-            actual = AccelerationAmount(0, METER, SECOND) + AccelerationAmount(1, METER, SECOND))
+            expected = AccelerationAmount(1, METER, SECOND, SECOND),
+            actual = AccelerationAmount(0, METER, SECOND, SECOND) + AccelerationAmount(1, METER, SECOND, SECOND))
     }
 
     @Test
     fun plusOtherAcceleration()
     {
         assertEquals(
-            expected = AccelerationAmount(1, FOOT, SECOND),
-            actual = AccelerationAmount(0, FOOT, SECOND) + AccelerationAmount(43200, INCH, MINUTE))
+            expected = AccelerationAmount(1, FOOT, SECOND, SECOND),
+            actual = AccelerationAmount(0, FOOT, SECOND, SECOND) + AccelerationAmount(12 * 60 * 60, INCH, MINUTE, MINUTE))
     }
 
     @Test
     fun minusSameAcceleration()
     {
         assertEquals(
-            expected = AccelerationAmount(0, METER, SECOND),
-            actual = AccelerationAmount(1, METER, SECOND) - AccelerationAmount(1, METER, SECOND))
+            expected = AccelerationAmount(0, METER, SECOND, SECOND),
+            actual = AccelerationAmount(1, METER, SECOND, SECOND) - AccelerationAmount(1, METER, SECOND, SECOND))
     }
 
     @Test
     fun minusOtherAcceleration()
     {
         assertEquals(
-            expected = AccelerationAmount(0, FOOT, SECOND),
-            actual = AccelerationAmount(1, FOOT, SECOND) - AccelerationAmount(43200, INCH, MINUTE))
+            expected = AccelerationAmount(0, FOOT, SECOND, SECOND),
+            actual = AccelerationAmount(1, FOOT, SECOND, SECOND) - AccelerationAmount(12 * 60 * 60, INCH, MINUTE, MINUTE))
     }
 
     @Test
@@ -55,7 +55,7 @@ class AcceleartionAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = AccelerationAmount(2, METER, SECOND) / AccelerationAmount(2, METER, SECOND))
+            actual = AccelerationAmount(2, METER, SECOND, SECOND) / AccelerationAmount(2, METER, SECOND, SECOND))
     }
 
     @Test
@@ -63,7 +63,7 @@ class AcceleartionAmountTest
     {
         assertEquals(
             expected = NaturalAmount(1),
-            actual = AccelerationAmount(2, FOOT, SECOND) / AccelerationAmount(86400, INCH, MINUTE))
+            actual = AccelerationAmount(2, FOOT, SECOND, SECOND) / AccelerationAmount(2 * 12 * 60 * 60, INCH, MINUTE, MINUTE))
     }
 
     @Test
@@ -71,7 +71,7 @@ class AcceleartionAmountTest
     {
         assertEquals(
             expected = SpeedAmount(4, METER, SECOND),
-            actual = AccelerationAmount(2, METER, SECOND) * TimeAmount(2, SECOND))
+            actual = AccelerationAmount(2, METER, SECOND, SECOND) * TimeAmount(2, SECOND))
     }
 
     @Test
@@ -79,32 +79,30 @@ class AcceleartionAmountTest
     {
         assertEquals(
             expected = SpeedAmount(240, METER, SECOND),
-            actual = AccelerationAmount(2, METER, SECOND) * TimeAmount(2, MINUTE))
+            actual = AccelerationAmount(2, METER, SECOND, SECOND) * TimeAmount(2, MINUTE))
     }
 
     @Test
-    fun timesSameSpeed()
+    fun divSameSpeed()
     {
         assertEquals(
-            expected = FrequencyAmount(4, SECOND),
-            actual = AccelerationAmount(2, METER, SECOND) * SpeedAmount(2, METER, SECOND))
+            expected = FrequencyAmount(1, SECOND),
+            actual = AccelerationAmount(2, METER, SECOND, SECOND) / SpeedAmount(2, METER, SECOND))
     }
 
     @Test
-    fun timesOtherSpeed()
+    fun divOtherSpeed()
     {
         assertEquals(
-            expected = FrequencyAmount(4, SECOND),
-            actual = AccelerationAmount(2, FOOT, SECOND) * SpeedAmount(86400, INCH, MINUTE))
+            expected = FrequencyAmount(1, SECOND),
+            actual = AccelerationAmount(2, FOOT, SECOND, SECOND) / SpeedAmount(2 * 12 * 60, INCH, MINUTE))
     }
 
     @Test
     fun timesMass()
     {
         assertEquals(
-            expected = ForceAmount(4, GRAM, METER, SECOND),
-            actual = AccelerationAmount(2, METER, SECOND) * MassAmount(2, GRAM))
+            expected = ForceAmount(4, GRAM, METER, SECOND, SECOND),
+            actual = AccelerationAmount(2, METER, SECOND, SECOND) * MassAmount(2, GRAM))
     }
-
-
 }

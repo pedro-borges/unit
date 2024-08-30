@@ -76,7 +76,8 @@ open class SpeedAmount<S : Unit<Space>, T : Unit<Time>>(
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
         AccelerationAmount(amount = amount / that.amount / convert(that.time to time),
                            space = space,
-                           time = time)
+                           time1 = time,
+                           time2 = time)
 
     // endregion
 
