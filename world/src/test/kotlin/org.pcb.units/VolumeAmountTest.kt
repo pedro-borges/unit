@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Test
 import org.pcb.units.amount.AreaAmount
 import org.pcb.units.amount.LengthAmount
 import org.pcb.units.amount.VolumeAmount
-import org.pcb.units.amount.cannon.Meter.METER
-import org.pcb.units.amount.length.Foot.FOOT
-import org.pcb.units.amount.length.Inch.INCH
+import org.pcb.units.amount.base.Meter.METER
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.amount.scalar.PercentAmount
+import org.pcb.units.amount.space.Foot.FOOT
+import org.pcb.units.amount.space.Inch.INCH
 
 class VolumeAmountTest
 {

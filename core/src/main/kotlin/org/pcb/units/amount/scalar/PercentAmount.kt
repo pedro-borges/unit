@@ -3,7 +3,7 @@ package org.pcb.units.amount.scalar
 import org.pcb.units.Unit
 import org.pcb.units.amount.ScalarAmount
 import org.pcb.units.amount.scalar.PercentAmount.PERCENT
-import org.pcb.units.domain.Scalar
+import org.pcb.units.dimension.Scalar
 import org.pcb.units.toBigBigDecimal
 
 @Suppress("unused")

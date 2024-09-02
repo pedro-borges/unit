@@ -2,9 +2,9 @@ package org.pcb.units.amount.electromagnetism
 
 import org.pcb.units.Unit
 import org.pcb.units.amount.ElectricChargeAmount
-import org.pcb.units.amount.cannon.Ampere.AMPERE
-import org.pcb.units.amount.cannon.Second.SECOND
-import org.pcb.units.domain.ElectricCharge
+import org.pcb.units.amount.base.Ampere.AMPERE
+import org.pcb.units.amount.base.Second.SECOND
+import org.pcb.units.dimension.ElectricCharge
 import org.pcb.units.toBigBigDecimal
 
 @Suppress("unused")

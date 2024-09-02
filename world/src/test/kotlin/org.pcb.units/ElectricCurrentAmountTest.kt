@@ -8,8 +8,8 @@ import org.pcb.units.amount.ElectricResistanceAmount
 import org.pcb.units.amount.ElectricTensionAmount
 import org.pcb.units.amount.PowerAmount
 import org.pcb.units.amount.TimeAmount
-import org.pcb.units.amount.cannon.Ampere.AMPERE
-import org.pcb.units.amount.cannon.Second.SECOND
+import org.pcb.units.amount.base.Ampere.AMPERE
+import org.pcb.units.amount.base.Second.SECOND
 import org.pcb.units.amount.electromagnetism.Ohm.OHM
 import org.pcb.units.amount.electromagnetism.Volt.VOLT
 import org.pcb.units.amount.mechanics.Watt

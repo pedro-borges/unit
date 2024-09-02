@@ -3,15 +3,15 @@ package org.pcb.units.amount
 import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
-import org.pcb.units.amount.cannon.Ampere.AMPERE
-import org.pcb.units.amount.cannon.Second.SECOND
+import org.pcb.units.amount.base.Ampere.AMPERE
+import org.pcb.units.amount.base.Second.SECOND
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.convert
+import org.pcb.units.dimension.ElectricCharge
+import org.pcb.units.dimension.ElectricCurrent
+import org.pcb.units.dimension.Scalar
+import org.pcb.units.dimension.Time
 import org.pcb.units.div
-import org.pcb.units.domain.ElectricCharge
-import org.pcb.units.domain.ElectricCurrent
-import org.pcb.units.domain.Scalar
-import org.pcb.units.domain.Time
 import org.pcb.units.times
 import org.pcb.units.toBigBigDecimal
 

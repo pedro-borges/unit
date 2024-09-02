@@ -5,9 +5,9 @@ import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.convert
+import org.pcb.units.dimension.Length
+import org.pcb.units.dimension.Scalar
 import org.pcb.units.div
-import org.pcb.units.domain.Length
-import org.pcb.units.domain.Scalar
 import org.pcb.units.times
 import org.pcb.units.toBigBigDecimal
 

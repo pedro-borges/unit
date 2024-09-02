@@ -3,7 +3,7 @@ package org.pcb.units.amount.frequency
 import org.pcb.units.Unit
 import org.pcb.units.amount.FrequencyAmount
 import org.pcb.units.amount.frequency.Hertz.HERTZ
-import org.pcb.units.domain.Time
+import org.pcb.units.dimension.Time
 import org.pcb.units.toBigBigDecimal
 
 @Suppress("unused")

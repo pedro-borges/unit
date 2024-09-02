@@ -8,25 +8,25 @@ import org.pcb.units.amount.ElectricResistanceAmount
 import org.pcb.units.amount.ElectricTensionAmount
 import org.pcb.units.amount.EnergyAmount
 import org.pcb.units.amount.PowerAmount
-import org.pcb.units.amount.cannon.Ampere.AMPERE
-import org.pcb.units.amount.cannon.Kilogram.KILOGRAM
-import org.pcb.units.amount.cannon.Meter.METER
-import org.pcb.units.amount.cannon.Second.SECOND
+import org.pcb.units.amount.base.Ampere.AMPERE
+import org.pcb.units.amount.base.Kilogram.KILOGRAM
+import org.pcb.units.amount.base.Meter.METER
+import org.pcb.units.amount.base.Second.SECOND
 import org.pcb.units.amount.electromagnetism.Coulomb.COULOMB
 import org.pcb.units.amount.electromagnetism.Ohm.OHM
 import org.pcb.units.amount.electromagnetism.Volt.VOLT
-import org.pcb.units.amount.length.Foot.FOOT
-import org.pcb.units.amount.length.Inch.INCH
 import org.pcb.units.amount.mass.Ounce.OUNCE
 import org.pcb.units.amount.mass.Pound.POUND
 import org.pcb.units.amount.mechanics.Joule.JOULE
 import org.pcb.units.amount.mechanics.Watt.WATT
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.amount.scalar.PercentAmount
+import org.pcb.units.amount.space.Foot.FOOT
+import org.pcb.units.amount.space.Inch.INCH
 import org.pcb.units.amount.time.Hour.HOUR
 import org.pcb.units.amount.time.Minute.MINUTE
-import org.pcb.units.domain.Length
-import org.pcb.units.domain.Time
+import org.pcb.units.dimension.Length
+import org.pcb.units.dimension.Time
 
 class ElectricTensionAmountTest
 {

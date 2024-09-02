@@ -3,7 +3,7 @@ package org.pcb.units.amount.finance
 import org.pcb.units.Unit
 import org.pcb.units.amount.CurrencyAmount
 import org.pcb.units.amount.finance.Gbp.GBP
-import org.pcb.units.domain.Currency
+import org.pcb.units.dimension.Currency
 import org.pcb.units.toBigBigDecimal
 
 @Suppress("unused")

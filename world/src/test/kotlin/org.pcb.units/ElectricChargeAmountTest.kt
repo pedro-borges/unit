@@ -5,8 +5,8 @@ import kotlin.test.assertEquals
 import org.pcb.units.amount.ElectricChargeAmount
 import org.pcb.units.amount.ElectricCurrentAmount
 import org.pcb.units.amount.TimeAmount
-import org.pcb.units.amount.cannon.Ampere.AMPERE
-import org.pcb.units.amount.cannon.Second.SECOND
+import org.pcb.units.amount.base.Ampere.AMPERE
+import org.pcb.units.amount.base.Second.SECOND
 import org.pcb.units.amount.electromagnetism.Coulomb.COULOMB
 import org.pcb.units.amount.scalar.NaturalAmount
 import org.pcb.units.amount.scalar.PercentAmount

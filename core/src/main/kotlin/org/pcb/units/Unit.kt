@@ -2,7 +2,7 @@ package org.pcb.units
 
 import java.math.BigDecimal
 import kotlin.reflect.KClass
-import org.pcb.units.domain.Domain
+import org.pcb.units.dimension.Domain
 
 abstract class Unit<D : Domain>(val domain: KClass<out D>)
 {

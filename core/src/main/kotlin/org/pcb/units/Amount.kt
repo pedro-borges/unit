@@ -3,8 +3,8 @@ package org.pcb.units
 import java.math.BigDecimal
 import java.util.Objects
 import org.pcb.units.amount.ScalarAmount
-import org.pcb.units.domain.Domain
-import org.pcb.units.domain.Scalar
+import org.pcb.units.dimension.Domain
+import org.pcb.units.dimension.Scalar
 
 abstract class Amount<D : Domain>(val amount: BigDecimal,
                               val unit: CompositeUnit<D>)

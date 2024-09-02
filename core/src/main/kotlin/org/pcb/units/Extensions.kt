@@ -3,7 +3,7 @@ package org.pcb.units
 import java.math.BigDecimal
 import java.math.MathContext.DECIMAL128
 import java.math.RoundingMode.HALF_EVEN
-import org.pcb.units.domain.Domain
+import org.pcb.units.dimension.Domain
 
 fun Number.toBigBigDecimal(): BigDecimal =
     when

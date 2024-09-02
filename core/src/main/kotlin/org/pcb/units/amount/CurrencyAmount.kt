@@ -4,10 +4,10 @@ import org.pcb.units.Amount
 import org.pcb.units.CompositeUnit
 import org.pcb.units.Unit
 import org.pcb.units.amount.scalar.NaturalAmount
+import org.pcb.units.dimension.Currency
+import org.pcb.units.dimension.Scalar
+import org.pcb.units.dimension.Time
 import org.pcb.units.div
-import org.pcb.units.domain.Currency
-import org.pcb.units.domain.Scalar
-import org.pcb.units.domain.Time
 import org.pcb.units.times
 import org.pcb.units.toBigBigDecimal
 

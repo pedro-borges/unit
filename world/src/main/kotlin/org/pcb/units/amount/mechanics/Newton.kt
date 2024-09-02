@@ -2,10 +2,10 @@ package org.pcb.units.amount.mechanics
 
 import org.pcb.units.Unit
 import org.pcb.units.amount.ForceAmount
-import org.pcb.units.amount.cannon.Kilogram.KILOGRAM
-import org.pcb.units.amount.cannon.Meter.METER
-import org.pcb.units.amount.cannon.Second.SECOND
-import org.pcb.units.domain.Force
+import org.pcb.units.amount.base.Kilogram.KILOGRAM
+import org.pcb.units.amount.base.Meter.METER
+import org.pcb.units.amount.base.Second.SECOND
+import org.pcb.units.dimension.Force
 import org.pcb.units.toBigBigDecimal
 
 @Suppress("unused")
