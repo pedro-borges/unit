@@ -5,13 +5,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.pcb.units</groupId>
-    <artifactId>units</artifactId>
+    <artifactId>unit</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
-        <module>core</module>
-        <module>world</module>
+        <module>dimensions</module>
+        <module>units</module>
     </modules>
 
     <properties>
