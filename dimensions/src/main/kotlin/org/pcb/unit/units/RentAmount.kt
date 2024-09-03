@@ -15,53 +15,54 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
         amount: Number,
-        val currency: C,
-        val time: T)
+        val major: C,
+        val minor: T)
     : Amount<Rent>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Rent::class,
-                       units = listOf(currency to 1,
-                                      time to -1)))
+                       units = listOf(major to 1,
+                                      minor to -1)))
 {
-    constructor(amount: Number, pair: Pair<C, T>) : this(amount, pair.first, pair.second)
+    val currency = major
+    val time = minor
 
     // region Rent
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         RentAmount(amount = amount * that.amount * that.unit.scale,
-                   currency = currency,
-                   time = time)
+                   major = currency,
+                   minor = time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         RentAmount(amount = amount / that.amount / that.unit.scale,
-                   currency = currency,
-                   time = time)
+                   major = currency,
+                   minor = time)
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> plus(that: RentAmount<C, T>) =
         RentAmount(amount = amount + that.amount
                             * convert(that.currency to currency)
                             / convert(that.time to time),
-                   currency = currency,
-                   time = time)
+                   major = currency,
+                   minor = time)
 
     @JvmName("plusRent")
     operator fun plus(that: RentAmount<C, T>) =
         RentAmount(amount = amount + that.amount,
-                   currency = currency,
-                   time = time)
+                   major = currency,
+                   minor = time)
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> minus(that: RentAmount<C, T>) =
         RentAmount(amount = amount - that.amount
                             * convert(that.currency to currency)
                             / convert(that.time to time),
-                   currency = currency,
-                   time = time)
+                   major = currency,
+                   minor = time)
 
     @JvmName("minusRent")
     operator fun minus(that: RentAmount<C, T>) =
         RentAmount(amount = amount - that.amount,
-                   currency = currency,
-                   time = time)
+                   major = currency,
+                   minor = time)
 
     // endregion
 

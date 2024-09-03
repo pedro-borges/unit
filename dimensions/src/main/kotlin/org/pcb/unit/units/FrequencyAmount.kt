@@ -112,8 +112,8 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     operator fun <C : Unit<Currency>> times(that: CurrencyAmount<C>) =
         RentAmount(amount = that.amount / amount,
-                   currency = that.currency,
-                   time = time)
+                   major = that.currency,
+                   minor = time)
 
     // endregion
 }

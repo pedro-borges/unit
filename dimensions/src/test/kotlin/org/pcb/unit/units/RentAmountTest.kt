@@ -15,80 +15,116 @@ class RentAmountTest
     fun timesScalar()
     {
         assertEquals(
-            expected = RentAmount(2 * 2, CURRENCY1 to TIME1),
-            actual = RentAmount(2, CURRENCY1 to TIME1) *
-                     PercentAmount(2 * 100))
+            expected = RentAmount(amount = 2 * 2,
+                                  major = CURRENCY1,
+                                  minor = TIME1),
+            actual = RentAmount(amount = 2,
+                                major = CURRENCY1,
+                                minor = TIME1) *
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun divScalar()
     {
         assertEquals(
-            expected = RentAmount(2 / 2, CURRENCY1 to TIME1),
-            actual = RentAmount(2, CURRENCY1 to TIME1) /
-                     PercentAmount(2 * 100))
+            expected = RentAmount(amount = 2 / 2,
+                                  major = CURRENCY1,
+                                  minor = TIME1),
+            actual = RentAmount(amount = 2,
+                                major = CURRENCY1,
+                                minor = TIME1) /
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun plusSameRent()
     {
         assertEquals(
-            expected = RentAmount(0 + 1, CURRENCY1 to TIME1),
-            actual = RentAmount(0, CURRENCY1 to TIME1) +
-                     RentAmount(1, CURRENCY1 to TIME1))
+            expected = RentAmount(amount = 0 + 1,
+                                  major = CURRENCY1,
+                                  minor = TIME1),
+            actual = RentAmount(amount = 0,
+                                major = CURRENCY1,
+                                minor = TIME1) +
+                     RentAmount(amount = 1,
+                                major = CURRENCY1,
+                                minor = TIME1))
     }
 
     @Test
     fun plusOtherRent()
     {
         assertEquals(
-            expected = RentAmount(0 + 1, CURRENCY1 to TIME1),
-            actual = RentAmount(0, CURRENCY1 to TIME1) +
-                     RentAmount(1, CURRENCY2 to TIME2))
+            expected = RentAmount(0 + 1, CURRENCY1, TIME1),
+            actual = RentAmount(amount = 0,
+                                major = CURRENCY1,
+                                minor = TIME1) +
+                     RentAmount(amount = 1,
+                                major = CURRENCY2,
+                                minor = TIME2))
     }
 
     @Test
     fun minusSameRent()
     {
         assertEquals(
-            expected = RentAmount(1 - 1, CURRENCY1 to TIME1),
-            actual = RentAmount(1, CURRENCY1 to TIME1) -
-                     RentAmount(1, CURRENCY1 to TIME1))
+            expected = RentAmount(amount = 1 - 1,
+                                  major = CURRENCY1, minor = TIME1),
+            actual = RentAmount(amount = 1,
+                                major = CURRENCY1, minor = TIME1) -
+                     RentAmount(amount = 1,
+                                major = CURRENCY1,
+                                minor = TIME1))
     }
 
     @Test
     fun minusOtherRent()
     {
         assertEquals(
-            expected = RentAmount(1 - 1, CURRENCY1 to TIME1),
-            actual = RentAmount(1, CURRENCY1 to TIME1) -
-                     RentAmount(1, CURRENCY2 to TIME2))
+            expected = RentAmount(amount = 1 - 1,
+                                  major = CURRENCY1, minor = TIME1),
+            actual = RentAmount(amount = 1,
+                                major = CURRENCY1, minor = TIME1) -
+                     RentAmount(amount = 1,
+                                major = CURRENCY2,
+                                minor = TIME2))
     }
 
     @Test
     fun divSameRent()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = RentAmount(2, CURRENCY1 to TIME1) /
-                     RentAmount(2, CURRENCY1 to TIME1))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = RentAmount(amount = 2,
+                                major = CURRENCY1, minor = TIME1) /
+                     RentAmount(amount = 2,
+                                major = CURRENCY1,
+                                minor = TIME1))
     }
 
     @Test
     fun divOtherRent()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = RentAmount(2, CURRENCY1 to TIME1) /
-                     RentAmount(2, CURRENCY2 to TIME2))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = RentAmount(amount = 2,
+                                major = CURRENCY1,
+                                minor = TIME1) /
+                     RentAmount(amount = 2,
+                                major = CURRENCY2,
+                                minor = TIME2))
     }
 
     @Test
     fun timesSameTime()
     {
         assertEquals(
-            expected = CurrencyAmount(2 * 2, CURRENCY1),
-            actual = RentAmount(2, CURRENCY1 to TIME1) *
+            expected = CurrencyAmount(amount = 2 * 2,
+                                      major = CURRENCY1),
+            actual = RentAmount(amount = 2,
+                                major = CURRENCY1,
+                                minor = TIME1) *
                      TimeAmount(2, TIME1))
     }
 
@@ -96,8 +132,11 @@ class RentAmountTest
     fun timesOtherTime()
     {
         assertEquals(
-            expected = CurrencyAmount(2 * 2, CURRENCY1),
-            actual = RentAmount(2, CURRENCY1 to TIME1) *
+            expected = CurrencyAmount(amount = 2 * 2,
+                                      major = CURRENCY1),
+            actual = RentAmount(amount = 2,
+                                major = CURRENCY1,
+                                minor = TIME1) *
                      TimeAmount(1, TIME2))
     }
 
@@ -107,8 +146,11 @@ class RentAmountTest
         assertEquals(
             expected = FrequencyAmount(amount = 2 / 2,
                                        minor = TIME1),
-            actual = RentAmount(2, CURRENCY1 to TIME1) /
-                     CurrencyAmount(2, CURRENCY1))
+            actual = RentAmount(amount = 2,
+                                major = CURRENCY1,
+                                minor = TIME1) /
+                     CurrencyAmount(amount = 2,
+                                    major = CURRENCY1))
     }
 
     @Test
@@ -117,7 +159,10 @@ class RentAmountTest
         assertEquals(
             expected = FrequencyAmount(amount = 2 / 2,
                                        minor = TIME1),
-            actual = RentAmount(2, CURRENCY1 to TIME1) /
-                     CurrencyAmount(1, CURRENCY2))
+            actual = RentAmount(amount = 2,
+                                major = CURRENCY1,
+                                minor = TIME1) /
+                     CurrencyAmount(amount = 1,
+                                    major = CURRENCY2))
     }
 }
