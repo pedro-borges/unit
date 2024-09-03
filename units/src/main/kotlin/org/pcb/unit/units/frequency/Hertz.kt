@@ -5,18 +5,17 @@ import org.pcb.unit.Quintuple
 import org.pcb.unit.Triple
 import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
-import org.pcb.unit.dimension.Time
+import org.pcb.unit.dimension.Frequency
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.FrequencyAmount
-import org.pcb.unit.units.frequency.Hertz.HERTZ
+import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.NaturalAmount.ONE
 
-@Suppress("unused")
 class Hertz(amount: Number)
-    : FrequencyAmount<HERTZ>(amount = amount.toBigBigDecimal(),
-                             ONE / HERTZ)
+    : FrequencyAmount<SECOND>(amount = amount.toBigBigDecimal(),
+                              unit = ONE / SECOND)
 {
-    object HERTZ : Unit<Time>(Time::class)
+    object HERTZ : Unit<Frequency>(Frequency::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
         override fun <B : Unit<*>> div(second: B) = Pair(this, second)

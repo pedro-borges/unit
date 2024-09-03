@@ -30,8 +30,8 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
 
     companion object
     {
-        operator fun invoke(amount: Number, electricCharge: Unit<ElectricCharge>) =
-            ElectricChargeAmount(amount = amount.toBigBigDecimal() * electricCharge.scale,
+        operator fun invoke(amount: Number, unit: Unit<ElectricCharge>) =
+            ElectricChargeAmount(amount = amount.toBigBigDecimal() * unit.scale,
                                  unit = AMPERE * SECOND)
     }
 

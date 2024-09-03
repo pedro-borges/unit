@@ -10,12 +10,10 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.Furlong.FURLONG
 
-@Suppress("unused")
 class Furlong(amount: Number)
-    : LengthAmount<FURLONG>(amount.toBigBigDecimal(), FURLONG)
+    : LengthAmount<FURLONG>(amount = amount.toBigBigDecimal(),
+                            unit = FURLONG)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object FURLONG : Unit<Length>(Length::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

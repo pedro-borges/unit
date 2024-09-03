@@ -10,12 +10,10 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.TimeAmount
 import org.pcb.unit.units.time.Minute.MINUTE
 
-@Suppress("unused")
 class Minute(amount: Number)
-    : TimeAmount<MINUTE>(amount, MINUTE)
+    : TimeAmount<MINUTE>(amount = amount,
+                         unit = MINUTE)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object MINUTE : Unit<Time>(Time::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

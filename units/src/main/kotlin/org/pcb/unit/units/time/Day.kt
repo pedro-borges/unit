@@ -10,12 +10,10 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.TimeAmount
 import org.pcb.unit.units.time.Day.DAY
 
-@Suppress("unused")
 class Day(amount: Number)
-    : TimeAmount<DAY>(amount, DAY)
+    : TimeAmount<DAY>(amount = amount,
+                      unit = DAY)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object DAY : Unit<Time>(Time::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

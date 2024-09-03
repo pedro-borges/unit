@@ -20,7 +20,7 @@ open class LengthAmount<L : Unit<Length>>(
                          domain = Length::class,
                          units = listOf(unit to 1)))
 {
-        val length = unit
+    val length = unit
     // region Length
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =

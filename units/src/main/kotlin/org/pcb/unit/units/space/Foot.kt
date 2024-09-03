@@ -10,12 +10,10 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.Foot.FOOT
 
-@Suppress("unused")
 class Foot(amount: Number)
-    : LengthAmount<FOOT>(amount.toBigBigDecimal(), FOOT)
+    : LengthAmount<FOOT>(amount = amount.toBigBigDecimal(),
+                         unit = FOOT)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object FOOT : Unit<Length>(Length::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

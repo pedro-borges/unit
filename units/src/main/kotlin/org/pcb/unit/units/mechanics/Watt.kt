@@ -12,13 +12,11 @@ import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
 
-@Suppress("unused")
 class Watt(amount: Number)
     : PowerAmount<KILOGRAM, METER, SECOND>(amount = amount,
-                                           (KILOGRAM * METER * METER) / (SECOND * SECOND * SECOND))
+                                           unit = (KILOGRAM * METER * METER) /
+                                                  (SECOND * SECOND * SECOND))
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object WATT : Unit<Power>(Power::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

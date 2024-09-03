@@ -6,6 +6,7 @@ import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Length
 import org.pcb.unit.units.VolumeAmount
 import org.pcb.unit.units.base.Meter
+import org.pcb.unit.units.space.Stere.STERE
 
 class StereTest
 {
@@ -14,6 +15,7 @@ class StereTest
     {
         Stere(1) equivalent Liter(1000000)
         Stere(1) equivalent Meter(1) * Meter(1) * Meter(1)
+        Stere(1) equivalent VolumeAmount(1, STERE)
     }
 
     private infix fun Stere.equivalent(other: VolumeAmount<*>) =

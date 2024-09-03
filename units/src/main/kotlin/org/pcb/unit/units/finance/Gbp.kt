@@ -10,12 +10,9 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.CurrencyAmount
 import org.pcb.unit.units.finance.Gbp.GBP
 
-@Suppress("unused")
 class Gbp(amount: Number)
     : CurrencyAmount<GBP>(amount.toBigBigDecimal(), GBP)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object GBP : Unit<Currency>(Currency::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

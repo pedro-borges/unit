@@ -34,9 +34,10 @@ open class ForceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     companion object
     {
-        operator fun invoke(amount: Number, force: Unit<Force>) =
-            ForceAmount(amount = amount.toBigBigDecimal() * force.scale,
-                        unit = (KILOGRAM * METER) / (SECOND * SECOND))
+        operator fun invoke(amount: Number, unit: Unit<Force>) =
+            ForceAmount(amount = amount.toBigBigDecimal() * unit.scale,
+                        unit = (KILOGRAM * METER) /
+                               (SECOND * SECOND))
     }
 
     // region Force

@@ -10,12 +10,10 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.Hand.HAND
 
-@Suppress("unused")
 class Hand(amount: Number)
-    : LengthAmount<HAND>(amount.toBigBigDecimal(), HAND)
+    : LengthAmount<HAND>(amount = amount.toBigBigDecimal(),
+                         unit = HAND)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object HAND : Unit<Length>(Length::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

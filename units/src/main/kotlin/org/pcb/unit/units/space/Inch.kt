@@ -10,12 +10,10 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.Inch.INCH
 
-@Suppress("unused")
 class Inch(amount: Number)
-    : LengthAmount<INCH>(amount.toBigBigDecimal(), INCH)
+    : LengthAmount<INCH>(amount = amount.toBigBigDecimal(),
+                         unit = INCH)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object INCH : Unit<Length>(Length::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

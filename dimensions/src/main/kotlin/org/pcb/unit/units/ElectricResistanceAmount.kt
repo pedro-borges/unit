@@ -43,9 +43,10 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
 
     companion object
     {
-        operator fun invoke(amount: Number, electricResistance: Unit<ElectricResistance>) =
-            ElectricResistanceAmount(amount = amount.toBigBigDecimal() * electricResistance.scale,
-                                     unit = KILOGRAM * METER * METER / (SECOND * SECOND * SECOND * AMPERE * AMPERE))
+        operator fun invoke(amount: Number, unit: Unit<ElectricResistance>) =
+            ElectricResistanceAmount(amount = amount.toBigBigDecimal() * unit.scale,
+                                     unit = (KILOGRAM * METER * METER) /
+                                            (SECOND * SECOND * SECOND * AMPERE * AMPERE))
     }
 
     // region ElectricTension

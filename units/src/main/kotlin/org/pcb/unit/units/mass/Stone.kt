@@ -10,12 +10,10 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.MassAmount
 import org.pcb.unit.units.mass.Stone.STONE
 
-@Suppress("unused")
 class Stone(amount: Number)
-    : MassAmount<STONE>(amount.toBigBigDecimal(), STONE)
+    : MassAmount<STONE>(amount = amount.toBigBigDecimal(),
+                        unit = STONE)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object STONE : Unit<Mass>(Mass::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

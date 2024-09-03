@@ -12,13 +12,15 @@ import org.pcb.unit.units.base.Kilogram
 import org.pcb.unit.units.base.Meter
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second
+import org.pcb.unit.units.electromagnetism.Ohm.OHM
 
 class OhmTest
 {
     @Test
     fun unit()
     {
-        Ohm(1) equivalent Kilogram(1) * (Meter(1) / Second(1)) * (Meter(1) / Second(1)) / Second(1) / Ampere(1) / Ampere(1)
+        Ohm(0.25) equivalent Kilogram(2) * (Meter(2) / Second(2)) * (Meter(2) / Second(2)) / Second(2) / Ampere(2) / Ampere(2)
+        Ohm(2) equivalent ElectricResistanceAmount(2, OHM)
     }
 
     private infix fun Ohm.equivalent(other: ElectricResistanceAmount<*, *, *, *>) =

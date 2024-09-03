@@ -5,12 +5,14 @@ import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Currency
+import org.pcb.unit.dimension.Frequency
 import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.NaturalAmount
 import org.pcb.unit.units.scalar.NaturalAmount.ONE
 
@@ -23,6 +25,13 @@ open class FrequencyAmount<T : Unit<Time>>(
                        units = listOf(unit.second to -1)))
 {
     val time = unit.second
+
+    companion object
+    {
+        operator fun invoke(amount: Number, unit: Unit<Frequency>) =
+            FrequencyAmount(amount = amount.toBigBigDecimal() / unit.scale,
+                            unit = ONE / SECOND)
+    }
 
     // region Frequency
 

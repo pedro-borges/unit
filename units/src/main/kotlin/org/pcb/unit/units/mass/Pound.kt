@@ -10,12 +10,10 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.MassAmount
 import org.pcb.units.amount.mass.Pound.POUND
 
-@Suppress("unused")
 class Pound(amount: Number)
-    : MassAmount<POUND>(amount.toBigBigDecimal(), POUND)
+    : MassAmount<POUND>(amount = amount.toBigBigDecimal(),
+                        unit = POUND)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object POUND : Unit<Mass>(Mass::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

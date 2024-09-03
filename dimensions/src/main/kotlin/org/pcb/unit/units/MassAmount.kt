@@ -67,16 +67,18 @@ open class MassAmount<M : Unit<Mass>>(
     // region Momentum
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
-        MomentumAmount(amount = that.amount * that.amount,
-                       unit = (mass * that.length) / that.time)
+        MomentumAmount(amount = amount * that.amount,
+                       unit = (mass * that.length) /
+                              that.time)
 
     // endregion
 
     // region Force
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: AccelerationAmount<L, T>) =
-        ForceAmount(amount = that.amount * that.amount,
-                    unit = (mass * that.length) / (that.time * that.time))
+        ForceAmount(amount = amount * that.amount,
+                    unit = (mass * that.length) /
+                           (that.time * that.time))
 
     // endregion
 }

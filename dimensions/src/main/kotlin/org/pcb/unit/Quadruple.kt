@@ -6,7 +6,7 @@ data class Quadruple<out A : Unit<*>, out B : Unit<*>, out C : Unit<*>, out D : 
         val third: C,
         val fourth: D)
 {
-    operator fun <E: Unit<*>>times(fifth: E) = Quintuple(first, second, third, fourth, fifth)
+    operator fun <E : Unit<*>> times(fifth: E) = Quintuple(first, second, third, fourth, fifth)
     operator fun <B : Unit<*>> div(second: B) = Pair(this, second)
     operator fun <B : Tuple<*, *>> div(second: B) = Pair(this, second)
     operator fun <B : Triple<*, *, *>> div(second: B) = Pair(this, second)

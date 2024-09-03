@@ -39,9 +39,10 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     companion object
     {
-        operator fun invoke(amount: Number, power: Unit<Power>) =
-            PowerAmount(amount = amount.toBigBigDecimal() * power.scale,
-                        unit = (KILOGRAM * METER * METER) / (SECOND * SECOND * SECOND))
+        operator fun invoke(amount: Number, unit: Unit<Power>) =
+            PowerAmount(amount = amount.toBigBigDecimal() * unit.scale,
+                        unit = (KILOGRAM * METER * METER) /
+                               (SECOND * SECOND * SECOND))
     }
 
     // region Energy

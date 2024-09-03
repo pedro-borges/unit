@@ -10,13 +10,15 @@ import org.pcb.unit.units.base.Kilogram
 import org.pcb.unit.units.base.Meter
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second
+import org.pcb.unit.units.mechanics.Watt.WATT
 
 class WattTest
 {
     @Test
     fun unit()
     {
-        Watt(1) equivalent Kilogram(1) * (Meter(1) / Second(1)) * (Meter(1) / Second(1)) / Second(1)
+        Watt(1) equivalent Kilogram(2) * (Meter(2) / Second(2)) * (Meter(2) / Second(2)) / Second(2)
+        Watt(2) equivalent PowerAmount(2, WATT)
     }
 
     private infix fun Watt.equivalent(other: PowerAmount<*, *, *>) =

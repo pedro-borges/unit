@@ -10,13 +10,10 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.VolumeAmount
 import org.pcb.unit.units.space.DeciMeter.DECIMETER
 
-@Suppress("unused")
 class Liter(amount: Number)
     : VolumeAmount<DECIMETER>(amount = amount,
                               unit = DECIMETER * DECIMETER * DECIMETER)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object LITER : Unit<Volume>(Volume::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
@@ -26,6 +23,6 @@ class Liter(amount: Number)
         override fun <B : Quadruple<*, *, *, *>> div(second: B) = Pair(this, second)
         override fun <B : Quintuple<*, *, *, *, *>> div(second: B) = Pair(this, second)
         override val symbol = "L"
-        override val scale = 1.toBigBigDecimal()
+        override val scale = 0.000001.toBigBigDecimal()
     }
 }

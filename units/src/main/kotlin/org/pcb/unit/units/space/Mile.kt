@@ -12,7 +12,8 @@ import org.pcb.unit.units.space.Mile.MILE
 
 @Suppress("unused")
 class Mile(amount: Number)
-    : LengthAmount<MILE>(amount.toBigBigDecimal(), MILE)
+    : LengthAmount<MILE>(amount = amount.toBigBigDecimal(),
+                         unit = MILE)
 {
     constructor(amount: String) : this(amount.toBigDecimal())
 

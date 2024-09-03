@@ -13,14 +13,11 @@ import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
 
-@Suppress("unused")
 class Ohm(amount: Number)
     : ElectricResistanceAmount<KILOGRAM, METER, SECOND, AMPERE>(amount = amount,
                                                                 unit = (KILOGRAM * METER * METER) /
                                                                        (SECOND * SECOND * SECOND * AMPERE * AMPERE))
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object OHM : Unit<ElectricResistance>(ElectricResistance::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

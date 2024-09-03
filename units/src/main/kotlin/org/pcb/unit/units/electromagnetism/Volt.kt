@@ -13,14 +13,11 @@ import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
 
-@Suppress("unused")
 class Volt(amount: Number)
     : ElectricTensionAmount<KILOGRAM, METER, SECOND, AMPERE>(amount = amount,
                                                              unit = (KILOGRAM * METER * METER) /
                                                                     (SECOND * SECOND * SECOND * AMPERE))
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object VOLT : Unit<ElectricTension>(ElectricTension::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

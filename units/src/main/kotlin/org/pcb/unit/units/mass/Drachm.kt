@@ -10,12 +10,10 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.MassAmount
 import org.pcb.unit.units.mass.Drachm.DRACHM
 
-@Suppress("unused")
 class Drachm(amount: Number)
-    : MassAmount<DRACHM>(amount.toBigBigDecimal(), DRACHM)
+    : MassAmount<DRACHM>(amount = amount.toBigBigDecimal(),
+                         unit = DRACHM)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object DRACHM : Unit<Mass>(Mass::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

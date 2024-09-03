@@ -12,13 +12,15 @@ import org.pcb.unit.units.base.Kilogram
 import org.pcb.unit.units.base.Meter
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second
+import org.pcb.unit.units.electromagnetism.Volt.VOLT
 
 class VoltTest
 {
     @Test
     fun unit()
     {
-        Volt(1) equivalent Kilogram(1) * (Meter(1) / Second(1)) * (Meter(1) / Second(1)) / Second(1) / Ampere(1)
+        Volt(0.5) equivalent Kilogram(2) * (Meter(2) / Second(2)) * (Meter(2) / Second(2)) / Second(2) / Ampere(2)
+        Volt(2) equivalent ElectricTensionAmount(2, VOLT)
     }
 
     private infix fun Volt.equivalent(other: ElectricTensionAmount<*, *, *, *>) =

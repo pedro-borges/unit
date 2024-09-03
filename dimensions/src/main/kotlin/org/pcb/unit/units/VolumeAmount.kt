@@ -7,9 +7,11 @@ import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Scalar
+import org.pcb.unit.dimension.Volume
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.scalar.NaturalAmount
 
 open class VolumeAmount<L : Unit<Length>>(
@@ -22,6 +24,13 @@ open class VolumeAmount<L : Unit<Length>>(
                          units = listOf(unit.first to 3)))
 {
     val length = unit.first
+
+    companion object
+    {
+        operator fun invoke(amount: Number, unit: Unit<Volume>) =
+            VolumeAmount(amount = amount.toBigBigDecimal() * unit.scale,
+                         unit = METER * METER * METER)
+    }
 
     // region Volume
 

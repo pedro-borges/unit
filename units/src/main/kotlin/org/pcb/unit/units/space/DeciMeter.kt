@@ -10,12 +10,10 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.DeciMeter.DECIMETER
 
-@Suppress("unused")
 class DeciMeter(amount: Number)
-    : LengthAmount<DECIMETER>(amount.toBigBigDecimal(), DECIMETER)
+    : LengthAmount<DECIMETER>(amount = amount.toBigBigDecimal(),
+                              unit = DECIMETER)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object DECIMETER : Unit<Length>(Length::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

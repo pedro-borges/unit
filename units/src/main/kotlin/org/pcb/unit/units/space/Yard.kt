@@ -10,12 +10,10 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.Yard.YARD
 
-@Suppress("unused")
 class Yard(amount: Number)
-    : LengthAmount<YARD>(amount.toBigBigDecimal(), YARD)
+    : LengthAmount<YARD>(amount = amount.toBigBigDecimal(),
+                         unit = YARD)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object YARD : Unit<Length>(Length::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

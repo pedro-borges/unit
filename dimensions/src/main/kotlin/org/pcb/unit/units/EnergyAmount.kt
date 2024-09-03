@@ -39,9 +39,10 @@ open class EnergyAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     companion object
     {
-        operator fun invoke(amount: Number, energy: Unit<Energy>) =
-            EnergyAmount(amount = amount.toBigBigDecimal() * energy.scale,
-                         unit = (KILOGRAM * METER * METER) / (SECOND * SECOND))
+        operator fun invoke(amount: Number, unit: Unit<Energy>) =
+            EnergyAmount(amount = amount.toBigBigDecimal() * unit.scale,
+                         unit = (KILOGRAM * METER * METER) /
+                                (SECOND * SECOND))
     }
 
     // region Energy
@@ -164,7 +165,7 @@ open class EnergyAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // region Power
 
-    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>)  =
         PowerAmount(amount = amount / that.amount / convert(that.time to time),
                     unit = (mass * length * length) / (time * time * time))
 

@@ -10,12 +10,10 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.Thou.THOU
 
-@Suppress("unused")
 class Thou(amount: Number)
-    : LengthAmount<THOU>(amount.toBigBigDecimal(), THOU)
+    : LengthAmount<THOU>(amount = amount.toBigBigDecimal(),
+                         unit = THOU)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object THOU : Unit<Length>(Length::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

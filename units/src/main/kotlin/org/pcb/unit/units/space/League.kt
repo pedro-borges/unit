@@ -10,12 +10,10 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.League.LEAGUE
 
-@Suppress("unused")
 class League(amount: Number)
-    : LengthAmount<LEAGUE>(amount.toBigBigDecimal(), LEAGUE)
+    : LengthAmount<LEAGUE>(amount = amount.toBigBigDecimal(),
+                           unit = LEAGUE)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object LEAGUE : Unit<Length>(Length::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

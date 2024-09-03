@@ -8,13 +8,15 @@ import org.pcb.unit.units.ElectricChargeAmount
 import org.pcb.unit.units.base.Ampere
 import org.pcb.unit.units.base.Second
 import org.pcb.unit.units.base.Second.SECOND
+import org.pcb.unit.units.electromagnetism.Coulomb.COULOMB
 
 class CoulombTest
 {
     @Test
     fun unit()
     {
-        Coulomb(1) equivalent Ampere(1) * Second(1)
+        Coulomb(2 * 2) equivalent Ampere(2) * Second(2)
+        Coulomb(2) equivalent ElectricChargeAmount(2, COULOMB)
     }
 
     private infix fun Coulomb.equivalent(other: ElectricChargeAmount<*, *>) =
