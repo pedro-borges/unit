@@ -92,12 +92,12 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
 
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         TimeAmount(amount = amount * that.amount * convert(that.length to length),
-                   time = time)
+                   major = time)
 
     @JvmName("timesLength")
     operator fun times(that: LengthAmount<L>) =
         TimeAmount(amount = amount * that.amount,
-                   time = time)
+                   major = time)
 
     // endregion
 }

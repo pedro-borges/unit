@@ -69,14 +69,16 @@ class ScalarAmountTest
             expected = FrequencyAmount(amount = 2 / 2,
                                        minor = TIME1),
             actual = NaturalAmount(amount = 2) /
-                     TimeAmount(2, TIME1))
+                     TimeAmount(amount = 2,
+                                major = TIME1))
     }
 
     @Test
     fun divFrequency()
     {
         assertEquals(
-            expected = TimeAmount(2 / 2, TIME1),
+            expected = TimeAmount(amount = 2 / 2,
+                                  major = TIME1),
             actual = NaturalAmount(amount = 2) /
                      FrequencyAmount(amount = 2,
                                      minor = TIME1))

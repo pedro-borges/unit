@@ -204,7 +204,8 @@ class ForceAmountTest
             actual = ForceAmount(amount = 2,
                                  major = MASS1 * LENGTH1,
                                  minor = TIME1 * TIME1) *
-                     TimeAmount(2, TIME1))
+                     TimeAmount(amount = 2,
+                                major = TIME1))
     }
 
     @Test
@@ -217,7 +218,8 @@ class ForceAmountTest
             actual = ForceAmount(amount = 2,
                                  major = MASS1 * LENGTH1,
                                  minor = TIME1 * TIME1) *
-                     TimeAmount(1, TIME2))
+                     TimeAmount(amount = 1,
+                                major = TIME2))
     }
 
     @Test
@@ -230,7 +232,8 @@ class ForceAmountTest
             actual = ForceAmount(amount = 2,
                                  major = MASS1 * LENGTH1,
                                  minor = TIME1 * TIME1) *
-                     LengthAmount(2, LENGTH1))
+                     LengthAmount(amount = 2,
+                                  major = LENGTH1))
     }
 
     @Test
@@ -243,6 +246,7 @@ class ForceAmountTest
             actual = ForceAmount(amount = 2,
                                  major = MASS1 * LENGTH1,
                                  minor = TIME1 * TIME1) *
-                     LengthAmount(1, LENGTH2))
+                     LengthAmount(amount = 1,
+                                  major = LENGTH2))
     }
 }

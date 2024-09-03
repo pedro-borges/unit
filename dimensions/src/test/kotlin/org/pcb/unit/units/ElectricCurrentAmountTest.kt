@@ -120,7 +120,8 @@ class ElectricCurrentAmountTest
                                             major = ELECTRICCURRENT1 * TIME1),
             actual = ElectricCurrentAmount(amount = 2,
                                            major = ELECTRICCURRENT1) *
-                     TimeAmount(2, TIME1))
+                     TimeAmount(amount = 2,
+                                major = TIME1))
     }
 
     @Test

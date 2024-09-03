@@ -112,7 +112,8 @@ class CurrencyAmountTest
                                   major = CURRENCY1 * SECOND),
             actual = CurrencyAmount(amount = 2,
                                     major = CURRENCY1) *
-                     TimeAmount(2, SECOND))
+                     TimeAmount(amount = 2,
+                                major = SECOND))
     }
 
     @Test
@@ -124,6 +125,7 @@ class CurrencyAmountTest
                                   minor = SECOND),
             actual = CurrencyAmount(amount = 2,
                                     major = CURRENCY1) /
-                     TimeAmount(2, SECOND))
+                     TimeAmount(amount = 2,
+                                major = SECOND))
     }
 }

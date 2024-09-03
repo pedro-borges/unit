@@ -165,7 +165,9 @@ class MomentumAmountTest
             actual = MomentumAmount(amount = 2,
                                     major = MASS1 * LENGTH1,
                                     minor = TIME1) /
-                     SpeedAmount(2, LENGTH1, TIME1))
+                     SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1))
     }
 
     @Test
@@ -192,7 +194,8 @@ class MomentumAmountTest
             actual = MomentumAmount(amount = 2,
                                     major = MASS1 * LENGTH1,
                                     minor = TIME1) /
-                     TimeAmount(2, TIME1))
+                     TimeAmount(amount = 2,
+                                major = TIME1))
     }
 
     @Test
@@ -205,7 +208,8 @@ class MomentumAmountTest
             actual = MomentumAmount(amount = 2,
                                     major = MASS1 * LENGTH1,
                                     minor = TIME1) /
-                     TimeAmount(1, TIME2))
+                     TimeAmount(amount = 1,
+                                major = TIME2))
     }
 
     @Test

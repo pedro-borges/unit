@@ -112,27 +112,32 @@ class DebtAmountTest
     fun divSameTime()
     {
         assertEquals(
-            expected = CurrencyAmount(2 / 2, CURRENCY1),
+            expected = CurrencyAmount(amount = 2 / 2,
+                                      major = CURRENCY1),
             actual = DebtAmount(amount = 2,
                                 major = CURRENCY1 * TIME1) /
-                     TimeAmount(2, TIME1))
+                     TimeAmount(amount = 2,
+                                major = TIME1))
     }
 
     @Test
     fun divOtherTime()
     {
         assertEquals(
-            expected = CurrencyAmount(2 / 2, CURRENCY1),
+            expected = CurrencyAmount(amount = 2 / 2,
+                                      major = CURRENCY1),
             actual = DebtAmount(amount = 2,
                                 major = CURRENCY1 * TIME1) /
-                     TimeAmount(1, TIME2))
+                     TimeAmount(amount = 1,
+                                major = TIME2))
     }
 
     @Test
     fun timesSameFrequency()
     {
         assertEquals(
-            expected = CurrencyAmount(2 / 2, CURRENCY1),
+            expected = CurrencyAmount(amount = 2 / 2,
+                                      major = CURRENCY1),
             actual = DebtAmount(amount = 2,
                                 major = CURRENCY1 * TIME1) *
                      FrequencyAmount(amount = 2,
@@ -143,7 +148,8 @@ class DebtAmountTest
     fun timesOtherFrequency()
     {
         assertEquals(
-            expected = CurrencyAmount(2 / 2, CURRENCY1),
+            expected = CurrencyAmount(amount = 2 / 2,
+                                      major = CURRENCY1),
             actual = DebtAmount(amount = 2,
                                 major = CURRENCY1 * TIME1) *
                      FrequencyAmount(amount = 1,

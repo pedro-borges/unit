@@ -216,7 +216,8 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /
-                     TimeAmount(2, TIME1))
+                     TimeAmount(amount = 2,
+                                major = TIME1))
     }
 
     @Test
@@ -229,14 +230,17 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /
-                     TimeAmount(1, TIME2))
+                     TimeAmount(amount = 1,
+                                major = TIME2))
     }
 
     @Test
     fun divSameMomentum()
     {
         assertEquals(
-            expected = SpeedAmount(2 / 2, LENGTH1, TIME1),
+            expected = SpeedAmount(amount = 2 / 2,
+                                   major = LENGTH1,
+                                   minor = TIME1),
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /
@@ -249,7 +253,9 @@ class EnergyAmountTest
     fun divOtherMomentum()
     {
         assertEquals(
-            expected = SpeedAmount(2 / 2, LENGTH1, TIME1),
+            expected = SpeedAmount(amount = 2 / 2,
+                                   major = LENGTH1,
+                                   minor = TIME1),
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /
@@ -268,7 +274,9 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /
-                     SpeedAmount(2, LENGTH1, TIME1))
+                     SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1))
     }
 
     @Test
@@ -281,7 +289,9 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /
-                     SpeedAmount(2, LENGTH2, TIME2))
+                     SpeedAmount(amount = 2,
+                                 major = LENGTH2,
+                                 minor = TIME2))
     }
 
     @Test

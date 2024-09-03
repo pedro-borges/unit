@@ -117,7 +117,7 @@ class LengthAmountTest
             actual = LengthAmount(amount = 2,
                                   major = LENGTH1) /
                      TimeAmount(amount = 2,
-                                time = TIME1))
+                                major = TIME1))
     }
 
     @Test

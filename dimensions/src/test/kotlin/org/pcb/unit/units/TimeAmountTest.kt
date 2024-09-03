@@ -14,8 +14,10 @@ class TimeAmountTest
     fun timesScalar()
     {
         assertEquals(
-            expected = TimeAmount(2 * 2, TIME1),
-            actual = TimeAmount(2, TIME1) *
+            expected = TimeAmount(amount = 2 * 2,
+                                  major = TIME1),
+            actual = TimeAmount(amount = 2,
+                                major = TIME1) *
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -23,8 +25,10 @@ class TimeAmountTest
     fun divScalar()
     {
         assertEquals(
-            expected = TimeAmount(2 / 2, TIME1),
-            actual = TimeAmount(2, TIME1) /
+            expected = TimeAmount(amount = 2 / 2,
+                                  major = TIME1),
+            actual = TimeAmount(amount = 2,
+                                major = TIME1) /
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -32,36 +36,48 @@ class TimeAmountTest
     fun plusSameTime()
     {
         assertEquals(
-            expected = TimeAmount(0 + 1, TIME1),
-            actual = TimeAmount(0, TIME1) +
-                     TimeAmount(1, TIME1))
+            expected = TimeAmount(amount = 0 + 1,
+                                  major = TIME1),
+            actual = TimeAmount(amount = 0,
+                                major = TIME1) +
+                     TimeAmount(amount = 1,
+                                major = TIME1))
     }
 
     @Test
     fun plusOtherTime()
     {
         assertEquals(
-            expected = TimeAmount(0 + 2, TIME1),
-            actual = TimeAmount(0, TIME1) +
-                     TimeAmount(1, TIME2))
+            expected = TimeAmount(amount = 0 + 2,
+                                  major = TIME1),
+            actual = TimeAmount(amount = 0,
+                                major = TIME1) +
+                     TimeAmount(amount = 1,
+                                major = TIME2))
     }
 
     @Test
     fun minusSameTime()
     {
         assertEquals(
-            expected = TimeAmount(1 - 1, TIME1),
-            actual = TimeAmount(1, TIME1) -
-                     TimeAmount(1, TIME1))
+            expected = TimeAmount(amount = 1 - 1,
+                                  major = TIME1),
+            actual = TimeAmount(amount = 1,
+                                major = TIME1) -
+                     TimeAmount(amount = 1,
+                                major = TIME1))
     }
 
     @Test
     fun minusOtherTime()
     {
         assertEquals(
-            expected = TimeAmount(2 - 2, TIME1),
-            actual = TimeAmount(2, TIME1) -
-                     TimeAmount(1, TIME2))
+            expected = TimeAmount(amount = 2 - 2,
+                                  major = TIME1),
+            actual = TimeAmount(amount = 2,
+                                major = TIME1) -
+                     TimeAmount(amount = 1,
+                                major = TIME2))
     }
 
     @Test
@@ -69,8 +85,10 @@ class TimeAmountTest
     {
         assertEquals(
             expected = NaturalAmount(amount = 1),
-            actual = TimeAmount(2, TIME1) /
-                     TimeAmount(2, TIME1))
+            actual = TimeAmount(amount = 2,
+                                major = TIME1) /
+                     TimeAmount(amount = 2,
+                                major = TIME1))
     }
 
     @Test
@@ -78,8 +96,10 @@ class TimeAmountTest
     {
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
-            actual = TimeAmount(2, TIME1) /
-                     TimeAmount(1, TIME2))
+            actual = TimeAmount(amount = 2,
+                                major = TIME1) /
+                     TimeAmount(amount = 1,
+                                major = TIME2))
     }
 
     @Test
@@ -89,7 +109,8 @@ class TimeAmountTest
             expected = PaceAmount(amount = 2 / 2,
                                   major = TIME1,
                                   minor = LENGTH1),
-            actual = TimeAmount(2, TIME1) /
+            actual = TimeAmount(amount = 2,
+                                major = TIME1) /
                      LengthAmount(amount = 2,
                                   major = LENGTH1))
     }

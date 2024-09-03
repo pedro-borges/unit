@@ -156,7 +156,8 @@ class PowerAmountTest
             actual = PowerAmount(amount = 2,
                                  major = MASS1 * LENGTH1 * LENGTH1,
                                  minor = TIME1 * TIME1 * TIME1) *
-                     TimeAmount(2, TIME1))
+                     TimeAmount(amount = 2,
+                                major = TIME1))
     }
 
     @Test
@@ -169,7 +170,8 @@ class PowerAmountTest
             actual = PowerAmount(amount = 2,
                                  major = MASS1 * LENGTH1 * LENGTH1,
                                  minor = TIME1 * TIME1 * TIME1) *
-                     TimeAmount(1, TIME2))
+                     TimeAmount(amount = 1,
+                                major = TIME2))
     }
 
     @Test

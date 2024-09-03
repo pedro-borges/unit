@@ -144,14 +144,17 @@ class PaceAmountTest
             actual = PaceAmount(amount = 2,
                                 major = TIME1,
                                 minor = LENGTH1) *
-                     SpeedAmount(2, LENGTH2, TIME2))
+                     SpeedAmount(amount = 2,
+                                 major = LENGTH2,
+                                 minor = TIME2))
     }
 
     @Test
     fun timesSameSpace()
     {
         assertEquals(
-            expected = TimeAmount(2 * 2, TIME1),
+            expected = TimeAmount(amount = 2 * 2,
+                                  major = TIME1),
             actual = PaceAmount(amount = 2,
                                 major = TIME1,
                                 minor = LENGTH1) *
@@ -163,7 +166,8 @@ class PaceAmountTest
     fun timesOtherSpace()
     {
         assertEquals(
-            expected = TimeAmount(2 * 2, TIME1),
+            expected = TimeAmount(amount = 2 * 2,
+                                  major = TIME1),
             actual = PaceAmount(amount = 2,
                                 major = TIME1,
                                 minor = LENGTH1) *
