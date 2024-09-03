@@ -154,7 +154,7 @@ class ElectricCurrentAmountTest
     @Test
     fun timesSameElectricTension()
     {
-        assertEquals(
+        assertEquals<PowerAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = PowerAmount(amount = 2 * 2,
                                    major = MASS1 * LENGTH1 * LENGTH1,
                                    minor = TIME1 * TIME1 * TIME1),

@@ -37,7 +37,7 @@ class PowerAmountTest
     @Test
     fun timesScalar()
     {
-        assertEquals(
+        assertEquals<PowerAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = PowerAmount(amount = 2 * 2,
                                    major = MASS1 * LENGTH1 * LENGTH1,
                                    minor = TIME1 * TIME1 * TIME1),
@@ -50,7 +50,7 @@ class PowerAmountTest
     @Test
     fun divScalar()
     {
-        assertEquals(
+        assertEquals<PowerAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = PowerAmount(amount = 2 / 2,
                                    major = MASS1 * LENGTH1 * LENGTH1,
                                    minor = TIME1 * TIME1 * TIME1),
@@ -63,7 +63,7 @@ class PowerAmountTest
     @Test
     fun plusSamePower()
     {
-        assertEquals(
+        assertEquals<PowerAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = PowerAmount(amount = 0 + 1,
                                    major = MASS1 * LENGTH1 * LENGTH1,
                                    minor = TIME1 * TIME1 * TIME1),
@@ -78,7 +78,7 @@ class PowerAmountTest
     @Test
     fun plusOtherPower()
     {
-        assertEquals(
+        assertEquals<PowerAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = PowerAmount(amount = 0 + 1,
                                    major = MASS1 * LENGTH1 * LENGTH1,
                                    minor = TIME1 * TIME1 * TIME1),
@@ -93,7 +93,7 @@ class PowerAmountTest
     @Test
     fun minusSamePower()
     {
-        assertEquals(
+        assertEquals<PowerAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = PowerAmount(amount = 1 - 1,
                                    major = MASS1 * LENGTH1 * LENGTH1,
                                    minor = TIME1 * TIME1 * TIME1),
@@ -108,7 +108,7 @@ class PowerAmountTest
     @Test
     fun minusOtherPower()
     {
-        assertEquals(
+        assertEquals<PowerAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = PowerAmount(amount = 1 - 1,
                                    major = MASS1 * LENGTH1 * LENGTH1,
                                    minor = TIME1 * TIME1 * TIME1),
