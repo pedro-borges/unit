@@ -105,7 +105,8 @@ class RentAmountTest
     fun divSameCurrency()
     {
         assertEquals(
-            expected = FrequencyAmount(2 / 2, TIME1),
+            expected = FrequencyAmount(amount = 2 / 2,
+                                       minor = TIME1),
             actual = RentAmount(2, CURRENCY1 to TIME1) /
                      CurrencyAmount(2, CURRENCY1))
     }
@@ -114,7 +115,8 @@ class RentAmountTest
     fun divOtherCurrency()
     {
         assertEquals(
-            expected = FrequencyAmount(2 / 2, TIME1),
+            expected = FrequencyAmount(amount = 2 / 2,
+                                       minor = TIME1),
             actual = RentAmount(2, CURRENCY1 to TIME1) /
                      CurrencyAmount(1, CURRENCY2))
     }

@@ -105,12 +105,12 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
         FrequencyAmount(amount = amount / that.amount
                                  / convert(that.length to length)
                                  * convert(that.time to time),
-                        time = time)
+                        minor = time)
 
     @JvmName("divSpeed")
     operator fun div(that: SpeedAmount<L, T>) =
         FrequencyAmount(amount = amount / that.amount,
-                        time = time)
+                        minor = time)
 
     // endregion
 

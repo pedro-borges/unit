@@ -20,72 +20,92 @@ class DebtAmountTest
     fun timesScalar()
     {
         assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
-            expected = DebtAmount(2 * 2, CURRENCY1 * TIME1),
-            actual = DebtAmount(2, CURRENCY1 * TIME1) *
-                     PercentAmount(2 * 100))
+            expected = DebtAmount(amount = 2 * 2,
+                                  major = CURRENCY1 * TIME1),
+            actual = DebtAmount(amount = 2,
+                                major = CURRENCY1 * TIME1) *
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun divScalar()
     {
         assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
-            expected = DebtAmount(2 / 2, CURRENCY1 * TIME1),
-            actual = DebtAmount(2, CURRENCY1 * TIME1) /
-                     PercentAmount(2 * 100))
+            expected = DebtAmount(amount = 2 / 2,
+                                  major = CURRENCY1 * TIME1),
+            actual = DebtAmount(amount = 2,
+                                major = CURRENCY1 * TIME1) /
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun plusSameDebt()
     {
         assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
-            expected = DebtAmount(0 + 1, CURRENCY1 * TIME1),
-            actual = DebtAmount(0, CURRENCY1 * TIME1) +
-                     DebtAmount(1, CURRENCY1 * TIME1))
+            expected = DebtAmount(amount = 0 + 1,
+                                  major = CURRENCY1 * TIME1),
+            actual = DebtAmount(amount = 0,
+                                major = CURRENCY1 * TIME1) +
+                     DebtAmount(amount = 1,
+                                major = CURRENCY1 * TIME1))
     }
 
     @Test
     fun plusOtherDebt()
     {
         assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
-            expected = DebtAmount(0 + (2 * 2), CURRENCY1 * TIME1),
-            actual = DebtAmount(0, CURRENCY1 * TIME1) +
-                     DebtAmount(1, CURRENCY2 * TIME2))
+            expected = DebtAmount(amount = 0 + (2 * 2),
+                                  major = CURRENCY1 * TIME1),
+            actual = DebtAmount(amount = 0,
+                                major = CURRENCY1 * TIME1) +
+                     DebtAmount(amount = 1,
+                                major = CURRENCY2 * TIME2))
     }
 
     @Test
     fun minusSameDebt()
     {
         assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
-            expected = DebtAmount(1 - 1, CURRENCY1 * TIME1),
-            actual = DebtAmount(1, CURRENCY1 * TIME1) -
-                     DebtAmount(1, CURRENCY1 * TIME1))
+            expected = DebtAmount(amount = 1 - 1,
+                                  major = CURRENCY1 * TIME1),
+            actual = DebtAmount(amount = 1,
+                                major = CURRENCY1 * TIME1) -
+                     DebtAmount(amount = 1,
+                                major = CURRENCY1 * TIME1))
     }
 
     @Test
     fun minusOtherDebt()
     {
         assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
-            expected = DebtAmount(4 - (2 * 2), CURRENCY1 * TIME1),
-            actual = DebtAmount(4, CURRENCY1 * TIME1) -
-                     DebtAmount(1, CURRENCY2 * TIME2))
+            expected = DebtAmount(amount = 4 - (2 * 2),
+                                  major = CURRENCY1 * TIME1),
+            actual = DebtAmount(amount = 4,
+                                major = CURRENCY1 * TIME1) -
+                     DebtAmount(amount = 1,
+                                major = CURRENCY2 * TIME2))
     }
 
     @Test
     fun divSameDebt()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = DebtAmount(2, CURRENCY1 * TIME1) /
-                     DebtAmount(2, CURRENCY1 * TIME1))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = DebtAmount(amount = 2,
+                                major = CURRENCY1 * TIME1) /
+                     DebtAmount(amount = 2,
+                                major = CURRENCY1 * TIME1))
     }
 
     @Test
     fun divOtherDebt()
     {
         assertEquals(
-            expected = NaturalAmount(4 / (2 * 2)),
-            actual = DebtAmount(4, CURRENCY1 * TIME1) /
-                     DebtAmount(1, CURRENCY2 * TIME2))
+            expected = NaturalAmount(amount = 4 / (2 * 2)),
+            actual = DebtAmount(amount = 4,
+                                major = CURRENCY1 * TIME1) /
+                     DebtAmount(amount = 1,
+                                major = CURRENCY2 * TIME2))
     }
 
     @Test
@@ -93,7 +113,8 @@ class DebtAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(2 / 2, CURRENCY1),
-            actual = DebtAmount(2, CURRENCY1 * TIME1) /
+            actual = DebtAmount(amount = 2,
+                                major = CURRENCY1 * TIME1) /
                      TimeAmount(2, TIME1))
     }
 
@@ -102,7 +123,8 @@ class DebtAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(2 / 2, CURRENCY1),
-            actual = DebtAmount(2, CURRENCY1 * TIME1) /
+            actual = DebtAmount(amount = 2,
+                                major = CURRENCY1 * TIME1) /
                      TimeAmount(1, TIME2))
     }
 
@@ -111,8 +133,10 @@ class DebtAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(2 / 2, CURRENCY1),
-            actual = DebtAmount(2, CURRENCY1 * TIME1) *
-                     FrequencyAmount(2, TIME1))
+            actual = DebtAmount(amount = 2,
+                                major = CURRENCY1 * TIME1) *
+                     FrequencyAmount(amount = 2,
+                                     minor = TIME1))
     }
 
     @Test
@@ -120,7 +144,9 @@ class DebtAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(2 / 2, CURRENCY1),
-            actual = DebtAmount(2, CURRENCY1 * TIME1) *
-                     FrequencyAmount(1, TIME2))
+            actual = DebtAmount(amount = 2,
+                                major = CURRENCY1 * TIME1) *
+                     FrequencyAmount(amount = 1,
+                                     minor = TIME2))
     }
 }

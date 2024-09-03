@@ -9,7 +9,8 @@ import org.pcb.unit.units.frequency.Hertz.HERTZ
 
 @Suppress("unused")
 class Hertz(amount: Number)
-    : FrequencyAmount<HERTZ>(amount.toBigBigDecimal(), HERTZ)
+    : FrequencyAmount<HERTZ>(amount = amount.toBigBigDecimal(),
+                             minor = HERTZ)
 {
     object HERTZ : Unit<Time>(Time::class)
     {

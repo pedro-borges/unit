@@ -137,7 +137,8 @@ class SpeedAmountTest
     fun divSameSpace()
     {
         assertEquals(
-            expected = FrequencyAmount(2 / 2, TIME1),
+            expected = FrequencyAmount(amount = 2 / 2,
+                                       minor = TIME1),
             actual = SpeedAmount(2, LENGTH1 to TIME1) /
                      LengthAmount(2, LENGTH1))
     }
@@ -146,7 +147,8 @@ class SpeedAmountTest
     fun divOtherSpace()
     {
         assertEquals(
-            expected = FrequencyAmount(2 / 2, TIME1),
+            expected = FrequencyAmount(amount = 2 / 2,
+                                       minor = TIME1),
             actual = SpeedAmount(2, LENGTH1 to TIME1) /
                      LengthAmount(1, LENGTH2))
     }

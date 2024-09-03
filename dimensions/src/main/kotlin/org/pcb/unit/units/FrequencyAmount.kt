@@ -15,39 +15,41 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class FrequencyAmount<T : Unit<Time>>(
         amount: Number,
-        val time: T)
+        val minor: T)
     : Amount<Time>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Time::class,
-                       units = listOf(time to -1)))
+                       units = listOf(minor to -1)))
 {
+        val time = minor
+
     // region Frequency
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         FrequencyAmount(amount = amount * that.amount * that.unit.scale,
-                        time = time)
+                        minor = time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         FrequencyAmount(amount = amount / that.amount / that.unit.scale,
-                        time = time)
+                        minor = time)
 
     operator fun <T : Unit<Time>> plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount / convert(that.time to time),
-                        time = time)
+                        minor = time)
 
     @JvmName("plusFrequency")
     operator fun plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount,
-                        time = time)
+                        minor = time)
 
     operator fun <T : Unit<Time>> minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount / convert(that.time to time),
-                        time = time)
+                        minor = time)
 
     @JvmName("minusFrequency")
     operator fun minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount,
-                        time = time)
+                        minor = time)
 
     // endregion
 

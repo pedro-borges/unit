@@ -17,72 +17,92 @@ class FrequencyAmountTest
     fun timesScalar()
     {
         assertEquals(
-            expected = FrequencyAmount(2 * 2, TIME1),
-            actual = FrequencyAmount(2, TIME1) *
-                     PercentAmount(2 * 100))
+            expected = FrequencyAmount(amount = 2 * 2,
+                                       minor = TIME1),
+            actual = FrequencyAmount(amount = 2,
+                                     minor = TIME1) *
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun divScalar()
     {
         assertEquals(
-            expected = FrequencyAmount(2 / 2, TIME1),
-            actual = FrequencyAmount(2, TIME1) /
-                     PercentAmount(2 * 100))
+            expected = FrequencyAmount(amount = 2 / 2,
+                                       minor = TIME1),
+            actual = FrequencyAmount(amount = 2,
+                                     minor = TIME1) /
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun plusSameFrequency()
     {
         assertEquals(
-            expected = FrequencyAmount(0 + 1, TIME1),
-            actual = FrequencyAmount(0, TIME1) +
-                     FrequencyAmount(1, TIME1))
+            expected = FrequencyAmount(amount = 0 + 1,
+                                       minor = TIME1),
+            actual = FrequencyAmount(amount = 0,
+                                     minor = TIME1) +
+                     FrequencyAmount(amount = 1,
+                                     minor = TIME1))
     }
 
     @Test
     fun plusOtherFrequency()
     {
         assertEquals(
-            expected = FrequencyAmount(0 + 1, TIME1),
-            actual = FrequencyAmount(0, TIME1) +
-                     FrequencyAmount(2, TIME2))
+            expected = FrequencyAmount(amount = 0 + 1,
+                                       minor = TIME1),
+            actual = FrequencyAmount(amount = 0,
+                                     minor = TIME1) +
+                     FrequencyAmount(amount = 2,
+                                     minor = TIME2))
     }
 
     @Test
     fun minusSameFrequency()
     {
         assertEquals(
-            expected = FrequencyAmount(1 - 1, TIME1),
-            actual = FrequencyAmount(1, TIME1) -
-                     FrequencyAmount(1, TIME1))
+            expected = FrequencyAmount(amount = 1 - 1,
+                                       minor = TIME1),
+            actual = FrequencyAmount(amount = 1,
+                                     minor = TIME1) -
+                     FrequencyAmount(amount = 1,
+                                     minor = TIME1))
     }
 
     @Test
     fun minusOtherFrequency()
     {
         assertEquals(
-            expected = FrequencyAmount(1 - 1, TIME1),
-            actual = FrequencyAmount(1, TIME1) -
-                     FrequencyAmount(2, TIME2))
+            expected = FrequencyAmount(amount = 1 - 1,
+                                       minor = TIME1),
+            actual = FrequencyAmount(amount = 1,
+                                     minor = TIME1) -
+                     FrequencyAmount(amount = 2,
+                                     minor = TIME2))
     }
 
     @Test
     fun divSameFrequency()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = FrequencyAmount(2, TIME1) /
-                     FrequencyAmount(2, TIME1))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = FrequencyAmount(amount = 2,
+                                     minor = TIME1) /
+                     FrequencyAmount(amount = 2,
+                                     minor = TIME1))
     }
 
     @Test
     fun divOtherFrequency()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = FrequencyAmount(1, TIME1) /
-                     FrequencyAmount(2, TIME2))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = FrequencyAmount(amount = 1,
+                                     minor = TIME1) /
+                     FrequencyAmount(amount = 2,
+                                     minor = TIME2))
     }
 
     @Test
@@ -90,7 +110,8 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = SpeedAmount(2 / 2, LENGTH1 to TIME1),
-            actual = FrequencyAmount(2, TIME1) *
+            actual = FrequencyAmount(amount = 2,
+                                     minor = TIME1) *
                      LengthAmount(2, LENGTH1))
     }
 
@@ -101,7 +122,8 @@ class FrequencyAmountTest
             expected = AccelerationAmount(amount = 2 / 2,
                                           major = LENGTH1,
                                           minor = TIME1 * TIME1),
-            actual = FrequencyAmount(2, TIME1) *
+            actual = FrequencyAmount(amount = 2,
+                                     minor = TIME1) *
                      SpeedAmount(2, LENGTH1 to TIME1))
     }
 
@@ -112,7 +134,8 @@ class FrequencyAmountTest
             expected = AccelerationAmount(amount = 2 / 2,
                                           major = LENGTH1,
                                           minor = TIME1 * TIME1),
-            actual = FrequencyAmount(2, TIME1) *
+            actual = FrequencyAmount(amount = 2,
+                                     minor = TIME1) *
                      SpeedAmount(2 * 2, LENGTH1 to TIME2))
     }
 
@@ -121,8 +144,10 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(2 / 2, CURRENCY1),
-            actual = FrequencyAmount(2, TIME1) *
-                     DebtAmount(2, CURRENCY1 * TIME1))
+            actual = FrequencyAmount(amount = 2,
+                                     minor = TIME1) *
+                     DebtAmount(amount = 2,
+                                major = CURRENCY1 * TIME1))
     }
 
     @Test
@@ -130,8 +155,10 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(2 / 2, CURRENCY1),
-            actual = FrequencyAmount(2, TIME1) *
-                     DebtAmount(1, CURRENCY1 * TIME2))
+            actual = FrequencyAmount(amount = 2,
+                                     minor = TIME1) *
+                     DebtAmount(amount = 1,
+                                major = CURRENCY1 * TIME2))
     }
 
     @Test
@@ -139,7 +166,8 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = RentAmount(2 / 2, CURRENCY1 to TIME1),
-            actual = FrequencyAmount(2, TIME1) *
+            actual = FrequencyAmount(amount = 2,
+                                     minor = TIME1) *
                      CurrencyAmount(2, CURRENCY1))
     }
 }

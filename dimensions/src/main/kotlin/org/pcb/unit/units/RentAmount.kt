@@ -95,12 +95,12 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     operator fun <C : Unit<Currency>> div(that: CurrencyAmount<C>) =
         FrequencyAmount(amount = amount / that.amount / convert(that.currency to currency),
-                        time = time)
+                        minor = time)
 
     @JvmName("divCurrency")
     operator fun div(that: CurrencyAmount<C>) =
         FrequencyAmount(amount = amount / that.amount,
-                        time = time)
+                        minor = time)
 
     // endregion
 }

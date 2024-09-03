@@ -12,62 +12,63 @@ class ScalarAmountTest
     fun timesScalar()
     {
         assertEquals(
-            expected = NaturalAmount(4),
-            actual = NaturalAmount(2) *
-                     PercentAmount(2 * 100))
+            expected = NaturalAmount(amount = 2 * 2),
+            actual = NaturalAmount(amount = 2) *
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun divScalar()
     {
         assertEquals(
-            expected = NaturalAmount(1),
-            actual = NaturalAmount(2) /
-                     PercentAmount(2 * 100))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = NaturalAmount(amount = 2) /
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun plusSameScalar()
     {
         assertEquals(
-            expected = NaturalAmount(1),
-            actual = NaturalAmount(0) +
-                     NaturalAmount(1))
+            expected = NaturalAmount(amount = 0 + 1),
+            actual = NaturalAmount(amount = 0) +
+                     NaturalAmount(amount = 1))
     }
 
     @Test
     fun plusOtherScalar()
     {
         assertEquals(
-            expected = NaturalAmount(1),
-            actual = NaturalAmount(0) +
-                     PercentAmount(100))
+            expected = NaturalAmount(amount = 0 + 1),
+            actual = NaturalAmount(amount = 0) +
+                     PercentAmount(amount = 100))
     }
 
     @Test
     fun minusSameScalar()
     {
         assertEquals(
-            expected = NaturalAmount(0),
-            actual = NaturalAmount(1) -
-                     NaturalAmount(1))
+            expected = NaturalAmount(amount = 1 - 1),
+            actual = NaturalAmount(amount = 1) -
+                     NaturalAmount(amount = 1))
     }
 
     @Test
     fun minusOtherScalar()
     {
         assertEquals(
-            expected = NaturalAmount(0),
-            actual = NaturalAmount(1) -
-                     PercentAmount(100))
+            expected = NaturalAmount(amount = 1 - 1),
+            actual = NaturalAmount(amount = 1) -
+                     PercentAmount(amount = 100))
     }
 
     @Test
     fun divTime()
     {
         assertEquals(
-            expected = FrequencyAmount(1, TIME1),
-            actual = NaturalAmount(2) /
+            expected = FrequencyAmount(amount = 2 / 2,
+                                       minor = TIME1),
+            actual = NaturalAmount(amount = 2) /
                      TimeAmount(2, TIME1))
     }
 
@@ -75,8 +76,9 @@ class ScalarAmountTest
     fun divFrequency()
     {
         assertEquals(
-            expected = TimeAmount(1, TIME1),
-            actual = NaturalAmount(2) /
-                     FrequencyAmount(2, TIME1))
+            expected = TimeAmount(2 / 2, TIME1),
+            actual = NaturalAmount(amount = 2) /
+                     FrequencyAmount(amount = 2,
+                                     minor = TIME1))
     }
 }

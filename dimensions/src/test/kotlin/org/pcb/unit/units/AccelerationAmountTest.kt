@@ -165,7 +165,8 @@ class AccelerationAmountTest
     fun divSameSpeed()
     {
         assertEquals(
-            expected = FrequencyAmount(2 / 2, TIME1),
+            expected = FrequencyAmount(amount = 2 / 2,
+                                       minor = TIME1),
             actual = AccelerationAmount(amount = 2,
                                         major = LENGTH1,
                                         minor = TIME1 * TIME1) /
@@ -176,7 +177,8 @@ class AccelerationAmountTest
     fun divOtherSpeed()
     {
         assertEquals(
-            expected = FrequencyAmount(2 / 2, TIME1),
+            expected = FrequencyAmount(amount = 2 / 2,
+                                       minor = TIME1),
             actual = AccelerationAmount(amount = 2,
                                         major = LENGTH1,
                                         minor = TIME1 * TIME1) /
