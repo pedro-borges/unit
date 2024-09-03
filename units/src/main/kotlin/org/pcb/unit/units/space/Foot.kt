@@ -11,7 +11,7 @@ import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.Foot.FOOT
 
 class Foot(amount: Number)
-    : LengthAmount<FOOT>(amount = amount.toBigBigDecimal(),
+    : LengthAmount<FOOT>(amount = amount,
                          unit = FOOT)
 {
     object FOOT : Unit<Length>(Length::class)

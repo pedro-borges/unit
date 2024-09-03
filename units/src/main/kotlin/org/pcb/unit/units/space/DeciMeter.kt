@@ -11,7 +11,7 @@ import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.DeciMeter.DECIMETER
 
 class DeciMeter(amount: Number)
-    : LengthAmount<DECIMETER>(amount = amount.toBigBigDecimal(),
+    : LengthAmount<DECIMETER>(amount = amount,
                               unit = DECIMETER)
 {
     object DECIMETER : Unit<Length>(Length::class)

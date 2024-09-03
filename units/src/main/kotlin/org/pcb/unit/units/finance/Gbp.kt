@@ -11,7 +11,8 @@ import org.pcb.unit.units.CurrencyAmount
 import org.pcb.unit.units.finance.Gbp.GBP
 
 class Gbp(amount: Number)
-    : CurrencyAmount<GBP>(amount.toBigBigDecimal(), GBP)
+    : CurrencyAmount<GBP>(amount = amount,
+                          unit = GBP)
 {
     object GBP : Unit<Currency>(Currency::class)
     {

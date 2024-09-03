@@ -11,7 +11,7 @@ import org.pcb.unit.units.MassAmount
 import org.pcb.unit.units.mass.Ounce.OUNCE
 
 class Ounce(amount: Number)
-    : MassAmount<OUNCE>(amount = amount.toBigBigDecimal(),
+    : MassAmount<OUNCE>(amount = amount,
                         unit = OUNCE)
 {
     object OUNCE : Unit<Mass>(Mass::class)

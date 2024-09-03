@@ -11,7 +11,7 @@ import org.pcb.unit.units.MassAmount
 import org.pcb.units.amount.mass.Pound.POUND
 
 class Pound(amount: Number)
-    : MassAmount<POUND>(amount = amount.toBigBigDecimal(),
+    : MassAmount<POUND>(amount = amount,
                         unit = POUND)
 {
     object POUND : Unit<Mass>(Mass::class)

@@ -12,7 +12,7 @@ import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.NaturalAmount.ONE
 
 class Hertz(amount: Number)
-    : FrequencyAmount<SECOND>(amount = amount.toBigBigDecimal(),
+    : FrequencyAmount<SECOND>(amount = amount,
                               unit = ONE / SECOND)
 {
     object HERTZ : Unit<Frequency>(Frequency::class)

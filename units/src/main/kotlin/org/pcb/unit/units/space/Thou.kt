@@ -11,7 +11,7 @@ import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.Thou.THOU
 
 class Thou(amount: Number)
-    : LengthAmount<THOU>(amount = amount.toBigBigDecimal(),
+    : LengthAmount<THOU>(amount = amount,
                          unit = THOU)
 {
     object THOU : Unit<Length>(Length::class)

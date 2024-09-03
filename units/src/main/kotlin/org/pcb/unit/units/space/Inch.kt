@@ -11,7 +11,7 @@ import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.Inch.INCH
 
 class Inch(amount: Number)
-    : LengthAmount<INCH>(amount = amount.toBigBigDecimal(),
+    : LengthAmount<INCH>(amount = amount,
                          unit = INCH)
 {
     object INCH : Unit<Length>(Length::class)

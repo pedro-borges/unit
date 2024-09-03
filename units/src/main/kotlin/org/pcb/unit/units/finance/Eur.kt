@@ -6,12 +6,12 @@ import org.pcb.unit.Triple
 import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Currency
-import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.CurrencyAmount
 import org.pcb.unit.units.finance.Eur.EUR
 
 class Eur(amount: Number)
-    : CurrencyAmount<EUR>(amount.toBigBigDecimal(), EUR)
+    : CurrencyAmount<EUR>(amount = amount,
+                          unit = EUR)
 {
     object EUR : Unit<Currency>(Currency::class)
     {

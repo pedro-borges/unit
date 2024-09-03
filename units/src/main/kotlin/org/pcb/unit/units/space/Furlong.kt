@@ -11,7 +11,7 @@ import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.Furlong.FURLONG
 
 class Furlong(amount: Number)
-    : LengthAmount<FURLONG>(amount = amount.toBigBigDecimal(),
+    : LengthAmount<FURLONG>(amount = amount,
                             unit = FURLONG)
 {
     object FURLONG : Unit<Length>(Length::class)

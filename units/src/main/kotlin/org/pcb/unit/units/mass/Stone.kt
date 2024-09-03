@@ -11,7 +11,7 @@ import org.pcb.unit.units.MassAmount
 import org.pcb.unit.units.mass.Stone.STONE
 
 class Stone(amount: Number)
-    : MassAmount<STONE>(amount = amount.toBigBigDecimal(),
+    : MassAmount<STONE>(amount = amount,
                         unit = STONE)
 {
     object STONE : Unit<Mass>(Mass::class)

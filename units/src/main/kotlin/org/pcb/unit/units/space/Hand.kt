@@ -11,7 +11,7 @@ import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.Hand.HAND
 
 class Hand(amount: Number)
-    : LengthAmount<HAND>(amount = amount.toBigBigDecimal(),
+    : LengthAmount<HAND>(amount = amount,
                          unit = HAND)
 {
     object HAND : Unit<Length>(Length::class)

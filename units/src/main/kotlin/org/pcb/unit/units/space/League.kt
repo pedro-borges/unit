@@ -11,7 +11,7 @@ import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.League.LEAGUE
 
 class League(amount: Number)
-    : LengthAmount<LEAGUE>(amount = amount.toBigBigDecimal(),
+    : LengthAmount<LEAGUE>(amount = amount,
                            unit = LEAGUE)
 {
     object LEAGUE : Unit<Length>(Length::class)

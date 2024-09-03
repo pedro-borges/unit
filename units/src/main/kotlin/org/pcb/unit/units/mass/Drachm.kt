@@ -11,7 +11,7 @@ import org.pcb.unit.units.MassAmount
 import org.pcb.unit.units.mass.Drachm.DRACHM
 
 class Drachm(amount: Number)
-    : MassAmount<DRACHM>(amount = amount.toBigBigDecimal(),
+    : MassAmount<DRACHM>(amount = amount,
                          unit = DRACHM)
 {
     object DRACHM : Unit<Mass>(Mass::class)

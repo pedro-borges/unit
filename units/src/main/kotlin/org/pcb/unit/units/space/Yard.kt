@@ -11,7 +11,7 @@ import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.Yard.YARD
 
 class Yard(amount: Number)
-    : LengthAmount<YARD>(amount = amount.toBigBigDecimal(),
+    : LengthAmount<YARD>(amount = amount,
                          unit = YARD)
 {
     object YARD : Unit<Length>(Length::class)

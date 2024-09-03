@@ -11,7 +11,7 @@ import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.space.Chain.CHAIN
 
 class Chain(amount: Number)
-    : LengthAmount<CHAIN>(amount = amount.toBigBigDecimal(),
+    : LengthAmount<CHAIN>(amount = amount,
                           unit = CHAIN)
 {
     object CHAIN : Unit<Length>(Length::class)
