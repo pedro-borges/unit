@@ -2,6 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Currency
@@ -15,49 +16,45 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
         amount: Number,
-        val currency: C,
-        val time: T)
+        major: Tuple<C, T>)
     : Amount<Debt>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Debt::class,
-                       units = listOf(currency to 1,
-                                      time to 1)))
+                       units = listOf(major.first to 1,
+                                      major.second to 1)))
 {
+    val currency = major.first
+    val time = major.second
+
     // region Debt
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         DebtAmount(amount = amount * that.amount * that.unit.scale,
-                   currency = currency,
-                   time = time)
+                   major = currency * time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         DebtAmount(amount = amount / that.amount / that.unit.scale,
-                   currency = currency,
-                   time = time)
+                   major = currency * time)
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> plus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount + that.amount * convert(that.currency to currency,
                                                            that.time to time),
-                   currency = currency,
-                   time = time)
+                   major = currency * time)
 
     @JvmName("plusDebt")
     operator fun plus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount + that.amount,
-                   currency = currency,
-                   time = time)
+                   major = currency * time)
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> minus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount - that.amount * convert(that.currency to currency,
                                                            that.time to time),
-                   currency = currency,
-                   time = time)
+                   major = currency * time)
 
     @JvmName("minusDebt")
     operator fun minus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount - that.amount,
-                   currency = currency,
-                   time = time)
+                   major = currency * time)
 
     // endregion
 
@@ -77,21 +74,21 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         CurrencyAmount(amount = amount / that.amount / convert(that.time to time),
-                       currency = currency)
+                       major = currency)
 
     @JvmName("divTime")
     operator fun div(that: TimeAmount<T>) =
         CurrencyAmount(amount = amount / that.amount,
-                       currency = currency)
+                       major = currency)
 
     operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
         CurrencyAmount(amount = amount / that.amount / convert(that.time to time),
-                       currency = currency)
+                       major = currency)
 
     @JvmName("timesFrequency")
     operator fun times(that: FrequencyAmount<T>) =
         CurrencyAmount(amount = amount / that.amount,
-                       currency = currency)
+                       major = currency)
 
     // endregion
 }

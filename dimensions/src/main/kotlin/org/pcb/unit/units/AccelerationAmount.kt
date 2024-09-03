@@ -2,6 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Acceleration
@@ -16,60 +17,56 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
-        val length: L,
-        val time: T,
-        time2: T)
-    : Amount<Acceleration>(amount = amount.toBigBigDecimal() * convert(time to time2),
+        major: L,
+        minor: Tuple<T, T>)
+    : Amount<Acceleration>(amount = amount.toBigBigDecimal() / convert(minor.second to minor.first),
                            unit = CompositeUnit(
                                domain = Acceleration::class,
-                               units = listOf(length to 1,
-                                              time to -2)))
+                               units = listOf(major to 1,
+                                              minor.first to -2)))
 {
+    val length = major
+    val time = minor.first
+
     // region Acceleration
 
-    override operator fun <U : Unit<Scalar>> times(that: ScalarAmount<U>): AccelerationAmount<L, T> =
+    override operator fun <U : Unit<Scalar>> times(that: ScalarAmount<U>) =
         AccelerationAmount(amount = amount * that.amount * that.unit.scale,
-                           length = length,
-                           time = time,
-                           time2 = time)
+                           major = length,
+                           minor = time * time)
 
-    override operator fun <U : Unit<Scalar>> div(that: ScalarAmount<U>): AccelerationAmount<L, T> =
+    override operator fun <U : Unit<Scalar>> div(that: ScalarAmount<U>) =
         AccelerationAmount(amount = amount / that.amount / that.unit.scale,
-                           length = length,
-                           time = time,
-                           time2 = time)
+                           major = length,
+                           minor = time * time)
 
     operator fun <L : Unit<Length>, T : Unit<Time>> plus(that: AccelerationAmount<L, T>) =
         AccelerationAmount(amount = amount + that.amount
                                     * convert(that.length to length)
                                     / convert(that.time to time,
                                               that.time to time),
-                           length = length,
-                           time = time,
-                           time2 = time)
+                           major = length,
+                           minor = time * time)
 
     @JvmName("plusAcceleration")
     operator fun plus(that: AccelerationAmount<L, T>) =
         AccelerationAmount(amount = amount + that.amount,
-                           length = length,
-                           time = time,
-                           time2 = time)
+                           major = length,
+                           minor = time * time)
 
     operator fun <L : Unit<Length>, T : Unit<Time>> minus(that: AccelerationAmount<L, T>) =
         AccelerationAmount(amount = amount - that.amount
                                     * convert(that.length to length)
                                     / convert(that.time to time,
                                               that.time to time),
-                           length = length,
-                           time = time,
-                           time2 = time)
+                           major = length,
+                           minor = time * time)
 
     @JvmName("minusAcceleration")
     operator fun minus(that: AccelerationAmount<L, T>) =
         AccelerationAmount(amount = amount - that.amount,
-                           length = length,
-                           time = time,
-                           time2 = time)
+                           major = length,
+                           minor = time * time)
 
     // endregion
 
@@ -105,8 +102,9 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
     // region Frequency
 
     operator fun <L : Unit<Length>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
-        FrequencyAmount(amount = amount / that.amount * convert(length to that.length,
-                                                                that.time to time),
+        FrequencyAmount(amount = amount / that.amount
+                                 / convert(that.length to length)
+                                 * convert(that.time to time),
                         time = time)
 
     @JvmName("divSpeed")
@@ -120,10 +118,8 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
         ForceAmount(amount = amount * that.amount,
-                    mass = that.mass,
-                    length = length,
-                    time = time,
-                    time2 = time)
+                    major = that.mass * length,
+                    minor = time * time)
 
     // endregion
 }

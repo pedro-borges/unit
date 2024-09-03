@@ -3,6 +3,7 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.Unit
+import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.units.scalar.NaturalAmount
 import org.pcb.unit.units.scalar.PercentAmount
@@ -19,97 +20,147 @@ class ForceAmountTest
     fun construct()
     {
         assertEquals<ForceAmount<MASS1, LENGTH1, out Unit<Time>>>(
-            expected = ForceAmount(1, MASS1, LENGTH1, TIME1, TIME1),
-            actual = ForceAmount(2, MASS1, LENGTH1, TIME1, TIME2))
+            expected = ForceAmount(amount = 1,
+                                   major = MASS1 * LENGTH1,
+                                   minor = TIME1 * TIME1),
+            actual = ForceAmount(amount = 2,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME2))
     }
 
     @Test
     fun timesScalar()
     {
-        assertEquals(
-            expected = ForceAmount(2 * 2, MASS1, LENGTH1, TIME1, TIME1),
-            actual = ForceAmount(2, MASS1, LENGTH1, TIME1, TIME1) *
-                     PercentAmount(2 * 100))
+        assertEquals<ForceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = ForceAmount(amount = 2 * 2,
+                                   major = MASS1 * LENGTH1,
+                                   minor = TIME1 * TIME1),
+            actual = ForceAmount(amount = 2,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1) *
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun divScalar()
     {
-        assertEquals(
-            expected = ForceAmount(2 / 2, MASS1, LENGTH1, TIME1, TIME1),
-            actual = ForceAmount(2, MASS1, LENGTH1, TIME1, TIME1) /
-                     PercentAmount(2 * 100))
+        assertEquals<ForceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = ForceAmount(amount = 2 / 2,
+                                   major = MASS1 * LENGTH1,
+                                   minor = TIME1 * TIME1),
+            actual = ForceAmount(amount = 2,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1) /
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun plusSameForce()
     {
-        assertEquals(
-            expected = ForceAmount(0 + 1, MASS1, LENGTH1, TIME1, TIME1),
-            actual = ForceAmount(0, MASS1, LENGTH1, TIME1, TIME1) +
-                     ForceAmount(1, MASS1, LENGTH1, TIME1, TIME1))
+        assertEquals<ForceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = ForceAmount(amount = 0 + 1,
+                                   major = MASS1 * LENGTH1,
+                                   minor = TIME1 * TIME1),
+            actual = ForceAmount(amount = 0,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1) +
+                     ForceAmount(amount = 1,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1))
     }
 
     @Test
     fun plusOtherForce()
     {
-        assertEquals(
-            expected = ForceAmount(0 + 1, MASS1, LENGTH1, TIME1, TIME1),
-            actual = ForceAmount(0, MASS1, LENGTH1, TIME1, TIME1) +
-                     ForceAmount(1, MASS2, LENGTH2, TIME2, TIME2))
+        assertEquals<ForceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = ForceAmount(amount = 0 + 1,
+                                   major = MASS1 * LENGTH1,
+                                   minor = TIME1 * TIME1),
+            actual = ForceAmount(amount = 0,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1) +
+                     ForceAmount(amount = 1,
+                                 major = MASS2 * LENGTH2,
+                                 minor = TIME2 * TIME2))
     }
 
     @Test
     fun minusSameForce()
     {
-        assertEquals(
-            expected = ForceAmount(1 - 1, MASS1, LENGTH1, TIME1, TIME1),
-            actual = ForceAmount(1, MASS1, LENGTH1, TIME1, TIME1) -
-                     ForceAmount(1, MASS1, LENGTH1, TIME1, TIME1))
+        assertEquals<ForceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = ForceAmount(amount = 1 - 1,
+                                   major = MASS1 * LENGTH1,
+                                   minor = TIME1 * TIME1),
+            actual = ForceAmount(amount = 1,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1) -
+                     ForceAmount(amount = 1,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1))
     }
 
     @Test
     fun minusOtherForce()
     {
-        assertEquals(
-            expected = ForceAmount(1 - 1, MASS1, LENGTH1, TIME1, TIME1),
-            actual = ForceAmount(1, MASS1, LENGTH1, TIME1, TIME1) -
-                     ForceAmount(1, MASS2, LENGTH2, TIME2, TIME2))
+        assertEquals<ForceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = ForceAmount(1 - 1, MASS1 * LENGTH1, TIME1 * TIME1),
+            actual = ForceAmount(amount = 1,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1) -
+                     ForceAmount(amount = 1,
+                                 major = MASS2 * LENGTH2,
+                                 minor = TIME2 * TIME2))
     }
 
     @Test
     fun divSameForce()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = ForceAmount(2, MASS1, LENGTH1, TIME1, TIME1) /
-                     ForceAmount(2, MASS1, LENGTH1, TIME1, TIME1))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = ForceAmount(amount = 2,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1) /
+                     ForceAmount(amount = 2,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1))
     }
 
     @Test
     fun divOtherForce()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = ForceAmount(2, MASS1, LENGTH1, TIME1, TIME1) /
-                     ForceAmount(2, MASS2, LENGTH2, TIME2, TIME2))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = ForceAmount(amount = 2,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1) /
+                     ForceAmount(amount = 2,
+                                 major = MASS2 * LENGTH2,
+                                 minor = TIME2 * TIME2))
     }
 
     @Test
     fun divSameMass()
     {
-        assertEquals(
-            expected = AccelerationAmount(2 / 2, LENGTH1, TIME1, TIME1),
-            actual = ForceAmount(2, MASS1, LENGTH1, TIME1, TIME1) /
+        assertEquals<AccelerationAmount<LENGTH1, out Unit<Time>>>(
+            expected = AccelerationAmount(amount = 2 / 2,
+                                          major = LENGTH1,
+                                          minor = TIME1 * TIME1),
+            actual = ForceAmount(amount = 2,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1) /
                      MassAmount(2, MASS1))
     }
 
     @Test
     fun divOtherMass()
     {
-        assertEquals(
-            expected = AccelerationAmount(2 / 2, LENGTH1, TIME1, TIME1),
-            actual = ForceAmount(2, MASS1, LENGTH1, TIME1, TIME1) /
+        assertEquals<AccelerationAmount<LENGTH1, out Unit<Time>>>(
+            expected = AccelerationAmount(amount = 2 / 2,
+                                          major = LENGTH1,
+                                          minor = TIME1 * TIME1),
+            actual = ForceAmount(amount = 2,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1) /
                      MassAmount(1, MASS2))
     }
 
@@ -118,8 +169,12 @@ class ForceAmountTest
     {
         assertEquals(
             expected = MassAmount(2 / 2, MASS1),
-            actual = ForceAmount(2, MASS1, LENGTH1, TIME1, TIME1) /
-                     AccelerationAmount(2, LENGTH1, TIME1, TIME1))
+            actual = ForceAmount(amount = 2,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1) /
+                     AccelerationAmount(amount = 2,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1))
     }
 
     @Test
@@ -127,16 +182,22 @@ class ForceAmountTest
     {
         assertEquals(
             expected = MassAmount(2 / 2, MASS1),
-            actual = ForceAmount(2, MASS1, LENGTH1, TIME1, TIME1) /
-                     AccelerationAmount(2 * 2, LENGTH2, TIME2, TIME2))
+            actual = ForceAmount(amount = 2,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1) /
+                     AccelerationAmount(amount = 2 * 2,
+                                        major = LENGTH2,
+                                        minor = TIME2 * TIME2))
     }
 
     @Test
     fun timesSameTime()
     {
         assertEquals(
-            expected = MomentumAmount(2 * 2, MASS1, LENGTH1, TIME1),
-            actual = ForceAmount(2, MASS1, LENGTH1, TIME1, TIME1) *
+            expected = MomentumAmount(2 * 2, (MASS1 * LENGTH1) to TIME1),
+            actual = ForceAmount(amount = 2,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1) *
                      TimeAmount(2, TIME1))
     }
 
@@ -144,26 +205,36 @@ class ForceAmountTest
     fun timesOtherTime()
     {
         assertEquals(
-            expected = MomentumAmount(2 * 2, MASS1, LENGTH1, TIME1),
-            actual = ForceAmount(2, MASS1, LENGTH1, TIME1, TIME1) *
+            expected = MomentumAmount(2 * 2, (MASS1 * LENGTH1) to TIME1),
+            actual = ForceAmount(amount = 2,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1) *
                      TimeAmount(1, TIME2))
     }
 
     @Test
     fun timesSameSpace()
     {
-        assertEquals(
-            expected = EnergyAmount(2 * 2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1),
-            actual = ForceAmount(2, MASS1, LENGTH1, TIME1, TIME1) *
+        assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = EnergyAmount(amount = 2 * 2,
+                                    major = MASS1 * LENGTH1 * LENGTH1,
+                                    minor = TIME1 * TIME1),
+            actual = ForceAmount(amount = 2,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1) *
                      LengthAmount(2, LENGTH1))
     }
 
     @Test
     fun timesOtherSpace()
     {
-        assertEquals(
-            expected = EnergyAmount(2 * 2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1),
-            actual = ForceAmount(2, MASS1, LENGTH1, TIME1, TIME1) *
+        assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = EnergyAmount(amount = 2 * 2,
+                                    major = MASS1 * LENGTH1 * LENGTH1,
+                                    minor = TIME1 * TIME1),
+            actual = ForceAmount(amount = 2,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1) *
                      LengthAmount(1, LENGTH2))
     }
 }

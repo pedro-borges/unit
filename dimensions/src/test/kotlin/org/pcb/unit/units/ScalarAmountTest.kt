@@ -2,9 +2,9 @@ package org.pcb.unit.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.NaturalAmount
 import org.pcb.unit.units.scalar.PercentAmount
+import org.pcb.unit.units.test.TIME1
 
 class ScalarAmountTest
 {
@@ -66,17 +66,17 @@ class ScalarAmountTest
     fun divTime()
     {
         assertEquals(
-            expected = FrequencyAmount(1, SECOND),
+            expected = FrequencyAmount(1, TIME1),
             actual = NaturalAmount(2) /
-                     TimeAmount(2, SECOND))
+                     TimeAmount(2, TIME1))
     }
 
     @Test
     fun divFrequency()
     {
         assertEquals(
-            expected = TimeAmount(1, SECOND),
+            expected = TimeAmount(1, TIME1),
             actual = NaturalAmount(2) /
-                     FrequencyAmount(2, SECOND))
+                     FrequencyAmount(2, TIME1))
     }
 }

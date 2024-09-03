@@ -2,6 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.Triple
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Length
@@ -22,6 +23,8 @@ open class VolumeAmount<L : Unit<Length>>(
                          domain = Length::class,
                          units = listOf(length to 3)))
 {
+    constructor(amount: Number, major: Triple<L, L, L>) : this(amount, major.first, major.second, major.third)
+
     // region Volume
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
@@ -44,7 +47,7 @@ open class VolumeAmount<L : Unit<Length>>(
                      length2 = length,
                      length3 = length)
 
-    @JvmName("plusLength")
+    @JvmName("plusVolume")
     operator fun plus(that: VolumeAmount<L>) =
         VolumeAmount(amount = amount + that.amount,
                      length = length,
@@ -59,7 +62,7 @@ open class VolumeAmount<L : Unit<Length>>(
                      length2 = length,
                      length3 = length)
 
-    @JvmName("minusLength")
+    @JvmName("minusVolume")
     operator fun minus(that: VolumeAmount<L>) =
         VolumeAmount(amount = amount - that.amount,
                      length = length,
@@ -85,14 +88,12 @@ open class VolumeAmount<L : Unit<Length>>(
 
     operator fun <L : Unit<Length>>div(that: LengthAmount<L>) =
         AreaAmount(amount = amount / that.amount / convert(that.length to length),
-                   length = length,
-                   length2 = length)
+                   major = length * length)
 
     @JvmName("divLength")
     operator fun div(that: LengthAmount<L>) =
         AreaAmount(amount = amount / that.amount,
-                   length = length,
-                   length2 = length)
+                   major = length * length)
 
     // endregion
 

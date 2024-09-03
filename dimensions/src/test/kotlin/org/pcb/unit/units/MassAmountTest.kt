@@ -2,6 +2,8 @@ package org.pcb.unit
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
+import org.pcb.unit.dimension.Mass
+import org.pcb.unit.dimension.Time
 import org.pcb.unit.units.AccelerationAmount
 import org.pcb.unit.units.ForceAmount
 import org.pcb.unit.units.MassAmount
@@ -92,17 +94,21 @@ class MassAmountTest
     fun timesSpeed()
     {
         assertEquals(
-            expected = MomentumAmount(2 * 2, MASS1, LENGTH1, TIME1),
+            expected = MomentumAmount(2 * 2, (MASS1 * LENGTH1) to TIME1),
             actual = MassAmount(2, MASS1) *
-                     SpeedAmount(2, LENGTH1, TIME1))
+                     SpeedAmount(2, LENGTH1 to TIME1))
     }
 
     @Test
     fun timesAcceleration()
     {
-        assertEquals(
-            expected = ForceAmount(2 * 2, MASS1, LENGTH1, TIME1, TIME1),
+        assertEquals<ForceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = ForceAmount(amount = 2 * 2,
+                                   major = MASS1 * LENGTH1,
+                                   minor = TIME1 * TIME1),
             actual = MassAmount(2, MASS1) *
-                     AccelerationAmount(2, LENGTH1, TIME1, TIME1))
+                     AccelerationAmount(amount = 2,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1))
     }
 }

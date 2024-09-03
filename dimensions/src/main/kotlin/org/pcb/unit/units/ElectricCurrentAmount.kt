@@ -16,39 +16,41 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
         amount: Number,
-        val electricCurrent: EC)
+        major: EC)
     : Amount<ElectricCurrent>(amount = amount.toBigBigDecimal(),
                               unit = CompositeUnit(
                                   domain = ElectricCurrent::class,
-                                  units = listOf(electricCurrent to 1)))
+                                  units = listOf(major to 1)))
 {
+    val electricCurrent = major
+
     // region ElectricCurrent
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricCurrentAmount(amount = amount * that.amount * that.unit.scale,
-                              electricCurrent = electricCurrent)
+                              major = electricCurrent)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         ElectricCurrentAmount(amount = amount / that.amount / that.unit.scale,
-                              electricCurrent = electricCurrent)
+                              major = electricCurrent)
 
     operator fun <EC : Unit<ElectricCurrent>> plus(that: ElectricCurrentAmount<EC>) =
         ElectricCurrentAmount(amount = amount + that.amount * convert(that.electricCurrent to electricCurrent),
-                              electricCurrent = electricCurrent)
+                              major = electricCurrent)
 
     @JvmName("plusElectricCurrent")
     operator fun plus(that: ElectricCurrentAmount<EC>) =
         ElectricCurrentAmount(amount = amount + that.amount,
-                              electricCurrent = electricCurrent)
+                              major = electricCurrent)
 
     operator fun <EC : Unit<ElectricCurrent>> minus(that: ElectricCurrentAmount<EC>) =
         ElectricCurrentAmount(amount = amount - that.amount * convert(that.electricCurrent to electricCurrent),
-                              electricCurrent = electricCurrent)
+                              major = electricCurrent)
 
     @JvmName("minusElectricCurrent")
     operator fun minus(that: ElectricCurrentAmount<EC>) =
         ElectricCurrentAmount(amount = amount - that.amount,
-                              electricCurrent = electricCurrent)
+                              major = electricCurrent)
 
     // endregion
 
@@ -67,8 +69,7 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         ElectricChargeAmount(amount = amount * that.amount,
-                             electricCurrent = electricCurrent,
-                             time = that.time)
+                             major = electricCurrent * that.time)
 
     // endregion
 
@@ -77,24 +78,14 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricTensionAmount(amount = amount * that.amount / convert(that.electricCurrent to electricCurrent,
                                                                       that.electricCurrent to electricCurrent),
-                              mass = that.mass,
-                              length = that.length,
-                              length2 = that.length,
-                              time = that.time,
-                              time2 = that.time,
-                              time3 = that.time,
-                              electricCurrent = electricCurrent)
+                              major = that.mass * that.length * that.length,
+                              minor = that.time * that.time * that.time * electricCurrent)
 
     @JvmName("timesElectricResistance")
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> times(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricTensionAmount(amount = amount * that.amount,
-                              mass = that.mass,
-                              length = that.length,
-                              length2 = that.length,
-                              time = that.time,
-                              time2 = that.time,
-                              time3 = that.time,
-                              electricCurrent = electricCurrent)
+                              major = that.mass * that.length * that.length,
+                              minor = that.time * that.time * that.time * electricCurrent)
 
     // endregion
 

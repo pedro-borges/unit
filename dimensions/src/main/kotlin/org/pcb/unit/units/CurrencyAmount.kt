@@ -14,39 +14,41 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class CurrencyAmount<C : Unit<Currency>>(
         amount: Number,
-        val currency: C)
+        major: C)
     : Amount<Currency>(amount = amount.toBigBigDecimal(),
                        unit = CompositeUnit(
                            domain = Currency::class,
-                           units = listOf(currency to 1)))
+                           units = listOf(major to 1)))
 {
+    val currency = major
+
     // region Currency
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         CurrencyAmount(amount = amount * that.amount * that.unit.scale,
-                       currency = currency)
+                       major = currency)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         CurrencyAmount(amount = amount / that.amount / that.unit.scale,
-                       currency = currency)
+                       major = currency)
 
     operator fun <C : Unit<Currency>> plus(that: CurrencyAmount<C>) =
         CurrencyAmount(amount = this.amount + that.amount * convert(that.currency to currency),
-                       currency = currency)
+                       major = currency)
 
     @JvmName("plusCurrency")
     operator fun plus(that: CurrencyAmount<C>) =
         CurrencyAmount(amount = this.amount + that.amount,
-                       currency = currency)
+                       major = currency)
 
     operator fun <C : Unit<Currency>> minus(that: CurrencyAmount<C>) =
         CurrencyAmount(amount = this.amount - that.amount * convert(that.currency to currency),
-                       currency = currency)
+                       major = currency)
 
     @JvmName("minusCurrency")
     operator fun minus(that: CurrencyAmount<C>) =
         CurrencyAmount(amount = this.amount - that.amount,
-                       currency = currency)
+                       major = currency)
 
     // endregion
 
@@ -74,8 +76,7 @@ open class CurrencyAmount<C : Unit<Currency>>(
 
     operator fun <U : Unit<Time>> times(that: TimeAmount<U>) =
         DebtAmount(amount = amount * that.amount,
-                   currency = currency,
-                   time = that.time)
+                   major = currency * that.time)
 
     // endregion
 }

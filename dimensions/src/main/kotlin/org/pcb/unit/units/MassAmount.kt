@@ -13,8 +13,9 @@ import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.NaturalAmount
 
-open class MassAmount<M : Unit<Mass>>(amount: Number,
-                                      val mass: M)
+open class MassAmount<M : Unit<Mass>>(
+        amount: Number,
+        val mass: M)
     : Amount<Mass>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Mass::class,
@@ -75,10 +76,8 @@ open class MassAmount<M : Unit<Mass>>(amount: Number,
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: AccelerationAmount<L, T>) =
         ForceAmount(amount = that.amount * that.amount,
-                    mass = mass,
-                    length = that.length,
-                    time = that.time,
-                    time2 = that.time)
+                    major = mass * that.length,
+                    minor = that.time * that.time)
 
     // endregion
 }

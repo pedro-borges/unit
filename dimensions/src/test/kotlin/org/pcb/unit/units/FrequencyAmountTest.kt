@@ -2,6 +2,8 @@ package org.pcb.unit.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.Unit
+import org.pcb.unit.dimension.Time
 import org.pcb.unit.units.scalar.NaturalAmount
 import org.pcb.unit.units.scalar.PercentAmount
 import org.pcb.unit.units.test.CURRENCY1
@@ -87,7 +89,7 @@ class FrequencyAmountTest
     fun timesSpace()
     {
         assertEquals(
-            expected = SpeedAmount(2 / 2, LENGTH1, TIME1),
+            expected = SpeedAmount(2 / 2, LENGTH1 to TIME1),
             actual = FrequencyAmount(2, TIME1) *
                      LengthAmount(2, LENGTH1))
     }
@@ -95,19 +97,23 @@ class FrequencyAmountTest
     @Test
     fun timesSameSpeed()
     {
-        assertEquals(
-            expected = AccelerationAmount(2 / 2, LENGTH1, TIME1, TIME1),
+        assertEquals<AccelerationAmount<LENGTH1, out Unit<Time>>>(
+            expected = AccelerationAmount(amount = 2 / 2,
+                                          major = LENGTH1,
+                                          minor = TIME1 * TIME1),
             actual = FrequencyAmount(2, TIME1) *
-                     SpeedAmount(2, LENGTH1, TIME1))
+                     SpeedAmount(2, LENGTH1 to TIME1))
     }
 
     @Test
     fun timesOtherSpeed()
     {
-        assertEquals(
-            expected = AccelerationAmount(2 / 2, LENGTH1, TIME1, TIME1),
+        assertEquals<AccelerationAmount<LENGTH1, out Unit<Time>>>(
+            expected = AccelerationAmount(amount = 2 / 2,
+                                          major = LENGTH1,
+                                          minor = TIME1 * TIME1),
             actual = FrequencyAmount(2, TIME1) *
-                     SpeedAmount(2 * 2, LENGTH1, TIME2))
+                     SpeedAmount(2 * 2, LENGTH1 to TIME2))
     }
 
     @Test
@@ -116,7 +122,7 @@ class FrequencyAmountTest
         assertEquals(
             expected = CurrencyAmount(2 / 2, CURRENCY1),
             actual = FrequencyAmount(2, TIME1) *
-                     DebtAmount(2, CURRENCY1, TIME1))
+                     DebtAmount(2, CURRENCY1 * TIME1))
     }
 
     @Test
@@ -125,14 +131,14 @@ class FrequencyAmountTest
         assertEquals(
             expected = CurrencyAmount(2 / 2, CURRENCY1),
             actual = FrequencyAmount(2, TIME1) *
-                     DebtAmount(1, CURRENCY1, TIME2))
+                     DebtAmount(1, CURRENCY1 * TIME2))
     }
 
     @Test
     fun timesCurrency()
     {
         assertEquals(
-            expected = RentAmount(2 / 2, CURRENCY1, TIME1),
+            expected = RentAmount(2 / 2, CURRENCY1 to TIME1),
             actual = FrequencyAmount(2, TIME1) *
                      CurrencyAmount(2, CURRENCY1))
     }

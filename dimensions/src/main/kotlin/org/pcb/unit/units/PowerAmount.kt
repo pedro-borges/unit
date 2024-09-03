@@ -2,6 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.Triple
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.ElectricCurrent
@@ -36,6 +37,8 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                                        length to 2,
                                        time to -3)))
 {
+    constructor(amount: Number, pair: Pair<Triple<M, L, L>, Triple<T, T, T>>) : this(amount, pair.first.first, pair.first.second, pair.first.third, pair.second.first, pair.second.second, pair.second.third)
+
     companion object
     {
         operator fun invoke(amount: Number, power: Unit<Power>) =
@@ -142,20 +145,14 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         EnergyAmount(amount = amount * that.amount * convert(that.time to time),
-                     mass = mass,
-                     length = length,
-                     length2 = length,
-                     time = time,
-                     time2 = time)
+                     major = mass * length * length,
+                     minor = time * time)
 
     @JvmName("timesTime")
     operator fun times(that: TimeAmount<T>) =
         EnergyAmount(amount = amount * that.amount,
-                     mass = mass,
-                     length = length,
-                     length2 = length,
-                     time = time,
-                     time2 = time)
+                     major = mass * length * length,
+                     minor = time * time)
 
     // endregion
 
@@ -169,12 +166,12 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                                        * convert(that.time to time,
                                                  that.time to time,
                                                  that.time to time),
-                              electricCurrent = that.electricCurrent)
+                              major = that.electricCurrent)
 
     @JvmName("divElectricTension")
     operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricTensionAmount<M, L, T, EC>) =
         ElectricCurrentAmount(amount = amount / that.amount,
-                              electricCurrent = that.electricCurrent)
+                              major = that.electricCurrent)
 
     // endregion
 
@@ -182,13 +179,8 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
         ElectricTensionAmount(amount = amount / that.amount,
-                              mass = mass,
-                              length = length,
-                              length2 = length,
-                              time = time,
-                              time2 = time,
-                              time3 = time,
-                              electricCurrent = that.electricCurrent)
+                              major = mass * length * length,
+                              minor = time * time * time * that.electricCurrent)
 
     // endregion
 }

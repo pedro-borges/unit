@@ -1,5 +1,6 @@
 package org.pcb.unit.units.scalar
 
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.toBigBigDecimal
@@ -11,6 +12,7 @@ class NaturalAmount(amount: Number)
 {
     object NATURAL : Unit<Scalar>(Scalar::class)
     {
+        override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
         override val symbol = ""
         override val scale = 1.toBigBigDecimal()
     }

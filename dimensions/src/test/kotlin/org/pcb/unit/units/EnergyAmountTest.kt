@@ -3,6 +3,7 @@ package org.pcb.unit
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.dimension.Length
+import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.units.ElectricChargeAmount
 import org.pcb.unit.units.ElectricTensionAmount
@@ -29,97 +30,149 @@ class EnergyAmountTest
     fun construct()
     {
         assertEquals<EnergyAmount<MASS1, out Unit<Length>, out Unit<Time>>>(
-            expected = EnergyAmount(1, MASS1, LENGTH1, LENGTH1, TIME1, TIME1),
-            actual = EnergyAmount(1, MASS1, LENGTH1, LENGTH2, TIME1, TIME2))
+            expected = EnergyAmount(amount = 1,
+                                    major = MASS1 * LENGTH1 * LENGTH1,
+                                    minor = TIME1 * TIME1),
+            actual = EnergyAmount(amount = 1,
+                                  major = MASS1 * LENGTH1 * LENGTH2,
+                                  minor = TIME1 * TIME2))
     }
 
     @Test
     fun timesScalar()
     {
-        assertEquals(
-            expected = EnergyAmount(2 * 2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) *
+        assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = EnergyAmount(amount = 2 * 2,
+                                    major = MASS1 * LENGTH1 * LENGTH1,
+                                    minor = TIME1 * TIME1),
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) *
                      PercentAmount(2 * 100))
     }
 
     @Test
     fun divScalar()
     {
-        assertEquals(
-            expected = EnergyAmount(2 / 2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) /
+        assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = EnergyAmount(amount = 2 / 2,
+                                    major = MASS1 * LENGTH1 * LENGTH1,
+                                    minor = TIME1 * TIME1),
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) /
                      PercentAmount(2 * 100))
     }
 
     @Test
     fun plusSameEnergy()
     {
-        assertEquals(
-            expected = EnergyAmount(0 + 1, MASS1, LENGTH1, LENGTH1, TIME1, TIME1),
-            actual = EnergyAmount(0, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) +
-                     EnergyAmount(1, MASS1, LENGTH1, LENGTH1, TIME1, TIME1))
+        assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = EnergyAmount(amount = 0 + 1,
+                                    major = MASS1 * LENGTH1 * LENGTH1,
+                                    minor = TIME1 * TIME1),
+            actual = EnergyAmount(amount = 0,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) +
+                     EnergyAmount(amount = 1,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1))
     }
 
     @Test
     fun plusOtherEnergy()
     {
-        assertEquals(
-            expected = EnergyAmount(0 + 2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1),
-            actual = EnergyAmount(0, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) +
-                     EnergyAmount(1, MASS2, LENGTH2, LENGTH2, TIME2, TIME2))
+        assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = EnergyAmount(amount = 0 + 2,
+                                    major = MASS1 * LENGTH1 * LENGTH1,
+                                    minor = TIME1 * TIME1),
+            actual = EnergyAmount(amount = 0,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) +
+                     EnergyAmount(amount = 1,
+                                  major = MASS2 * LENGTH2 * LENGTH2,
+                                  minor = TIME2 * TIME2))
     }
 
     @Test
     fun minusSameEnergy()
     {
-        assertEquals(
-            expected = EnergyAmount(1 - 1, MASS1, LENGTH1, LENGTH1, TIME1, TIME1),
-            actual = EnergyAmount(1, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) -
-                     EnergyAmount(1, MASS1, LENGTH1, LENGTH1, TIME1, TIME1))
+        assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = EnergyAmount(amount = 1 - 1,
+                                    major = MASS1 * LENGTH1 * LENGTH1,
+                                    minor = TIME1 * TIME1),
+            actual = EnergyAmount(amount = 1,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) -
+                     EnergyAmount(amount = 1,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1))
     }
 
     @Test
     fun minusOtherEnergy()
     {
-        assertEquals(
-            expected = EnergyAmount(2 - 2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) -
-                     EnergyAmount(1, MASS2, LENGTH2, LENGTH2, TIME2, TIME2))
+        assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = EnergyAmount(amount = 2 - 2,
+                                    major = MASS1 * LENGTH1 * LENGTH1,
+                                    minor = TIME1 * TIME1),
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) -
+                     EnergyAmount(amount = 1,
+                                  major = MASS2 * LENGTH2 * LENGTH2,
+                                  minor = TIME2 * TIME2))
     }
 
     @Test
     fun divSameEnergy()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) /
-                     EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) /
+                     EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1))
     }
 
     @Test
     fun divOtherEnergy()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) /
-                     EnergyAmount(1, MASS2, LENGTH2, LENGTH2, TIME2, TIME2))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) /
+                     EnergyAmount(amount = 1,
+                                  major = MASS2 * LENGTH2 * LENGTH2,
+                                  minor = TIME2 * TIME2))
     }
 
     @Test
     fun divSameSpace()
     {
-        assertEquals(
-            expected = ForceAmount(2 / 2, MASS1, LENGTH1, TIME1, TIME1),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) /
+        assertEquals<ForceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = ForceAmount(amount = 2 / 2,
+                                   major = MASS1 * LENGTH1,
+                                   minor = TIME1 * TIME1),
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) /
                      LengthAmount(2, LENGTH1))
     }
 
     @Test
     fun divOtherSpace()
     {
-        assertEquals(
-            expected = ForceAmount(2 / 2, MASS1, LENGTH1, TIME1, TIME1),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) /
+        assertEquals<ForceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = ForceAmount(amount = 2 / 2,
+                                   major = MASS1 * LENGTH1,
+                                   minor = TIME1 * TIME1),
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) /
                      LengthAmount(1, LENGTH2))
     }
 
@@ -128,8 +181,12 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = LengthAmount(2 / 2, LENGTH1),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) /
-                     ForceAmount(2, MASS1, LENGTH1, TIME1, TIME1))
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) /
+                     ForceAmount(amount = 2,
+                                 major = MASS1 * LENGTH1,
+                                 minor = TIME1 * TIME1))
     }
 
     @Test
@@ -137,16 +194,22 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = LengthAmount(2 / 2, LENGTH1),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) /
-                     ForceAmount(2, MASS2, LENGTH2, TIME2, TIME2))
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) /
+                     ForceAmount(amount = 2,
+                                 major = MASS2 * LENGTH2,
+                                 minor = TIME2 * TIME2))
     }
 
     @Test
     fun divSameTime()
     {
         assertEquals(
-            expected = PowerAmount(2 / 2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) /
+            expected = PowerAmount(2 / 2, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1)),
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) /
                      TimeAmount(2, TIME1))
     }
 
@@ -154,8 +217,10 @@ class EnergyAmountTest
     fun divOtherTime()
     {
         assertEquals(
-            expected = PowerAmount(2 / 2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) /
+            expected = PowerAmount(2 / 2, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1)),
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) /
                      TimeAmount(1, TIME2))
     }
 
@@ -164,7 +229,9 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = SpeedAmount(2 / 2, LENGTH1, TIME1),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) /
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) /
                      MomentumAmount(2, MASS1, LENGTH1, TIME1))
     }
 
@@ -173,7 +240,9 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = SpeedAmount(2 / 2, LENGTH1, TIME1),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) /
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) /
                      MomentumAmount(1, MASS2, LENGTH2, TIME2))
     }
 
@@ -181,8 +250,13 @@ class EnergyAmountTest
     fun divSameSpeed()
     {
         assertEquals(
-            expected = MomentumAmount(2 / 2, MASS1, LENGTH1, TIME1),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) /
+            expected = MomentumAmount(amount = 2 / 2,
+                                      mass = MASS1,
+                                      length = LENGTH1,
+                                      time = TIME1),
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) /
                      SpeedAmount(2, LENGTH1, TIME1))
     }
 
@@ -191,25 +265,36 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = MomentumAmount(2 / 2, MASS1, LENGTH1, TIME1),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) /
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) /
                      SpeedAmount(2, LENGTH2, TIME2))
     }
 
     @Test
     fun divSameElectricCharge()
     {
-        assertEquals(
-            expected = ElectricTensionAmount(2 / 2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) /
-                     ElectricChargeAmount(2, ELECTRICCURRENT1, TIME1))
+        assertEquals<ElectricTensionAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
+            expected = ElectricTensionAmount(amount = 2 / 2,
+                                             major = MASS1 * LENGTH1 * LENGTH1,
+                                             minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1),
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) /
+                     ElectricChargeAmount(amount = 2,
+                                          major = ELECTRICCURRENT1 * TIME1))
     }
 
     @Test
     fun divOtherElectricCharge()
     {
-        assertEquals(
-            expected = ElectricTensionAmount(2 / 2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1),
-            actual = EnergyAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1) /
-                     ElectricChargeAmount(1, ELECTRICCURRENT1, TIME2))
+        assertEquals<ElectricTensionAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
+            expected = ElectricTensionAmount(amount = 2 / 2,
+                                             major = MASS1 * LENGTH1 * LENGTH1,
+                                             minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1),
+            actual = EnergyAmount(amount = 2,
+                                  major = MASS1 * LENGTH1 * LENGTH1,
+                                  minor = TIME1 * TIME1) /
+                     ElectricChargeAmount(amount = 1, major = ELECTRICCURRENT1 * TIME2))
     }
 }

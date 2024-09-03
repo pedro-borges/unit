@@ -15,8 +15,8 @@ class PaceAmountTest
     fun timesScalar()
     {
         assertEquals(
-            expected = PaceAmount(2 * 2, TIME1, LENGTH1),
-            actual = PaceAmount(2, TIME1, LENGTH1) *
+            expected = PaceAmount(2 * 2, TIME1 to LENGTH1),
+            actual = PaceAmount(2, TIME1 to LENGTH1) *
                      PercentAmount(2 * 100))
     }
 
@@ -24,8 +24,8 @@ class PaceAmountTest
     fun divScalar()
     {
         assertEquals(
-            expected = PaceAmount(2 / 2, TIME1, LENGTH1),
-            actual = PaceAmount(2, TIME1, LENGTH1) /
+            expected = PaceAmount(2 / 2, TIME1 to LENGTH1),
+            actual = PaceAmount(2, TIME1 to LENGTH1) /
                      PercentAmount(2 * 100))
     }
 
@@ -33,36 +33,36 @@ class PaceAmountTest
     fun plusSamePace()
     {
         assertEquals(
-            expected = PaceAmount(0 + 1, TIME1, LENGTH1),
-            actual = PaceAmount(0, TIME1, LENGTH1) +
-                     PaceAmount(1, TIME1, LENGTH1))
+            expected = PaceAmount(0 + 1, TIME1 to LENGTH1),
+            actual = PaceAmount(0, TIME1 to LENGTH1) +
+                     PaceAmount(1, TIME1 to LENGTH1))
     }
 
     @Test
     fun plusOtherPace()
     {
         assertEquals(
-            expected = PaceAmount(0 + 1, TIME1, LENGTH1),
-            actual = PaceAmount(0, TIME1, LENGTH1) +
-                     PaceAmount(1, TIME2, LENGTH2))
+            expected = PaceAmount(0 + 1, TIME1 to LENGTH1),
+            actual = PaceAmount(0, TIME1 to LENGTH1) +
+                     PaceAmount(1, TIME2 to LENGTH2))
     }
 
     @Test
     fun minusSamePace()
     {
         assertEquals(
-            expected = PaceAmount(1 - 1, TIME1, LENGTH1),
-            actual = PaceAmount(1, TIME1, LENGTH1) -
-                     PaceAmount(1, TIME1, LENGTH1))
+            expected = PaceAmount(1 - 1, TIME1 to LENGTH1),
+            actual = PaceAmount(1, TIME1 to LENGTH1) -
+                     PaceAmount(1, TIME1 to LENGTH1))
     }
 
     @Test
     fun minusOtherPace()
     {
         assertEquals(
-            expected = PaceAmount(1 - 1, TIME1, LENGTH1),
-            actual = PaceAmount(1, TIME1, LENGTH1) -
-                     PaceAmount(1, TIME2, LENGTH2))
+            expected = PaceAmount(1 - 1, TIME1 to LENGTH1),
+            actual = PaceAmount(1, TIME1 to LENGTH1) -
+                     PaceAmount(1, TIME2 to LENGTH2))
     }
 
     @Test
@@ -70,8 +70,8 @@ class PaceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(2 / 2),
-            actual = PaceAmount(2, TIME1, LENGTH1) /
-                     PaceAmount(2, TIME1, LENGTH1))
+            actual = PaceAmount(2, TIME1 to LENGTH1) /
+                     PaceAmount(2, TIME1 to LENGTH1))
     }
 
     @Test
@@ -79,8 +79,8 @@ class PaceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(2 / 2),
-            actual = PaceAmount(2, TIME1, LENGTH1) /
-                     PaceAmount(2, TIME2, LENGTH2))
+            actual = PaceAmount(2, TIME1 to LENGTH1) /
+                     PaceAmount(2, TIME2 to LENGTH2))
     }
 
     @Test
@@ -88,7 +88,7 @@ class PaceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(2 / 2),
-            actual = PaceAmount(2, TIME1, LENGTH1) *
+            actual = PaceAmount(2, TIME1 to LENGTH1) *
                      SpeedAmount(2, LENGTH1, TIME1))
     }
 
@@ -97,7 +97,7 @@ class PaceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(2 / 2),
-            actual = PaceAmount(2, TIME1, LENGTH1) *
+            actual = PaceAmount(2, TIME1 to LENGTH1) *
                      SpeedAmount(2, LENGTH2, TIME2))
     }
 
@@ -106,7 +106,7 @@ class PaceAmountTest
     {
         assertEquals(
             expected = TimeAmount(2 * 2, TIME1),
-            actual = PaceAmount(2, TIME1, LENGTH1) *
+            actual = PaceAmount(2, TIME1 to LENGTH1) *
                      LengthAmount(2, LENGTH1))
     }
 
@@ -115,7 +115,7 @@ class PaceAmountTest
     {
         assertEquals(
             expected = TimeAmount(2 * 2, TIME1),
-            actual = PaceAmount(2, TIME1, LENGTH1) *
+            actual = PaceAmount(2, TIME1 to LENGTH1) *
                      LengthAmount(1, LENGTH2))
     }
 }

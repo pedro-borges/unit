@@ -2,6 +2,7 @@ package org.pcb.unit
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
+import org.pcb.unit.dimension.Length
 import org.pcb.unit.units.AreaAmount
 import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.SpeedAmount
@@ -91,7 +92,7 @@ class LengthAmountTest
     fun divTime()
     {
         assertEquals(
-            expected = SpeedAmount(2 / 2, LENGTH1, TIME1),
+            expected = SpeedAmount(2 / 2, LENGTH1 to TIME1),
             actual = LengthAmount(2, LENGTH1) /
                      TimeAmount(2, TIME1))
     }
@@ -99,8 +100,8 @@ class LengthAmountTest
     @Test
     fun timesSameLength()
     {
-        assertEquals(
-            expected = AreaAmount(2 * 2, LENGTH1, LENGTH1),
+        assertEquals<AreaAmount<out Unit<Length>>>(
+            expected = AreaAmount(2 * 2, LENGTH1 * LENGTH1),
             actual = LengthAmount(2, LENGTH1) *
                      LengthAmount(2, LENGTH1))
     }
@@ -108,8 +109,8 @@ class LengthAmountTest
     @Test
     fun timesOtherLength()
     {
-        assertEquals(
-            expected = AreaAmount(2 * 2, LENGTH1, LENGTH1),
+        assertEquals<AreaAmount<out Unit<Length>>>(
+            expected = AreaAmount(2 * 2, LENGTH1 * LENGTH1),
             actual = LengthAmount(2, LENGTH1) *
                      LengthAmount(1, LENGTH2))
     }
@@ -118,17 +119,17 @@ class LengthAmountTest
     fun timesSameArea()
     {
         assertEquals(
-            expected = VolumeAmount(2 * 2, LENGTH1, LENGTH1, LENGTH1),
+            expected = VolumeAmount(2 * 2, LENGTH1 * LENGTH1 * LENGTH1),
             actual = LengthAmount(2, LENGTH1) *
-                     AreaAmount(2, LENGTH1, LENGTH1))
+                     AreaAmount(2, LENGTH1 * LENGTH1))
     }
 
     @Test
     fun timesOtherArea()
     {
         assertEquals(
-            expected = VolumeAmount(2 * 2 * 2, LENGTH1, LENGTH1, LENGTH1),
+            expected = VolumeAmount(2 * 2 * 2, LENGTH1 * LENGTH1 * LENGTH1),
             actual = LengthAmount(2, LENGTH1) *
-                     AreaAmount(1, LENGTH2, LENGTH2))
+                     AreaAmount(1, LENGTH2 * LENGTH2))
     }
 }

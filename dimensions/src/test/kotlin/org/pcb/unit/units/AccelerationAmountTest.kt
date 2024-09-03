@@ -3,6 +3,7 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.Unit
+import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.units.scalar.NaturalAmount
 import org.pcb.unit.units.scalar.PercentAmount
@@ -18,62 +19,98 @@ class AccelerationAmountTest
     fun construct()
     {
         assertEquals<AccelerationAmount<LENGTH1, out Unit<Time>>>(
-            expected = AccelerationAmount(1, LENGTH1, TIME1, TIME1),
-            actual = AccelerationAmount(2, LENGTH1, TIME1, TIME2))
+            expected = AccelerationAmount(amount = 1,
+                                          major = LENGTH1,
+                                          minor = TIME1 * TIME1),
+            actual = AccelerationAmount(amount = 2,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME2))
     }
 
     @Test
     fun timesScalar()
     {
-        assertEquals(
-            expected = AccelerationAmount(2 * 2, LENGTH1, TIME1, TIME1),
-            actual = AccelerationAmount(2, LENGTH1, TIME1, TIME1) *
+        assertEquals<AccelerationAmount<LENGTH1, out Unit<Time>>>(
+            expected = AccelerationAmount(amount = 2 * 2,
+                                          major = LENGTH1,
+                                          minor = TIME1 * TIME1),
+            actual = AccelerationAmount(amount = 2,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1) *
                      PercentAmount(2 * 100))
     }
 
     @Test
     fun divScalar()
     {
-        assertEquals(
-            expected = AccelerationAmount(2 / 2, LENGTH1, TIME1, TIME1),
-            actual = AccelerationAmount(2, LENGTH1, TIME1, TIME1) /
+        assertEquals<AccelerationAmount<LENGTH1, out Unit<Time>>>(
+            expected = AccelerationAmount(amount = 2 / 2,
+                                          major = LENGTH1,
+                                          minor = TIME1 * TIME1),
+            actual = AccelerationAmount(amount = 2,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1) /
                      PercentAmount(2 * 100))
     }
 
     @Test
     fun plusSameAcceleration()
     {
-        assertEquals(
-            expected = AccelerationAmount(0 + 1, LENGTH1, TIME1, TIME1),
-            actual = AccelerationAmount(0, LENGTH1, TIME1, TIME1) +
-                     AccelerationAmount(1, LENGTH1, TIME1, TIME1))
+        assertEquals<AccelerationAmount<LENGTH1, out Unit<Time>>>(
+            expected = AccelerationAmount(amount = 0 + 1,
+                                          major = LENGTH1,
+                                          minor = TIME1 * TIME1),
+            actual = AccelerationAmount(amount = 0,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1) +
+                     AccelerationAmount(amount = 1,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1))
     }
 
     @Test
     fun plusOtherAcceleration()
     {
-        assertEquals(
-            expected = AccelerationAmount(0 + 1, LENGTH1, TIME1, TIME1),
-            actual = AccelerationAmount(0, LENGTH1, TIME1, TIME1) +
-                     AccelerationAmount(2 * 2, LENGTH1, TIME2, TIME2))
+        assertEquals<AccelerationAmount<LENGTH1, out Unit<Time>>>(
+            expected = AccelerationAmount(amount = 0 + 1,
+                                          major = LENGTH1,
+                                          minor = TIME1 * TIME1),
+            actual = AccelerationAmount(amount = 0,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1) +
+                     AccelerationAmount(amount = 2,
+                                        major = LENGTH2,
+                                        minor = TIME2 * TIME2))
     }
 
     @Test
     fun minusSameAcceleration()
     {
-        assertEquals(
-            expected = AccelerationAmount(1 - 1, LENGTH1, TIME1, TIME1),
-            actual = AccelerationAmount(1, LENGTH1, TIME1, TIME1) -
-                     AccelerationAmount(1, LENGTH1, TIME1, TIME1))
+        assertEquals<AccelerationAmount<LENGTH1, out Unit<Time>>>(
+            expected = AccelerationAmount(amount = 1 - 1,
+                                          major = LENGTH1,
+                                          minor = TIME1 * TIME1),
+            actual = AccelerationAmount(amount = 1,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1) -
+                     AccelerationAmount(amount = 1,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1))
     }
 
     @Test
     fun minusOtherAcceleration()
     {
-        assertEquals(
-            expected = AccelerationAmount(1 - 1, LENGTH1, TIME1, TIME1),
-            actual = AccelerationAmount(1, LENGTH1, TIME1, TIME1) -
-                     AccelerationAmount(2 * 2, LENGTH1, TIME2, TIME2))
+        assertEquals<AccelerationAmount<LENGTH1, out Unit<Time>>>(
+            expected = AccelerationAmount(amount = 1 - 1,
+                                          major = LENGTH1,
+                                          minor = TIME1 * TIME1),
+            actual = AccelerationAmount(amount = 1,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1) -
+                     AccelerationAmount(amount = 2,
+                                        major = LENGTH2,
+                                        minor = TIME2 * TIME2))
     }
 
     @Test
@@ -81,8 +118,12 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = NaturalAmount(2 / 2),
-            actual = AccelerationAmount(2, LENGTH1, TIME1, TIME1) /
-                     AccelerationAmount(2, LENGTH1, TIME1, TIME1))
+            actual = AccelerationAmount(amount = 2,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1) /
+                     AccelerationAmount(amount = 2,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1))
     }
 
     @Test
@@ -90,16 +131,22 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = NaturalAmount(2 / 2),
-            actual = AccelerationAmount(2, LENGTH1, TIME1, TIME1) /
-                     AccelerationAmount(2 * (2 * 2), LENGTH1, TIME2, TIME2))
+            actual = AccelerationAmount(amount = 2,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1) /
+                     AccelerationAmount(amount = 2 * 2,
+                                        major = LENGTH2,
+                                        minor = TIME2 * TIME2))
     }
 
     @Test
     fun timesSameTime()
     {
         assertEquals(
-            expected = SpeedAmount(2 * 2, LENGTH1, TIME1),
-            actual = AccelerationAmount(2, LENGTH1, TIME1, TIME1) *
+            expected = SpeedAmount(2 * 2, LENGTH1 to TIME1),
+            actual = AccelerationAmount(amount = 2,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1) *
                      TimeAmount(2, TIME1))
     }
 
@@ -107,8 +154,10 @@ class AccelerationAmountTest
     fun timesOtherTime()
     {
         assertEquals(
-            expected = SpeedAmount(2 * 2, LENGTH1, TIME1),
-            actual = AccelerationAmount(2, LENGTH1, TIME1, TIME1) *
+            expected = SpeedAmount(2 * 2, LENGTH1 to TIME1),
+            actual = AccelerationAmount(amount = 2,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1) *
                      TimeAmount(1, TIME2))
     }
 
@@ -117,7 +166,9 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(2 / 2, TIME1),
-            actual = AccelerationAmount(2, LENGTH1, TIME1, TIME1) /
+            actual = AccelerationAmount(amount = 2,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1) /
                      SpeedAmount(2, LENGTH1, TIME1))
     }
 
@@ -126,16 +177,22 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(2 / 2, TIME1),
-            actual = AccelerationAmount(2, LENGTH1, TIME1, TIME1) /
+            actual = AccelerationAmount(amount = 2,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1) /
                      SpeedAmount(2, LENGTH2, TIME2))
     }
 
     @Test
     fun timesMass()
     {
-        assertEquals(
-            expected = ForceAmount(2 * 2, MASS1, LENGTH1, TIME1, TIME1),
-            actual = AccelerationAmount(2, LENGTH1, TIME1, TIME1) *
+        assertEquals<ForceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+            expected = ForceAmount(amount = 2 * 2,
+                                   major = MASS1 * LENGTH1,
+                                   minor = TIME1 * TIME1),
+            actual = AccelerationAmount(amount = 2,
+                                        major = LENGTH1,
+                                        minor = TIME1 * TIME1) *
                      MassAmount(2, MASS1))
     }
 }

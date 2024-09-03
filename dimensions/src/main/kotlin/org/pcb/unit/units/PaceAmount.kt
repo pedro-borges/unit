@@ -23,6 +23,8 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
                        units = listOf(time to 1,
                                       length to -1)))
 {
+    constructor(amount: Number, pair: Pair<T, L>) : this(amount, pair.first, pair.second)
+
     // region Pace
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =

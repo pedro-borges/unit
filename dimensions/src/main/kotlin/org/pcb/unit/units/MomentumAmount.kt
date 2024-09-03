@@ -2,6 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Length
@@ -26,6 +27,8 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                                           length to 1,
                                           time to -1)))
 {
+    constructor(amount: Number, pair: Pair<Tuple<M, L>, T>) : this(amount, pair.first.first, pair.first.second, pair.second)
+
     // region Momentum
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
@@ -122,18 +125,14 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount / convert(that.time to time),
-                    mass = mass,
-                    length = length,
-                    time = time,
-                    time2 = time)
+                    major = mass * length,
+                    minor = time * time)
 
     @JvmName("divTime")
     operator fun div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount,
-                    mass = mass,
-                    length = length,
-                    time = time,
-                    time2 = time)
+                    major = mass * length,
+                    minor = time * time)
 
     // endregion
 
@@ -143,20 +142,14 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
         EnergyAmount(amount = amount * that.amount
                               * convert(that.length to length)
                               / convert(that.time to time),
-                     mass = mass,
-                     length = length,
-                     length2 = length,
-                     time = time,
-                     time2 = time)
+                     major = mass * length * length,
+                     minor = time * time)
 
     @JvmName("timesSpeed")
     operator fun times(that: SpeedAmount<L, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     mass = mass,
-                     length = length,
-                     length2 = length,
-                     time = time,
-                     time2 = time)
+                     major = mass * length * length,
+                     minor = time * time)
 
     // endregion
 }

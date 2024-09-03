@@ -1,5 +1,6 @@
 package org.pcb.unit.units.base
 
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.ElectricCurrent
 import org.pcb.unit.toBigBigDecimal
@@ -14,6 +15,7 @@ class Ampere(amount: Number)
 
     object AMPERE : Unit<ElectricCurrent>(ElectricCurrent::class)
     {
+        override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
         override val symbol = "A"
         override val scale = 1.toBigBigDecimal()
     }

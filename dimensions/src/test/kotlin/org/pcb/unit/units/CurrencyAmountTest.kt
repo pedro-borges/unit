@@ -2,6 +2,8 @@ package org.pcb.unit.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.Unit
+import org.pcb.unit.dimension.Currency
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.NaturalAmount
 import org.pcb.unit.units.scalar.PercentAmount
@@ -85,8 +87,8 @@ class CurrencyAmountTest
     @Test
     fun timesTime()
     {
-        assertEquals(
-            expected = DebtAmount(2 * 2, CURRENCY1, SECOND),
+        assertEquals<DebtAmount<out Unit<Currency>, SECOND>>(
+            expected = DebtAmount(2 * 2, CURRENCY1 * SECOND),
             actual = CurrencyAmount(2, CURRENCY1) *
                      TimeAmount(2, SECOND))
     }
@@ -95,7 +97,7 @@ class CurrencyAmountTest
     fun divTime()
     {
         assertEquals(
-            expected = RentAmount(1, CURRENCY1, SECOND),
+            expected = RentAmount(1, CURRENCY1 to SECOND),
             actual = CurrencyAmount(2, CURRENCY1) /
                      TimeAmount(2, SECOND))
     }

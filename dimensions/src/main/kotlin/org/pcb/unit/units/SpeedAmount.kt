@@ -24,6 +24,8 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
                         units = listOf(length to 1,
                                        time to -1)))
 {
+    constructor(amount: Number, pair: Pair<L, T>) : this(amount, pair.first, pair.second)
+
     // region Speed
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
@@ -93,9 +95,8 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
         AccelerationAmount(amount = amount / that.amount / convert(that.time to time),
-                           length = length,
-                           time = time,
-                           time2 = time)
+                           major = length,
+                           minor = time * time)
 
     // endregion
 
@@ -118,20 +119,14 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
         EnergyAmount(amount = amount * that.amount
                               * convert(that.length to length)
                               / convert(that.time to time),
-                     mass = that.mass,
-                     length = length,
-                     length2 = length,
-                     time = time,
-                     time2 = time)
+                     major = that.mass * length * length,
+                     minor = time * time)
 
     @JvmName("timesMomentum")
     operator fun <M : Unit<Mass>> times(that: MomentumAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     mass = that.mass,
-                     length = length,
-                     length2 = length,
-                     time = time,
-                     time2 = time)
+                     major = that.mass * length * length,
+                     minor = time * time)
 
     // endregion
 }
