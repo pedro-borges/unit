@@ -236,7 +236,9 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /
-                     MomentumAmount(2, MASS1, LENGTH1, TIME1))
+                     MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1))
     }
 
     @Test
@@ -247,17 +249,18 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /
-                     MomentumAmount(1, MASS2, LENGTH2, TIME2))
+                     MomentumAmount(amount = 1,
+                                    major = MASS2 * LENGTH2,
+                                    minor = TIME2))
     }
 
     @Test
     fun divSameSpeed()
     {
-        assertEquals(
+        assertEquals<MomentumAmount<out Unit<Mass>, LENGTH1, TIME1>>(
             expected = MomentumAmount(amount = 2 / 2,
-                                      mass = MASS1,
-                                      length = LENGTH1,
-                                      time = TIME1),
+                                      major = MASS1 * LENGTH1,
+                                      minor = TIME1),
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /
@@ -267,8 +270,10 @@ class EnergyAmountTest
     @Test
     fun divOtherSpeed()
     {
-        assertEquals(
-            expected = MomentumAmount(2 / 2, MASS1, LENGTH1, TIME1),
+        assertEquals<MomentumAmount<out Unit<Mass>, LENGTH1, TIME1>>(
+            expected = MomentumAmount(amount = 2 / 2,
+                                      major = MASS1 * LENGTH1,
+                                      minor = TIME1),
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /

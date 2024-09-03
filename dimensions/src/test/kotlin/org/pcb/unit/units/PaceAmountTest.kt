@@ -15,89 +15,135 @@ class PaceAmountTest
     fun timesScalar()
     {
         assertEquals(
-            expected = PaceAmount(2 * 2, TIME1 to LENGTH1),
-            actual = PaceAmount(2, TIME1 to LENGTH1) *
-                     PercentAmount(2 * 100))
+            expected = PaceAmount(amount = 2 * 2,
+                                  major = TIME1,
+                                  minor = LENGTH1),
+            actual = PaceAmount(amount = 2,
+                                major = TIME1,
+                                minor = LENGTH1) *
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun divScalar()
     {
         assertEquals(
-            expected = PaceAmount(2 / 2, TIME1 to LENGTH1),
-            actual = PaceAmount(2, TIME1 to LENGTH1) /
-                     PercentAmount(2 * 100))
+            expected = PaceAmount(amount = 2 / 2,
+                                  major = TIME1,
+                                  minor = LENGTH1),
+            actual = PaceAmount(amount = 2,
+                                major = TIME1,
+                                minor = LENGTH1) /
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun plusSamePace()
     {
         assertEquals(
-            expected = PaceAmount(0 + 1, TIME1 to LENGTH1),
-            actual = PaceAmount(0, TIME1 to LENGTH1) +
-                     PaceAmount(1, TIME1 to LENGTH1))
+            expected = PaceAmount(amount = 0 + 1,
+                                  major = TIME1,
+                                  minor = LENGTH1),
+            actual = PaceAmount(amount = 0,
+                                major = TIME1,
+                                minor = LENGTH1) +
+                     PaceAmount(amount = 1,
+                                major = TIME1,
+                                minor = LENGTH1))
     }
 
     @Test
     fun plusOtherPace()
     {
         assertEquals(
-            expected = PaceAmount(0 + 1, TIME1 to LENGTH1),
-            actual = PaceAmount(0, TIME1 to LENGTH1) +
-                     PaceAmount(1, TIME2 to LENGTH2))
+            expected = PaceAmount(amount = 0 + 1,
+                                  major = TIME1,
+                                  minor = LENGTH1),
+            actual = PaceAmount(amount = 0,
+                                major = TIME1,
+                                minor = LENGTH1) +
+                     PaceAmount(amount = 1,
+                                major = TIME2,
+                                minor = LENGTH2))
     }
 
     @Test
     fun minusSamePace()
     {
         assertEquals(
-            expected = PaceAmount(1 - 1, TIME1 to LENGTH1),
-            actual = PaceAmount(1, TIME1 to LENGTH1) -
-                     PaceAmount(1, TIME1 to LENGTH1))
+            expected = PaceAmount(amount = 1 - 1,
+                                  major = TIME1,
+                                  minor = LENGTH1),
+            actual = PaceAmount(amount = 1,
+                                major = TIME1,
+                                minor = LENGTH1) -
+                     PaceAmount(amount = 1,
+                                major = TIME1,
+                                minor = LENGTH1))
     }
 
     @Test
     fun minusOtherPace()
     {
         assertEquals(
-            expected = PaceAmount(1 - 1, TIME1 to LENGTH1),
-            actual = PaceAmount(1, TIME1 to LENGTH1) -
-                     PaceAmount(1, TIME2 to LENGTH2))
+            expected = PaceAmount(amount = 1 - 1,
+                                  major = TIME1,
+                                  minor = LENGTH1),
+            actual = PaceAmount(amount = 1,
+                                major = TIME1,
+                                minor = LENGTH1) -
+                     PaceAmount(amount = 1,
+                                major = TIME2,
+                                minor = LENGTH2))
     }
 
     @Test
     fun divSamePace()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = PaceAmount(2, TIME1 to LENGTH1) /
-                     PaceAmount(2, TIME1 to LENGTH1))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = PaceAmount(amount = 2,
+                                major = TIME1,
+                                minor = LENGTH1) /
+                     PaceAmount(amount = 2,
+                                major = TIME1,
+                                minor = LENGTH1))
     }
 
     @Test
     fun divOtherPace()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = PaceAmount(2, TIME1 to LENGTH1) /
-                     PaceAmount(2, TIME2 to LENGTH2))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = PaceAmount(amount = 2,
+                                major = TIME1,
+                                minor = LENGTH1) /
+                     PaceAmount(amount = 2,
+                                major = TIME2,
+                                minor = LENGTH2))
     }
 
     @Test
     fun timesSameSpeed()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = PaceAmount(2, TIME1 to LENGTH1) *
-                     SpeedAmount(2, LENGTH1, TIME1))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = PaceAmount(amount = 2,
+                                major = TIME1,
+                                minor = LENGTH1) *
+                     SpeedAmount(amount = 2,
+                                 length = LENGTH1,
+                                 time = TIME1))
     }
 
     @Test
     fun timesOtherSpeed()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = PaceAmount(2, TIME1 to LENGTH1) *
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = PaceAmount(amount = 2,
+                                major = TIME1,
+                                minor = LENGTH1) *
                      SpeedAmount(2, LENGTH2, TIME2))
     }
 
@@ -106,7 +152,9 @@ class PaceAmountTest
     {
         assertEquals(
             expected = TimeAmount(2 * 2, TIME1),
-            actual = PaceAmount(2, TIME1 to LENGTH1) *
+            actual = PaceAmount(amount = 2,
+                                major = TIME1,
+                                minor = LENGTH1) *
                      LengthAmount(amount = 2,
                                   major = LENGTH1))
     }
@@ -116,7 +164,9 @@ class PaceAmountTest
     {
         assertEquals(
             expected = TimeAmount(2 * 2, TIME1),
-            actual = PaceAmount(2, TIME1 to LENGTH1) *
+            actual = PaceAmount(amount = 2,
+                                major = TIME1,
+                                minor = LENGTH1) *
                      LengthAmount(amount = 1,
                                   major = LENGTH2))
     }

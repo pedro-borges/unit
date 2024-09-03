@@ -113,8 +113,10 @@ class MassAmountTest
     @Test
     fun timesSpeed()
     {
-        assertEquals(
-            expected = MomentumAmount(2 * 2, (MASS1 * LENGTH1) to TIME1),
+        assertEquals<MomentumAmount<out Unit<Mass>, LENGTH1, TIME1>>(
+            expected = MomentumAmount(amount = 2 * 2,
+                                      major = MASS1 * LENGTH1,
+                                      minor = TIME1),
             actual = MassAmount(amount = 2,
                                 major = MASS1) *
                      SpeedAmount(2, LENGTH1 to TIME1))

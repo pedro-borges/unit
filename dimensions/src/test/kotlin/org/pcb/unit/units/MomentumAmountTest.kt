@@ -19,73 +19,113 @@ class MomentumAmountTest
     @Test
     fun timesScalar()
     {
-        assertEquals(
-            expected = MomentumAmount(2 * 2, (MASS1 * LENGTH1) to TIME1),
-            actual = MomentumAmount(2, (MASS1 * LENGTH1) to TIME1) *
-                     PercentAmount(2 * 100))
+        assertEquals<MomentumAmount<out Unit<Mass>, LENGTH1, TIME1>>(
+            expected = MomentumAmount(amount = 2 * 2,
+                                      major = MASS1 * LENGTH1,
+                                      minor = TIME1),
+            actual = MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1) *
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun divScalar()
     {
-        assertEquals(
-            expected = MomentumAmount(2 / 2, (MASS1 * LENGTH1) to TIME1),
-            actual = MomentumAmount(2, (MASS1 * LENGTH1) to TIME1) /
-                     PercentAmount(2 * 100))
+        assertEquals<MomentumAmount<out Unit<Mass>, LENGTH1, TIME1>>(
+            expected = MomentumAmount(amount = 2 / 2,
+                                      major = MASS1 * LENGTH1,
+                                      minor = TIME1),
+            actual = MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1) /
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun plusSameMomentum()
     {
-        assertEquals(
-            expected = MomentumAmount(0 + 1, (MASS1 * LENGTH1) to TIME1),
-            actual = MomentumAmount(0, (MASS1 * LENGTH1) to TIME1) +
-                     MomentumAmount(1, (MASS1 * LENGTH1) to TIME1))
+        assertEquals<MomentumAmount<out Unit<Mass>, LENGTH1, TIME1>>(
+            expected = MomentumAmount(amount = 0 + 1,
+                                      major = MASS1 * LENGTH1,
+                                      minor = TIME1),
+            actual = MomentumAmount(amount = 0,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1) +
+                     MomentumAmount(amount = 1,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1))
     }
 
     @Test
     fun plusOtherMomentum()
     {
-        assertEquals(
-            expected = MomentumAmount(0 + 2, (MASS1 * LENGTH1) to TIME1),
-            actual = MomentumAmount(0, (MASS1 * LENGTH1) to TIME1) +
-                     MomentumAmount(1, (MASS2 * LENGTH2) to TIME2))
+        assertEquals<MomentumAmount<out Unit<Mass>, LENGTH1, TIME1>>(
+            expected = MomentumAmount(amount = 0 + 2,
+                                      major = MASS1 * LENGTH1,
+                                      minor = TIME1),
+            actual = MomentumAmount(amount = 0,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1) +
+                     MomentumAmount(amount = 1,
+                                    major = MASS2 * LENGTH2,
+                                    minor = TIME2))
     }
 
     @Test
     fun minusSameMomentum()
     {
-        assertEquals(
-            expected = MomentumAmount(1 - 1, (MASS1 * LENGTH1) to TIME1),
-            actual = MomentumAmount(1, (MASS1 * LENGTH1) to TIME1) -
-                     MomentumAmount(1, (MASS1 * LENGTH1) to TIME1))
+        assertEquals<MomentumAmount<out Unit<Mass>, LENGTH1, TIME1>>(
+            expected = MomentumAmount(amount = 1 - 1,
+                                      major = MASS1 * LENGTH1,
+                                      minor = TIME1),
+            actual = MomentumAmount(amount = 1,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1) -
+                     MomentumAmount(amount = 1,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1))
     }
 
     @Test
     fun minusOtherMomentum()
     {
-        assertEquals(
-            expected = MomentumAmount(2 - 2, (MASS1 * LENGTH1) to TIME1),
-            actual = MomentumAmount(2, (MASS1 * LENGTH1) to TIME1) -
-                     MomentumAmount(1, (MASS2 * LENGTH2) to TIME2))
+        assertEquals<MomentumAmount<out Unit<Mass>, LENGTH1, TIME1>>(
+            expected = MomentumAmount(amount = 2 - 2,
+                                      major = MASS1 * LENGTH1,
+                                      minor = TIME1),
+            actual = MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1) -
+                     MomentumAmount(amount = 1,
+                                    major = MASS2 * LENGTH2,
+                                    minor = TIME2))
     }
 
     @Test
     fun divSameMomentum()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = MomentumAmount(2, (MASS1 * LENGTH1) to TIME1) /
-                     MomentumAmount(2, (MASS1 * LENGTH1) to TIME1))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1) /
+                     MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1))
     }
 
     @Test
     fun divOtherMomentum()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = MomentumAmount(2, (MASS1 * LENGTH1) to TIME1) /
-                     MomentumAmount(1, (MASS2 * LENGTH2) to TIME2))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1) /
+                     MomentumAmount(amount = 1,
+                                    major = MASS2 * LENGTH2,
+                                    minor = TIME2))
     }
 
     @Test
@@ -93,7 +133,9 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = SpeedAmount(2 / 2, LENGTH1 to TIME1),
-            actual = MomentumAmount(2, (MASS1 * LENGTH1) to TIME1) /
+            actual = MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1) /
                      MassAmount(amount = 2,
                                 major = MASS1))
     }
@@ -103,7 +145,9 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = SpeedAmount(2 / 2, LENGTH1 to TIME1),
-            actual = MomentumAmount(2, MASS1, LENGTH1, TIME1) /
+            actual = MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1) /
                      MassAmount(amount = 1,
                                 major = MASS2))
     }
@@ -114,7 +158,9 @@ class MomentumAmountTest
         assertEquals(
             expected = MassAmount(amount = 2 / 2,
                                   major = MASS1),
-            actual = MomentumAmount(2, (MASS1 * LENGTH1) to TIME1) /
+            actual = MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1) /
                      SpeedAmount(2, LENGTH1 to TIME1))
     }
 
@@ -124,7 +170,9 @@ class MomentumAmountTest
         assertEquals(
             expected = MassAmount(amount = 2 / 2,
                                   major = MASS1),
-            actual = MomentumAmount(2, (MASS1 * LENGTH1) to TIME1) /
+            actual = MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1) /
                      SpeedAmount(2, LENGTH2 to TIME2))
     }
 
@@ -135,7 +183,9 @@ class MomentumAmountTest
             expected = ForceAmount(amount = 2 / 2,
                                    major = MASS1 * LENGTH1,
                                    minor = TIME1 * TIME1),
-            actual = MomentumAmount(2, MASS1, LENGTH1, TIME1) /
+            actual = MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1) /
                      TimeAmount(2, TIME1))
     }
 
@@ -146,7 +196,9 @@ class MomentumAmountTest
             expected = ForceAmount(amount = 1,
                                    major = MASS1 * LENGTH1,
                                    minor = TIME1 * TIME1),
-            actual = MomentumAmount(2, (MASS1 * LENGTH1) to TIME1) /
+            actual = MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1) /
                      TimeAmount(1, TIME2))
     }
 
@@ -157,7 +209,9 @@ class MomentumAmountTest
             expected = EnergyAmount(amount = 2 * 2,
                                     major = MASS1 * LENGTH1 * LENGTH1,
                                     minor = TIME1 * TIME1),
-            actual = MomentumAmount(2, (MASS1 * LENGTH1) to TIME1) *
+            actual = MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1) *
                      SpeedAmount(2, LENGTH1 to TIME1))
     }
 
@@ -168,7 +222,9 @@ class MomentumAmountTest
             expected = EnergyAmount(amount = 2 * 2,
                                     major = MASS1 * LENGTH1 * LENGTH1,
                                     minor = TIME1 * TIME1),
-            actual = MomentumAmount(2, (MASS1 * LENGTH1) to TIME1) *
+            actual = MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1) *
                      SpeedAmount(2, LENGTH2 to TIME2))
     }
 }

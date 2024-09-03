@@ -135,16 +135,14 @@ open class ForceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         MomentumAmount(amount = amount * that.amount * convert(that.time to time),
-                       mass = mass,
-                       length = length,
-                       time = time)
+                       major = mass * length,
+                       minor = time)
 
     @JvmName("timesTime")
     operator fun times(that: TimeAmount<T>) =
         MomentumAmount(amount = amount * that.amount,
-                       mass = mass,
-                       length = length,
-                       time = time)
+                       major = mass * length,
+                       minor = time)
 
 
     // endregion

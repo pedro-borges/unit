@@ -65,8 +65,8 @@ open class TimeAmount<T : Unit<Time>>(
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         PaceAmount(amount = amount / that.amount,
-                   time = time,
-                   length = that.length)
+                   major = time,
+                   minor = that.length)
 
     // endregion
 }

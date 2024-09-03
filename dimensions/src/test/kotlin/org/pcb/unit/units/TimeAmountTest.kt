@@ -86,7 +86,9 @@ class TimeAmountTest
     fun divSpace()
     {
         assertEquals(
-            expected = PaceAmount(2 / 2, TIME1 to LENGTH1),
+            expected = PaceAmount(amount = 2 / 2,
+                                  major = TIME1,
+                                  minor = LENGTH1),
             actual = TimeAmount(2, TIME1) /
                      LengthAmount(amount = 2,
                                   major = LENGTH1))

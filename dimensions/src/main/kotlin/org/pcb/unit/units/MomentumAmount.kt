@@ -17,63 +17,58 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
-        val mass: M,
-        val length: L,
-        val time: T)
+        major: Tuple<M, L>,
+        minor: T)
     : Amount<Momentum>(amount = amount.toBigBigDecimal(),
                        unit = CompositeUnit(
                            domain = Momentum::class,
-                           units = listOf(mass to 1,
-                                          length to 1,
-                                          time to -1)))
+                           units = listOf(major.first to 1,
+                                          major.second to 1,
+                                          minor to -1)))
 {
-    constructor(amount: Number, pair: Pair<Tuple<M, L>, T>) : this(amount, pair.first.first, pair.first.second, pair.second)
+    val mass = major.first
+    val length = major.second
+    val time = minor
 
     // region Momentum
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MomentumAmount(amount = amount * that.amount * that.unit.scale,
-                       mass = mass,
-                       length = length,
-                       time = time)
+                       major = mass * length,
+                       minor = time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         MomentumAmount(amount = amount / that.amount / that.unit.scale,
-                       mass = mass,
-                       length = length,
-                       time = time)
+                       major = mass * length,
+                       minor = time)
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> plus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount + that.amount
                                 * convert(that.mass to mass,
                                           that.length to length)
                                 / convert(that.time to time),
-                       mass = mass,
-                       length = length,
-                       time = time)
+                       major = mass * length,
+                       minor = time)
 
     @JvmName("plusMomentum")
     operator fun plus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount + that.amount,
-                       mass = mass,
-                       length = length,
-                       time = time)
+                       major = mass * length,
+                       minor = time)
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> minus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount - that.amount
                                 * convert(that.mass to mass,
                                           that.length to length)
                                 / convert(that.time to time),
-                       mass = mass,
-                       length = length,
-                       time = time)
+                       major = mass * length,
+                       minor = time)
 
     @JvmName("minusMomentum")
     operator fun minus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount - that.amount,
-                       mass = mass,
-                       length = length,
-                       time = time)
+                       major = mass * length,
+                       minor = time)
 
     // endregion
 

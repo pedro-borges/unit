@@ -165,16 +165,14 @@ open class EnergyAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
         MomentumAmount(amount = amount / that.amount
                                 / convert(that.length to length)
                                 * convert(that.time to time),
-                       mass = mass,
-                       length = length,
-                       time = time)
+                       major = mass * length,
+                       minor = time)
 
     @JvmName("divSpeed")
     operator fun div(that: SpeedAmount<L, T>) =
         MomentumAmount(amount = amount / that.amount,
-                       mass = mass,
-                       length = length,
-                       time = time)
+                       major = mass * length,
+                       minor = time)
 
     // endregion
 

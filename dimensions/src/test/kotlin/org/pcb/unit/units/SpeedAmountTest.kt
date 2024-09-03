@@ -165,7 +165,9 @@ class SpeedAmountTest
                                     major = MASS1 * LENGTH1 * LENGTH1,
                                     minor = TIME1 * TIME1),
             actual = SpeedAmount(2, LENGTH1 to TIME1) *
-                     MomentumAmount(2, (MASS1 * LENGTH1) to TIME1))
+                     MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH1,
+                                    minor = TIME1))
     }
 
     @Test
@@ -176,6 +178,8 @@ class SpeedAmountTest
                                     major = MASS1 * LENGTH1 * LENGTH1,
                                     minor = TIME1 * TIME1),
             actual = SpeedAmount(2, LENGTH1 to TIME1) *
-                     MomentumAmount(2, (MASS1 * LENGTH2) to TIME2))
+                     MomentumAmount(amount = 2,
+                                    major = MASS1 * LENGTH2,
+                                    minor = TIME2))
     }
 }

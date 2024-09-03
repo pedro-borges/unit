@@ -68,9 +68,8 @@ open class MassAmount<M : Unit<Mass>>(
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
         MomentumAmount(amount = that.amount * that.amount,
-                       mass = mass,
-                       length = that.length,
-                       time = that.time)
+                       major = mass * that.length,
+                       minor = that.time)
 
     // endregion
 
