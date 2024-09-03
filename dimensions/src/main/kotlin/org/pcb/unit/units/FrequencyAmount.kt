@@ -75,8 +75,8 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         SpeedAmount(amount = that.amount / amount,
-                    length = that.length,
-                    time = time)
+                    major = that.length,
+                    minor = time)
 
     // endregion
 

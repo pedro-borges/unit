@@ -143,7 +143,9 @@ class AccelerationAmountTest
     fun timesSameTime()
     {
         assertEquals(
-            expected = SpeedAmount(2 * 2, LENGTH1 to TIME1),
+            expected = SpeedAmount(amount = 2 * 2,
+                                   major = LENGTH1,
+                                   minor = TIME1),
             actual = AccelerationAmount(amount = 2,
                                         major = LENGTH1,
                                         minor = TIME1 * TIME1) *
@@ -154,7 +156,9 @@ class AccelerationAmountTest
     fun timesOtherTime()
     {
         assertEquals(
-            expected = SpeedAmount(2 * 2, LENGTH1 to TIME1),
+            expected = SpeedAmount(amount = 2 * 2,
+                                   major = LENGTH1,
+                                   minor = TIME1),
             actual = AccelerationAmount(amount = 2,
                                         major = LENGTH1,
                                         minor = TIME1 * TIME1) *

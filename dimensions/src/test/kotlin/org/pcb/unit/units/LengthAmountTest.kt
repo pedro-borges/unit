@@ -112,7 +112,8 @@ class LengthAmountTest
     {
         assertEquals(
             expected = SpeedAmount(amount = 2 / 2,
-                                   pair = LENGTH1 to TIME1),
+                                   major = LENGTH1,
+                                   minor = TIME1),
             actual = LengthAmount(amount = 2,
                                   major = LENGTH1) /
                      TimeAmount(amount = 2,

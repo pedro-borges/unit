@@ -66,8 +66,8 @@ open class LengthAmount<L : Unit<Length>>(
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
         SpeedAmount(amount = amount / that.amount,
-                    length = length,
-                    time = that.time)
+                    major = length,
+                    minor = that.time)
 
     // endregion
 

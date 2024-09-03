@@ -25,8 +25,12 @@ class SpeedAmountTest
     fun timesScalar()
     {
         assertEquals(
-            expected = SpeedAmount(2 * 2, LENGTH1 to TIME1),
-            actual = SpeedAmount(2, LENGTH1 to TIME1) *
+            expected = SpeedAmount(amount = 2 * 2,
+                                   major = LENGTH1,
+                                   minor = TIME1),
+            actual = SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1) *
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -34,8 +38,12 @@ class SpeedAmountTest
     fun divScalar()
     {
         assertEquals(
-            expected = SpeedAmount(2 / 2, LENGTH1 to TIME1),
-            actual = SpeedAmount(2, LENGTH1 to TIME1) /
+            expected = SpeedAmount(amount = 2 / 2,
+                                   major = LENGTH1,
+                                   minor = TIME1),
+            actual = SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1) /
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -43,36 +51,60 @@ class SpeedAmountTest
     fun plusSameSpeed()
     {
         assertEquals(
-            expected = SpeedAmount(0 + 1, LENGTH1 to TIME1),
-            actual = SpeedAmount(0, LENGTH1 to TIME1) +
-                     SpeedAmount(1, LENGTH1 to TIME1))
+            expected = SpeedAmount(amount = 0 + 1,
+                                   major = LENGTH1,
+                                   minor = TIME1),
+            actual = SpeedAmount(amount = 0,
+                                 major = LENGTH1,
+                                 minor = TIME1) +
+                     SpeedAmount(amount = 1,
+                                 major = LENGTH1,
+                                 minor = TIME1))
     }
 
     @Test
     fun plusOtherSpeed()
     {
         assertEquals(
-            expected = SpeedAmount(0 + (2 / 2), LENGTH1 to TIME1),
-            actual = SpeedAmount(0, LENGTH1 to TIME1) +
-                     SpeedAmount(1, LENGTH2 to TIME2))
+            expected = SpeedAmount(amount = 0 + (2 / 2),
+                                   major = LENGTH1,
+                                   minor = TIME1),
+            actual = SpeedAmount(amount = 0,
+                                 major = LENGTH1,
+                                 minor = TIME1) +
+                     SpeedAmount(amount = 1,
+                                 major = LENGTH2,
+                                 minor = TIME2))
     }
 
     @Test
     fun minusSameSpeed()
     {
         assertEquals(
-            expected = SpeedAmount(1 - 1, LENGTH1 to TIME1),
-            actual = SpeedAmount(1, LENGTH1 to TIME1) -
-                     SpeedAmount(1, LENGTH1 to TIME1))
+            expected = SpeedAmount(amount = 1 - 1,
+                                   major = LENGTH1,
+                                   minor = TIME1),
+            actual = SpeedAmount(amount = 1,
+                                 major = LENGTH1,
+                                 minor = TIME1) -
+                     SpeedAmount(amount = 1,
+                                 major = LENGTH1,
+                                 minor = TIME1))
     }
 
     @Test
     fun minusOtherSpeed()
     {
         assertEquals(
-            expected = SpeedAmount(1 - (2 / 2), LENGTH1 to TIME1),
-            actual = SpeedAmount(1, LENGTH1 to TIME1) -
-                     SpeedAmount(1, LENGTH2 to TIME2))
+            expected = SpeedAmount(amount = 1 - (2 / 2),
+                                   major = LENGTH1,
+                                   minor = TIME1),
+            actual = SpeedAmount(amount = 1,
+                                 major = LENGTH1,
+                                 minor = TIME1) -
+                     SpeedAmount(amount = 1,
+                                 major = LENGTH2,
+                                 minor = TIME2))
     }
 
     @Test
@@ -80,8 +112,12 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
-            actual = SpeedAmount(2, LENGTH1 to TIME1) /
-                     SpeedAmount(2, LENGTH1 to TIME1))
+            actual = SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1) /
+                     SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1))
     }
 
     @Test
@@ -89,8 +125,12 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
-            actual = SpeedAmount(2, LENGTH1 to TIME1) /
-                     SpeedAmount(2, LENGTH2 to TIME2))
+            actual = SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1) /
+                     SpeedAmount(amount = 2,
+                                 major = LENGTH2,
+                                 minor = TIME2))
     }
 
     @Test
@@ -99,7 +139,9 @@ class SpeedAmountTest
         assertEquals(
             expected = LengthAmount(amount = 2 * 2,
                                     major = LENGTH1),
-            actual = SpeedAmount(2, LENGTH1 to TIME1) *
+            actual = SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1) *
                      TimeAmount(2, TIME1))
     }
 
@@ -109,7 +151,9 @@ class SpeedAmountTest
         assertEquals(
             expected = LengthAmount(amount = 2 * 2,
                                     major = LENGTH1),
-            actual = SpeedAmount(2, LENGTH1 to TIME1) *
+            actual = SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1) *
                      TimeAmount(1, TIME2))
     }
 
@@ -120,7 +164,9 @@ class SpeedAmountTest
             expected = AccelerationAmount(amount = 2 / 2,
                                           major = LENGTH1,
                                           minor = TIME1 * TIME1),
-            actual = SpeedAmount(2, LENGTH1 to TIME1) /
+            actual = SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1) /
                      TimeAmount(2, TIME1))
     }
 
@@ -131,7 +177,9 @@ class SpeedAmountTest
             expected = AccelerationAmount(amount = 2 / 2,
                                           major = LENGTH1,
                                           minor = TIME1 * TIME1),
-            actual = SpeedAmount(2, LENGTH1 to TIME1) /
+            actual = SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1) /
                      TimeAmount(1, TIME2))
     }
 
@@ -141,7 +189,9 @@ class SpeedAmountTest
         assertEquals(
             expected = FrequencyAmount(amount = 2 / 2,
                                        minor = TIME1),
-            actual = SpeedAmount(2, LENGTH1 to TIME1) /
+            actual = SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1) /
                      LengthAmount(amount = 2,
                                   major = LENGTH1))
     }
@@ -152,7 +202,9 @@ class SpeedAmountTest
         assertEquals(
             expected = FrequencyAmount(amount = 2 / 2,
                                        minor = TIME1),
-            actual = SpeedAmount(2, LENGTH1 to TIME1) /
+            actual = SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1) /
                      LengthAmount(amount = 1,
                                   major = LENGTH2))
     }
@@ -164,7 +216,9 @@ class SpeedAmountTest
             expected = EnergyAmount(amount = 2 * 2,
                                     major = MASS1 * LENGTH1 * LENGTH1,
                                     minor = TIME1 * TIME1),
-            actual = SpeedAmount(2, LENGTH1 to TIME1) *
+            actual = SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1) *
                      MomentumAmount(amount = 2,
                                     major = MASS1 * LENGTH1,
                                     minor = TIME1))
@@ -177,7 +231,9 @@ class SpeedAmountTest
             expected = EnergyAmount(amount = 2 * 2,
                                     major = MASS1 * LENGTH1 * LENGTH1,
                                     minor = TIME1 * TIME1),
-            actual = SpeedAmount(2, LENGTH1 to TIME1) *
+            actual = SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1) *
                      MomentumAmount(amount = 2,
                                     major = MASS1 * LENGTH2,
                                     minor = TIME2))

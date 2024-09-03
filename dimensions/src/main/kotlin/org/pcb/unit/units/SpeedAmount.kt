@@ -16,53 +16,54 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
-        val length: L,
-        val time: T)
+        major: L,
+        minor: T)
     : Amount<Speed>(amount = amount.toBigBigDecimal(),
                     unit = CompositeUnit(
                         domain = Speed::class,
-                        units = listOf(length to 1,
-                                       time to -1)))
+                        units = listOf(major to 1,
+                                       minor to -1)))
 {
-    constructor(amount: Number, pair: Pair<L, T>) : this(amount, pair.first, pair.second)
+    val length = major
+    val time = minor
 
     // region Speed
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         SpeedAmount(amount = amount * that.amount * that.unit.scale,
-                    length = length,
-                    time = time)
+                    major = length,
+                    minor = time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         SpeedAmount(amount = amount / that.amount / that.unit.scale,
-                    length = length,
-                    time = time)
+                    major = length,
+                    minor = time)
 
     operator fun <L : Unit<Length>, T : Unit<Time>> plus(that: SpeedAmount<L, T>) =
         SpeedAmount(amount = amount + that.amount
                              * convert(that.length to length)
                              / convert(that.time to time),
-                    length = length,
-                    time = time)
+                    major = length,
+                    minor = time)
 
     @JvmName("plusSpeed")
     operator fun plus(that: SpeedAmount<L, T>) =
         SpeedAmount(amount = amount + that.amount,
-                    length = length,
-                    time = time)
+                    major = length,
+                    minor = time)
 
     operator fun <L : Unit<Length>, T : Unit<Time>> minus(that: SpeedAmount<L, T>) =
         SpeedAmount(amount = amount - that.amount
                              * convert(that.length to length)
                              / convert(that.time to time),
-                    length = length,
-                    time = time)
+                    major = length,
+                    minor = time)
 
     @JvmName("minusSpeed")
     operator fun minus(that: SpeedAmount<L, T>) =
         SpeedAmount(amount = amount - that.amount,
-                    length = length,
-                    time = time)
+                    major = length,
+                    minor = time)
 
     // endregion
 

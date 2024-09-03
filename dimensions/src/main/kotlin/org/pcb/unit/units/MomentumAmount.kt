@@ -90,14 +90,14 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
         SpeedAmount(amount = amount / that.amount / convert(that.mass to mass),
-                    length = length,
-                    time = time)
+                    major = length,
+                    minor = time)
 
     @JvmName("divMass")
     operator fun div(that: MassAmount<M>) =
         SpeedAmount(amount = amount / that.amount,
-                    length = length,
-                    time = time)
+                    major = length,
+                    minor = time)
 
     // endregion
 

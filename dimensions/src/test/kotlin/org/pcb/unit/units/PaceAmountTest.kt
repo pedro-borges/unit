@@ -132,8 +132,8 @@ class PaceAmountTest
                                 major = TIME1,
                                 minor = LENGTH1) *
                      SpeedAmount(amount = 2,
-                                 length = LENGTH1,
-                                 time = TIME1))
+                                 major = LENGTH1,
+                                 minor = TIME1))
     }
 
     @Test

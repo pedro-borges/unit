@@ -132,7 +132,9 @@ class MomentumAmountTest
     fun divSameMass()
     {
         assertEquals(
-            expected = SpeedAmount(2 / 2, LENGTH1 to TIME1),
+            expected = SpeedAmount(amount = 2 / 2,
+                                   major = LENGTH1,
+                                   minor = TIME1),
             actual = MomentumAmount(amount = 2,
                                     major = MASS1 * LENGTH1,
                                     minor = TIME1) /
@@ -144,7 +146,9 @@ class MomentumAmountTest
     fun divOtherMass()
     {
         assertEquals(
-            expected = SpeedAmount(2 / 2, LENGTH1 to TIME1),
+            expected = SpeedAmount(amount = 2 / 2,
+                                   major = LENGTH1,
+                                   minor = TIME1),
             actual = MomentumAmount(amount = 2,
                                     major = MASS1 * LENGTH1,
                                     minor = TIME1) /
@@ -161,7 +165,7 @@ class MomentumAmountTest
             actual = MomentumAmount(amount = 2,
                                     major = MASS1 * LENGTH1,
                                     minor = TIME1) /
-                     SpeedAmount(2, LENGTH1 to TIME1))
+                     SpeedAmount(2, LENGTH1, TIME1))
     }
 
     @Test
@@ -173,7 +177,9 @@ class MomentumAmountTest
             actual = MomentumAmount(amount = 2,
                                     major = MASS1 * LENGTH1,
                                     minor = TIME1) /
-                     SpeedAmount(2, LENGTH2 to TIME2))
+                     SpeedAmount(amount = 2,
+                                 major = LENGTH2,
+                                 minor = TIME2))
     }
 
     @Test
@@ -212,7 +218,9 @@ class MomentumAmountTest
             actual = MomentumAmount(amount = 2,
                                     major = MASS1 * LENGTH1,
                                     minor = TIME1) *
-                     SpeedAmount(2, LENGTH1 to TIME1))
+                     SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1))
     }
 
     @Test
@@ -225,6 +233,8 @@ class MomentumAmountTest
             actual = MomentumAmount(amount = 2,
                                     major = MASS1 * LENGTH1,
                                     minor = TIME1) *
-                     SpeedAmount(2, LENGTH2 to TIME2))
+                     SpeedAmount(amount = 2,
+                                 major = LENGTH2,
+                                 minor = TIME2))
     }
 }

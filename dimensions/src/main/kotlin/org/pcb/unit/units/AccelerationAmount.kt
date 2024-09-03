@@ -88,14 +88,14 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         SpeedAmount(amount = amount * that.amount * convert(that.time to time),
-                    length = length,
-                    time = time)
+                    major = length,
+                    minor = time)
 
     @JvmName("timesTime")
     operator fun times(that: TimeAmount<T>) =
         SpeedAmount(amount = amount * that.amount,
-                    length = length,
-                    time = time)
+                    major = length,
+                    minor = time)
 
     // endregion
 

@@ -119,7 +119,9 @@ class MassAmountTest
                                       minor = TIME1),
             actual = MassAmount(amount = 2,
                                 major = MASS1) *
-                     SpeedAmount(2, LENGTH1 to TIME1))
+                     SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1))
     }
 
     @Test

@@ -109,7 +109,9 @@ class FrequencyAmountTest
     fun timesSpace()
     {
         assertEquals(
-            expected = SpeedAmount(2 / 2, LENGTH1 to TIME1),
+            expected = SpeedAmount(amount = 2 / 2,
+                                   major = LENGTH1,
+                                   minor = TIME1),
             actual = FrequencyAmount(amount = 2,
                                      minor = TIME1) *
                      LengthAmount(amount = 2,
@@ -125,7 +127,9 @@ class FrequencyAmountTest
                                           minor = TIME1 * TIME1),
             actual = FrequencyAmount(amount = 2,
                                      minor = TIME1) *
-                     SpeedAmount(2, LENGTH1 to TIME1))
+                     SpeedAmount(amount = 2,
+                                 major = LENGTH1,
+                                 minor = TIME1))
     }
 
     @Test
@@ -137,7 +141,9 @@ class FrequencyAmountTest
                                           minor = TIME1 * TIME1),
             actual = FrequencyAmount(amount = 2,
                                      minor = TIME1) *
-                     SpeedAmount(2 * 2, LENGTH1 to TIME2))
+                     SpeedAmount(amount = 2 * 2,
+                                 major = LENGTH1,
+                                 minor = TIME2))
     }
 
     @Test
