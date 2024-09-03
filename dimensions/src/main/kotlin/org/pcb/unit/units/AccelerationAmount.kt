@@ -110,7 +110,8 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
         ForceAmount(amount = amount * that.amount,
-                    unit = (that.mass * length) / (time * time))
+                    unit = (that.mass * length) /
+                           (time * time))
 
     // endregion
 }

@@ -113,12 +113,14 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
         EnergyAmount(amount = amount * that.amount
                               * convert(that.length to length)
                               / convert(that.time to time),
-                     unit = (that.mass * length * length) / (time * time))
+                     unit = (that.mass * length * length) /
+                            (time * time))
 
     @JvmName("timesMomentum")
     operator fun <M : Unit<Mass>> times(that: MomentumAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = (that.mass * length * length) / (time * time))
+                     unit = (that.mass * length * length) /
+                            (time * time))
 
     // endregion
 }

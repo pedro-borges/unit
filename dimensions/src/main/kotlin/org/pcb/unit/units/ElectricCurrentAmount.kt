@@ -78,12 +78,14 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricTensionAmount(amount = amount * that.amount / convert(that.electricCurrent to electricCurrent,
                                                                       that.electricCurrent to electricCurrent),
-                              unit = (that.mass * that.length * that.length) / (that.time * that.time * that.time * electricCurrent))
+                              unit = (that.mass * that.length * that.length) /
+                                     (that.time * that.time * that.time * electricCurrent))
 
     @JvmName("timesElectricResistance")
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> times(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricTensionAmount(amount = amount * that.amount,
-                              unit = (that.mass * that.length * that.length) / (that.time * that.time * that.time * electricCurrent))
+                              unit = (that.mass * that.length * that.length) /
+                                     (that.time * that.time * that.time * electricCurrent))
 
     // endregion
 
@@ -91,12 +93,14 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: ElectricTensionAmount<M, L, T, EC>) =
         PowerAmount(amount = amount * that.amount / convert(that.electricCurrent to electricCurrent),
-                    unit = (that.mass * that.length * that.length) / (that.time * that.time * that.time))
+                    unit = (that.mass * that.length * that.length) /
+                           (that.time * that.time * that.time))
 
     @JvmName("timesElectricTension")
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> times(that: ElectricTensionAmount<M, L, T, EC>) =
         PowerAmount(amount = amount * that.amount,
-                    unit = (that.mass * that.length * that.length) / (that.time * that.time * that.time))
+                    unit = (that.mass * that.length * that.length) /
+                           (that.time * that.time * that.time))
 
     // endregion
 }

@@ -49,11 +49,13 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         PowerAmount(amount = amount * that.amount * that.unit.scale,
-                    unit = (mass * length * length) / (time * time * time))
+                    unit = (mass * length * length) /
+                           (time * time * time))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         PowerAmount(amount = amount / that.amount / that.unit.scale,
-                    unit = (mass * length * length) / (time * time * time))
+                    unit = (mass * length * length) /
+                           (time * time * time))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> plus(that: PowerAmount<M, L, T>) =
         PowerAmount(amount = amount + that.amount
@@ -63,12 +65,14 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                              / convert(that.time to time,
                                        that.time to time,
                                        that.time to time),
-                    unit = (mass * length * length) / (time * time * time))
+                    unit = (mass * length * length) /
+                           (time * time * time))
 
     @JvmName("plusPower")
     operator fun plus(that: PowerAmount<M, L, T>) =
         PowerAmount(amount = amount + that.amount,
-                    unit = (mass * length * length) / (time * time * time))
+                    unit = (mass * length * length) /
+                           (time * time * time))
 
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> minus(that: PowerAmount<M, L, T>) =
@@ -79,12 +83,14 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                              / convert(that.time to time,
                                        that.time to time,
                                        that.time to time),
-                    unit = (mass * length * length) / (time * time * time))
+                    unit = (mass * length * length) /
+                           (time * time * time))
 
     @JvmName("minusPower")
     operator fun minus(that: PowerAmount<M, L, T>) =
         PowerAmount(amount = amount - that.amount,
-                    unit = (mass * length * length) / (time * time * time))
+                    unit = (mass * length * length) /
+                           (time * time * time))
 
     // endregion
 
@@ -109,12 +115,14 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         EnergyAmount(amount = amount * that.amount * convert(that.time to time),
-                     unit = (mass * length * length) / (time * time))
+                     unit = (mass * length * length) /
+                            (time * time))
 
     @JvmName("timesTime")
     operator fun times(that: TimeAmount<T>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = (mass * length * length) / (time * time))
+                     unit = (mass * length * length) /
+                            (time * time))
 
     // endregion
 
@@ -141,7 +149,8 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
         ElectricTensionAmount(amount = amount / that.amount,
-                              unit = (mass * length * length) / (time * time * time * that.electricCurrent))
+                              unit = (mass * length * length) /
+                                     (time * time * time * that.electricCurrent))
 
     // endregion
 }

@@ -33,35 +33,41 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MomentumAmount(amount = amount * that.amount * that.unit.scale,
-                       unit = (mass * length) / time)
+                       unit = (mass * length) /
+                              time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         MomentumAmount(amount = amount / that.amount / that.unit.scale,
-                       unit = (mass * length) / time)
+                       unit = (mass * length) /
+                              time)
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> plus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount + that.amount
                                 * convert(that.mass to mass,
                                           that.length to length)
                                 / convert(that.time to time),
-                       unit = (mass * length) / time)
+                       unit = (mass * length) /
+                              (time))
 
     @JvmName("plusMomentum")
     operator fun plus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount + that.amount,
-                       unit = (mass * length) / time)
+                       unit = (mass * length) /
+                              (time))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> minus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount - that.amount
                                 * convert(that.mass to mass,
                                           that.length to length)
                                 / convert(that.time to time),
-                       unit = (mass * length) / time)
+                       unit = (mass * length) /
+                              (time))
 
     @JvmName("minusMomentum")
     operator fun minus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount - that.amount,
-                       unit = (mass * length) / time)
+                       unit = (mass * length) /
+                              (time))
 
     // endregion
 
@@ -111,12 +117,14 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount / convert(that.time to time),
-                    unit = (mass * length) / (time * time))
+                    unit = (mass * length) /
+                           (time * time))
 
     @JvmName("divTime")
     operator fun div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount,
-                    unit = (mass * length) / (time * time))
+                    unit = (mass * length) /
+                           (time * time))
 
     // endregion
 
@@ -126,12 +134,14 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
         EnergyAmount(amount = amount * that.amount
                               * convert(that.length to length)
                               / convert(that.time to time),
-                     unit = (mass * length * length) / (time * time))
+                     unit = (mass * length * length) /
+                            (time * time))
 
     @JvmName("timesSpeed")
     operator fun times(that: SpeedAmount<L, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = (mass * length * length) / (time * time))
+                     unit = (mass * length * length) /
+                            (time * time))
 
     // endregion
 }
