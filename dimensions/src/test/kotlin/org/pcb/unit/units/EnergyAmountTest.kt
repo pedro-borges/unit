@@ -48,7 +48,7 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) *
-                     PercentAmount(2 * 100))
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
@@ -61,7 +61,7 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /
-                     PercentAmount(2 * 100))
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test

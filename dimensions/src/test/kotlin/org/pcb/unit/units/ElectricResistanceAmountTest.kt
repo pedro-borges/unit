@@ -44,7 +44,7 @@ class ElectricResistanceAmountTest
             actual = ElectricResistanceAmount(amount = 2,
                                               major = MASS1 * LENGTH1 * LENGTH1,
                                               minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) *
-                     PercentAmount(2 * 100))
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
@@ -57,7 +57,7 @@ class ElectricResistanceAmountTest
             actual = ElectricResistanceAmount(amount = 2,
                                               major = MASS1 * LENGTH1 * LENGTH1,
                                               minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
-                     PercentAmount(2 * 100))
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
@@ -124,7 +124,7 @@ class ElectricResistanceAmountTest
     fun divSameElectricResistance()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
+            expected = NaturalAmount(amount = 2 / 2),
             actual = ElectricResistanceAmount(amount = 2,
                                               major = MASS1 * LENGTH1 * LENGTH1,
                                               minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
@@ -137,7 +137,7 @@ class ElectricResistanceAmountTest
     fun divOtherElectricResistance()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
+            expected = NaturalAmount(amount = 2 / 2),
             actual = ElectricResistanceAmount(amount = 2,
                                               major = MASS1 * LENGTH1 * LENGTH1,
                                               minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /

@@ -96,7 +96,7 @@ class AreaAmountTest
     fun divOtherArea()
     {
         assertEquals(
-            expected = NaturalAmount(4 / (2 * 2)),
+            expected = NaturalAmount(amount = 4 / (2 * 2)),
             actual = AreaAmount(amount = 4,
                                 major = LENGTH1 * LENGTH1) /
                      AreaAmount(amount = 1,

@@ -16,7 +16,7 @@ class TimeAmountTest
         assertEquals(
             expected = TimeAmount(2 * 2, TIME1),
             actual = TimeAmount(2, TIME1) *
-                     PercentAmount(2 * 100))
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
@@ -25,7 +25,7 @@ class TimeAmountTest
         assertEquals(
             expected = TimeAmount(2 / 2, TIME1),
             actual = TimeAmount(2, TIME1) /
-                     PercentAmount(2 * 100))
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
@@ -68,7 +68,7 @@ class TimeAmountTest
     fun divSameTime()
     {
         assertEquals(
-            expected = NaturalAmount(1),
+            expected = NaturalAmount(amount = 1),
             actual = TimeAmount(2, TIME1) /
                      TimeAmount(2, TIME1))
     }
@@ -77,7 +77,7 @@ class TimeAmountTest
     fun divOtherTime()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
+            expected = NaturalAmount(amount = 2 / 2),
             actual = TimeAmount(2, TIME1) /
                      TimeAmount(1, TIME2))
     }

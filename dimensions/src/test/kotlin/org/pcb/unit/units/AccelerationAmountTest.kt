@@ -37,7 +37,7 @@ class AccelerationAmountTest
             actual = AccelerationAmount(amount = 2,
                                         major = LENGTH1,
                                         minor = TIME1 * TIME1) *
-                     PercentAmount(2 * 100))
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
@@ -50,7 +50,7 @@ class AccelerationAmountTest
             actual = AccelerationAmount(amount = 2,
                                         major = LENGTH1,
                                         minor = TIME1 * TIME1) /
-                     PercentAmount(2 * 100))
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
@@ -117,7 +117,7 @@ class AccelerationAmountTest
     fun divSameAcceleration()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
+            expected = NaturalAmount(amount = 2 / 2),
             actual = AccelerationAmount(amount = 2,
                                         major = LENGTH1,
                                         minor = TIME1 * TIME1) /
@@ -130,7 +130,7 @@ class AccelerationAmountTest
     fun divOtherAcceleration()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
+            expected = NaturalAmount(amount = 2 / 2),
             actual = AccelerationAmount(amount = 2,
                                         major = LENGTH1,
                                         minor = TIME1 * TIME1) /

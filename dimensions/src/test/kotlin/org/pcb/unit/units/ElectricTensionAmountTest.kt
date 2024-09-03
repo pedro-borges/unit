@@ -46,7 +46,7 @@ class ElectricTensionAmountTest
             actual = ElectricTensionAmount(amount = 2,
                                            major = MASS1 * LENGTH1 * LENGTH1,
                                            minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1) *
-                     PercentAmount(2 * 100))
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
@@ -59,7 +59,7 @@ class ElectricTensionAmountTest
             actual = ElectricTensionAmount(amount = 2,
                                            major = MASS1 * LENGTH1 * LENGTH1,
                                            minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1) /
-                     PercentAmount(2 * 100))
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
@@ -126,7 +126,7 @@ class ElectricTensionAmountTest
     fun divSameElectricTension()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
+            expected = NaturalAmount(amount = 2 / 2),
             actual = ElectricTensionAmount(amount = 2,
                                            major = MASS1 * LENGTH1 * LENGTH1,
                                            minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1) /
@@ -139,7 +139,7 @@ class ElectricTensionAmountTest
     fun divOtherElectricTension()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
+            expected = NaturalAmount(amount = 2 / 2),
             actual = ElectricTensionAmount(amount = 2,
                                            major = MASS1 * LENGTH1 * LENGTH1,
                                            minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1) /

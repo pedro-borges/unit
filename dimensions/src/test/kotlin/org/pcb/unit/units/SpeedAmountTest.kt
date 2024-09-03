@@ -27,7 +27,7 @@ class SpeedAmountTest
         assertEquals(
             expected = SpeedAmount(2 * 2, LENGTH1 to TIME1),
             actual = SpeedAmount(2, LENGTH1 to TIME1) *
-                     PercentAmount(2 * 100))
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
@@ -36,7 +36,7 @@ class SpeedAmountTest
         assertEquals(
             expected = SpeedAmount(2 / 2, LENGTH1 to TIME1),
             actual = SpeedAmount(2, LENGTH1 to TIME1) /
-                     PercentAmount(2 * 100))
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
@@ -79,7 +79,7 @@ class SpeedAmountTest
     fun divSameSpeed()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
+            expected = NaturalAmount(amount = 2 / 2),
             actual = SpeedAmount(2, LENGTH1 to TIME1) /
                      SpeedAmount(2, LENGTH1 to TIME1))
     }
@@ -88,7 +88,7 @@ class SpeedAmountTest
     fun divOtherSpeed()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
+            expected = NaturalAmount(amount = 2 / 2),
             actual = SpeedAmount(2, LENGTH1 to TIME1) /
                      SpeedAmount(2, LENGTH2 to TIME2))
     }

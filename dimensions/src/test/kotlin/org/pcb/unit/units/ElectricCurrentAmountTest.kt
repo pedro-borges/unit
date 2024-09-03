@@ -28,7 +28,7 @@ class ElectricCurrentAmountTest
                                              major = ELECTRICCURRENT1),
             actual = ElectricCurrentAmount(amount = 2,
                                            major = ELECTRICCURRENT1) *
-                     PercentAmount(2 * 100))
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
@@ -39,7 +39,7 @@ class ElectricCurrentAmountTest
                                              major = ELECTRICCURRENT1),
             actual = ElectricCurrentAmount(amount = 2,
                                            major = ELECTRICCURRENT1) /
-                     PercentAmount(2 * 100))
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
@@ -94,7 +94,7 @@ class ElectricCurrentAmountTest
     fun divSameElectricCurrent()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
+            expected = NaturalAmount(amount = 2 / 2),
             actual = ElectricCurrentAmount(amount = 2,
                                            major = ELECTRICCURRENT1) /
                      ElectricCurrentAmount(amount = 2,
@@ -105,7 +105,7 @@ class ElectricCurrentAmountTest
     fun divOtherElectricCurrent()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
+            expected = NaturalAmount(amount = 2 / 2),
             actual = ElectricCurrentAmount(amount = 2,
                                            major = ELECTRICCURRENT1) /
                      ElectricCurrentAmount(amount = 1,

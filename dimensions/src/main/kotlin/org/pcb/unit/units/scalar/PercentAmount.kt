@@ -9,7 +9,8 @@ import org.pcb.unit.units.scalar.PercentAmount.PERCENT
 
 @Suppress("unused")
 class PercentAmount(amount: Number)
-    : ScalarAmount<PERCENT>(amount, PERCENT)
+    : ScalarAmount<PERCENT>(amount = amount,
+                            major = PERCENT)
 {
     object PERCENT : Unit<Scalar>(Scalar::class)
     {

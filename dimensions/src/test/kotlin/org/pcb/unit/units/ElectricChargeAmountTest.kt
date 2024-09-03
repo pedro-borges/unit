@@ -19,80 +19,102 @@ class ElectricChargeAmountTest
     fun timesScalar()
     {
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
-            expected = ElectricChargeAmount(2 * 2, ELECTRICCURRENT1 * TIME1),
-            actual = ElectricChargeAmount(2, ELECTRICCURRENT1 * TIME1) *
-                     PercentAmount(2 * 100))
+            expected = ElectricChargeAmount(amount = 2 * 2,
+                                            major = ELECTRICCURRENT1 * TIME1),
+            actual = ElectricChargeAmount(amount = 2,
+                                          major = ELECTRICCURRENT1 * TIME1) *
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun divScalar()
     {
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
-            expected = ElectricChargeAmount(2 / 2, ELECTRICCURRENT1 * TIME1),
-            actual = ElectricChargeAmount(2, ELECTRICCURRENT1 * TIME1) /
-                     PercentAmount(2 * 100))
+            expected = ElectricChargeAmount(amount = 2 / 2,
+                                            major = ELECTRICCURRENT1 * TIME1),
+            actual = ElectricChargeAmount(amount = 2,
+                                          major = ELECTRICCURRENT1 * TIME1) /
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun plusSameElectricCharge()
     {
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
-            expected = ElectricChargeAmount(0 + 1, ELECTRICCURRENT1 * TIME1),
-            actual = ElectricChargeAmount(0, ELECTRICCURRENT1 * TIME1) +
-                     ElectricChargeAmount(1, ELECTRICCURRENT1 * TIME1))
+            expected = ElectricChargeAmount(amount = 0 + 1,
+                                            major = ELECTRICCURRENT1 * TIME1),
+            actual = ElectricChargeAmount(amount = 0,
+                                          major = ELECTRICCURRENT1 * TIME1) +
+                     ElectricChargeAmount(amount = 1,
+                                          major = ELECTRICCURRENT1 * TIME1))
     }
 
     @Test
     fun plusOtherElectricCharge()
     {
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
-            expected = ElectricChargeAmount(0 + (2 * 2), ELECTRICCURRENT1 * TIME1),
-            actual = ElectricChargeAmount(0, ELECTRICCURRENT1 * TIME1) +
-                     ElectricChargeAmount(1, ELECTRICCURRENT2 * TIME2))
+            expected = ElectricChargeAmount(amount = 0 + (2 * 2),
+                                            major = ELECTRICCURRENT1 * TIME1),
+            actual = ElectricChargeAmount(amount = 0,
+                                          major = ELECTRICCURRENT1 * TIME1) +
+                     ElectricChargeAmount(amount = 1,
+                                          major = ELECTRICCURRENT2 * TIME2))
     }
 
     @Test
     fun minusSameElectricCharge()
     {
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
-            expected = ElectricChargeAmount(1 - 1, ELECTRICCURRENT1 * TIME1),
-            actual = ElectricChargeAmount(1, ELECTRICCURRENT1 * TIME1) -
-                     ElectricChargeAmount(1, ELECTRICCURRENT1 * TIME1))
+            expected = ElectricChargeAmount(amount = 1 - 1,
+                                            major = ELECTRICCURRENT1 * TIME1),
+            actual = ElectricChargeAmount(amount = 1,
+                                          major = ELECTRICCURRENT1 * TIME1) -
+                     ElectricChargeAmount(amount = 1,
+                                          major = ELECTRICCURRENT1 * TIME1))
     }
 
     @Test
     fun minusOtherElectricCharge()
     {
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
-            expected = ElectricChargeAmount(4 - (2 * 2), ELECTRICCURRENT1 * TIME1),
-            actual = ElectricChargeAmount(4, ELECTRICCURRENT1 * TIME1) -
-                     ElectricChargeAmount(1, ELECTRICCURRENT2 * TIME2))
+            expected = ElectricChargeAmount(amount = 4 - (2 * 2),
+                                            major = ELECTRICCURRENT1 * TIME1),
+            actual = ElectricChargeAmount(amount = 4,
+                                          major = ELECTRICCURRENT1 * TIME1) -
+                     ElectricChargeAmount(amount = 1,
+                                          major = ELECTRICCURRENT2 * TIME2))
     }
 
     @Test
     fun divSameElectricCharge()
     {
         assertEquals(
-            expected = NaturalAmount(1),
-            actual = ElectricChargeAmount(2, ELECTRICCURRENT1 * TIME1) /
-                     ElectricChargeAmount(2, ELECTRICCURRENT1 * TIME1))
+            expected = NaturalAmount(amount = 1),
+            actual = ElectricChargeAmount(amount = 2,
+                                          major = ELECTRICCURRENT1 * TIME1) /
+                     ElectricChargeAmount(amount = 2,
+                                          major = ELECTRICCURRENT1 * TIME1))
     }
 
     @Test
     fun divOtherElectricCharge()
     {
         assertEquals(
-            expected = NaturalAmount(4 / (2 * 2)),
-            actual = ElectricChargeAmount(4, ELECTRICCURRENT1 * TIME1) /
-                     ElectricChargeAmount(1, ELECTRICCURRENT2 * TIME2))
+            expected = NaturalAmount(amount = 4 / (2 * 2)),
+            actual = ElectricChargeAmount(amount = 4,
+                                          major = ELECTRICCURRENT1 * TIME1) /
+                     ElectricChargeAmount(amount = 1,
+                                          major = ELECTRICCURRENT2 * TIME2))
     }
 
     @Test
     fun divTime()
     {
         assertEquals(
-            expected = ElectricCurrentAmount(2 / 2, ELECTRICCURRENT1),
-            actual = ElectricChargeAmount(2, ELECTRICCURRENT1 * TIME1) /
+            expected = ElectricCurrentAmount(amount = 2 / 2,
+                                             major = ELECTRICCURRENT1),
+            actual = ElectricChargeAmount(amount = 2,
+                                          major = ELECTRICCURRENT1 * TIME1) /
                      TimeAmount(2, TIME1))
     }
 }

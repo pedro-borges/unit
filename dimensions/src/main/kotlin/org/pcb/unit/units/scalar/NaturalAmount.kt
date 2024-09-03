@@ -8,7 +8,8 @@ import org.pcb.unit.units.ScalarAmount
 import org.pcb.unit.units.scalar.NaturalAmount.NATURAL
 
 class NaturalAmount(amount: Number)
-    : ScalarAmount<NATURAL>(amount, NATURAL)
+    : ScalarAmount<NATURAL>(amount = amount,
+                            major = NATURAL)
 {
     object NATURAL : Unit<Scalar>(Scalar::class)
     {
