@@ -9,7 +9,8 @@ import org.pcb.unit.units.space.DeciMeter.DECIMETER
 
 @Suppress("unused")
 class Liter(amount: Number)
-    : VolumeAmount<DECIMETER>(amount.toBigBigDecimal(), DECIMETER, DECIMETER, DECIMETER)
+    : VolumeAmount<DECIMETER>(amount = amount,
+                              major = DECIMETER * DECIMETER * DECIMETER)
 {
     constructor(amount: String) : this(amount.toBigDecimal())
 

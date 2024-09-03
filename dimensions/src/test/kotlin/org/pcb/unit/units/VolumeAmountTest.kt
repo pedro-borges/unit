@@ -14,7 +14,7 @@ class VolumeAmountTest
     @Test
     fun timesScalar()
     {
-        assertEquals(
+        assertEquals<VolumeAmount<out Unit<Length>>>(
             expected = VolumeAmount(amount = 2 * 2,
                                     major = LENGTH1 * LENGTH1 * LENGTH1),
             actual = VolumeAmount(amount = 2,
@@ -25,7 +25,7 @@ class VolumeAmountTest
     @Test
     fun divScalar()
     {
-        assertEquals(
+        assertEquals<VolumeAmount<out Unit<Length>>>(
             expected = VolumeAmount(amount = 2 / 2,
                                     major = LENGTH1 * LENGTH1 * LENGTH1),
             actual = VolumeAmount(amount = 2,
@@ -36,7 +36,7 @@ class VolumeAmountTest
     @Test
     fun plusSameVolume()
     {
-        assertEquals(
+        assertEquals<VolumeAmount<out Unit<Length>>>(
             expected = VolumeAmount(amount = 0 + 1,
                                     major = LENGTH1 * LENGTH1 * LENGTH1),
             actual = VolumeAmount(amount = 0,
@@ -48,7 +48,7 @@ class VolumeAmountTest
     @Test
     fun plusOtherVolume()
     {
-        assertEquals(
+        assertEquals<VolumeAmount<out Unit<Length>>>(
             expected = VolumeAmount(amount = 0 + (2 * 2 * 2),
                                     major = LENGTH1 * LENGTH1 * LENGTH1),
             actual = VolumeAmount(amount = 0,
@@ -60,7 +60,7 @@ class VolumeAmountTest
     @Test
     fun minusSameVolume()
     {
-        assertEquals(
+        assertEquals<VolumeAmount<out Unit<Length>>>(
             expected = VolumeAmount(amount = 1 - 1,
                                     major = LENGTH1 * LENGTH1 * LENGTH1),
             actual = VolumeAmount(amount = 1,
@@ -72,7 +72,7 @@ class VolumeAmountTest
     @Test
     fun minusOtherVolume()
     {
-        assertEquals(
+        assertEquals<VolumeAmount<out Unit<Length>>>(
             expected = VolumeAmount(amount = 8 - (2 * 2 * 2),
                                     major = LENGTH1 * LENGTH1 * LENGTH1),
             actual = VolumeAmount(amount = 8,

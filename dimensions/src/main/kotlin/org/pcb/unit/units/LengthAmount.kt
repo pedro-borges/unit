@@ -89,16 +89,12 @@ open class LengthAmount<L : Unit<Length>>(
     operator fun <L : Unit<Length>> times(that: AreaAmount<L>) =
         VolumeAmount(amount = amount * that.amount * convert(that.length to length,
                                                              that.length to length),
-                     length = length,
-                     length2 = length,
-                     length3 = length)
+                     major = length * length * length)
 
     @JvmName("timesArea")
     operator fun times(that: AreaAmount<L>) =
         VolumeAmount(amount = amount * that.amount,
-                     length = length,
-                     length2 = length,
-                     length3 = length)
+                     major = length * length * length)
 
     // endregion
 }

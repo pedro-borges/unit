@@ -9,7 +9,8 @@ import org.pcb.unit.units.base.Meter.METER
 
 @Suppress("unused")
 class Stere(amount: Number)
-    : VolumeAmount<METER>(amount.toBigBigDecimal(), METER, METER, METER)
+    : VolumeAmount<METER>(amount = amount,
+                          major = METER * METER * METER)
 {
     constructor(amount: String) : this(amount.toBigDecimal())
 

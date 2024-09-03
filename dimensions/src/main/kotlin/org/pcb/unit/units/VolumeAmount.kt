@@ -14,69 +14,57 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class VolumeAmount<L : Unit<Length>>(
         amount: Number,
-        val length: L,
-        length2: L,
-        length3: L)
-    : Amount<Length>(amount = amount.toBigBigDecimal() * convert(length2 to length,
-                                                                 length3 to length),
+        major: Triple<L, L, L>)
+    : Amount<Length>(amount = amount.toBigBigDecimal() * convert(major.second to major.first,
+                                                                 major.third to major.first),
                      unit = CompositeUnit(
                          domain = Length::class,
-                         units = listOf(length to 3)))
+                         units = listOf(major.first to 3)))
 {
-    constructor(amount: Number, major: Triple<L, L, L>) : this(amount, major.first, major.second, major.third)
+    val length = major.first
 
     // region Volume
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         VolumeAmount(amount = amount * that.amount * that.unit.scale,
-                     length = length,
-                     length2 = length,
-                     length3 = length)
+                     major = length * length * length)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         VolumeAmount(amount = amount / that.amount / that.unit.scale,
-                     length = length,
-                     length2 = length,
-                     length3 = length)
+                     major = length * length * length)
 
     operator fun <L : Unit<Length>> plus(that: VolumeAmount<L>) =
         VolumeAmount(amount = amount + that.amount * convert(that.length to length,
                                                              that.length to length,
                                                              that.length to length),
-                     length = length,
-                     length2 = length,
-                     length3 = length)
+                     major = length * length * length)
 
     @JvmName("plusVolume")
     operator fun plus(that: VolumeAmount<L>) =
         VolumeAmount(amount = amount + that.amount,
-                     length = length,
-                     length2 = length,
-                     length3 = length)
+                     major = length * length * length)
 
     operator fun <L : Unit<Length>> minus(that: VolumeAmount<L>) =
         VolumeAmount(amount = amount - that.amount * convert(that.length to length,
                                                              that.length to length,
                                                              that.length to length),
-                     length = length,
-                     length2 = length,
-                     length3 = length)
+                     major = length * length * length)
 
     @JvmName("minusVolume")
     operator fun minus(that: VolumeAmount<L>) =
         VolumeAmount(amount = amount - that.amount,
-                     length = length,
-                     length2 = length,
-                     length3 = length)
+                     major = length * length * length)
 
     // endregion
 
     // region Scalar
 
     operator fun <L : Unit<Length>> div(that: VolumeAmount<L>) =
-        NaturalAmount(amount = amount / that.amount / convert(that.length to length,
-                                                              that.length to length,
-                                                              that.length to length),)
+        NaturalAmount(
+            amount = amount / that.amount / convert(that.length to length,
+                                                    that.length to length,
+                                                    that.length to length),
+        )
 
     @JvmName("divLength")
     operator fun div(that: VolumeAmount<L>) =
@@ -86,7 +74,7 @@ open class VolumeAmount<L : Unit<Length>>(
 
     // region Area
 
-    operator fun <L : Unit<Length>>div(that: LengthAmount<L>) =
+    operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         AreaAmount(amount = amount / that.amount / convert(that.length to length),
                    major = length * length)
 
@@ -99,15 +87,15 @@ open class VolumeAmount<L : Unit<Length>>(
 
     // region Length
 
-    operator fun <L : Unit<Length>>div(that: AreaAmount<L>) =
+    operator fun <L : Unit<Length>> div(that: AreaAmount<L>) =
         LengthAmount(amount = amount / that.amount / convert(that.length to length,
-                                                           that.length to length),
-                   major = length)
+                                                             that.length to length),
+                     major = length)
 
     @JvmName("divArea")
     operator fun div(that: AreaAmount<L>) =
         LengthAmount(amount = amount / that.amount,
-                   major = length)
+                     major = length)
 
     // endregion
 }

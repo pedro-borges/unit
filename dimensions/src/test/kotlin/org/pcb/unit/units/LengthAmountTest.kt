@@ -147,7 +147,7 @@ class LengthAmountTest
     @Test
     fun timesSameArea()
     {
-        assertEquals(
+        assertEquals<VolumeAmount<out Unit<Length>>>(
             expected = VolumeAmount(amount = 2 * 2,
                                     major = LENGTH1 * LENGTH1 * LENGTH1),
             actual = LengthAmount(amount = 2,
@@ -159,7 +159,7 @@ class LengthAmountTest
     @Test
     fun timesOtherArea()
     {
-        assertEquals(
+        assertEquals<VolumeAmount<out Unit<Length>>>(
             expected = VolumeAmount(amount = 2 * 2 * 2,
                                     major = LENGTH1 * LENGTH1 * LENGTH1),
             actual = LengthAmount(amount = 2,

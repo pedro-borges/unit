@@ -56,7 +56,9 @@ class RentAmountTest
     fun plusOtherRent()
     {
         assertEquals(
-            expected = RentAmount(0 + 1, CURRENCY1, TIME1),
+            expected = RentAmount(amount = 0 + 1,
+                                  major = CURRENCY1,
+                                  minor = TIME1),
             actual = RentAmount(amount = 0,
                                 major = CURRENCY1,
                                 minor = TIME1) +
@@ -70,9 +72,11 @@ class RentAmountTest
     {
         assertEquals(
             expected = RentAmount(amount = 1 - 1,
-                                  major = CURRENCY1, minor = TIME1),
+                                  major = CURRENCY1,
+                                  minor = TIME1),
             actual = RentAmount(amount = 1,
-                                major = CURRENCY1, minor = TIME1) -
+                                major = CURRENCY1,
+                                minor = TIME1) -
                      RentAmount(amount = 1,
                                 major = CURRENCY1,
                                 minor = TIME1))
@@ -83,9 +87,11 @@ class RentAmountTest
     {
         assertEquals(
             expected = RentAmount(amount = 1 - 1,
-                                  major = CURRENCY1, minor = TIME1),
+                                  major = CURRENCY1,
+                                  minor = TIME1),
             actual = RentAmount(amount = 1,
-                                major = CURRENCY1, minor = TIME1) -
+                                major = CURRENCY1,
+                                minor = TIME1) -
                      RentAmount(amount = 1,
                                 major = CURRENCY2,
                                 minor = TIME2))
@@ -97,7 +103,8 @@ class RentAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
             actual = RentAmount(amount = 2,
-                                major = CURRENCY1, minor = TIME1) /
+                                major = CURRENCY1,
+                                minor = TIME1) /
                      RentAmount(amount = 2,
                                 major = CURRENCY1,
                                 minor = TIME1))

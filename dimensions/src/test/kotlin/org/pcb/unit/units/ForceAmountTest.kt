@@ -103,7 +103,9 @@ class ForceAmountTest
     fun minusOtherForce()
     {
         assertEquals<ForceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
-            expected = ForceAmount(1 - 1, MASS1 * LENGTH1, TIME1 * TIME1),
+            expected = ForceAmount(amount = 1 - 1,
+                                   major = MASS1 * LENGTH1,
+                                   minor = TIME1 * TIME1),
             actual = ForceAmount(amount = 1,
                                  major = MASS1 * LENGTH1,
                                  minor = TIME1 * TIME1) -
