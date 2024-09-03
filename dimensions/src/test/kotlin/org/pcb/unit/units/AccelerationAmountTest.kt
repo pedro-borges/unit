@@ -195,6 +195,7 @@ class AccelerationAmountTest
             actual = AccelerationAmount(amount = 2,
                                         major = LENGTH1,
                                         minor = TIME1 * TIME1) *
-                     MassAmount(2, MASS1))
+                     MassAmount(amount = 2,
+                                major = MASS1))
     }
 }

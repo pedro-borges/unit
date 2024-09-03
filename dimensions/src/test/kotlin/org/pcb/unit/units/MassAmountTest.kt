@@ -22,72 +22,92 @@ class MassAmountTest
     fun timesScalar()
     {
         assertEquals(
-            expected = MassAmount(2 * 2, MASS1),
-            actual = MassAmount(2, MASS1) *
-                     PercentAmount(2 * 100))
+            expected = MassAmount(amount = 2 * 2,
+                                  major = MASS1),
+            actual = MassAmount(amount = 2,
+                                major = MASS1) *
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun divScalar()
     {
         assertEquals(
-            expected = MassAmount(2 / 2, MASS1),
-            actual = MassAmount(2, MASS1) /
-                     PercentAmount(2 * 100))
+            expected = MassAmount(amount = 2 / 2,
+                                  major = MASS1),
+            actual = MassAmount(amount = 2,
+                                major = MASS1) /
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun plusSameMass()
     {
         assertEquals(
-            expected = MassAmount(0 + 1, MASS1),
-            actual = MassAmount(0, MASS1) +
-                     MassAmount(1, MASS1))
+            expected = MassAmount(amount = 0 + 1,
+                                  major = MASS1),
+            actual = MassAmount(amount = 0,
+                                major = MASS1) +
+                     MassAmount(amount = 1,
+                                major = MASS1))
     }
 
     @Test
     fun plusOtherMass()
     {
         assertEquals(
-            expected = MassAmount(0 + 2, MASS1),
-            actual = MassAmount(0, MASS1) +
-                     MassAmount(1, MASS2))
+            expected = MassAmount(amount = 0 + 2,
+                                  major = MASS1),
+            actual = MassAmount(amount = 0,
+                                major = MASS1) +
+                     MassAmount(amount = 1,
+                                major = MASS2))
     }
 
     @Test
     fun minusSameMass()
     {
         assertEquals(
-            expected = MassAmount(1 - 1, MASS1),
-            actual = MassAmount(1, MASS1) -
-                     MassAmount(1, MASS1))
+            expected = MassAmount(amount = 1 - 1,
+                                  major = MASS1),
+            actual = MassAmount(amount = 1,
+                                major = MASS1) -
+                     MassAmount(amount = 1,
+                                major = MASS1))
     }
 
     @Test
     fun minusOtherMass()
     {
         assertEquals(
-            expected = MassAmount(2 - 2, MASS1),
-            actual = MassAmount(2, MASS1) -
-                     MassAmount(1, MASS2))
+            expected = MassAmount(amount = 2 - 2,
+                                  major = MASS1),
+            actual = MassAmount(amount = 2,
+                                major = MASS1) -
+                     MassAmount(amount = 1,
+                                major = MASS2))
     }
 
     @Test
     fun divSameMass()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = MassAmount(2, MASS1) /
-                     MassAmount(2, MASS1))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = MassAmount(amount = 2,
+                                major = MASS1) /
+                     MassAmount(amount = 2,
+                                major = MASS1))
     }
 
     @Test
     fun divOtherMass()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = MassAmount(2, MASS1) /
-                     MassAmount(1, MASS2))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = MassAmount(amount = 2,
+                                major = MASS1) /
+                     MassAmount(amount = 1,
+                                major = MASS2))
     }
 
     @Test
@@ -95,7 +115,8 @@ class MassAmountTest
     {
         assertEquals(
             expected = MomentumAmount(2 * 2, (MASS1 * LENGTH1) to TIME1),
-            actual = MassAmount(2, MASS1) *
+            actual = MassAmount(amount = 2,
+                                major = MASS1) *
                      SpeedAmount(2, LENGTH1 to TIME1))
     }
 
@@ -106,7 +127,8 @@ class MassAmountTest
             expected = ForceAmount(amount = 2 * 2,
                                    major = MASS1 * LENGTH1,
                                    minor = TIME1 * TIME1),
-            actual = MassAmount(2, MASS1) *
+            actual = MassAmount(amount = 2,
+                                major = MASS1) *
                      AccelerationAmount(amount = 2,
                                         major = LENGTH1,
                                         minor = TIME1 * TIME1))

@@ -122,12 +122,12 @@ open class ForceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                             / convert(that.length to length)
                             * convert(that.time to time,
                                       that.time to time),
-                   mass = mass)
+                   major = mass)
 
     @JvmName("divAcceleration")
     operator fun div(that: AccelerationAmount<L, T>) =
         MassAmount(amount = amount / that.amount,
-                   mass = mass)
+                   major = mass)
 
     // endregion
 

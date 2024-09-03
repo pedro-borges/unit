@@ -148,7 +148,8 @@ class ForceAmountTest
             actual = ForceAmount(amount = 2,
                                  major = MASS1 * LENGTH1,
                                  minor = TIME1 * TIME1) /
-                     MassAmount(2, MASS1))
+                     MassAmount(amount = 2,
+                                major = MASS1))
     }
 
     @Test
@@ -161,14 +162,16 @@ class ForceAmountTest
             actual = ForceAmount(amount = 2,
                                  major = MASS1 * LENGTH1,
                                  minor = TIME1 * TIME1) /
-                     MassAmount(1, MASS2))
+                     MassAmount(amount = 1,
+                                major = MASS2))
     }
 
     @Test
     fun divSameAcceleration()
     {
         assertEquals(
-            expected = MassAmount(2 / 2, MASS1),
+            expected = MassAmount(amount = 2 / 2,
+                                  major = MASS1),
             actual = ForceAmount(amount = 2,
                                  major = MASS1 * LENGTH1,
                                  minor = TIME1 * TIME1) /
@@ -181,7 +184,8 @@ class ForceAmountTest
     fun divOtherAcceleration()
     {
         assertEquals(
-            expected = MassAmount(2 / 2, MASS1),
+            expected = MassAmount(amount = 2 / 2,
+                                  major = MASS1),
             actual = ForceAmount(amount = 2,
                                  major = MASS1 * LENGTH1,
                                  minor = TIME1 * TIME1) /

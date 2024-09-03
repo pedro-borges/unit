@@ -15,39 +15,41 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class MassAmount<M : Unit<Mass>>(
         amount: Number,
-        val mass: M)
+        major: M)
     : Amount<Mass>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Mass::class,
-                       units = listOf(mass to 1)))
+                       units = listOf(major to 1)))
 {
+    val mass = major
+
     // region Mass
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MassAmount(amount = amount * that.amount * that.unit.scale,
-                   mass = mass)
+                   major = mass)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         MassAmount(amount = amount / that.amount / that.unit.scale,
-                   mass = mass)
+                   major = mass)
 
     operator fun <M : Unit<Mass>> plus(that: MassAmount<M>) =
         MassAmount(amount = amount + that.amount * convert(that.mass to mass),
-                   mass = mass)
+                   major = mass)
 
     @JvmName("plusMass")
     operator fun plus(that: MassAmount<M>) =
         MassAmount(amount = amount + that.amount,
-                   mass = mass)
+                   major = mass)
 
     operator fun <M : Unit<Mass>> minus(that: MassAmount<M>) =
         MassAmount(amount = amount - that.amount * convert(that.mass to mass),
-                   mass = mass)
+                   major = mass)
 
     @JvmName("minusMass")
     operator fun minus(that: MassAmount<M>) =
         MassAmount(amount = amount - that.amount,
-                   mass = mass)
+                   major = mass)
 
     // endregion
 

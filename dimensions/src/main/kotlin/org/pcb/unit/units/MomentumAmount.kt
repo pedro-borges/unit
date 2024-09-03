@@ -112,12 +112,12 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
         MassAmount(amount = amount / that.amount
                             / convert(that.length to length)
                             * convert(that.time to time),
-                   mass = mass)
+                   major = mass)
 
     @JvmName("divSpeed")
     operator fun div(that: SpeedAmount<L, T>) =
         MassAmount(amount = amount / that.amount,
-                   mass = mass)
+                   major = mass)
 
     // endregion
 
