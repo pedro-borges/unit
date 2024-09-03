@@ -1,0 +1,22 @@
+package org.pcb.unit.units.time
+
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import org.pcb.unit.units.TimeAmount
+import org.pcb.unit.units.base.Second
+
+class HourTest
+{
+    @Test
+    fun scales()
+    {
+        Hour(1) equivalent Second(60 * 60)
+
+        Hour(1) equivalent Minute(60)
+        Hour(1) equivalent Hour(1)
+        Hour(24) equivalent Day(1)
+    }
+
+    private infix fun Hour.equivalent(other: TimeAmount<*>) =
+        assertEquals(this, Hour(0) + other)
+}

@@ -3,7 +3,9 @@ package org.pcb.unit
 import java.math.BigDecimal
 import java.math.MathContext.DECIMAL128
 import java.math.RoundingMode.HALF_EVEN
-import org.pcb.unit.dimension.Domain
+
+fun String.toBigBigDecimal() =
+    BigDecimal(this)
 
 fun Number.toBigBigDecimal(): BigDecimal =
     when
@@ -38,15 +40,11 @@ fun Collection<Pair<Unit<*>, Int>>.sumToMap(): Map<Unit<*>, Int>
     return result
 }
 
-infix fun <D : Domain, U: Unit<D>> U.or(that: U): U =
-    if (scale == that.scale) this
-    else throw IllegalStateException("$this and $that differ")
-
 fun convert(vararg units: Pair<Unit<*>, Unit<*>>): BigDecimal =
     units.fold(1.toBigBigDecimal()) { acc, unit ->
         acc * unit.first.scale / unit.second.scale
     }
 
-operator fun BigDecimal.div(other: BigDecimal): BigDecimal = divide(other, 42, HALF_EVEN)
+operator fun Number.div(other: BigDecimal): BigDecimal = toBigBigDecimal().divide(other, 42, HALF_EVEN)
 
-operator fun BigDecimal.times(other: BigDecimal): BigDecimal = multiply(other, DECIMAL128)
+operator fun Number.times(other: BigDecimal): BigDecimal = toBigBigDecimal().multiply(other, DECIMAL128)

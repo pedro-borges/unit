@@ -1,0 +1,20 @@
+package org.pcb.unit.units.base
+
+import org.pcb.unit.Unit
+import org.pcb.unit.dimension.Time
+import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.units.TimeAmount
+import org.pcb.unit.units.base.Second.SECOND
+
+@Suppress("unused")
+class Second(amount: Number)
+    : TimeAmount<SECOND>(amount, SECOND)
+{
+    constructor(amount: String) : this(amount.toBigDecimal())
+
+    object SECOND : Unit<Time>(Time::class)
+    {
+        override val symbol = "s"
+        override val scale = 1.toBigBigDecimal()
+    }
+}

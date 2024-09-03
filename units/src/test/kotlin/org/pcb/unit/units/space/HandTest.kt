@@ -1,0 +1,28 @@
+package org.pcb.unit.units.space
+
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import org.pcb.unit.units.LengthAmount
+import org.pcb.unit.units.base.Meter
+
+class HandTest
+{
+    @Test
+    fun scales()
+    {
+        Hand(1) equivalent Meter(0.1016)
+
+        Hand(1) equivalent Thou(4 * 1000)
+        Hand(1) equivalent Inch(4)
+        Hand(1) equivalent Hand(1)
+        Hand(3) equivalent Foot(1)
+        Hand(3 * 3) equivalent Yard(1)
+        Hand(3 * 3 * 22) equivalent Chain(1)
+        Hand(3 * 3 * 22 * 10) equivalent Furlong(1)
+        Hand(3 * 3 * 22 * 10 * 8) equivalent Mile(1)
+        Hand(3 * 3 * 22 * 10 * 8 * 3) equivalent League(1)
+    }
+
+    private infix fun Hand.equivalent(other: LengthAmount<*>) =
+        assertEquals(this, Hand(0) + other)
+}
