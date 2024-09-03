@@ -210,7 +210,9 @@ class EnergyAmountTest
     fun divSameTime()
     {
         assertEquals(
-            expected = PowerAmount(2 / 2, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1)),
+            expected = PowerAmount(amount = 2 / 2,
+                                   major = MASS1 * LENGTH1 * LENGTH1,
+                                   minor = TIME1 * TIME1 * TIME1),
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /
@@ -221,7 +223,9 @@ class EnergyAmountTest
     fun divOtherTime()
     {
         assertEquals(
-            expected = PowerAmount(2 / 2, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1)),
+            expected = PowerAmount(amount = 2 / 2,
+                                   major = MASS1 * LENGTH1 * LENGTH1,
+                                   minor = TIME1 * TIME1 * TIME1),
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /

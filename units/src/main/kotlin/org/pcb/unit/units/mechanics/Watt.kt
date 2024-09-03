@@ -11,7 +11,9 @@ import org.pcb.unit.units.base.Second.SECOND
 
 @Suppress("unused")
 class Watt(amount: Number)
-    : PowerAmount<KILOGRAM, METER, SECOND>(amount, KILOGRAM, METER, METER, SECOND, SECOND, SECOND)
+    : PowerAmount<KILOGRAM, METER, SECOND>(amount = amount,
+                                           major = KILOGRAM * METER * METER,
+                                           minor = SECOND * SECOND * SECOND)
 {
     constructor(amount: String) : this(amount.toBigDecimal())
 

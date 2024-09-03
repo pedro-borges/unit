@@ -15,13 +15,13 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class FrequencyAmount<T : Unit<Time>>(
         amount: Number,
-        val minor: T)
+        minor: T)
     : Amount<Time>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Time::class,
                        units = listOf(minor to -1)))
 {
-        val time = minor
+    val time = minor
 
     // region Frequency
 

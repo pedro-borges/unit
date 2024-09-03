@@ -15,8 +15,8 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
         amount: Number,
-        val major: T,
-        val minor: L)
+        major: T,
+        minor: L)
     : Amount<Pace>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Pace::class,

@@ -14,7 +14,7 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class LengthAmount<L : Unit<Length>>(
         amount: Number,
-        val major: L)
+        major: L)
     : Amount<Length>(amount = amount.toBigBigDecimal(),
                      unit = CompositeUnit(
                          domain = Length::class,
