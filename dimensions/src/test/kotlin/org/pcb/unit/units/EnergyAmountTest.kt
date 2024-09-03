@@ -328,9 +328,9 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   unit = (MASS1 * LENGTH1 * LENGTH1) /
                                          (TIME1 * TIME1)) /
-                    ElectricTensionAmount(amount = 2,
-                                          unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                 (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)))
+                     ElectricTensionAmount(amount = 2,
+                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                  (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)))
     }
 
     @Test

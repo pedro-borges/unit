@@ -267,13 +267,13 @@ class ElectricTensionAmountTest
     {
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
             expected = ElectricChargeAmount(amount = 2 * 2,
-                                   unit = ELECTRICCURRENT1 * TIME1),
+                                            unit = ELECTRICCURRENT1 * TIME1),
             actual = ElectricTensionAmount(amount = 2,
                                            unit = (MASS1 * LENGTH1 * LENGTH1) /
                                                   (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)) *
                      ElectricCapacitanceAmount(amount = 2,
-                                           unit = (TIME1 * TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)/
-                                                  (MASS1 * LENGTH1 * LENGTH1)))
+                                               unit = (TIME1 * TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
+                                                      (MASS1 * LENGTH1 * LENGTH1)))
     }
 
     @Test
@@ -286,7 +286,7 @@ class ElectricTensionAmountTest
                                            unit = (MASS1 * LENGTH1 * LENGTH1) /
                                                   (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)) *
                      ElectricCapacitanceAmount(amount = 2,
-                                               unit = (TIME2 * TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2)/
+                                               unit = (TIME2 * TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2) /
                                                       (MASS2 * LENGTH2 * LENGTH2)))
     }
 }
