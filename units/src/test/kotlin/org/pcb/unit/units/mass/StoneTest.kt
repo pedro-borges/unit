@@ -16,6 +16,7 @@ class StoneTest
         Stone(1) equivalent Drachm(14 * 16 * 16)
         Stone(1) equivalent Ounce(14 * 16)
         Stone(1) equivalent Pound(14)
+        Stone(1) equivalent Stone(1)
     }
 
     private infix fun Stone.equivalent(other: MassAmount<*>) =

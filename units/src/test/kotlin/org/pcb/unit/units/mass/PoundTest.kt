@@ -15,6 +15,7 @@ class PoundTest
 
         Pound(1) equivalent Drachm(16 * 16)
         Pound(1) equivalent Ounce(16)
+        Pound(1) equivalent Pound(1)
         Pound(14) equivalent Stone(1)
     }
 

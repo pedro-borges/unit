@@ -14,8 +14,9 @@ class OunceTest
         Ounce(1) equivalent Kilogram(0.028349523125)
 
         Ounce(1) equivalent Drachm(16)
+        Ounce(1) equivalent Ounce(1)
         Ounce(16) equivalent Pound(1)
-        Ounce(14 * 16) equivalent Stone(1)
+        Ounce(16 * 14) equivalent Stone(1)
     }
 
     private infix fun Ounce.equivalent(other: MassAmount<*>) =
