@@ -1,5 +1,6 @@
 package org.pcb.unit.units.mass
 
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.toBigBigDecimal
@@ -14,6 +15,7 @@ class Ounce(amount: Number)
 
     object OUNCE : Unit<Mass>(Mass::class)
     {
+        override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
         override val symbol = "oz"
         override val scale = 0.028349523125.toBigBigDecimal()
     }

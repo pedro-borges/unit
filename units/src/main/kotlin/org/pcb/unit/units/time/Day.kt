@@ -1,5 +1,6 @@
 package org.pcb.unit.units.time
 
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.toBigBigDecimal
@@ -14,6 +15,7 @@ class Day(amount: Number)
 
     object DAY : Unit<Time>(Time::class)
     {
+        override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
         override val symbol = "D"
         override val scale = 86400.toBigBigDecimal()
     }

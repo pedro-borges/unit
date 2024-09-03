@@ -1,5 +1,6 @@
 package org.pcb.unit.units.mechanics
 
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Power
 import org.pcb.unit.toBigBigDecimal
@@ -16,6 +17,7 @@ class Watt(amount: Number)
 
     object WATT : Unit<Power>(Power::class)
     {
+        override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
         override val symbol = "W"
         override val scale = 1.toBigBigDecimal()
     }

@@ -1,5 +1,6 @@
 package org.pcb.unit.units.time
 
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.toBigBigDecimal
@@ -14,6 +15,7 @@ class Minute(amount: Number)
 
     object MINUTE : Unit<Time>(Time::class)
     {
+        override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
         override val symbol = "min"
         override val scale = 60.toBigBigDecimal()
     }

@@ -1,5 +1,6 @@
 package org.pcb.unit.units.space
 
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Length
 import org.pcb.unit.toBigBigDecimal
@@ -14,6 +15,7 @@ class Chain(amount: Number)
 
     object CHAIN : Unit<Length>(Length::class)
     {
+        override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
         override val symbol = "ch"
         override val scale = 20.1168.toBigBigDecimal()
     }

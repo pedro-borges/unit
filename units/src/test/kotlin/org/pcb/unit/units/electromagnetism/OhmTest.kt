@@ -2,10 +2,15 @@ package org.pcb.unit.units.electromagnetism
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.Unit
+import org.pcb.unit.dimension.Mass
+import org.pcb.unit.dimension.Time
 import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.base.Ampere
+import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Kilogram
 import org.pcb.unit.units.base.Meter
+import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second
 
 class OhmTest
@@ -17,5 +22,5 @@ class OhmTest
     }
 
     private infix fun Ohm.equivalent(other: ElectricResistanceAmount<*, *, *, *>) =
-        assertEquals(this, Ohm(0) + other)
+        assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(this, Ohm(0) + other)
 }

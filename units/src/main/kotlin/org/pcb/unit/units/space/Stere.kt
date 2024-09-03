@@ -1,5 +1,6 @@
 package org.pcb.unit.units.space
 
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Volume
 import org.pcb.unit.toBigBigDecimal
@@ -14,6 +15,7 @@ class Stere(amount: Number)
 
     object STERE : Unit<Volume>(Volume::class)
     {
+        override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
         override val symbol = "st"
         override val scale = 1.toBigBigDecimal()
     }

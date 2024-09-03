@@ -1,5 +1,6 @@
 package org.pcb.unit.units.finance
 
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Currency
 import org.pcb.unit.toBigBigDecimal
@@ -14,6 +15,7 @@ class Eur(amount: Number)
 
     object EUR : Unit<Currency>(Currency::class)
     {
+        override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
         override val symbol = "EUR"
         override val scale = CurrencyConverter[this]
     }
