@@ -10,4 +10,5 @@ data class Tuple<out A : Unit<*>, out B : Unit<*>>(
     operator fun <B : Triple<*, *, *>> div(second: B) = Pair(this, second)
     operator fun <B : Quadruple<*, *, *, *>> div(second: B) = Pair(this, second)
     operator fun <B : Quintuple<*, *, *, *, *>> div(second: B) = Pair(this, second)
+    operator fun <B : Sextuple<*, *, *, *, *, *>> div(second: B) = Pair(this, second)
 }

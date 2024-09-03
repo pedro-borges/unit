@@ -28,7 +28,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
     val currency = unit.first
     val time = unit.second
 
-    // region Rent
+    // region -> Rent
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         RentAmount(amount = amount * that.amount * that.unit.scale,
@@ -74,7 +74,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     // endregion
 
-    // region Scalar
+    // region -> Scalar
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> div(that: RentAmount<C, T>) =
         NaturalAmount(amount = amount / that.amount
@@ -87,7 +87,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     // endregion
 
-    // region Currency
+    // region -> Currency
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         CurrencyAmount(amount = amount * that.amount * convert(that.time to time),
@@ -100,7 +100,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     // endregion
 
-    // region Frequency
+    // region -> Frequency
 
     operator fun <C : Unit<Currency>> div(that: CurrencyAmount<C>) =
         FrequencyAmount(amount = amount / that.amount / convert(that.currency to currency),

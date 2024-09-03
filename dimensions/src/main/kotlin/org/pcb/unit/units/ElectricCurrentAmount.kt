@@ -24,7 +24,7 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
 {
     val electricCurrent = unit
 
-    // region ElectricCurrent
+    // region -> ElectricCurrent
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricCurrentAmount(amount = amount * that.amount * that.unit.scale,
@@ -54,7 +54,7 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
 
     // endregion
 
-    // region Scalar
+    // region -> Scalar
 
     operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
         NaturalAmount(amount = amount / that.amount / convert(that.electricCurrent to electricCurrent))
@@ -65,7 +65,7 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
 
     // endregion
 
-    // region ElectricCharge
+    // region -> ElectricCharge
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         ElectricChargeAmount(amount = amount * that.amount,
@@ -73,7 +73,7 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
 
     // endregion
 
-    // region ElectricTension
+    // region -> ElectricTension
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricTensionAmount(amount = amount * that.amount / convert(that.electricCurrent to electricCurrent,
@@ -89,7 +89,7 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
 
     // endregion
 
-    // region Power
+    // region -> Power
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: ElectricTensionAmount<M, L, T, EC>) =
         PowerAmount(amount = amount * that.amount / convert(that.electricCurrent to electricCurrent),

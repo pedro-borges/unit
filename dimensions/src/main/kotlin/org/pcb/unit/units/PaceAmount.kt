@@ -25,7 +25,7 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
     val time = unit.first
     val length = unit.second
 
-    // region Pace
+    // region -> Pace
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         PaceAmount(amount = amount * that.amount * that.unit.scale,
@@ -59,7 +59,7 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
 
     // endregion
 
-    // region Scalar
+    // region -> Scalar
 
     operator fun <T : Unit<Time>, L : Unit<Length>> div(that: PaceAmount<T, L>) =
         NaturalAmount(amount = amount / that.amount
@@ -81,7 +81,7 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
 
     // endregion
 
-    // region Time
+    // region -> Time
 
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         TimeAmount(amount = amount * that.amount * convert(that.length to length),

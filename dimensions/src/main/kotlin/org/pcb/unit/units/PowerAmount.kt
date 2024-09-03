@@ -45,7 +45,7 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                                (SECOND * SECOND * SECOND))
     }
 
-    // region Energy
+    // region -> Energy
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         PowerAmount(amount = amount * that.amount * that.unit.scale,
@@ -94,7 +94,7 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // endregion
 
-    // region Scalar
+    // region -> Scalar
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> div(that: PowerAmount<M, L, T>) =
         NaturalAmount(amount = amount / that.amount
@@ -111,7 +111,7 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // endregion
 
-    // region Energy
+    // region -> Energy
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         EnergyAmount(amount = amount * that.amount * convert(that.time to time),
@@ -126,7 +126,7 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // endregion
 
-    // region ElectricCurrent
+    // region -> ElectricCurrent
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricTensionAmount<M, L, T, EC>) =
         ElectricCurrentAmount(amount = amount / that.amount
@@ -145,7 +145,7 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // endregion
 
-    // region ElectricTension
+    // region -> ElectricTension
 
     operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
         ElectricTensionAmount(amount = amount / that.amount,

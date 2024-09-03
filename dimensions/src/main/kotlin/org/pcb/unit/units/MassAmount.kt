@@ -23,7 +23,7 @@ open class MassAmount<M : Unit<Mass>>(
 {
     val mass = unit
 
-    // region Mass
+    // region -> Mass
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MassAmount(amount = amount * that.amount * that.unit.scale,
@@ -53,7 +53,7 @@ open class MassAmount<M : Unit<Mass>>(
 
     // endregion
 
-    // region Scalar
+    // region -> Scalar
 
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
         NaturalAmount(amount = amount / that.amount / convert(that.mass to mass))
@@ -64,7 +64,7 @@ open class MassAmount<M : Unit<Mass>>(
 
     // endregion
 
-    // region Momentum
+    // region -> Momentum
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
         MomentumAmount(amount = amount * that.amount,
@@ -73,7 +73,7 @@ open class MassAmount<M : Unit<Mass>>(
 
     // endregion
 
-    // region Force
+    // region -> Force
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: AccelerationAmount<L, T>) =
         ForceAmount(amount = amount * that.amount,

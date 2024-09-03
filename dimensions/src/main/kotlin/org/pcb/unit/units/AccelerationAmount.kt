@@ -28,7 +28,7 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
     val length = unit.first
     val time = unit.second.first
 
-    // region Acceleration
+    // region -> Acceleration
 
     override operator fun <U : Unit<Scalar>> times(that: ScalarAmount<U>) =
         AccelerationAmount(amount = amount * that.amount * that.unit.scale,
@@ -64,7 +64,7 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
 
     // endregion
 
-    // region Scalar
+    // region -> Scalar
 
     operator fun <L : Unit<Length>, T : Unit<Time>> div(that: AccelerationAmount<L, T>) =
         NaturalAmount(amount = amount / that.amount
@@ -78,7 +78,7 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
 
     // endregion
 
-    // region Speed
+    // region -> Speed
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         SpeedAmount(amount = amount * that.amount * convert(that.time to time),
@@ -91,7 +91,7 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
 
     // endregion
 
-    // region Frequency
+    // region -> Frequency
 
     operator fun <L : Unit<Length>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
         FrequencyAmount(amount = amount / that.amount
@@ -106,7 +106,7 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
 
     // endregion
 
-    // region Force
+    // region -> Force
 
     operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
         ForceAmount(amount = amount * that.amount,

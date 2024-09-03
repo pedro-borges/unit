@@ -29,7 +29,7 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
     val length = unit.first.second
     val time = unit.second
 
-    // region Momentum
+    // region -> Momentum
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MomentumAmount(amount = amount * that.amount * that.unit.scale,
@@ -71,7 +71,7 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // endregion
 
-    // region Scalar
+    // region -> Scalar
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> div(that: MomentumAmount<M, L, T>) =
         NaturalAmount(amount = amount / that.amount
@@ -85,7 +85,7 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // endregion
 
-    // region Speed
+    // region -> Speed
 
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
         SpeedAmount(amount = amount / that.amount / convert(that.mass to mass),
@@ -98,7 +98,7 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // endregion
 
-    // region Mass
+    // region -> Mass
 
     operator fun <L : Unit<Length>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
         MassAmount(amount = amount / that.amount
@@ -113,7 +113,7 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // endregion
 
-    // region Force
+    // region -> Force
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount / convert(that.time to time),
@@ -128,7 +128,7 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // endregion
 
-    // region Energy
+    // region -> Energy
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
         EnergyAmount(amount = amount * that.amount

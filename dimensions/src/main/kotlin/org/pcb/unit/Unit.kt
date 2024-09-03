@@ -15,6 +15,7 @@ abstract class Unit<D : Domain>(val domain: KClass<out D>)
     abstract operator fun <B : Triple<*, *, *>> div(second: B): Pair<Unit<D>, B>
     abstract operator fun <B : Quadruple<*, *, *, *>> div(second: B): Pair<Unit<D>, B>
     abstract operator fun <B : Quintuple<*, *, *, *, *>> div(second: B): Pair<Unit<D>, B>
+    abstract operator fun <B : Sextuple<*, *, *, *, *, *>> div(second: B) : Pair<Unit<D>, B>
 
     override fun equals(other: Any?): Boolean
     {

@@ -17,6 +17,13 @@ class CoulombTest
     {
         Coulomb(2 * 2) equivalent Ampere(2) * Second(2)
         Coulomb(2) equivalent ElectricChargeAmount(2, COULOMB)
+
+        assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, SECOND>>(
+            expected = Coulomb(2 * 3),
+            actual = Farad(2) * Volt(3))
+        assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, SECOND>>(
+            expected = Coulomb(2 * 3),
+            actual = Volt(2) * Farad(3))
     }
 
     private infix fun Coulomb.equivalent(other: ElectricChargeAmount<*, *>) =

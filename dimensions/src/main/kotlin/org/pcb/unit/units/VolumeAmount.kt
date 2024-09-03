@@ -32,7 +32,7 @@ open class VolumeAmount<L : Unit<Length>>(
                          unit = METER * METER * METER)
     }
 
-    // region Volume
+    // region -> Volume
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         VolumeAmount(amount = amount * that.amount * that.unit.scale,
@@ -66,7 +66,7 @@ open class VolumeAmount<L : Unit<Length>>(
 
     // endregion
 
-    // region Scalar
+    // region -> Scalar
 
     operator fun <L : Unit<Length>> div(that: VolumeAmount<L>) =
         NaturalAmount(
@@ -81,7 +81,7 @@ open class VolumeAmount<L : Unit<Length>>(
 
     // endregion
 
-    // region Area
+    // region -> Area
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         AreaAmount(amount = amount / that.amount / convert(that.length to length),
@@ -94,7 +94,7 @@ open class VolumeAmount<L : Unit<Length>>(
 
     // endregion
 
-    // region Length
+    // region -> Length
 
     operator fun <L : Unit<Length>> div(that: AreaAmount<L>) =
         LengthAmount(amount = amount / that.amount / convert(that.length to length,

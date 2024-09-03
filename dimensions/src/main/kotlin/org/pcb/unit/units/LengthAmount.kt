@@ -21,7 +21,7 @@ open class LengthAmount<L : Unit<Length>>(
                          units = listOf(unit to 1)))
 {
     val length = unit
-    // region Length
+    // region -> Length
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         LengthAmount(amount = amount * that.amount * that.unit.scale,
@@ -51,7 +51,7 @@ open class LengthAmount<L : Unit<Length>>(
 
     // endregion
 
-    // region Scalar
+    // region -> Scalar
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         NaturalAmount(amount = amount / that.amount / convert(that.length to length))
@@ -62,7 +62,7 @@ open class LengthAmount<L : Unit<Length>>(
 
     // endregion
 
-    // region Speed
+    // region -> Speed
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
         SpeedAmount(amount = amount / that.amount,
@@ -70,7 +70,7 @@ open class LengthAmount<L : Unit<Length>>(
 
     // endregion
 
-    // region Area
+    // region -> Area
 
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         AreaAmount(amount = amount * that.amount * convert(that.length to length),
@@ -83,7 +83,7 @@ open class LengthAmount<L : Unit<Length>>(
 
     // endregion
 
-    // region Volume
+    // region -> Volume
 
     operator fun <L : Unit<Length>> times(that: AreaAmount<L>) =
         VolumeAmount(amount = amount * that.amount * convert(that.length to length,

@@ -21,7 +21,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 {
     val scalar = unit
 
-    // region Scalar
+    // region -> Scalar
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ScalarAmount(amount = amount * that.amount * that.unit.scale,
@@ -51,7 +51,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     // endregion
 
-    // region Frequency
+    // region -> Frequency
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         FrequencyAmount(amount = amount * unit.scale / that.amount,
@@ -59,7 +59,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     // endregion
 
-    // region Time
+    // region -> Time
 
     operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
         TimeAmount(amount = amount * unit.scale / that.amount,

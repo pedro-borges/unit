@@ -22,7 +22,7 @@ open class AreaAmount<L : Unit<Length>>(
 {
     val length = unit.first
 
-    // region Area
+    // region -> Area
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         AreaAmount(amount = amount * that.amount * that.unit.scale,
@@ -54,7 +54,7 @@ open class AreaAmount<L : Unit<Length>>(
 
     // endregion
 
-    // region Scalar
+    // region -> Scalar
 
     operator fun <L : Unit<Length>> div(that: AreaAmount<L>) =
         NaturalAmount(amount = amount / that.amount / convert(that.length to length,
@@ -66,7 +66,7 @@ open class AreaAmount<L : Unit<Length>>(
 
     // endregion
 
-    // region Length
+    // region -> Length
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         LengthAmount(amount = amount / that.amount / convert(that.length to length),
@@ -79,7 +79,7 @@ open class AreaAmount<L : Unit<Length>>(
 
     // endregion
 
-    // region Volume
+    // region -> Volume
 
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         VolumeAmount(amount = amount * that.amount * convert(that.length to length),

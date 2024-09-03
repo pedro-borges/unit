@@ -49,7 +49,7 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
                                             (SECOND * SECOND * SECOND * AMPERE * AMPERE))
     }
 
-    // region ElectricTension
+    // region -> ElectricTension
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricResistanceAmount(amount = amount * that.amount * that.unit.scale,
@@ -94,7 +94,7 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
 
     // endregion
 
-    // region Scalar
+    // region -> Scalar
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
         NaturalAmount(amount = amount / that.amount
@@ -113,7 +113,7 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
 
     // endregion
 
-    // region ElectricTension
+    // region -> ElectricTension
 
     operator fun <EC : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<EC>) =
         ElectricTensionAmount(amount = amount * that.amount * convert(that.electricCurrent to electricCurrent),

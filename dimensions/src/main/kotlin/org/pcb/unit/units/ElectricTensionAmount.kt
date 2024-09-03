@@ -48,7 +48,7 @@ open class ElectricTensionAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time
                                          (SECOND * SECOND * SECOND * AMPERE))
     }
 
-    // region ElectricTension
+    // region -> ElectricTension
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricTensionAmount(amount = amount * that.amount * that.unit.scale,
@@ -98,7 +98,7 @@ open class ElectricTensionAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time
 
     // endregion
 
-    // region Scalar
+    // region -> Scalar
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricTensionAmount<M, L, T, EC>) =
         NaturalAmount(amount = amount / that.amount
@@ -116,7 +116,7 @@ open class ElectricTensionAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time
 
     // endregion
 
-    // region Energy
+    // region -> Energy
 
     operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricChargeAmount<EC, T>) =
         EnergyAmount(amount = amount * that.amount * convert(that.time to time,
@@ -132,7 +132,7 @@ open class ElectricTensionAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time
 
     // endregion
 
-    // region ElectricCurrent
+    // region -> ElectricCurrent
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricCurrentAmount(amount = amount / that.amount
@@ -153,7 +153,7 @@ open class ElectricTensionAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time
 
     // endregion
 
-    // region ElectricResistance
+    // region -> ElectricResistance
 
     operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
         ElectricResistanceAmount(amount = amount / that.amount / convert(that.electricCurrent to electricCurrent),
@@ -166,7 +166,7 @@ open class ElectricTensionAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time
 
     // endregion
 
-    // region Power
+    // region -> Power
 
     operator fun <EC : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<EC>) =
         PowerAmount(amount = amount * that.amount * convert(that.electricCurrent to electricCurrent),
@@ -178,6 +178,28 @@ open class ElectricTensionAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time
         PowerAmount(amount = amount * that.amount,
                     unit = (mass * length * length) /
                            (time * time * time))
+
+    // endregion
+
+    // region -> ElectricCharge
+
+    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> times(that: ElectricCapacitanceAmount<T, EC, M, L>) =
+        ElectricChargeAmount(amount = amount * that.amount
+                                      * convert(that.electricCurrent to electricCurrent,
+                                                that.electricCurrent to electricCurrent,
+                                                that.time to time,
+                                                that.time to time,
+                                                that.time to time,
+                                                that.time to time)
+                                      / convert(that.mass to mass,
+                                                that.length to length,
+                                                that.length to length),
+                             unit = electricCurrent * time)
+
+    @JvmName("timesElectricCapacitance")
+    operator fun times(that: ElectricCapacitanceAmount<T, EC, M, L>) =
+        ElectricChargeAmount(amount = amount * that.amount,
+                             unit = electricCurrent * time)
 
     // endregion
 }

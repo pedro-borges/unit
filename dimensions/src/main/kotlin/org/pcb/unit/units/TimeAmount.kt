@@ -22,7 +22,7 @@ open class TimeAmount<T : Unit<Time>>(
 {
     val time = unit
 
-    // region Time
+    // region -> Time
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         TimeAmount(amount = amount * that.amount * that.unit.scale,
@@ -52,7 +52,7 @@ open class TimeAmount<T : Unit<Time>>(
 
     // endregion
 
-    // region Scalar
+    // region -> Scalar
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         NaturalAmount(amount = amount / that.amount / convert(that.time to time))
@@ -63,7 +63,7 @@ open class TimeAmount<T : Unit<Time>>(
 
     // endregion
 
-    // region Pace
+    // region -> Pace
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         PaceAmount(amount = amount / that.amount,
