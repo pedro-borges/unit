@@ -11,7 +11,6 @@ class HourTest
     fun scales()
     {
         Hour(1) equivalent Second(60 * 60)
-
         Hour(1) equivalent Minute(60)
         Hour(1) equivalent Hour(1)
         Hour(24) equivalent Day(1)

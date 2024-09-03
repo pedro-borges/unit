@@ -6,9 +6,11 @@ import org.pcb.unit.dimension.ElectricCurrent
 import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
+import org.pcb.unit.units.ElectricCapacitanceAmount
 import org.pcb.unit.units.ElectricCurrentAmount
 import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.ElectricTensionAmount
+import org.pcb.unit.units.TimeAmount
 import org.pcb.unit.units.scalar.NaturalAmount
 import org.pcb.unit.units.scalar.PercentAmount
 import org.pcb.unit.units.test.ELECTRICCURRENT1
@@ -172,5 +174,33 @@ class ElectricResistanceAmountTest
                                                      (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)) *
                      ElectricCurrentAmount(amount = 1,
                                            unit = ELECTRICCURRENT2))
+    }
+
+    @Test
+    fun timesSameElectricCapacitance()
+    {
+        assertEquals(
+            expected = TimeAmount(amount = 2 * 2,
+                                  unit = TIME1),
+            actual = ElectricResistanceAmount(amount = 2,
+                                              unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                     (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)) *
+                     ElectricCapacitanceAmount(amount = 2,
+                                               unit = (TIME1 * TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
+                                                      (MASS1 * LENGTH1 * LENGTH1)))
+    }
+
+    @Test
+    fun timesOtherElectricCapacitance()
+    {
+        assertEquals(
+            expected = TimeAmount(amount = 16 * (2 * 2 * 2 * 2),
+                                  unit = TIME1),
+            actual = ElectricResistanceAmount(amount = 2 * (2 * 2 * 2),
+                                              unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                     (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)) *
+                     ElectricCapacitanceAmount(amount = 2,
+                                               unit = (TIME2 * TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2) /
+                                                      (MASS2 * LENGTH2 * LENGTH2)))
     }
 }

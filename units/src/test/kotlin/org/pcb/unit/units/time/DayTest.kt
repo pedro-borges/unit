@@ -11,7 +11,6 @@ class DayTest
     fun scales()
     {
         Day(1) equivalent Second(60 * 60 * 24)
-
         Day(1) equivalent Minute(60 * 24)
         Day(1) equivalent Hour(24)
         Day(1) equivalent Day(1)

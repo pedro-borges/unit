@@ -4,7 +4,9 @@ import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
+import org.pcb.unit.dimension.ElectricCurrent
 import org.pcb.unit.dimension.Length
+import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
@@ -68,6 +70,41 @@ open class TimeAmount<T : Unit<Time>>(
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         PaceAmount(amount = amount / that.amount,
                    unit = time / that.length)
+
+    // endregion
+
+    // region -> ElectricCapacitance
+
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
+        ElectricCapacitanceAmount(amount = amount / that.amount * convert(that.time to time,
+                                                                          that.time to time,
+                                                                          that.time to time),
+                                  unit = (time * time * time * time * that.electricCurrent * that.electricCurrent) /
+                                         (that.mass * that.length * that.length))
+
+    @JvmName("divElectricResistance")
+    operator fun <M : Unit<Mass>, L : Unit<Length>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
+        ElectricCapacitanceAmount(amount = amount / that.amount,
+                                  unit = (time * time * time * time * that.electricCurrent * that.electricCurrent) /
+                                         (that.mass * that.length * that.length))
+
+    // endregion
+
+    // region -> ElectricResistance
+
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricCapacitanceAmount<T, EC, M, L>) =
+        ElectricResistanceAmount(amount = amount / that.amount / convert(that.time to time,
+                                                                         that.time to time,
+                                                                         that.time to time,
+                                                                         that.time to time),
+                                 unit = (that.mass * that.length * that.length) /
+                                        (time * time * time * that.electricCurrent * that.electricCurrent))
+
+    @JvmName("divElectricCapacitance")
+    operator fun <M : Unit<Mass>, L : Unit<Length>, EC : Unit<ElectricCurrent>> div(that: ElectricCapacitanceAmount<T, EC, M, L>) =
+        ElectricResistanceAmount(amount = amount / that.amount,
+                                 unit = (that.mass * that.length * that.length) /
+                                        (time * time * time * that.electricCurrent * that.electricCurrent))
 
     // endregion
 }

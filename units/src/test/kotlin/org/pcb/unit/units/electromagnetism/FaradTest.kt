@@ -8,6 +8,7 @@ import org.pcb.unit.dimension.Time
 import org.pcb.unit.units.ElectricCapacitanceAmount
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Meter.METER
+import org.pcb.unit.units.base.Second
 import org.pcb.unit.units.electromagnetism.Farad.FARAD
 
 class FaradTest
@@ -21,6 +22,10 @@ class FaradTest
         assertEquals<ElectricCapacitanceAmount<out Unit<Time>, AMPERE, out Unit<Mass>, METER>>(
             expected = Farad(6 / 3),
             actual = Coulomb(6) / Volt(3))
+
+        assertEquals<ElectricCapacitanceAmount<out Unit<Time>, AMPERE, out Unit<Mass>, METER>>(
+            expected = Farad(6 / 3),
+            actual = Second(6) / Ohm(3))
     }
 
     private infix fun Farad.equivalent(other: ElectricCapacitanceAmount<*, *, *, *>) =

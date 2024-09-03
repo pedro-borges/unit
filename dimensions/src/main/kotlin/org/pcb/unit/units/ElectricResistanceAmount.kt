@@ -60,14 +60,15 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
                                  unit = mass * length * length / (time * time * time * electricCurrent * electricCurrent))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> plus(that: ElectricResistanceAmount<M, L, T, EC>) =
-        ElectricResistanceAmount(amount = amount + that.amount * convert(that.mass to mass,
-                                                                         that.length to length,
-                                                                         that.length to length,
-                                                                         time to that.time,
-                                                                         time to that.time,
-                                                                         time to that.time,
-                                                                         electricCurrent to that.electricCurrent,
-                                                                         electricCurrent to that.electricCurrent),
+        ElectricResistanceAmount(amount = amount + that.amount
+                                          * convert(that.mass to mass,
+                                                    that.length to length,
+                                                    that.length to length)
+                                          / convert(that.time to time,
+                                                    that.time to time,
+                                                    that.time to time,
+                                                    that.electricCurrent to electricCurrent,
+                                                    that.electricCurrent to electricCurrent),
                                  unit = mass * length * length / (time * time * time * electricCurrent * electricCurrent))
 
     @JvmName("plusElectricResistance")
@@ -98,14 +99,14 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
         NaturalAmount(amount = amount / that.amount
-                               / convert(that.mass to mass,
-                                         that.length to length,
-                                         that.length to length)
                                * convert(that.time to time,
                                          that.time to time,
                                          that.time to time,
                                          that.electricCurrent to electricCurrent,
-                                         that.electricCurrent to electricCurrent))
+                                         that.electricCurrent to electricCurrent)
+                               / convert(that.mass to mass,
+                                         that.length to length,
+                                         that.length to length))
 
     @JvmName("divElectricCurrent")
     operator fun div(that: ElectricResistanceAmount<M, L, T, EC>) =
@@ -125,6 +126,28 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
         ElectricTensionAmount(amount = amount * that.amount,
                               unit = (mass * length * length) /
                                      (time * time * time * electricCurrent))
+
+    // endregion
+
+    // region -> Time
+
+    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> times(that: ElectricCapacitanceAmount<T, EC, M, L>) =
+        TimeAmount(amount = amount * that.amount
+                            * convert(that.time to time,
+                                      that.time to time,
+                                      that.time to time,
+                                      that.time to time,
+                                      that.electricCurrent to electricCurrent,
+                                      that.electricCurrent to electricCurrent)
+                            / convert(that.mass to mass,
+                                      that.length to length,
+                                      that.length to length),
+                   unit = time)
+
+    @JvmName("timesElectricCapacitance")
+    operator fun times(that: ElectricCapacitanceAmount<T, EC, M, L>) =
+        TimeAmount(amount = amount * that.amount,
+                   unit = time)
 
     // endregion
 }

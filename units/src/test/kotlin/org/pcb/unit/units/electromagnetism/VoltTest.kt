@@ -33,12 +33,16 @@ class VoltTest
             actual = Joule(6) / Coulomb(3))
 
         assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Volt(amount = 6 / 3),
+            actual = Watt(6) / Ampere(3))
+
+        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
             expected = Volt(amount = 2 * 3),
             actual = Ampere(2) * Ohm(3))
 
         assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
-            expected = Volt(amount = 6 / 3),
-            actual = Watt(6) / Ampere(3))
+            expected = Volt(amount = 2 * 3),
+            actual = Ohm(2) * Ampere(3))
     }
 
     private infix fun Volt.equivalent(other: ElectricTensionAmount<*, *, *, *>) =

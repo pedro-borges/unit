@@ -11,7 +11,6 @@ class MinuteTest
     fun scales()
     {
         Minute(1) equivalent Second(60)
-
         Minute(1) equivalent Minute(1)
         Minute(60) equivalent Hour(1)
         Minute(60 * 24) equivalent Day(1)

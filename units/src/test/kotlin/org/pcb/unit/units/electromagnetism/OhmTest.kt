@@ -25,6 +25,10 @@ class OhmTest
         assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
             expected = Ohm(amount = 6 / 3),
             actual = Volt(6) / Ampere(3))
+
+        assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Ohm(amount = 6 / 3),
+            actual = Second(6) / Farad(3))
     }
 
     private infix fun Ohm.equivalent(other: ElectricResistanceAmount<*, *, *, *>) =

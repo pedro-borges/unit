@@ -144,4 +144,25 @@ open class ElectricCapacitanceAmount<T : Unit<Time>, EC : Unit<ElectricCurrent>,
                              unit = electricCurrent * time)
 
     //endregion
+
+    // region -> Time
+
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: ElectricResistanceAmount<M, L, T, EC>) =
+        TimeAmount(amount = amount * that.amount
+                            / convert(that.time to time,
+                                      that.time to time,
+                                      that.time to time,
+                                      that.electricCurrent to electricCurrent,
+                                      that.electricCurrent to electricCurrent)
+                            * convert(that.mass to mass,
+                                      that.length to length,
+                                      that.length to length),
+                   unit = time)
+
+    @JvmName("timesElectricCapacitance")
+    operator fun times(that: ElectricCapacitanceAmount<T, EC, M, L>) =
+        TimeAmount(amount = amount * that.amount,
+                   unit = time)
+
+    // endregion
 }
