@@ -112,7 +112,8 @@ class FrequencyAmountTest
             expected = SpeedAmount(2 / 2, LENGTH1 to TIME1),
             actual = FrequencyAmount(amount = 2,
                                      minor = TIME1) *
-                     LengthAmount(2, LENGTH1))
+                     LengthAmount(amount = 2,
+                                  major = LENGTH1))
     }
 
     @Test

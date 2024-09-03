@@ -70,12 +70,12 @@ open class AreaAmount<L : Unit<Length>>(
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         LengthAmount(amount = amount / that.amount / convert(that.length to length),
-                     length = length)
+                     major = length)
 
     @JvmName("divLength")
     operator fun div(that: LengthAmount<L>) =
         LengthAmount(amount = amount / that.amount,
-                     length = length)
+                     major = length)
 
     // endregion
 

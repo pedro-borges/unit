@@ -160,7 +160,8 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /
-                     LengthAmount(2, LENGTH1))
+                     LengthAmount(amount = 2,
+                                  major = LENGTH1))
     }
 
     @Test
@@ -173,14 +174,16 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /
-                     LengthAmount(1, LENGTH2))
+                     LengthAmount(amount = 1,
+                                  major = LENGTH2))
     }
 
     @Test
     fun divSameForce()
     {
         assertEquals(
-            expected = LengthAmount(2 / 2, LENGTH1),
+            expected = LengthAmount(amount = 2 / 2,
+                                    major = LENGTH1),
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /
@@ -193,7 +196,8 @@ class EnergyAmountTest
     fun divOtherForce()
     {
         assertEquals(
-            expected = LengthAmount(2 / 2, LENGTH1),
+            expected = LengthAmount(amount = 2 / 2,
+                                    major = LENGTH1),
             actual = EnergyAmount(amount = 2,
                                   major = MASS1 * LENGTH1 * LENGTH1,
                                   minor = TIME1 * TIME1) /

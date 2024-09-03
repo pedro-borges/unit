@@ -132,12 +132,12 @@ open class EnergyAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                                         that.length to length)
                               * convert(that.time to time,
                                         that.time to time),
-                     length = length)
+                     major = length)
 
     @JvmName("divForce")
     operator fun div(that: ForceAmount<M, L, T>) =
         LengthAmount(amount = amount / that.amount,
-                     length = length)
+                     major = length)
 
     // endregion
 

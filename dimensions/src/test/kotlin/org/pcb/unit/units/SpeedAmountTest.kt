@@ -97,7 +97,8 @@ class SpeedAmountTest
     fun timesSameTime()
     {
         assertEquals(
-            expected = LengthAmount(2 * 2, LENGTH1),
+            expected = LengthAmount(amount = 2 * 2,
+                                    major = LENGTH1),
             actual = SpeedAmount(2, LENGTH1 to TIME1) *
                      TimeAmount(2, TIME1))
     }
@@ -106,7 +107,8 @@ class SpeedAmountTest
     fun timesOtherTime()
     {
         assertEquals(
-            expected = LengthAmount(2 * 2, LENGTH1),
+            expected = LengthAmount(amount = 2 * 2,
+                                    major = LENGTH1),
             actual = SpeedAmount(2, LENGTH1 to TIME1) *
                      TimeAmount(1, TIME2))
     }
@@ -140,7 +142,8 @@ class SpeedAmountTest
             expected = FrequencyAmount(amount = 2 / 2,
                                        minor = TIME1),
             actual = SpeedAmount(2, LENGTH1 to TIME1) /
-                     LengthAmount(2, LENGTH1))
+                     LengthAmount(amount = 2,
+                                  major = LENGTH1))
     }
 
     @Test
@@ -150,7 +153,8 @@ class SpeedAmountTest
             expected = FrequencyAmount(amount = 2 / 2,
                                        minor = TIME1),
             actual = SpeedAmount(2, LENGTH1 to TIME1) /
-                     LengthAmount(1, LENGTH2))
+                     LengthAmount(amount = 1,
+                                  major = LENGTH2))
     }
 
     @Test

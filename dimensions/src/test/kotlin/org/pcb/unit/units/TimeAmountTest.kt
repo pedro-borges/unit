@@ -88,6 +88,7 @@ class TimeAmountTest
         assertEquals(
             expected = PaceAmount(2 / 2, TIME1 to LENGTH1),
             actual = TimeAmount(2, TIME1) /
-                     LengthAmount(2, LENGTH1))
+                     LengthAmount(amount = 2,
+                                  major = LENGTH1))
     }
 }

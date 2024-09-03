@@ -29,7 +29,7 @@ class ElectricResistanceAmountTest
             expected = ElectricResistanceAmount(amount = 1,
                                                 major = MASS1 * LENGTH1 * LENGTH1,
                                                 minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1),
-            actual = ElectricResistanceAmount(amount = 2 * 2,
+            actual = ElectricResistanceAmount(amount = 2 * 2 * 2 / 2,
                                               major = MASS1 * LENGTH1 * LENGTH2,
                                               minor = TIME1 * TIME2 * TIME2 * ELECTRICCURRENT1 * ELECTRICCURRENT2))
     }

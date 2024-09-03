@@ -82,12 +82,12 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         LengthAmount(amount = amount * that.amount * convert(that.time to time),
-                     length = length)
+                     major = length)
 
     @JvmName("timesTime")
     operator fun times(that: TimeAmount<T>) =
         LengthAmount(amount = amount * that.amount,
-                     length = length)
+                     major = length)
 
     // endregion
 

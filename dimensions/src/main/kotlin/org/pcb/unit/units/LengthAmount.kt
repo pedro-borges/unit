@@ -14,39 +14,40 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class LengthAmount<L : Unit<Length>>(
         amount: Number,
-        val length: L)
+        val major: L)
     : Amount<Length>(amount = amount.toBigBigDecimal(),
                      unit = CompositeUnit(
                          domain = Length::class,
-                         units = listOf(length to 1)))
+                         units = listOf(major to 1)))
 {
+        val length = major
     // region Length
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         LengthAmount(amount = amount * that.amount * that.unit.scale,
-                     length = length)
+                     major = length)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         LengthAmount(amount = amount / that.amount / that.unit.scale,
-                     length = length)
+                     major = length)
 
     operator fun <L : Unit<Length>> plus(that: LengthAmount<L>) =
         LengthAmount(amount = amount + that.amount * convert(that.length to length),
-                     length = length)
+                     major = length)
 
     @JvmName("plusLength")
     operator fun plus(that: LengthAmount<L>) =
         LengthAmount(amount = amount + that.amount,
-                     length = length)
+                     major = length)
 
     operator fun <L : Unit<Length>> minus(that: LengthAmount<L>) =
         LengthAmount(amount = amount - that.amount * convert(that.length to length),
-                     length = length)
+                     major = length)
 
     @JvmName("minusLength")
     operator fun minus(that: LengthAmount<L>) =
         LengthAmount(amount = amount - that.amount,
-                     length = length)
+                     major = length)
 
     // endregion
 

@@ -102,12 +102,12 @@ open class VolumeAmount<L : Unit<Length>>(
     operator fun <L : Unit<Length>>div(that: AreaAmount<L>) =
         LengthAmount(amount = amount / that.amount / convert(that.length to length,
                                                            that.length to length),
-                   length = length)
+                   major = length)
 
     @JvmName("divArea")
     operator fun div(that: AreaAmount<L>) =
         LengthAmount(amount = amount / that.amount,
-                   length = length)
+                   major = length)
 
     // endregion
 }

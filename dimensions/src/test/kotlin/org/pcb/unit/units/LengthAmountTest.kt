@@ -20,116 +20,150 @@ class LengthAmountTest
     fun timesScalar()
     {
         assertEquals(
-            expected = LengthAmount(2 * 2, LENGTH1),
-            actual = LengthAmount(2, LENGTH1) *
-                     PercentAmount(2 * 100))
+            expected = LengthAmount(amount = 2 * 2,
+                                    major = LENGTH1),
+            actual = LengthAmount(amount = 2,
+                                  major = LENGTH1) *
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun divScalar()
     {
         assertEquals(
-            expected = LengthAmount(2 / 2, LENGTH1),
-            actual = LengthAmount(2, LENGTH1) /
-                     PercentAmount(2 * 100))
+            expected = LengthAmount(amount = 2 / 2,
+                                    major = LENGTH1),
+            actual = LengthAmount(amount = 2,
+                                  major = LENGTH1) /
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun plusSameLength()
     {
         assertEquals(
-            expected = LengthAmount(0 + 1, LENGTH1),
-            actual = LengthAmount(0, LENGTH1) +
-                     LengthAmount(1, LENGTH1))
+            expected = LengthAmount(amount = 0 + 1,
+                                    major = LENGTH1),
+            actual = LengthAmount(amount = 0,
+                                  major = LENGTH1) +
+                     LengthAmount(amount = 1,
+                                  major = LENGTH1))
     }
 
     @Test
     fun plusOtherLength()
     {
         assertEquals(
-            expected = LengthAmount(0 + 2, LENGTH1),
-            actual = LengthAmount(0, LENGTH1) +
-                     LengthAmount(1, LENGTH2))
+            expected = LengthAmount(amount = 0 + 2,
+                                    major = LENGTH1),
+            actual = LengthAmount(amount = 0,
+                                  major = LENGTH1) +
+                     LengthAmount(amount = 1,
+                                  major = LENGTH2))
     }
 
     @Test
     fun minusSameLength()
     {
         assertEquals(
-            expected = LengthAmount(2 - 2, LENGTH1),
-            actual = LengthAmount(2, LENGTH1) -
-                     LengthAmount(1, LENGTH2))
+            expected = LengthAmount(amount = 2 - 2,
+                                    major = LENGTH1),
+            actual = LengthAmount(amount = 2,
+                                  major = LENGTH1) -
+                     LengthAmount(amount = 1,
+                                  major = LENGTH2))
     }
 
     @Test
     fun minusOtherLength()
     {
         assertEquals(
-            expected = LengthAmount(2 - 2, LENGTH1),
-            actual = LengthAmount(2, LENGTH1) -
-                     LengthAmount(1, LENGTH2))
+            expected = LengthAmount(amount = 2 - 2, LENGTH1),
+            actual = LengthAmount(amount = 2,
+                                  major = LENGTH1) -
+                     LengthAmount(amount = 1,
+                                  major = LENGTH2))
     }
 
     @Test
     fun divSameLength()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = LengthAmount(2, LENGTH1) /
-                     LengthAmount(2, LENGTH1))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = LengthAmount(amount = 2,
+                                  major = LENGTH1) /
+                     LengthAmount(amount = 2,
+                                  major = LENGTH1))
     }
 
     @Test
     fun divOtherLength()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = LengthAmount(2, LENGTH1) /
-                     LengthAmount(1, LENGTH2))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = LengthAmount(amount = 2,
+                                  major = LENGTH1) /
+                     LengthAmount(amount = 1,
+                                  major = LENGTH2))
     }
 
     @Test
     fun divTime()
     {
         assertEquals(
-            expected = SpeedAmount(2 / 2, LENGTH1 to TIME1),
-            actual = LengthAmount(2, LENGTH1) /
-                     TimeAmount(2, TIME1))
+            expected = SpeedAmount(amount = 2 / 2,
+                                   pair = LENGTH1 to TIME1),
+            actual = LengthAmount(amount = 2,
+                                  major = LENGTH1) /
+                     TimeAmount(amount = 2,
+                                time = TIME1))
     }
 
     @Test
     fun timesSameLength()
     {
         assertEquals<AreaAmount<out Unit<Length>>>(
-            expected = AreaAmount(2 * 2, LENGTH1 * LENGTH1),
-            actual = LengthAmount(2, LENGTH1) *
-                     LengthAmount(2, LENGTH1))
+            expected = AreaAmount(amount = 2 * 2,
+                                  major = LENGTH1 * LENGTH1),
+            actual = LengthAmount(amount = 2,
+                                  major = LENGTH1) *
+                     LengthAmount(amount = 2,
+                                  major = LENGTH1))
     }
 
     @Test
     fun timesOtherLength()
     {
         assertEquals<AreaAmount<out Unit<Length>>>(
-            expected = AreaAmount(2 * 2, LENGTH1 * LENGTH1),
-            actual = LengthAmount(2, LENGTH1) *
-                     LengthAmount(1, LENGTH2))
+            expected = AreaAmount(amount = 2 * 2,
+                                  major = LENGTH1 * LENGTH1),
+            actual = LengthAmount(amount = 2,
+                                  major = LENGTH1) *
+                     LengthAmount(amount = 1,
+                                  major = LENGTH2))
     }
 
     @Test
     fun timesSameArea()
     {
         assertEquals(
-            expected = VolumeAmount(2 * 2, LENGTH1 * LENGTH1 * LENGTH1),
-            actual = LengthAmount(2, LENGTH1) *
-                     AreaAmount(2, LENGTH1 * LENGTH1))
+            expected = VolumeAmount(amount = 2 * 2,
+                                    major = LENGTH1 * LENGTH1 * LENGTH1),
+            actual = LengthAmount(amount = 2,
+                                  major = LENGTH1) *
+                     AreaAmount(amount = 2,
+                                major = LENGTH1 * LENGTH1))
     }
 
     @Test
     fun timesOtherArea()
     {
         assertEquals(
-            expected = VolumeAmount(2 * 2 * 2, LENGTH1 * LENGTH1 * LENGTH1),
-            actual = LengthAmount(2, LENGTH1) *
-                     AreaAmount(1, LENGTH2 * LENGTH2))
+            expected = VolumeAmount(amount = 2 * 2 * 2,
+                                    major = LENGTH1 * LENGTH1 * LENGTH1),
+            actual = LengthAmount(amount = 2,
+                                  major = LENGTH1) *
+                     AreaAmount(amount = 1,
+                                major = LENGTH2 * LENGTH2))
     }
 }

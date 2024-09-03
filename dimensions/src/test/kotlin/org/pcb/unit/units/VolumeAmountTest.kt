@@ -15,107 +15,139 @@ class VolumeAmountTest
     fun timesScalar()
     {
         assertEquals(
-            expected = VolumeAmount(2 * 2, LENGTH1 * LENGTH1 * LENGTH1),
-            actual = VolumeAmount(2, LENGTH1 * LENGTH1 * LENGTH1) *
-                     PercentAmount(2 * 100))
+            expected = VolumeAmount(amount = 2 * 2,
+                                    major = LENGTH1 * LENGTH1 * LENGTH1),
+            actual = VolumeAmount(amount = 2,
+                                  major = LENGTH1 * LENGTH1 * LENGTH1) *
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun divScalar()
     {
         assertEquals(
-            expected = VolumeAmount(2 / 2, LENGTH1 * LENGTH1 * LENGTH1),
-            actual = VolumeAmount(2, LENGTH1 * LENGTH1 * LENGTH1) /
-                     PercentAmount(2 * 100))
+            expected = VolumeAmount(amount = 2 / 2,
+                                    major = LENGTH1 * LENGTH1 * LENGTH1),
+            actual = VolumeAmount(amount = 2,
+                                  major = LENGTH1 * LENGTH1 * LENGTH1) /
+                     PercentAmount(amount = 2 * 100))
     }
 
     @Test
     fun plusSameVolume()
     {
         assertEquals(
-            expected = VolumeAmount(0 + 1, LENGTH1 * LENGTH1 * LENGTH1),
-            actual = VolumeAmount(0, LENGTH1 * LENGTH1 * LENGTH1) +
-                     VolumeAmount(1, LENGTH1 * LENGTH1 * LENGTH1))
+            expected = VolumeAmount(amount = 0 + 1,
+                                    major = LENGTH1 * LENGTH1 * LENGTH1),
+            actual = VolumeAmount(amount = 0,
+                                  major = LENGTH1 * LENGTH1 * LENGTH1) +
+                     VolumeAmount(amount = 1,
+                                  major = LENGTH1 * LENGTH1 * LENGTH1))
     }
 
     @Test
     fun plusOtherVolume()
     {
         assertEquals(
-            expected = VolumeAmount(0 + (2 * 2 * 2), LENGTH1 * LENGTH1 * LENGTH1),
-            actual = VolumeAmount(0, LENGTH1, LENGTH1, LENGTH1) +
-                     VolumeAmount(1, LENGTH2 * LENGTH2 * LENGTH2))
+            expected = VolumeAmount(amount = 0 + (2 * 2 * 2),
+                                    major = LENGTH1 * LENGTH1 * LENGTH1),
+            actual = VolumeAmount(amount = 0,
+                                  major = LENGTH1 * LENGTH1 * LENGTH1) +
+                     VolumeAmount(amount = 1,
+                                  major = LENGTH2 * LENGTH2 * LENGTH2))
     }
 
     @Test
     fun minusSameVolume()
     {
         assertEquals(
-            expected = VolumeAmount(1 - 1, LENGTH1 * LENGTH1 * LENGTH1),
-            actual = VolumeAmount(1, LENGTH1 * LENGTH1 * LENGTH1) -
-                     VolumeAmount(1, LENGTH1 * LENGTH1 * LENGTH1))
+            expected = VolumeAmount(amount = 1 - 1,
+                                    major = LENGTH1 * LENGTH1 * LENGTH1),
+            actual = VolumeAmount(amount = 1,
+                                  major = LENGTH1 * LENGTH1 * LENGTH1) -
+                     VolumeAmount(amount = 1,
+                                  major = LENGTH1 * LENGTH1 * LENGTH1))
     }
 
     @Test
     fun minusOtherVolume()
     {
         assertEquals(
-            expected = VolumeAmount(8 - (2 * 2 * 2), LENGTH1 * LENGTH1 * LENGTH1),
-            actual = VolumeAmount(8, LENGTH1, LENGTH1, LENGTH1) -
-                     VolumeAmount(1, LENGTH2 * LENGTH2 * LENGTH2))
+            expected = VolumeAmount(amount = 8 - (2 * 2 * 2),
+                                    major = LENGTH1 * LENGTH1 * LENGTH1),
+            actual = VolumeAmount(amount = 8,
+                                  major = LENGTH1 * LENGTH1 * LENGTH1) -
+                     VolumeAmount(amount = 1,
+                                  major = LENGTH2 * LENGTH2 * LENGTH2))
     }
 
     @Test
     fun divSameVolume()
     {
         assertEquals(
-            expected = NaturalAmount(2 / 2),
-            actual = VolumeAmount(2, LENGTH1 * LENGTH1 * LENGTH1) /
-                     VolumeAmount(2, LENGTH1 * LENGTH1 * LENGTH1))
+            expected = NaturalAmount(amount = 2 / 2),
+            actual = VolumeAmount(amount = 2,
+                                  major = LENGTH1 * LENGTH1 * LENGTH1) /
+                     VolumeAmount(amount = 2,
+                                  major = LENGTH1 * LENGTH1 * LENGTH1))
     }
 
     @Test
     fun divOtherVolume()
     {
         assertEquals(
-            expected = NaturalAmount(8 / (2 * 2 * 2)),
-            actual = VolumeAmount(8, LENGTH1, LENGTH1, LENGTH1) /
-                     VolumeAmount(1, LENGTH2 * LENGTH2 * LENGTH2))
+            expected = NaturalAmount(amount = 8 / (2 * 2 * 2)),
+            actual = VolumeAmount(amount = 8,
+                                  major = LENGTH1 * LENGTH1 * LENGTH1) /
+                     VolumeAmount(amount = 1,
+                                  major = LENGTH2 * LENGTH2 * LENGTH2))
     }
 
     @Test
     fun divSameLength()
     {
         assertEquals<AreaAmount<out Unit<Length>>>(
-            expected = AreaAmount(2 / 2, LENGTH1 * LENGTH1),
-            actual = VolumeAmount(2, LENGTH1 * LENGTH1 * LENGTH1) /
-                     LengthAmount(2, LENGTH1))
+            expected = AreaAmount(amount = 2 / 2,
+                                  major = LENGTH1 * LENGTH1),
+            actual = VolumeAmount(amount = 2,
+                                  major = LENGTH1 * LENGTH1 * LENGTH1) /
+                     LengthAmount(amount = 2,
+                                  major = LENGTH1))
     }
 
     @Test
     fun divOtherLength()
     {
         assertEquals<AreaAmount<out Unit<Length>>>(
-            expected = AreaAmount(2 / 2, LENGTH1 * LENGTH1),
-            actual = VolumeAmount(2, LENGTH1, LENGTH1, LENGTH1) /
-                     LengthAmount(1, LENGTH2))
+            expected = AreaAmount(amount = 2 / 2,
+                                  major = LENGTH1 * LENGTH1),
+            actual = VolumeAmount(amount = 2,
+                                  major = LENGTH1 * LENGTH1 * LENGTH1) /
+                     LengthAmount(amount = 1,
+                                  major = LENGTH2))
     }
 
     @Test
     fun divSameArea()
     {
         assertEquals(
-            expected = LengthAmount(2 / 2, LENGTH1),
-            actual = VolumeAmount(2, LENGTH1 * LENGTH1 * LENGTH1) /
-                     AreaAmount(2, LENGTH1 * LENGTH1))
+            expected = LengthAmount(amount = 2 / 2,
+                                    major = LENGTH1),
+            actual = VolumeAmount(amount = 2,
+                                  major = LENGTH1 * LENGTH1 * LENGTH1) /
+                     AreaAmount(amount = 2,
+                                major = LENGTH1 * LENGTH1))
     }
 
     @Test
     fun divOtherArea()
     {
         assertEquals(
-            expected = LengthAmount(4 / (2 * 2), LENGTH1),
-            actual = VolumeAmount(4, LENGTH1, LENGTH1, LENGTH1) /
-                     AreaAmount(1, LENGTH2 * LENGTH2))
+            expected = LengthAmount(amount = 4 / (2 * 2),
+                                    major = LENGTH1),
+            actual = VolumeAmount(amount = 4,
+                                  major = LENGTH1 * LENGTH1 * LENGTH1) /
+                     AreaAmount(amount = 1,
+                                major = LENGTH2 * LENGTH2))
     }
 }
