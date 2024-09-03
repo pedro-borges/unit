@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.dimension.ElectricCurrent
 import org.pcb.unit.dimension.Length
+import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.units.ElectricCurrentAmount
 import org.pcb.unit.units.ElectricResistanceAmount
@@ -24,17 +25,17 @@ class ElectricResistanceAmountTest
     @Test
     fun construct()
     {
-        assertEquals<ElectricResistanceAmount<MASS1, out Unit<Length>, out Unit<Time>, out Unit<ElectricCurrent>>>(
-            expected = ElectricResistanceAmount(1, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1),
-            actual = ElectricResistanceAmount(2 * 2, MASS1, LENGTH1, LENGTH2, TIME1, TIME2, TIME2, ELECTRICCURRENT1, ELECTRICCURRENT2))
+        assertEquals<ElectricResistanceAmount<out Unit<Mass>, out Unit<Length>, Unit<Time>, out Unit<ElectricCurrent>>>(
+            expected = ElectricResistanceAmount(1, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)),
+            actual = ElectricResistanceAmount(2 * 2, (MASS1 * LENGTH1 * LENGTH2) to (TIME1 * TIME2 * TIME2 * ELECTRICCURRENT1 * ELECTRICCURRENT2)))
     }
 
     @Test
     fun timesScalar()
     {
         assertEquals(
-            expected = ElectricResistanceAmount(2 * 2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1),
-            actual = ElectricResistanceAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1) *
+            expected = ElectricResistanceAmount(2 * 2, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)),
+            actual = ElectricResistanceAmount(2, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)) *
                      PercentAmount(2 * 100))
     }
 
@@ -42,8 +43,8 @@ class ElectricResistanceAmountTest
     fun divScalar()
     {
         assertEquals(
-            expected = ElectricResistanceAmount(2 / 2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1),
-            actual = ElectricResistanceAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1) /
+            expected = ElectricResistanceAmount(2 / 2, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)),
+            actual = ElectricResistanceAmount(2, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)) /
                      PercentAmount(2 * 100))
     }
 
@@ -51,36 +52,36 @@ class ElectricResistanceAmountTest
     fun plusSameElectricResistance()
     {
         assertEquals(
-            expected = ElectricResistanceAmount(0 + 1, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1),
-            actual = ElectricResistanceAmount(0, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1) +
-                     ElectricResistanceAmount(1, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1))
+            expected = ElectricResistanceAmount(0 + 1, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)),
+            actual = ElectricResistanceAmount(0, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)) +
+                     ElectricResistanceAmount(1, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)))
     }
 
     @Test
     fun plusOtherElectricResistance()
     {
         assertEquals(
-            expected = ElectricResistanceAmount(0 + 1, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1),
-            actual = ElectricResistanceAmount(0, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1) +
-                     ElectricResistanceAmount(2 * 2, MASS2, LENGTH2, LENGTH2, TIME2, TIME2, TIME2, ELECTRICCURRENT2, ELECTRICCURRENT2))
+            expected = ElectricResistanceAmount(0 + 1, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)),
+            actual = ElectricResistanceAmount(0, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)) +
+                     ElectricResistanceAmount(2 * 2, (MASS2 * LENGTH2 * LENGTH2) to (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2)))
     }
 
     @Test
     fun minusSameElectricResistance()
     {
         assertEquals(
-            expected = ElectricResistanceAmount(1 - 1, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1),
-            actual = ElectricResistanceAmount(1, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1) -
-                     ElectricResistanceAmount(1, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1))
+            expected = ElectricResistanceAmount(1 - 1, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)),
+            actual = ElectricResistanceAmount(1, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)) -
+                     ElectricResistanceAmount(1, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)))
     }
 
     @Test
     fun minusOtherElectricResistance()
     {
         assertEquals(
-            expected = ElectricResistanceAmount(1 - 1, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1),
-            actual = ElectricResistanceAmount(1, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1) -
-                     ElectricResistanceAmount(2 * 2, MASS2, LENGTH2, LENGTH2, TIME2, TIME2, TIME2, ELECTRICCURRENT2, ELECTRICCURRENT2))
+            expected = ElectricResistanceAmount(1 - 1, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)),
+            actual = ElectricResistanceAmount(1, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)) -
+                     ElectricResistanceAmount(2 * 2, (MASS2 * LENGTH2 * LENGTH2) to (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2)))
     }
 
     @Test
@@ -88,8 +89,8 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(2 / 2),
-            actual = ElectricResistanceAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1) /
-                     ElectricResistanceAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1))
+            actual = ElectricResistanceAmount(2, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)) /
+                     ElectricResistanceAmount(2, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)))
     }
 
     @Test
@@ -97,16 +98,16 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = NaturalAmount(2 / 2),
-            actual = ElectricResistanceAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1) /
-                     ElectricResistanceAmount(2 * (2 * 2), MASS2, LENGTH2, LENGTH2, TIME2, TIME2, TIME2, ELECTRICCURRENT2, ELECTRICCURRENT2))
+            actual = ElectricResistanceAmount(2, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)) /
+                     ElectricResistanceAmount(2 * (2 * 2), (MASS2 * LENGTH2 * LENGTH2) to (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2)))
     }
 
     @Test
     fun timesSameElectricCurrent()
     {
         assertEquals(
-            expected = ElectricTensionAmount(2 * 2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1),
-            actual = ElectricResistanceAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1) *
+            expected = ElectricTensionAmount(2 * 2, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)),
+            actual = ElectricResistanceAmount(2, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)) *
                      ElectricCurrentAmount(2, ELECTRICCURRENT1))
     }
 
@@ -114,8 +115,8 @@ class ElectricResistanceAmountTest
     fun timesOtherElectricCurrent()
     {
         assertEquals(
-            expected = ElectricTensionAmount(2 * 2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1),
-            actual = ElectricResistanceAmount(2, MASS1, LENGTH1, LENGTH1, TIME1, TIME1, TIME1, ELECTRICCURRENT1, ELECTRICCURRENT1) *
+            expected = ElectricTensionAmount(2 * 2, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)),
+            actual = ElectricResistanceAmount(2, (MASS1 * LENGTH1 * LENGTH1) to (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)) *
                      ElectricCurrentAmount(1, ELECTRICCURRENT2))
     }
 }

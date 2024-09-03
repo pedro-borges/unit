@@ -9,6 +9,9 @@ abstract class Unit<D : Domain>(val domain: KClass<out D>)
     abstract val symbol: String
     abstract val scale: BigDecimal
 
+    operator fun <B: Unit<*>>times(second: B) =
+        Tuple(this, second)
+
     override fun equals(other: Any?): Boolean
     {
         return when

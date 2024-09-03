@@ -2,6 +2,8 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.Quadruple
+import org.pcb.unit.Triple
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.ElectricCurrent
@@ -38,6 +40,8 @@ open class ElectricTensionAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time
                                                  time to -3,
                                                  electricCurrent to -1)))
 {
+    constructor(amount: Number, pair: Pair<Triple<M, L, L>, Quadruple<T, T, T, EC>>) : this(amount, pair.first.first, pair.first.second, pair.first.third, pair.second.first, pair.second.second, pair.second.third, pair.second.fourth)
+
     companion object
     {
         operator fun invoke(amount: Number, electricTension: Unit<ElectricTension>) =
