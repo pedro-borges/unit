@@ -16,9 +16,9 @@ class VolumeAmountTest
     {
         assertEquals<VolumeAmount<out Unit<Length>>>(
             expected = VolumeAmount(amount = 2 * 2,
-                                    major = LENGTH1 * LENGTH1 * LENGTH1),
+                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
             actual = VolumeAmount(amount = 2,
-                                  major = LENGTH1 * LENGTH1 * LENGTH1) *
+                                  unit = LENGTH1 * LENGTH1 * LENGTH1) *
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -27,9 +27,9 @@ class VolumeAmountTest
     {
         assertEquals<VolumeAmount<out Unit<Length>>>(
             expected = VolumeAmount(amount = 2 / 2,
-                                    major = LENGTH1 * LENGTH1 * LENGTH1),
+                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
             actual = VolumeAmount(amount = 2,
-                                  major = LENGTH1 * LENGTH1 * LENGTH1) /
+                                  unit = LENGTH1 * LENGTH1 * LENGTH1) /
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -38,11 +38,11 @@ class VolumeAmountTest
     {
         assertEquals<VolumeAmount<out Unit<Length>>>(
             expected = VolumeAmount(amount = 0 + 1,
-                                    major = LENGTH1 * LENGTH1 * LENGTH1),
+                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
             actual = VolumeAmount(amount = 0,
-                                  major = LENGTH1 * LENGTH1 * LENGTH1) +
+                                  unit = LENGTH1 * LENGTH1 * LENGTH1) +
                      VolumeAmount(amount = 1,
-                                  major = LENGTH1 * LENGTH1 * LENGTH1))
+                                  unit = LENGTH1 * LENGTH1 * LENGTH1))
     }
 
     @Test
@@ -50,11 +50,11 @@ class VolumeAmountTest
     {
         assertEquals<VolumeAmount<out Unit<Length>>>(
             expected = VolumeAmount(amount = 0 + (2 * 2 * 2),
-                                    major = LENGTH1 * LENGTH1 * LENGTH1),
+                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
             actual = VolumeAmount(amount = 0,
-                                  major = LENGTH1 * LENGTH1 * LENGTH1) +
+                                  unit = LENGTH1 * LENGTH1 * LENGTH1) +
                      VolumeAmount(amount = 1,
-                                  major = LENGTH2 * LENGTH2 * LENGTH2))
+                                  unit = LENGTH2 * LENGTH2 * LENGTH2))
     }
 
     @Test
@@ -62,11 +62,11 @@ class VolumeAmountTest
     {
         assertEquals<VolumeAmount<out Unit<Length>>>(
             expected = VolumeAmount(amount = 1 - 1,
-                                    major = LENGTH1 * LENGTH1 * LENGTH1),
+                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
             actual = VolumeAmount(amount = 1,
-                                  major = LENGTH1 * LENGTH1 * LENGTH1) -
+                                  unit = LENGTH1 * LENGTH1 * LENGTH1) -
                      VolumeAmount(amount = 1,
-                                  major = LENGTH1 * LENGTH1 * LENGTH1))
+                                  unit = LENGTH1 * LENGTH1 * LENGTH1))
     }
 
     @Test
@@ -74,11 +74,11 @@ class VolumeAmountTest
     {
         assertEquals<VolumeAmount<out Unit<Length>>>(
             expected = VolumeAmount(amount = 8 - (2 * 2 * 2),
-                                    major = LENGTH1 * LENGTH1 * LENGTH1),
+                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
             actual = VolumeAmount(amount = 8,
-                                  major = LENGTH1 * LENGTH1 * LENGTH1) -
+                                  unit = LENGTH1 * LENGTH1 * LENGTH1) -
                      VolumeAmount(amount = 1,
-                                  major = LENGTH2 * LENGTH2 * LENGTH2))
+                                  unit = LENGTH2 * LENGTH2 * LENGTH2))
     }
 
     @Test
@@ -87,9 +87,9 @@ class VolumeAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
             actual = VolumeAmount(amount = 2,
-                                  major = LENGTH1 * LENGTH1 * LENGTH1) /
+                                  unit = LENGTH1 * LENGTH1 * LENGTH1) /
                      VolumeAmount(amount = 2,
-                                  major = LENGTH1 * LENGTH1 * LENGTH1))
+                                  unit = LENGTH1 * LENGTH1 * LENGTH1))
     }
 
     @Test
@@ -98,9 +98,9 @@ class VolumeAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 8 / (2 * 2 * 2)),
             actual = VolumeAmount(amount = 8,
-                                  major = LENGTH1 * LENGTH1 * LENGTH1) /
+                                  unit = LENGTH1 * LENGTH1 * LENGTH1) /
                      VolumeAmount(amount = 1,
-                                  major = LENGTH2 * LENGTH2 * LENGTH2))
+                                  unit = LENGTH2 * LENGTH2 * LENGTH2))
     }
 
     @Test
@@ -108,11 +108,11 @@ class VolumeAmountTest
     {
         assertEquals<AreaAmount<out Unit<Length>>>(
             expected = AreaAmount(amount = 2 / 2,
-                                  major = LENGTH1 * LENGTH1),
+                                  unit = LENGTH1 * LENGTH1),
             actual = VolumeAmount(amount = 2,
-                                  major = LENGTH1 * LENGTH1 * LENGTH1) /
+                                  unit = LENGTH1 * LENGTH1 * LENGTH1) /
                      LengthAmount(amount = 2,
-                                  major = LENGTH1))
+                                  unit = LENGTH1))
     }
 
     @Test
@@ -120,11 +120,11 @@ class VolumeAmountTest
     {
         assertEquals<AreaAmount<out Unit<Length>>>(
             expected = AreaAmount(amount = 2 / 2,
-                                  major = LENGTH1 * LENGTH1),
+                                  unit = LENGTH1 * LENGTH1),
             actual = VolumeAmount(amount = 2,
-                                  major = LENGTH1 * LENGTH1 * LENGTH1) /
+                                  unit = LENGTH1 * LENGTH1 * LENGTH1) /
                      LengthAmount(amount = 1,
-                                  major = LENGTH2))
+                                  unit = LENGTH2))
     }
 
     @Test
@@ -132,11 +132,11 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = LengthAmount(amount = 2 / 2,
-                                    major = LENGTH1),
+                                    unit = LENGTH1),
             actual = VolumeAmount(amount = 2,
-                                  major = LENGTH1 * LENGTH1 * LENGTH1) /
+                                  unit = LENGTH1 * LENGTH1 * LENGTH1) /
                      AreaAmount(amount = 2,
-                                major = LENGTH1 * LENGTH1))
+                                unit = LENGTH1 * LENGTH1))
     }
 
     @Test
@@ -144,10 +144,10 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = LengthAmount(amount = 4 / (2 * 2),
-                                    major = LENGTH1),
+                                    unit = LENGTH1),
             actual = VolumeAmount(amount = 4,
-                                  major = LENGTH1 * LENGTH1 * LENGTH1) /
+                                  unit = LENGTH1 * LENGTH1 * LENGTH1) /
                      AreaAmount(amount = 1,
-                                major = LENGTH2 * LENGTH2))
+                                unit = LENGTH2 * LENGTH2))
     }
 }

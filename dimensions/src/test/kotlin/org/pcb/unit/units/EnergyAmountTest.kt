@@ -31,11 +31,11 @@ class EnergyAmountTest
     {
         assertEquals<EnergyAmount<MASS1, out Unit<Length>, out Unit<Time>>>(
             expected = EnergyAmount(amount = 1,
-                                    major = MASS1 * LENGTH1 * LENGTH1,
-                                    minor = TIME1 * TIME1),
+                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                           (TIME1 * TIME1)),
             actual = EnergyAmount(amount = 1,
-                                  major = MASS1 * LENGTH1 * LENGTH2,
-                                  minor = TIME1 * TIME2))
+                                  unit = (MASS1 * LENGTH1 * LENGTH2) /
+                                         (TIME1 * TIME2)))
     }
 
     @Test
@@ -43,11 +43,11 @@ class EnergyAmountTest
     {
         assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = EnergyAmount(amount = 2 * 2,
-                                    major = MASS1 * LENGTH1 * LENGTH1,
-                                    minor = TIME1 * TIME1),
+                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                           (TIME1 * TIME1)),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) *
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) *
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -56,11 +56,11 @@ class EnergyAmountTest
     {
         assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = EnergyAmount(amount = 2 / 2,
-                                    major = MASS1 * LENGTH1 * LENGTH1,
-                                    minor = TIME1 * TIME1),
+                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                           (TIME1 * TIME1)),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) /
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -69,14 +69,14 @@ class EnergyAmountTest
     {
         assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = EnergyAmount(amount = 0 + 1,
-                                    major = MASS1 * LENGTH1 * LENGTH1,
-                                    minor = TIME1 * TIME1),
+                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                           (TIME1 * TIME1)),
             actual = EnergyAmount(amount = 0,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) +
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) +
                      EnergyAmount(amount = 1,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1))
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)))
     }
 
     @Test
@@ -84,14 +84,14 @@ class EnergyAmountTest
     {
         assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = EnergyAmount(amount = 0 + 2,
-                                    major = MASS1 * LENGTH1 * LENGTH1,
-                                    minor = TIME1 * TIME1),
+                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                           (TIME1 * TIME1)),
             actual = EnergyAmount(amount = 0,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) +
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) +
                      EnergyAmount(amount = 1,
-                                  major = MASS2 * LENGTH2 * LENGTH2,
-                                  minor = TIME2 * TIME2))
+                                  unit = (MASS2 * LENGTH2 * LENGTH2) /
+                                         (TIME2 * TIME2)))
     }
 
     @Test
@@ -99,14 +99,14 @@ class EnergyAmountTest
     {
         assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = EnergyAmount(amount = 1 - 1,
-                                    major = MASS1 * LENGTH1 * LENGTH1,
-                                    minor = TIME1 * TIME1),
+                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                           (TIME1 * TIME1)),
             actual = EnergyAmount(amount = 1,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) -
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) -
                      EnergyAmount(amount = 1,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1))
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)))
     }
 
     @Test
@@ -114,14 +114,14 @@ class EnergyAmountTest
     {
         assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = EnergyAmount(amount = 2 - 2,
-                                    major = MASS1 * LENGTH1 * LENGTH1,
-                                    minor = TIME1 * TIME1),
+                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                           (TIME1 * TIME1)),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) -
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) -
                      EnergyAmount(amount = 1,
-                                  major = MASS2 * LENGTH2 * LENGTH2,
-                                  minor = TIME2 * TIME2))
+                                  unit = (MASS2 * LENGTH2 * LENGTH2) /
+                                         (TIME2 * TIME2)))
     }
 
     @Test
@@ -130,11 +130,11 @@ class EnergyAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) /
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
                      EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1))
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)))
     }
 
     @Test
@@ -143,11 +143,11 @@ class EnergyAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) /
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
                      EnergyAmount(amount = 1,
-                                  major = MASS2 * LENGTH2 * LENGTH2,
-                                  minor = TIME2 * TIME2))
+                                  unit = (MASS2 * LENGTH2 * LENGTH2) /
+                                         (TIME2 * TIME2)))
     }
 
     @Test
@@ -155,13 +155,13 @@ class EnergyAmountTest
     {
         assertEquals<ForceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = ForceAmount(amount = 2 / 2,
-                                   major = MASS1 * LENGTH1,
-                                   minor = TIME1 * TIME1),
+                                   unit = (MASS1 * LENGTH1) /
+                                          (TIME1 * TIME1)),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) /
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
                      LengthAmount(amount = 2,
-                                  major = LENGTH1))
+                                  unit = LENGTH1))
     }
 
     @Test
@@ -169,13 +169,13 @@ class EnergyAmountTest
     {
         assertEquals<ForceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = ForceAmount(amount = 2 / 2,
-                                   major = MASS1 * LENGTH1,
-                                   minor = TIME1 * TIME1),
+                                   unit = (MASS1 * LENGTH1) /
+                                          (TIME1 * TIME1)),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) /
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
                      LengthAmount(amount = 1,
-                                  major = LENGTH2))
+                                  unit = LENGTH2))
     }
 
     @Test
@@ -183,13 +183,13 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = LengthAmount(amount = 2 / 2,
-                                    major = LENGTH1),
+                                    unit = LENGTH1),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) /
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
                      ForceAmount(amount = 2,
-                                 major = MASS1 * LENGTH1,
-                                 minor = TIME1 * TIME1))
+                                 unit = (MASS1 * LENGTH1) /
+                                        (TIME1 * TIME1)))
     }
 
     @Test
@@ -197,13 +197,13 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = LengthAmount(amount = 2 / 2,
-                                    major = LENGTH1),
+                                    unit = LENGTH1),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) /
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
                      ForceAmount(amount = 2,
-                                 major = MASS2 * LENGTH2,
-                                 minor = TIME2 * TIME2))
+                                 unit = (MASS2 * LENGTH2) /
+                                        (TIME2 * TIME2)))
     }
 
     @Test
@@ -211,13 +211,13 @@ class EnergyAmountTest
     {
         assertEquals<PowerAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = PowerAmount(amount = 2 / 2,
-                                   major = MASS1 * LENGTH1 * LENGTH1,
-                                   minor = TIME1 * TIME1 * TIME1),
+                                   unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                          (TIME1 * TIME1 * TIME1)),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) /
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
                      TimeAmount(amount = 2,
-                                major = TIME1))
+                                unit = TIME1))
     }
 
     @Test
@@ -225,43 +225,41 @@ class EnergyAmountTest
     {
         assertEquals<PowerAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = PowerAmount(amount = 2 / 2,
-                                   major = MASS1 * LENGTH1 * LENGTH1,
-                                   minor = TIME1 * TIME1 * TIME1),
+                                   unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                          (TIME1 * TIME1 * TIME1)),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) /
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
                      TimeAmount(amount = 1,
-                                major = TIME2))
+                                unit = TIME2))
     }
 
     @Test
     fun divSameMomentum()
     {
-        assertEquals(
+        assertEquals<SpeedAmount<out Unit<Length>, TIME1>>(
             expected = SpeedAmount(amount = 2 / 2,
-                                   major = LENGTH1,
-                                   minor = TIME1),
+                                   unit = LENGTH1 / TIME1),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) /
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
                      MomentumAmount(amount = 2,
-                                    major = MASS1 * LENGTH1,
-                                    minor = TIME1))
+                                    unit = (MASS1 * LENGTH1) /
+                                           TIME1))
     }
 
     @Test
     fun divOtherMomentum()
     {
-        assertEquals(
+        assertEquals<SpeedAmount<out Unit<Length>, TIME1>>(
             expected = SpeedAmount(amount = 2 / 2,
-                                   major = LENGTH1,
-                                   minor = TIME1),
+                                   unit = LENGTH1 / TIME1),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) /
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
                      MomentumAmount(amount = 1,
-                                    major = MASS2 * LENGTH2,
-                                    minor = TIME2))
+                                    unit = (MASS2 * LENGTH2) /
+                                           TIME2))
     }
 
     @Test
@@ -269,14 +267,13 @@ class EnergyAmountTest
     {
         assertEquals<MomentumAmount<out Unit<Mass>, LENGTH1, TIME1>>(
             expected = MomentumAmount(amount = 2 / 2,
-                                      major = MASS1 * LENGTH1,
-                                      minor = TIME1),
+                                      unit = (MASS1 * LENGTH1) /
+                                             TIME1),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) /
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
                      SpeedAmount(amount = 2,
-                                 major = LENGTH1,
-                                 minor = TIME1))
+                                 unit = LENGTH1 / TIME1))
     }
 
     @Test
@@ -284,14 +281,13 @@ class EnergyAmountTest
     {
         assertEquals<MomentumAmount<out Unit<Mass>, LENGTH1, TIME1>>(
             expected = MomentumAmount(amount = 2 / 2,
-                                      major = MASS1 * LENGTH1,
-                                      minor = TIME1),
+                                      unit = (MASS1 * LENGTH1) /
+                                             TIME1),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) /
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
                      SpeedAmount(amount = 2,
-                                 major = LENGTH2,
-                                 minor = TIME2))
+                                 unit = LENGTH2 / TIME2))
     }
 
     @Test
@@ -299,13 +295,13 @@ class EnergyAmountTest
     {
         assertEquals<ElectricTensionAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
             expected = ElectricTensionAmount(amount = 2 / 2,
-                                             major = MASS1 * LENGTH1 * LENGTH1,
-                                             minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1),
+                                             unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                    (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) /
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
                      ElectricChargeAmount(amount = 2,
-                                          major = ELECTRICCURRENT1 * TIME1))
+                                          unit = ELECTRICCURRENT1 * TIME1))
     }
 
     @Test
@@ -313,11 +309,11 @@ class EnergyAmountTest
     {
         assertEquals<ElectricTensionAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
             expected = ElectricTensionAmount(amount = 2 / 2,
-                                             major = MASS1 * LENGTH1 * LENGTH1,
-                                             minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1),
+                                             unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                    (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)),
             actual = EnergyAmount(amount = 2,
-                                  major = MASS1 * LENGTH1 * LENGTH1,
-                                  minor = TIME1 * TIME1) /
-                     ElectricChargeAmount(amount = 1, major = ELECTRICCURRENT1 * TIME2))
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
+                     ElectricChargeAmount(amount = 1, unit = ELECTRICCURRENT1 * TIME2))
     }
 }

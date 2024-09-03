@@ -21,9 +21,9 @@ class LengthAmountTest
     {
         assertEquals(
             expected = LengthAmount(amount = 2 * 2,
-                                    major = LENGTH1),
+                                    unit = LENGTH1),
             actual = LengthAmount(amount = 2,
-                                  major = LENGTH1) *
+                                  unit = LENGTH1) *
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -32,9 +32,9 @@ class LengthAmountTest
     {
         assertEquals(
             expected = LengthAmount(amount = 2 / 2,
-                                    major = LENGTH1),
+                                    unit = LENGTH1),
             actual = LengthAmount(amount = 2,
-                                  major = LENGTH1) /
+                                  unit = LENGTH1) /
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -43,11 +43,11 @@ class LengthAmountTest
     {
         assertEquals(
             expected = LengthAmount(amount = 0 + 1,
-                                    major = LENGTH1),
+                                    unit = LENGTH1),
             actual = LengthAmount(amount = 0,
-                                  major = LENGTH1) +
+                                  unit = LENGTH1) +
                      LengthAmount(amount = 1,
-                                  major = LENGTH1))
+                                  unit = LENGTH1))
     }
 
     @Test
@@ -55,11 +55,11 @@ class LengthAmountTest
     {
         assertEquals(
             expected = LengthAmount(amount = 0 + 2,
-                                    major = LENGTH1),
+                                    unit = LENGTH1),
             actual = LengthAmount(amount = 0,
-                                  major = LENGTH1) +
+                                  unit = LENGTH1) +
                      LengthAmount(amount = 1,
-                                  major = LENGTH2))
+                                  unit = LENGTH2))
     }
 
     @Test
@@ -67,11 +67,11 @@ class LengthAmountTest
     {
         assertEquals(
             expected = LengthAmount(amount = 2 - 2,
-                                    major = LENGTH1),
+                                    unit = LENGTH1),
             actual = LengthAmount(amount = 2,
-                                  major = LENGTH1) -
+                                  unit = LENGTH1) -
                      LengthAmount(amount = 1,
-                                  major = LENGTH2))
+                                  unit = LENGTH2))
     }
 
     @Test
@@ -80,9 +80,9 @@ class LengthAmountTest
         assertEquals(
             expected = LengthAmount(amount = 2 - 2, LENGTH1),
             actual = LengthAmount(amount = 2,
-                                  major = LENGTH1) -
+                                  unit = LENGTH1) -
                      LengthAmount(amount = 1,
-                                  major = LENGTH2))
+                                  unit = LENGTH2))
     }
 
     @Test
@@ -91,9 +91,9 @@ class LengthAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
             actual = LengthAmount(amount = 2,
-                                  major = LENGTH1) /
+                                  unit = LENGTH1) /
                      LengthAmount(amount = 2,
-                                  major = LENGTH1))
+                                  unit = LENGTH1))
     }
 
     @Test
@@ -102,22 +102,21 @@ class LengthAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
             actual = LengthAmount(amount = 2,
-                                  major = LENGTH1) /
+                                  unit = LENGTH1) /
                      LengthAmount(amount = 1,
-                                  major = LENGTH2))
+                                  unit = LENGTH2))
     }
 
     @Test
     fun divTime()
     {
-        assertEquals(
+        assertEquals<SpeedAmount<out Unit<Length>, TIME1>>(
             expected = SpeedAmount(amount = 2 / 2,
-                                   major = LENGTH1,
-                                   minor = TIME1),
+                                   unit = LENGTH1 / TIME1),
             actual = LengthAmount(amount = 2,
-                                  major = LENGTH1) /
+                                  unit = LENGTH1) /
                      TimeAmount(amount = 2,
-                                major = TIME1))
+                                unit = TIME1))
     }
 
     @Test
@@ -125,11 +124,11 @@ class LengthAmountTest
     {
         assertEquals<AreaAmount<out Unit<Length>>>(
             expected = AreaAmount(amount = 2 * 2,
-                                  major = LENGTH1 * LENGTH1),
+                                  unit = LENGTH1 * LENGTH1),
             actual = LengthAmount(amount = 2,
-                                  major = LENGTH1) *
+                                  unit = LENGTH1) *
                      LengthAmount(amount = 2,
-                                  major = LENGTH1))
+                                  unit = LENGTH1))
     }
 
     @Test
@@ -137,11 +136,11 @@ class LengthAmountTest
     {
         assertEquals<AreaAmount<out Unit<Length>>>(
             expected = AreaAmount(amount = 2 * 2,
-                                  major = LENGTH1 * LENGTH1),
+                                  unit = LENGTH1 * LENGTH1),
             actual = LengthAmount(amount = 2,
-                                  major = LENGTH1) *
+                                  unit = LENGTH1) *
                      LengthAmount(amount = 1,
-                                  major = LENGTH2))
+                                  unit = LENGTH2))
     }
 
     @Test
@@ -149,11 +148,11 @@ class LengthAmountTest
     {
         assertEquals<VolumeAmount<out Unit<Length>>>(
             expected = VolumeAmount(amount = 2 * 2,
-                                    major = LENGTH1 * LENGTH1 * LENGTH1),
+                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
             actual = LengthAmount(amount = 2,
-                                  major = LENGTH1) *
+                                  unit = LENGTH1) *
                      AreaAmount(amount = 2,
-                                major = LENGTH1 * LENGTH1))
+                                unit = LENGTH1 * LENGTH1))
     }
 
     @Test
@@ -161,10 +160,10 @@ class LengthAmountTest
     {
         assertEquals<VolumeAmount<out Unit<Length>>>(
             expected = VolumeAmount(amount = 2 * 2 * 2,
-                                    major = LENGTH1 * LENGTH1 * LENGTH1),
+                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
             actual = LengthAmount(amount = 2,
-                                  major = LENGTH1) *
+                                  unit = LENGTH1) *
                      AreaAmount(amount = 1,
-                                major = LENGTH2 * LENGTH2))
+                                unit = LENGTH2 * LENGTH2))
     }
 }

@@ -14,41 +14,41 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class TimeAmount<T : Unit<Time>>(
         amount: Number,
-        major: T)
+        unit: T)
     : Amount<Time>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Time::class,
-                       units = listOf(major to 1)))
+                       units = listOf(unit to 1)))
 {
-    val time = major
+    val time = unit
 
     // region Time
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         TimeAmount(amount = amount * that.amount * that.unit.scale,
-                   major = time)
+                   unit = time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         TimeAmount(amount = amount / that.amount / that.unit.scale,
-                   major = time)
+                   unit = time)
 
     operator fun <T : Unit<Time>> plus(that: TimeAmount<T>) =
         TimeAmount(amount = amount + that.amount * convert(that.time to time),
-                   major = time)
+                   unit = time)
 
     @JvmName("plusTime")
     operator fun plus(that: TimeAmount<T>) =
         TimeAmount(amount = amount + that.amount,
-                   major = time)
+                   unit = time)
 
     operator fun <T : Unit<Time>> minus(that: TimeAmount<T>) =
         TimeAmount(amount = amount - that.amount * convert(that.time to time),
-                   major = time)
+                   unit = time)
 
     @JvmName("minusTime")
     operator fun minus(that: TimeAmount<T>) =
         TimeAmount(amount = amount - that.amount,
-                   major = time)
+                   unit = time)
 
     // endregion
 
@@ -67,8 +67,7 @@ open class TimeAmount<T : Unit<Time>>(
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         PaceAmount(amount = amount / that.amount,
-                   major = time,
-                   minor = that.length)
+                   unit = time / that.length)
 
     // endregion
 }

@@ -9,44 +9,45 @@ import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.units.scalar.NaturalAmount.ONE
 
 open class ScalarAmount<S : Unit<Scalar>>(
         amount: Number,
-        major: S)
+        unit: S)
     : Amount<Scalar>(amount = amount.toBigBigDecimal(),
                      unit = CompositeUnit(
                          domain = Scalar::class,
-                         units = listOf(major to 1)))
+                         units = listOf(unit to 1)))
 {
-    val scalar = major
+    val scalar = unit
 
     // region Scalar
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ScalarAmount(amount = amount * that.amount * that.unit.scale,
-                     major = scalar)
+                     unit = scalar)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         ScalarAmount(amount = amount / that.amount / that.unit.scale,
-                     major = scalar)
+                     unit = scalar)
 
     operator fun <S : Unit<Scalar>> plus(that: ScalarAmount<S>) =
         ScalarAmount(amount = amount + that.amount * convert(that.scalar to scalar),
-                     major = scalar)
+                     unit = scalar)
 
     @JvmName("plusScalar")
     operator fun plus(that: ScalarAmount<S>) =
         ScalarAmount(amount = amount + that.amount,
-                     major = scalar)
+                     unit = scalar)
 
     operator fun <S : Unit<Scalar>> minus(that: ScalarAmount<S>) =
         ScalarAmount(amount = amount - that.amount * convert(that.scalar to scalar),
-                     major = scalar)
+                     unit = scalar)
 
     @JvmName("minusScalar")
     operator fun minus(that: ScalarAmount<S>) =
         ScalarAmount(amount = amount - that.amount,
-                     major = scalar)
+                     unit = scalar)
 
     // endregion
 
@@ -54,7 +55,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         FrequencyAmount(amount = amount * unit.scale / that.amount,
-                        minor = that.time)
+                        unit = ONE / that.time)
 
     // endregion
 
@@ -62,7 +63,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
         TimeAmount(amount = amount * unit.scale / that.amount,
-                   major = that.time)
+                   unit = that.time)
 
     // endregion
 }

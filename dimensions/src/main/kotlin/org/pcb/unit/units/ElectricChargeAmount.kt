@@ -18,52 +18,52 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
         amount: Number,
-        major: Tuple<EC, T>)
+        unit: Tuple<EC, T>)
     : Amount<ElectricCharge>(amount = amount.toBigBigDecimal(),
                              unit = CompositeUnit(
                                  domain = ElectricCharge::class,
-                                 units = listOf(major.first to 1,
-                                                major.second to 1)))
+                                 units = listOf(unit.first to 1,
+                                                unit.second to 1)))
 {
-    val electricCurrent = major.first
-    val time = major.second
+    val electricCurrent = unit.first
+    val time = unit.second
 
     companion object
     {
         operator fun invoke(amount: Number, electricCharge: Unit<ElectricCharge>) =
             ElectricChargeAmount(amount = amount.toBigBigDecimal() * electricCharge.scale,
-                                 major = AMPERE * SECOND)
+                                 unit = AMPERE * SECOND)
     }
 
     // region ElectricCharge
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricChargeAmount(amount = amount * that.amount * that.unit.scale,
-                             major = electricCurrent * time)
+                             unit = electricCurrent * time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         ElectricChargeAmount(amount = amount / that.amount / that.unit.scale,
-                             major = electricCurrent * time)
+                             unit = electricCurrent * time)
 
     operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> plus(that: ElectricChargeAmount<EC, T>) =
         ElectricChargeAmount(amount = amount + that.amount * convert(that.electricCurrent to electricCurrent,
                                                                      that.time to time),
-                             major = electricCurrent * time)
+                             unit = electricCurrent * time)
 
     @JvmName("plusElectricCharge")
     operator fun plus(that: ElectricChargeAmount<EC, T>) =
         ElectricChargeAmount(amount = amount + that.amount,
-                             major = electricCurrent * time)
+                             unit = electricCurrent * time)
 
     operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> minus(that: ElectricChargeAmount<EC, T>) =
         ElectricChargeAmount(amount = amount - that.amount * convert(that.electricCurrent to electricCurrent,
                                                                      that.time to time),
-                             major = electricCurrent * time)
+                             unit = electricCurrent * time)
 
     @JvmName("minusElectricCharge")
     operator fun minus(that: ElectricChargeAmount<EC, T>) =
         ElectricChargeAmount(amount = amount - that.amount,
-                             major = electricCurrent * time)
+                             unit = electricCurrent * time)
 
     // endregion
 
@@ -83,7 +83,7 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         ElectricCurrentAmount(amount = amount / that.amount / that.unit.scale,
-                              major = electricCurrent)
+                              unit = electricCurrent)
 
     // endregion
 }

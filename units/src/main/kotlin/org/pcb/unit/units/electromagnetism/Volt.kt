@@ -1,5 +1,8 @@
 package org.pcb.unit.units.electromagnetism
 
+import org.pcb.unit.Quadruple
+import org.pcb.unit.Quintuple
+import org.pcb.unit.Triple
 import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.ElectricTension
@@ -13,14 +16,19 @@ import org.pcb.unit.units.base.Second.SECOND
 @Suppress("unused")
 class Volt(amount: Number)
     : ElectricTensionAmount<KILOGRAM, METER, SECOND, AMPERE>(amount = amount,
-                                                             major = KILOGRAM * METER * METER,
-                                                             minor = SECOND * SECOND * SECOND * AMPERE)
+                                                             unit = (KILOGRAM * METER * METER) /
+                                                                    (SECOND * SECOND * SECOND * AMPERE))
 {
     constructor(amount: String) : this(amount.toBigDecimal())
 
     object VOLT : Unit<ElectricTension>(ElectricTension::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
+        override fun <B : Unit<*>> div(second: B) = Pair(this, second)
+        override fun <B : Tuple<*, *>> div(second: B) = Pair(this, second)
+        override fun <B : Triple<*, *, *>> div(second: B) = Pair(this, second)
+        override fun <B : Quadruple<*, *, *, *>> div(second: B) = Pair(this, second)
+        override fun <B : Quintuple<*, *, *, *, *>> div(second: B) = Pair(this, second)
         override val symbol = "V"
         override val scale = 1.toBigBigDecimal()
     }

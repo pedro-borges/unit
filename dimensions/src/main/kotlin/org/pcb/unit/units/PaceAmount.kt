@@ -15,54 +15,47 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
         amount: Number,
-        major: T,
-        minor: L)
+        unit: Pair<T, L>)
     : Amount<Pace>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Pace::class,
-                       units = listOf(major to 1,
-                                      minor to -1)))
+                       units = listOf(unit.first to 1,
+                                      unit.second to -1)))
 {
-    val time = major
-    val length = minor
+    val time = unit.first
+    val length = unit.second
 
     // region Pace
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         PaceAmount(amount = amount * that.amount * that.unit.scale,
-                   major = time,
-                   minor = length)
+                   unit = time / length)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         PaceAmount(amount = amount / that.amount / that.unit.scale,
-                   major = time,
-                   minor = length)
+                   unit = time / length)
 
     operator fun <T : Unit<Time>, L : Unit<Length>> plus(that: PaceAmount<T, L>) =
         PaceAmount(amount = amount + that.amount
                             * convert(that.time to time)
                             / convert(that.length to length),
-                   major = time,
-                   minor = length)
+                   unit = time / length)
 
     @JvmName("plusPace")
     operator fun plus(that: PaceAmount<T, L>) =
         PaceAmount(amount = amount + that.amount,
-                   major = time,
-                   minor = length)
+                   unit = time / length)
 
     operator fun <T : Unit<Time>, L : Unit<Length>> minus(that: PaceAmount<T, L>) =
         PaceAmount(amount = amount - that.amount
                             * convert(that.time to time)
                             / convert(that.length to length),
-                   major = time,
-                   minor = length)
+                   unit = time / length)
 
     @JvmName("minusPace")
     operator fun minus(that: PaceAmount<T, L>) =
         PaceAmount(amount = amount - that.amount,
-                   major = time,
-                   minor = length)
+                   unit = time / length)
 
     // endregion
 
@@ -92,12 +85,12 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
 
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         TimeAmount(amount = amount * that.amount * convert(that.length to length),
-                   major = time)
+                   unit = time)
 
     @JvmName("timesLength")
     operator fun times(that: LengthAmount<L>) =
         TimeAmount(amount = amount * that.amount,
-                   major = time)
+                   unit = time)
 
     // endregion
 }

@@ -17,9 +17,9 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(amount = 2 * 2,
-                                      major = CURRENCY1),
+                                      unit = CURRENCY1),
             actual = CurrencyAmount(amount = 2,
-                                    major = CURRENCY1) *
+                                    unit = CURRENCY1) *
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -28,9 +28,9 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(amount = 2 / 2,
-                                      major = CURRENCY1),
+                                      unit = CURRENCY1),
             actual = CurrencyAmount(amount = 2,
-                                    major = CURRENCY1) /
+                                    unit = CURRENCY1) /
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -39,11 +39,11 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(amount = 0 + 1,
-                                      major = CURRENCY1),
+                                      unit = CURRENCY1),
             actual = CurrencyAmount(amount = 0,
-                                    major = CURRENCY1) +
+                                    unit = CURRENCY1) +
                      CurrencyAmount(amount = 1,
-                                    major = CURRENCY1))
+                                    unit = CURRENCY1))
     }
 
     @Test
@@ -51,11 +51,11 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(amount = 0 + 2,
-                                      major = CURRENCY1),
+                                      unit = CURRENCY1),
             actual = CurrencyAmount(amount = 0,
-                                    major = CURRENCY1) +
+                                    unit = CURRENCY1) +
                      CurrencyAmount(amount = 1,
-                                    major = CURRENCY2))
+                                    unit = CURRENCY2))
     }
 
     @Test
@@ -63,11 +63,11 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(amount = 1 - 1,
-                                      major = CURRENCY1),
+                                      unit = CURRENCY1),
             actual = CurrencyAmount(amount = 1,
-                                    major = CURRENCY1) -
+                                    unit = CURRENCY1) -
                      CurrencyAmount(amount = 1,
-                                    major = CURRENCY1))
+                                    unit = CURRENCY1))
     }
 
     @Test
@@ -75,11 +75,11 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(amount = 2 - 2,
-                                      major = CURRENCY1),
+                                      unit = CURRENCY1),
             actual = CurrencyAmount(amount = 2,
-                                    major = CURRENCY1) -
+                                    unit = CURRENCY1) -
                      CurrencyAmount(amount = 1,
-                                    major = CURRENCY2))
+                                    unit = CURRENCY2))
     }
 
     @Test
@@ -88,9 +88,9 @@ class CurrencyAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
             actual = CurrencyAmount(amount = 2,
-                                    major = CURRENCY1) /
+                                    unit = CURRENCY1) /
                      CurrencyAmount(amount = 2,
-                                    major = CURRENCY1))
+                                    unit = CURRENCY1))
     }
 
     @Test
@@ -99,9 +99,9 @@ class CurrencyAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
             actual = CurrencyAmount(amount = 2,
-                                    major = CURRENCY1) /
+                                    unit = CURRENCY1) /
                      CurrencyAmount(amount = 1,
-                                    major = CURRENCY2))
+                                    unit = CURRENCY2))
     }
 
     @Test
@@ -109,23 +109,24 @@ class CurrencyAmountTest
     {
         assertEquals<DebtAmount<out Unit<Currency>, SECOND>>(
             expected = DebtAmount(amount = 2 * 2,
-                                  major = CURRENCY1 * SECOND),
+                                  unit = CURRENCY1 * SECOND),
             actual = CurrencyAmount(amount = 2,
-                                    major = CURRENCY1) *
+                                    unit = CURRENCY1) *
                      TimeAmount(amount = 2,
-                                major = SECOND))
+                                unit = SECOND))
     }
 
     @Test
     fun divTime()
     {
-        assertEquals(
+        assertEquals<RentAmount<out Unit<Currency>, SECOND>>(
             expected = RentAmount(amount = 1,
                                   major = CURRENCY1,
-                                  minor = SECOND),
+                                  minor = SECOND,
+                                  unit = CURRENCY1 / SECOND),
             actual = CurrencyAmount(amount = 2,
-                                    major = CURRENCY1) /
+                                    unit = CURRENCY1) /
                      TimeAmount(amount = 2,
-                                major = SECOND))
+                                unit = SECOND))
     }
 }

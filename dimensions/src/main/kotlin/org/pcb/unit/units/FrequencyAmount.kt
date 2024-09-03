@@ -12,44 +12,45 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.NaturalAmount
+import org.pcb.unit.units.scalar.NaturalAmount.ONE
 
 open class FrequencyAmount<T : Unit<Time>>(
         amount: Number,
-        minor: T)
+        unit: Pair<Unit<Scalar>, T>)
     : Amount<Time>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Time::class,
-                       units = listOf(minor to -1)))
+                       units = listOf(unit.second to -1)))
 {
-    val time = minor
+    val time = unit.second
 
     // region Frequency
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         FrequencyAmount(amount = amount * that.amount * that.unit.scale,
-                        minor = time)
+                        unit = ONE / time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         FrequencyAmount(amount = amount / that.amount / that.unit.scale,
-                        minor = time)
+                        unit = ONE / time)
 
     operator fun <T : Unit<Time>> plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount / convert(that.time to time),
-                        minor = time)
+                        unit = ONE / time)
 
     @JvmName("plusFrequency")
     operator fun plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount,
-                        minor = time)
+                        unit = ONE / time)
 
     operator fun <T : Unit<Time>> minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount / convert(that.time to time),
-                        minor = time)
+                        unit = ONE / time)
 
     @JvmName("minusFrequency")
     operator fun minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount,
-                        minor = time)
+                        unit = ONE / time)
 
     // endregion
 
@@ -75,8 +76,7 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         SpeedAmount(amount = that.amount / amount,
-                    major = that.length,
-                    minor = time)
+                    unit = that.length / time)
 
     // endregion
 
@@ -84,14 +84,12 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
         AccelerationAmount(amount = that.amount / amount / convert(that.time to time),
-                           major = that.length,
-                           minor = time * time)
+                           unit = that.length / (time * time))
 
     @JvmName("timesSpeed")
     operator fun <L : Unit<Length>> times(that: SpeedAmount<L, T>) =
         AccelerationAmount(amount = that.amount / amount,
-                           major = that.length,
-                           minor = time * time)
+                           unit = that.length / (time * time))
 
     // endregion
 
@@ -99,12 +97,12 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> times(that: DebtAmount<C, T>) =
         CurrencyAmount(amount = that.amount / amount * convert(that.time to time),
-                       major = that.currency)
+                       unit = that.currency)
 
     @JvmName("timesDebt")
     operator fun <C : Unit<Currency>> times(that: DebtAmount<C, T>) =
         CurrencyAmount(amount = that.amount / amount,
-                       major = that.currency)
+                       unit = that.currency)
 
     // endregion
 
@@ -113,7 +111,8 @@ open class FrequencyAmount<T : Unit<Time>>(
     operator fun <C : Unit<Currency>> times(that: CurrencyAmount<C>) =
         RentAmount(amount = that.amount / amount,
                    major = that.currency,
-                   minor = time)
+                   minor = time,
+                   unit = that.currency / time)
 
     // endregion
 }

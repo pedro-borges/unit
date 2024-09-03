@@ -1,5 +1,8 @@
 package org.pcb.unit.units.electromagnetism
 
+import org.pcb.unit.Quadruple
+import org.pcb.unit.Quintuple
+import org.pcb.unit.Triple
 import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.ElectricResistance
@@ -13,14 +16,19 @@ import org.pcb.unit.units.base.Second.SECOND
 @Suppress("unused")
 class Ohm(amount: Number)
     : ElectricResistanceAmount<KILOGRAM, METER, SECOND, AMPERE>(amount = amount,
-                                                                major = KILOGRAM * METER * METER,
-                                                                minor = SECOND * SECOND * SECOND * AMPERE * AMPERE)
+                                                                unit = (KILOGRAM * METER * METER) /
+                                                                       (SECOND * SECOND * SECOND * AMPERE * AMPERE))
 {
     constructor(amount: String) : this(amount.toBigDecimal())
 
     object OHM : Unit<ElectricResistance>(ElectricResistance::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
+        override fun <B : Unit<*>> div(second: B) = Pair(this, second)
+        override fun <B : Tuple<*, *>> div(second: B) = Pair(this, second)
+        override fun <B : Triple<*, *, *>> div(second: B) = Pair(this, second)
+        override fun <B : Quadruple<*, *, *, *>> div(second: B) = Pair(this, second)
+        override fun <B : Quintuple<*, *, *, *, *>> div(second: B) = Pair(this, second)
         override val symbol = "Ω"
         override val scale = 1.toBigBigDecimal()
     }

@@ -23,44 +23,40 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>>(
         amount: Number,
-        major: Triple<M, L, L>,
-        minor: Quintuple<T, T, T, EC, EC>)
+        unit: Pair<Triple<M, L, L>, Quintuple<T, T, T, EC, EC>>)
     : Amount<ElectricCurrent>(amount = amount.toBigBigDecimal()
-                                       * convert(major.third to major.second)
-                                       / convert(minor.second to minor.first,
-                                                 minor.third to minor.first,
-                                                 minor.fifth to minor.fourth),
+                                       * convert(unit.first.third to unit.first.second)
+                                       / convert(unit.second.second to unit.second.first,
+                                                 unit.second.third to unit.second.first,
+                                                 unit.second.fifth to unit.second.fourth),
                               unit = CompositeUnit(
                                   domain = ElectricCurrent::class,
-                                  units = listOf(major.first to 1,
-                                                 major.second to 2,
-                                                 minor.first to -3,
-                                                 minor.fourth to -2)))
+                                  units = listOf(unit.first.first to 1,
+                                                 unit.first.second to 2,
+                                                 unit.second.first to -3,
+                                                 unit.second.fourth to -2)))
 {
-    val mass = major.first
-    val length = major.second
-    val time = minor.first
-    val electricCurrent = minor.fourth
+    val mass = unit.first.first
+    val length = unit.first.second
+    val time = unit.second.first
+    val electricCurrent = unit.second.fourth
 
     companion object
     {
         operator fun invoke(amount: Number, electricResistance: Unit<ElectricResistance>) =
             ElectricResistanceAmount(amount = amount.toBigBigDecimal() * electricResistance.scale,
-                                     major = KILOGRAM * METER * METER,
-                                     minor = SECOND * SECOND * SECOND * AMPERE * AMPERE)
+                                     unit = KILOGRAM * METER * METER / (SECOND * SECOND * SECOND * AMPERE * AMPERE))
     }
 
     // region ElectricTension
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricResistanceAmount(amount = amount * that.amount * that.unit.scale,
-                                 major = mass * length * length,
-                                 minor = time * time * time * electricCurrent * electricCurrent)
+                                 unit = mass * length * length / (time * time * time * electricCurrent * electricCurrent))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         ElectricResistanceAmount(amount = amount / that.amount / that.unit.scale,
-                                 major = mass * length * length,
-                                 minor = time * time * time * electricCurrent * electricCurrent)
+                                 unit = mass * length * length / (time * time * time * electricCurrent * electricCurrent))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> plus(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricResistanceAmount(amount = amount + that.amount * convert(that.mass to mass,
@@ -71,14 +67,12 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
                                                                          time to that.time,
                                                                          electricCurrent to that.electricCurrent,
                                                                          electricCurrent to that.electricCurrent),
-                                 major = mass * length * length,
-                                 minor = time * time * time * electricCurrent * electricCurrent)
+                                 unit = mass * length * length / (time * time * time * electricCurrent * electricCurrent))
 
     @JvmName("plusElectricResistance")
     operator fun plus(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricResistanceAmount(amount = amount + that.amount,
-                                 major = mass * length * length,
-                                 minor = time * time * time * electricCurrent * electricCurrent)
+                                 unit = mass * length * length / (time * time * time * electricCurrent * electricCurrent))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> minus(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricResistanceAmount(amount = amount - that.amount
@@ -90,14 +84,12 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
                                                     that.time to time,
                                                     that.electricCurrent to electricCurrent,
                                                     that.electricCurrent to electricCurrent),
-                                 major = mass * length * length,
-                                 minor = time * time * time * electricCurrent * electricCurrent)
+                                 unit = mass * length * length / (time * time * time * electricCurrent * electricCurrent))
 
     @JvmName("minusElectricCurrent")
     operator fun minus(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricResistanceAmount(amount = amount - that.amount,
-                                 major = mass * length * length,
-                                 minor = time * time * time * electricCurrent * electricCurrent)
+                                 unit = mass * length * length / (time * time * time * electricCurrent * electricCurrent))
 
     // endregion
 
@@ -124,14 +116,12 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
 
     operator fun <EC : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<EC>) =
         ElectricTensionAmount(amount = amount * that.amount * convert(that.electricCurrent to electricCurrent),
-                              major = mass * length * length,
-                              minor = time * time * time * electricCurrent)
+                              unit = (mass * length * length) / (time * time * time * electricCurrent))
 
     @JvmName("timesElectricCurrent")
     operator fun times(that: ElectricCurrentAmount<EC>) =
         ElectricTensionAmount(amount = amount * that.amount,
-                              major = mass * length * length,
-                              minor = time * time * time * electricCurrent)
+                              unit = (mass * length * length) / (time * time * time * electricCurrent))
 
     // endregion
 }

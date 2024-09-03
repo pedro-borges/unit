@@ -20,9 +20,9 @@ class ElectricChargeAmountTest
     {
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
             expected = ElectricChargeAmount(amount = 2 * 2,
-                                            major = ELECTRICCURRENT1 * TIME1),
+                                            unit = ELECTRICCURRENT1 * TIME1),
             actual = ElectricChargeAmount(amount = 2,
-                                          major = ELECTRICCURRENT1 * TIME1) *
+                                          unit = ELECTRICCURRENT1 * TIME1) *
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -31,9 +31,9 @@ class ElectricChargeAmountTest
     {
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
             expected = ElectricChargeAmount(amount = 2 / 2,
-                                            major = ELECTRICCURRENT1 * TIME1),
+                                            unit = ELECTRICCURRENT1 * TIME1),
             actual = ElectricChargeAmount(amount = 2,
-                                          major = ELECTRICCURRENT1 * TIME1) /
+                                          unit = ELECTRICCURRENT1 * TIME1) /
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -42,11 +42,11 @@ class ElectricChargeAmountTest
     {
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
             expected = ElectricChargeAmount(amount = 0 + 1,
-                                            major = ELECTRICCURRENT1 * TIME1),
+                                            unit = ELECTRICCURRENT1 * TIME1),
             actual = ElectricChargeAmount(amount = 0,
-                                          major = ELECTRICCURRENT1 * TIME1) +
+                                          unit = ELECTRICCURRENT1 * TIME1) +
                      ElectricChargeAmount(amount = 1,
-                                          major = ELECTRICCURRENT1 * TIME1))
+                                          unit = ELECTRICCURRENT1 * TIME1))
     }
 
     @Test
@@ -54,11 +54,11 @@ class ElectricChargeAmountTest
     {
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
             expected = ElectricChargeAmount(amount = 0 + (2 * 2),
-                                            major = ELECTRICCURRENT1 * TIME1),
+                                            unit = ELECTRICCURRENT1 * TIME1),
             actual = ElectricChargeAmount(amount = 0,
-                                          major = ELECTRICCURRENT1 * TIME1) +
+                                          unit = ELECTRICCURRENT1 * TIME1) +
                      ElectricChargeAmount(amount = 1,
-                                          major = ELECTRICCURRENT2 * TIME2))
+                                          unit = ELECTRICCURRENT2 * TIME2))
     }
 
     @Test
@@ -66,11 +66,11 @@ class ElectricChargeAmountTest
     {
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
             expected = ElectricChargeAmount(amount = 1 - 1,
-                                            major = ELECTRICCURRENT1 * TIME1),
+                                            unit = ELECTRICCURRENT1 * TIME1),
             actual = ElectricChargeAmount(amount = 1,
-                                          major = ELECTRICCURRENT1 * TIME1) -
+                                          unit = ELECTRICCURRENT1 * TIME1) -
                      ElectricChargeAmount(amount = 1,
-                                          major = ELECTRICCURRENT1 * TIME1))
+                                          unit = ELECTRICCURRENT1 * TIME1))
     }
 
     @Test
@@ -78,11 +78,11 @@ class ElectricChargeAmountTest
     {
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
             expected = ElectricChargeAmount(amount = 4 - (2 * 2),
-                                            major = ELECTRICCURRENT1 * TIME1),
+                                            unit = ELECTRICCURRENT1 * TIME1),
             actual = ElectricChargeAmount(amount = 4,
-                                          major = ELECTRICCURRENT1 * TIME1) -
+                                          unit = ELECTRICCURRENT1 * TIME1) -
                      ElectricChargeAmount(amount = 1,
-                                          major = ELECTRICCURRENT2 * TIME2))
+                                          unit = ELECTRICCURRENT2 * TIME2))
     }
 
     @Test
@@ -91,9 +91,9 @@ class ElectricChargeAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 1),
             actual = ElectricChargeAmount(amount = 2,
-                                          major = ELECTRICCURRENT1 * TIME1) /
+                                          unit = ELECTRICCURRENT1 * TIME1) /
                      ElectricChargeAmount(amount = 2,
-                                          major = ELECTRICCURRENT1 * TIME1))
+                                          unit = ELECTRICCURRENT1 * TIME1))
     }
 
     @Test
@@ -102,9 +102,9 @@ class ElectricChargeAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 4 / (2 * 2)),
             actual = ElectricChargeAmount(amount = 4,
-                                          major = ELECTRICCURRENT1 * TIME1) /
+                                          unit = ELECTRICCURRENT1 * TIME1) /
                      ElectricChargeAmount(amount = 1,
-                                          major = ELECTRICCURRENT2 * TIME2))
+                                          unit = ELECTRICCURRENT2 * TIME2))
     }
 
     @Test
@@ -112,10 +112,10 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricCurrentAmount(amount = 2 / 2,
-                                             major = ELECTRICCURRENT1),
+                                             unit = ELECTRICCURRENT1),
             actual = ElectricChargeAmount(amount = 2,
-                                          major = ELECTRICCURRENT1 * TIME1) /
+                                          unit = ELECTRICCURRENT1 * TIME1) /
                      TimeAmount(amount = 2,
-                                major = TIME1))
+                                unit = TIME1))
     }
 }

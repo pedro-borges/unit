@@ -20,38 +20,34 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class ForceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
-        major: Tuple<M, L>,
-        minor: Tuple<T, T>)
-    : Amount<Force>(amount = amount.toBigBigDecimal() / convert(minor.second to minor.first),
+        unit: Pair<Tuple<M, L>, Tuple<T, T>>)
+    : Amount<Force>(amount = amount.toBigBigDecimal() / convert(unit.second.second to unit.second.first),
                     unit = CompositeUnit(
                         domain = Force::class,
-                        units = listOf(major.first to 1,
-                                       major.second to 1,
-                                       minor.first to -2)))
+                        units = listOf(unit.first.first to 1,
+                                       unit.first.second to 1,
+                                       unit.second.first to -2)))
 {
-    val mass = major.first
-    val length = major.second
-    val time = minor.first
+    val mass = unit.first.first
+    val length = unit.first.second
+    val time = unit.second.first
 
     companion object
     {
         operator fun invoke(amount: Number, force: Unit<Force>) =
             ForceAmount(amount = amount.toBigBigDecimal() * force.scale,
-                        major = KILOGRAM * METER,
-                        minor = SECOND * SECOND)
+                        unit = (KILOGRAM * METER) / (SECOND * SECOND))
     }
 
     // region Force
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ForceAmount(amount = amount * that.amount * that.unit.scale,
-                    major = mass * length,
-                    minor = time * time)
+                    unit = (mass * length) / (time * time))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         ForceAmount(amount = amount / that.amount / that.unit.scale,
-                    major = mass * length,
-                    minor = time * time)
+                    unit = (mass * length) / (time * time))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> plus(that: ForceAmount<M, L, T>) =
         ForceAmount(amount = amount + that.amount
@@ -59,14 +55,12 @@ open class ForceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                                        that.length to length)
                              / convert(that.time to time,
                                        that.time to time),
-                    major = mass * length,
-                    minor = time * time)
+                    unit = (mass * length) / (time * time))
 
     @JvmName("plusForce")
     operator fun plus(that: ForceAmount<M, L, T>) =
         ForceAmount(amount = amount + that.amount,
-                    major = mass * length,
-                    minor = time * time)
+                    unit = (mass * length) / (time * time))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> minus(that: ForceAmount<M, L, T>) =
         ForceAmount(amount = amount - that.amount
@@ -74,14 +68,12 @@ open class ForceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                                        that.length to length)
                              / convert(that.time to time,
                                        that.time to time),
-                    major = mass * length,
-                    minor = time * time)
+                    unit = (mass * length) / (time * time))
 
     @JvmName("minusForce")
     operator fun minus(that: ForceAmount<M, L, T>) =
         ForceAmount(amount = amount - that.amount,
-                    major = mass * length,
-                    minor = time * time)
+                    unit = (mass * length) / (time * time))
 
     // endregion
 
@@ -104,14 +96,12 @@ open class ForceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
         AccelerationAmount(amount = amount / that.amount / convert(that.mass to mass),
-                           major = length,
-                           minor = time * time)
+                           unit = length / (time * time))
 
     @JvmName("divMass")
     operator fun div(that: MassAmount<M>) =
         AccelerationAmount(amount = amount / that.amount,
-                           major = length,
-                           minor = time * time)
+                           unit = length / (time * time))
 
     // endregion
 
@@ -122,12 +112,12 @@ open class ForceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                             / convert(that.length to length)
                             * convert(that.time to time,
                                       that.time to time),
-                   major = mass)
+                   unit = mass)
 
     @JvmName("divAcceleration")
     operator fun div(that: AccelerationAmount<L, T>) =
         MassAmount(amount = amount / that.amount,
-                   major = mass)
+                   unit = mass)
 
     // endregion
 
@@ -135,14 +125,12 @@ open class ForceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         MomentumAmount(amount = amount * that.amount * convert(that.time to time),
-                       major = mass * length,
-                       minor = time)
+                       unit = (mass * length) / time)
 
     @JvmName("timesTime")
     operator fun times(that: TimeAmount<T>) =
         MomentumAmount(amount = amount * that.amount,
-                       major = mass * length,
-                       minor = time)
+                       unit = (mass * length) / time)
 
 
     // endregion
@@ -151,14 +139,12 @@ open class ForceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         EnergyAmount(amount = amount * that.amount * convert(that.length to length),
-                     major = mass * length * length,
-                     minor = time * time)
+                     unit = (mass * length * length) / (time * time))
 
     @JvmName("timesLength")
     operator fun times(that: LengthAmount<L>) =
         EnergyAmount(amount = amount * that.amount,
-                     major = mass * length * length,
-                     minor = time * time)
+                     unit = (mass * length * length) / (time * time))
 
     // endregion
 }

@@ -2,6 +2,8 @@ package org.pcb.unit.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.Unit
+import org.pcb.unit.dimension.Time
 import org.pcb.unit.units.scalar.NaturalAmount
 import org.pcb.unit.units.scalar.PercentAmount
 import org.pcb.unit.units.test.LENGTH1
@@ -15,9 +17,9 @@ class TimeAmountTest
     {
         assertEquals(
             expected = TimeAmount(amount = 2 * 2,
-                                  major = TIME1),
+                                  unit = TIME1),
             actual = TimeAmount(amount = 2,
-                                major = TIME1) *
+                                unit = TIME1) *
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -26,9 +28,9 @@ class TimeAmountTest
     {
         assertEquals(
             expected = TimeAmount(amount = 2 / 2,
-                                  major = TIME1),
+                                  unit = TIME1),
             actual = TimeAmount(amount = 2,
-                                major = TIME1) /
+                                unit = TIME1) /
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -37,11 +39,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = TimeAmount(amount = 0 + 1,
-                                  major = TIME1),
+                                  unit = TIME1),
             actual = TimeAmount(amount = 0,
-                                major = TIME1) +
+                                unit = TIME1) +
                      TimeAmount(amount = 1,
-                                major = TIME1))
+                                unit = TIME1))
     }
 
     @Test
@@ -49,11 +51,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = TimeAmount(amount = 0 + 2,
-                                  major = TIME1),
+                                  unit = TIME1),
             actual = TimeAmount(amount = 0,
-                                major = TIME1) +
+                                unit = TIME1) +
                      TimeAmount(amount = 1,
-                                major = TIME2))
+                                unit = TIME2))
     }
 
     @Test
@@ -61,11 +63,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = TimeAmount(amount = 1 - 1,
-                                  major = TIME1),
+                                  unit = TIME1),
             actual = TimeAmount(amount = 1,
-                                major = TIME1) -
+                                unit = TIME1) -
                      TimeAmount(amount = 1,
-                                major = TIME1))
+                                unit = TIME1))
     }
 
     @Test
@@ -73,11 +75,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = TimeAmount(amount = 2 - 2,
-                                  major = TIME1),
+                                  unit = TIME1),
             actual = TimeAmount(amount = 2,
-                                major = TIME1) -
+                                unit = TIME1) -
                      TimeAmount(amount = 1,
-                                major = TIME2))
+                                unit = TIME2))
     }
 
     @Test
@@ -86,9 +88,9 @@ class TimeAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 1),
             actual = TimeAmount(amount = 2,
-                                major = TIME1) /
+                                unit = TIME1) /
                      TimeAmount(amount = 2,
-                                major = TIME1))
+                                unit = TIME1))
     }
 
     @Test
@@ -97,21 +99,20 @@ class TimeAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
             actual = TimeAmount(amount = 2,
-                                major = TIME1) /
+                                unit = TIME1) /
                      TimeAmount(amount = 1,
-                                major = TIME2))
+                                unit = TIME2))
     }
 
     @Test
     fun divSpace()
     {
-        assertEquals(
+        assertEquals<PaceAmount<out Unit<Time>, LENGTH1>>(
             expected = PaceAmount(amount = 2 / 2,
-                                  major = TIME1,
-                                  minor = LENGTH1),
+                                  unit = TIME1 / LENGTH1),
             actual = TimeAmount(amount = 2,
-                                major = TIME1) /
+                                unit = TIME1) /
                      LengthAmount(amount = 2,
-                                  major = LENGTH1))
+                                  unit = LENGTH1))
     }
 }

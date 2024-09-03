@@ -3,6 +3,7 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.scalar.NaturalAmount
+import org.pcb.unit.units.scalar.NaturalAmount.ONE
 import org.pcb.unit.units.scalar.PercentAmount
 import org.pcb.unit.units.test.TIME1
 
@@ -67,10 +68,10 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 2 / 2,
-                                       minor = TIME1),
+                                       unit = ONE / TIME1),
             actual = NaturalAmount(amount = 2) /
                      TimeAmount(amount = 2,
-                                major = TIME1))
+                                unit = TIME1))
     }
 
     @Test
@@ -78,9 +79,9 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = TimeAmount(amount = 2 / 2,
-                                  major = TIME1),
+                                  unit = TIME1),
             actual = NaturalAmount(amount = 2) /
                      FrequencyAmount(amount = 2,
-                                     minor = TIME1))
+                                     unit = ONE / TIME1))
     }
 }

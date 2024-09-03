@@ -8,6 +8,7 @@ import org.pcb.unit.units.DebtAmount
 import org.pcb.unit.units.FrequencyAmount
 import org.pcb.unit.units.TimeAmount
 import org.pcb.unit.units.scalar.NaturalAmount
+import org.pcb.unit.units.scalar.NaturalAmount.ONE
 import org.pcb.unit.units.scalar.PercentAmount
 import org.pcb.unit.units.test.CURRENCY1
 import org.pcb.unit.units.test.CURRENCY2
@@ -21,9 +22,9 @@ class DebtAmountTest
     {
         assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
             expected = DebtAmount(amount = 2 * 2,
-                                  major = CURRENCY1 * TIME1),
+                                  unit = CURRENCY1 * TIME1),
             actual = DebtAmount(amount = 2,
-                                major = CURRENCY1 * TIME1) *
+                                unit = CURRENCY1 * TIME1) *
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -32,9 +33,9 @@ class DebtAmountTest
     {
         assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
             expected = DebtAmount(amount = 2 / 2,
-                                  major = CURRENCY1 * TIME1),
+                                  unit = CURRENCY1 * TIME1),
             actual = DebtAmount(amount = 2,
-                                major = CURRENCY1 * TIME1) /
+                                unit = CURRENCY1 * TIME1) /
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -43,11 +44,11 @@ class DebtAmountTest
     {
         assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
             expected = DebtAmount(amount = 0 + 1,
-                                  major = CURRENCY1 * TIME1),
+                                  unit = CURRENCY1 * TIME1),
             actual = DebtAmount(amount = 0,
-                                major = CURRENCY1 * TIME1) +
+                                unit = CURRENCY1 * TIME1) +
                      DebtAmount(amount = 1,
-                                major = CURRENCY1 * TIME1))
+                                unit = CURRENCY1 * TIME1))
     }
 
     @Test
@@ -55,11 +56,11 @@ class DebtAmountTest
     {
         assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
             expected = DebtAmount(amount = 0 + (2 * 2),
-                                  major = CURRENCY1 * TIME1),
+                                  unit = CURRENCY1 * TIME1),
             actual = DebtAmount(amount = 0,
-                                major = CURRENCY1 * TIME1) +
+                                unit = CURRENCY1 * TIME1) +
                      DebtAmount(amount = 1,
-                                major = CURRENCY2 * TIME2))
+                                unit = CURRENCY2 * TIME2))
     }
 
     @Test
@@ -67,11 +68,11 @@ class DebtAmountTest
     {
         assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
             expected = DebtAmount(amount = 1 - 1,
-                                  major = CURRENCY1 * TIME1),
+                                  unit = CURRENCY1 * TIME1),
             actual = DebtAmount(amount = 1,
-                                major = CURRENCY1 * TIME1) -
+                                unit = CURRENCY1 * TIME1) -
                      DebtAmount(amount = 1,
-                                major = CURRENCY1 * TIME1))
+                                unit = CURRENCY1 * TIME1))
     }
 
     @Test
@@ -79,11 +80,11 @@ class DebtAmountTest
     {
         assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
             expected = DebtAmount(amount = 4 - (2 * 2),
-                                  major = CURRENCY1 * TIME1),
+                                  unit = CURRENCY1 * TIME1),
             actual = DebtAmount(amount = 4,
-                                major = CURRENCY1 * TIME1) -
+                                unit = CURRENCY1 * TIME1) -
                      DebtAmount(amount = 1,
-                                major = CURRENCY2 * TIME2))
+                                unit = CURRENCY2 * TIME2))
     }
 
     @Test
@@ -92,9 +93,9 @@ class DebtAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
             actual = DebtAmount(amount = 2,
-                                major = CURRENCY1 * TIME1) /
+                                unit = CURRENCY1 * TIME1) /
                      DebtAmount(amount = 2,
-                                major = CURRENCY1 * TIME1))
+                                unit = CURRENCY1 * TIME1))
     }
 
     @Test
@@ -103,9 +104,9 @@ class DebtAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 4 / (2 * 2)),
             actual = DebtAmount(amount = 4,
-                                major = CURRENCY1 * TIME1) /
+                                unit = CURRENCY1 * TIME1) /
                      DebtAmount(amount = 1,
-                                major = CURRENCY2 * TIME2))
+                                unit = CURRENCY2 * TIME2))
     }
 
     @Test
@@ -113,11 +114,11 @@ class DebtAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(amount = 2 / 2,
-                                      major = CURRENCY1),
+                                      unit = CURRENCY1),
             actual = DebtAmount(amount = 2,
-                                major = CURRENCY1 * TIME1) /
+                                unit = CURRENCY1 * TIME1) /
                      TimeAmount(amount = 2,
-                                major = TIME1))
+                                unit = TIME1))
     }
 
     @Test
@@ -125,11 +126,11 @@ class DebtAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(amount = 2 / 2,
-                                      major = CURRENCY1),
+                                      unit = CURRENCY1),
             actual = DebtAmount(amount = 2,
-                                major = CURRENCY1 * TIME1) /
+                                unit = CURRENCY1 * TIME1) /
                      TimeAmount(amount = 1,
-                                major = TIME2))
+                                unit = TIME2))
     }
 
     @Test
@@ -137,11 +138,11 @@ class DebtAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(amount = 2 / 2,
-                                      major = CURRENCY1),
+                                      unit = CURRENCY1),
             actual = DebtAmount(amount = 2,
-                                major = CURRENCY1 * TIME1) *
+                                unit = CURRENCY1 * TIME1) *
                      FrequencyAmount(amount = 2,
-                                     minor = TIME1))
+                                     unit = ONE / TIME1))
     }
 
     @Test
@@ -149,10 +150,10 @@ class DebtAmountTest
     {
         assertEquals(
             expected = CurrencyAmount(amount = 2 / 2,
-                                      major = CURRENCY1),
+                                      unit = CURRENCY1),
             actual = DebtAmount(amount = 2,
-                                major = CURRENCY1 * TIME1) *
+                                unit = CURRENCY1 * TIME1) *
                      FrequencyAmount(amount = 1,
-                                     minor = TIME2))
+                                     unit = ONE / TIME2))
     }
 }

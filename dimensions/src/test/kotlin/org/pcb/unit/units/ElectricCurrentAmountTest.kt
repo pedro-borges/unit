@@ -25,9 +25,9 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = ElectricCurrentAmount(amount = 2 * 2,
-                                             major = ELECTRICCURRENT1),
+                                             unit = ELECTRICCURRENT1),
             actual = ElectricCurrentAmount(amount = 2,
-                                           major = ELECTRICCURRENT1) *
+                                           unit = ELECTRICCURRENT1) *
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -36,9 +36,9 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = ElectricCurrentAmount(amount = 2 / 2,
-                                             major = ELECTRICCURRENT1),
+                                             unit = ELECTRICCURRENT1),
             actual = ElectricCurrentAmount(amount = 2,
-                                           major = ELECTRICCURRENT1) /
+                                           unit = ELECTRICCURRENT1) /
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -47,11 +47,11 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = ElectricCurrentAmount(amount = 0 + 1,
-                                             major = ELECTRICCURRENT1),
+                                             unit = ELECTRICCURRENT1),
             actual = ElectricCurrentAmount(amount = 0,
-                                           major = ELECTRICCURRENT1) +
+                                           unit = ELECTRICCURRENT1) +
                      ElectricCurrentAmount(amount = 1,
-                                           major = ELECTRICCURRENT1))
+                                           unit = ELECTRICCURRENT1))
     }
 
     @Test
@@ -59,11 +59,11 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = ElectricCurrentAmount(amount = 0 + 2,
-                                             major = ELECTRICCURRENT1),
+                                             unit = ELECTRICCURRENT1),
             actual = ElectricCurrentAmount(amount = 0,
-                                           major = ELECTRICCURRENT1) +
+                                           unit = ELECTRICCURRENT1) +
                      ElectricCurrentAmount(amount = 1,
-                                           major = ELECTRICCURRENT2))
+                                           unit = ELECTRICCURRENT2))
     }
 
     @Test
@@ -71,11 +71,11 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = ElectricCurrentAmount(amount = 1 - 1,
-                                             major = ELECTRICCURRENT1),
+                                             unit = ELECTRICCURRENT1),
             actual = ElectricCurrentAmount(amount = 1,
-                                           major = ELECTRICCURRENT1) -
+                                           unit = ELECTRICCURRENT1) -
                      ElectricCurrentAmount(amount = 1,
-                                           major = ELECTRICCURRENT1))
+                                           unit = ELECTRICCURRENT1))
     }
 
     @Test
@@ -83,11 +83,11 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = ElectricCurrentAmount(amount = 2 - 2,
-                                             major = ELECTRICCURRENT1),
+                                             unit = ELECTRICCURRENT1),
             actual = ElectricCurrentAmount(amount = 2,
-                                           major = ELECTRICCURRENT1) -
+                                           unit = ELECTRICCURRENT1) -
                      ElectricCurrentAmount(amount = 1,
-                                           major = ELECTRICCURRENT2))
+                                           unit = ELECTRICCURRENT2))
     }
 
     @Test
@@ -96,9 +96,9 @@ class ElectricCurrentAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
             actual = ElectricCurrentAmount(amount = 2,
-                                           major = ELECTRICCURRENT1) /
+                                           unit = ELECTRICCURRENT1) /
                      ElectricCurrentAmount(amount = 2,
-                                           major = ELECTRICCURRENT1))
+                                           unit = ELECTRICCURRENT1))
     }
 
     @Test
@@ -107,9 +107,9 @@ class ElectricCurrentAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
             actual = ElectricCurrentAmount(amount = 2,
-                                           major = ELECTRICCURRENT1) /
+                                           unit = ELECTRICCURRENT1) /
                      ElectricCurrentAmount(amount = 1,
-                                           major = ELECTRICCURRENT2))
+                                           unit = ELECTRICCURRENT2))
     }
 
     @Test
@@ -117,11 +117,11 @@ class ElectricCurrentAmountTest
     {
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
             expected = ElectricChargeAmount(amount = 2 * 2,
-                                            major = ELECTRICCURRENT1 * TIME1),
+                                            unit = ELECTRICCURRENT1 * TIME1),
             actual = ElectricCurrentAmount(amount = 2,
-                                           major = ELECTRICCURRENT1) *
+                                           unit = ELECTRICCURRENT1) *
                      TimeAmount(amount = 2,
-                                major = TIME1))
+                                unit = TIME1))
     }
 
     @Test
@@ -129,13 +129,13 @@ class ElectricCurrentAmountTest
     {
         assertEquals<ElectricTensionAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
             expected = ElectricTensionAmount(amount = 2 * 2,
-                                             major = MASS1 * LENGTH1 * LENGTH1,
-                                             minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1),
+                                             unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                    (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)),
             actual = ElectricCurrentAmount(amount = 2,
-                                           major = ELECTRICCURRENT1) *
+                                           unit = ELECTRICCURRENT1) *
                      ElectricResistanceAmount(amount = 2,
-                                              major = MASS1 * LENGTH1 * LENGTH1,
-                                              minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1))
+                                              unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                     (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)))
     }
 
     @Test
@@ -143,13 +143,13 @@ class ElectricCurrentAmountTest
     {
         assertEquals<ElectricTensionAmount<out Unit<Mass>, out Unit<Length>, out Unit<Time>, ELECTRICCURRENT1>>(
             expected = ElectricTensionAmount(amount = 2 * 2,
-                                             major = MASS1 * LENGTH1 * LENGTH1,
-                                             minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1),
+                                             unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                    (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)),
             actual = ElectricCurrentAmount(amount = 2,
-                                           major = ELECTRICCURRENT1) *
+                                           unit = ELECTRICCURRENT1) *
                      ElectricResistanceAmount(amount = 2 * (2 * 2),
-                                              major = MASS2 * LENGTH2 * LENGTH2,
-                                              minor = TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2))
+                                              unit = (MASS2 * LENGTH2 * LENGTH2) /
+                                                     (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2)))
     }
 
     @Test
@@ -157,13 +157,13 @@ class ElectricCurrentAmountTest
     {
         assertEquals<PowerAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = PowerAmount(amount = 2 * 2,
-                                   major = MASS1 * LENGTH1 * LENGTH1,
-                                   minor = TIME1 * TIME1 * TIME1),
+                                   unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                          (TIME1 * TIME1 * TIME1)),
             actual = ElectricCurrentAmount(amount = 2,
-                                           major = ELECTRICCURRENT1) *
+                                           unit = ELECTRICCURRENT1) *
                      ElectricTensionAmount(amount = 2,
-                                           major = MASS1 * LENGTH1 * LENGTH1,
-                                           minor = TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1))
+                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                  (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)))
     }
 
     @Test
@@ -171,12 +171,12 @@ class ElectricCurrentAmountTest
     {
         assertEquals<PowerAmount<out Unit<Mass>, out Unit<Length>, out Unit<Time>>>(
             expected = PowerAmount(amount = 2 * 2,
-                                   major = MASS1 * LENGTH1 * LENGTH1,
-                                   minor = TIME1 * TIME1 * TIME1),
+                                   unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                          (TIME1 * TIME1 * TIME1)),
             actual = ElectricCurrentAmount(amount = 2,
-                                           major = ELECTRICCURRENT1) *
+                                           unit = ELECTRICCURRENT1) *
                      ElectricTensionAmount(amount = 2 * 2,
-                                           major = MASS2 * LENGTH2 * LENGTH2,
-                                           minor = TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2))
+                                           unit = (MASS2 * LENGTH2 * LENGTH2) /
+                                                  (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2)))
     }
 }

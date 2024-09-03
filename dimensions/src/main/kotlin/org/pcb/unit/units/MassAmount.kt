@@ -15,41 +15,41 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class MassAmount<M : Unit<Mass>>(
         amount: Number,
-        major: M)
+        unit: M)
     : Amount<Mass>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Mass::class,
-                       units = listOf(major to 1)))
+                       units = listOf(unit to 1)))
 {
-    val mass = major
+    val mass = unit
 
     // region Mass
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MassAmount(amount = amount * that.amount * that.unit.scale,
-                   major = mass)
+                   unit = mass)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         MassAmount(amount = amount / that.amount / that.unit.scale,
-                   major = mass)
+                   unit = mass)
 
     operator fun <M : Unit<Mass>> plus(that: MassAmount<M>) =
         MassAmount(amount = amount + that.amount * convert(that.mass to mass),
-                   major = mass)
+                   unit = mass)
 
     @JvmName("plusMass")
     operator fun plus(that: MassAmount<M>) =
         MassAmount(amount = amount + that.amount,
-                   major = mass)
+                   unit = mass)
 
     operator fun <M : Unit<Mass>> minus(that: MassAmount<M>) =
         MassAmount(amount = amount - that.amount * convert(that.mass to mass),
-                   major = mass)
+                   unit = mass)
 
     @JvmName("minusMass")
     operator fun minus(that: MassAmount<M>) =
         MassAmount(amount = amount - that.amount,
-                   major = mass)
+                   unit = mass)
 
     // endregion
 
@@ -68,8 +68,7 @@ open class MassAmount<M : Unit<Mass>>(
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
         MomentumAmount(amount = that.amount * that.amount,
-                       major = mass * that.length,
-                       minor = that.time)
+                       unit = (mass * that.length) / that.time)
 
     // endregion
 
@@ -77,8 +76,7 @@ open class MassAmount<M : Unit<Mass>>(
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: AccelerationAmount<L, T>) =
         ForceAmount(amount = that.amount * that.amount,
-                    major = mass * that.length,
-                    minor = that.time * that.time)
+                    unit = (mass * that.length) / (that.time * that.time))
 
     // endregion
 }

@@ -13,57 +13,51 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.NaturalAmount
+import org.pcb.unit.units.scalar.NaturalAmount.ONE
 
 open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
-        major: L,
-        minor: T)
+        unit: Pair<L, T>)
     : Amount<Speed>(amount = amount.toBigBigDecimal(),
                     unit = CompositeUnit(
                         domain = Speed::class,
-                        units = listOf(major to 1,
-                                       minor to -1)))
+                        units = listOf(unit.first to 1,
+                                       unit.second to -1)))
 {
-    val length = major
-    val time = minor
+    val length = unit.first
+    val time = unit.second
 
     // region Speed
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         SpeedAmount(amount = amount * that.amount * that.unit.scale,
-                    major = length,
-                    minor = time)
+                    unit = length / time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         SpeedAmount(amount = amount / that.amount / that.unit.scale,
-                    major = length,
-                    minor = time)
+                    unit = length / time)
 
     operator fun <L : Unit<Length>, T : Unit<Time>> plus(that: SpeedAmount<L, T>) =
         SpeedAmount(amount = amount + that.amount
                              * convert(that.length to length)
                              / convert(that.time to time),
-                    major = length,
-                    minor = time)
+                    unit = length / time)
 
     @JvmName("plusSpeed")
     operator fun plus(that: SpeedAmount<L, T>) =
         SpeedAmount(amount = amount + that.amount,
-                    major = length,
-                    minor = time)
+                    unit = length / time)
 
     operator fun <L : Unit<Length>, T : Unit<Time>> minus(that: SpeedAmount<L, T>) =
         SpeedAmount(amount = amount - that.amount
                              * convert(that.length to length)
                              / convert(that.time to time),
-                    major = length,
-                    minor = time)
+                    unit = length / time)
 
     @JvmName("minusSpeed")
     operator fun minus(that: SpeedAmount<L, T>) =
         SpeedAmount(amount = amount - that.amount,
-                    major = length,
-                    minor = time)
+                    unit = length / time)
 
     // endregion
 
@@ -83,12 +77,12 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         LengthAmount(amount = amount * that.amount * convert(that.time to time),
-                     major = length)
+                     unit = length)
 
     @JvmName("timesTime")
     operator fun times(that: TimeAmount<T>) =
         LengthAmount(amount = amount * that.amount,
-                     major = length)
+                     unit = length)
 
     // endregion
 
@@ -96,8 +90,7 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
         AccelerationAmount(amount = amount / that.amount / convert(that.time to time),
-                           major = length,
-                           minor = time * time)
+                           unit = length / (time * time))
 
     // endregion
 
@@ -105,12 +98,12 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         FrequencyAmount(amount = amount / that.amount / convert(that.length to length),
-                        minor = time)
+                        unit = ONE / time)
 
     @JvmName("divLength")
     operator fun div(that: LengthAmount<L>) =
         FrequencyAmount(amount = amount / that.amount,
-                        minor = time)
+                        unit = ONE / time)
 
     // endregion
 
@@ -120,14 +113,12 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
         EnergyAmount(amount = amount * that.amount
                               * convert(that.length to length)
                               / convert(that.time to time),
-                     major = that.mass * length * length,
-                     minor = time * time)
+                     unit = (that.mass * length * length) / (time * time))
 
     @JvmName("timesMomentum")
     operator fun <M : Unit<Mass>> times(that: MomentumAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     major = that.mass * length * length,
-                     minor = time * time)
+                     unit = (that.mass * length * length) / (time * time))
 
     // endregion
 }

@@ -23,9 +23,9 @@ class MassAmountTest
     {
         assertEquals(
             expected = MassAmount(amount = 2 * 2,
-                                  major = MASS1),
+                                  unit = MASS1),
             actual = MassAmount(amount = 2,
-                                major = MASS1) *
+                                unit = MASS1) *
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -34,9 +34,9 @@ class MassAmountTest
     {
         assertEquals(
             expected = MassAmount(amount = 2 / 2,
-                                  major = MASS1),
+                                  unit = MASS1),
             actual = MassAmount(amount = 2,
-                                major = MASS1) /
+                                unit = MASS1) /
                      PercentAmount(amount = 2 * 100))
     }
 
@@ -45,11 +45,11 @@ class MassAmountTest
     {
         assertEquals(
             expected = MassAmount(amount = 0 + 1,
-                                  major = MASS1),
+                                  unit = MASS1),
             actual = MassAmount(amount = 0,
-                                major = MASS1) +
+                                unit = MASS1) +
                      MassAmount(amount = 1,
-                                major = MASS1))
+                                unit = MASS1))
     }
 
     @Test
@@ -57,11 +57,11 @@ class MassAmountTest
     {
         assertEquals(
             expected = MassAmount(amount = 0 + 2,
-                                  major = MASS1),
+                                  unit = MASS1),
             actual = MassAmount(amount = 0,
-                                major = MASS1) +
+                                unit = MASS1) +
                      MassAmount(amount = 1,
-                                major = MASS2))
+                                unit = MASS2))
     }
 
     @Test
@@ -69,11 +69,11 @@ class MassAmountTest
     {
         assertEquals(
             expected = MassAmount(amount = 1 - 1,
-                                  major = MASS1),
+                                  unit = MASS1),
             actual = MassAmount(amount = 1,
-                                major = MASS1) -
+                                unit = MASS1) -
                      MassAmount(amount = 1,
-                                major = MASS1))
+                                unit = MASS1))
     }
 
     @Test
@@ -81,11 +81,11 @@ class MassAmountTest
     {
         assertEquals(
             expected = MassAmount(amount = 2 - 2,
-                                  major = MASS1),
+                                  unit = MASS1),
             actual = MassAmount(amount = 2,
-                                major = MASS1) -
+                                unit = MASS1) -
                      MassAmount(amount = 1,
-                                major = MASS2))
+                                unit = MASS2))
     }
 
     @Test
@@ -94,9 +94,9 @@ class MassAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
             actual = MassAmount(amount = 2,
-                                major = MASS1) /
+                                unit = MASS1) /
                      MassAmount(amount = 2,
-                                major = MASS1))
+                                unit = MASS1))
     }
 
     @Test
@@ -105,9 +105,9 @@ class MassAmountTest
         assertEquals(
             expected = NaturalAmount(amount = 2 / 2),
             actual = MassAmount(amount = 2,
-                                major = MASS1) /
+                                unit = MASS1) /
                      MassAmount(amount = 1,
-                                major = MASS2))
+                                unit = MASS2))
     }
 
     @Test
@@ -115,13 +115,12 @@ class MassAmountTest
     {
         assertEquals<MomentumAmount<out Unit<Mass>, LENGTH1, TIME1>>(
             expected = MomentumAmount(amount = 2 * 2,
-                                      major = MASS1 * LENGTH1,
-                                      minor = TIME1),
+                                      unit = (MASS1 * LENGTH1) /
+                                             TIME1),
             actual = MassAmount(amount = 2,
-                                major = MASS1) *
+                                unit = MASS1) *
                      SpeedAmount(amount = 2,
-                                 major = LENGTH1,
-                                 minor = TIME1))
+                                 unit = LENGTH1 / TIME1))
     }
 
     @Test
@@ -129,12 +128,12 @@ class MassAmountTest
     {
         assertEquals<ForceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
             expected = ForceAmount(amount = 2 * 2,
-                                   major = MASS1 * LENGTH1,
-                                   minor = TIME1 * TIME1),
+                                   unit = (MASS1 * LENGTH1) /
+                                          (TIME1 * TIME1)),
             actual = MassAmount(amount = 2,
-                                major = MASS1) *
+                                unit = MASS1) *
                      AccelerationAmount(amount = 2,
-                                        major = LENGTH1,
-                                        minor = TIME1 * TIME1))
+                                        unit = LENGTH1 /
+                                               (TIME1 * TIME1)))
     }
 }

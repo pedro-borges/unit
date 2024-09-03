@@ -14,40 +14,40 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class LengthAmount<L : Unit<Length>>(
         amount: Number,
-        major: L)
+        unit: L)
     : Amount<Length>(amount = amount.toBigBigDecimal(),
                      unit = CompositeUnit(
                          domain = Length::class,
-                         units = listOf(major to 1)))
+                         units = listOf(unit to 1)))
 {
-        val length = major
+        val length = unit
     // region Length
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         LengthAmount(amount = amount * that.amount * that.unit.scale,
-                     major = length)
+                     unit = length)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         LengthAmount(amount = amount / that.amount / that.unit.scale,
-                     major = length)
+                     unit = length)
 
     operator fun <L : Unit<Length>> plus(that: LengthAmount<L>) =
         LengthAmount(amount = amount + that.amount * convert(that.length to length),
-                     major = length)
+                     unit = length)
 
     @JvmName("plusLength")
     operator fun plus(that: LengthAmount<L>) =
         LengthAmount(amount = amount + that.amount,
-                     major = length)
+                     unit = length)
 
     operator fun <L : Unit<Length>> minus(that: LengthAmount<L>) =
         LengthAmount(amount = amount - that.amount * convert(that.length to length),
-                     major = length)
+                     unit = length)
 
     @JvmName("minusLength")
     operator fun minus(that: LengthAmount<L>) =
         LengthAmount(amount = amount - that.amount,
-                     major = length)
+                     unit = length)
 
     // endregion
 
@@ -66,8 +66,7 @@ open class LengthAmount<L : Unit<Length>>(
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
         SpeedAmount(amount = amount / that.amount,
-                    major = length,
-                    minor = that.time)
+                    unit = length / that.time)
 
     // endregion
 
@@ -75,12 +74,12 @@ open class LengthAmount<L : Unit<Length>>(
 
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         AreaAmount(amount = amount * that.amount * convert(that.length to length),
-                   major = length * length)
+                   unit = length * length)
 
     @JvmName("timesLength")
     operator fun times(that: LengthAmount<L>) =
         AreaAmount(amount = amount * that.amount,
-                   major = length * length)
+                   unit = length * length)
 
     // endregion
 
@@ -89,12 +88,12 @@ open class LengthAmount<L : Unit<Length>>(
     operator fun <L : Unit<Length>> times(that: AreaAmount<L>) =
         VolumeAmount(amount = amount * that.amount * convert(that.length to length,
                                                              that.length to length),
-                     major = length * length * length)
+                     unit = length * length * length)
 
     @JvmName("timesArea")
     operator fun times(that: AreaAmount<L>) =
         VolumeAmount(amount = amount * that.amount,
-                     major = length * length * length)
+                     unit = length * length * length)
 
     // endregion
 }

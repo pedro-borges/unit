@@ -1,5 +1,8 @@
 package org.pcb.unit.units.space
 
+import org.pcb.unit.Quadruple
+import org.pcb.unit.Quintuple
+import org.pcb.unit.Triple
 import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Length
@@ -16,6 +19,11 @@ class Furlong(amount: Number)
     object FURLONG : Unit<Length>(Length::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
+        override fun <B : Unit<*>> div(second: B) = Pair(this, second)
+        override fun <B : Tuple<*, *>> div(second: B) = Pair(this, second)
+        override fun <B : Triple<*, *, *>> div(second: B) = Pair(this, second)
+        override fun <B : Quadruple<*, *, *, *>> div(second: B) = Pair(this, second)
+        override fun <B : Quintuple<*, *, *, *, *>> div(second: B) = Pair(this, second)
         override val symbol = "fur"
         override val scale = 201.168.toBigBigDecimal()
     }

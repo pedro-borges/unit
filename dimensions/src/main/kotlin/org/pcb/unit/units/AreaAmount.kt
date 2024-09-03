@@ -14,43 +14,43 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class AreaAmount<L : Unit<Length>>(
         amount: Number,
-        major: Tuple<L, L>)
-    : Amount<Length>(amount = amount.toBigBigDecimal() * convert(major.second to major.first),
+        unit: Tuple<L, L>)
+    : Amount<Length>(amount = amount.toBigBigDecimal() * convert(unit.second to unit.first),
                      unit = CompositeUnit(
                          domain = Length::class,
-                         units = listOf(major.first to 2)))
+                         units = listOf(unit.first to 2)))
 {
-    val length = major.first
+    val length = unit.first
 
     // region Area
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         AreaAmount(amount = amount * that.amount * that.unit.scale,
-                   major = length * length)
+                   unit = length * length)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         AreaAmount(amount = amount / that.amount / that.unit.scale,
-                   major = length * length)
+                   unit = length * length)
 
     operator fun <L : Unit<Length>> plus(that: AreaAmount<L>) =
         AreaAmount(amount = amount + that.amount * convert(that.length to length,
                                                            that.length to length),
-                   major = length * length)
+                   unit = length * length)
 
     @JvmName("plusArea")
     operator fun plus(that: AreaAmount<L>) =
         AreaAmount(amount = amount + that.amount,
-                   major = length * length)
+                   unit = length * length)
 
     operator fun <L : Unit<Length>> minus(that: AreaAmount<L>) =
         AreaAmount(amount = amount - that.amount * convert(that.length to length,
                                                            that.length to length),
-                   major = length * length)
+                   unit = length * length)
 
     @JvmName("minusArea")
     operator fun minus(that: AreaAmount<L>) =
         AreaAmount(amount = amount - that.amount,
-                   major = length * length)
+                   unit = length * length)
 
     // endregion
 
@@ -70,12 +70,12 @@ open class AreaAmount<L : Unit<Length>>(
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         LengthAmount(amount = amount / that.amount / convert(that.length to length),
-                     major = length)
+                     unit = length)
 
     @JvmName("divLength")
     operator fun div(that: LengthAmount<L>) =
         LengthAmount(amount = amount / that.amount,
-                     major = length)
+                     unit = length)
 
     // endregion
 
@@ -83,12 +83,12 @@ open class AreaAmount<L : Unit<Length>>(
 
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         VolumeAmount(amount = amount * that.amount * convert(that.length to length),
-                     major = length * length * length)
+                     unit = length * length * length)
 
     @JvmName("timesLength")
     operator fun times(that: LengthAmount<L>) =
         VolumeAmount(amount = amount * that.amount,
-                     major = length * length * length)
+                     unit = length * length * length)
 
     // endregion
 }
