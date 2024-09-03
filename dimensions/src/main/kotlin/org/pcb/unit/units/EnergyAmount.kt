@@ -202,4 +202,23 @@ open class EnergyAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                                      (time * time * time * that.electricCurrent))
 
     // endregion
+
+    // region -> ElectricCharge
+
+    operator fun <M : Unit<Mass>, L : Unit<Length>, EC : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricTensionAmount<M, L, T, EC>) =
+        ElectricChargeAmount(amount = amount / that.amount
+                                      / convert(that.mass to mass,
+                                                that.length to length,
+                                                that.length to length)
+                                      * convert(that.time to time,
+                                                that.time to time,
+                                                that.time to time),
+                             unit = that.electricCurrent * time)
+
+    @JvmName("divElectricTension")
+    operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricTensionAmount<M, L, T, EC>) =
+        ElectricChargeAmount(amount = amount / that.amount / convert(that.time to time),
+                             unit = that.electricCurrent * time)
+
+    // endregion
 }

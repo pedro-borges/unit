@@ -2,6 +2,7 @@ package org.pcb.unit
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.dimension.ElectricCurrent
 import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
@@ -17,6 +18,7 @@ import org.pcb.unit.units.TimeAmount
 import org.pcb.unit.units.scalar.NaturalAmount
 import org.pcb.unit.units.scalar.PercentAmount
 import org.pcb.unit.units.test.ELECTRICCURRENT1
+import org.pcb.unit.units.test.ELECTRICCURRENT2
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
 import org.pcb.unit.units.test.MASS1
@@ -315,5 +317,33 @@ class EnergyAmountTest
                                   unit = (MASS1 * LENGTH1 * LENGTH1) /
                                          (TIME1 * TIME1)) /
                      ElectricChargeAmount(amount = 1, unit = ELECTRICCURRENT1 * TIME2))
+    }
+
+    @Test
+    fun divSameElectricTension()
+    {
+        assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
+            expected = ElectricChargeAmount(amount = 2 / 2,
+                                            unit = ELECTRICCURRENT1 * TIME1),
+            actual = EnergyAmount(amount = 2,
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
+                    ElectricTensionAmount(amount = 2,
+                                          unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                 (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)))
+    }
+
+    @Test
+    fun divOtherElectricTension()
+    {
+        assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
+            expected = ElectricChargeAmount(amount = 2 / 2,
+                                            unit = ELECTRICCURRENT1 * TIME1),
+            actual = EnergyAmount(amount = 2,
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
+                     ElectricTensionAmount(amount = 2 * 2,
+                                           unit = (MASS2 * LENGTH2 * LENGTH2) /
+                                                  (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2)))
     }
 }

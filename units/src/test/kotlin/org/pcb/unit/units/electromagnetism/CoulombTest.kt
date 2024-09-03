@@ -9,6 +9,7 @@ import org.pcb.unit.units.base.Ampere
 import org.pcb.unit.units.base.Second
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.electromagnetism.Coulomb.COULOMB
+import org.pcb.unit.units.mechanics.Joule
 
 class CoulombTest
 {
@@ -21,9 +22,14 @@ class CoulombTest
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, SECOND>>(
             expected = Coulomb(2 * 3),
             actual = Farad(2) * Volt(3))
+
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, SECOND>>(
             expected = Coulomb(2 * 3),
             actual = Volt(2) * Farad(3))
+
+        assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, SECOND>>(
+            expected = Coulomb(6 / 3),
+            actual = Joule(6) / Volt(3))
     }
 
     private infix fun Coulomb.equivalent(other: ElectricChargeAmount<*, *>) =

@@ -21,6 +21,10 @@ class OhmTest
     {
         Ohm(0.25) equivalent Kilogram(2) * (Meter(2) / Second(2)) * (Meter(2) / Second(2)) / Second(2) / Ampere(2) / Ampere(2)
         Ohm(2) equivalent ElectricResistanceAmount(2, OHM)
+
+        assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Ohm(amount = 6 / 3),
+            actual = Volt(6) / Ampere(3))
     }
 
     private infix fun Ohm.equivalent(other: ElectricResistanceAmount<*, *, *, *>) =
