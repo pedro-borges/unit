@@ -11,12 +11,9 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.ElectricCurrentAmount
 import org.pcb.unit.units.base.Ampere.AMPERE
 
-@Suppress("unused")
 class Ampere(amount: Number)
     : ElectricCurrentAmount<AMPERE>(amount, AMPERE)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object AMPERE : Unit<ElectricCurrent>(ElectricCurrent::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

@@ -5,7 +5,7 @@ import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Currency
-import org.pcb.unit.units.scalar.Natural.NATURAL
+import org.pcb.unit.div
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
 import org.pcb.unit.units.test.CURRENCY2
@@ -135,7 +135,7 @@ class RentAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 2 / 2,
-                                       unit = NATURAL / TIME1),
+                                       unit = 1 / TIME1),
             actual = RentAmount(amount = 2,
                                 unit = CURRENCY1 / TIME1) /
                      CurrencyAmount(amount = 2,
@@ -147,7 +147,7 @@ class RentAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 2 / 2,
-                                       unit = NATURAL / TIME1),
+                                       unit = 1 / TIME1),
             actual = RentAmount(amount = 2,
                                 unit = CURRENCY1 / TIME1) /
                      CurrencyAmount(amount = 1,

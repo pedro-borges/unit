@@ -15,11 +15,10 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Second.SECOND
-import org.pcb.unit.units.scalar.Natural.NATURAL
 
 open class FrequencyAmount<T : Unit<Time>>(
         amount: Number,
-        unit: Fraction<Unit<Scalar>, T>)
+        unit: Fraction<Number, T>)
     : Amount<Time>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Time::class,
@@ -31,36 +30,36 @@ open class FrequencyAmount<T : Unit<Time>>(
     {
         operator fun invoke(amount: Number, unit: Unit<Frequency>) =
             FrequencyAmount(amount = amount.toBigBigDecimal() / unit.scale,
-                            unit = NATURAL / SECOND)
+                            unit = 1 / SECOND)
     }
 
     // region -> Frequency
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         FrequencyAmount(amount = amount * that.amount * that.unit.scale,
-                        unit = NATURAL / time)
+                        unit = 1 / time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         FrequencyAmount(amount = amount / that.amount / that.unit.scale,
-                        unit = NATURAL / time)
+                        unit = 1 / time)
 
     operator fun <T : Unit<Time>> plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount / convert(that.time to time),
-                        unit = NATURAL / time)
+                        unit = 1 / time)
 
     @JvmName("plusFrequency")
     operator fun plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount,
-                        unit = NATURAL / time)
+                        unit = 1 / time)
 
     operator fun <T : Unit<Time>> minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount / convert(that.time to time),
-                        unit = NATURAL / time)
+                        unit = 1 / time)
 
     @JvmName("minusFrequency")
     operator fun minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount,
-                        unit = NATURAL / time)
+                        unit = 1 / time)
 
     // endregion
 

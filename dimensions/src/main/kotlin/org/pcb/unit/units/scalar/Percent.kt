@@ -11,7 +11,6 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.ScalarAmount
 import org.pcb.unit.units.scalar.Percent.PERCENT
 
-@Suppress("unused")
 class Percent(amount: Number)
     : ScalarAmount<PERCENT>(amount = amount,
                             unit = PERCENT)

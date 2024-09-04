@@ -10,7 +10,6 @@ import org.pcb.unit.div
 import org.pcb.unit.minus
 import org.pcb.unit.plus
 import org.pcb.unit.times
-import org.pcb.unit.units.scalar.Natural.NATURAL
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.LENGTH1
@@ -72,7 +71,7 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 2 / 2,
-                                       unit = NATURAL / TIME1),
+                                       unit = 1 / TIME1),
             actual = Percent(amount = 2 * 100) /
                      TimeAmount(amount = 2,
                                 unit = TIME1))
@@ -86,7 +85,7 @@ class ScalarAmountTest
                                   unit = TIME1),
             actual = Percent(amount = 2 * 100) /
                      FrequencyAmount(amount = 2,
-                                     unit = NATURAL / TIME1))
+                                     unit = 1 / TIME1))
     }
 
     @Test

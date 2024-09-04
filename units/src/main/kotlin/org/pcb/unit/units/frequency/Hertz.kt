@@ -7,14 +7,14 @@ import org.pcb.unit.Triple
 import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Frequency
+import org.pcb.unit.div
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.FrequencyAmount
 import org.pcb.unit.units.base.Second.SECOND
-import org.pcb.unit.units.scalar.Natural.NATURAL
 
 class Hertz(amount: Number)
     : FrequencyAmount<SECOND>(amount = amount,
-                              unit = NATURAL / SECOND)
+                              unit = 1 / SECOND)
 {
     object HERTZ : Unit<Frequency>(Frequency::class)
     {

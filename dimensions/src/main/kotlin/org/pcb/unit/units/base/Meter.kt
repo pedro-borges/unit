@@ -11,12 +11,9 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.base.Meter.METER
 
-@Suppress("unused")
 class Meter(amount: Number)
     : LengthAmount<METER>(amount.toBigBigDecimal(), METER)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object METER : Unit<Length>(Length::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)

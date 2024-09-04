@@ -8,7 +8,6 @@ import org.pcb.unit.units.CurrencyAmount
 import org.pcb.unit.units.DebtAmount
 import org.pcb.unit.units.FrequencyAmount
 import org.pcb.unit.units.TimeAmount
-import org.pcb.unit.units.scalar.Natural.NATURAL
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
 import org.pcb.unit.units.test.CURRENCY2
@@ -142,7 +141,7 @@ class DebtAmountTest
             actual = DebtAmount(amount = 2,
                                 unit = CURRENCY1 * TIME1) *
                      FrequencyAmount(amount = 2,
-                                     unit = NATURAL / TIME1))
+                                     unit = 1 / TIME1))
     }
 
     @Test
@@ -154,6 +153,6 @@ class DebtAmountTest
             actual = DebtAmount(amount = 2,
                                 unit = CURRENCY1 * TIME1) *
                      FrequencyAmount(amount = 1,
-                                     unit = NATURAL / TIME2))
+                                     unit = 1 / TIME2))
     }
 }

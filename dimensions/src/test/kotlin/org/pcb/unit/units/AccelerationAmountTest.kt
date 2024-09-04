@@ -7,7 +7,7 @@ import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
-import org.pcb.unit.units.scalar.Natural.NATURAL
+import org.pcb.unit.div
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
@@ -169,7 +169,7 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 2 / 2,
-                                       unit = NATURAL / TIME1),
+                                       unit = 1 / TIME1),
             actual = AccelerationAmount(amount = 2,
                                         unit = LENGTH1 /
                                                (TIME1 * TIME1)) /
@@ -182,7 +182,7 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 2 / 2,
-                                       unit = NATURAL / TIME1),
+                                       unit = 1 / TIME1),
             actual = AccelerationAmount(amount = 2,
                                         unit = LENGTH1 /
                                                (TIME1 * TIME1)) /

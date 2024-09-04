@@ -13,7 +13,6 @@ import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.FrequencyAmount
 import org.pcb.unit.units.ScalarAmount
 import org.pcb.unit.units.TimeAmount
-import org.pcb.unit.units.scalar.Natural.NATURAL
 
 fun String.toBigBigDecimal() =
     BigDecimal(this)
@@ -56,20 +55,22 @@ fun convert(vararg units: Pair<Unit<*>, Unit<*>>): BigDecimal =
         acc * unit.first.scale / unit.second.scale
     }
 
-operator fun Number.div(other: BigDecimal): BigDecimal = toBigBigDecimal().divide(other, 42, HALF_EVEN)
-
-operator fun Number.times(other: BigDecimal): BigDecimal = toBigBigDecimal().multiply(other, DECIMAL128)
-
-operator fun Number.plus(other: BigDecimal): BigDecimal = toBigBigDecimal().add(other)
-
-operator fun Number.minus(other: BigDecimal): BigDecimal = toBigBigDecimal().subtract(other)
-
 typealias Fraction<A, B> = Pair<A, B>
 
-val <A, B> Fraction<A, B>.major: A
-    get() = first
-val <A, B> Fraction<A, B>.minor
-    get() = second
+operator fun Number.div(other: BigDecimal): BigDecimal = toBigBigDecimal().divide(other, 42, HALF_EVEN)
+operator fun Number.times(other: BigDecimal): BigDecimal = toBigBigDecimal().multiply(other, DECIMAL128)
+operator fun Number.plus(other: BigDecimal): BigDecimal = toBigBigDecimal().add(other)
+operator fun Number.minus(other: BigDecimal): BigDecimal = toBigBigDecimal().subtract(other)
+
+operator fun <B : Unit<*>> Number.div(second: B) = Fraction(this, second)
+operator fun <B : Tuple<*, *>> Number.div(second: B) = Fraction(this, second)
+operator fun <B : Triple<*, *, *>> Number.div(second: B) = Fraction(this, second)
+operator fun <B : Quadruple<*, *, *, *>> Number.div(second: B) = Fraction(this, second)
+operator fun <B : Quintuple<*, *, *, *, *>> Number.div(second: B) = Fraction(this, second)
+operator fun <B : Sextuple<*, *, *, *, *, *>> Number.div(second: B) = Fraction(this, second)
+
+val <A, B> Fraction<A, B>.major: A get() = first
+val <A, B> Fraction<A, B>.minor get() = second
 
 operator fun <S : Unit<Scalar>> Number.times(that: ScalarAmount<S>) =
     this * that.amount * that.unit.scale
@@ -78,14 +79,14 @@ operator fun <S : Unit<Scalar>> Number.div(that: ScalarAmount<S>) =
     this / that.amount / that.unit.scale
 
 operator fun <S : Unit<Scalar>> Number.plus(that: ScalarAmount<S>) =
-    this + that.amount * convert(that.scalar to NATURAL)
+    this + that.amount / that.unit.scale
 
 operator fun <S : Unit<Scalar>> Number.minus(that: ScalarAmount<S>) =
-    this - that.amount * convert(that.scalar to NATURAL)
+    this - that.amount / that.unit.scale
 
 operator fun <T : Unit<Time>> Number.div(that: TimeAmount<T>) =
     FrequencyAmount(amount = this / that.amount,
-                    unit = NATURAL / that.time)
+                    unit = 1 / that.time)
 
 operator fun <T : Unit<Time>> Number.div(that: FrequencyAmount<T>) =
     TimeAmount(amount = this * that.amount,
@@ -100,4 +101,3 @@ operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<Electr
     ElectricConductivityAmount(amount = this / that.amount,
                                unit = (that.time * that.time * that.time * that.electricCurrent * that.electricCurrent) /
                                       (that.mass * that.length * that.length))
-

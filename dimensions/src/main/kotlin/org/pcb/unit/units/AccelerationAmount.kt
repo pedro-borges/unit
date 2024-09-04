@@ -16,7 +16,6 @@ import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.scalar.Natural.NATURAL
 
 open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
@@ -96,12 +95,12 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
         FrequencyAmount(amount = amount / that.amount
                                  / convert(that.length to length)
                                  * convert(that.time to time),
-                        unit = NATURAL / time)
+                        unit = 1 / time)
 
     @JvmName("divSpeed")
     operator fun div(that: SpeedAmount<L, T>) =
         FrequencyAmount(amount = amount / that.amount,
-                        unit = NATURAL / time)
+                        unit = 1 / time)
 
     // endregion
 

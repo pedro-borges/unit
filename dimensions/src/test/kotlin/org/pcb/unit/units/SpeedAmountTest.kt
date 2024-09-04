@@ -13,7 +13,6 @@ import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.MomentumAmount
 import org.pcb.unit.units.SpeedAmount
 import org.pcb.unit.units.TimeAmount
-import org.pcb.unit.units.scalar.Natural.NATURAL
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
@@ -170,7 +169,7 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 2 / 2,
-                                       unit = NATURAL / TIME1),
+                                       unit = 1 / TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 / TIME1) /
                      LengthAmount(amount = 2,
@@ -182,7 +181,7 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 2 / 2,
-                                       unit = NATURAL / TIME1),
+                                       unit = 1 / TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 / TIME1) /
                      LengthAmount(amount = 1,

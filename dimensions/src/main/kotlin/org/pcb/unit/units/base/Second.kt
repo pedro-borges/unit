@@ -11,12 +11,9 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.TimeAmount
 import org.pcb.unit.units.base.Second.SECOND
 
-@Suppress("unused")
 class Second(amount: Number)
     : TimeAmount<SECOND>(amount, SECOND)
 {
-    constructor(amount: String) : this(amount.toBigDecimal())
-
     object SECOND : Unit<Time>(Time::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
