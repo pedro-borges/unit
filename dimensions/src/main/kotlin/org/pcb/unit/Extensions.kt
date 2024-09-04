@@ -57,10 +57,10 @@ fun convert(vararg units: Pair<Unit<*>, Unit<*>>): BigDecimal =
 
 typealias Fraction<A, B> = Pair<A, B>
 
-operator fun Number.div(other: BigDecimal): BigDecimal = toBigBigDecimal().divide(other, 42, HALF_EVEN)
-operator fun Number.times(other: BigDecimal): BigDecimal = toBigBigDecimal().multiply(other, DECIMAL128)
-operator fun Number.plus(other: BigDecimal): BigDecimal = toBigBigDecimal().add(other)
-operator fun Number.minus(other: BigDecimal): BigDecimal = toBigBigDecimal().subtract(other)
+operator fun Number.div(other: BigDecimal): BigDecimal = toBigBigDecimal().divide(other, 42, HALF_EVEN).stripTrailingZeros()
+operator fun Number.times(other: BigDecimal): BigDecimal = toBigBigDecimal().multiply(other, DECIMAL128).stripTrailingZeros()
+operator fun Number.plus(other: BigDecimal): BigDecimal = toBigBigDecimal().add(other).stripTrailingZeros()
+operator fun Number.minus(other: BigDecimal): BigDecimal = toBigBigDecimal().subtract(other).stripTrailingZeros()
 
 operator fun <B : Unit<*>> Number.div(second: B) = Fraction(this, second)
 operator fun <B : Tuple<*, *>> Number.div(second: B) = Fraction(this, second)
@@ -79,10 +79,10 @@ operator fun <S : Unit<Scalar>> Number.div(that: ScalarAmount<S>) =
     this / that.amount / that.unit.scale
 
 operator fun <S : Unit<Scalar>> Number.plus(that: ScalarAmount<S>) =
-    this + that.amount / that.unit.scale
+    this + that.amount * that.unit.scale
 
 operator fun <S : Unit<Scalar>> Number.minus(that: ScalarAmount<S>) =
-    this - that.amount / that.unit.scale
+    this - that.amount * that.unit.scale
 
 operator fun <T : Unit<Time>> Number.div(that: TimeAmount<T>) =
     FrequencyAmount(amount = this / that.amount,
