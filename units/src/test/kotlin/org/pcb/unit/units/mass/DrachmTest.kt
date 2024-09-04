@@ -8,6 +8,9 @@ import org.pcb.units.amount.mass.Pound
 
 class DrachmTest
 {
+    private infix fun Drachm.equivalent(other: MassAmount<*>) =
+        assertEquals(this, Drachm(0) + other)
+
     @Test
     fun scales()
     {
@@ -18,7 +21,4 @@ class DrachmTest
         Drachm(16 * 16) equivalent Pound(1)
         Drachm(16 * 16 * 14) equivalent Stone(1)
     }
-
-    private infix fun Drachm.equivalent(other: MassAmount<*>) =
-        assertEquals(this, Drachm(0) + other)
 }

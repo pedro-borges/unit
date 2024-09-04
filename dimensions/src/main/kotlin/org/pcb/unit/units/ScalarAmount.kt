@@ -4,12 +4,15 @@ import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
+import org.pcb.unit.dimension.ElectricCurrent
+import org.pcb.unit.dimension.Length
+import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.scalar.NaturalAmount.ONE
+import org.pcb.unit.units.scalar.Natural.NATURAL
 
 open class ScalarAmount<S : Unit<Scalar>>(
         amount: Number,
@@ -21,7 +24,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 {
     val scalar = unit
 
-    // region -> Scalar
+    // region -> Natural
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ScalarAmount(amount = amount * that.amount * that.unit.scale,
@@ -55,15 +58,33 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         FrequencyAmount(amount = amount * unit.scale / that.amount,
-                        unit = ONE / that.time)
+                        unit = NATURAL / that.time)
 
     // endregion
 
     // region -> Time
 
     operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
-        TimeAmount(amount = amount * unit.scale / that.amount,
+        TimeAmount(amount = amount * unit.scale * that.amount,
                    unit = that.time)
+
+    // endregion
+
+    // region -> ElectricResistance
+
+    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> div(that: ElectricConductivityAmount<T, EC, M, L>) =
+        ElectricResistanceAmount(amount = amount * that.amount * unit.scale,
+                                 unit = (that.mass * that.length * that.length) /
+                                        (that.time * that.time * that.time * that.electricCurrent * that.electricCurrent))
+
+    // endregion
+
+    // region -> ElectricConductivity
+
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
+        ElectricConductivityAmount(amount = amount * unit.scale / that.amount,
+                                   unit = (that.time * that.time * that.time * that.electricCurrent * that.electricCurrent) /
+                                          (that.mass * that.length * that.length))
 
     // endregion
 }

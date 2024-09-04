@@ -14,13 +14,10 @@ import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.scalar.NaturalAmount
-import org.pcb.unit.units.scalar.NaturalAmount.ONE
+import org.pcb.unit.units.scalar.Natural.NATURAL
 
 open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
         amount: Number,
-        major: C,
-        minor: T,
         unit: Fraction<C, T>)
     : Amount<Rent>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
@@ -35,58 +32,44 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         RentAmount(amount = amount * that.amount * that.unit.scale,
-                   major = currency,
-                   minor = time,
                    unit = currency / time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         RentAmount(amount = amount / that.amount / that.unit.scale,
-                   major = currency,
-                   minor = time,
                    unit = currency / time)
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> plus(that: RentAmount<C, T>) =
         RentAmount(amount = amount + that.amount
                             * convert(that.currency to currency)
                             / convert(that.time to time),
-                   major = currency,
-                   minor = time,
                    unit = currency / time)
 
     @JvmName("plusRent")
     operator fun plus(that: RentAmount<C, T>) =
         RentAmount(amount = amount + that.amount,
-                   major = currency,
-                   minor = time,
                    unit = currency / time)
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> minus(that: RentAmount<C, T>) =
         RentAmount(amount = amount - that.amount
                             * convert(that.currency to currency)
                             / convert(that.time to time),
-                   major = currency,
-                   minor = time,
                    unit = currency / time)
 
     @JvmName("minusRent")
     operator fun minus(that: RentAmount<C, T>) =
         RentAmount(amount = amount - that.amount,
-                   major = currency,
-                   minor = time,
                    unit = currency / time)
 
     // endregion
 
-    // region -> Scalar
+    // region -> Natural
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> div(that: RentAmount<C, T>) =
-        NaturalAmount(amount = amount / that.amount
-                               / convert(that.currency to currency)
-                               * convert(that.time to time))
+        amount / that.amount / convert(that.currency to currency) * convert(that.time to time)
 
     @JvmName("divRent")
     operator fun div(that: RentAmount<C, T>) =
-        NaturalAmount(amount = amount / that.amount)
+        amount / that.amount
 
     // endregion
 
@@ -107,12 +90,12 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     operator fun <C : Unit<Currency>> div(that: CurrencyAmount<C>) =
         FrequencyAmount(amount = amount / that.amount / convert(that.currency to currency),
-                        unit = ONE / time)
+                        unit = NATURAL / time)
 
     @JvmName("divCurrency")
     operator fun div(that: CurrencyAmount<C>) =
         FrequencyAmount(amount = amount / that.amount,
-                        unit = ONE / time)
+                        unit = NATURAL / time)
 
     // endregion
 }

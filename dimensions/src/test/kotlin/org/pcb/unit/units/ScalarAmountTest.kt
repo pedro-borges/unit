@@ -1,10 +1,20 @@
 package org.pcb.unit.units
 
+import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.units.scalar.NaturalAmount
-import org.pcb.unit.units.scalar.NaturalAmount.ONE
-import org.pcb.unit.units.scalar.PercentAmount
+import org.pcb.unit.Unit
+import org.pcb.unit.dimension.Mass
+import org.pcb.unit.dimension.Time
+import org.pcb.unit.div
+import org.pcb.unit.minus
+import org.pcb.unit.plus
+import org.pcb.unit.times
+import org.pcb.unit.units.scalar.Natural.NATURAL
+import org.pcb.unit.units.scalar.Percent
+import org.pcb.unit.units.test.ELECTRICCURRENT1
+import org.pcb.unit.units.test.LENGTH1
+import org.pcb.unit.units.test.MASS1
 import org.pcb.unit.units.test.TIME1
 
 class ScalarAmountTest
@@ -13,54 +23,48 @@ class ScalarAmountTest
     fun timesScalar()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 * 2),
-            actual = NaturalAmount(amount = 2) *
-                     PercentAmount(amount = 2 * 100))
+            expected = BigDecimal(2 * 2),
+            actual = 2 * Percent(amount = 2 * 100))
     }
 
     @Test
     fun divScalar()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
-            actual = NaturalAmount(amount = 2) /
-                     PercentAmount(amount = 2 * 100))
+            expected = BigDecimal(2 / 2),
+            actual = 2 / Percent(amount = 2 * 100))
     }
 
     @Test
     fun plusSameScalar()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 0 + 1),
-            actual = NaturalAmount(amount = 0) +
-                     NaturalAmount(amount = 1))
+            expected = BigDecimal(0 + 1),
+            actual = 0 + BigDecimal(1))
     }
 
     @Test
     fun plusOtherScalar()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 0 + 1),
-            actual = NaturalAmount(amount = 0) +
-                     PercentAmount(amount = 100))
+            expected = BigDecimal(0 + 1),
+            actual = 0 + Percent(amount = 100))
     }
 
     @Test
     fun minusSameScalar()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 1 - 1),
-            actual = NaturalAmount(amount = 1) -
-                     NaturalAmount(amount = 1))
+            expected = BigDecimal(1 - 1),
+            actual = 1 - BigDecimal(1))
     }
 
     @Test
     fun minusOtherScalar()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 1 - 1),
-            actual = NaturalAmount(amount = 1) -
-                     PercentAmount(amount = 100))
+            expected = BigDecimal(1 - 1),
+            actual = 1 - Percent(amount = 100))
     }
 
     @Test
@@ -68,8 +72,8 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 2 / 2,
-                                       unit = ONE / TIME1),
-            actual = NaturalAmount(amount = 2) /
+                                       unit = NATURAL / TIME1),
+            actual = Percent(amount = 2 * 100) /
                      TimeAmount(amount = 2,
                                 unit = TIME1))
     }
@@ -78,10 +82,36 @@ class ScalarAmountTest
     fun divFrequency()
     {
         assertEquals(
-            expected = TimeAmount(amount = 2 / 2,
+            expected = TimeAmount(amount = 2 * 2,
                                   unit = TIME1),
-            actual = NaturalAmount(amount = 2) /
+            actual = Percent(amount = 2 * 100) /
                      FrequencyAmount(amount = 2,
-                                     unit = ONE / TIME1))
+                                     unit = NATURAL / TIME1))
+    }
+
+    @Test
+    fun divElectricConductivity()
+    {
+        assertEquals<ElectricResistanceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
+            expected = ElectricResistanceAmount(amount = 2 * 2,
+                                                unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                       (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)),
+            actual = Percent(amount = 2 * 100) /
+                     ElectricConductivityAmount(amount = 2,
+                                                unit = (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)
+                                                       / (MASS1 * LENGTH1 * LENGTH1)))
+    }
+
+    @Test
+    fun divElectricResistance()
+    {
+        assertEquals<ElectricConductivityAmount<out Unit<Time>, ELECTRICCURRENT1, out Unit<Mass>, LENGTH1>>(
+            expected = ElectricConductivityAmount(amount = 2 / 2,
+                                                  unit = (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)
+                                                         / (MASS1 * LENGTH1 * LENGTH1)),
+            actual = Percent(amount = 2 * 100) /
+                     ElectricResistanceAmount(amount = 2,
+                                              unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                     (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)))
     }
 }

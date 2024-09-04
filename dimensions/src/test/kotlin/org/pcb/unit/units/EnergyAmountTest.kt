@@ -1,5 +1,6 @@
 package org.pcb.unit
 
+import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.dimension.ElectricCurrent
@@ -15,8 +16,7 @@ import org.pcb.unit.units.MomentumAmount
 import org.pcb.unit.units.PowerAmount
 import org.pcb.unit.units.SpeedAmount
 import org.pcb.unit.units.TimeAmount
-import org.pcb.unit.units.scalar.NaturalAmount
-import org.pcb.unit.units.scalar.PercentAmount
+import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
 import org.pcb.unit.units.test.LENGTH1
@@ -50,7 +50,7 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   unit = (MASS1 * LENGTH1 * LENGTH1) /
                                          (TIME1 * TIME1)) *
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -63,7 +63,7 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   unit = (MASS1 * LENGTH1 * LENGTH1) /
                                          (TIME1 * TIME1)) /
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -130,7 +130,7 @@ class EnergyAmountTest
     fun divSameEnergy()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = EnergyAmount(amount = 2,
                                   unit = (MASS1 * LENGTH1 * LENGTH1) /
                                          (TIME1 * TIME1)) /
@@ -143,7 +143,7 @@ class EnergyAmountTest
     fun divOtherEnergy()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = EnergyAmount(amount = 2,
                                   unit = (MASS1 * LENGTH1 * LENGTH1) /
                                          (TIME1 * TIME1)) /
@@ -206,6 +206,34 @@ class EnergyAmountTest
                      ForceAmount(amount = 2,
                                  unit = (MASS2 * LENGTH2) /
                                         (TIME2 * TIME2)))
+    }
+
+    @Test
+    fun divSamePower()
+    {
+        assertEquals(
+            expected = TimeAmount(amount = 2 / 2,
+                                    unit = TIME1),
+            actual = EnergyAmount(amount = 2,
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
+                     PowerAmount(amount = 2,
+                                 unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                        (TIME1 * TIME1 * TIME1)))
+    }
+
+    @Test
+    fun divOtherPower()
+    {
+        assertEquals(
+            expected = TimeAmount(amount = 2 / 2,
+                                    unit = TIME1),
+            actual = EnergyAmount(amount = 2,
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
+                     PowerAmount(amount = 2,
+                                 unit = (MASS2 * LENGTH2 * LENGTH2) /
+                                        (TIME2 * TIME2 * TIME2)))
     }
 
     @Test

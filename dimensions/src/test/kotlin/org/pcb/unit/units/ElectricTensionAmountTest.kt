@@ -1,5 +1,6 @@
 package org.pcb.unit
 
+import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.dimension.ElectricCurrent
@@ -14,8 +15,7 @@ import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.ElectricTensionAmount
 import org.pcb.unit.units.EnergyAmount
 import org.pcb.unit.units.PowerAmount
-import org.pcb.unit.units.scalar.NaturalAmount
-import org.pcb.unit.units.scalar.PercentAmount
+import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
 import org.pcb.unit.units.test.LENGTH1
@@ -49,7 +49,7 @@ class ElectricTensionAmountTest
             actual = ElectricTensionAmount(amount = 2,
                                            unit = (MASS1 * LENGTH1 * LENGTH1) /
                                                   (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)) *
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -62,7 +62,7 @@ class ElectricTensionAmountTest
             actual = ElectricTensionAmount(amount = 2,
                                            unit = (MASS1 * LENGTH1 * LENGTH1) /
                                                   (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)) /
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -129,7 +129,7 @@ class ElectricTensionAmountTest
     fun divSameElectricTension()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = ElectricTensionAmount(amount = 2,
                                            unit = (MASS1 * LENGTH1 * LENGTH1) /
                                                   (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)) /
@@ -142,7 +142,7 @@ class ElectricTensionAmountTest
     fun divOtherElectricTension()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = ElectricTensionAmount(amount = 2,
                                            unit = (MASS1 * LENGTH1 * LENGTH1) /
                                                   (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)) /

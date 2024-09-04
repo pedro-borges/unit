@@ -7,6 +7,9 @@ import org.pcb.unit.units.base.Meter
 
 class HandTest
 {
+    private infix fun Hand.equivalent(other: LengthAmount<*>) =
+        assertEquals(this, Hand(0) + other)
+
     @Test
     fun scales()
     {
@@ -22,7 +25,4 @@ class HandTest
         Hand(3 * 3 * 22 * 10 * 8) equivalent Mile(1)
         Hand(3 * 3 * 22 * 10 * 8 * 3) equivalent League(1)
     }
-
-    private infix fun Hand.equivalent(other: LengthAmount<*>) =
-        assertEquals(this, Hand(0) + other)
 }

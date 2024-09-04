@@ -12,7 +12,6 @@ import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.scalar.NaturalAmount
 
 open class TimeAmount<T : Unit<Time>>(
         amount: Number,
@@ -54,14 +53,14 @@ open class TimeAmount<T : Unit<Time>>(
 
     // endregion
 
-    // region -> Scalar
+    // region -> Natural
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
-        NaturalAmount(amount = amount / that.amount / convert(that.time to time))
+        amount / that.amount / convert(that.time to time)
 
     @JvmName("divTime")
     operator fun div(that: TimeAmount<T>) =
-        NaturalAmount(amount = amount / that.amount)
+        amount / that.amount
 
     // endregion
 
@@ -70,6 +69,23 @@ open class TimeAmount<T : Unit<Time>>(
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         PaceAmount(amount = amount / that.amount,
                    unit = time / that.length)
+
+    // endregion
+
+    // region -> Energy
+
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> times(that: PowerAmount<M, L, T>) =
+        EnergyAmount(amount = amount * that.amount / convert(that.time to time,
+                                                             that.time to time,
+                                                             that.time to time),
+                     unit = (that.mass * that.length * that.length) /
+                            (time * time))
+
+    @JvmName("timesPower")
+    operator fun <M : Unit<Mass>, L : Unit<Length>> times(that: PowerAmount<M, L, T>) =
+        EnergyAmount(amount = amount * that.amount,
+                     unit = (that.mass * that.length * that.length) /
+                            (time * time))
 
     // endregion
 

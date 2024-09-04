@@ -14,7 +14,6 @@ import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.scalar.NaturalAmount
 
 open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
         amount: Number,
@@ -62,25 +61,21 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
 
     // endregion
 
-    // region -> Scalar
+    // region -> Natural
 
     operator fun <T : Unit<Time>, L : Unit<Length>> div(that: PaceAmount<T, L>) =
-        NaturalAmount(amount = amount / that.amount
-                               * convert(that.time to time)
-                               / convert(that.length to length))
+        amount / that.amount * convert(that.time to time) / convert(that.length to length)
 
     @JvmName("divPace")
     operator fun div(that: PaceAmount<T, L>) =
-        NaturalAmount(amount = amount / that.amount)
+        amount / that.amount
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
-        NaturalAmount(amount = amount / that.amount
-                               / convert(that.time to time)
-                               * convert(that.length to length))
+        amount / that.amount / convert(that.time to time) * convert(that.length to length)
 
     @JvmName("timesSpeed")
     operator fun times(that: SpeedAmount<L, T>) =
-        NaturalAmount(amount = amount / that.amount)
+        amount / that.amount
 
     // endregion
 

@@ -1,5 +1,6 @@
 package org.pcb.unit
 
+import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.dimension.Currency
@@ -7,9 +8,8 @@ import org.pcb.unit.units.CurrencyAmount
 import org.pcb.unit.units.DebtAmount
 import org.pcb.unit.units.FrequencyAmount
 import org.pcb.unit.units.TimeAmount
-import org.pcb.unit.units.scalar.NaturalAmount
-import org.pcb.unit.units.scalar.NaturalAmount.ONE
-import org.pcb.unit.units.scalar.PercentAmount
+import org.pcb.unit.units.scalar.Natural.NATURAL
+import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
 import org.pcb.unit.units.test.CURRENCY2
 import org.pcb.unit.units.test.TIME1
@@ -25,7 +25,7 @@ class DebtAmountTest
                                   unit = CURRENCY1 * TIME1),
             actual = DebtAmount(amount = 2,
                                 unit = CURRENCY1 * TIME1) *
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -36,7 +36,7 @@ class DebtAmountTest
                                   unit = CURRENCY1 * TIME1),
             actual = DebtAmount(amount = 2,
                                 unit = CURRENCY1 * TIME1) /
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -91,7 +91,7 @@ class DebtAmountTest
     fun divSameDebt()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = DebtAmount(amount = 2,
                                 unit = CURRENCY1 * TIME1) /
                      DebtAmount(amount = 2,
@@ -102,7 +102,7 @@ class DebtAmountTest
     fun divOtherDebt()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 4 / (2 * 2)),
+            expected = BigDecimal(4 / (2 * 2)),
             actual = DebtAmount(amount = 4,
                                 unit = CURRENCY1 * TIME1) /
                      DebtAmount(amount = 1,
@@ -142,7 +142,7 @@ class DebtAmountTest
             actual = DebtAmount(amount = 2,
                                 unit = CURRENCY1 * TIME1) *
                      FrequencyAmount(amount = 2,
-                                     unit = ONE / TIME1))
+                                     unit = NATURAL / TIME1))
     }
 
     @Test
@@ -154,6 +154,6 @@ class DebtAmountTest
             actual = DebtAmount(amount = 2,
                                 unit = CURRENCY1 * TIME1) *
                      FrequencyAmount(amount = 1,
-                                     unit = ONE / TIME2))
+                                     unit = NATURAL / TIME2))
     }
 }

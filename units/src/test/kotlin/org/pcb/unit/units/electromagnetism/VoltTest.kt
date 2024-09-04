@@ -18,37 +18,49 @@ import org.pcb.unit.units.mechanics.Watt
 
 class VoltTest
 {
+    private infix fun Volt.equivalent(other: ElectricTensionAmount<*, *, *, *>) =
+        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(this, Volt(0) + other)
+
     @Test
     fun unit()
     {
         Volt(0.5) equivalent Kilogram(2) * (Meter(2) / Second(2)) * (Meter(2) / Second(2)) / Second(2) / Ampere(2)
         Volt(2) equivalent ElectricTensionAmount(2, VOLT)
-
-        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
-            expected = Volt(amount = 6 / 3),
-            actual = Coulomb(6) / Farad(3))
-
-        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
-            expected = Volt(amount = 6 / 3),
-            actual = Joule(6) / Coulomb(3))
-
-        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
-            expected = Volt(amount = 6 / 3),
-            actual = Watt(6) / Ampere(3))
-
-        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
-            expected = Volt(amount = 6 / 3),
-            actual = Ampere(6) / Siemens(3))
-
-        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
-            expected = Volt(amount = 2 * 3),
-            actual = Ampere(2) * Ohm(3))
-
-        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
-            expected = Volt(amount = 2 * 3),
-            actual = Ohm(2) * Ampere(3))
     }
 
-    private infix fun Volt.equivalent(other: ElectricTensionAmount<*, *, *, *>) =
-        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(this, Volt(0) + other)
+    @Test
+    fun coulombDivFarad() =
+        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Volt(6 / 3),
+            actual = Coulomb(6) / Farad(3))
+
+    @Test
+    fun jouleDivCoulomb() =
+        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Volt(6 / 3),
+            actual = Joule(6) / Coulomb(3))
+
+    @Test
+    fun wattDivAmpere() =
+        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Volt(6 / 3),
+            actual = Watt(6) / Ampere(3))
+
+    @Test
+    fun ampereDivSiemens() =
+        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Volt(6 / 3),
+            actual = Ampere(6) / Siemens(3))
+
+    @Test
+    fun ampereTimesOhm() =
+        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Volt(2 * 3),
+            actual = Ampere(2) * Ohm(3))
+
+    @Test
+    fun ohmTimesAmpere() =
+        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Volt(2 * 3),
+            actual = Ohm(2) * Ampere(3))
 }

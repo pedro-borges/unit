@@ -7,6 +7,9 @@ import org.pcb.unit.units.base.Meter
 
 class InchTest
 {
+    private infix fun Inch.equivalent(other: LengthAmount<*>) =
+        assertEquals(this, Inch(0) + other)
+
     @Test
     fun scales()
     {
@@ -22,7 +25,4 @@ class InchTest
         Inch(4 * 3 * 3 * 22 * 10 * 8) equivalent Mile(1)
         Inch(4 * 3 * 3 * 22 * 10 * 8 * 3) equivalent League(1)
     }
-
-    private infix fun Inch.equivalent(other: LengthAmount<*>) =
-        assertEquals(this, Inch(0) + other)
 }

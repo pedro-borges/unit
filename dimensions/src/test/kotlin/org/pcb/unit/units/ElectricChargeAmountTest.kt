@@ -1,5 +1,6 @@
 package org.pcb.unit
 
+import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.dimension.Domain
@@ -11,9 +12,9 @@ import org.pcb.unit.units.ElectricCapacitanceAmount
 import org.pcb.unit.units.ElectricChargeAmount
 import org.pcb.unit.units.ElectricCurrentAmount
 import org.pcb.unit.units.ElectricTensionAmount
+import org.pcb.unit.units.EnergyAmount
 import org.pcb.unit.units.TimeAmount
-import org.pcb.unit.units.scalar.NaturalAmount
-import org.pcb.unit.units.scalar.PercentAmount
+import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
 import org.pcb.unit.units.test.LENGTH1
@@ -33,7 +34,7 @@ class ElectricChargeAmountTest
                                             unit = ELECTRICCURRENT1 * TIME1),
             actual = ElectricChargeAmount(amount = 2,
                                           unit = ELECTRICCURRENT1 * TIME1) *
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -44,7 +45,7 @@ class ElectricChargeAmountTest
                                             unit = ELECTRICCURRENT1 * TIME1),
             actual = ElectricChargeAmount(amount = 2,
                                           unit = ELECTRICCURRENT1 * TIME1) /
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -99,7 +100,7 @@ class ElectricChargeAmountTest
     fun divSameElectricCharge()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 1),
+            expected = BigDecimal(1),
             actual = ElectricChargeAmount(amount = 2,
                                           unit = ELECTRICCURRENT1 * TIME1) /
                      ElectricChargeAmount(amount = 2,
@@ -110,7 +111,7 @@ class ElectricChargeAmountTest
     fun divOtherElectricCharge()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 4 / (2 * 2)),
+            expected = BigDecimal(4 / (2 * 2)),
             actual = ElectricChargeAmount(amount = 4,
                                           unit = ELECTRICCURRENT1 * TIME1) /
                      ElectricChargeAmount(amount = 1,
@@ -183,5 +184,33 @@ class ElectricChargeAmountTest
                      ElectricCapacitanceAmount(amount = 2,
                                                unit = (TIME2 * TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2) /
                                                       (MASS2 * LENGTH2 * LENGTH2)))
+    }
+
+    @Test
+    fun timesSameElectricTension()
+    {
+        assertEquals<Amount<out Domain>>(
+            expected = EnergyAmount(amount = 2 * 2,
+                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                           (TIME1 * TIME1)),
+            actual = ElectricChargeAmount(amount = 2,
+                                          unit = ELECTRICCURRENT1 * TIME1) *
+                     ElectricTensionAmount(amount = 2,
+                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                  (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)))
+    }
+
+    @Test
+    fun timesOtherElectricTension()
+    {
+        assertEquals<Amount<out Domain>>(
+            expected = EnergyAmount(amount = 2 * 2,
+                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                           (TIME1 * TIME1)),
+            actual = ElectricChargeAmount(amount = 2,
+                                          unit = ELECTRICCURRENT1 * TIME1) *
+                     ElectricTensionAmount(amount = 2 * (2 * 2 * 2 * 2),
+                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                  (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2)))
     }
 }

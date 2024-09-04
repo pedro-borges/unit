@@ -1,5 +1,6 @@
 package org.pcb.unit
 
+import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.dimension.Length
@@ -10,8 +11,7 @@ import org.pcb.unit.units.ElectricTensionAmount
 import org.pcb.unit.units.EnergyAmount
 import org.pcb.unit.units.PowerAmount
 import org.pcb.unit.units.TimeAmount
-import org.pcb.unit.units.scalar.NaturalAmount
-import org.pcb.unit.units.scalar.PercentAmount
+import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
@@ -44,7 +44,7 @@ class PowerAmountTest
             actual = PowerAmount(amount = 2,
                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
                                         (TIME1 * TIME1 * TIME1)) *
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -57,7 +57,7 @@ class PowerAmountTest
             actual = PowerAmount(amount = 2,
                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
                                         (TIME1 * TIME1 * TIME1)) /
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -124,7 +124,7 @@ class PowerAmountTest
     fun divSamePower()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = PowerAmount(amount = 2,
                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
                                         (TIME1 * TIME1 * TIME1)) /
@@ -137,7 +137,7 @@ class PowerAmountTest
     fun divOtherPower()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = PowerAmount(amount = 2,
                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
                                         (TIME1 * TIME1 * TIME1)) /

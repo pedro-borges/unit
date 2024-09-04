@@ -16,17 +16,49 @@ import org.pcb.unit.units.mechanics.Joule.JOULE
 
 class JouleTest
 {
+    private infix fun Joule.equivalent(other: EnergyAmount<*, *, *>) =
+        assertEquals<EnergyAmount<out Unit<Mass>, METER, out Unit<Time>>>(this, Joule(0) + other)
+
     @Test
     fun unit()
     {
         Joule(2) equivalent Kilogram(2) * (Meter(2) / Second(2)) * (Meter(2) / Second(2))
         Joule(2) equivalent EnergyAmount(2, JOULE)
-
-        assertEquals<EnergyAmount<out Unit<Mass>, METER, out Unit<Time>>>(
-            expected = Joule(amount = 2 * 3),
-            actual = Volt(2) * Coulomb(3))
     }
 
-    private infix fun Joule.equivalent(other: EnergyAmount<*, *, *>) =
-        assertEquals<EnergyAmount<out Unit<Mass>, METER, out Unit<Time>>>(this, Joule(0) + other)
+    @Test
+    fun secondTimesWatt() =
+        assertEquals<EnergyAmount<out Unit<Mass>, METER, out Unit<Time>>>(
+            expected = Joule(2 * 3),
+            actual = Second(2) * Watt(3))
+
+    @Test
+    fun wattTimesSecond() =
+        assertEquals<EnergyAmount<out Unit<Mass>, METER, out Unit<Time>>>(
+            expected = Joule(2 * 3),
+            actual = Watt(2) * Second(3))
+
+    @Test
+    fun meterTimesNewton() =
+        assertEquals<EnergyAmount<out Unit<Mass>, METER, out Unit<Time>>>(
+            expected = Joule(2 * 3),
+            actual = Meter(2) * Newton(3))
+
+    @Test
+    fun newtonTimesMeter() =
+        assertEquals<EnergyAmount<out Unit<Mass>, METER, out Unit<Time>>>(
+            expected = Joule(2 * 3),
+            actual = Newton(2) * Meter(3))
+
+    @Test
+    fun coulombTimesVolt() =
+        assertEquals<EnergyAmount<out Unit<Mass>, METER, out Unit<Time>>>(
+            expected = Joule(2 * 3),
+            actual = Coulomb(2) * Volt(3))
+
+    @Test
+    fun voltTimesCoulomb() =
+        assertEquals<EnergyAmount<out Unit<Mass>, METER, out Unit<Time>>>(
+            expected = Joule(2 * 3),
+            actual = Volt(2) * Coulomb(3))
 }

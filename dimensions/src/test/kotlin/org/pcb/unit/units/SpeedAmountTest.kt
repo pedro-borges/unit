@@ -1,5 +1,6 @@
 package org.pcb.unit
 
+import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.dimension.Length
@@ -12,9 +13,8 @@ import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.MomentumAmount
 import org.pcb.unit.units.SpeedAmount
 import org.pcb.unit.units.TimeAmount
-import org.pcb.unit.units.scalar.NaturalAmount
-import org.pcb.unit.units.scalar.NaturalAmount.ONE
-import org.pcb.unit.units.scalar.PercentAmount
+import org.pcb.unit.units.scalar.Natural.NATURAL
+import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
 import org.pcb.unit.units.test.MASS1
@@ -31,7 +31,7 @@ class SpeedAmountTest
                                    unit = LENGTH1 / TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 / TIME1) *
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -42,7 +42,7 @@ class SpeedAmountTest
                                    unit = LENGTH1 / TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 / TIME1) /
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -97,7 +97,7 @@ class SpeedAmountTest
     fun divSameSpeed()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 / TIME1) /
                      SpeedAmount(amount = 2,
@@ -108,7 +108,7 @@ class SpeedAmountTest
     fun divOtherSpeed()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 / TIME1) /
                      SpeedAmount(amount = 2,
@@ -170,7 +170,7 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 2 / 2,
-                                       unit = ONE / TIME1),
+                                       unit = NATURAL / TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 / TIME1) /
                      LengthAmount(amount = 2,
@@ -182,7 +182,7 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 2 / 2,
-                                       unit = ONE / TIME1),
+                                       unit = NATURAL / TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 / TIME1) /
                      LengthAmount(amount = 1,

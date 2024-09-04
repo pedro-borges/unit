@@ -12,7 +12,6 @@ import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.scalar.NaturalAmount
 
 open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
         amount: Number,
@@ -54,14 +53,14 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
 
     // endregion
 
-    // region -> Scalar
+    // region -> Natural
 
     operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
-        NaturalAmount(amount = amount / that.amount / convert(that.electricCurrent to electricCurrent))
+        amount / that.amount / convert(that.electricCurrent to electricCurrent)
 
     @JvmName("divElectricCurrent")
     operator fun div(that: ElectricCurrentAmount<EC>) =
-        NaturalAmount(amount = amount / that.amount)
+        amount / that.amount
 
     // endregion
 

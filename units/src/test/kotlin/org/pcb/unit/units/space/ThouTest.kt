@@ -7,6 +7,9 @@ import org.pcb.unit.units.base.Meter
 
 class ThouTest
 {
+    private infix fun Thou.equivalent(other: LengthAmount<*>) =
+        assertEquals(this, Thou(0) + other)
+
     @Test
     fun scales()
     {
@@ -22,7 +25,4 @@ class ThouTest
         Thou(1000 * 4 * 3 * 3 * 22 * 10 * 8) equivalent Mile(1)
         Thou(1000 * 4 * 3 * 3 * 22 * 10 * 8 * 3) equivalent League(1)
     }
-
-    private infix fun Thou.equivalent(other: LengthAmount<*>) =
-        assertEquals(this, Thou(0) + other)
 }

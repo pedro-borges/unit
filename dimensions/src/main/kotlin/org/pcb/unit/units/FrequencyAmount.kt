@@ -15,8 +15,7 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Second.SECOND
-import org.pcb.unit.units.scalar.NaturalAmount
-import org.pcb.unit.units.scalar.NaturalAmount.ONE
+import org.pcb.unit.units.scalar.Natural.NATURAL
 
 open class FrequencyAmount<T : Unit<Time>>(
         amount: Number,
@@ -32,54 +31,54 @@ open class FrequencyAmount<T : Unit<Time>>(
     {
         operator fun invoke(amount: Number, unit: Unit<Frequency>) =
             FrequencyAmount(amount = amount.toBigBigDecimal() / unit.scale,
-                            unit = ONE / SECOND)
+                            unit = NATURAL / SECOND)
     }
 
     // region -> Frequency
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         FrequencyAmount(amount = amount * that.amount * that.unit.scale,
-                        unit = ONE / time)
+                        unit = NATURAL / time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         FrequencyAmount(amount = amount / that.amount / that.unit.scale,
-                        unit = ONE / time)
+                        unit = NATURAL / time)
 
     operator fun <T : Unit<Time>> plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount / convert(that.time to time),
-                        unit = ONE / time)
+                        unit = NATURAL / time)
 
     @JvmName("plusFrequency")
     operator fun plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount,
-                        unit = ONE / time)
+                        unit = NATURAL / time)
 
     operator fun <T : Unit<Time>> minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount / convert(that.time to time),
-                        unit = ONE / time)
+                        unit = NATURAL / time)
 
     @JvmName("minusFrequency")
     operator fun minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount,
-                        unit = ONE / time)
+                        unit = NATURAL / time)
 
     // endregion
 
-    // region -> Scalar
+    // region -> Natural
 
     operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
-        NaturalAmount(amount = amount / that.amount * convert(that.time to time))
+        amount / that.amount * convert(that.time to time)
 
     @JvmName("divFrequency")
     operator fun div(that: FrequencyAmount<T>) =
-        NaturalAmount(amount = amount / that.amount)
+        amount / that.amount
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
-        NaturalAmount(amount = amount * that.amount / convert(that.time to time))
+        amount * that.amount / convert(that.time to time)
 
     @JvmName("timesTime")
     operator fun times(that: TimeAmount<T>) =
-        NaturalAmount(amount = amount * that.amount)
+        amount * that.amount
 
     // endregion
 
@@ -121,8 +120,6 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     operator fun <C : Unit<Currency>> times(that: CurrencyAmount<C>) =
         RentAmount(amount = that.amount / amount,
-                   major = that.currency,
-                   minor = time,
                    unit = that.currency / time)
 
     // endregion

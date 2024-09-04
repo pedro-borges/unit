@@ -9,14 +9,13 @@ import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.ScalarAmount
-import org.pcb.unit.units.scalar.PercentAmount.PERCENT
+import org.pcb.unit.units.scalar.Natural.NATURAL
 
-@Suppress("unused")
-class PercentAmount(amount: Number)
-    : ScalarAmount<PERCENT>(amount = amount,
-                            unit = PERCENT)
+class Natural(amount: Number)
+    : ScalarAmount<NATURAL>(amount = amount,
+                            unit = NATURAL)
 {
-    object PERCENT : Unit<Scalar>(Scalar::class)
+    object NATURAL : Unit<Scalar>(Scalar::class)
     {
         override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
         override fun <B : Unit<*>> div(second: B) = Pair(this, second)
@@ -26,7 +25,7 @@ class PercentAmount(amount: Number)
         override fun <B : Quintuple<*, *, *, *, *>> div(second: B) = Pair(this, second)
         override fun <B : Sextuple<*, *, *, *, *, *>> div(second: B) = Pair(this, second)
 
-        override val symbol = "%"
-        override val scale = 0.01.toBigBigDecimal()
+        override val symbol = ""
+        override val scale = 1.toBigBigDecimal()
     }
 }

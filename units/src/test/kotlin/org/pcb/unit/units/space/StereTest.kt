@@ -10,6 +10,9 @@ import org.pcb.unit.units.space.Stere.STERE
 
 class StereTest
 {
+    private infix fun Stere.equivalent(other: VolumeAmount<*>) =
+        assertEquals<VolumeAmount<out Unit<Length>>>(this, Stere(0) + other)
+
     @Test
     fun scales()
     {
@@ -17,7 +20,4 @@ class StereTest
         Stere(1) equivalent Meter(1) * Meter(1) * Meter(1)
         Stere(1) equivalent VolumeAmount(1, STERE)
     }
-
-    private infix fun Stere.equivalent(other: VolumeAmount<*>) =
-        assertEquals<VolumeAmount<out Unit<Length>>>(this, Stere(0) + other)
 }

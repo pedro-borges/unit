@@ -7,6 +7,9 @@ import org.pcb.unit.units.base.Meter
 
 class FurlongTest
 {
+    private infix fun Furlong.equivalent(other: LengthAmount<*>) =
+        assertEquals(this, Furlong(0) + other)
+
     @Test
     fun scales()
     {
@@ -22,7 +25,4 @@ class FurlongTest
         Furlong(8) equivalent Mile(1)
         Furlong(8 * 3) equivalent League(1)
     }
-
-    private infix fun Furlong.equivalent(other: LengthAmount<*>) =
-        assertEquals(this, Furlong(0) + other)
 }

@@ -7,6 +7,9 @@ import org.pcb.unit.units.base.Second
 
 class HourTest
 {
+    private infix fun Hour.equivalent(other: TimeAmount<*>) =
+        assertEquals(this, Hour(0) + other)
+
     @Test
     fun scales()
     {
@@ -15,7 +18,4 @@ class HourTest
         Hour(1) equivalent Hour(1)
         Hour(24) equivalent Day(1)
     }
-
-    private infix fun Hour.equivalent(other: TimeAmount<*>) =
-        assertEquals(this, Hour(0) + other)
 }

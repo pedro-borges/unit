@@ -3,6 +3,17 @@ package org.pcb.unit
 import java.math.BigDecimal
 import java.math.MathContext.DECIMAL128
 import java.math.RoundingMode.HALF_EVEN
+import org.pcb.unit.dimension.ElectricCurrent
+import org.pcb.unit.dimension.Length
+import org.pcb.unit.dimension.Mass
+import org.pcb.unit.dimension.Scalar
+import org.pcb.unit.dimension.Time
+import org.pcb.unit.units.ElectricConductivityAmount
+import org.pcb.unit.units.ElectricResistanceAmount
+import org.pcb.unit.units.FrequencyAmount
+import org.pcb.unit.units.ScalarAmount
+import org.pcb.unit.units.TimeAmount
+import org.pcb.unit.units.scalar.Natural.NATURAL
 
 fun String.toBigBigDecimal() =
     BigDecimal(this)
@@ -49,9 +60,44 @@ operator fun Number.div(other: BigDecimal): BigDecimal = toBigBigDecimal().divid
 
 operator fun Number.times(other: BigDecimal): BigDecimal = toBigBigDecimal().multiply(other, DECIMAL128)
 
+operator fun Number.plus(other: BigDecimal): BigDecimal = toBigBigDecimal().add(other)
+
+operator fun Number.minus(other: BigDecimal): BigDecimal = toBigBigDecimal().subtract(other)
+
 typealias Fraction<A, B> = Pair<A, B>
 
 val <A, B> Fraction<A, B>.major: A
     get() = first
 val <A, B> Fraction<A, B>.minor
     get() = second
+
+operator fun <S : Unit<Scalar>> Number.times(that: ScalarAmount<S>) =
+    this * that.amount * that.unit.scale
+
+operator fun <S : Unit<Scalar>> Number.div(that: ScalarAmount<S>) =
+    this / that.amount / that.unit.scale
+
+operator fun <S : Unit<Scalar>> Number.plus(that: ScalarAmount<S>) =
+    this + that.amount * convert(that.scalar to NATURAL)
+
+operator fun <S : Unit<Scalar>> Number.minus(that: ScalarAmount<S>) =
+    this - that.amount * convert(that.scalar to NATURAL)
+
+operator fun <T : Unit<Time>> Number.div(that: TimeAmount<T>) =
+    FrequencyAmount(amount = this / that.amount,
+                    unit = NATURAL / that.time)
+
+operator fun <T : Unit<Time>> Number.div(that: FrequencyAmount<T>) =
+    TimeAmount(amount = this * that.amount,
+               unit = that.time)
+
+operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> Number.div(that: ElectricConductivityAmount<T, EC, M, L>) =
+    ElectricResistanceAmount(amount = this * that.amount,
+                             unit = (that.mass * that.length * that.length) /
+                                    (that.time * that.time * that.time * that.electricCurrent * that.electricCurrent))
+
+operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> Number.div(that: ElectricResistanceAmount<M, L, T, EC>) =
+    ElectricConductivityAmount(amount = this / that.amount,
+                               unit = (that.time * that.time * that.time * that.electricCurrent * that.electricCurrent) /
+                                      (that.mass * that.length * that.length))
+

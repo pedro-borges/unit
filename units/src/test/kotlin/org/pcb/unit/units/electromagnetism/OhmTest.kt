@@ -5,6 +5,7 @@ import kotlin.test.assertEquals
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
+import org.pcb.unit.div
 import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.base.Ampere
 import org.pcb.unit.units.base.Ampere.AMPERE
@@ -16,21 +17,30 @@ import org.pcb.unit.units.electromagnetism.Ohm.OHM
 
 class OhmTest
 {
+    private infix fun Ohm.equivalent(other: ElectricResistanceAmount<*, *, *, *>) =
+        assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(this, Ohm(0) + other)
+
     @Test
     fun unit()
     {
         Ohm(0.25) equivalent Kilogram(2) * (Meter(2) / Second(2)) * (Meter(2) / Second(2)) / Second(2) / Ampere(2) / Ampere(2)
         Ohm(2) equivalent ElectricResistanceAmount(2, OHM)
-
-        assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
-            expected = Ohm(amount = 6 / 3),
-            actual = Volt(6) / Ampere(3))
-
-        assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
-            expected = Ohm(amount = 6 / 3),
-            actual = Second(6) / Farad(3))
     }
 
-    private infix fun Ohm.equivalent(other: ElectricResistanceAmount<*, *, *, *>) =
-        assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(this, Ohm(0) + other)
+    @Test
+    fun voltDivAmpere() =
+        assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Ohm(6 / 3),
+            actual = Volt(6) / Ampere(3))
+
+    @Test
+    fun secondDivFarad() =
+        assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Ohm(6 / 3),
+            actual = Second(6) / Farad(3))
+    @Test
+    fun oneDivSiemens() =
+        assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Ohm(2 * 3),
+            actual = 2 / Siemens(3))
 }

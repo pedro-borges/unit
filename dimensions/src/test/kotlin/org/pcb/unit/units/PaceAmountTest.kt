@@ -1,11 +1,11 @@
 package org.pcb.unit.units
 
+import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Time
-import org.pcb.unit.units.scalar.NaturalAmount
-import org.pcb.unit.units.scalar.PercentAmount
+import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
 import org.pcb.unit.units.test.TIME1
@@ -21,7 +21,7 @@ class PaceAmountTest
                                   unit = TIME1 / LENGTH1),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 / LENGTH1) *
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -32,7 +32,7 @@ class PaceAmountTest
                                   unit = TIME1 / LENGTH1),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 / LENGTH1) /
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -87,7 +87,7 @@ class PaceAmountTest
     fun divSamePace()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 / LENGTH1) /
                      PaceAmount(amount = 2,
@@ -98,7 +98,7 @@ class PaceAmountTest
     fun divOtherPace()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 / LENGTH1) /
                      PaceAmount(amount = 2,
@@ -109,7 +109,7 @@ class PaceAmountTest
     fun timesSameSpeed()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 / LENGTH1) *
                      SpeedAmount(amount = 2,
@@ -120,7 +120,7 @@ class PaceAmountTest
     fun timesOtherSpeed()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 / LENGTH1) *
                      SpeedAmount(amount = 2,

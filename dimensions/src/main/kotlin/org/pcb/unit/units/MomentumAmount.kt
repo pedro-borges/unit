@@ -16,7 +16,6 @@ import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.scalar.NaturalAmount
 
 open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
@@ -74,17 +73,17 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> Scalar
+    // region -> Natural
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> div(that: MomentumAmount<M, L, T>) =
-        NaturalAmount(amount = amount / that.amount
-                               / convert(that.mass to mass,
-                                         that.length to length)
-                               * convert(that.time to time))
+        amount / that.amount /
+        convert(that.mass to mass,
+                that.length to length) *
+        convert(that.time to time)
 
     @JvmName("divMomentum")
     operator fun div(that: MomentumAmount<M, L, T>) =
-        NaturalAmount(amount = amount / that.amount)
+        amount / that.amount
 
     // endregion
 

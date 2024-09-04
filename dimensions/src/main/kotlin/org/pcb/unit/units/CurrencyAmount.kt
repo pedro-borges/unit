@@ -10,7 +10,6 @@ import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.scalar.NaturalAmount
 
 open class CurrencyAmount<C : Unit<Currency>>(
         amount: Number,
@@ -52,14 +51,14 @@ open class CurrencyAmount<C : Unit<Currency>>(
 
     // endregion
 
-    // region -> Scalar
+    // region -> Natural
 
     operator fun <C : Unit<Currency>> div(that: CurrencyAmount<C>) =
-        NaturalAmount(amount = amount / that.amount / convert(that.currency to currency))
+        amount / that.amount / convert(that.currency to currency)
 
     @JvmName("divCurrency")
     operator fun div(that: CurrencyAmount<C>) =
-        NaturalAmount(amount = amount / that.amount)
+        amount / that.amount
 
     // endregion
 
@@ -67,8 +66,6 @@ open class CurrencyAmount<C : Unit<Currency>>(
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
         RentAmount(amount = amount / that.amount,
-                   major = currency,
-                   minor = that.time,
                    unit = currency / that.time)
 
     // endregion

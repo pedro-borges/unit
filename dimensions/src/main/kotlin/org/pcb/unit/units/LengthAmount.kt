@@ -5,12 +5,12 @@ import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Length
+import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.scalar.NaturalAmount
 
 open class LengthAmount<L : Unit<Length>>(
         amount: Number,
@@ -51,14 +51,14 @@ open class LengthAmount<L : Unit<Length>>(
 
     // endregion
 
-    // region -> Scalar
+    // region -> Natural
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
-        NaturalAmount(amount = amount / that.amount / convert(that.length to length))
+        amount / that.amount / convert(that.length to length)
 
     @JvmName("divLength")
     operator fun div(that: LengthAmount<L>) =
-        NaturalAmount(amount = amount / that.amount)
+        amount / that.amount
 
     // endregion
 
@@ -94,6 +94,21 @@ open class LengthAmount<L : Unit<Length>>(
     operator fun times(that: AreaAmount<L>) =
         VolumeAmount(amount = amount * that.amount,
                      unit = length * length * length)
+
+    // endregion
+
+    // region -> Energy
+
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> times(that: ForceAmount<M, L, T>) =
+        EnergyAmount(amount = amount * that.amount * convert(that.length to length),
+                     unit = (that.mass * length * length) /
+                            (that.time * that.time))
+
+    @JvmName("timesForce")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<M, L, T>) =
+        EnergyAmount(amount = amount * that.amount,
+                     unit = (that.mass * length * length) /
+                            (that.time * that.time))
 
     // endregion
 }

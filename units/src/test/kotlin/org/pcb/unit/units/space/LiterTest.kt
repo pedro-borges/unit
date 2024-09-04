@@ -9,6 +9,9 @@ import org.pcb.unit.units.space.Liter.LITER
 
 class LiterTest
 {
+    private infix fun Liter.equivalent(other: VolumeAmount<*>) =
+        assertEquals<VolumeAmount<out Unit<Length>>>(this, Liter(0) + other)
+
     @Test
     fun scales()
     {
@@ -16,7 +19,4 @@ class LiterTest
         Liter(1) equivalent DeciMeter(1) * DeciMeter(1) * DeciMeter(1)
         Liter(1) equivalent VolumeAmount(1, LITER)
     }
-
-    private infix fun Liter.equivalent(other: VolumeAmount<*>) =
-        assertEquals<VolumeAmount<out Unit<Length>>>(this, Liter(0) + other)
 }

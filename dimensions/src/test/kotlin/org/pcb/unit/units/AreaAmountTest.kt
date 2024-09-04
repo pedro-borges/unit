@@ -1,11 +1,11 @@
 package org.pcb.unit.units
 
+import java.math.BigDecimal
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Length
-import org.pcb.unit.units.scalar.NaturalAmount
-import org.pcb.unit.units.scalar.PercentAmount
+import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
 
@@ -19,7 +19,7 @@ class AreaAmountTest
                                   unit = LENGTH1 * LENGTH1),
             actual = AreaAmount(amount = 2,
                                 unit = LENGTH1 * LENGTH1) *
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -30,7 +30,7 @@ class AreaAmountTest
                                   unit = LENGTH1 * LENGTH1),
             actual = AreaAmount(amount = 2,
                                 unit = LENGTH1 * LENGTH1) /
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -85,7 +85,7 @@ class AreaAmountTest
     fun divSameArea()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = AreaAmount(amount = 2,
                                 unit = LENGTH1 * LENGTH1) /
                      AreaAmount(amount = 2,
@@ -96,7 +96,7 @@ class AreaAmountTest
     fun divOtherArea()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 4 / (2 * 2)),
+            expected = BigDecimal(4 / (2 * 2)),
             actual = AreaAmount(amount = 4,
                                 unit = LENGTH1 * LENGTH1) /
                      AreaAmount(amount = 1,

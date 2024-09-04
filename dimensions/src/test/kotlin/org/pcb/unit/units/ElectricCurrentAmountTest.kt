@@ -1,5 +1,6 @@
 package org.pcb.unit.units
 
+import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.Unit
@@ -7,8 +8,7 @@ import org.pcb.unit.dimension.ElectricCurrent
 import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
-import org.pcb.unit.units.scalar.NaturalAmount
-import org.pcb.unit.units.scalar.PercentAmount
+import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
 import org.pcb.unit.units.test.LENGTH1
@@ -28,7 +28,7 @@ class ElectricCurrentAmountTest
                                              unit = ELECTRICCURRENT1),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) *
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -39,7 +39,7 @@ class ElectricCurrentAmountTest
                                              unit = ELECTRICCURRENT1),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) /
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -94,7 +94,7 @@ class ElectricCurrentAmountTest
     fun divSameElectricCurrent()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) /
                      ElectricCurrentAmount(amount = 2,
@@ -105,7 +105,7 @@ class ElectricCurrentAmountTest
     fun divOtherElectricCurrent()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) /
                      ElectricCurrentAmount(amount = 1,

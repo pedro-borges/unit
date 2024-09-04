@@ -7,6 +7,9 @@ import org.pcb.unit.units.base.Meter
 
 class YardTest
 {
+    private infix fun Yard.equivalent(other: LengthAmount<*>) =
+        assertEquals(this, Yard(0) + other)
+
     @Test
     fun scales()
     {
@@ -22,7 +25,4 @@ class YardTest
         Yard(22 * 10 * 8) equivalent Mile(1)
         Yard(22 * 10 * 8 * 3) equivalent League(1)
     }
-
-    private infix fun Yard.equivalent(other: LengthAmount<*>) =
-        assertEquals(this, Yard(0) + other)
 }

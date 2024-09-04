@@ -7,6 +7,9 @@ import org.pcb.unit.units.base.Meter
 
 class MileTest
 {
+    private infix fun Mile.equivalent(other: LengthAmount<*>) =
+        assertEquals(this, Mile(0) + other)
+
     @Test
     fun scales()
     {
@@ -22,7 +25,4 @@ class MileTest
         Mile(1) equivalent Mile(1)
         Mile(3) equivalent League(1)
     }
-
-    private infix fun Mile.equivalent(other: LengthAmount<*>) =
-        assertEquals(this, Mile(0) + other)
 }

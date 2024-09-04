@@ -7,6 +7,9 @@ import org.pcb.unit.units.base.Meter
 
 class ChainTest
 {
+    private infix fun Chain.equivalent(other: LengthAmount<*>) =
+        assertEquals(this, Chain(0) + other)
+
     @Test
     fun scales()
     {
@@ -22,7 +25,4 @@ class ChainTest
         Chain(10 * 8) equivalent Mile(1)
         Chain(10 * 8 * 3) equivalent League(1)
     }
-
-    private infix fun Chain.equivalent(other: LengthAmount<*>) =
-        assertEquals(this, Chain(0) + other)
 }

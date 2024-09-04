@@ -12,7 +12,6 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Meter.METER
-import org.pcb.unit.units.scalar.NaturalAmount
 
 open class VolumeAmount<L : Unit<Length>>(
         amount: Number,
@@ -66,18 +65,16 @@ open class VolumeAmount<L : Unit<Length>>(
 
     // endregion
 
-    // region -> Scalar
+    // region -> Natural
 
     operator fun <L : Unit<Length>> div(that: VolumeAmount<L>) =
-        NaturalAmount(
-            amount = amount / that.amount / convert(that.length to length,
-                                                    that.length to length,
-                                                    that.length to length),
-        )
+        amount / that.amount / convert(that.length to length,
+                                       that.length to length,
+                                       that.length to length)
 
     @JvmName("divLength")
     operator fun div(that: VolumeAmount<L>) =
-        NaturalAmount(amount = amount / that.amount)
+        amount / that.amount
 
     // endregion
 

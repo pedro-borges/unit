@@ -14,6 +14,9 @@ import org.pcb.unit.units.mechanics.Newton.NEWTON
 
 class NewtonTest
 {
+    private infix fun Newton.equivalent(other: ForceAmount<*, *, *>) =
+        assertEquals<ForceAmount<out Unit<Mass>, METER, out Unit<Time>>>(this, Newton(0) + other)
+
     @Test
     fun unit()
     {
@@ -21,6 +24,9 @@ class NewtonTest
         Newton(2) equivalent ForceAmount(2, NEWTON)
     }
 
-    private infix fun Newton.equivalent(other: ForceAmount<*, *, *>) =
-        assertEquals<ForceAmount<out Unit<Mass>, METER, out Unit<Time>>>(this, Newton(0) + other)
+    @Test
+    fun jouleDivMeter() =
+        assertEquals<ForceAmount<out Unit<Mass>, METER, out Unit<Time>>>(
+            expected = Newton(1),
+            actual = Joule(1) / Meter(1))
 }

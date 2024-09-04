@@ -1,13 +1,13 @@
 package org.pcb.unit.units
 
+import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
-import org.pcb.unit.units.scalar.NaturalAmount
-import org.pcb.unit.units.scalar.PercentAmount
+import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
 import org.pcb.unit.units.test.MASS1
@@ -27,7 +27,7 @@ class MomentumAmountTest
             actual = MomentumAmount(amount = 2,
                                     unit = (MASS1 * LENGTH1) /
                                            TIME1) *
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -40,7 +40,7 @@ class MomentumAmountTest
             actual = MomentumAmount(amount = 2,
                                     unit = (MASS1 * LENGTH1) /
                                            TIME1) /
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -107,7 +107,7 @@ class MomentumAmountTest
     fun divSameMomentum()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = MomentumAmount(amount = 2,
                                     unit = (MASS1 * LENGTH1) /
                                            TIME1) /
@@ -120,7 +120,7 @@ class MomentumAmountTest
     fun divOtherMomentum()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = MomentumAmount(amount = 2,
                                     unit = (MASS1 * LENGTH1) /
                                            TIME1) /

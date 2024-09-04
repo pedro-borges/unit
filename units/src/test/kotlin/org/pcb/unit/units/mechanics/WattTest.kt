@@ -16,17 +16,31 @@ import org.pcb.unit.units.mechanics.Watt.WATT
 
 class WattTest
 {
+    private infix fun Watt.equivalent(other: PowerAmount<*, *, *>) =
+        assertEquals<PowerAmount<out Unit<Mass>, METER, out Unit<Time>>>(this, Watt(0) + other)
+
     @Test
     fun unit()
     {
         Watt(1) equivalent Kilogram(2) * (Meter(2) / Second(2)) * (Meter(2) / Second(2)) / Second(2)
         Watt(2) equivalent PowerAmount(2, WATT)
-
-        assertEquals<PowerAmount<out Unit<Mass>, METER, out Unit<Time>>>(
-            expected = Watt(amount = 2 * 3),
-            actual = Volt(2) * Ampere(3))
     }
 
-    private infix fun Watt.equivalent(other: PowerAmount<*, *, *>) =
-        assertEquals<PowerAmount<out Unit<Mass>, METER, out Unit<Time>>>(this, Watt(0) + other)
+    @Test
+    fun jouleDivSecond() =
+        assertEquals<PowerAmount<out Unit<Mass>, METER, out Unit<Time>>>(
+            expected = Watt(6 / 3),
+            actual = Joule(6) / Second(3))
+
+    @Test
+    fun voltTimesAmpere() =
+        assertEquals<PowerAmount<out Unit<Mass>, METER, out Unit<Time>>>(
+            expected = Watt(2 * 3),
+            actual = Volt(2) * Ampere(3))
+
+    @Test
+    fun ampereTimesVolt() =
+        assertEquals<PowerAmount<out Unit<Mass>, METER, out Unit<Time>>>(
+            expected = Watt(2 * 3),
+            actual = Ampere(2) * Volt(3))
 }

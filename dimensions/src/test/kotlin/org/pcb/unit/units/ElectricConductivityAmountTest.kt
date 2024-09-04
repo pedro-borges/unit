@@ -1,5 +1,6 @@
 package org.pcb.unit
 
+import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.dimension.ElectricCurrent
@@ -8,9 +9,9 @@ import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.units.ElectricConductivityAmount
 import org.pcb.unit.units.ElectricCurrentAmount
+import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.ElectricTensionAmount
-import org.pcb.unit.units.scalar.NaturalAmount
-import org.pcb.unit.units.scalar.PercentAmount
+import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
 import org.pcb.unit.units.test.LENGTH1
@@ -44,7 +45,7 @@ class ElectricConductivityAmountTest
             actual = ElectricConductivityAmount(amount = 2,
                                                 unit = (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
                                                        (MASS1 * LENGTH1 * LENGTH1)) *
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -57,7 +58,7 @@ class ElectricConductivityAmountTest
             actual = ElectricConductivityAmount(amount = 2,
                                                 unit = (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
                                                        (MASS1 * LENGTH1 * LENGTH1)) /
-                     PercentAmount(amount = 2 * 100))
+                     Percent(amount = 2 * 100))
     }
 
     @Test
@@ -124,7 +125,7 @@ class ElectricConductivityAmountTest
     fun divSameElectricConductivity()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 2 / 2),
+            expected = BigDecimal(2 / 2),
             actual = ElectricConductivityAmount(amount = 2,
                                                 unit = (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
                                                        (MASS1 * LENGTH1 * LENGTH1)) /
@@ -137,13 +138,39 @@ class ElectricConductivityAmountTest
     fun divOtherElectricConductivity()
     {
         assertEquals(
-            expected = NaturalAmount(amount = 8 / (2 * 2 * 2)),
+            expected = BigDecimal(8 / (2 * 2 * 2)),
             actual = ElectricConductivityAmount(amount = 2 * (2 * 2),
                                                 unit = (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
                                                        (MASS1 * LENGTH1 * LENGTH1)) /
                      ElectricConductivityAmount(amount = 2,
                                                 unit = (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2) /
                                                        (MASS2 * LENGTH2 * LENGTH2)))
+    }
+
+    @Test
+    fun timesSameElectricResistance()
+    {
+        assertEquals(
+            expected = BigDecimal(2 / 2),
+            actual = ElectricConductivityAmount(amount = 2,
+                                                unit = (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
+                                                       (MASS1 * LENGTH1 * LENGTH1)) *
+                     ElectricResistanceAmount(amount = 2,
+                                              unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                     (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)))
+    }
+
+    @Test
+    fun timesOtherElectricResistance()
+    {
+        assertEquals(
+            expected = BigDecimal(2 / 2),
+            actual = ElectricConductivityAmount(amount = 2,
+                                                unit = (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
+                                                       (MASS1 * LENGTH1 * LENGTH1)) *
+                     ElectricResistanceAmount(amount = 2 * (2 * 2),
+                                              unit = (MASS2 * LENGTH2 * LENGTH2) /
+                                                     (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2)))
     }
 
     @Test

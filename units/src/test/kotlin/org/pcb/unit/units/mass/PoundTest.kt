@@ -8,6 +8,9 @@ import org.pcb.units.amount.mass.Pound
 
 class PoundTest
 {
+    private infix fun Pound.equivalent(other: MassAmount<*>) =
+        assertEquals(this, Pound(0) + other)
+
     @Test
     fun scales()
     {
@@ -18,7 +21,4 @@ class PoundTest
         Pound(1) equivalent Pound(1)
         Pound(14) equivalent Stone(1)
     }
-
-    private infix fun Pound.equivalent(other: MassAmount<*>) =
-        assertEquals(this, Pound(0) + other)
 }
