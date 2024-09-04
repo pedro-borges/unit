@@ -2,6 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.Fraction
 import org.pcb.unit.Sextuple
 import org.pcb.unit.Triple
 import org.pcb.unit.Unit
@@ -14,6 +15,8 @@ import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
+import org.pcb.unit.major
+import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Ampere.AMPERE
@@ -24,24 +27,24 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class ElectricCapacitanceAmount<T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>>(
         amount: Number,
-        unit: Pair<Sextuple<T, T, T, T, EC, EC>, Triple<M, L, L>>)
+        unit: Fraction<Sextuple<T, T, T, T, EC, EC>, Triple<M, L, L>>)
     : Amount<ElectricCharge>(amount = amount.toBigBigDecimal()
-                                      * convert(unit.first.second to unit.first.first,
-                                                unit.first.third to unit.first.first,
-                                                unit.first.fourth to unit.first.first,
-                                                unit.first.sixth to unit.first.fifth)
-                                      / convert(unit.second.third to unit.second.second),
+                                      * convert(unit.major.second to unit.major.first,
+                                                unit.major.third to unit.major.first,
+                                                unit.major.fourth to unit.major.first,
+                                                unit.major.sixth to unit.major.fifth)
+                                      / convert(unit.minor.third to unit.minor.second),
                              unit = CompositeUnit(
                                  domain = ElectricCharge::class,
-                                 units = listOf(unit.first.first to 4,
-                                                unit.first.first to 2,
-                                                unit.second.first to -1,
-                                                unit.second.second to -2)))
+                                 units = listOf(unit.major.first to 4,
+                                                unit.major.first to 2,
+                                                unit.minor.first to -1,
+                                                unit.minor.second to -2)))
 {
-    val time = unit.first.first
-    val electricCurrent = unit.first.fifth
-    val mass = unit.second.first
-    val length = unit.second.second
+    val time = unit.major.first
+    val electricCurrent = unit.major.fifth
+    val mass = unit.minor.first
+    val length = unit.minor.second
 
     companion object
     {

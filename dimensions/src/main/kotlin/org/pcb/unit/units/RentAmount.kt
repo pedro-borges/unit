@@ -2,6 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.Fraction
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Currency
@@ -9,6 +10,8 @@ import org.pcb.unit.dimension.Rent
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
+import org.pcb.unit.major
+import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.NaturalAmount
@@ -18,15 +21,15 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
         amount: Number,
         major: C,
         minor: T,
-        unit: Pair<C, T>)
+        unit: Fraction<C, T>)
     : Amount<Rent>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Rent::class,
-                       units = listOf(unit.first to 1,
-                                      unit.second to -1)))
+                       units = listOf(unit.major to 1,
+                                      unit.minor to -1)))
 {
-    val currency = unit.first
-    val time = unit.second
+    val currency = unit.major
+    val time = unit.minor
 
     // region -> Rent
 

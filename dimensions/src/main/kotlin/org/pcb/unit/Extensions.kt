@@ -48,3 +48,10 @@ fun convert(vararg units: Pair<Unit<*>, Unit<*>>): BigDecimal =
 operator fun Number.div(other: BigDecimal): BigDecimal = toBigBigDecimal().divide(other, 42, HALF_EVEN)
 
 operator fun Number.times(other: BigDecimal): BigDecimal = toBigBigDecimal().multiply(other, DECIMAL128)
+
+typealias Fraction<A, B> = Pair<A, B>
+
+val <A, B> Fraction<A, B>.major: A
+    get() = first
+val <A, B> Fraction<A, B>.minor
+    get() = second

@@ -153,6 +153,62 @@ class ElectricCurrentAmountTest
     }
 
     @Test
+    fun divSameElectricConductivity()
+    {
+        assertEquals<ElectricTensionAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
+            expected = ElectricTensionAmount(amount = 2 / 2,
+                                             unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                    (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)),
+            actual = ElectricCurrentAmount(amount = 2,
+                                           unit = ELECTRICCURRENT1) /
+                     ElectricConductivityAmount(amount = 2,
+                                                unit = (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
+                                                       (MASS1 * LENGTH1 * LENGTH1)))
+    }
+
+    @Test
+    fun divOtherElectricConductivity()
+    {
+        assertEquals<ElectricTensionAmount<out Unit<Mass>, out Unit<Length>, out Unit<Time>, ELECTRICCURRENT1>>(
+            expected = ElectricTensionAmount(amount = 2 / 2,
+                                             unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                    (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)),
+            actual = ElectricCurrentAmount(amount = 2,
+                                           unit = ELECTRICCURRENT1) /
+                     ElectricConductivityAmount(amount = 2 * (2 * 2),
+                                                unit = (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2) /
+                                                       (MASS2 * LENGTH2 * LENGTH2)))
+    }
+
+    @Test
+    fun divSameElectricTension()
+    {
+        assertEquals<ElectricConductivityAmount<out Unit<Time>, ELECTRICCURRENT1, out Unit<Mass>, LENGTH1>>(
+            expected = ElectricConductivityAmount(amount = 2 / 2,
+                                                  unit = (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
+                                                         (MASS1 * LENGTH1 * LENGTH1)),
+            actual = ElectricCurrentAmount(amount = 2,
+                                           unit = ELECTRICCURRENT1) /
+                     ElectricTensionAmount(amount = 2,
+                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                  (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)))
+    }
+
+    @Test
+    fun divOtherElectricTension()
+    {
+        assertEquals<ElectricConductivityAmount<out Unit<Time>, ELECTRICCURRENT1, out Unit<Mass>, LENGTH1>>(
+            expected = ElectricConductivityAmount(amount = 2 / 2,
+                                                  unit = (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
+                                                         (MASS1 * LENGTH1 * LENGTH1)),
+            actual = ElectricCurrentAmount(amount = 2,
+                                           unit = ELECTRICCURRENT1) /
+                     ElectricTensionAmount(amount = 2 * 2,
+                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                  (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT2)))
+    }
+
+    @Test
     fun timesSameElectricTension()
     {
         assertEquals<PowerAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(

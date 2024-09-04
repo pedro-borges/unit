@@ -2,6 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.Fraction
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Currency
@@ -10,6 +11,7 @@ import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
+import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Second.SECOND
@@ -18,13 +20,13 @@ import org.pcb.unit.units.scalar.NaturalAmount.ONE
 
 open class FrequencyAmount<T : Unit<Time>>(
         amount: Number,
-        unit: Pair<Unit<Scalar>, T>)
+        unit: Fraction<Unit<Scalar>, T>)
     : Amount<Time>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Time::class,
-                       units = listOf(unit.second to -1)))
+                       units = listOf(unit.minor to -1)))
 {
-    val time = unit.second
+    val time = unit.minor
 
     companion object
     {

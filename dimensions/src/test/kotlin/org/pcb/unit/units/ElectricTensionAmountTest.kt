@@ -8,6 +8,7 @@ import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.units.ElectricCapacitanceAmount
 import org.pcb.unit.units.ElectricChargeAmount
+import org.pcb.unit.units.ElectricConductivityAmount
 import org.pcb.unit.units.ElectricCurrentAmount
 import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.ElectricTensionAmount
@@ -233,6 +234,33 @@ class ElectricTensionAmountTest
                                                      (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2)))
     }
 
+    @Test
+    fun timesSameElectricConductivity()
+    {
+        assertEquals(
+            expected = ElectricCurrentAmount(amount = 2 * 2,
+                                             unit = ELECTRICCURRENT1),
+            actual = ElectricTensionAmount(amount = 2,
+                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                  (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)) *
+                     ElectricConductivityAmount(amount = 2,
+                                                unit = (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
+                                                       (MASS1 * LENGTH1 * LENGTH1)))
+    }
+
+    @Test
+    fun timesOtherElectricConductivity()
+    {
+        assertEquals(
+            expected = ElectricCurrentAmount(amount = 2 * 2,
+                                             unit = ELECTRICCURRENT1),
+            actual = ElectricTensionAmount(amount = 2,
+                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                  (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)) *
+                     ElectricConductivityAmount(amount = 2 * (2 * 2),
+                                                unit = (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2) /
+                                                       (MASS2 * LENGTH2 * LENGTH2)))
+    }
 
     @Test
     fun timesSameElectricCurrent()

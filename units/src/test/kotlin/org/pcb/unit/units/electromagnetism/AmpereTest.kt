@@ -21,6 +21,14 @@ class AmpereTest
         assertEquals(
             expected = Ampere(6 / 3),
             actual = Volt(6) / Ohm(3))
+
+        assertEquals(
+            expected = Ampere(2 * 3),
+            actual = Siemens(2) * Volt(3))
+
+        assertEquals(
+            expected = Ampere(2 * 3),
+            actual = Volt(2) * Siemens(3))
     }
 
     private infix fun Ampere.equivalent(other: ElectricCurrentAmount<*>) =

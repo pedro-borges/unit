@@ -87,6 +87,33 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
                               unit = (that.mass * that.length * that.length) /
                                      (that.time * that.time * that.time * electricCurrent))
 
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricConductivityAmount<T, EC, M, L>) =
+        ElectricTensionAmount(amount = amount / that.amount * convert(that.electricCurrent to electricCurrent,
+                                                                      that.electricCurrent to electricCurrent),
+                              unit = (that.mass * that.length * that.length) /
+                                     (that.time * that.time * that.time * electricCurrent))
+
+    @JvmName("divElectricConductivity")
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> div(that: ElectricConductivityAmount<T, EC, M, L>) =
+        ElectricTensionAmount(amount = amount / that.amount,
+                              unit = (that.mass * that.length * that.length) /
+                                     (that.time * that.time * that.time * electricCurrent))
+
+    // endregion
+
+    // region -> ElectricConductivity
+
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricTensionAmount<M, L, T, EC>) =
+        ElectricConductivityAmount(amount = amount / that.amount * convert(that.electricCurrent to electricCurrent),
+                                   unit = (that.time * that.time * that.time * electricCurrent * electricCurrent) /
+                                          (that.mass * that.length * that.length))
+
+    @JvmName("divElectricTension")
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> div(that: ElectricTensionAmount<M, L, T, EC>) =
+        ElectricConductivityAmount(amount = amount / that.amount,
+                                   unit = (that.time * that.time * that.time * electricCurrent * electricCurrent) /
+                                          (that.mass * that.length * that.length))
+
     // endregion
 
     // region -> Power

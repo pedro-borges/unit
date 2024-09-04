@@ -2,6 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.Fraction
 import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
@@ -11,23 +12,25 @@ import org.pcb.unit.dimension.Momentum
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
+import org.pcb.unit.major
+import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.NaturalAmount
 
 open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<Tuple<M, L>, T>)
+        unit: Fraction<Tuple<M, L>, T>)
     : Amount<Momentum>(amount = amount.toBigBigDecimal(),
                        unit = CompositeUnit(
                            domain = Momentum::class,
-                           units = listOf(unit.first.first to 1,
-                                          unit.first.second to 1,
-                                          unit.second to -1)))
+                           units = listOf(unit.major.first to 1,
+                                          unit.major.second to 1,
+                                          unit.minor to -1)))
 {
-    val mass = unit.first.first
-    val length = unit.first.second
-    val time = unit.second
+    val mass = unit.major.first
+    val length = unit.major.second
+    val time = unit.minor
 
     // region -> Momentum
 

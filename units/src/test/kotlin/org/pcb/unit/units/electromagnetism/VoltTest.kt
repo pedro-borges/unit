@@ -37,6 +37,10 @@ class VoltTest
             actual = Watt(6) / Ampere(3))
 
         assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Volt(amount = 6 / 3),
+            actual = Ampere(6) / Siemens(3))
+
+        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
             expected = Volt(amount = 2 * 3),
             actual = Ampere(2) * Ohm(3))
 

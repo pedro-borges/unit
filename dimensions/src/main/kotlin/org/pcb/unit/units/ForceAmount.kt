@@ -2,6 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.Fraction
 import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
@@ -11,6 +12,8 @@ import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
+import org.pcb.unit.major
+import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Kilogram.KILOGRAM
@@ -20,17 +23,17 @@ import org.pcb.unit.units.scalar.NaturalAmount
 
 open class ForceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<Tuple<M, L>, Tuple<T, T>>)
-    : Amount<Force>(amount = amount.toBigBigDecimal() / convert(unit.second.second to unit.second.first),
+        unit: Fraction<Tuple<M, L>, Tuple<T, T>>)
+    : Amount<Force>(amount = amount.toBigBigDecimal() / convert(unit.minor.second to unit.minor.first),
                     unit = CompositeUnit(
                         domain = Force::class,
-                        units = listOf(unit.first.first to 1,
-                                       unit.first.second to 1,
-                                       unit.second.first to -2)))
+                        units = listOf(unit.major.first to 1,
+                                       unit.major.second to 1,
+                                       unit.minor.first to -2)))
 {
-    val mass = unit.first.first
-    val length = unit.first.second
-    val time = unit.second.first
+    val mass = unit.major.first
+    val length = unit.major.second
+    val time = unit.minor.first
 
     companion object
     {
