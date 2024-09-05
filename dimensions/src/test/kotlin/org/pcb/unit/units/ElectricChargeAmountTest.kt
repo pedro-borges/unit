@@ -220,13 +220,13 @@ class ElectricChargeAmountTest
     {
         assertEquals<MagneticFluxAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                           (TIME1 * TIME1 * ELECTRICCURRENT1)),
+                                          unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                 (TIME1 * TIME1 * ELECTRICCURRENT1)),
             actual = ElectricChargeAmount(amount = 2,
                                           unit = ELECTRICCURRENT1 * TIME1) *
                      ElectricResistanceAmount(amount = 2,
-                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                  (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)))
+                                              unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                     (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)))
     }
 
     @Test

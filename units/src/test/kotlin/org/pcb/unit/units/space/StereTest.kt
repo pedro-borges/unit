@@ -2,8 +2,6 @@ package org.pcb.unit.units.space
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.Unit
-import org.pcb.unit.dimension.Length
 import org.pcb.unit.units.VolumeAmount
 import org.pcb.unit.units.base.Meter
 import org.pcb.unit.units.space.Stere.STERE
@@ -11,7 +9,7 @@ import org.pcb.unit.units.space.Stere.STERE
 class StereTest
 {
     private infix fun Stere.equivalent(other: VolumeAmount<*>) =
-        assertEquals<VolumeAmount<out Unit<Length>>>(this, Stere(0) + other)
+        assertEquals(this, Stere(0) + other)
 
     @Test
     fun scales()

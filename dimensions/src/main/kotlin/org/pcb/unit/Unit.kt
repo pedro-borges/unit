@@ -9,13 +9,13 @@ abstract class Unit<D : Domain>(val domain: KClass<out D>)
     abstract val symbol: String
     abstract val scale: BigDecimal
 
-    abstract operator fun <B : Unit<*>> times(second: B): Tuple<Unit<D>, B>
-    abstract operator fun <B : Unit<*>> div(second: B): Pair<Unit<D>, B>
-    abstract operator fun <B : Tuple<*, *>> div(second: B): Pair<Unit<D>, B>
-    abstract operator fun <B : Triple<*, *, *>> div(second: B): Pair<Unit<D>, B>
-    abstract operator fun <B : Quadruple<*, *, *, *>> div(second: B): Pair<Unit<D>, B>
-    abstract operator fun <B : Quintuple<*, *, *, *, *>> div(second: B): Pair<Unit<D>, B>
-    abstract operator fun <B : Sextuple<*, *, *, *, *, *>> div(second: B): Pair<Unit<D>, B>
+    open operator fun <B : Unit<*>> times(second: B) = Tuple(this, second)
+    open operator fun <B : Unit<*>> div(second: B) = Pair(this, second)
+    open operator fun <B : Tuple<*, *>> div(second: B) = Pair(this, second)
+    open operator fun <B : Triple<*, *, *>> div(second: B) = Pair(this, second)
+    open operator fun <B : Quadruple<*, *, *, *>> div(second: B) = Pair(this, second)
+    open operator fun <B : Quintuple<*, *, *, *, *>> div(second: B) = Pair(this, second)
+    open operator fun <B : Sextuple<*, *, *, *, *, *>> div(second: B) = Pair(this, second)
 
     override fun equals(other: Any?): Boolean
     {

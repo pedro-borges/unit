@@ -1,30 +1,17 @@
 package org.pcb.units.amount.mass
 
-import org.pcb.unit.Quadruple
-import org.pcb.unit.Quintuple
-import org.pcb.unit.Sextuple
-import org.pcb.unit.Triple
-import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.MassAmount
-import org.pcb.units.amount.mass.Pound.POUND
 
 class Pound(amount: Number)
-    : MassAmount<POUND>(amount = amount,
-                        unit = POUND)
+    : MassAmount<Unit<Mass>>(
+    amount = amount,
+    unit = POUND)
 {
     object POUND : Unit<Mass>(Mass::class)
     {
-        override fun <B : Unit<*>> times(second: B) = Tuple(this, second)
-        override fun <B : Unit<*>> div(second: B) = Pair(this, second)
-        override fun <B : Tuple<*, *>> div(second: B) = Pair(this, second)
-        override fun <B : Triple<*, *, *>> div(second: B) = Pair(this, second)
-        override fun <B : Quadruple<*, *, *, *>> div(second: B) = Pair(this, second)
-        override fun <B : Quintuple<*, *, *, *, *>> div(second: B) = Pair(this, second)
-        override fun <B : Sextuple<*, *, *, *, *, *>> div(second: B) = Pair(this, second)
-
         override val symbol = "lb"
         override val scale = 0.45359237.toBigBigDecimal()
     }

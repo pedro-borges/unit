@@ -2,23 +2,18 @@ package org.pcb.unit.units.electromagnetism
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.Unit
-import org.pcb.unit.dimension.Mass
-import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.base.Ampere
-import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Kilogram
 import org.pcb.unit.units.base.Meter
-import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second
 import org.pcb.unit.units.electromagnetism.Ohm.OHM
 
 class OhmTest
 {
     private infix fun Ohm.equivalent(other: ElectricResistanceAmount<*, *, *, *>) =
-        assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(this, Ohm(0) + other)
+        assertEquals(this, Ohm(0) + other)
 
     @Test
     fun unit()
@@ -29,25 +24,25 @@ class OhmTest
 
     @Test
     fun oneDivSiemens() =
-        assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+        assertEquals(
             expected = Ohm(2 * 3),
             actual = 2 / Siemens(3))
 
     @Test
     fun secondDivFarad() =
-        assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+        assertEquals(
             expected = Ohm(6 / 3),
             actual = Second(6) / Farad(3))
 
     @Test
     fun voltDivAmpere() =
-        assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+        assertEquals(
             expected = Ohm(6 / 3),
             actual = Volt(6) / Ampere(3))
 
     @Test
     fun weberDivCoulomb() =
-        assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+        assertEquals(
             expected = Ohm(6 / 3),
             actual = Weber(6) / Coulomb(3))
 }

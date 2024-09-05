@@ -2,15 +2,13 @@ package org.pcb.unit.units.space
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.Unit
-import org.pcb.unit.dimension.Length
 import org.pcb.unit.units.VolumeAmount
 import org.pcb.unit.units.space.Liter.LITER
 
 class LiterTest
 {
     private infix fun Liter.equivalent(other: VolumeAmount<*>) =
-        assertEquals<VolumeAmount<out Unit<Length>>>(this, Liter(0) + other)
+        assertEquals(this, Liter(0) + other)
 
     @Test
     fun scales()

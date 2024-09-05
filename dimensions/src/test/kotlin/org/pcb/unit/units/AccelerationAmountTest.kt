@@ -20,7 +20,7 @@ class AccelerationAmountTest
     @Test
     fun construct()
     {
-        assertEquals<AccelerationAmount<Unit<Length>, out Unit<Time>>>(
+        assertEquals<AccelerationAmount<LENGTH1, Unit<Time>>>(
             expected = AccelerationAmount(amount = 1,
                                           unit = LENGTH1 /
                                                  (TIME1 * TIME1)),
@@ -32,7 +32,7 @@ class AccelerationAmountTest
     @Test
     fun timesScalar()
     {
-        assertEquals<AccelerationAmount<Unit<Length>, out Unit<Time>>>(
+        assertEquals<AccelerationAmount<Unit<Length>, Unit<Time>>>(
             expected = AccelerationAmount(amount = 2 * 2,
                                           unit = LENGTH1 /
                                                  (TIME1 * TIME1)),
@@ -45,7 +45,7 @@ class AccelerationAmountTest
     @Test
     fun divScalar()
     {
-        assertEquals<AccelerationAmount<Unit<Length>, out Unit<Time>>>(
+        assertEquals<AccelerationAmount<Unit<Length>, Unit<Time>>>(
             expected = AccelerationAmount(amount = 2 / 2,
                                           unit = LENGTH1 /
                                                  (TIME1 * TIME1)),
@@ -58,7 +58,7 @@ class AccelerationAmountTest
     @Test
     fun plusSameAcceleration()
     {
-        assertEquals<AccelerationAmount<Unit<Length>, out Unit<Time>>>(
+        assertEquals<AccelerationAmount<Unit<Length>, Unit<Time>>>(
             expected = AccelerationAmount(amount = 0 + 1,
                                           unit = LENGTH1 / (TIME1 * TIME1)),
             actual = AccelerationAmount(amount = 0,
@@ -70,7 +70,7 @@ class AccelerationAmountTest
     @Test
     fun plusOtherAcceleration()
     {
-        assertEquals<AccelerationAmount<Unit<Length>, out Unit<Time>>>(
+        assertEquals<AccelerationAmount<Unit<Length>, Unit<Time>>>(
             expected = AccelerationAmount(amount = 0 + 1,
                                           unit = LENGTH1 /
                                                  (TIME1 * TIME1)),
@@ -85,7 +85,7 @@ class AccelerationAmountTest
     @Test
     fun minusSameAcceleration()
     {
-        assertEquals<AccelerationAmount<Unit<Length>, out Unit<Time>>>(
+        assertEquals<AccelerationAmount<Unit<Length>, Unit<Time>>>(
             expected = AccelerationAmount(amount = 1 - 1,
                                           unit = LENGTH1 /
                                                  (TIME1 * TIME1)),
@@ -100,7 +100,7 @@ class AccelerationAmountTest
     @Test
     fun minusOtherAcceleration()
     {
-        assertEquals<AccelerationAmount<Unit<Length>, out Unit<Time>>>(
+        assertEquals<AccelerationAmount<Unit<Length>, Unit<Time>>>(
             expected = AccelerationAmount(amount = 1 - 1,
                                           unit = LENGTH1 /
                                                  (TIME1 * TIME1)),
@@ -141,7 +141,7 @@ class AccelerationAmountTest
     @Test
     fun timesSameTime()
     {
-        assertEquals<SpeedAmount<out Unit<Length>, TIME1>>(
+        assertEquals<SpeedAmount<Unit<Length>, TIME1>>(
             expected = SpeedAmount(amount = 2 * 2,
                                    unit = LENGTH1 / TIME1),
             actual = AccelerationAmount(amount = 2,
@@ -154,7 +154,7 @@ class AccelerationAmountTest
     @Test
     fun timesOtherTime()
     {
-        assertEquals<SpeedAmount<out Unit<Length>, TIME1>>(
+        assertEquals<SpeedAmount<Unit<Length>, TIME1>>(
             expected = SpeedAmount(amount = 2 * 2,
                                    unit = LENGTH1 / TIME1),
             actual = AccelerationAmount(amount = 2,
@@ -193,7 +193,7 @@ class AccelerationAmountTest
     @Test
     fun timesMass()
     {
-        assertEquals<ForceAmount<out Unit<Mass>, out Unit<Length>, out Unit<Time>>>(
+        assertEquals<ForceAmount<Unit<Mass>, LENGTH1, Unit<Time>>>(
             expected = ForceAmount(amount = 2 * 2,
                                    unit = (MASS1 * LENGTH1) /
                                           (TIME1 * TIME1)),
