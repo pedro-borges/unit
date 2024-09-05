@@ -15,10 +15,11 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Second.SECOND
+import org.pcb.unit.units.scalar.Numeric.NUMBER
 
 open class FrequencyAmount<T : Unit<Time>>(
         amount: Number,
-        unit: Fraction<Number, T>)
+        unit: Fraction<NUMBER, T>)
     : Amount<Time>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Time::class,

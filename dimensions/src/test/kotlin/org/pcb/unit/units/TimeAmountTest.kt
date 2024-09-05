@@ -153,6 +153,18 @@ class TimeAmountTest
     }
 
     @Test
+    fun timesElectricCurrent()
+    {
+        assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
+            expected = ElectricChargeAmount(amount = 2 * 2,
+                                            unit = ELECTRICCURRENT1 * TIME1),
+            actual = TimeAmount(amount = 2,
+                                unit = TIME1) *
+                     ElectricCurrentAmount(amount = 2,
+                                           unit = ELECTRICCURRENT1))
+    }
+
+    @Test
     fun divSameElectricResistance()
     {
         assertEquals<ElectricCapacitanceAmount<out Unit<Time>, ELECTRICCURRENT1, out Unit<Mass>, LENGTH1>>(

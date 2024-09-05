@@ -13,6 +13,7 @@ import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.FrequencyAmount
 import org.pcb.unit.units.ScalarAmount
 import org.pcb.unit.units.TimeAmount
+import org.pcb.unit.units.scalar.Numeric.NUMBER
 
 fun String.toBigBigDecimal() =
     BigDecimal(this)
@@ -62,12 +63,12 @@ operator fun Number.times(other: BigDecimal): BigDecimal = toBigBigDecimal().mul
 operator fun Number.plus(other: BigDecimal): BigDecimal = toBigBigDecimal().add(other).stripTrailingZeros()
 operator fun Number.minus(other: BigDecimal): BigDecimal = toBigBigDecimal().subtract(other).stripTrailingZeros()
 
-operator fun <B : Unit<*>> Number.div(second: B) = Fraction(this, second)
-operator fun <B : Tuple<*, *>> Number.div(second: B) = Fraction(this, second)
-operator fun <B : Triple<*, *, *>> Number.div(second: B) = Fraction(this, second)
-operator fun <B : Quadruple<*, *, *, *>> Number.div(second: B) = Fraction(this, second)
-operator fun <B : Quintuple<*, *, *, *, *>> Number.div(second: B) = Fraction(this, second)
-operator fun <B : Sextuple<*, *, *, *, *, *>> Number.div(second: B) = Fraction(this, second)
+operator fun <B : Unit<*>> Number.div(second: B) = Fraction(NUMBER(this), second)
+operator fun <B : Tuple<*, *>> Number.div(second: B) = Fraction(NUMBER(this), second)
+operator fun <B : Triple<*, *, *>> Number.div(second: B) = Fraction(NUMBER(this), second)
+operator fun <B : Quadruple<*, *, *, *>> Number.div(second: B) = Fraction(NUMBER(this), second)
+operator fun <B : Quintuple<*, *, *, *, *>> Number.div(second: B) = Fraction(NUMBER(this), second)
+operator fun <B : Sextuple<*, *, *, *, *, *>> Number.div(second: B) = Fraction(NUMBER(this), second)
 
 val <A, B> Fraction<A, B>.major: A get() = first
 val <A, B> Fraction<A, B>.minor get() = second

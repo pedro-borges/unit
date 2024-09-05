@@ -24,6 +24,18 @@ class CoulombTest
     }
 
     @Test
+    fun ampereTimesSecond() =
+        assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, SECOND>>(
+            expected = Coulomb(2 * 3),
+            actual = Ampere(2) * Second(3))
+
+    @Test
+    fun secondTimesAmpere() =
+        assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, SECOND>>(
+            expected = Coulomb(2 * 3),
+            actual = Second(2) * Ampere(3))
+
+    @Test
     fun jouleDivVolt() =
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, SECOND>>(
             expected = Coulomb(6 / 3),

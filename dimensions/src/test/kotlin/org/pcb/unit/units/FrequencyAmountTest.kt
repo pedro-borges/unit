@@ -14,6 +14,7 @@ import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.TIME1
 import org.pcb.unit.units.test.TIME2
 
+
 class FrequencyAmountTest
 {
     @Test

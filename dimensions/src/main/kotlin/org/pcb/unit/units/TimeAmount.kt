@@ -89,6 +89,14 @@ open class TimeAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> ElectricCharge
+
+    operator fun <EC : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<EC>) =
+        ElectricChargeAmount(amount = amount * that.amount,
+                             unit = that.electricCurrent * time)
+
+    // endregion
+
     // region -> ElectricCapacitance
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =

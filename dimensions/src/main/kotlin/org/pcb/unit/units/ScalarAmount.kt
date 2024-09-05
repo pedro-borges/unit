@@ -57,7 +57,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         FrequencyAmount(amount = amount * unit.scale / that.amount,
-                        unit = 1.div(that.time))
+                        unit = 1 / that.time)
 
     // endregion
 
