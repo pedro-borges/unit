@@ -6,6 +6,7 @@ import org.pcb.unit.units.ElectricCurrentAmount
 import org.pcb.unit.units.base.Ampere
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Second
+import org.pcb.unit.units.mechanics.Joule
 import org.pcb.unit.units.mechanics.Watt
 
 class AmpereTest
@@ -24,6 +25,12 @@ class AmpereTest
         assertEquals(
             expected = Ampere(6 / 3),
             actual = Coulomb(6) / Second(3))
+
+    @Test
+    fun jouleDivWeber() =
+        assertEquals(
+            expected = Ampere(6 / 3),
+            actual = Joule(6) / Weber(3))
 
     @Test
     fun siemensTimesVolt() =

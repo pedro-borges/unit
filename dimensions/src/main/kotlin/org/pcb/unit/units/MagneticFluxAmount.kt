@@ -200,4 +200,54 @@ open class MagneticFluxAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, 
                              unit = electricCurrent * time)
 
     // endregion
+
+    // region -> ElectricCurrent
+
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: ElectricResistanceAmount<M, L, T, EC>) =
+        ElectricCurrentAmount(amount = amount * that.amount
+                                       / convert(that.mass to mass,
+                                                 that.length to length,
+                                                 that.length to length)
+                                       * convert(that.time to time,
+                                                 that.time to time,
+                                                 that.time to time,
+                                                 that.electricCurrent to electricCurrent,
+                                                 that.electricCurrent to electricCurrent),
+                              unit = electricCurrent)
+
+    @JvmName("timesElectricResistance")
+    operator fun times(that: EnergyAmount<M, L, T>) =
+        ElectricCurrentAmount(amount = amount * that.amount,
+                              unit = electricCurrent)
+
+    // endregion
+
+    // region -> Energy
+
+    operator fun <EC : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<EC>) =
+        EnergyAmount(amount = amount * that.amount
+                              * convert(that.electricCurrent to electricCurrent),
+                     unit = (mass * length * length) /
+                            (time * time))
+
+    @JvmName("timesElectricCurrent")
+    operator fun times(that: ElectricCurrentAmount<EC>) =
+        EnergyAmount(amount = amount * that.amount,
+                     unit = (mass * length * length) /
+                            (time * time))
+
+    // endregion
+
+    // region -> ElectricCurrent
+
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> times(that: EnergyAmount<M, L, T>) =
+        ElectricCurrentAmount(amount = amount * that.amount
+                                       * convert(that.mass to mass,
+                                                 that.length to length,
+                                                 that.length to length)
+                                       / convert(that.time to time,
+                                                 that.time to time),
+                              unit = electricCurrent)
+
+    // endregion
 }

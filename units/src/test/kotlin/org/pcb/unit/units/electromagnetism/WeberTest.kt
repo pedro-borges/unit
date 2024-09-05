@@ -13,6 +13,7 @@ import org.pcb.unit.units.base.Meter
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second
 import org.pcb.unit.units.electromagnetism.Weber.WEBER
+import org.pcb.unit.units.mechanics.Joule
 
 class WeberTest
 {
@@ -31,6 +32,12 @@ class WeberTest
         assertEquals<MagneticFluxAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
             expected = Weber(2 * 3),
             actual = Coulomb(2) * Ohm(3))
+
+    @Test
+    fun jouleDivAmpere() =
+        assertEquals<MagneticFluxAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Weber(6 / 3),
+            actual = Joule(6) / Ampere(3))
 
     @Test
     fun ohmTimesCoulomb() =

@@ -54,7 +54,7 @@ class CoulombTest
             actual = Volt(2) * Farad(3))
 
     @Test
-    fun webberDivOhm() =
+    fun weberDivOhm() =
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, SECOND>>(
             expected = Coulomb(6 / 3),
             actual = Weber(6) / Ohm(3))

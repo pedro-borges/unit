@@ -390,4 +390,32 @@ class EnergyAmountTest
                      ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1))
     }
+
+    @Test
+    fun divSameMagneticFlux()
+    {
+        assertEquals(
+            expected = ElectricCurrentAmount(amount = 2 / 2,
+                                             unit = ELECTRICCURRENT1),
+            actual = EnergyAmount(amount = 2,
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
+                     MagneticFluxAmount(amount = 2,
+                                        unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                               (TIME1 * TIME1 * ELECTRICCURRENT1)))
+    }
+
+    @Test
+    fun divOtherMagneticFlux()
+    {
+        assertEquals(
+            expected = ElectricCurrentAmount(amount = 2 / 2,
+                                             unit = ELECTRICCURRENT2),
+            actual = EnergyAmount(amount = 2,
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
+                     MagneticFluxAmount(amount = 1,
+                                        unit = (MASS2 * LENGTH2 * LENGTH2) /
+                                               (TIME2 * TIME2 * ELECTRICCURRENT2)))
+    }
 }
