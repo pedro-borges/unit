@@ -30,10 +30,10 @@ class CoulombTest
             actual = Ampere(2) * Second(3))
 
     @Test
-    fun secondTimesAmpere() =
+    fun faradTimesVolt() =
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, SECOND>>(
             expected = Coulomb(2 * 3),
-            actual = Second(2) * Ampere(3))
+            actual = Farad(2) * Volt(3))
 
     @Test
     fun jouleDivVolt() =
@@ -42,14 +42,20 @@ class CoulombTest
             actual = Joule(6) / Volt(3))
 
     @Test
-    fun faradTimesVolt() =
+    fun secondTimesAmpere() =
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, SECOND>>(
             expected = Coulomb(2 * 3),
-            actual = Farad(2) * Volt(3))
+            actual = Second(2) * Ampere(3))
 
     @Test
     fun voltTimesFarad() =
         assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, SECOND>>(
             expected = Coulomb(2 * 3),
             actual = Volt(2) * Farad(3))
+
+    @Test
+    fun webberDivOhm() =
+        assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, SECOND>>(
+            expected = Coulomb(6 / 3),
+            actual = Weber(6) / Ohm(3))
 }

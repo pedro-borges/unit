@@ -157,10 +157,47 @@ open class MagneticFluxAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, 
                                      (time * time * time * electricCurrent))
 
     @JvmName("divTime")
-    operator fun  div(that: TimeAmount<T>) =
+    operator fun div(that: TimeAmount<T>) =
         ElectricTensionAmount(amount = amount / that.amount,
                               unit = (mass * length * length) /
                                      (time * time * time * electricCurrent))
+
+    // endregion
+
+    // region -> ElectricResistance
+
+    operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricChargeAmount<EC, T>) =
+        ElectricResistanceAmount(amount = amount / that.amount / convert(that.time to time,
+                                                                         that.electricCurrent to electricCurrent),
+                                 unit = (mass * length * length) /
+                                        (time * time * time * electricCurrent * electricCurrent))
+
+    @JvmName("divElectricCharge")
+    operator fun div(that: ElectricChargeAmount<EC, T>) =
+        ElectricResistanceAmount(amount = amount / that.amount,
+                                 unit = (mass * length * length) /
+                                        (time * time * time * electricCurrent * electricCurrent))
+
+    // endregion
+
+    // region -> ElectricCharge
+
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
+        ElectricChargeAmount(amount = amount / that.amount
+                                      / convert(that.mass to mass,
+                                                that.length to length,
+                                                that.length to length)
+                                      * convert(that.time to time,
+                                                that.time to time,
+                                                that.time to time,
+                                                that.electricCurrent to electricCurrent,
+                                                that.electricCurrent to electricCurrent),
+                             unit = electricCurrent * time)
+
+    @JvmName("divElectricResistance")
+    operator fun div(that: ElectricResistanceAmount<M, L, T, EC>) =
+        ElectricChargeAmount(amount = amount / that.amount,
+                             unit = electricCurrent * time)
 
     // endregion
 }

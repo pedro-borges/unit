@@ -28,10 +28,10 @@ class OhmTest
     }
 
     @Test
-    fun voltDivAmpere() =
+    fun oneDivSiemens() =
         assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
-            expected = Ohm(6 / 3),
-            actual = Volt(6) / Ampere(3))
+            expected = Ohm(2 * 3),
+            actual = 2 / Siemens(3))
 
     @Test
     fun secondDivFarad() =
@@ -40,8 +40,14 @@ class OhmTest
             actual = Second(6) / Farad(3))
 
     @Test
-    fun oneDivSiemens() =
+    fun voltDivAmpere() =
         assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
-            expected = Ohm(2 * 3),
-            actual = 2 / Siemens(3))
+            expected = Ohm(6 / 3),
+            actual = Volt(6) / Ampere(3))
+
+    @Test
+    fun weberDivCoulomb() =
+        assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Ohm(6 / 3),
+            actual = Weber(6) / Coulomb(3))
 }

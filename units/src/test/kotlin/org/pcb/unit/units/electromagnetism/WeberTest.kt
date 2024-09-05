@@ -27,14 +27,26 @@ class WeberTest
     }
 
     @Test
-    fun voltTimesSecond() =
+    fun coulombTimesOhm() =
         assertEquals<MagneticFluxAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
             expected = Weber(2 * 3),
-            actual = Volt(2) * Second(3))
+            actual = Coulomb(2) * Ohm(3))
+
+    @Test
+    fun ohmTimesCoulomb() =
+        assertEquals<MagneticFluxAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Weber(2 * 3),
+            actual = Ohm(2) * Coulomb(3))
 
     @Test
     fun secondTimesVolt() =
         assertEquals<MagneticFluxAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
             expected = Weber(2 * 3),
             actual = Second(2) * Volt(3))
+
+    @Test
+    fun voltTimesSecond() =
+        assertEquals<MagneticFluxAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Weber(2 * 3),
+            actual = Volt(2) * Second(3))
 }
