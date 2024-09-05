@@ -3,10 +3,13 @@ package org.pcb.unit
 import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.dimension.Domain
 import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
+import org.pcb.unit.units.ElectricTensionAmount
 import org.pcb.unit.units.MagneticFluxAmount
+import org.pcb.unit.units.TimeAmount
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
@@ -141,5 +144,61 @@ class MagneticFluxAmountTest
                      MagneticFluxAmount(amount = 2,
                                         unit = (MASS2 * LENGTH2 * LENGTH2) /
                                                (TIME2 * TIME2 * ELECTRICCURRENT2)))
+    }
+
+    @Test
+    fun divSameElectricTension()
+    {
+        assertEquals(
+            expected = TimeAmount(amount = 2 / 2,
+                                  unit = TIME1),
+            actual = MagneticFluxAmount(amount = 2,
+                                        unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                               (TIME1 * TIME1 * ELECTRICCURRENT1)) /
+                     ElectricTensionAmount(amount = 2,
+                                        unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                               (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)))
+    }
+
+    @Test
+    fun divOtherElectricTension()
+    {
+        assertEquals(
+            expected = TimeAmount(amount = 2 / 2,
+                                  unit = TIME1),
+            actual = MagneticFluxAmount(amount = 2,
+                                        unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                               (TIME1 * TIME1 * ELECTRICCURRENT1)) /
+                     ElectricTensionAmount(amount = 2 * 2,
+                                           unit = (MASS2 * LENGTH2 * LENGTH2) /
+                                                  (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2)))
+    }
+
+    @Test
+    fun divSameTime()
+    {
+        assertEquals<Amount<out Domain>>(
+            expected = ElectricTensionAmount(amount = 2 / 2,
+                                             unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                    (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)),
+            actual = MagneticFluxAmount(amount = 2,
+                                        unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                               (TIME1 * TIME1 * ELECTRICCURRENT1)) /
+                    TimeAmount(amount = 2,
+                               unit = TIME1))
+    }
+
+    @Test
+    fun divOtherTime()
+    {
+        assertEquals<Amount<out Domain>>(
+            expected = ElectricTensionAmount(amount = 2 / 2,
+                                             unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                    (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)),
+            actual = MagneticFluxAmount(amount = 2,
+                                        unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                               (TIME1 * TIME1 * ELECTRICCURRENT1)) /
+                     TimeAmount(amount = 1,
+                                unit = TIME2))
     }
 }

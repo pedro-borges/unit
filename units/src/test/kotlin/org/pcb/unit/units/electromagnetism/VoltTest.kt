@@ -29,6 +29,24 @@ class VoltTest
     }
 
     @Test
+    fun ampereTimesOhm() =
+        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Volt(2 * 3),
+            actual = Ampere(2) * Ohm(3))
+
+    @Test
+    fun ohmTimesAmpere() =
+        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Volt(2 * 3),
+            actual = Ohm(2) * Ampere(3))
+
+    @Test
+    fun ampereDivSiemens() =
+        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Volt(6 / 3),
+            actual = Ampere(6) / Siemens(3))
+
+    @Test
     fun coulombDivFarad() =
         assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
             expected = Volt(6 / 3),
@@ -47,20 +65,8 @@ class VoltTest
             actual = Watt(6) / Ampere(3))
 
     @Test
-    fun ampereDivSiemens() =
+    fun weberDivSecond() =
         assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
             expected = Volt(6 / 3),
-            actual = Ampere(6) / Siemens(3))
-
-    @Test
-    fun ampereTimesOhm() =
-        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
-            expected = Volt(2 * 3),
-            actual = Ampere(2) * Ohm(3))
-
-    @Test
-    fun ohmTimesAmpere() =
-        assertEquals<ElectricTensionAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
-            expected = Volt(2 * 3),
-            actual = Ohm(2) * Ampere(3))
+            actual = Weber(6) / Second(3))
 }

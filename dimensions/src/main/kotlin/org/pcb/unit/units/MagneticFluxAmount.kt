@@ -128,4 +128,39 @@ open class MagneticFluxAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, 
                             (time * time))
 
     // endregion
+
+    // region -> Time
+
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricTensionAmount<M, L, T, EC>) =
+        TimeAmount(amount = amount / that.amount
+                            / convert(that.mass to mass,
+                                      that.length to length,
+                                      that.length to length)
+                            * convert(that.time to time,
+                                      that.time to time,
+                                      that.time to time,
+                                      that.electricCurrent to electricCurrent),
+                   unit = time)
+
+    @JvmName("divElectricTension")
+    operator fun div(that: ElectricTensionAmount<M, L, T, EC>) =
+        TimeAmount(amount = amount / that.amount,
+                   unit = time)
+
+    // endregion
+
+    // region -> ElectricTension
+
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        ElectricTensionAmount(amount = amount / that.amount / convert(that.time to time),
+                              unit = (mass * length * length) /
+                                     (time * time * time * electricCurrent))
+
+    @JvmName("divTime")
+    operator fun  div(that: TimeAmount<T>) =
+        ElectricTensionAmount(amount = amount / that.amount,
+                              unit = (mass * length * length) /
+                                     (time * time * time * electricCurrent))
+
+    // endregion
 }
