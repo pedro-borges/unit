@@ -106,13 +106,13 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
         amount / that.amount /
         convert(that.mass to mass,
-                                   that.length to length,
-                                   that.length to length) *
+                that.length to length,
+                that.length to length) *
         convert(that.time to time,
-                                   that.time to time,
-                                   that.time to time,
-                                   that.electricCurrent to electricCurrent,
-                                   that.electricCurrent to electricCurrent)
+                that.time to time,
+                that.time to time,
+                that.electricCurrent to electricCurrent,
+                that.electricCurrent to electricCurrent)
 
     @JvmName("divElectricResistance")
     operator fun div(that: ElectricResistanceAmount<M, L, T, EC>) =
@@ -121,13 +121,13 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> times(that: ElectricConductivityAmount<T, EC, M, L>) =
         amount / that.amount /
         convert(that.time to time,
-                                   that.time to time,
-                                   that.time to time,
-                                   that.electricCurrent to electricCurrent,
-                                   that.electricCurrent to electricCurrent) *
+                that.time to time,
+                that.time to time,
+                that.electricCurrent to electricCurrent,
+                that.electricCurrent to electricCurrent) *
         convert(that.mass to mass,
-                                   that.length to length,
-                                   that.length to length)
+                that.length to length,
+                that.length to length)
 
     @JvmName("timesElectricResistance")
     operator fun times(that: ElectricConductivityAmount<T, EC, M, L>) =

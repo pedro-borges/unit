@@ -100,12 +100,12 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> div(that: PowerAmount<M, L, T>) =
         amount / that.amount /
-                         convert(that.mass to mass,
-                                   that.length to length,
-                                   that.length to length) *
-                         convert(that.time to time,
-                                   that.time to time,
-                                   that.time to time)
+        convert(that.mass to mass,
+                that.length to length,
+                that.length to length) *
+        convert(that.time to time,
+                that.time to time,
+                that.time to time)
 
     @JvmName("divPower")
     operator fun div(that: PowerAmount<M, L, T>) =

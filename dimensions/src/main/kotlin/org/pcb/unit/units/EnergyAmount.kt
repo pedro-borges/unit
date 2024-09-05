@@ -240,4 +240,13 @@ open class EnergyAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                              unit = that.electricCurrent * time)
 
     // endregion
+
+    // region -> MagneticFlux
+
+    operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
+        MagneticFluxAmount(amount = amount / that.amount,
+                           unit = (mass * length * length) /
+                                  (time * time * that.electricCurrent))
+
+    // endregion
 }

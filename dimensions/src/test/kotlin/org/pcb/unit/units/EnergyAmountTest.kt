@@ -8,10 +8,12 @@ import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.units.ElectricChargeAmount
+import org.pcb.unit.units.ElectricCurrentAmount
 import org.pcb.unit.units.ElectricTensionAmount
 import org.pcb.unit.units.EnergyAmount
 import org.pcb.unit.units.ForceAmount
 import org.pcb.unit.units.LengthAmount
+import org.pcb.unit.units.MagneticFluxAmount
 import org.pcb.unit.units.MomentumAmount
 import org.pcb.unit.units.PowerAmount
 import org.pcb.unit.units.SpeedAmount
@@ -213,7 +215,7 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = TimeAmount(amount = 2 / 2,
-                                    unit = TIME1),
+                                  unit = TIME1),
             actual = EnergyAmount(amount = 2,
                                   unit = (MASS1 * LENGTH1 * LENGTH1) /
                                          (TIME1 * TIME1)) /
@@ -227,7 +229,7 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = TimeAmount(amount = 2 / 2,
-                                    unit = TIME1),
+                                  unit = TIME1),
             actual = EnergyAmount(amount = 2,
                                   unit = (MASS1 * LENGTH1 * LENGTH1) /
                                          (TIME1 * TIME1)) /
@@ -373,5 +375,19 @@ class EnergyAmountTest
                      ElectricTensionAmount(amount = 2 * 2,
                                            unit = (MASS2 * LENGTH2 * LENGTH2) /
                                                   (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2)))
+    }
+
+    @Test
+    fun divElectricCurrent()
+    {
+        assertEquals<MagneticFluxAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
+            expected = MagneticFluxAmount(amount = 2 / 2,
+                                          unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                 (TIME1 * TIME1 * ELECTRICCURRENT1)),
+            actual = EnergyAmount(amount = 2,
+                                  unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                         (TIME1 * TIME1)) /
+                     ElectricCurrentAmount(amount = 2,
+                                           unit = ELECTRICCURRENT1))
     }
 }

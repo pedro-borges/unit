@@ -38,6 +38,7 @@ class OhmTest
         assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
             expected = Ohm(6 / 3),
             actual = Second(6) / Farad(3))
+
     @Test
     fun oneDivSiemens() =
         assertEquals<ElectricResistanceAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
