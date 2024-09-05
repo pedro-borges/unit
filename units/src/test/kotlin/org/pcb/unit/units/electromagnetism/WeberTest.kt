@@ -25,4 +25,16 @@ class WeberTest
         Weber(1) equivalent Kilogram(2) * (Meter(2) / Second(2)) * (Meter(2) / Second(2)) / Ampere(2)
         Weber(2) equivalent MagneticFluxAmount(2, WEBER)
     }
+
+    @Test
+    fun voltTimesSecond() =
+        assertEquals<MagneticFluxAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Weber(2 * 3),
+            actual = Volt(2) * Second(3))
+
+    @Test
+    fun secondTimesVolt() =
+        assertEquals<MagneticFluxAmount<out Unit<Mass>, METER, out Unit<Time>, AMPERE>>(
+            expected = Weber(2 * 3),
+            actual = Second(2) * Volt(3))
 }

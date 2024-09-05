@@ -221,4 +221,19 @@ open class ElectricTensionAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time
                              unit = electricCurrent * time)
 
     // endregion
+
+    // region -> MagneticFlux
+
+    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
+        MagneticFluxAmount(amount = amount * that.amount * convert(that.time to time),
+                           unit = (mass * length * length) /
+                                  (time * time * electricCurrent))
+
+    @JvmName("timesTime")
+    operator fun times(that: TimeAmount<T>) =
+        MagneticFluxAmount(amount = amount * that.amount,
+                           unit = (mass * length * length) /
+                                  (time * time * electricCurrent))
+
+    // endregion
 }

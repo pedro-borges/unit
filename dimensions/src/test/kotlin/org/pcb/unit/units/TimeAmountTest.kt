@@ -219,4 +219,32 @@ class TimeAmountTest
                                                unit = (TIME2 * TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2) /
                                                       (MASS2 * LENGTH2 * LENGTH2)))
     }
+
+    @Test
+    fun timesSameElectricTension()
+    {
+        assertEquals<MagneticFluxAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
+            expected = MagneticFluxAmount(amount = 2 * 2,
+                                          unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                 (TIME1 * TIME1 * ELECTRICCURRENT1)),
+            actual = TimeAmount(amount = 2,
+                                unit = TIME1) *
+                     ElectricTensionAmount(amount = 2,
+                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                  (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)))
+    }
+
+    @Test
+    fun timesOtherElectricTension()
+    {
+        assertEquals<MagneticFluxAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
+            expected = MagneticFluxAmount(amount = 2 * 2 * (2 * 2 * 2),
+                                          unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                 (TIME1 * TIME1 * ELECTRICCURRENT1)),
+            actual = TimeAmount(amount = 2,
+                                unit = TIME1) *
+                     ElectricTensionAmount(amount = 2,
+                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                  (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT1)))
+    }
 }

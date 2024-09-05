@@ -14,7 +14,9 @@ import org.pcb.unit.units.ElectricCurrentAmount
 import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.ElectricTensionAmount
 import org.pcb.unit.units.EnergyAmount
+import org.pcb.unit.units.MagneticFluxAmount
 import org.pcb.unit.units.PowerAmount
+import org.pcb.unit.units.TimeAmount
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
@@ -316,5 +318,33 @@ class ElectricTensionAmountTest
                      ElectricCapacitanceAmount(amount = 2,
                                                unit = (TIME2 * TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2) /
                                                       (MASS2 * LENGTH2 * LENGTH2)))
+    }
+
+    @Test
+    fun timesSameTime()
+    {
+        assertEquals<MagneticFluxAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
+            expected = MagneticFluxAmount(amount = 2 * 2,
+                                          unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                 (TIME1 * TIME1 * ELECTRICCURRENT1)),
+            actual = ElectricTensionAmount(amount = 2,
+                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                  (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)) *
+                     TimeAmount(amount = 2,
+                                unit = TIME1))
+    }
+
+    @Test
+    fun timesOtherTime()
+    {
+        assertEquals<MagneticFluxAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
+            expected = MagneticFluxAmount(amount = 2 * (2 * 2),
+                                          unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                 (TIME1 * TIME1 * ELECTRICCURRENT1)),
+            actual = ElectricTensionAmount(amount = 2,
+                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
+                                                  (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)) *
+                     TimeAmount(amount = 2,
+                                unit = TIME2))
     }
 }
