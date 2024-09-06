@@ -3,9 +3,6 @@ package org.pcb.unit.units
 import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.Unit
-import org.pcb.unit.dimension.Mass
-import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.minus
 import org.pcb.unit.plus
@@ -30,7 +27,7 @@ class ScalarAmountTest
     fun divScalar()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = 2 / Percent(amount = 2 * 100))
     }
 
@@ -70,7 +67,7 @@ class ScalarAmountTest
     fun divTime()
     {
         assertEquals(
-            expected = FrequencyAmount(amount = 2 / 2,
+            expected = FrequencyAmount(amount = 1,
                                        unit = 1 / TIME1),
             actual = Percent(amount = 2 * 100) /
                      TimeAmount(amount = 2,
@@ -91,26 +88,22 @@ class ScalarAmountTest
     @Test
     fun divElectricConductivity()
     {
-        assertEquals<ElectricResistanceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
+        assertEquals(
             expected = ElectricResistanceAmount(amount = 2 * 2,
-                                                unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                       (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)),
+                                                unit = (MASS1 * LENGTH1) / (TIME1 * ELECTRICCURRENT1)),
             actual = Percent(amount = 2 * 100) /
                      ElectricConductivityAmount(amount = 2,
-                                                unit = (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)
-                                                       / (MASS1 * LENGTH1 * LENGTH1)))
+                                                unit = (TIME1 * ELECTRICCURRENT1) / (MASS1 * LENGTH1)))
     }
 
     @Test
     fun divElectricResistance()
     {
-        assertEquals<ElectricConductivityAmount<out Unit<Time>, ELECTRICCURRENT1, out Unit<Mass>, LENGTH1>>(
-            expected = ElectricConductivityAmount(amount = 2 / 2,
-                                                  unit = (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)
-                                                         / (MASS1 * LENGTH1 * LENGTH1)),
+        assertEquals(
+            expected = ElectricConductivityAmount(amount = 1,
+                                                  unit = (TIME1 * ELECTRICCURRENT1) / (MASS1 * LENGTH1)),
             actual = Percent(amount = 2 * 100) /
                      ElectricResistanceAmount(amount = 2,
-                                              unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                     (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)))
+                                              unit = (MASS1 * LENGTH1) / (TIME1 * ELECTRICCURRENT1)))
     }
 }

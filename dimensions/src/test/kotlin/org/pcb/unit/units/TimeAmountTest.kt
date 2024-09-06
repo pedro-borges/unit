@@ -3,11 +3,7 @@ package org.pcb.unit.units
 import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.Unit
-import org.pcb.unit.dimension.ElectricCurrent
-import org.pcb.unit.dimension.Length
-import org.pcb.unit.dimension.Mass
-import org.pcb.unit.dimension.Time
+import org.pcb.unit.Tuple
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
@@ -35,7 +31,7 @@ class TimeAmountTest
     fun divScalar()
     {
         assertEquals(
-            expected = TimeAmount(amount = 2 / 2,
+            expected = TimeAmount(amount = 1,
                                   unit = TIME1),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
@@ -46,7 +42,7 @@ class TimeAmountTest
     fun plusSameTime()
     {
         assertEquals(
-            expected = TimeAmount(amount = 0 + 1,
+            expected = TimeAmount(amount = 1,
                                   unit = TIME1),
             actual = TimeAmount(amount = 0,
                                 unit = TIME1) +
@@ -58,7 +54,7 @@ class TimeAmountTest
     fun plusOtherTime()
     {
         assertEquals(
-            expected = TimeAmount(amount = 0 + 2,
+            expected = TimeAmount(amount = 10,
                                   unit = TIME1),
             actual = TimeAmount(amount = 0,
                                 unit = TIME1) +
@@ -70,7 +66,7 @@ class TimeAmountTest
     fun minusSameTime()
     {
         assertEquals(
-            expected = TimeAmount(amount = 1 - 1,
+            expected = TimeAmount(amount = 0,
                                   unit = TIME1),
             actual = TimeAmount(amount = 1,
                                 unit = TIME1) -
@@ -82,19 +78,19 @@ class TimeAmountTest
     fun minusOtherTime()
     {
         assertEquals(
-            expected = TimeAmount(amount = 2 - 2,
-                                  unit = TIME1),
-            actual = TimeAmount(amount = 2,
-                                unit = TIME1) -
-                     TimeAmount(amount = 1,
-                                unit = TIME2))
+            expected = TimeAmount(amount = 10 - 10,
+                                  unit = TIME2),
+            actual = TimeAmount(amount = 1,
+                                unit = TIME2) -
+                     TimeAmount(amount = 10,
+                                unit = TIME1))
     }
 
     @Test
     fun divSameTime()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
                      TimeAmount(amount = 2,
@@ -105,18 +101,18 @@ class TimeAmountTest
     fun divOtherTime()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
-            actual = TimeAmount(amount = 2,
-                                unit = TIME1) /
-                     TimeAmount(amount = 1,
-                                unit = TIME2))
+            expected = BigDecimal(1),
+            actual = TimeAmount(amount = 1,
+                                unit = TIME2) /
+                     TimeAmount(amount = 10,
+                                unit = TIME1))
     }
 
     @Test
     fun divSpace()
     {
-        assertEquals<PaceAmount<out Unit<Time>, LENGTH1>>(
-            expected = PaceAmount(amount = 2 / 2,
+        assertEquals(
+            expected = PaceAmount(amount = 1,
                                   unit = TIME1 / LENGTH1),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
@@ -127,35 +123,31 @@ class TimeAmountTest
     @Test
     fun timesSamePower()
     {
-        assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+        assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                           (TIME1 * TIME1)),
+                                    unit = Tuple(MASS1, LENGTH1) / TIME1),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
                      PowerAmount(amount = 2,
-                                 unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                        (TIME1 * TIME1 * TIME1)))
+                                 unit = Tuple(MASS1, LENGTH1) / TIME1))
     }
 
     @Test
     fun timesOtherPower()
     {
-        assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+        assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                           (TIME1 * TIME1)),
+                                    unit = Tuple(MASS1, LENGTH1) / TIME1),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
-                     PowerAmount(amount = 2 * (2 * 2 * 2),
-                                 unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                        (TIME2 * TIME2 * TIME2)))
+                     PowerAmount(amount = 2000,
+                                 unit = Tuple(MASS1, LENGTH1) / TIME2))
     }
 
     @Test
     fun timesElectricCurrent()
     {
-        assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
+        assertEquals(
             expected = ElectricChargeAmount(amount = 2 * 2,
                                             unit = ELECTRICCURRENT1 * TIME1),
             actual = TimeAmount(amount = 2,
@@ -167,84 +159,72 @@ class TimeAmountTest
     @Test
     fun divSameElectricResistance()
     {
-        assertEquals<ElectricCapacitanceAmount<out Unit<Time>, ELECTRICCURRENT1, out Unit<Mass>, LENGTH1>>(
-            expected = ElectricCapacitanceAmount(amount = 2 / 2,
-                                                 unit = (TIME1 * TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
-                                                        (MASS1 * LENGTH1 * LENGTH1)),
+        assertEquals(
+            expected = ElectricCapacitanceAmount(amount = 1,
+                                                 unit = Tuple(TIME1, ELECTRICCURRENT1) / Tuple(MASS1, LENGTH1)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
                      ElectricResistanceAmount(amount = 2,
-                                              unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                     (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)))
+                                              unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
     fun divOtherElectricResistance()
     {
-        assertEquals<ElectricCapacitanceAmount<out Unit<Time>, out Unit<ElectricCurrent>, out Unit<Mass>, out Unit<Length>>>(
-            expected = ElectricCapacitanceAmount(amount = 8 / (2 * 2 * 2),
-                                                 unit = (TIME1 * TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
-                                                        (MASS1 * LENGTH1 * LENGTH1)),
-            actual = TimeAmount(amount = 8,
+        assertEquals(
+            expected = ElectricCapacitanceAmount(amount = 1,
+                                                 unit = Tuple(TIME1, ELECTRICCURRENT2) / Tuple(MASS2, LENGTH2)),
+            actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
-                     ElectricResistanceAmount(amount = 2 * (2 * 2),
-                                              unit = (MASS2 * LENGTH2 * LENGTH2) /
-                                                     (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2)))
+                     ElectricResistanceAmount(amount = 2000,
+                                              unit = Tuple(MASS2, LENGTH2) / Tuple(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
     fun divSameElectricCapacitance()
     {
-        assertEquals<ElectricResistanceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
-            expected = ElectricResistanceAmount(amount = 2 / 2,
-                                                unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                       (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)),
+        assertEquals(
+            expected = ElectricResistanceAmount(amount = 1,
+                                                unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
                      ElectricCapacitanceAmount(amount = 2,
-                                               unit = (TIME1 * TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
-                                                      (MASS1 * LENGTH1 * LENGTH1)))
+                                               unit = Tuple(TIME1, ELECTRICCURRENT1) / Tuple(MASS1, LENGTH1)))
     }
 
     @Test
     fun divOtherElectricCapacitance()
     {
-        assertEquals<ElectricResistanceAmount<out Unit<Mass>, out Unit<Length>, out Unit<Time>, out Unit<ElectricCurrent>>>(
-            expected = ElectricResistanceAmount(amount = 16 / (2 * 2 * 2 * 2),
-                                                unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                       (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)),
-            actual = TimeAmount(amount = 16,
+        assertEquals(
+            expected = ElectricResistanceAmount(amount = 1,
+                                                unit = Tuple(MASS2, LENGTH2) / Tuple(TIME1, ELECTRICCURRENT2)),
+            actual = TimeAmount(amount = 20000,
                                 unit = TIME1) /
                      ElectricCapacitanceAmount(amount = 2,
-                                               unit = (TIME2 * TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2) /
-                                                      (MASS2 * LENGTH2 * LENGTH2)))
+                                               unit = Tuple(TIME2, ELECTRICCURRENT2) / Tuple(MASS2, LENGTH2)))
     }
 
     @Test
     fun timesSameElectricTension()
     {
-        assertEquals<MagneticFluxAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
+        assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                 (TIME1 * TIME1 * ELECTRICCURRENT1)),
+                                          unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
                      ElectricTensionAmount(amount = 2,
-                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                  (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)))
+                                           unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
     fun timesOtherElectricTension()
     {
-        assertEquals<MagneticFluxAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
-            expected = MagneticFluxAmount(amount = 2 * 2 * (2 * 2 * 2),
-                                          unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                 (TIME1 * TIME1 * ELECTRICCURRENT1)),
+        assertEquals(
+            expected = MagneticFluxAmount(amount = 2 * 2,
+                                          unit = Tuple(MASS1, LENGTH1) / Tuple(TIME2, ELECTRICCURRENT1)),
             actual = TimeAmount(amount = 2,
-                                unit = TIME1) *
-                     ElectricTensionAmount(amount = 2,
-                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                  (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT1)))
+                                unit = TIME2) *
+                     ElectricTensionAmount(amount = 2000,
+                                           unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)))
     }
 }

@@ -19,49 +19,49 @@ import org.pcb.unit.toBigBigDecimal
 
 open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
-        unit: Fraction<L, Tuple<T, T>>)
-    : Amount<Acceleration>(amount = amount.toBigBigDecimal() / convert(unit.minor.second to unit.minor.first),
+        unit: Fraction<L, T>)
+    : Amount<Acceleration>(amount = amount.toBigBigDecimal(),
                            unit = CompositeUnit(
                                domain = Acceleration::class,
                                units = listOf(unit.major to 1,
-                                              unit.minor.first to -2)))
+                                              unit.minor to -2)))
 {
     val length = unit.major
-    val time = unit.minor.first
+    val time = unit.minor
 
     // region -> Acceleration
 
     override operator fun <U : Unit<Scalar>> times(that: ScalarAmount<U>) =
         AccelerationAmount(amount = amount * that.amount * that.unit.scale,
-                           unit = length / (time * time))
+                           unit = Fraction(length, time))
 
     override operator fun <U : Unit<Scalar>> div(that: ScalarAmount<U>) =
         AccelerationAmount(amount = amount / that.amount / that.unit.scale,
-                           unit = length / (time * time))
+                           unit = Fraction(length, time))
 
     operator fun <L : Unit<Length>, T : Unit<Time>> plus(that: AccelerationAmount<L, T>) =
         AccelerationAmount(amount = amount + that.amount
                                     * convert(that.length to length)
                                     / convert(that.time to time,
                                               that.time to time),
-                           unit = length / (time * time))
+                           unit = Fraction(length, time))
 
     @JvmName("plusAcceleration")
     operator fun plus(that: AccelerationAmount<L, T>) =
         AccelerationAmount(amount = amount + that.amount,
-                           unit = length / (time * time))
+                           unit = Fraction(length, time))
 
     operator fun <L : Unit<Length>, T : Unit<Time>> minus(that: AccelerationAmount<L, T>) =
         AccelerationAmount(amount = amount - that.amount
                                     * convert(that.length to length)
                                     / convert(that.time to time,
                                               that.time to time),
-                           unit = length / (time * time))
+                           unit = Fraction(length, time))
 
     @JvmName("minusAcceleration")
     operator fun minus(that: AccelerationAmount<L, T>) =
         AccelerationAmount(amount = amount - that.amount,
-                           unit = length / (time * time))
+                           unit = Fraction(length, time))
 
     // endregion
 
@@ -80,12 +80,12 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         SpeedAmount(amount = amount * that.amount * convert(that.time to time),
-                    unit = length / time)
+                    unit = Fraction(length, time))
 
     @JvmName("timesTime")
     operator fun times(that: TimeAmount<T>) =
         SpeedAmount(amount = amount * that.amount,
-                    unit = length / time)
+                    unit = Fraction(length, time))
 
     // endregion
 
@@ -108,8 +108,7 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
         ForceAmount(amount = amount * that.amount,
-                    unit = (that.mass * length) /
-                           (time * time))
+                    unit = Fraction(Tuple(that.mass, length), time))
 
     // endregion
 }

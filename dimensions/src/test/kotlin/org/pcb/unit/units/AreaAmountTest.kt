@@ -3,8 +3,6 @@ package org.pcb.unit.units
 import java.math.BigDecimal
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
-import org.pcb.unit.Unit
-import org.pcb.unit.dimension.Length
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
@@ -14,103 +12,103 @@ class AreaAmountTest
     @Test
     fun timesScalar()
     {
-        assertEquals<AreaAmount<out Unit<Length>>>(
+        assertEquals(
             expected = AreaAmount(amount = 2 * 2,
-                                  unit = LENGTH1 * LENGTH1),
+                                  unit = LENGTH1),
             actual = AreaAmount(amount = 2,
-                                unit = LENGTH1 * LENGTH1) *
+                                unit = LENGTH1) *
                      Percent(amount = 2 * 100))
     }
 
     @Test
     fun divScalar()
     {
-        assertEquals<AreaAmount<out Unit<Length>>>(
-            expected = AreaAmount(amount = 2 / 2,
-                                  unit = LENGTH1 * LENGTH1),
+        assertEquals(
+            expected = AreaAmount(amount = 1,
+                                  unit = LENGTH1),
             actual = AreaAmount(amount = 2,
-                                unit = LENGTH1 * LENGTH1) /
+                                unit = LENGTH1) /
                      Percent(amount = 2 * 100))
     }
 
     @Test
     fun plusSameArea()
     {
-        assertEquals<AreaAmount<out Unit<Length>>>(
-            expected = AreaAmount(amount = 0 + 1,
-                                  unit = LENGTH1 * LENGTH1),
+        assertEquals(
+            expected = AreaAmount(amount = 1,
+                                  unit = LENGTH1),
             actual = AreaAmount(amount = 0,
-                                unit = LENGTH1 * LENGTH1) +
+                                unit = LENGTH1) +
                      AreaAmount(amount = 1,
-                                unit = LENGTH1 * LENGTH1))
+                                unit = LENGTH1))
     }
 
     @Test
     fun plusOtherArea()
     {
-        assertEquals<AreaAmount<out Unit<Length>>>(
-            expected = AreaAmount(amount = 0 + (2 * 2),
-                                  unit = LENGTH1 * LENGTH1),
+        assertEquals(
+            expected = AreaAmount(amount = 1,
+                                  unit = LENGTH2),
             actual = AreaAmount(amount = 0,
-                                unit = LENGTH1 * LENGTH1) +
-                     AreaAmount(amount = 1,
-                                unit = LENGTH2 * LENGTH2))
+                                unit = LENGTH2) +
+                     AreaAmount(amount = 100,
+                                unit = LENGTH1))
     }
 
     @Test
     fun minusSameArea()
     {
-        assertEquals<AreaAmount<out Unit<Length>>>(
-            expected = AreaAmount(amount = 1 - 1,
-                                  unit = LENGTH1 * LENGTH1),
+        assertEquals(
+            expected = AreaAmount(amount = 0,
+                                  unit = LENGTH1),
             actual = AreaAmount(amount = 1,
-                                unit = LENGTH1 * LENGTH1) -
+                                unit = LENGTH1) -
                      AreaAmount(amount = 1,
-                                unit = LENGTH1 * LENGTH1))
+                                unit = LENGTH1))
     }
 
     @Test
     fun minusOtherArea()
     {
-        assertEquals<AreaAmount<out Unit<Length>>>(
-            expected = AreaAmount(amount = 4 - (2 * 2),
-                                  unit = LENGTH1 * LENGTH1),
-            actual = AreaAmount(amount = 4,
-                                unit = LENGTH1 * LENGTH1) -
-                     AreaAmount(amount = 1,
-                                unit = LENGTH2 * LENGTH2))
+        assertEquals(
+            expected = AreaAmount(amount = 0,
+                                  unit = LENGTH2),
+            actual = AreaAmount(amount = 1,
+                                unit = LENGTH2) -
+                     AreaAmount(amount = 100,
+                                unit = LENGTH1))
     }
 
     @Test
     fun divSameArea()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = AreaAmount(amount = 2,
-                                unit = LENGTH1 * LENGTH1) /
+                                unit = LENGTH1) /
                      AreaAmount(amount = 2,
-                                unit = LENGTH1 * LENGTH1))
+                                unit = LENGTH1))
     }
 
     @Test
     fun divOtherArea()
     {
         assertEquals(
-            expected = BigDecimal(4 / (2 * 2)),
-            actual = AreaAmount(amount = 4,
-                                unit = LENGTH1 * LENGTH1) /
-                     AreaAmount(amount = 1,
-                                unit = LENGTH2 * LENGTH2))
+            expected = BigDecimal(1),
+            actual = AreaAmount(amount = 2,
+                                unit = LENGTH2) /
+                     AreaAmount(amount = 200,
+                                unit = LENGTH1))
     }
 
     @Test
     fun divSameLength()
     {
         assertEquals(
-            expected = LengthAmount(amount = 2 / 2,
+            expected = LengthAmount(amount = 1,
                                     unit = LENGTH1),
             actual = AreaAmount(amount = 2,
-                                unit = LENGTH1 * LENGTH1) /
+                                unit = LENGTH1) /
                      LengthAmount(amount = 2,
                                   unit = LENGTH1))
     }
@@ -119,22 +117,22 @@ class AreaAmountTest
     fun divOtherLength()
     {
         assertEquals(
-            expected = LengthAmount(amount = 2 / 2,
-                                    unit = LENGTH1),
+            expected = LengthAmount(amount = 1,
+                                    unit = LENGTH2),
             actual = AreaAmount(amount = 2,
-                                unit = LENGTH1 * LENGTH1) /
-                     LengthAmount(amount = 1,
-                                  unit = LENGTH2))
+                                unit = LENGTH2) /
+                     LengthAmount(amount = 20,
+                                  unit = LENGTH1))
     }
 
     @Test
     fun timesSameLength()
     {
-        assertEquals<VolumeAmount<out Unit<Length>>>(
+        assertEquals(
             expected = VolumeAmount(amount = 2 * 2,
-                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
+                                    unit = LENGTH1),
             actual = AreaAmount(amount = 2,
-                                unit = LENGTH1 * LENGTH1) *
+                                unit = LENGTH1) *
                      LengthAmount(amount = 2,
                                   unit = LENGTH1))
     }
@@ -142,12 +140,12 @@ class AreaAmountTest
     @Test
     fun timesOtherLength()
     {
-        assertEquals<VolumeAmount<out Unit<Length>>>(
+        assertEquals(
             expected = VolumeAmount(amount = 2 * 2,
-                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
+                                    unit = LENGTH2),
             actual = AreaAmount(amount = 2,
-                                unit = LENGTH1 * LENGTH1) *
-                     LengthAmount(amount = 1,
-                                  unit = LENGTH2))
+                                unit = LENGTH2) *
+                     LengthAmount(amount = 20,
+                                  unit = LENGTH1))
     }
 }

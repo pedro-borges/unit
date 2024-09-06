@@ -1,5 +1,6 @@
 package org.pcb.unit.units.electromagnetism
 
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.ElectricConductivity
 import org.pcb.unit.dimension.ElectricCurrent
@@ -16,8 +17,7 @@ import org.pcb.unit.units.base.Second.SECOND
 class Siemens(amount: Number)
     : ElectricConductivityAmount<Unit<Time>, Unit<ElectricCurrent>, Unit<Mass>, Unit<Length>>(
     amount = amount,
-    unit = (SECOND * SECOND * SECOND * AMPERE * AMPERE) /
-           (KILOGRAM * METER * METER))
+    unit = Tuple(SECOND, AMPERE) / Tuple(KILOGRAM, METER))
 {
     object SIEMENS : Unit<ElectricConductivity>(ElectricConductivity::class)
     {

@@ -3,9 +3,6 @@ package org.pcb.unit
 import java.math.BigDecimal
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
-import org.pcb.unit.dimension.Length
-import org.pcb.unit.dimension.Mass
-import org.pcb.unit.dimension.Time
 import org.pcb.unit.units.AreaAmount
 import org.pcb.unit.units.EnergyAmount
 import org.pcb.unit.units.ForceAmount
@@ -17,7 +14,9 @@ import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
 import org.pcb.unit.units.test.MASS1
+import org.pcb.unit.units.test.MASS2
 import org.pcb.unit.units.test.TIME1
+import org.pcb.unit.units.test.TIME2
 
 class LengthAmountTest
 {
@@ -36,7 +35,7 @@ class LengthAmountTest
     fun divScalar()
     {
         assertEquals(
-            expected = LengthAmount(amount = 2 / 2,
+            expected = LengthAmount(amount = 1,
                                     unit = LENGTH1),
             actual = LengthAmount(amount = 2,
                                   unit = LENGTH1) /
@@ -47,7 +46,7 @@ class LengthAmountTest
     fun plusSameLength()
     {
         assertEquals(
-            expected = LengthAmount(amount = 0 + 1,
+            expected = LengthAmount(amount = 1,
                                     unit = LENGTH1),
             actual = LengthAmount(amount = 0,
                                   unit = LENGTH1) +
@@ -59,42 +58,42 @@ class LengthAmountTest
     fun plusOtherLength()
     {
         assertEquals(
-            expected = LengthAmount(amount = 0 + 2,
-                                    unit = LENGTH1),
+            expected = LengthAmount(amount = 1,
+                                    unit = LENGTH2),
             actual = LengthAmount(amount = 0,
-                                  unit = LENGTH1) +
-                     LengthAmount(amount = 1,
-                                  unit = LENGTH2))
+                                  unit = LENGTH2) +
+                     LengthAmount(amount = 10,
+                                  unit = LENGTH1))
     }
 
     @Test
     fun minusSameLength()
     {
         assertEquals(
-            expected = LengthAmount(amount = 2 - 2,
+            expected = LengthAmount(amount = 0,
                                     unit = LENGTH1),
-            actual = LengthAmount(amount = 2,
+            actual = LengthAmount(amount = 1,
                                   unit = LENGTH1) -
                      LengthAmount(amount = 1,
-                                  unit = LENGTH2))
+                                  unit = LENGTH1))
     }
 
     @Test
     fun minusOtherLength()
     {
         assertEquals(
-            expected = LengthAmount(amount = 2 - 2, LENGTH1),
-            actual = LengthAmount(amount = 2,
-                                  unit = LENGTH1) -
-                     LengthAmount(amount = 1,
-                                  unit = LENGTH2))
+            expected = LengthAmount(amount = 0, LENGTH2),
+            actual = LengthAmount(amount = 1,
+                                  unit = LENGTH2) -
+                     LengthAmount(amount = 10,
+                                  unit = LENGTH1))
     }
 
     @Test
     fun divSameLength()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = LengthAmount(amount = 2,
                                   unit = LENGTH1) /
                      LengthAmount(amount = 2,
@@ -105,18 +104,18 @@ class LengthAmountTest
     fun divOtherLength()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = LengthAmount(amount = 2,
-                                  unit = LENGTH1) /
-                     LengthAmount(amount = 1,
-                                  unit = LENGTH2))
+                                  unit = LENGTH2) /
+                     LengthAmount(amount = 20,
+                                  unit = LENGTH1))
     }
 
     @Test
     fun divTime()
     {
-        assertEquals<SpeedAmount<out Unit<Length>, TIME1>>(
-            expected = SpeedAmount(amount = 2 / 2,
+        assertEquals(
+            expected = SpeedAmount(amount = 1,
                                    unit = LENGTH1 / TIME1),
             actual = LengthAmount(amount = 2,
                                   unit = LENGTH1) /
@@ -127,9 +126,9 @@ class LengthAmountTest
     @Test
     fun timesSameLength()
     {
-        assertEquals<AreaAmount<out Unit<Length>>>(
+        assertEquals(
             expected = AreaAmount(amount = 2 * 2,
-                                  unit = LENGTH1 * LENGTH1),
+                                  unit = LENGTH1),
             actual = LengthAmount(amount = 2,
                                   unit = LENGTH1) *
                      LengthAmount(amount = 2,
@@ -139,64 +138,60 @@ class LengthAmountTest
     @Test
     fun timesOtherLength()
     {
-        assertEquals<AreaAmount<out Unit<Length>>>(
+        assertEquals(
             expected = AreaAmount(amount = 2 * 2,
-                                  unit = LENGTH1 * LENGTH1),
+                                  unit = LENGTH2),
             actual = LengthAmount(amount = 2,
-                                  unit = LENGTH1) *
-                     LengthAmount(amount = 1,
-                                  unit = LENGTH2))
+                                  unit = LENGTH2) *
+                     LengthAmount(amount = 20,
+                                  unit = LENGTH1))
     }
 
     @Test
     fun timesSameArea()
     {
-        assertEquals<VolumeAmount<out Unit<Length>>>(
+        assertEquals(
             expected = VolumeAmount(amount = 2 * 2,
-                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
+                                    unit = LENGTH1),
             actual = LengthAmount(amount = 2,
                                   unit = LENGTH1) *
                      AreaAmount(amount = 2,
-                                unit = LENGTH1 * LENGTH1))
+                                unit = LENGTH1))
     }
 
     @Test
     fun timesOtherArea()
     {
-        assertEquals<VolumeAmount<out Unit<Length>>>(
-            expected = VolumeAmount(amount = 2 * 2 * 2,
-                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
+        assertEquals(
+            expected = VolumeAmount(amount = 2 * 2,
+                                    unit = LENGTH2),
             actual = LengthAmount(amount = 2,
-                                  unit = LENGTH1) *
-                     AreaAmount(amount = 1,
-                                unit = LENGTH2 * LENGTH2))
+                                  unit = LENGTH2) *
+                     AreaAmount(amount = 200,
+                                unit = LENGTH1))
     }
 
     @Test
     fun timesSameForce()
     {
-        assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+        assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                           (TIME1 * TIME1)),
+                                    unit = Tuple(MASS1, LENGTH1) / TIME1),
             actual = LengthAmount(amount = 2,
                                   unit = LENGTH1) *
                      ForceAmount(amount = 2,
-                                 unit = (MASS1 * LENGTH1) /
-                                        (TIME1 * TIME1)))
+                                 unit = Tuple(MASS1, LENGTH1) / TIME1))
     }
 
     @Test
     fun timesOtherForce()
     {
-        assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
-            expected = EnergyAmount(amount = 2 * (2 * 2),
-                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                           (TIME1 * TIME1)),
+        assertEquals(
+            expected = EnergyAmount(amount = 2 * 2,
+                                    unit = Tuple(MASS2, LENGTH2) / TIME2),
             actual = LengthAmount(amount = 2,
-                                  unit = LENGTH1) *
-                     ForceAmount(amount = 2,
-                                 unit = (MASS1 * LENGTH2) /
-                                        (TIME1 * TIME1)))
+                                  unit = LENGTH2) *
+                     ForceAmount(amount = 20,
+                                 unit = Tuple(MASS2, LENGTH1) / TIME2))
     }
 }

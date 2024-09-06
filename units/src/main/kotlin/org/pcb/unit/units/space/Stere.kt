@@ -10,7 +10,7 @@ import org.pcb.unit.units.base.Meter.METER
 class Stere(amount: Number)
     : VolumeAmount<Unit<Length>>(
     amount = amount,
-    unit = METER * METER * METER)
+    unit = METER)
 {
     object STERE : Unit<Volume>(Volume::class)
     {

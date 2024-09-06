@@ -2,6 +2,8 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.Fraction
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.ElectricCurrent
@@ -73,8 +75,8 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> div(that: ElectricConductivityAmount<T, EC, M, L>) =
         ElectricResistanceAmount(amount = amount * that.amount * unit.scale,
-                                 unit = (that.mass * that.length * that.length) /
-                                        (that.time * that.time * that.time * that.electricCurrent * that.electricCurrent))
+                                 unit = Fraction(Tuple(that.mass, that.length),
+                                                 Tuple(that.time, that.electricCurrent)))
 
     // endregion
 
@@ -82,8 +84,8 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricConductivityAmount(amount = amount * unit.scale / that.amount,
-                                   unit = (that.time * that.time * that.time * that.electricCurrent * that.electricCurrent) /
-                                          (that.mass * that.length * that.length))
+                                   unit = Fraction(Tuple(that.time, that.electricCurrent),
+                                                   Tuple(that.mass, that.length)))
 
     // endregion
 }

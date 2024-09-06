@@ -3,8 +3,6 @@ package org.pcb.unit.units
 import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.Unit
-import org.pcb.unit.dimension.Currency
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
@@ -27,7 +25,7 @@ class CurrencyAmountTest
     fun divScalar()
     {
         assertEquals(
-            expected = CurrencyAmount(amount = 2 / 2,
+            expected = CurrencyAmount(amount = 1,
                                       unit = CURRENCY1),
             actual = CurrencyAmount(amount = 2,
                                     unit = CURRENCY1) /
@@ -38,7 +36,7 @@ class CurrencyAmountTest
     fun plusSameCurrency()
     {
         assertEquals(
-            expected = CurrencyAmount(amount = 0 + 1,
+            expected = CurrencyAmount(amount = 1,
                                       unit = CURRENCY1),
             actual = CurrencyAmount(amount = 0,
                                     unit = CURRENCY1) +
@@ -50,19 +48,19 @@ class CurrencyAmountTest
     fun plusOtherCurrency()
     {
         assertEquals(
-            expected = CurrencyAmount(amount = 0 + 2,
-                                      unit = CURRENCY1),
+            expected = CurrencyAmount(amount = 1,
+                                      unit = CURRENCY2),
             actual = CurrencyAmount(amount = 0,
-                                    unit = CURRENCY1) +
-                     CurrencyAmount(amount = 1,
-                                    unit = CURRENCY2))
+                                    unit = CURRENCY2) +
+                     CurrencyAmount(amount = 10,
+                                    unit = CURRENCY1))
     }
 
     @Test
     fun minusSameCurrency()
     {
         assertEquals(
-            expected = CurrencyAmount(amount = 1 - 1,
+            expected = CurrencyAmount(amount = 0,
                                       unit = CURRENCY1),
             actual = CurrencyAmount(amount = 1,
                                     unit = CURRENCY1) -
@@ -74,19 +72,19 @@ class CurrencyAmountTest
     fun minusOtherCurrency()
     {
         assertEquals(
-            expected = CurrencyAmount(amount = 2 - 2,
-                                      unit = CURRENCY1),
-            actual = CurrencyAmount(amount = 2,
-                                    unit = CURRENCY1) -
-                     CurrencyAmount(amount = 1,
-                                    unit = CURRENCY2))
+            expected = CurrencyAmount(amount = 0,
+                                      unit = CURRENCY2),
+            actual = CurrencyAmount(amount = 1,
+                                    unit = CURRENCY2) -
+                     CurrencyAmount(amount = 10,
+                                    unit = CURRENCY1))
     }
 
     @Test
     fun divSameCurrency()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = CurrencyAmount(amount = 2,
                                     unit = CURRENCY1) /
                      CurrencyAmount(amount = 2,
@@ -97,17 +95,17 @@ class CurrencyAmountTest
     fun divOtherCurrency()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = CurrencyAmount(amount = 2,
-                                    unit = CURRENCY1) /
-                     CurrencyAmount(amount = 1,
-                                    unit = CURRENCY2))
+                                    unit = CURRENCY2) /
+                     CurrencyAmount(amount = 20,
+                                    unit = CURRENCY1))
     }
 
     @Test
     fun timesTime()
     {
-        assertEquals<DebtAmount<out Unit<Currency>, SECOND>>(
+        assertEquals(
             expected = DebtAmount(amount = 2 * 2,
                                   unit = CURRENCY1 * SECOND),
             actual = CurrencyAmount(amount = 2,
@@ -119,7 +117,7 @@ class CurrencyAmountTest
     @Test
     fun divTime()
     {
-        assertEquals<RentAmount<out Unit<Currency>, SECOND>>(
+        assertEquals(
             expected = RentAmount(amount = 1,
                                   unit = CURRENCY1 / SECOND),
             actual = CurrencyAmount(amount = 2,

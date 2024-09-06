@@ -3,8 +3,6 @@ package org.pcb.unit.units
 import java.math.BigDecimal
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
-import org.pcb.unit.Unit
-import org.pcb.unit.dimension.Length
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
@@ -14,103 +12,103 @@ class VolumeAmountTest
     @Test
     fun timesScalar()
     {
-        assertEquals<VolumeAmount<out Unit<Length>>>(
+        assertEquals(
             expected = VolumeAmount(amount = 2 * 2,
-                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
+                                    unit = LENGTH1),
             actual = VolumeAmount(amount = 2,
-                                  unit = LENGTH1 * LENGTH1 * LENGTH1) *
+                                  unit = LENGTH1) *
                      Percent(amount = 2 * 100))
     }
 
     @Test
     fun divScalar()
     {
-        assertEquals<VolumeAmount<out Unit<Length>>>(
-            expected = VolumeAmount(amount = 2 / 2,
-                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
+        assertEquals(
+            expected = VolumeAmount(amount = 1,
+                                    unit = LENGTH1),
             actual = VolumeAmount(amount = 2,
-                                  unit = LENGTH1 * LENGTH1 * LENGTH1) /
+                                  unit = LENGTH1) /
                      Percent(amount = 2 * 100))
     }
 
     @Test
     fun plusSameVolume()
     {
-        assertEquals<VolumeAmount<out Unit<Length>>>(
-            expected = VolumeAmount(amount = 0 + 1,
-                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
+        assertEquals(
+            expected = VolumeAmount(amount = 1,
+                                    unit = LENGTH1),
             actual = VolumeAmount(amount = 0,
-                                  unit = LENGTH1 * LENGTH1 * LENGTH1) +
+                                  unit = LENGTH1) +
                      VolumeAmount(amount = 1,
-                                  unit = LENGTH1 * LENGTH1 * LENGTH1))
+                                  unit = LENGTH1))
     }
 
     @Test
     fun plusOtherVolume()
     {
-        assertEquals<VolumeAmount<out Unit<Length>>>(
-            expected = VolumeAmount(amount = 0 + (2 * 2 * 2),
-                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
+        assertEquals(
+            expected = VolumeAmount(amount = 1,
+                                    unit = LENGTH2),
             actual = VolumeAmount(amount = 0,
-                                  unit = LENGTH1 * LENGTH1 * LENGTH1) +
-                     VolumeAmount(amount = 1,
-                                  unit = LENGTH2 * LENGTH2 * LENGTH2))
+                                  unit = LENGTH2) +
+                     VolumeAmount(amount = 1000,
+                                  unit = LENGTH1))
     }
 
     @Test
     fun minusSameVolume()
     {
-        assertEquals<VolumeAmount<out Unit<Length>>>(
-            expected = VolumeAmount(amount = 1 - 1,
-                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
+        assertEquals(
+            expected = VolumeAmount(amount = 0,
+                                    unit = LENGTH1),
             actual = VolumeAmount(amount = 1,
-                                  unit = LENGTH1 * LENGTH1 * LENGTH1) -
+                                  unit = LENGTH1) -
                      VolumeAmount(amount = 1,
-                                  unit = LENGTH1 * LENGTH1 * LENGTH1))
+                                  unit = LENGTH1))
     }
 
     @Test
     fun minusOtherVolume()
     {
-        assertEquals<VolumeAmount<out Unit<Length>>>(
-            expected = VolumeAmount(amount = 8 - (2 * 2 * 2),
-                                    unit = LENGTH1 * LENGTH1 * LENGTH1),
-            actual = VolumeAmount(amount = 8,
-                                  unit = LENGTH1 * LENGTH1 * LENGTH1) -
-                     VolumeAmount(amount = 1,
-                                  unit = LENGTH2 * LENGTH2 * LENGTH2))
+        assertEquals(
+            expected = VolumeAmount(amount = 0,
+                                    unit = LENGTH2),
+            actual = VolumeAmount(amount = 1,
+                                  unit = LENGTH2) -
+                     VolumeAmount(amount = 1000,
+                                  unit = LENGTH1))
     }
 
     @Test
     fun divSameVolume()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = VolumeAmount(amount = 2,
-                                  unit = LENGTH1 * LENGTH1 * LENGTH1) /
+                                  unit = LENGTH1) /
                      VolumeAmount(amount = 2,
-                                  unit = LENGTH1 * LENGTH1 * LENGTH1))
+                                  unit = LENGTH1))
     }
 
     @Test
     fun divOtherVolume()
     {
         assertEquals(
-            expected = BigDecimal(8 / (2 * 2 * 2)),
-            actual = VolumeAmount(amount = 8,
-                                  unit = LENGTH1 * LENGTH1 * LENGTH1) /
-                     VolumeAmount(amount = 1,
-                                  unit = LENGTH2 * LENGTH2 * LENGTH2))
+            expected = BigDecimal(1),
+            actual = VolumeAmount(amount = 2,
+                                  unit = LENGTH2) /
+                     VolumeAmount(amount = 2000,
+                                  unit = LENGTH1))
     }
 
     @Test
     fun divSameLength()
     {
-        assertEquals<AreaAmount<out Unit<Length>>>(
-            expected = AreaAmount(amount = 2 / 2,
-                                  unit = LENGTH1 * LENGTH1),
+        assertEquals(
+            expected = AreaAmount(amount = 1,
+                                  unit = LENGTH1),
             actual = VolumeAmount(amount = 2,
-                                  unit = LENGTH1 * LENGTH1 * LENGTH1) /
+                                  unit = LENGTH1) /
                      LengthAmount(amount = 2,
                                   unit = LENGTH1))
     }
@@ -118,36 +116,36 @@ class VolumeAmountTest
     @Test
     fun divOtherLength()
     {
-        assertEquals<AreaAmount<out Unit<Length>>>(
-            expected = AreaAmount(amount = 2 / 2,
-                                  unit = LENGTH1 * LENGTH1),
+        assertEquals(
+            expected = AreaAmount(amount = 1,
+                                  unit = LENGTH2),
             actual = VolumeAmount(amount = 2,
-                                  unit = LENGTH1 * LENGTH1 * LENGTH1) /
-                     LengthAmount(amount = 1,
-                                  unit = LENGTH2))
+                                  unit = LENGTH2) /
+                     LengthAmount(amount = 20,
+                                  unit = LENGTH1))
     }
 
     @Test
     fun divSameArea()
     {
         assertEquals(
-            expected = LengthAmount(amount = 2 / 2,
+            expected = LengthAmount(amount = 1,
                                     unit = LENGTH1),
             actual = VolumeAmount(amount = 2,
-                                  unit = LENGTH1 * LENGTH1 * LENGTH1) /
+                                  unit = LENGTH1) /
                      AreaAmount(amount = 2,
-                                unit = LENGTH1 * LENGTH1))
+                                unit = LENGTH1))
     }
 
     @Test
     fun divOtherArea()
     {
         assertEquals(
-            expected = LengthAmount(amount = 4 / (2 * 2),
-                                    unit = LENGTH1),
-            actual = VolumeAmount(amount = 4,
-                                  unit = LENGTH1 * LENGTH1 * LENGTH1) /
-                     AreaAmount(amount = 1,
-                                unit = LENGTH2 * LENGTH2))
+            expected = LengthAmount(amount = 1,
+                                    unit = LENGTH2),
+            actual = VolumeAmount(amount = 2,
+                                  unit = LENGTH2) /
+                     AreaAmount(amount = 200,
+                                unit = LENGTH1))
     }
 }

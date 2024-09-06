@@ -16,14 +16,15 @@ import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric.NUMBER
+import org.pcb.unit.units.scalar.Numeric.ONE
 
 open class FrequencyAmount<T : Unit<Time>>(
         amount: Number,
         unit: Fraction<NUMBER, T>)
-    : Amount<Time>(amount = amount.toBigBigDecimal(),
-                   unit = CompositeUnit(
-                       domain = Time::class,
-                       units = listOf(unit.minor to -1)))
+    : Amount<Frequency>(amount = amount.toBigBigDecimal(),
+                        unit = CompositeUnit(
+                            domain = Frequency::class,
+                            units = listOf(unit.minor to -1)))
 {
     val time = unit.minor
 
@@ -31,36 +32,36 @@ open class FrequencyAmount<T : Unit<Time>>(
     {
         operator fun invoke(amount: Number, unit: Unit<Frequency>) =
             FrequencyAmount(amount = amount.toBigBigDecimal() / unit.scale,
-                            unit = 1 / SECOND)
+                            unit = Fraction(ONE, SECOND))
     }
 
     // region -> Frequency
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         FrequencyAmount(amount = amount * that.amount * that.unit.scale,
-                        unit = 1 / time)
+                        unit = Fraction(ONE, time))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         FrequencyAmount(amount = amount / that.amount / that.unit.scale,
-                        unit = 1 / time)
+                        unit = Fraction(ONE, time))
 
     operator fun <T : Unit<Time>> plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount / convert(that.time to time),
-                        unit = 1 / time)
+                        unit = Fraction(ONE, time))
 
     @JvmName("plusFrequency")
     operator fun plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount,
-                        unit = 1 / time)
+                        unit = Fraction(ONE, time))
 
     operator fun <T : Unit<Time>> minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount / convert(that.time to time),
-                        unit = 1 / time)
+                        unit = Fraction(ONE, time))
 
     @JvmName("minusFrequency")
     operator fun minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount,
-                        unit = 1 / time)
+                        unit = Fraction(ONE, time))
 
     // endregion
 
@@ -94,12 +95,12 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
         AccelerationAmount(amount = that.amount / amount / convert(that.time to time),
-                           unit = that.length / (time * time))
+                           unit = Fraction(that.length, time))
 
     @JvmName("timesSpeed")
     operator fun <L : Unit<Length>> times(that: SpeedAmount<L, T>) =
         AccelerationAmount(amount = that.amount / amount,
-                           unit = that.length / (time * time))
+                           unit = Fraction(that.length, time))
 
     // endregion
 

@@ -10,7 +10,7 @@ import org.pcb.unit.units.space.DeciMeter.DECIMETER
 class Liter(amount: Number)
     : VolumeAmount<Unit<Length>>(
     amount = amount,
-    unit = DECIMETER * DECIMETER * DECIMETER)
+    unit = DECIMETER)
 {
     object LITER : Unit<Volume>(Volume::class)
     {

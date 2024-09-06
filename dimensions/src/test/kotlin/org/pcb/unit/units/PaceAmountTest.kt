@@ -3,8 +3,7 @@ package org.pcb.unit.units
 import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.Unit
-import org.pcb.unit.dimension.Time
+import org.pcb.unit.Fraction
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
@@ -16,7 +15,7 @@ class PaceAmountTest
     @Test
     fun timesScalar()
     {
-        assertEquals<PaceAmount<out Unit<Time>, LENGTH1>>(
+        assertEquals(
             expected = PaceAmount(amount = 2 * 2,
                                   unit = TIME1 / LENGTH1),
             actual = PaceAmount(amount = 2,
@@ -27,8 +26,8 @@ class PaceAmountTest
     @Test
     fun divScalar()
     {
-        assertEquals<PaceAmount<out Unit<Time>, LENGTH1>>(
-            expected = PaceAmount(amount = 2 / 2,
+        assertEquals(
+            expected = PaceAmount(amount = 1,
                                   unit = TIME1 / LENGTH1),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 / LENGTH1) /
@@ -38,8 +37,8 @@ class PaceAmountTest
     @Test
     fun plusSamePace()
     {
-        assertEquals<PaceAmount<out Unit<Time>, LENGTH1>>(
-            expected = PaceAmount(amount = 0 + 1,
+        assertEquals(
+            expected = PaceAmount(amount = 1,
                                   unit = TIME1 / LENGTH1),
             actual = PaceAmount(amount = 0,
                                 unit = TIME1 / LENGTH1) +
@@ -50,8 +49,8 @@ class PaceAmountTest
     @Test
     fun plusOtherPace()
     {
-        assertEquals<PaceAmount<out Unit<Time>, LENGTH1>>(
-            expected = PaceAmount(amount = 0 + 1,
+        assertEquals(
+            expected = PaceAmount(amount = 1,
                                   unit = TIME1 / LENGTH1),
             actual = PaceAmount(amount = 0,
                                 unit = TIME1 / LENGTH1) +
@@ -62,8 +61,8 @@ class PaceAmountTest
     @Test
     fun minusSamePace()
     {
-        assertEquals<PaceAmount<out Unit<Time>, LENGTH1>>(
-            expected = PaceAmount(amount = 1 - 1,
+        assertEquals(
+            expected = PaceAmount(amount = 0,
                                   unit = TIME1 / LENGTH1),
             actual = PaceAmount(amount = 1,
                                 unit = TIME1 / LENGTH1) -
@@ -74,8 +73,8 @@ class PaceAmountTest
     @Test
     fun minusOtherPace()
     {
-        assertEquals<PaceAmount<out Unit<Time>, LENGTH1>>(
-            expected = PaceAmount(amount = 1 - 1,
+        assertEquals(
+            expected = PaceAmount(amount = 0,
                                   unit = TIME1 / LENGTH1),
             actual = PaceAmount(amount = 1,
                                 unit = TIME1 / LENGTH1) -
@@ -87,7 +86,7 @@ class PaceAmountTest
     fun divSamePace()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 / LENGTH1) /
                      PaceAmount(amount = 2,
@@ -98,7 +97,7 @@ class PaceAmountTest
     fun divOtherPace()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 / LENGTH1) /
                      PaceAmount(amount = 2,
@@ -109,7 +108,7 @@ class PaceAmountTest
     fun timesSameSpeed()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 / LENGTH1) *
                      SpeedAmount(amount = 2,
@@ -120,7 +119,7 @@ class PaceAmountTest
     fun timesOtherSpeed()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 / LENGTH1) *
                      SpeedAmount(amount = 2,
@@ -134,7 +133,7 @@ class PaceAmountTest
             expected = TimeAmount(amount = 2 * 2,
                                   unit = TIME1),
             actual = PaceAmount(amount = 2,
-                                unit = TIME1 / LENGTH1) *
+                                unit = Fraction(TIME1, LENGTH1)) *
                      LengthAmount(amount = 2,
                                   unit = LENGTH1))
     }
@@ -146,8 +145,8 @@ class PaceAmountTest
             expected = TimeAmount(amount = 2 * 2,
                                   unit = TIME1),
             actual = PaceAmount(amount = 2,
-                                unit = TIME1 / LENGTH1) *
-                     LengthAmount(amount = 1,
-                                  unit = LENGTH2))
+                                unit = Fraction(TIME1, LENGTH2)) *
+                     LengthAmount(amount = 20,
+                                  unit = LENGTH1))
     }
 }

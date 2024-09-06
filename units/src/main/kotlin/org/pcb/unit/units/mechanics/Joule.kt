@@ -1,5 +1,6 @@
 package org.pcb.unit.units.mechanics
 
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Energy
 import org.pcb.unit.dimension.Length
@@ -14,8 +15,7 @@ import org.pcb.unit.units.base.Second.SECOND
 class Joule(amount: Number)
     : EnergyAmount<Unit<Mass>, Unit<Length>, Unit<Time>>(
     amount = amount,
-    unit = (KILOGRAM * METER * METER) /
-           (SECOND * SECOND))
+    unit = Tuple(KILOGRAM, METER) / SECOND)
 {
     object JOULE : Unit<Energy>(Energy::class)
     {

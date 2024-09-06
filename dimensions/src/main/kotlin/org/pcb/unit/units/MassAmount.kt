@@ -2,6 +2,8 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.Fraction
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Length
@@ -67,8 +69,8 @@ open class MassAmount<M : Unit<Mass>>(
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
         MomentumAmount(amount = amount * that.amount,
-                       unit = (mass * that.length) /
-                              that.time)
+                       unit = Fraction(Tuple(mass, that.length),
+                                       that.time))
 
     // endregion
 
@@ -76,8 +78,7 @@ open class MassAmount<M : Unit<Mass>>(
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: AccelerationAmount<L, T>) =
         ForceAmount(amount = amount * that.amount,
-                    unit = (mass * that.length) /
-                           (that.time * that.time))
+                    unit = Fraction(Tuple(mass, that.length), that.time))
 
     // endregion
 }

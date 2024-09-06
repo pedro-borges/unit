@@ -3,11 +3,9 @@ package org.pcb.unit.units
 import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.Unit
-import org.pcb.unit.dimension.Currency
-import org.pcb.unit.dimension.Length
-import org.pcb.unit.dimension.Time
-import org.pcb.unit.div
+import org.pcb.unit.Fraction
+import org.pcb.unit.Tuple
+import org.pcb.unit.units.scalar.Numeric.ONE
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
 import org.pcb.unit.units.test.LENGTH1
@@ -22,9 +20,9 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 2 * 2,
-                                       unit = 1 / TIME1),
+                                       unit = Fraction(ONE, TIME1)),
             actual = FrequencyAmount(amount = 2,
-                                     unit = 1 / TIME1) *
+                                     unit = Fraction(ONE, TIME1)) *
                      Percent(amount = 2 * 100))
     }
 
@@ -32,10 +30,10 @@ class FrequencyAmountTest
     fun divScalar()
     {
         assertEquals(
-            expected = FrequencyAmount(amount = 2 / 2,
-                                       unit = 1 / TIME1),
+            expected = FrequencyAmount(amount = 1,
+                                       unit = Fraction(ONE, TIME1)),
             actual = FrequencyAmount(amount = 2,
-                                     unit = 1 / TIME1) /
+                                     unit = Fraction(ONE, TIME1)) /
                      Percent(amount = 2 * 100))
     }
 
@@ -43,80 +41,80 @@ class FrequencyAmountTest
     fun plusSameFrequency()
     {
         assertEquals(
-            expected = FrequencyAmount(amount = 0 + 1,
-                                       unit = 1 / TIME1),
+            expected = FrequencyAmount(amount = 1,
+                                       unit = Fraction(ONE, TIME1)),
             actual = FrequencyAmount(amount = 0,
-                                     unit = 1 / TIME1) +
+                                     unit = Fraction(ONE, TIME1)) +
                      FrequencyAmount(amount = 1,
-                                     unit = 1 / TIME1))
+                                     unit = Fraction(ONE, TIME1)))
     }
 
     @Test
     fun plusOtherFrequency()
     {
         assertEquals(
-            expected = FrequencyAmount(amount = 0 + 1,
-                                       unit = 1 / TIME1),
+            expected = FrequencyAmount(amount = 1,
+                                       unit = Fraction(ONE, TIME1)),
             actual = FrequencyAmount(amount = 0,
-                                     unit = 1 / TIME1) +
-                     FrequencyAmount(amount = 2,
-                                     unit = 1 / TIME2))
+                                     unit = Fraction(ONE, TIME1)) +
+                     FrequencyAmount(amount = 10,
+                                     unit = Fraction(ONE, TIME2)))
     }
 
     @Test
     fun minusSameFrequency()
     {
         assertEquals(
-            expected = FrequencyAmount(amount = 1 - 1,
-                                       unit = 1 / TIME1),
+            expected = FrequencyAmount(amount = 0,
+                                       unit = Fraction(ONE, TIME1)),
             actual = FrequencyAmount(amount = 1,
-                                     unit = 1 / TIME1) -
+                                     unit = Fraction(ONE, TIME1)) -
                      FrequencyAmount(amount = 1,
-                                     unit = 1 / TIME1))
+                                     unit = Fraction(ONE, TIME1)))
     }
 
     @Test
     fun minusOtherFrequency()
     {
         assertEquals(
-            expected = FrequencyAmount(amount = 1 - 1,
-                                       unit = 1 / TIME1),
+            expected = FrequencyAmount(amount = 0,
+                                       unit = Fraction(ONE, TIME1)),
             actual = FrequencyAmount(amount = 1,
-                                     unit = 1 / TIME1) -
-                     FrequencyAmount(amount = 2,
-                                     unit = 1 / TIME2))
+                                     unit = Fraction(ONE, TIME1)) -
+                     FrequencyAmount(amount = 10,
+                                     unit = Fraction(ONE, TIME2)))
     }
 
     @Test
     fun divSameFrequency()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = 1 / TIME1) /
+                                     unit = Fraction(ONE, TIME1)) /
                      FrequencyAmount(amount = 2,
-                                     unit = 1 / TIME1))
+                                     unit = Fraction(ONE, TIME1)))
     }
 
     @Test
     fun divOtherFrequency()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
-            actual = FrequencyAmount(amount = 1,
-                                     unit = 1 / TIME1) /
-                     FrequencyAmount(amount = 2,
-                                     unit = 1 / TIME2))
+            expected = BigDecimal(1),
+            actual = FrequencyAmount(amount = 2,
+                                     unit = Fraction(ONE, TIME1)) /
+                     FrequencyAmount(amount = 20,
+                                     unit = Fraction(ONE, TIME2)))
     }
 
     @Test
     fun timesSpace()
     {
-        assertEquals<SpeedAmount<out Unit<Length>, TIME1>>(
-            expected = SpeedAmount(amount = 2 / 2,
+        assertEquals(
+            expected = SpeedAmount(amount = 1,
                                    unit = LENGTH1 / TIME1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = 1 / TIME1) *
+                                     unit = Fraction(ONE, TIME1)) *
                      LengthAmount(amount = 2,
                                   unit = LENGTH1))
     }
@@ -124,12 +122,11 @@ class FrequencyAmountTest
     @Test
     fun timesSameSpeed()
     {
-        assertEquals<AccelerationAmount<out Unit<Length>, out Unit<Time>>>(
-            expected = AccelerationAmount(amount = 2 / 2,
-                                          unit = LENGTH1 /
-                                                 (TIME1 * TIME1)),
+        assertEquals(
+            expected = AccelerationAmount(amount = 1,
+                                          unit = LENGTH1 / TIME1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = 1 / TIME1) *
+                                     unit = Fraction(ONE, TIME1)) *
                      SpeedAmount(amount = 2,
                                  unit = LENGTH1 / TIME1))
     }
@@ -137,13 +134,12 @@ class FrequencyAmountTest
     @Test
     fun timesOtherSpeed()
     {
-        assertEquals<AccelerationAmount<out Unit<Length>, out Unit<Time>>>(
-            expected = AccelerationAmount(amount = 2 / 2,
-                                          unit = LENGTH1 /
-                                                 (TIME1 * TIME1)),
+        assertEquals(
+            expected = AccelerationAmount(amount = 1,
+                                          unit = LENGTH1 / TIME1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = 1 / TIME1) *
-                     SpeedAmount(amount = 2 * 2,
+                                     unit = Fraction(ONE, TIME1)) *
+                     SpeedAmount(amount = 20,
                                  unit = LENGTH1 / TIME2))
     }
 
@@ -151,34 +147,34 @@ class FrequencyAmountTest
     fun timesSameDebt()
     {
         assertEquals(
-            expected = CurrencyAmount(amount = 2 / 2,
+            expected = CurrencyAmount(amount = 1,
                                       unit = CURRENCY1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = 1 / TIME1) *
+                                     unit = Fraction(ONE, TIME1)) *
                      DebtAmount(amount = 2,
-                                unit = CURRENCY1 * TIME1))
+                                unit = Tuple(CURRENCY1, TIME1)))
     }
 
     @Test
     fun timesOtherDebt()
     {
         assertEquals(
-            expected = CurrencyAmount(amount = 2 / 2,
+            expected = CurrencyAmount(amount = 1,
                                       unit = CURRENCY1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = 1 / TIME1) *
-                     DebtAmount(amount = 1,
-                                unit = CURRENCY1 * TIME2))
+                                     unit = Fraction(ONE, TIME2)) *
+                     DebtAmount(amount = 20,
+                                unit = Tuple(CURRENCY1, TIME1)))
     }
 
     @Test
     fun timesCurrency()
     {
-        assertEquals<RentAmount<out Unit<Currency>, TIME1>>(
-            expected = RentAmount(amount = 2 / 2,
+        assertEquals(
+            expected = RentAmount(amount = 1,
                                   unit = CURRENCY1 / TIME1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = 1 / TIME1) *
+                                     unit = Fraction(ONE, TIME1)) *
                      CurrencyAmount(amount = 2,
                                     unit = CURRENCY1))
     }

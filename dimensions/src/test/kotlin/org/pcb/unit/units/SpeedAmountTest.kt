@@ -3,9 +3,6 @@ package org.pcb.unit
 import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.dimension.Length
-import org.pcb.unit.dimension.Mass
-import org.pcb.unit.dimension.Time
 import org.pcb.unit.units.AccelerationAmount
 import org.pcb.unit.units.EnergyAmount
 import org.pcb.unit.units.FrequencyAmount
@@ -13,6 +10,7 @@ import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.MomentumAmount
 import org.pcb.unit.units.SpeedAmount
 import org.pcb.unit.units.TimeAmount
+import org.pcb.unit.units.scalar.Numeric.ONE
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
@@ -25,7 +23,7 @@ class SpeedAmountTest
     @Test
     fun timesScalar()
     {
-        assertEquals<SpeedAmount<out Unit<Length>, TIME1>>(
+        assertEquals(
             expected = SpeedAmount(amount = 2 * 2,
                                    unit = LENGTH1 / TIME1),
             actual = SpeedAmount(amount = 2,
@@ -36,8 +34,8 @@ class SpeedAmountTest
     @Test
     fun divScalar()
     {
-        assertEquals<SpeedAmount<out Unit<Length>, TIME1>>(
-            expected = SpeedAmount(amount = 2 / 2,
+        assertEquals(
+            expected = SpeedAmount(amount = 1,
                                    unit = LENGTH1 / TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 / TIME1) /
@@ -47,8 +45,8 @@ class SpeedAmountTest
     @Test
     fun plusSameSpeed()
     {
-        assertEquals<SpeedAmount<out Unit<Length>, TIME1>>(
-            expected = SpeedAmount(amount = 0 + 1,
+        assertEquals(
+            expected = SpeedAmount(amount = 1,
                                    unit = LENGTH1 / TIME1),
             actual = SpeedAmount(amount = 0,
                                  unit = LENGTH1 / TIME1) +
@@ -59,7 +57,7 @@ class SpeedAmountTest
     @Test
     fun plusOtherSpeed()
     {
-        assertEquals<SpeedAmount<out Unit<Length>, TIME1>>(
+        assertEquals(
             expected = SpeedAmount(amount = 0 + (2 / 2),
                                    unit = LENGTH1 / TIME1),
             actual = SpeedAmount(amount = 0,
@@ -71,8 +69,8 @@ class SpeedAmountTest
     @Test
     fun minusSameSpeed()
     {
-        assertEquals<SpeedAmount<out Unit<Length>, TIME1>>(
-            expected = SpeedAmount(amount = 1 - 1,
+        assertEquals(
+            expected = SpeedAmount(amount = 0,
                                    unit = LENGTH1 / TIME1),
             actual = SpeedAmount(amount = 1,
                                  unit = LENGTH1 / TIME1) -
@@ -83,7 +81,7 @@ class SpeedAmountTest
     @Test
     fun minusOtherSpeed()
     {
-        assertEquals<SpeedAmount<out Unit<Length>, TIME1>>(
+        assertEquals(
             expected = SpeedAmount(amount = 1 - (2 / 2),
                                    unit = LENGTH1 / TIME1),
             actual = SpeedAmount(amount = 1,
@@ -96,7 +94,7 @@ class SpeedAmountTest
     fun divSameSpeed()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 / TIME1) /
                      SpeedAmount(amount = 2,
@@ -107,7 +105,7 @@ class SpeedAmountTest
     fun divOtherSpeed()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 / TIME1) /
                      SpeedAmount(amount = 2,
@@ -121,7 +119,7 @@ class SpeedAmountTest
             expected = LengthAmount(amount = 2 * 2,
                                     unit = LENGTH1),
             actual = SpeedAmount(amount = 2,
-                                 unit = LENGTH1 / TIME1) *
+                                 unit = Fraction(LENGTH1, TIME1)) *
                      TimeAmount(amount = 2,
                                 unit = TIME1))
     }
@@ -133,18 +131,17 @@ class SpeedAmountTest
             expected = LengthAmount(amount = 2 * 2,
                                     unit = LENGTH1),
             actual = SpeedAmount(amount = 2,
-                                 unit = LENGTH1 / TIME1) *
-                     TimeAmount(amount = 1,
-                                unit = TIME2))
+                                 unit = Fraction(LENGTH1, TIME2)) *
+                     TimeAmount(amount = 20,
+                                unit = TIME1))
     }
 
     @Test
     fun divSameTime()
     {
-        assertEquals<AccelerationAmount<out Unit<Length>, out Unit<Time>>>(
-            expected = AccelerationAmount(amount = 2 / 2,
-                                          unit = LENGTH1 /
-                                                 (TIME1 * TIME1)),
+        assertEquals(
+            expected = AccelerationAmount(amount = 1,
+                                          unit = LENGTH1 / TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 / TIME1) /
                      TimeAmount(amount = 2,
@@ -154,21 +151,20 @@ class SpeedAmountTest
     @Test
     fun divOtherTime()
     {
-        assertEquals<AccelerationAmount<out Unit<Length>, out Unit<Time>>>(
-            expected = AccelerationAmount(amount = 2 / 2,
-                                          unit = LENGTH1 /
-                                                 (TIME1 * TIME1)),
+        assertEquals(
+            expected = AccelerationAmount(amount = 1,
+                                          unit = LENGTH2 / TIME2),
             actual = SpeedAmount(amount = 2,
-                                 unit = LENGTH1 / TIME1) /
-                     TimeAmount(amount = 1,
-                                unit = TIME2))
+                                 unit = LENGTH2 / TIME2) /
+                     TimeAmount(amount = 20,
+                                unit = TIME1))
     }
 
     @Test
     fun divSameSpace()
     {
         assertEquals(
-            expected = FrequencyAmount(amount = 2 / 2,
+            expected = FrequencyAmount(amount = 1,
                                        unit = 1 / TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 / TIME1) /
@@ -180,39 +176,35 @@ class SpeedAmountTest
     fun divOtherSpace()
     {
         assertEquals(
-            expected = FrequencyAmount(amount = 2 / 2,
-                                       unit = 1 / TIME1),
+            expected = FrequencyAmount(amount = 1,
+                                       unit = Fraction(ONE, TIME2)),
             actual = SpeedAmount(amount = 2,
-                                 unit = LENGTH1 / TIME1) /
-                     LengthAmount(amount = 1,
-                                  unit = LENGTH2))
+                                 unit = Fraction(LENGTH2, TIME2)) /
+                     LengthAmount(amount = 20,
+                                  unit = LENGTH1))
     }
 
     @Test
     fun timesSameMomentum()
     {
-        assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+        assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                           (TIME1 * TIME1)),
+                                    unit = Tuple(MASS1, LENGTH1) / TIME1),
             actual = SpeedAmount(amount = 2,
-                                 unit = LENGTH1 / TIME1) *
+                                 unit = Fraction(LENGTH1, TIME1)) *
                      MomentumAmount(amount = 2,
-                                    unit = (MASS1 * LENGTH1) /
-                                           TIME1))
+                                    unit = Tuple(MASS1, LENGTH1) / TIME1))
     }
 
     @Test
     fun timesOtherMomentum()
     {
-        assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+        assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                           (TIME1 * TIME1)),
+                                    unit = Tuple(MASS1, LENGTH1) / TIME1),
             actual = SpeedAmount(amount = 2,
-                                 unit = LENGTH1 / TIME1) *
+                                 unit = Fraction(LENGTH1, TIME1)) *
                      MomentumAmount(amount = 2,
-                                    unit = (MASS1 * LENGTH2) /
-                                           TIME2))
+                                    unit = Tuple(MASS1, LENGTH2) / TIME2))
     }
 }

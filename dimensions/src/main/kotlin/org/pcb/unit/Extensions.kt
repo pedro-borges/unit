@@ -95,10 +95,10 @@ operator fun <T : Unit<Time>> Number.div(that: FrequencyAmount<T>) =
 
 operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> Number.div(that: ElectricConductivityAmount<T, EC, M, L>) =
     ElectricResistanceAmount(amount = this * that.amount,
-                             unit = (that.mass * that.length * that.length) /
-                                    (that.time * that.time * that.time * that.electricCurrent * that.electricCurrent))
+                             unit = Fraction(Tuple(that.mass, that.length),
+                                             Tuple(that.time, that.electricCurrent)))
 
 operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> Number.div(that: ElectricResistanceAmount<M, L, T, EC>) =
     ElectricConductivityAmount(amount = this / that.amount,
-                               unit = (that.time * that.time * that.time * that.electricCurrent * that.electricCurrent) /
-                                      (that.mass * that.length * that.length))
+                               unit = Fraction(Tuple(that.time, that.electricCurrent),
+                                               Tuple(that.mass, that.length)))

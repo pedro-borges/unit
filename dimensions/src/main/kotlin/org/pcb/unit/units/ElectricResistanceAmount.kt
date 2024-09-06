@@ -3,8 +3,7 @@ package org.pcb.unit.units
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Fraction
-import org.pcb.unit.Quintuple
-import org.pcb.unit.Triple
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.ElectricCurrent
@@ -23,44 +22,41 @@ import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
 
-open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>>(
+open class ElectricResistanceAmount<M : Unit<Mass>, L2 : Unit<Length>, T3 : Unit<Time>, EC2 : Unit<ElectricCurrent>>(
         amount: Number,
-        unit: Fraction<Triple<M, L, L>, Quintuple<T, T, T, EC, EC>>)
-    : Amount<ElectricCurrent>(amount = amount.toBigBigDecimal()
-                                       * convert(unit.major.third to unit.major.second)
-                                       / convert(unit.minor.second to unit.minor.first,
-                                                 unit.minor.third to unit.minor.first,
-                                                 unit.minor.fifth to unit.minor.fourth),
+        unit: Fraction<Tuple<M, L2>, Tuple<T3, EC2>>)
+    : Amount<ElectricCurrent>(amount = amount.toBigBigDecimal(),
                               unit = CompositeUnit(
                                   domain = ElectricCurrent::class,
                                   units = listOf(unit.major.first to 1,
                                                  unit.major.second to 2,
                                                  unit.minor.first to -3,
-                                                 unit.minor.fourth to -2)))
+                                                 unit.minor.second to -2)))
 {
     val mass = unit.major.first
     val length = unit.major.second
     val time = unit.minor.first
-    val electricCurrent = unit.minor.fourth
+    val electricCurrent = unit.minor.second
 
     companion object
     {
         operator fun invoke(amount: Number, unit: Unit<ElectricResistance>) =
             ElectricResistanceAmount(amount = amount.toBigBigDecimal() * unit.scale,
-                                     unit = (KILOGRAM * METER * METER) /
-                                            (SECOND * SECOND * SECOND * AMPERE * AMPERE))
+                                     unit = Fraction(Tuple(KILOGRAM, METER),
+                                                     Tuple(SECOND, AMPERE)))
     }
 
     // region -> ElectricTension
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricResistanceAmount(amount = amount * that.amount * that.unit.scale,
-                                 unit = (mass * length * length) /
-                                        (time * time * time * electricCurrent * electricCurrent))
+                                 unit = Fraction(Tuple(mass, length),
+                                                 Tuple(time, electricCurrent)))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         ElectricResistanceAmount(amount = amount / that.amount / that.unit.scale,
-                                 unit = mass * length * length / (time * time * time * electricCurrent * electricCurrent))
+                                 unit = Fraction(Tuple(mass, length),
+                                                 Tuple(time, electricCurrent)))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> plus(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricResistanceAmount(amount = amount + that.amount
@@ -72,13 +68,14 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
                                                     that.time to time,
                                                     that.electricCurrent to electricCurrent,
                                                     that.electricCurrent to electricCurrent),
-                                 unit = (mass * length * length) /
-                                        (time * time * time * electricCurrent * electricCurrent))
+                                 unit = Fraction(Tuple(mass, length),
+                                                 Tuple(time, electricCurrent)))
 
     @JvmName("plusElectricResistance")
-    operator fun plus(that: ElectricResistanceAmount<M, L, T, EC>) =
+    operator fun plus(that: ElectricResistanceAmount<M, L2, T3, EC2>) =
         ElectricResistanceAmount(amount = amount + that.amount,
-                                 unit = mass * length * length / (time * time * time * electricCurrent * electricCurrent))
+                                 unit = Fraction(Tuple(mass, length),
+                                                 Tuple(time, electricCurrent)))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> minus(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricResistanceAmount(amount = amount - that.amount
@@ -90,14 +87,14 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
                                                     that.time to time,
                                                     that.electricCurrent to electricCurrent,
                                                     that.electricCurrent to electricCurrent),
-                                 unit = (mass * length * length) /
-                                        (time * time * time * electricCurrent * electricCurrent))
+                                 unit = Fraction(Tuple(mass, length),
+                                                 Tuple(time, electricCurrent)))
 
     @JvmName("minusElectricResistance")
-    operator fun minus(that: ElectricResistanceAmount<M, L, T, EC>) =
+    operator fun minus(that: ElectricResistanceAmount<M, L2, T3, EC2>) =
         ElectricResistanceAmount(amount = amount - that.amount,
-                                 unit = (mass * length * length) /
-                                        (time * time * time * electricCurrent * electricCurrent))
+                                 unit = Fraction(Tuple(mass, length),
+                                                 Tuple(time, electricCurrent)))
 
     // endregion
 
@@ -115,22 +112,22 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
                 that.electricCurrent to electricCurrent)
 
     @JvmName("divElectricResistance")
-    operator fun div(that: ElectricResistanceAmount<M, L, T, EC>) =
+    operator fun div(that: ElectricResistanceAmount<M, L2, T3, EC2>) =
         amount / that.amount
 
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> times(that: ElectricConductivityAmount<T, EC, M, L>) =
-        amount / that.amount /
+        amount / that.amount *
         convert(that.time to time,
                 that.time to time,
                 that.time to time,
                 that.electricCurrent to electricCurrent,
-                that.electricCurrent to electricCurrent) *
+                that.electricCurrent to electricCurrent) /
         convert(that.mass to mass,
                 that.length to length,
                 that.length to length)
 
     @JvmName("timesElectricResistance")
-    operator fun times(that: ElectricConductivityAmount<T, EC, M, L>) =
+    operator fun times(that: ElectricConductivityAmount<T3, EC2, M, L2>) =
         amount / that.amount
 
     // endregion
@@ -139,14 +136,14 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
 
     operator fun <EC : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<EC>) =
         ElectricTensionAmount(amount = amount * that.amount * convert(that.electricCurrent to electricCurrent),
-                              unit = (mass * length * length) /
-                                     (time * time * time * electricCurrent))
+                              unit = Fraction(Tuple(mass, length),
+                                              Tuple(time, electricCurrent)))
 
     @JvmName("timesElectricCurrent")
-    operator fun times(that: ElectricCurrentAmount<EC>) =
+    operator fun times(that: ElectricCurrentAmount<EC2>) =
         ElectricTensionAmount(amount = amount * that.amount,
-                              unit = (mass * length * length) /
-                                     (time * time * time * electricCurrent))
+                              unit = Fraction(Tuple(mass, length),
+                                              Tuple(time, electricCurrent)))
 
     // endregion
 
@@ -166,7 +163,7 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
                    unit = time)
 
     @JvmName("timesElectricCapacitance")
-    operator fun times(that: ElectricCapacitanceAmount<T, EC, M, L>) =
+    operator fun times(that: ElectricCapacitanceAmount<T3, EC2, M, L2>) =
         TimeAmount(amount = amount * that.amount,
                    unit = time)
 
@@ -177,14 +174,14 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<T
     operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricChargeAmount<EC, T>) =
         MagneticFluxAmount(amount = amount * that.amount * convert(that.time to time,
                                                                    that.electricCurrent to electricCurrent),
-                           unit = (mass * length * length) /
-                                  (time * time * electricCurrent))
+                           unit = Fraction(Tuple(mass, length),
+                                           Tuple(time, electricCurrent)))
 
     @JvmName("timesElectricCharge")
-    operator fun times(that: ElectricChargeAmount<EC, T>) =
+    operator fun times(that: ElectricChargeAmount<EC2, T3>) =
         MagneticFluxAmount(amount = amount * that.amount,
-                           unit = (mass * length * length) /
-                                  (time * time * electricCurrent))
+                           unit = Fraction(Tuple(mass, length),
+                                           Tuple(time, electricCurrent)))
 
     // endregion
 }

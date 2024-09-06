@@ -2,6 +2,8 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.Fraction
+import org.pcb.unit.Tuple
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Length
@@ -21,6 +23,7 @@ open class LengthAmount<L : Unit<Length>>(
                          units = listOf(unit to 1)))
 {
     val length = unit
+
     // region -> Length
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
@@ -74,12 +77,12 @@ open class LengthAmount<L : Unit<Length>>(
 
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         AreaAmount(amount = amount * that.amount * convert(that.length to length),
-                   unit = length * length)
+                   unit = length)
 
     @JvmName("timesLength")
     operator fun times(that: LengthAmount<L>) =
         AreaAmount(amount = amount * that.amount,
-                   unit = length * length)
+                   unit = length)
 
     // endregion
 
@@ -88,12 +91,12 @@ open class LengthAmount<L : Unit<Length>>(
     operator fun <L : Unit<Length>> times(that: AreaAmount<L>) =
         VolumeAmount(amount = amount * that.amount * convert(that.length to length,
                                                              that.length to length),
-                     unit = length * length * length)
+                     unit = length)
 
     @JvmName("timesArea")
     operator fun times(that: AreaAmount<L>) =
         VolumeAmount(amount = amount * that.amount,
-                     unit = length * length * length)
+                     unit = length)
 
     // endregion
 
@@ -101,14 +104,14 @@ open class LengthAmount<L : Unit<Length>>(
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> times(that: ForceAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount * convert(that.length to length),
-                     unit = (that.mass * length * length) /
-                            (that.time * that.time))
+                     unit = Fraction(Tuple(that.mass, length),
+                                     that.time))
 
     @JvmName("timesForce")
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = (that.mass * length * length) /
-                            (that.time * that.time))
+                     unit = Fraction(Tuple(that.mass, length),
+                                     that.time))
 
     // endregion
 }

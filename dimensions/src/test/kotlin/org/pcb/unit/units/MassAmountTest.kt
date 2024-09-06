@@ -3,8 +3,6 @@ package org.pcb.unit
 import java.math.BigDecimal
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
-import org.pcb.unit.dimension.Mass
-import org.pcb.unit.dimension.Time
 import org.pcb.unit.units.AccelerationAmount
 import org.pcb.unit.units.ForceAmount
 import org.pcb.unit.units.MassAmount
@@ -33,7 +31,7 @@ class MassAmountTest
     fun divScalar()
     {
         assertEquals(
-            expected = MassAmount(amount = 2 / 2,
+            expected = MassAmount(amount = 1,
                                   unit = MASS1),
             actual = MassAmount(amount = 2,
                                 unit = MASS1) /
@@ -44,7 +42,7 @@ class MassAmountTest
     fun plusSameMass()
     {
         assertEquals(
-            expected = MassAmount(amount = 0 + 1,
+            expected = MassAmount(amount = 1,
                                   unit = MASS1),
             actual = MassAmount(amount = 0,
                                 unit = MASS1) +
@@ -56,19 +54,19 @@ class MassAmountTest
     fun plusOtherMass()
     {
         assertEquals(
-            expected = MassAmount(amount = 0 + 2,
-                                  unit = MASS1),
+            expected = MassAmount(amount = 1,
+                                  unit = MASS2),
             actual = MassAmount(amount = 0,
-                                unit = MASS1) +
-                     MassAmount(amount = 1,
-                                unit = MASS2))
+                                unit = MASS2) +
+                     MassAmount(amount = 10,
+                                unit = MASS1))
     }
 
     @Test
     fun minusSameMass()
     {
         assertEquals(
-            expected = MassAmount(amount = 1 - 1,
+            expected = MassAmount(amount = 0,
                                   unit = MASS1),
             actual = MassAmount(amount = 1,
                                 unit = MASS1) -
@@ -80,19 +78,19 @@ class MassAmountTest
     fun minusOtherMass()
     {
         assertEquals(
-            expected = MassAmount(amount = 2 - 2,
-                                  unit = MASS1),
-            actual = MassAmount(amount = 2,
-                                unit = MASS1) -
-                     MassAmount(amount = 1,
-                                unit = MASS2))
+            expected = MassAmount(amount = 0,
+                                  unit = MASS2),
+            actual = MassAmount(amount = 1,
+                                unit = MASS2) -
+                     MassAmount(amount = 10,
+                                unit = MASS1))
     }
 
     @Test
     fun divSameMass()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = MassAmount(amount = 2,
                                 unit = MASS1) /
                      MassAmount(amount = 2,
@@ -103,37 +101,34 @@ class MassAmountTest
     fun divOtherMass()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = MassAmount(amount = 2,
-                                unit = MASS1) /
-                     MassAmount(amount = 1,
-                                unit = MASS2))
+                                unit = MASS2) /
+                     MassAmount(amount = 20,
+                                unit = MASS1))
     }
 
     @Test
     fun timesSpeed()
     {
-        assertEquals<MomentumAmount<out Unit<Mass>, LENGTH1, TIME1>>(
+        assertEquals(
             expected = MomentumAmount(amount = 2 * 2,
-                                      unit = (MASS1 * LENGTH1) /
-                                             TIME1),
+                                      unit = Tuple(MASS1, LENGTH1) / TIME1),
             actual = MassAmount(amount = 2,
                                 unit = MASS1) *
                      SpeedAmount(amount = 2,
-                                 unit = LENGTH1 / TIME1))
+                                 unit = Fraction(LENGTH1, TIME1)))
     }
 
     @Test
     fun timesAcceleration()
     {
-        assertEquals<ForceAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+        assertEquals(
             expected = ForceAmount(amount = 2 * 2,
-                                   unit = (MASS1 * LENGTH1) /
-                                          (TIME1 * TIME1)),
+                                   unit = Tuple(MASS1, LENGTH1) / TIME1),
             actual = MassAmount(amount = 2,
                                 unit = MASS1) *
                      AccelerationAmount(amount = 2,
-                                        unit = LENGTH1 /
-                                               (TIME1 * TIME1)))
+                                        unit = Fraction(LENGTH1, TIME1)))
     }
 }

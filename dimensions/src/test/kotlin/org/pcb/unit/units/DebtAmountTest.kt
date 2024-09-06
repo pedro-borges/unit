@@ -3,11 +3,11 @@ package org.pcb.unit
 import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.dimension.Currency
 import org.pcb.unit.units.CurrencyAmount
 import org.pcb.unit.units.DebtAmount
 import org.pcb.unit.units.FrequencyAmount
 import org.pcb.unit.units.TimeAmount
+import org.pcb.unit.units.scalar.Numeric.ONE
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
 import org.pcb.unit.units.test.CURRENCY2
@@ -19,7 +19,7 @@ class DebtAmountTest
     @Test
     fun timesScalar()
     {
-        assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
+        assertEquals(
             expected = DebtAmount(amount = 2 * 2,
                                   unit = CURRENCY1 * TIME1),
             actual = DebtAmount(amount = 2,
@@ -30,8 +30,8 @@ class DebtAmountTest
     @Test
     fun divScalar()
     {
-        assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
-            expected = DebtAmount(amount = 2 / 2,
+        assertEquals(
+            expected = DebtAmount(amount = 1,
                                   unit = CURRENCY1 * TIME1),
             actual = DebtAmount(amount = 2,
                                 unit = CURRENCY1 * TIME1) /
@@ -41,8 +41,8 @@ class DebtAmountTest
     @Test
     fun plusSameDebt()
     {
-        assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
-            expected = DebtAmount(amount = 0 + 1,
+        assertEquals(
+            expected = DebtAmount(amount = 1,
                                   unit = CURRENCY1 * TIME1),
             actual = DebtAmount(amount = 0,
                                 unit = CURRENCY1 * TIME1) +
@@ -53,20 +53,20 @@ class DebtAmountTest
     @Test
     fun plusOtherDebt()
     {
-        assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
-            expected = DebtAmount(amount = 0 + (2 * 2),
-                                  unit = CURRENCY1 * TIME1),
+        assertEquals(
+            expected = DebtAmount(amount = 1,
+                                  unit = CURRENCY2 * TIME2),
             actual = DebtAmount(amount = 0,
-                                unit = CURRENCY1 * TIME1) +
-                     DebtAmount(amount = 1,
-                                unit = CURRENCY2 * TIME2))
+                                unit = CURRENCY2 * TIME2) +
+                     DebtAmount(amount = 100,
+                                unit = CURRENCY1 * TIME1))
     }
 
     @Test
     fun minusSameDebt()
     {
-        assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
-            expected = DebtAmount(amount = 1 - 1,
+        assertEquals(
+            expected = DebtAmount(amount = 0,
                                   unit = CURRENCY1 * TIME1),
             actual = DebtAmount(amount = 1,
                                 unit = CURRENCY1 * TIME1) -
@@ -77,20 +77,20 @@ class DebtAmountTest
     @Test
     fun minusOtherDebt()
     {
-        assertEquals<DebtAmount<out Unit<Currency>, TIME1>>(
-            expected = DebtAmount(amount = 4 - (2 * 2),
-                                  unit = CURRENCY1 * TIME1),
-            actual = DebtAmount(amount = 4,
-                                unit = CURRENCY1 * TIME1) -
-                     DebtAmount(amount = 1,
-                                unit = CURRENCY2 * TIME2))
+        assertEquals(
+            expected = DebtAmount(amount = 0,
+                                  unit = CURRENCY2 * TIME2),
+            actual = DebtAmount(amount = 1,
+                                unit = CURRENCY2 * TIME2) -
+                     DebtAmount(amount = 100,
+                                unit = CURRENCY1 * TIME1))
     }
 
     @Test
     fun divSameDebt()
     {
         assertEquals(
-            expected = BigDecimal(2 / 2),
+            expected = BigDecimal(1),
             actual = DebtAmount(amount = 2,
                                 unit = CURRENCY1 * TIME1) /
                      DebtAmount(amount = 2,
@@ -101,21 +101,21 @@ class DebtAmountTest
     fun divOtherDebt()
     {
         assertEquals(
-            expected = BigDecimal(4 / (2 * 2)),
-            actual = DebtAmount(amount = 4,
-                                unit = CURRENCY1 * TIME1) /
-                     DebtAmount(amount = 1,
-                                unit = CURRENCY2 * TIME2))
+            expected = BigDecimal(1),
+            actual = DebtAmount(amount = 2,
+                                unit = CURRENCY2 * TIME2) /
+                     DebtAmount(amount = 200,
+                                unit = CURRENCY1 * TIME1))
     }
 
     @Test
     fun divSameTime()
     {
         assertEquals(
-            expected = CurrencyAmount(amount = 2 / 2,
+            expected = CurrencyAmount(amount = 1,
                                       unit = CURRENCY1),
             actual = DebtAmount(amount = 2,
-                                unit = CURRENCY1 * TIME1) /
+                                unit = Tuple(CURRENCY1, TIME1)) /
                      TimeAmount(amount = 2,
                                 unit = TIME1))
     }
@@ -124,22 +124,22 @@ class DebtAmountTest
     fun divOtherTime()
     {
         assertEquals(
-            expected = CurrencyAmount(amount = 2 / 2,
-                                      unit = CURRENCY1),
+            expected = CurrencyAmount(amount = 1,
+                                      unit = CURRENCY2),
             actual = DebtAmount(amount = 2,
-                                unit = CURRENCY1 * TIME1) /
-                     TimeAmount(amount = 1,
-                                unit = TIME2))
+                                unit = Tuple(CURRENCY2, TIME2)) /
+                     TimeAmount(amount = 20,
+                                unit = TIME1))
     }
 
     @Test
     fun timesSameFrequency()
     {
         assertEquals(
-            expected = CurrencyAmount(amount = 2 / 2,
+            expected = CurrencyAmount(amount = 1,
                                       unit = CURRENCY1),
             actual = DebtAmount(amount = 2,
-                                unit = CURRENCY1 * TIME1) *
+                                unit = Tuple(CURRENCY1, TIME1)) *
                      FrequencyAmount(amount = 2,
                                      unit = 1 / TIME1))
     }
@@ -148,11 +148,11 @@ class DebtAmountTest
     fun timesOtherFrequency()
     {
         assertEquals(
-            expected = CurrencyAmount(amount = 2 / 2,
-                                      unit = CURRENCY1),
+            expected = CurrencyAmount(amount = 1,
+                                      unit = CURRENCY2),
             actual = DebtAmount(amount = 2,
-                                unit = CURRENCY1 * TIME1) *
-                     FrequencyAmount(amount = 1,
-                                     unit = 1 / TIME2))
+                                unit = Tuple(CURRENCY2, TIME2)) *
+                     FrequencyAmount(amount = 20,
+                                     unit = Fraction(ONE, TIME1)))
     }
 }

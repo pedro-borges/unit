@@ -3,10 +3,6 @@ package org.pcb.unit
 import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.dimension.ElectricCurrent
-import org.pcb.unit.dimension.Length
-import org.pcb.unit.dimension.Mass
-import org.pcb.unit.dimension.Time
 import org.pcb.unit.units.ElectricCapacitanceAmount
 import org.pcb.unit.units.ElectricChargeAmount
 import org.pcb.unit.units.ElectricCurrentAmount
@@ -30,7 +26,7 @@ class ElectricChargeAmountTest
     @Test
     fun timesScalar()
     {
-        assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
+        assertEquals(
             expected = ElectricChargeAmount(amount = 2 * 2,
                                             unit = ELECTRICCURRENT1 * TIME1),
             actual = ElectricChargeAmount(amount = 2,
@@ -41,8 +37,8 @@ class ElectricChargeAmountTest
     @Test
     fun divScalar()
     {
-        assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
-            expected = ElectricChargeAmount(amount = 2 / 2,
+        assertEquals(
+            expected = ElectricChargeAmount(amount = 1,
                                             unit = ELECTRICCURRENT1 * TIME1),
             actual = ElectricChargeAmount(amount = 2,
                                           unit = ELECTRICCURRENT1 * TIME1) /
@@ -52,8 +48,8 @@ class ElectricChargeAmountTest
     @Test
     fun plusSameElectricCharge()
     {
-        assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
-            expected = ElectricChargeAmount(amount = 0 + 1,
+        assertEquals(
+            expected = ElectricChargeAmount(amount = 1,
                                             unit = ELECTRICCURRENT1 * TIME1),
             actual = ElectricChargeAmount(amount = 0,
                                           unit = ELECTRICCURRENT1 * TIME1) +
@@ -64,20 +60,20 @@ class ElectricChargeAmountTest
     @Test
     fun plusOtherElectricCharge()
     {
-        assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
-            expected = ElectricChargeAmount(amount = 0 + (2 * 2),
-                                            unit = ELECTRICCURRENT1 * TIME1),
+        assertEquals(
+            expected = ElectricChargeAmount(amount = 1,
+                                            unit = ELECTRICCURRENT2 * TIME2),
             actual = ElectricChargeAmount(amount = 0,
-                                          unit = ELECTRICCURRENT1 * TIME1) +
-                     ElectricChargeAmount(amount = 1,
-                                          unit = ELECTRICCURRENT2 * TIME2))
+                                          unit = ELECTRICCURRENT2 * TIME2) +
+                     ElectricChargeAmount(amount = 100,
+                                          unit = ELECTRICCURRENT1 * TIME1))
     }
 
     @Test
     fun minusSameElectricCharge()
     {
-        assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
-            expected = ElectricChargeAmount(amount = 1 - 1,
+        assertEquals(
+            expected = ElectricChargeAmount(amount = 0,
                                             unit = ELECTRICCURRENT1 * TIME1),
             actual = ElectricChargeAmount(amount = 1,
                                           unit = ELECTRICCURRENT1 * TIME1) -
@@ -88,13 +84,13 @@ class ElectricChargeAmountTest
     @Test
     fun minusOtherElectricCharge()
     {
-        assertEquals<ElectricChargeAmount<out Unit<ElectricCurrent>, TIME1>>(
-            expected = ElectricChargeAmount(amount = 4 - (2 * 2),
-                                            unit = ELECTRICCURRENT1 * TIME1),
-            actual = ElectricChargeAmount(amount = 4,
-                                          unit = ELECTRICCURRENT1 * TIME1) -
-                     ElectricChargeAmount(amount = 1,
-                                          unit = ELECTRICCURRENT2 * TIME2))
+        assertEquals(
+            expected = ElectricChargeAmount(amount = 0,
+                                            unit = Tuple(ELECTRICCURRENT2, TIME2)),
+            actual = ElectricChargeAmount(amount = 1,
+                                          unit = Tuple(ELECTRICCURRENT2, TIME2)) -
+                     ElectricChargeAmount(amount = 100,
+                                          unit = Tuple(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -112,21 +108,21 @@ class ElectricChargeAmountTest
     fun divOtherElectricCharge()
     {
         assertEquals(
-            expected = BigDecimal(4 / (2 * 2)),
-            actual = ElectricChargeAmount(amount = 4,
-                                          unit = ELECTRICCURRENT1 * TIME1) /
-                     ElectricChargeAmount(amount = 1,
-                                          unit = ELECTRICCURRENT2 * TIME2))
+            expected = BigDecimal(1),
+            actual = ElectricChargeAmount(amount = 2,
+                                          unit = Tuple(ELECTRICCURRENT2, TIME2)) /
+                     ElectricChargeAmount(amount = 200,
+                                          unit = Tuple(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
     fun divTime()
     {
         assertEquals(
-            expected = ElectricCurrentAmount(amount = 2 / 2,
+            expected = ElectricCurrentAmount(amount = 1,
                                              unit = ELECTRICCURRENT1),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = ELECTRICCURRENT1 * TIME1) /
+                                          unit = Tuple(ELECTRICCURRENT1, TIME1)) /
                      TimeAmount(amount = 2,
                                 unit = TIME1))
     }
@@ -134,112 +130,96 @@ class ElectricChargeAmountTest
     @Test
     fun divSameElectricTension()
     {
-        assertEquals<ElectricCapacitanceAmount<out Unit<Time>, ELECTRICCURRENT1, out Unit<Mass>, LENGTH1>>(
-            expected = ElectricCapacitanceAmount(amount = 2 / 2,
-                                                 unit = (TIME1 * TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
-                                                        (MASS1 * LENGTH1 * LENGTH1)),
+        assertEquals(
+            expected = ElectricCapacitanceAmount(amount = 1,
+                                                 unit = Tuple(TIME1, ELECTRICCURRENT1) / Tuple(MASS1, LENGTH1)),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = ELECTRICCURRENT1 * TIME1) /
+                                          unit = Tuple(ELECTRICCURRENT1, TIME1)) /
                      ElectricTensionAmount(amount = 2,
-                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                  (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)))
+                                           unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
     fun divOtherElectricTension()
     {
-        assertEquals<ElectricCapacitanceAmount<out Unit<Time>, ELECTRICCURRENT1, out Unit<Mass>, out Unit<Length>>>(
-            expected = ElectricCapacitanceAmount(amount = 2 / 2,
-                                                 unit = (TIME1 * TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
-                                                        (MASS1 * LENGTH1 * LENGTH1)),
+        assertEquals(
+            expected = ElectricCapacitanceAmount(amount = 1,
+                                                 unit = Tuple(TIME1, ELECTRICCURRENT1) / Tuple(MASS2, LENGTH2)),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = ELECTRICCURRENT1 * TIME1) /
-                     ElectricTensionAmount(amount = 2 * 2,
-                                           unit = (MASS2 * LENGTH2 * LENGTH2) /
-                                                  (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2)))
+                                          unit = Tuple(ELECTRICCURRENT1, TIME1)) /
+                     ElectricTensionAmount(amount = 20000,
+                                           unit = Tuple(MASS2, LENGTH2) / Tuple(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
     fun divSameElectricCapacitance()
     {
-        assertEquals<ElectricTensionAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
-            expected = ElectricTensionAmount(amount = 2 / 2,
-                                             unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                    (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)),
+        assertEquals(
+            expected = ElectricTensionAmount(amount = 1,
+                                             unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = ELECTRICCURRENT1 * TIME1) /
+                                          unit = Tuple(ELECTRICCURRENT1, TIME1)) /
                      ElectricCapacitanceAmount(amount = 2,
-                                               unit = (TIME1 * TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1) /
-                                                      (MASS1 * LENGTH1 * LENGTH1)))
+                                               unit = Tuple(TIME1, ELECTRICCURRENT1) / Tuple(MASS1, LENGTH1)))
     }
 
     @Test
     fun divOtherElectricCapacitance()
     {
-        assertEquals<ElectricTensionAmount<out Unit<Mass>, out Unit<Length>, out Unit<Time>, ELECTRICCURRENT1>>(
-            expected = ElectricTensionAmount(amount = 16 / 16,
-                                             unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                    (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)),
-            actual = ElectricChargeAmount(amount = 2 * (2 * 2 * 2),
-                                          unit = ELECTRICCURRENT1 * TIME1) /
+        assertEquals(
+            expected = ElectricTensionAmount(amount = 128 / 128,
+                                             unit = Tuple(MASS2, LENGTH2) / Tuple(TIME1, ELECTRICCURRENT1)),
+            actual = ElectricChargeAmount(amount = 2000000,
+                                          unit = Tuple(ELECTRICCURRENT1, TIME1)) /
                      ElectricCapacitanceAmount(amount = 2,
-                                               unit = (TIME2 * TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2) /
-                                                      (MASS2 * LENGTH2 * LENGTH2)))
+                                               unit = Tuple(TIME2, ELECTRICCURRENT2) / Tuple(MASS2, LENGTH2)))
     }
 
     @Test
     fun timesSameElectricTension()
     {
-        assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+        assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                           (TIME1 * TIME1)),
+                                    unit = (MASS1 * LENGTH1) / TIME1),
             actual = ElectricChargeAmount(amount = 2,
                                           unit = ELECTRICCURRENT1 * TIME1) *
                      ElectricTensionAmount(amount = 2,
-                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                  (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1)))
+                                           unit = (MASS1 * LENGTH1) / (TIME1 * ELECTRICCURRENT1)))
     }
 
     @Test
     fun timesOtherElectricTension()
     {
-        assertEquals<EnergyAmount<out Unit<Mass>, LENGTH1, out Unit<Time>>>(
+        assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                           (TIME1 * TIME1)),
+                                    unit = Tuple(MASS2, LENGTH2) / TIME1),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = ELECTRICCURRENT1 * TIME1) *
-                     ElectricTensionAmount(amount = 2 * (2 * 2 * 2 * 2),
-                                           unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                  (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2)))
+                                          unit = Tuple(ELECTRICCURRENT1, TIME1)) *
+                     ElectricTensionAmount(amount = 20000,
+                                           unit = Tuple(MASS2, LENGTH2) / Tuple(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
     fun timesSameElectricResistance()
     {
-        assertEquals<MagneticFluxAmount<out Unit<Mass>, LENGTH1, out Unit<Time>, ELECTRICCURRENT1>>(
+        assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                 (TIME1 * TIME1 * ELECTRICCURRENT1)),
+                                          unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = ELECTRICCURRENT1 * TIME1) *
+                                          unit = Tuple(ELECTRICCURRENT1, TIME1)) *
                      ElectricResistanceAmount(amount = 2,
-                                              unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                     (TIME1 * TIME1 * TIME1 * ELECTRICCURRENT1 * ELECTRICCURRENT1)))
+                                              unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
     fun timesOtherElectricResistance()
     {
-        assertEquals<MagneticFluxAmount<out Unit<Mass>, out Unit<Length>, out Unit<Time>, ELECTRICCURRENT1>>(
+        assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = (MASS1 * LENGTH1 * LENGTH1) /
-                                                 (TIME1 * TIME1 * ELECTRICCURRENT1)),
+                                          unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = ELECTRICCURRENT1 * TIME1) *
-                     ElectricResistanceAmount(amount = 2 * (2 * 2),
-                                              unit = (MASS2 * LENGTH2 * LENGTH2) /
-                                                     (TIME2 * TIME2 * TIME2 * ELECTRICCURRENT2 * ELECTRICCURRENT2)))
+                                          unit = Tuple(ELECTRICCURRENT1, TIME1)) *
+                     ElectricResistanceAmount(amount = 200000,
+                                              unit = Tuple(MASS1, LENGTH1) / Tuple(TIME2, ELECTRICCURRENT2)))
     }
 }

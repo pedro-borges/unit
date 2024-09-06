@@ -31,33 +31,33 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         RentAmount(amount = amount * that.amount * that.unit.scale,
-                   unit = currency / time)
+                   unit = Fraction(currency, time))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         RentAmount(amount = amount / that.amount / that.unit.scale,
-                   unit = currency / time)
+                   unit = Fraction(currency, time))
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> plus(that: RentAmount<C, T>) =
         RentAmount(amount = amount + that.amount
                             * convert(that.currency to currency)
                             / convert(that.time to time),
-                   unit = currency / time)
+                   unit = Fraction(currency, time))
 
     @JvmName("plusRent")
     operator fun plus(that: RentAmount<C, T>) =
         RentAmount(amount = amount + that.amount,
-                   unit = currency / time)
+                   unit = Fraction(currency, time))
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> minus(that: RentAmount<C, T>) =
         RentAmount(amount = amount - that.amount
                             * convert(that.currency to currency)
                             / convert(that.time to time),
-                   unit = currency / time)
+                   unit = Fraction(currency, time))
 
     @JvmName("minusRent")
     operator fun minus(that: RentAmount<C, T>) =
         RentAmount(amount = amount - that.amount,
-                   unit = currency / time)
+                   unit = Fraction(currency, time))
 
     // endregion
 

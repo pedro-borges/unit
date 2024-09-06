@@ -29,31 +29,31 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         DebtAmount(amount = amount * that.amount * that.unit.scale,
-                   unit = currency * time)
+                   unit = Tuple(currency, time))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         DebtAmount(amount = amount / that.amount / that.unit.scale,
-                   unit = currency * time)
+                   unit = Tuple(currency, time))
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> plus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount + that.amount * convert(that.currency to currency,
                                                            that.time to time),
-                   unit = currency * time)
+                   unit = Tuple(currency, time))
 
     @JvmName("plusDebt")
     operator fun plus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount + that.amount,
-                   unit = currency * time)
+                   unit = Tuple(currency, time))
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> minus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount - that.amount * convert(that.currency to currency,
                                                            that.time to time),
-                   unit = currency * time)
+                   unit = Tuple(currency, time))
 
     @JvmName("minusDebt")
     operator fun minus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount - that.amount,
-                   unit = currency * time)
+                   unit = Tuple(currency, time))
 
     // endregion
 
