@@ -24,7 +24,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class MagneticFluxAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>, EC : Unit<ElectricCurrent>>(
         amount: Number,
-        unit: Pair<org.pcb.unit.U2<M, L2>, org.pcb.unit.U2<T2, EC>>)
+        unit: Pair<U2<M, L2>, U2<T2, EC>>)
     : Amount<ElectricCurrent>(amount = amount.toBigBigDecimal(),
                               unit = CompositeUnit(
                                   domain = ElectricCurrent::class,

@@ -17,7 +17,7 @@ import org.pcb.unit.units.base.Second.SECOND
 class Siemens(amount: Number)
     : ElectricConductivityAmount<Unit<Time>, Unit<ElectricCurrent>, Unit<Mass>, Unit<Length>>(
     amount = amount,
-    unit = U2(SECOND, AMPERE).to(U2(KILOGRAM, METER)))
+    unit = U2(SECOND, AMPERE) to U2(KILOGRAM, METER))
 {
     object SIEMENS : Unit<ElectricConductivity>(ElectricConductivity::class)
     {

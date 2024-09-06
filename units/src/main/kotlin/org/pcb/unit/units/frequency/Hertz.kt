@@ -11,7 +11,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 class Hertz(amount: Number)
     : FrequencyAmount<Unit<Time>>(
     amount = amount,
-    unit = Pair(NUMERIC, SECOND))
+    unit = NUMERIC to SECOND)
 {
     object HERTZ : Unit<Frequency>(Frequency::class)
     {

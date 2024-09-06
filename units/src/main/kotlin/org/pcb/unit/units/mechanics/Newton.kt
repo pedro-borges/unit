@@ -15,7 +15,7 @@ import org.pcb.unit.units.base.Second.SECOND
 class Newton(amount: Number)
     : ForceAmount<Unit<Mass>, Unit<Length>, Unit<Time>>(
     amount = amount,
-    unit = U2(KILOGRAM, METER).to(SECOND))
+    unit = U2(KILOGRAM, METER) to SECOND)
 {
     object NEWTON : Unit<Force>(Force::class)
     {

@@ -17,7 +17,7 @@ import org.pcb.unit.units.base.Second.SECOND
 class Ohm(amount: Number)
     : ElectricResistanceAmount<Unit<Mass>, Unit<Length>, Unit<Time>, Unit<ElectricCurrent>>(
     amount = amount,
-    unit = U2(KILOGRAM, METER).to(U2(SECOND, AMPERE)))
+    unit = U2(KILOGRAM, METER) to U2(SECOND, AMPERE))
 {
     object OHM : Unit<ElectricResistance>(ElectricResistance::class)
     {
