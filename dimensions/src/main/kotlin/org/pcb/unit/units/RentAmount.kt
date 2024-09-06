@@ -31,33 +31,33 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         RentAmount(amount = amount * that.amount * that.unit.scale,
-                   unit = Pair(currency, time))
+                   unit = currency to time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         RentAmount(amount = amount / that.amount / that.unit.scale,
-                   unit = Pair(currency, time))
+                   unit = currency to time)
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> plus(that: RentAmount<C, T>) =
         RentAmount(amount = amount + that.amount
                             * convert(that.currency to currency)
                             / (convert(that.time to time)),
-                   unit = Pair(currency, time))
+                   unit = currency to time)
 
     @JvmName("plusRent")
     operator fun plus(that: RentAmount<C, T>) =
         RentAmount(amount = amount + that.amount,
-                   unit = Pair(currency, time))
+                   unit = currency to time)
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> minus(that: RentAmount<C, T>) =
         RentAmount(amount = amount - that.amount
                             * convert(that.currency to currency)
                             / (convert(that.time to time)),
-                   unit = Pair(currency, time))
+                   unit = currency to time)
 
     @JvmName("minusRent")
     operator fun minus(that: RentAmount<C, T>) =
         RentAmount(amount = amount - that.amount,
-                   unit = Pair(currency, time))
+                   unit = currency to time)
 
     // endregion
 
@@ -89,12 +89,12 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     operator fun <C : Unit<Currency>> div(that: CurrencyAmount<C>) =
         FrequencyAmount(amount = amount / that.amount / convert(that.currency to currency),
-                        unit = Pair(ONE, time))
+                        unit = ONE to time)
 
     @JvmName("divCurrency")
     operator fun div(that: CurrencyAmount<C>) =
         FrequencyAmount(amount = amount / that.amount,
-                        unit = Pair(ONE, time))
+                        unit = ONE to time)
 
     // endregion
 }

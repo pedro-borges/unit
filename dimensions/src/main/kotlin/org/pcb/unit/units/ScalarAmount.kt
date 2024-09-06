@@ -32,7 +32,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
                      unit = scalar)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        ScalarAmount(amount = amount/that.amount/that.unit.scale,
+        ScalarAmount(amount = amount / that.amount / that.unit.scale,
                      unit = scalar)
 
     operator fun <S : Unit<Scalar>> plus(that: ScalarAmount<S>) =
@@ -59,7 +59,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         FrequencyAmount(amount = amount * unit.scale / that.amount,
-                        unit = Pair(ONE, that.time))
+                        unit = ONE to that.time)
 
     // endregion
 
@@ -75,8 +75,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> div(that: ElectricConductivityAmount<T, EC, M, L>) =
         ElectricResistanceAmount(amount = amount * that.amount * unit.scale,
-                                 unit = Pair(T2(that.mass, that.length),
-                                             T2(that.time, that.electricCurrent)))
+                                 unit = T2(that.mass, that.length) to T2(that.time, that.electricCurrent))
 
     // endregion
 
@@ -84,8 +83,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricConductivityAmount(amount = amount * unit.scale / that.amount,
-                                   unit = Pair(T2(that.time, that.electricCurrent),
-                                               T2(that.mass, that.length)))
+                                   unit = T2(that.time, that.electricCurrent) to T2(that.mass, that.length))
 
     // endregion
 }

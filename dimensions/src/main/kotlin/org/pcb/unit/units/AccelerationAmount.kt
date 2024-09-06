@@ -33,35 +33,35 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
 
     override operator fun <U : Unit<Scalar>> times(that: ScalarAmount<U>) =
         AccelerationAmount(amount = amount * that.amount * that.unit.scale,
-                           unit = Pair(length, time))
+                           unit = length to time)
 
     override operator fun <U : Unit<Scalar>> div(that: ScalarAmount<U>) =
         AccelerationAmount(amount = amount / that.amount / that.unit.scale,
-                           unit = Pair(length, time))
+                           unit = length to time)
 
     operator fun <L : Unit<Length>, T : Unit<Time>> plus(that: AccelerationAmount<L, T>) =
         AccelerationAmount(amount = amount + that.amount
                                     * convert(that.length to length)
                                     / (convert(that.time to time,
                                                that.time to time)),
-                           unit = Pair(length, time))
+                           unit = length to time)
 
     @JvmName("plusAcceleration")
     operator fun plus(that: AccelerationAmount<L, T>) =
         AccelerationAmount(amount = amount + that.amount,
-                           unit = Pair(length, time))
+                           unit = length to time)
 
     operator fun <L : Unit<Length>, T : Unit<Time>> minus(that: AccelerationAmount<L, T>) =
         AccelerationAmount(amount = amount - that.amount
                                     * convert(that.length to length)
                                     / convert(that.time to time,
                                               that.time to time),
-                           unit = Pair(length, time))
+                           unit = length to time)
 
     @JvmName("minusAcceleration")
     operator fun minus(that: AccelerationAmount<L, T>) =
         AccelerationAmount(amount = amount - that.amount,
-                           unit = Pair(length, time))
+                           unit = length to time)
 
     // endregion
 
@@ -80,12 +80,12 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         SpeedAmount(amount = amount * that.amount * convert(that.time to time),
-                    unit = Pair(length, time))
+                    unit = length to time)
 
     @JvmName("timesTime")
     operator fun times(that: TimeAmount<T>) =
         SpeedAmount(amount = amount * that.amount,
-                    unit = Pair(length, time))
+                    unit = length to time)
 
     // endregion
 
@@ -95,12 +95,12 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
         FrequencyAmount(amount = amount / that.amount
                                  / convert(that.length to length)
                                  * convert(that.time to time),
-                        unit = Pair(ONE, time))
+                        unit = ONE to time)
 
     @JvmName("divSpeed")
     operator fun div(that: SpeedAmount<L, T>) =
         FrequencyAmount(amount = amount / that.amount,
-                        unit = Pair(ONE, time))
+                        unit = ONE to time)
 
     // endregion
 
@@ -108,7 +108,7 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
         ForceAmount(amount = amount * that.amount,
-                    unit = Pair(T2(that.mass, length), time))
+                    unit = T2(that.mass, length) to time)
 
     // endregion
 }

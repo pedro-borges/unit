@@ -41,59 +41,52 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L2 : Unit<Length>, T3 : Unit
     {
         operator fun invoke(amount: Number, unit: Unit<ElectricResistance>) =
             ElectricResistanceAmount(amount = amount.toBigBigDecimal() * unit.scale,
-                                     unit = Pair(T2(KILOGRAM, METER),
-                                                 T2(SECOND, AMPERE)))
+                                     unit = T2(KILOGRAM, METER) to T2(SECOND, AMPERE))
     }
 
     // region -> ElectricTension
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricResistanceAmount(amount = amount * that.amount * that.unit.scale,
-                                 unit = Pair(T2(mass, length),
-                                             T2(time, electricCurrent)))
+                                 unit = T2(mass, length) to T2(time, electricCurrent))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         ElectricResistanceAmount(amount = amount / that.amount / that.unit.scale,
-                                 unit = Pair(T2(mass, length),
-                                             T2(time, electricCurrent)))
+                                 unit = T2(mass, length) to T2(time, electricCurrent))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> plus(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricResistanceAmount(amount = amount + that.amount
-                                                    * convert(that.mass to mass,
-                                                              that.length to length,
-                                                              that.length to length)
-                                                    / convert(that.time to time,
-                                                              that.time to time,
-                                                              that.time to time,
-                                                              that.electricCurrent to electricCurrent,
-                                                              that.electricCurrent to electricCurrent),
-                                 unit = Pair(T2(mass, length),
-                                             T2(time, electricCurrent)))
+                                          * convert(that.mass to mass,
+                                                    that.length to length,
+                                                    that.length to length)
+                                          / convert(that.time to time,
+                                                    that.time to time,
+                                                    that.time to time,
+                                                    that.electricCurrent to electricCurrent,
+                                                    that.electricCurrent to electricCurrent),
+                                 unit = T2(mass, length) to T2(time, electricCurrent))
 
     @JvmName("plusElectricResistance")
     operator fun plus(that: ElectricResistanceAmount<M, L2, T3, EC2>) =
         ElectricResistanceAmount(amount = amount + that.amount,
-                                 unit = Pair(T2(mass, length),
-                                             T2(time, electricCurrent)))
+                                 unit = T2(mass, length) to T2(time, electricCurrent))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> minus(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricResistanceAmount(amount = amount - that.amount
-                                                    * convert(that.mass to mass,
-                                                              that.length to length,
-                                                              that.length to length)
-                                                    / convert(that.time to time,
-                                                              that.time to time,
-                                                              that.time to time,
-                                                              that.electricCurrent to electricCurrent,
-                                                              that.electricCurrent to electricCurrent),
-                                 unit = Pair(T2(mass, length),
-                                             T2(time, electricCurrent)))
+                                          * convert(that.mass to mass,
+                                                    that.length to length,
+                                                    that.length to length)
+                                          / convert(that.time to time,
+                                                    that.time to time,
+                                                    that.time to time,
+                                                    that.electricCurrent to electricCurrent,
+                                                    that.electricCurrent to electricCurrent),
+                                 unit = T2(mass, length) to T2(time, electricCurrent))
 
     @JvmName("minusElectricResistance")
     operator fun minus(that: ElectricResistanceAmount<M, L2, T3, EC2>) =
         ElectricResistanceAmount(amount = amount - that.amount,
-                                 unit = Pair(T2(mass, length),
-                                             T2(time, electricCurrent)))
+                                 unit = T2(mass, length) to T2(time, electricCurrent))
 
     // endregion
 
@@ -126,7 +119,7 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L2 : Unit<Length>, T3 : Unit
 
     @JvmName("timesElectricResistance")
     operator fun times(that: ElectricConductivityAmount<T3, EC2, M, L2>) =
-        amount/that.amount
+        amount / that.amount
 
     // endregion
 
@@ -134,14 +127,12 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L2 : Unit<Length>, T3 : Unit
 
     operator fun <EC : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<EC>) =
         ElectricTensionAmount(amount = amount * that.amount * convert(that.electricCurrent to electricCurrent),
-                              unit = Pair(T2(mass, length),
-                                          T2(time, electricCurrent)))
+                              unit = T2(mass, length) to T2(time, electricCurrent))
 
     @JvmName("timesElectricCurrent")
     operator fun times(that: ElectricCurrentAmount<EC2>) =
         ElectricTensionAmount(amount = amount * that.amount,
-                              unit = Pair(T2(mass, length),
-                                          T2(time, electricCurrent)))
+                              unit = T2(mass, length) to T2(time, electricCurrent))
 
     // endregion
 
@@ -172,14 +163,12 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L2 : Unit<Length>, T3 : Unit
     operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricChargeAmount<EC, T>) =
         MagneticFluxAmount(amount = amount * that.amount * convert(that.time to time,
                                                                    that.electricCurrent to electricCurrent),
-                           unit = Pair(T2(mass, length),
-                                       T2(time, electricCurrent)))
+                           unit = T2(mass, length) to T2(time, electricCurrent))
 
     @JvmName("timesElectricCharge")
     operator fun times(that: ElectricChargeAmount<EC2, T3>) =
         MagneticFluxAmount(amount = amount * that.amount,
-                           unit = Pair(T2(mass, length),
-                                       T2(time, electricCurrent)))
+                           unit = T2(mass, length) to T2(time, electricCurrent))
 
     // endregion
 }

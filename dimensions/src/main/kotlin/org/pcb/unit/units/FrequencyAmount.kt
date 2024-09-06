@@ -30,36 +30,36 @@ open class FrequencyAmount<T : Unit<Time>>(
     {
         operator fun invoke(amount: Number, unit: Unit<Frequency>) =
             FrequencyAmount(amount = amount.toBigBigDecimal() / unit.scale,
-                            unit = Pair(ONE, SECOND))
+                            unit = ONE to SECOND)
     }
 
     // region -> Frequency
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         FrequencyAmount(amount = amount * that.amount * that.unit.scale,
-                        unit = Pair(ONE, time))
+                        unit = ONE to time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         FrequencyAmount(amount = amount / that.amount / that.unit.scale,
-                        unit = Pair(ONE, time))
+                        unit = ONE to time)
 
     operator fun <T : Unit<Time>> plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount / convert(that.time to time),
-                        unit = Pair(ONE, time))
+                        unit = ONE to time)
 
     @JvmName("plusFrequency")
     operator fun plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount,
-                        unit = Pair(ONE, time))
+                        unit = ONE to time)
 
     operator fun <T : Unit<Time>> minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount / convert(that.time to time),
-                        unit = Pair(ONE, time))
+                        unit = ONE to time)
 
     @JvmName("minusFrequency")
     operator fun minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount,
-                        unit = Pair(ONE, time))
+                        unit = ONE to time)
 
     // endregion
 
@@ -85,7 +85,7 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         SpeedAmount(amount = that.amount / amount,
-                    unit = Pair(that.length, time))
+                    unit = that.length to time)
 
     // endregion
 
@@ -93,12 +93,12 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
         AccelerationAmount(amount = that.amount / amount / convert(that.time to time),
-                           unit = Pair(that.length, time))
+                           unit = that.length to time)
 
     @JvmName("timesSpeed")
     operator fun <L : Unit<Length>> times(that: SpeedAmount<L, T>) =
         AccelerationAmount(amount = that.amount / amount,
-                           unit = Pair(that.length, time))
+                           unit = that.length to time)
 
     // endregion
 
@@ -119,7 +119,7 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     operator fun <C : Unit<Currency>> times(that: CurrencyAmount<C>) =
         RentAmount(amount = that.amount / amount,
-                   unit = Pair(that.currency, time))
+                   unit = that.currency to time)
 
     // endregion
 }

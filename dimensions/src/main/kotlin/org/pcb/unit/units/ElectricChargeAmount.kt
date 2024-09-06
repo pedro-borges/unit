@@ -94,14 +94,12 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
                                                                           that.time to time,
                                                                           that.time to time,
                                                                           that.time to time),
-                                  unit = Pair(T2(time, electricCurrent),
-                                              T2(that.mass, that.length)))
+                                  unit = T2(time, electricCurrent) to T2(that.mass, that.length))
 
     @JvmName("divElectricTension")
     operator fun <M : Unit<Mass>, L : Unit<Length>> div(that: ElectricTensionAmount<M, L, T, EC>) =
         ElectricCapacitanceAmount(amount = amount / that.amount,
-                                  unit = Pair(T2(time, electricCurrent),
-                                              T2(that.mass, that.length)))
+                                  unit = T2(time, electricCurrent) to T2(that.mass, that.length))
 
     // endregion
 
@@ -114,14 +112,12 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
                                                                       that.time to time,
                                                                       that.time to time,
                                                                       that.time to time),
-                              unit = Pair(T2(that.mass, that.length),
-                                          T2(time, electricCurrent)))
+                              unit = T2(that.mass, that.length) to T2(time, electricCurrent))
 
     @JvmName("divElectricCapacitance")
     operator fun <M : Unit<Mass>, L : Unit<Length>> div(that: ElectricCapacitanceAmount<T, EC, M, L>) =
         ElectricTensionAmount(amount = amount / that.amount,
-                              unit = Pair(T2(that.mass, that.length),
-                                          T2(time, electricCurrent)))
+                              unit = T2(that.mass, that.length) to T2(time, electricCurrent))
 
     // endregion
 
@@ -132,14 +128,12 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
                                                              that.time to time,
                                                              that.time to time,
                                                              that.time to time),
-                     unit = Pair(T2(that.mass, that.length),
-                                 time))
+                     unit = T2(that.mass, that.length) to time)
 
     @JvmName("timesElectricTension")
     operator fun <M : Unit<Mass>, L : Unit<Length>> times(that: ElectricTensionAmount<M, L, T, EC>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = Pair(T2(that.mass, that.length),
-                                 time))
+                     unit = T2(that.mass, that.length) to time)
 
     // endregion
 
@@ -151,14 +145,12 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
                                                                    that.time to time,
                                                                    that.time to time,
                                                                    that.time to time),
-                           unit = Pair(T2(that.mass, that.length),
-                                       T2(time, electricCurrent)))
+                           unit = T2(that.mass, that.length) to T2(time, electricCurrent))
 
     @JvmName("timesElectricResistance")
     operator fun <M : Unit<Mass>, L : Unit<Length>> times(that: ElectricResistanceAmount<M, L, T, EC>) =
         MagneticFluxAmount(amount = amount * that.amount,
-                           unit = Pair(T2(that.mass, that.length),
-                                       T2(time, electricCurrent)))
+                           unit = T2(that.mass, that.length) to T2(time, electricCurrent))
 
     // endregion
 }

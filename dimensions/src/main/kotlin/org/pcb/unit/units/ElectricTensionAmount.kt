@@ -41,21 +41,18 @@ open class ElectricTensionAmount<M : Unit<Mass>, L2 : Unit<Length>, T3 : Unit<Ti
     {
         operator fun invoke(amount: Number, unit: Unit<ElectricTension>) =
             ElectricTensionAmount(amount = amount.toBigBigDecimal() * unit.scale,
-                                  unit = Pair(T2(KILOGRAM, METER),
-                                              T2(SECOND, AMPERE)))
+                                  unit = T2(KILOGRAM, METER) to T2(SECOND, AMPERE))
     }
 
     // region -> ElectricTension
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricTensionAmount(amount = amount * that.amount * that.unit.scale,
-                              unit = Pair(T2(mass, length),
-                                          T2(time, electricCurrent)))
+                              unit = T2(mass, length) to T2(time, electricCurrent))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         ElectricTensionAmount(amount = amount / that.amount / that.unit.scale,
-                              unit = Pair(T2(mass, length),
-                                          T2(time, electricCurrent)))
+                              unit = T2(mass, length) to T2(time, electricCurrent))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> plus(that: ElectricTensionAmount<M, L, T, EC>) =
         ElectricTensionAmount(amount = amount + that.amount
@@ -66,14 +63,12 @@ open class ElectricTensionAmount<M : Unit<Mass>, L2 : Unit<Length>, T3 : Unit<Ti
                                                  that.time to time,
                                                  that.time to time,
                                                  that.electricCurrent to electricCurrent),
-                              unit = Pair(T2(mass, length),
-                                          T2(time, electricCurrent)))
+                              unit = T2(mass, length) to T2(time, electricCurrent))
 
     @JvmName("plusElectricPotential")
     operator fun plus(that: ElectricTensionAmount<M, L2, T3, EC>) =
         ElectricTensionAmount(amount = amount + that.amount,
-                              unit = Pair(T2(mass, length),
-                                          T2(time, electricCurrent)))
+                              unit = T2(mass, length) to T2(time, electricCurrent))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> minus(that: ElectricTensionAmount<M, L, T, EC>) =
         ElectricTensionAmount(amount = amount - that.amount
@@ -84,14 +79,12 @@ open class ElectricTensionAmount<M : Unit<Mass>, L2 : Unit<Length>, T3 : Unit<Ti
                                                  that.time to time,
                                                  that.time to time,
                                                  that.electricCurrent to electricCurrent),
-                              unit = Pair(T2(mass, length),
-                                          T2(time, electricCurrent)))
+                              unit = T2(mass, length) to T2(time, electricCurrent))
 
     @JvmName("minusElectricCurrent")
     operator fun minus(that: ElectricTensionAmount<M, L2, T3, EC>) =
         ElectricTensionAmount(amount = amount - that.amount,
-                              unit = Pair(T2(mass, length),
-                                          T2(time, electricCurrent)))
+                              unit = T2(mass, length) to T2(time, electricCurrent))
 
     // endregion
 
@@ -108,7 +101,7 @@ open class ElectricTensionAmount<M : Unit<Mass>, L2 : Unit<Length>, T3 : Unit<Ti
 
     @JvmName("divElectricCurrent")
     operator fun div(that: ElectricTensionAmount<M, L2, T3, EC>) =
-        amount /that.amount
+        amount / that.amount
 
     // endregion
 
@@ -117,14 +110,12 @@ open class ElectricTensionAmount<M : Unit<Mass>, L2 : Unit<Length>, T3 : Unit<Ti
     operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricChargeAmount<EC, T>) =
         EnergyAmount(amount = amount * that.amount * convert(that.time to time,
                                                              that.electricCurrent to electricCurrent),
-                     unit = Pair(T2(mass, length),
-                                 time))
+                     unit = T2(mass, length) to time)
 
     @JvmName("timesElectricCharge")
     operator fun times(that: ElectricChargeAmount<EC, T3>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = Pair(T2(mass, length),
-                                 time))
+                     unit = T2(mass, length) to time)
 
     // endregion
 
@@ -170,14 +161,12 @@ open class ElectricTensionAmount<M : Unit<Mass>, L2 : Unit<Length>, T3 : Unit<Ti
 
     operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
         ElectricResistanceAmount(amount = amount / that.amount / convert(that.electricCurrent to electricCurrent),
-                                 unit = Pair(T2(mass, length),
-                                             T2(time, electricCurrent)))
+                                 unit = T2(mass, length) to T2(time, electricCurrent))
 
     @JvmName("divElectricCurrent")
     operator fun div(that: ElectricCurrentAmount<EC>) =
         ElectricResistanceAmount(amount = amount / that.amount,
-                                 unit = Pair(T2(mass, length),
-                                             T2(time, electricCurrent)))
+                                 unit = T2(mass, length) to T2(time, electricCurrent))
 
     // endregion
 
@@ -185,14 +174,12 @@ open class ElectricTensionAmount<M : Unit<Mass>, L2 : Unit<Length>, T3 : Unit<Ti
 
     operator fun <EC : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<EC>) =
         PowerAmount(amount = amount * that.amount * convert(that.electricCurrent to electricCurrent),
-                    unit = Pair(T2(mass, length),
-                                time))
+                    unit = T2(mass, length) to time)
 
     @JvmName("timesElectricCurrent")
     operator fun times(that: ElectricCurrentAmount<EC>) =
         PowerAmount(amount = amount * that.amount,
-                    unit = Pair(T2(mass, length),
-                                time))
+                    unit = T2(mass, length) to time)
 
     // endregion
 
@@ -222,14 +209,12 @@ open class ElectricTensionAmount<M : Unit<Mass>, L2 : Unit<Length>, T3 : Unit<Ti
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         MagneticFluxAmount(amount = amount * that.amount * convert(that.time to time),
-                           unit = Pair(T2(mass, length),
-                                       T2(time, electricCurrent)))
+                           unit = T2(mass, length) to T2(time, electricCurrent))
 
     @JvmName("timesTime")
     operator fun times(that: TimeAmount<T3>) =
         MagneticFluxAmount(amount = amount * that.amount,
-                           unit = Pair(T2(mass, length),
-                                       T2(time, electricCurrent)))
+                           unit = T2(mass, length) to T2(time, electricCurrent))
 
     // endregion
 }

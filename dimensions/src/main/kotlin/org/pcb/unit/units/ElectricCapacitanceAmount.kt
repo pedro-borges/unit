@@ -42,21 +42,18 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
     {
         operator fun invoke(amount: Number, unit: Unit<ElectricCapacitance>) =
             ElectricCapacitanceAmount(amount = amount * unit.scale,
-                                      unit = Pair(T2(SECOND, AMPERE),
-                                                  T2(KILOGRAM, METER)))
+                                      unit = T2(SECOND, AMPERE) to T2(KILOGRAM, METER))
     }
 
     // region -> ElectricCharge
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricCapacitanceAmount(amount = amount * that.amount * that.unit.scale,
-                                  unit = Pair(T2(time, electricCurrent),
-                                              T2(mass, length)))
+                                  unit = T2(time, electricCurrent) to T2(mass, length))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         ElectricCapacitanceAmount(amount = amount / that.amount / that.unit.scale,
-                                  unit = Pair(T2(time, electricCurrent),
-                                              T2(mass, length)))
+                                  unit = T2(time, electricCurrent) to T2(mass, length))
 
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> plus(that: ElectricCapacitanceAmount<T, EC, M, L>) =
         ElectricCapacitanceAmount(amount = amount + that.amount
@@ -69,14 +66,12 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
                                            / convert(that.mass to mass,
                                                      that.length to length,
                                                      that.length to length),
-                                  unit = Pair(T2(time, electricCurrent),
-                                              T2(mass, length)))
+                                  unit = T2(time, electricCurrent) to T2(mass, length))
 
     @JvmName("plusElectricCapacitance")
     operator fun plus(that: ElectricCapacitanceAmount<T4, EC2, M, L2>) =
         ElectricCapacitanceAmount(amount = amount + that.amount,
-                                  unit = Pair(T2(time, electricCurrent),
-                                              T2(mass, length)))
+                                  unit = T2(time, electricCurrent) to T2(mass, length))
 
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> minus(that: ElectricCapacitanceAmount<T, EC, M, L>) =
         ElectricCapacitanceAmount(amount = amount - that.amount
@@ -89,14 +84,12 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
                                            / convert(that.mass to mass,
                                                      that.length to length,
                                                      that.length to length),
-                                  unit = Pair(T2(time, electricCurrent),
-                                              T2(mass, length)))
+                                  unit = T2(time, electricCurrent) to T2(mass, length))
 
     @JvmName("minusElectricCapacitance")
     operator fun minus(that: ElectricCapacitanceAmount<T4, EC2, M, L2>) =
         ElectricCapacitanceAmount(amount = amount - that.amount,
-                                  unit = Pair(T2(time, electricCurrent),
-                                              T2(mass, length)))
+                                  unit = T2(time, electricCurrent) to T2(mass, length))
 
     // endregion
 

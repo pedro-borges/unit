@@ -67,7 +67,7 @@ open class CurrencyAmount<C : Unit<Currency>>(
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
         RentAmount(amount = amount / that.amount,
-                   unit = Pair(currency, that.time))
+                   unit = currency to that.time)
 
     // endregion
 

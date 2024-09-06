@@ -69,7 +69,7 @@ open class TimeAmount<T : Unit<Time>>(
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         PaceAmount(amount = amount / that.amount,
-                   unit = Pair(time, that.length))
+                   unit = time to that.length)
 
     // endregion
 
@@ -79,14 +79,12 @@ open class TimeAmount<T : Unit<Time>>(
         EnergyAmount(amount = amount * that.amount / convert(that.time to time,
                                                              that.time to time,
                                                              that.time to time),
-                     unit = Pair(T2(that.mass, that.length),
-                                 time))
+                     unit = T2(that.mass, that.length) to time)
 
     @JvmName("timesPower")
     operator fun <M : Unit<Mass>, L : Unit<Length>> times(that: PowerAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = Pair(T2(that.mass, that.length),
-                                 time))
+                     unit = T2(that.mass, that.length) to time)
 
     // endregion
 
@@ -104,14 +102,12 @@ open class TimeAmount<T : Unit<Time>>(
         ElectricCapacitanceAmount(amount = amount / that.amount * convert(that.time to time,
                                                                           that.time to time,
                                                                           that.time to time),
-                                  unit = Pair(T2(time, that.electricCurrent),
-                                              T2(that.mass, that.length)))
+                                  unit = T2(time, that.electricCurrent) to T2(that.mass, that.length))
 
     @JvmName("divElectricResistance")
     operator fun <M : Unit<Mass>, L : Unit<Length>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricCapacitanceAmount(amount = amount / that.amount,
-                                  unit = Pair(T2(time, that.electricCurrent),
-                                              T2(that.mass, that.length)))
+                                  unit = T2(time, that.electricCurrent) to T2(that.mass, that.length))
 
     // endregion
 
@@ -122,14 +118,12 @@ open class TimeAmount<T : Unit<Time>>(
                                                                          that.time to time,
                                                                          that.time to time,
                                                                          that.time to time),
-                                 unit = Pair(T2(that.mass, that.length),
-                                             T2(time, that.electricCurrent)))
+                                 unit = T2(that.mass, that.length) to T2(time, that.electricCurrent))
 
     @JvmName("divElectricCapacitance")
     operator fun <M : Unit<Mass>, L : Unit<Length>, EC : Unit<ElectricCurrent>> div(that: ElectricCapacitanceAmount<T, EC, M, L>) =
         ElectricResistanceAmount(amount = amount / that.amount,
-                                 unit = Pair(T2(that.mass, that.length),
-                                             T2(time, that.electricCurrent)))
+                                 unit = T2(that.mass, that.length) to T2(time, that.electricCurrent))
 
     // endregion
 
@@ -139,14 +133,12 @@ open class TimeAmount<T : Unit<Time>>(
         MagneticFluxAmount(amount = amount * that.amount * convert(that.time to time,
                                                                    that.time to time,
                                                                    that.time to time),
-                           unit = Pair(T2(that.mass, that.length),
-                                       T2(time, that.electricCurrent)))
+                           unit = T2(that.mass, that.length) to T2(time, that.electricCurrent))
 
     @JvmName("timesElectricTension")
     operator fun <M : Unit<Mass>, L : Unit<Length>, EC : Unit<ElectricCurrent>> times(that: ElectricTensionAmount<M, L, T, EC>) =
         MagneticFluxAmount(amount = amount * that.amount,
-                           unit = Pair(T2(that.mass, that.length),
-                                       T2(time, that.electricCurrent)))
+                           unit = T2(that.mass, that.length) to T2(time, that.electricCurrent))
 
     // endregion
 }

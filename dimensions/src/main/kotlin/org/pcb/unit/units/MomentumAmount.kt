@@ -34,41 +34,35 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MomentumAmount(amount = amount * that.amount * that.unit.scale,
-                       unit = Pair(T2(mass, length),
-                                   time))
+                       unit = T2(mass, length) to time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         MomentumAmount(amount = amount / that.amount / that.unit.scale,
-                       unit = Pair(T2(mass, length),
-                                   time))
+                       unit = T2(mass, length) to time)
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> plus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount + that.amount
                                 * convert(that.mass to mass,
                                           that.length to length)
                                 / convert(that.time to time),
-                       unit = Pair(T2(mass, length),
-                                   time))
+                       unit = T2(mass, length) to time)
 
     @JvmName("plusMomentum")
     operator fun plus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount + that.amount,
-                       unit = Pair(T2(mass, length),
-                                   time))
+                       unit = T2(mass, length) to time)
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> minus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount - that.amount
                                 * convert(that.mass to mass,
                                           that.length to length)
                                 / convert(that.time to time),
-                       unit = Pair(T2(mass, length),
-                                   time))
+                       unit = T2(mass, length) to time)
 
     @JvmName("minusMomentum")
     operator fun minus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount - that.amount,
-                       unit = Pair(T2(mass, length),
-                                   time))
+                       unit = T2(mass, length) to time)
 
     // endregion
 
@@ -90,12 +84,12 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
         SpeedAmount(amount = amount / that.amount / convert(that.mass to mass),
-                    unit = Pair(length, time))
+                    unit = length to time)
 
     @JvmName("divMass")
     operator fun div(that: MassAmount<M>) =
         SpeedAmount(amount = amount / that.amount,
-                    unit = Pair(length, time))
+                    unit = length to time)
 
     // endregion
 
@@ -118,12 +112,12 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount / convert(that.time to time),
-                    unit = Pair(T2(mass, length), time))
+                    unit = T2(mass, length) to time)
 
     @JvmName("divTime")
     operator fun div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount,
-                    unit = Pair(T2(mass, length), time))
+                    unit = T2(mass, length) to time)
 
     // endregion
 
@@ -133,14 +127,12 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
         EnergyAmount(amount = amount * that.amount
                               * convert(that.length to length)
                               / convert(that.time to time),
-                     unit = Pair(T2(mass, length),
-                                 time))
+                     unit = T2(mass, length) to time)
 
     @JvmName("timesSpeed")
     operator fun times(that: SpeedAmount<L, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = Pair(T2(mass, length),
-                                 time))
+                     unit = T2(mass, length) to time)
 
     // endregion
 }

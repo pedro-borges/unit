@@ -41,21 +41,18 @@ open class MagneticFluxAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>
     {
         operator fun invoke(amount: Number, unit: Unit<MagneticFlux>) =
             MagneticFluxAmount(amount = amount.toBigBigDecimal() * unit.scale,
-                               unit = Pair(T2(KILOGRAM, METER),
-                                           T2(SECOND, AMPERE)))
+                               unit = T2(KILOGRAM, METER) to T2(SECOND, AMPERE))
     }
 
     // region -> ElectricTension
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MagneticFluxAmount(amount = amount * that.amount * that.unit.scale,
-                           unit = Pair(T2(mass, length),
-                                       T2(time, electricCurrent)))
+                           unit = T2(mass, length) to T2(time, electricCurrent))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         MagneticFluxAmount(amount = amount / that.amount / that.unit.scale,
-                           unit = Pair(T2(mass, length),
-                                       T2(time, electricCurrent)))
+                           unit = T2(mass, length) to T2(time, electricCurrent))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> plus(that: MagneticFluxAmount<M, L, T, EC>) =
         MagneticFluxAmount(amount = amount + that.amount
@@ -65,14 +62,12 @@ open class MagneticFluxAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>
                                     / convert(that.time to time,
                                               that.time to time,
                                               that.electricCurrent to electricCurrent),
-                           unit = Pair(T2(mass, length),
-                                       T2(time, electricCurrent)))
+                           unit = T2(mass, length) to T2(time, electricCurrent))
 
     @JvmName("plusMagneticFlux")
     operator fun plus(that: MagneticFluxAmount<M, L2, T2, EC>) =
         MagneticFluxAmount(amount = amount + that.amount,
-                           unit = Pair(T2(mass, length),
-                                       T2(time, electricCurrent)))
+                           unit = T2(mass, length) to T2(time, electricCurrent))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> minus(that: MagneticFluxAmount<M, L, T, EC>) =
         MagneticFluxAmount(amount = amount - that.amount
@@ -82,14 +77,12 @@ open class MagneticFluxAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>
                                     / convert(that.time to time,
                                               that.time to time,
                                               that.electricCurrent to electricCurrent),
-                           unit = Pair(T2(mass, length),
-                                       T2(time, electricCurrent)))
+                           unit = T2(mass, length) to T2(time, electricCurrent))
 
     @JvmName("minusMagneticFlux")
     operator fun minus(that: MagneticFluxAmount<M, L2, T2, EC>) =
         MagneticFluxAmount(amount = amount - that.amount,
-                           unit = Pair(T2(mass, length),
-                                       T2(time, electricCurrent)))
+                           unit = T2(mass, length) to T2(time, electricCurrent))
 
     // endregion
 
@@ -134,14 +127,12 @@ open class MagneticFluxAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         ElectricTensionAmount(amount = amount / that.amount / convert(that.time to time),
-                              unit = Pair(T2(mass, length),
-                                          T2(time, electricCurrent)))
+                              unit = T2(mass, length) to T2(time, electricCurrent))
 
     @JvmName("divTime")
     operator fun div(that: TimeAmount<T2>) =
         ElectricTensionAmount(amount = amount / that.amount,
-                              unit = Pair(T2(mass, length),
-                                          T2(time, electricCurrent)))
+                              unit = T2(mass, length) to T2(time, electricCurrent))
 
     // endregion
 
@@ -150,14 +141,12 @@ open class MagneticFluxAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>
     operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricChargeAmount<EC, T>) =
         ElectricResistanceAmount(amount = amount / that.amount / convert(that.time to time,
                                                                          that.electricCurrent to electricCurrent),
-                                 unit = Pair(T2(mass, length),
-                                             T2(time, electricCurrent)))
+                                 unit = T2(mass, length) to T2(time, electricCurrent))
 
     @JvmName("divElectricCharge")
     operator fun div(that: ElectricChargeAmount<EC, T2>) =
         ElectricResistanceAmount(amount = amount / that.amount,
-                                 unit = Pair(T2(mass, length),
-                                             T2(time, that.electricCurrent)))
+                                 unit = T2(mass, length) to T2(time, that.electricCurrent))
 
     // endregion
 
@@ -208,14 +197,12 @@ open class MagneticFluxAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>
     operator fun <EC : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<EC>) =
         EnergyAmount(amount = amount * that.amount
                               * convert(that.electricCurrent to electricCurrent),
-                     unit = Pair(T2(mass, length),
-                                 time))
+                     unit = T2(mass, length) to time)
 
     @JvmName("timesElectricCurrent")
     operator fun times(that: ElectricCurrentAmount<EC>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = Pair(T2(mass, length),
-                                 time))
+                     unit = T2(mass, length) to time)
 
     // endregion
 

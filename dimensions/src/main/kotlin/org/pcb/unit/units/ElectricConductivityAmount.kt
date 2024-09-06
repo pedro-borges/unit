@@ -41,21 +41,18 @@ open class ElectricConductivityAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurren
     {
         operator fun invoke(amount: Number, unit: Unit<ElectricConductivity>) =
             ElectricConductivityAmount(amount = amount.toBigBigDecimal() * unit.scale,
-                                       unit = Pair(T2(SECOND, AMPERE),
-                                                   T2(KILOGRAM, METER)))
+                                       unit = T2(SECOND, AMPERE) to T2(KILOGRAM, METER))
     }
 
     // region -> ElectricTension
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricConductivityAmount(amount = amount * that.amount * that.unit.scale,
-                                   unit = Pair(T2(time, electricCurrent),
-                                               T2(mass, length)))
+                                   unit = T2(time, electricCurrent) to T2(mass, length))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         ElectricConductivityAmount(amount = amount / that.amount / that.unit.scale,
-                                   unit = Pair(T2(time, electricCurrent),
-                                               T2(mass, length)))
+                                   unit = T2(time, electricCurrent) to T2(mass, length))
 
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> plus(that: ElectricConductivityAmount<T, EC, M, L>) =
         ElectricConductivityAmount(amount = amount + that.amount
@@ -67,14 +64,12 @@ open class ElectricConductivityAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurren
                                             / convert(that.mass to mass,
                                                       that.length to length,
                                                       that.length to length),
-                                   unit = Pair(T2(time, electricCurrent),
-                                               T2(mass, length)))
+                                   unit = T2(time, electricCurrent) to T2(mass, length))
 
     @JvmName("plusElectricConductivity")
     operator fun plus(that: ElectricConductivityAmount<T3, EC2, M, L2>) =
         ElectricConductivityAmount(amount = amount + that.amount,
-                                   unit = Pair(T2(time, electricCurrent),
-                                               T2(mass, length)))
+                                   unit = T2(time, electricCurrent) to T2(mass, length))
 
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> minus(that: ElectricConductivityAmount<T, EC, M, L>) =
         ElectricConductivityAmount(amount = amount - that.amount
@@ -86,14 +81,12 @@ open class ElectricConductivityAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurren
                                             / convert(that.mass to mass,
                                                       that.length to length,
                                                       that.length to length),
-                                   unit = Pair(T2(time, electricCurrent),
-                                               T2(mass, length)))
+                                   unit = T2(time, electricCurrent) to T2(mass, length))
 
     @JvmName("minusElectricConductivity")
     operator fun minus(that: ElectricConductivityAmount<T3, EC2, M, L2>) =
         ElectricConductivityAmount(amount = amount - that.amount,
-                                   unit = Pair(T2(time, electricCurrent),
-                                               T2(mass, length)))
+                                   unit = T2(time, electricCurrent) to T2(mass, length))
 
     // endregion
 

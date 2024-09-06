@@ -68,7 +68,7 @@ open class LengthAmount<L : Unit<Length>>(
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
         SpeedAmount(amount = amount / that.amount,
-                    unit = Pair(length, that.time))
+                    unit = length to that.time)
 
     // endregion
 
@@ -103,14 +103,12 @@ open class LengthAmount<L : Unit<Length>>(
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> times(that: ForceAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount * convert(that.length to length),
-                     unit = Pair(T2(that.mass, length),
-                                 that.time))
+                     unit = T2(that.mass, length) to that.time)
 
     @JvmName("timesForce")
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = Pair(T2(that.mass, length),
-                                 that.time))
+                     unit = T2(that.mass, length) to that.time)
 
     // endregion
 }

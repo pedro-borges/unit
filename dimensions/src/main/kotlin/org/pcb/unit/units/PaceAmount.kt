@@ -30,33 +30,33 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         PaceAmount(amount = amount * that.amount * that.unit.scale,
-                   unit = Pair(time, length))
+                   unit = time to length)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         PaceAmount(amount = amount / that.amount / that.unit.scale,
-                   unit = Pair(time, length))
+                   unit = time to length)
 
     operator fun <T : Unit<Time>, L : Unit<Length>> plus(that: PaceAmount<T, L>) =
         PaceAmount(amount = amount + that.amount
                             * convert(that.time to time)
                             / convert(that.length to length),
-                   unit = Pair(time, length))
+                   unit = time to length)
 
     @JvmName("plusPace")
     operator fun plus(that: PaceAmount<T, L>) =
         PaceAmount(amount = amount + that.amount,
-                   unit = Pair(time, length))
+                   unit = time to length)
 
     operator fun <T : Unit<Time>, L : Unit<Length>> minus(that: PaceAmount<T, L>) =
         PaceAmount(amount = amount - that.amount
                             * convert(that.time to time)
                             / convert(that.length to length),
-                   unit = Pair(time, length))
+                   unit = time to length)
 
     @JvmName("minusPace")
     operator fun minus(that: PaceAmount<T, L>) =
         PaceAmount(amount = amount - that.amount,
-                   unit = Pair(time, length))
+                   unit = time to length)
 
     // endregion
 
