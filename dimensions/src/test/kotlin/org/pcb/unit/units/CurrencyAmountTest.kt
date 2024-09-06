@@ -3,6 +3,8 @@ package org.pcb.unit.units
 import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.Fraction
+import org.pcb.unit.T2
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
@@ -107,7 +109,7 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = DebtAmount(amount = 2 * 2,
-                                  unit = CURRENCY1 * SECOND),
+                                  unit = T2(CURRENCY1, SECOND)),
             actual = CurrencyAmount(amount = 2,
                                     unit = CURRENCY1) *
                      TimeAmount(amount = 2,
@@ -119,7 +121,7 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = RentAmount(amount = 1,
-                                  unit = CURRENCY1 / SECOND),
+                                  unit = Fraction(CURRENCY1, SECOND)),
             actual = CurrencyAmount(amount = 2,
                                     unit = CURRENCY1) /
                      TimeAmount(amount = 2,

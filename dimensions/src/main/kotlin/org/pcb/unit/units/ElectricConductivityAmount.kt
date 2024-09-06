@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Fraction
-import org.pcb.unit.Tuple
+import org.pcb.unit.T2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.ElectricConductivity
@@ -24,7 +24,7 @@ import org.pcb.unit.units.base.Second.SECOND
 
 open class ElectricConductivityAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurrent>, M : Unit<Mass>, L2 : Unit<Length>>(
         amount: Number,
-        unit: Fraction<Tuple<T3, EC2>, Tuple<M, L2>>)
+        unit: Fraction<T2<T3, EC2>, T2<M, L2>>)
     : Amount<ElectricCurrent>(amount = amount.toBigBigDecimal(),
                               unit = CompositeUnit(
                                   domain = ElectricCurrent::class,
@@ -42,21 +42,21 @@ open class ElectricConductivityAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurren
     {
         operator fun invoke(amount: Number, unit: Unit<ElectricConductivity>) =
             ElectricConductivityAmount(amount = amount.toBigBigDecimal() * unit.scale,
-                                       unit = Fraction(Tuple(SECOND, AMPERE),
-                                                       Tuple(KILOGRAM, METER)))
+                                       unit = Fraction(T2(SECOND, AMPERE),
+                                                       T2(KILOGRAM, METER)))
     }
 
     // region -> ElectricTension
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricConductivityAmount(amount = amount * that.amount * that.unit.scale,
-                                   unit = Fraction(Tuple(time, electricCurrent),
-                                                   Tuple(mass, length)))
+                                   unit = Fraction(T2(time, electricCurrent),
+                                                   T2(mass, length)))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         ElectricConductivityAmount(amount = amount / that.amount / that.unit.scale,
-                                   unit = Fraction(Tuple(time, electricCurrent),
-                                                   Tuple(mass, length)))
+                                   unit = Fraction(T2(time, electricCurrent),
+                                                   T2(mass, length)))
 
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> plus(that: ElectricConductivityAmount<T, EC, M, L>) =
         ElectricConductivityAmount(amount = amount + that.amount
@@ -68,14 +68,14 @@ open class ElectricConductivityAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurren
                                             / convert(that.mass to mass,
                                                       that.length to length,
                                                       that.length to length),
-                                   unit = Fraction(Tuple(time, electricCurrent),
-                                                   Tuple(mass, length)))
+                                   unit = Fraction(T2(time, electricCurrent),
+                                                   T2(mass, length)))
 
     @JvmName("plusElectricConductivity")
     operator fun plus(that: ElectricConductivityAmount<T3, EC2, M, L2>) =
         ElectricConductivityAmount(amount = amount + that.amount,
-                                   unit = Fraction(Tuple(time, electricCurrent),
-                                                   Tuple(mass, length)))
+                                   unit = Fraction(T2(time, electricCurrent),
+                                                   T2(mass, length)))
 
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> minus(that: ElectricConductivityAmount<T, EC, M, L>) =
         ElectricConductivityAmount(amount = amount - that.amount
@@ -87,14 +87,14 @@ open class ElectricConductivityAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurren
                                             / convert(that.mass to mass,
                                                       that.length to length,
                                                       that.length to length),
-                                   unit = Fraction(Tuple(time, electricCurrent),
-                                                   Tuple(mass, length)))
+                                   unit = Fraction(T2(time, electricCurrent),
+                                                   T2(mass, length)))
 
     @JvmName("minusElectricConductivity")
     operator fun minus(that: ElectricConductivityAmount<T3, EC2, M, L2>) =
         ElectricConductivityAmount(amount = amount - that.amount,
-                                   unit = Fraction(Tuple(time, electricCurrent),
-                                                   Tuple(mass, length)))
+                                   unit = Fraction(T2(time, electricCurrent),
+                                                   T2(mass, length)))
 
     // endregion
 

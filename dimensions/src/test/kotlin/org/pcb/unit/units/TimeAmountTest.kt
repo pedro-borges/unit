@@ -3,7 +3,8 @@ package org.pcb.unit.units
 import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.Tuple
+import org.pcb.unit.Fraction
+import org.pcb.unit.T2
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
@@ -113,7 +114,7 @@ class TimeAmountTest
     {
         assertEquals(
             expected = PaceAmount(amount = 1,
-                                  unit = TIME1 / LENGTH1),
+                                  unit = Fraction(TIME1, LENGTH1)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
                      LengthAmount(amount = 2,
@@ -125,11 +126,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = Tuple(MASS1, LENGTH1) / TIME1),
+                                    unit = T2(MASS1, LENGTH1) / TIME1),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
                      PowerAmount(amount = 2,
-                                 unit = Tuple(MASS1, LENGTH1) / TIME1))
+                                 unit = T2(MASS1, LENGTH1) / TIME1))
     }
 
     @Test
@@ -137,11 +138,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = Tuple(MASS1, LENGTH1) / TIME1),
+                                    unit = T2(MASS1, LENGTH1) / TIME1),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
                      PowerAmount(amount = 2000,
-                                 unit = Tuple(MASS1, LENGTH1) / TIME2))
+                                 unit = T2(MASS1, LENGTH1) / TIME2))
     }
 
     @Test
@@ -149,7 +150,7 @@ class TimeAmountTest
     {
         assertEquals(
             expected = ElectricChargeAmount(amount = 2 * 2,
-                                            unit = ELECTRICCURRENT1 * TIME1),
+                                            unit = T2(ELECTRICCURRENT1, TIME1)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
                      ElectricCurrentAmount(amount = 2,
@@ -161,11 +162,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = ElectricCapacitanceAmount(amount = 1,
-                                                 unit = Tuple(TIME1, ELECTRICCURRENT1) / Tuple(MASS1, LENGTH1)),
+                                                 unit = T2(TIME1, ELECTRICCURRENT1) / T2(MASS1, LENGTH1)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
                      ElectricResistanceAmount(amount = 2,
-                                              unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)))
+                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -173,11 +174,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = ElectricCapacitanceAmount(amount = 1,
-                                                 unit = Tuple(TIME1, ELECTRICCURRENT2) / Tuple(MASS2, LENGTH2)),
+                                                 unit = T2(TIME1, ELECTRICCURRENT2) / T2(MASS2, LENGTH2)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
                      ElectricResistanceAmount(amount = 2000,
-                                              unit = Tuple(MASS2, LENGTH2) / Tuple(TIME2, ELECTRICCURRENT2)))
+                                              unit = T2(MASS2, LENGTH2) / T2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -185,11 +186,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 1,
-                                                unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)),
+                                                unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
                      ElectricCapacitanceAmount(amount = 2,
-                                               unit = Tuple(TIME1, ELECTRICCURRENT1) / Tuple(MASS1, LENGTH1)))
+                                               unit = T2(TIME1, ELECTRICCURRENT1) / T2(MASS1, LENGTH1)))
     }
 
     @Test
@@ -197,11 +198,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 1,
-                                                unit = Tuple(MASS2, LENGTH2) / Tuple(TIME1, ELECTRICCURRENT2)),
+                                                unit = T2(MASS2, LENGTH2) / T2(TIME1, ELECTRICCURRENT2)),
             actual = TimeAmount(amount = 20000,
                                 unit = TIME1) /
                      ElectricCapacitanceAmount(amount = 2,
-                                               unit = Tuple(TIME2, ELECTRICCURRENT2) / Tuple(MASS2, LENGTH2)))
+                                               unit = T2(TIME2, ELECTRICCURRENT2) / T2(MASS2, LENGTH2)))
     }
 
     @Test
@@ -209,11 +210,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)),
+                                          unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
                      ElectricTensionAmount(amount = 2,
-                                           unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)))
+                                           unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -221,10 +222,10 @@ class TimeAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = Tuple(MASS1, LENGTH1) / Tuple(TIME2, ELECTRICCURRENT1)),
+                                          unit = T2(MASS1, LENGTH1) / T2(TIME2, ELECTRICCURRENT1)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME2) *
                      ElectricTensionAmount(amount = 2000,
-                                           unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)))
+                                           unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)))
     }
 }

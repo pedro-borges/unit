@@ -2,13 +2,13 @@ package org.pcb.unit.units.electromagnetism
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.div
 import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.base.Ampere
 import org.pcb.unit.units.base.Kilogram
 import org.pcb.unit.units.base.Meter
 import org.pcb.unit.units.base.Second
 import org.pcb.unit.units.electromagnetism.Ohm.OHM
+import org.pcb.unit.units.scalar.Numeric
 
 class OhmTest
 {
@@ -26,7 +26,7 @@ class OhmTest
     fun oneDivSiemens() =
         assertEquals(
             expected = Ohm(2 * 3),
-            actual = 2 / Siemens(3))
+            actual = Numeric(2) / Siemens(3))
 
     @Test
     fun secondDivFarad() =

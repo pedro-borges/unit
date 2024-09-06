@@ -2,6 +2,8 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.Fraction
+import org.pcb.unit.T2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Currency
@@ -66,7 +68,7 @@ open class CurrencyAmount<C : Unit<Currency>>(
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
         RentAmount(amount = amount / that.amount,
-                   unit = currency / that.time)
+                   unit = Fraction(currency, that.time))
 
     // endregion
 
@@ -74,7 +76,7 @@ open class CurrencyAmount<C : Unit<Currency>>(
 
     operator fun <U : Unit<Time>> times(that: TimeAmount<U>) =
         DebtAmount(amount = amount * that.amount,
-                   unit = currency * that.time)
+                   unit = T2(currency, that.time))
 
     // endregion
 }

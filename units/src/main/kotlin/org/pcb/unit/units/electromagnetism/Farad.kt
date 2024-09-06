@@ -1,6 +1,6 @@
 package org.pcb.unit.units.electromagnetism
 
-import org.pcb.unit.Tuple
+import org.pcb.unit.T2
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.ElectricCapacitance
 import org.pcb.unit.dimension.ElectricCurrent
@@ -17,7 +17,7 @@ import org.pcb.unit.units.base.Second.SECOND
 class Farad(amount: Number)
     : ElectricCapacitanceAmount<Unit<Time>, Unit<ElectricCurrent>, Unit<Mass>, Unit<Length>>(
     amount = amount,
-    unit = Tuple(SECOND, AMPERE) / Tuple(KILOGRAM, METER))
+    unit = T2(SECOND, AMPERE) / T2(KILOGRAM, METER))
 {
     object FARAD : Unit<ElectricCapacitance>(ElectricCapacitance::class)
     {

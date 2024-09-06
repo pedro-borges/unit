@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Fraction
-import org.pcb.unit.Tuple
+import org.pcb.unit.T2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Force
@@ -22,7 +22,7 @@ import org.pcb.unit.units.base.Second.SECOND
 
 open class ForceAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>>(
         amount: Number,
-        unit: Fraction<Tuple<M, L2>, T2>)
+        unit: Fraction<org.pcb.unit.T2<M, L2>, T2>)
     : Amount<Force>(amount = amount.toBigBigDecimal(),
                     unit = CompositeUnit(
                         domain = Force::class,
@@ -38,7 +38,7 @@ open class ForceAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>>(
     {
         operator fun invoke(amount: Number, unit: Unit<Force>) =
             ForceAmount(amount = amount.toBigBigDecimal() * unit.scale,
-                        unit = Fraction(Tuple(KILOGRAM, METER),
+                        unit = Fraction(T2(KILOGRAM, METER),
                                         SECOND))
     }
 
@@ -46,11 +46,11 @@ open class ForceAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>>(
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ForceAmount(amount = amount * that.amount * that.unit.scale,
-                    unit = Fraction(Tuple(mass, length), time))
+                    unit = Fraction(T2(mass, length), time))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         ForceAmount(amount = amount / that.amount / that.unit.scale,
-                    unit = Fraction(Tuple(mass, length), time))
+                    unit = Fraction(T2(mass, length), time))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> plus(that: ForceAmount<M, L, T>) =
         ForceAmount(amount = amount + that.amount
@@ -58,12 +58,12 @@ open class ForceAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>>(
                                        that.length to length)
                              / convert(that.time to time,
                                        that.time to time),
-                    unit = Fraction(Tuple(mass, length), time))
+                    unit = Fraction(T2(mass, length), time))
 
     @JvmName("plusForce")
     operator fun plus(that: ForceAmount<M, L2, T2>) =
         ForceAmount(amount = amount + that.amount,
-                    unit = Fraction(Tuple(mass, length), time))
+                    unit = Fraction(T2(mass, length), time))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> minus(that: ForceAmount<M, L, T>) =
         ForceAmount(amount = amount - that.amount
@@ -71,12 +71,12 @@ open class ForceAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>>(
                                        that.length to length)
                              / convert(that.time to time,
                                        that.time to time),
-                    unit = Fraction(Tuple(mass, length), time))
+                    unit = Fraction(T2(mass, length), time))
 
     @JvmName("minusForce")
     operator fun minus(that: ForceAmount<M, L2, T2>) =
         ForceAmount(amount = amount - that.amount,
-                    unit = Fraction(Tuple(mass, length), time))
+                    unit = Fraction(T2(mass, length), time))
 
     // endregion
 
@@ -128,13 +128,13 @@ open class ForceAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>>(
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         MomentumAmount(amount = amount * that.amount * convert(that.time to time),
-                       unit = (mass * length) /
-                              (time))
+                       unit = Fraction(T2(mass, length),
+                                       time))
 
     @JvmName("timesTime")
     operator fun times(that: TimeAmount<T2>) =
         MomentumAmount(amount = amount * that.amount,
-                       unit = Fraction(Tuple(mass, length), time))
+                       unit = Fraction(T2(mass, length), time))
 
 
     // endregion
@@ -143,13 +143,13 @@ open class ForceAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>>(
 
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         EnergyAmount(amount = amount * that.amount * convert(that.length to length),
-                     unit = Fraction(Tuple(mass, length),
+                     unit = Fraction(T2(mass, length),
                                      time))
 
     @JvmName("timesLength")
     operator fun times(that: LengthAmount<L2>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = Fraction(Tuple(mass, length),
+                     unit = Fraction(T2(mass, length),
                                      time))
 
     // endregion

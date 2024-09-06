@@ -28,9 +28,9 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricChargeAmount(amount = 2 * 2,
-                                            unit = ELECTRICCURRENT1 * TIME1),
+                                            unit = T2(ELECTRICCURRENT1, TIME1)),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = ELECTRICCURRENT1 * TIME1) *
+                                          unit = T2(ELECTRICCURRENT1, TIME1)) *
                      Percent(amount = 2 * 100))
     }
 
@@ -39,9 +39,9 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricChargeAmount(amount = 1,
-                                            unit = ELECTRICCURRENT1 * TIME1),
+                                            unit = T2(ELECTRICCURRENT1, TIME1)),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = ELECTRICCURRENT1 * TIME1) /
+                                          unit = T2(ELECTRICCURRENT1, TIME1)) /
                      Percent(amount = 2 * 100))
     }
 
@@ -50,11 +50,11 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricChargeAmount(amount = 1,
-                                            unit = ELECTRICCURRENT1 * TIME1),
+                                            unit = T2(ELECTRICCURRENT1, TIME1)),
             actual = ElectricChargeAmount(amount = 0,
-                                          unit = ELECTRICCURRENT1 * TIME1) +
+                                          unit = T2(ELECTRICCURRENT1, TIME1)) +
                      ElectricChargeAmount(amount = 1,
-                                          unit = ELECTRICCURRENT1 * TIME1))
+                                          unit = T2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -62,11 +62,11 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricChargeAmount(amount = 1,
-                                            unit = ELECTRICCURRENT2 * TIME2),
+                                            unit = T2(ELECTRICCURRENT2, TIME2)),
             actual = ElectricChargeAmount(amount = 0,
-                                          unit = ELECTRICCURRENT2 * TIME2) +
+                                          unit = T2(ELECTRICCURRENT2, TIME2)) +
                      ElectricChargeAmount(amount = 100,
-                                          unit = ELECTRICCURRENT1 * TIME1))
+                                          unit = T2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -74,11 +74,11 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricChargeAmount(amount = 0,
-                                            unit = ELECTRICCURRENT1 * TIME1),
+                                            unit = T2(ELECTRICCURRENT1, TIME1)),
             actual = ElectricChargeAmount(amount = 1,
-                                          unit = ELECTRICCURRENT1 * TIME1) -
+                                          unit = T2(ELECTRICCURRENT1, TIME1)) -
                      ElectricChargeAmount(amount = 1,
-                                          unit = ELECTRICCURRENT1 * TIME1))
+                                          unit = T2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -86,11 +86,11 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricChargeAmount(amount = 0,
-                                            unit = Tuple(ELECTRICCURRENT2, TIME2)),
+                                            unit = T2(ELECTRICCURRENT2, TIME2)),
             actual = ElectricChargeAmount(amount = 1,
-                                          unit = Tuple(ELECTRICCURRENT2, TIME2)) -
+                                          unit = T2(ELECTRICCURRENT2, TIME2)) -
                      ElectricChargeAmount(amount = 100,
-                                          unit = Tuple(ELECTRICCURRENT1, TIME1)))
+                                          unit = T2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -99,9 +99,9 @@ class ElectricChargeAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = ELECTRICCURRENT1 * TIME1) /
+                                          unit = T2(ELECTRICCURRENT1, TIME1)) /
                      ElectricChargeAmount(amount = 2,
-                                          unit = ELECTRICCURRENT1 * TIME1))
+                                          unit = T2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -110,9 +110,9 @@ class ElectricChargeAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = Tuple(ELECTRICCURRENT2, TIME2)) /
+                                          unit = T2(ELECTRICCURRENT2, TIME2)) /
                      ElectricChargeAmount(amount = 200,
-                                          unit = Tuple(ELECTRICCURRENT1, TIME1)))
+                                          unit = T2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -122,7 +122,7 @@ class ElectricChargeAmountTest
             expected = ElectricCurrentAmount(amount = 1,
                                              unit = ELECTRICCURRENT1),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = Tuple(ELECTRICCURRENT1, TIME1)) /
+                                          unit = T2(ELECTRICCURRENT1, TIME1)) /
                      TimeAmount(amount = 2,
                                 unit = TIME1))
     }
@@ -132,11 +132,11 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricCapacitanceAmount(amount = 1,
-                                                 unit = Tuple(TIME1, ELECTRICCURRENT1) / Tuple(MASS1, LENGTH1)),
+                                                 unit = T2(TIME1, ELECTRICCURRENT1) / T2(MASS1, LENGTH1)),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = Tuple(ELECTRICCURRENT1, TIME1)) /
+                                          unit = T2(ELECTRICCURRENT1, TIME1)) /
                      ElectricTensionAmount(amount = 2,
-                                           unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)))
+                                           unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -144,11 +144,11 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricCapacitanceAmount(amount = 1,
-                                                 unit = Tuple(TIME1, ELECTRICCURRENT1) / Tuple(MASS2, LENGTH2)),
+                                                 unit = T2(TIME1, ELECTRICCURRENT1) / T2(MASS2, LENGTH2)),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = Tuple(ELECTRICCURRENT1, TIME1)) /
+                                          unit = T2(ELECTRICCURRENT1, TIME1)) /
                      ElectricTensionAmount(amount = 20000,
-                                           unit = Tuple(MASS2, LENGTH2) / Tuple(TIME2, ELECTRICCURRENT2)))
+                                           unit = T2(MASS2, LENGTH2) / T2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -156,11 +156,11 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 1,
-                                             unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)),
+                                             unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = Tuple(ELECTRICCURRENT1, TIME1)) /
+                                          unit = T2(ELECTRICCURRENT1, TIME1)) /
                      ElectricCapacitanceAmount(amount = 2,
-                                               unit = Tuple(TIME1, ELECTRICCURRENT1) / Tuple(MASS1, LENGTH1)))
+                                               unit = T2(TIME1, ELECTRICCURRENT1) / T2(MASS1, LENGTH1)))
     }
 
     @Test
@@ -168,11 +168,11 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 128 / 128,
-                                             unit = Tuple(MASS2, LENGTH2) / Tuple(TIME1, ELECTRICCURRENT1)),
+                                             unit = T2(MASS2, LENGTH2) / T2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricChargeAmount(amount = 2000000,
-                                          unit = Tuple(ELECTRICCURRENT1, TIME1)) /
+                                          unit = T2(ELECTRICCURRENT1, TIME1)) /
                      ElectricCapacitanceAmount(amount = 2,
-                                               unit = Tuple(TIME2, ELECTRICCURRENT2) / Tuple(MASS2, LENGTH2)))
+                                               unit = T2(TIME2, ELECTRICCURRENT2) / T2(MASS2, LENGTH2)))
     }
 
     @Test
@@ -180,11 +180,11 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = (MASS1 * LENGTH1) / TIME1),
+                                    unit = T2(MASS1, LENGTH1) / TIME1),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = ELECTRICCURRENT1 * TIME1) *
+                                          unit = T2(ELECTRICCURRENT1, TIME1)) *
                      ElectricTensionAmount(amount = 2,
-                                           unit = (MASS1 * LENGTH1) / (TIME1 * ELECTRICCURRENT1)))
+                                           unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -192,11 +192,11 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = Tuple(MASS2, LENGTH2) / TIME1),
+                                    unit = T2(MASS2, LENGTH2) / TIME1),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = Tuple(ELECTRICCURRENT1, TIME1)) *
+                                          unit = T2(ELECTRICCURRENT1, TIME1)) *
                      ElectricTensionAmount(amount = 20000,
-                                           unit = Tuple(MASS2, LENGTH2) / Tuple(TIME2, ELECTRICCURRENT2)))
+                                           unit = T2(MASS2, LENGTH2) / T2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -204,11 +204,11 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)),
+                                          unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = Tuple(ELECTRICCURRENT1, TIME1)) *
+                                          unit = T2(ELECTRICCURRENT1, TIME1)) *
                      ElectricResistanceAmount(amount = 2,
-                                              unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)))
+                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -216,10 +216,10 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)),
+                                          unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = Tuple(ELECTRICCURRENT1, TIME1)) *
+                                          unit = T2(ELECTRICCURRENT1, TIME1)) *
                      ElectricResistanceAmount(amount = 200000,
-                                              unit = Tuple(MASS1, LENGTH1) / Tuple(TIME2, ELECTRICCURRENT2)))
+                                              unit = T2(MASS1, LENGTH1) / T2(TIME2, ELECTRICCURRENT2)))
     }
 }

@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Fraction
-import org.pcb.unit.Tuple
+import org.pcb.unit.T2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.ElectricCurrent
@@ -14,6 +14,7 @@ import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.units.scalar.Numeric.ONE
 
 open class ScalarAmount<S : Unit<Scalar>>(
         amount: Number,
@@ -59,7 +60,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         FrequencyAmount(amount = amount * unit.scale / that.amount,
-                        unit = 1 / that.time)
+                        unit = Fraction(ONE, that.time))
 
     // endregion
 
@@ -75,8 +76,8 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> div(that: ElectricConductivityAmount<T, EC, M, L>) =
         ElectricResistanceAmount(amount = amount * that.amount * unit.scale,
-                                 unit = Fraction(Tuple(that.mass, that.length),
-                                                 Tuple(that.time, that.electricCurrent)))
+                                 unit = Fraction(T2(that.mass, that.length),
+                                                 T2(that.time, that.electricCurrent)))
 
     // endregion
 
@@ -84,8 +85,8 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricConductivityAmount(amount = amount * unit.scale / that.amount,
-                                   unit = Fraction(Tuple(that.time, that.electricCurrent),
-                                                   Tuple(that.mass, that.length)))
+                                   unit = Fraction(T2(that.time, that.electricCurrent),
+                                                   T2(that.mass, that.length)))
 
     // endregion
 }

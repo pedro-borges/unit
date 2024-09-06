@@ -1,5 +1,6 @@
 package org.pcb.unit.units.electromagnetism
 
+import org.pcb.unit.T2
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.ElectricCurrent
 import org.pcb.unit.dimension.ElectricResistance
@@ -16,7 +17,7 @@ import org.pcb.unit.units.base.Second.SECOND
 class Ohm(amount: Number)
     : ElectricResistanceAmount<Unit<Mass>, Unit<Length>, Unit<Time>, Unit<ElectricCurrent>>(
     amount = amount,
-    unit = (KILOGRAM * METER) / (SECOND * AMPERE))
+    unit = T2(KILOGRAM, METER) / T2(SECOND, AMPERE))
 {
     object OHM : Unit<ElectricResistance>(ElectricResistance::class)
     {

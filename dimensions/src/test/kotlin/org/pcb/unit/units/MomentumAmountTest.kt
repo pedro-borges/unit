@@ -4,7 +4,7 @@ import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.Fraction
-import org.pcb.unit.Tuple
+import org.pcb.unit.T2
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
@@ -20,9 +20,9 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 2 * 2,
-                                      unit = (MASS1 * LENGTH1) / TIME1),
+                                      unit = T2(MASS1, LENGTH1) / TIME1),
             actual = MomentumAmount(amount = 2,
-                                    unit = (MASS1 * LENGTH1) / TIME1) *
+                                    unit = T2(MASS1, LENGTH1) / TIME1) *
                      Percent(amount = 2 * 100))
     }
 
@@ -31,9 +31,9 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 1,
-                                      unit = (MASS1 * LENGTH1) / TIME1),
+                                      unit = T2(MASS1, LENGTH1) / TIME1),
             actual = MomentumAmount(amount = 2,
-                                    unit = (MASS1 * LENGTH1) / TIME1) /
+                                    unit = T2(MASS1, LENGTH1) / TIME1) /
                      Percent(amount = 2 * 100))
     }
 
@@ -42,11 +42,11 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 1,
-                                      unit = (MASS1 * LENGTH1) / TIME1),
+                                      unit = T2(MASS1, LENGTH1) / TIME1),
             actual = MomentumAmount(amount = 0,
-                                    unit = (MASS1 * LENGTH1) / TIME1) +
+                                    unit = T2(MASS1, LENGTH1) / TIME1) +
                      MomentumAmount(amount = 1,
-                                    unit = (MASS1 * LENGTH1) / TIME1))
+                                    unit = T2(MASS1, LENGTH1) / TIME1))
     }
 
     @Test
@@ -54,11 +54,11 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 1,
-                                      unit = (MASS2 * LENGTH2) / TIME2),
+                                      unit = T2(MASS2, LENGTH2) / TIME2),
             actual = MomentumAmount(amount = 0,
-                                    unit = (MASS2 * LENGTH2) / TIME2) +
+                                    unit = T2(MASS2, LENGTH2) / TIME2) +
                      MomentumAmount(amount = 10,
-                                    unit = (MASS1 * LENGTH1) / TIME1))
+                                    unit = T2(MASS1, LENGTH1) / TIME1))
     }
 
     @Test
@@ -66,11 +66,11 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 0,
-                                      unit = (MASS1 * LENGTH1) / TIME1),
+                                      unit = T2(MASS1, LENGTH1) / TIME1),
             actual = MomentumAmount(amount = 1,
-                                    unit = (MASS1 * LENGTH1) / TIME1) -
+                                    unit = T2(MASS1, LENGTH1) / TIME1) -
                      MomentumAmount(amount = 1,
-                                    unit = (MASS1 * LENGTH1) / TIME1))
+                                    unit = T2(MASS1, LENGTH1) / TIME1))
     }
 
     @Test
@@ -78,11 +78,11 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 0,
-                                      unit = (MASS2 * LENGTH2) / TIME2),
+                                      unit = T2(MASS2, LENGTH2) / TIME2),
             actual = MomentumAmount(amount = 1,
-                                    unit = (MASS2 * LENGTH2) / TIME2) -
+                                    unit = T2(MASS2, LENGTH2) / TIME2) -
                      MomentumAmount(amount = 10,
-                                    unit = (MASS1 * LENGTH1) / TIME1))
+                                    unit = T2(MASS1, LENGTH1) / TIME1))
     }
 
     @Test
@@ -91,9 +91,9 @@ class MomentumAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = MomentumAmount(amount = 2,
-                                    unit = (MASS1 * LENGTH1) / TIME1) /
+                                    unit = T2(MASS1, LENGTH1) / TIME1) /
                      MomentumAmount(amount = 2,
-                                    unit = (MASS1 * LENGTH1) / TIME1))
+                                    unit = T2(MASS1, LENGTH1) / TIME1))
     }
 
     @Test
@@ -102,9 +102,9 @@ class MomentumAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = MomentumAmount(amount = 2,
-                                    unit = (MASS2 * LENGTH2) / TIME2) /
+                                    unit = T2(MASS2, LENGTH2) / TIME2) /
                      MomentumAmount(amount = 20,
-                                    unit = (MASS1 * LENGTH1) / TIME1))
+                                    unit = T2(MASS1, LENGTH1) / TIME1))
     }
 
     @Test
@@ -112,9 +112,9 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = SpeedAmount(amount = 1,
-                                   unit = LENGTH1 / TIME1),
+                                   unit = Fraction(LENGTH1, TIME1)),
             actual = MomentumAmount(amount = 2,
-                                    unit = (MASS1 * LENGTH1) / TIME1) /
+                                    unit = T2(MASS1, LENGTH1) / TIME1) /
                      MassAmount(amount = 2,
                                 unit = MASS1))
     }
@@ -124,9 +124,9 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = SpeedAmount(amount = 1,
-                                   unit = LENGTH1 / TIME1),
+                                   unit = Fraction(LENGTH1, TIME1)),
             actual = MomentumAmount(amount = 2,
-                                    unit = Fraction(Tuple(MASS2, LENGTH1), TIME1)) /
+                                    unit = Fraction(T2(MASS2, LENGTH1), TIME1)) /
                      MassAmount(amount = 20,
                                 unit = MASS1))
     }
@@ -138,9 +138,9 @@ class MomentumAmountTest
             expected = MassAmount(amount = 1,
                                   unit = MASS1),
             actual = MomentumAmount(amount = 2,
-                                    unit = Tuple(MASS1, LENGTH1) / TIME1) /
+                                    unit = T2(MASS1, LENGTH1) / TIME1) /
                      SpeedAmount(amount = 2,
-                                 unit = LENGTH1 / TIME1))
+                                 unit = Fraction(LENGTH1, TIME1)))
     }
 
     @Test
@@ -150,9 +150,9 @@ class MomentumAmountTest
             expected = MassAmount(amount = 1,
                                   unit = MASS1),
             actual = MomentumAmount(amount = 2,
-                                    unit = Tuple(MASS1, LENGTH1) / TIME1) /
+                                    unit = T2(MASS1, LENGTH1) / TIME1) /
                      SpeedAmount(amount = 2,
-                                 unit = LENGTH2 / TIME2))
+                                 unit = Fraction(LENGTH2, TIME2)))
     }
 
     @Test
@@ -160,9 +160,9 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = ForceAmount(amount = 1,
-                                   unit = (MASS1 * LENGTH1) / TIME1),
+                                   unit = T2(MASS1, LENGTH1) / TIME1),
             actual = MomentumAmount(amount = 2,
-                                    unit = (MASS1 * LENGTH1) / TIME1) /
+                                    unit = T2(MASS1, LENGTH1) / TIME1) /
                      TimeAmount(amount = 2,
                                 unit = TIME1))
     }
@@ -172,9 +172,9 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = ForceAmount(amount = 1,
-                                   unit = (MASS1 * LENGTH1) / TIME2),
+                                   unit = T2(MASS1, LENGTH1) / TIME2),
             actual = MomentumAmount(amount = 2,
-                                    unit = (MASS1 * LENGTH1) / TIME2) /
+                                    unit = T2(MASS1, LENGTH1) / TIME2) /
                      TimeAmount(amount = 20,
                                 unit = TIME1))
     }
@@ -184,11 +184,11 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = (MASS1 * LENGTH1) / TIME1),
+                                    unit = T2(MASS1, LENGTH1) / TIME1),
             actual = MomentumAmount(amount = 2,
-                                    unit = (MASS1 * LENGTH1) / TIME1) *
+                                    unit = T2(MASS1, LENGTH1) / TIME1) *
                      SpeedAmount(amount = 2,
-                                 unit = LENGTH1 / TIME1))
+                                 unit = Fraction(LENGTH1, TIME1)))
     }
 
     @Test
@@ -196,10 +196,10 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = (MASS1 * LENGTH1) / TIME1),
+                                    unit = T2(MASS1, LENGTH1) / TIME1),
             actual = MomentumAmount(amount = 2,
-                                    unit = (MASS1 * LENGTH1) / TIME1) *
+                                    unit = T2(MASS1, LENGTH1) / TIME1) *
                      SpeedAmount(amount = 2,
-                                 unit = LENGTH2 / TIME2))
+                                 unit = Fraction(LENGTH2, TIME2)))
     }
 }

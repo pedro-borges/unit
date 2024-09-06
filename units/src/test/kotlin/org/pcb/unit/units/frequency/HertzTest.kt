@@ -2,10 +2,10 @@ package org.pcb.unit.units.frequency
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.div
 import org.pcb.unit.units.FrequencyAmount
 import org.pcb.unit.units.base.Second
 import org.pcb.unit.units.frequency.Hertz.HERTZ
+import org.pcb.unit.units.scalar.Numeric
 
 class HertzTest
 {
@@ -15,7 +15,7 @@ class HertzTest
     @Test
     fun unit()
     {
-        Hertz(2) equivalent 2 / Second(1)
+        Hertz(2) equivalent Numeric(2) / Second(1)
         Hertz(2) equivalent FrequencyAmount(2, HERTZ)
     }
 
@@ -23,5 +23,5 @@ class HertzTest
     fun scalarDivTime() =
         assertEquals(
             expected = Hertz(6 / 3),
-            actual = 6 / Second(3))
+            actual = Numeric(6) / Second(3))
 }

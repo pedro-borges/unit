@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Fraction
-import org.pcb.unit.Tuple
+import org.pcb.unit.T2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Acceleration
@@ -16,6 +16,7 @@ import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.units.scalar.Numeric.ONE
 
 open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
@@ -95,12 +96,12 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
         FrequencyAmount(amount = amount / that.amount
                                  / convert(that.length to length)
                                  * convert(that.time to time),
-                        unit = 1 / time)
+                        unit = Fraction(ONE, time))
 
     @JvmName("divSpeed")
     operator fun div(that: SpeedAmount<L, T>) =
         FrequencyAmount(amount = amount / that.amount,
-                        unit = 1 / time)
+                        unit = Fraction(ONE, time))
 
     // endregion
 
@@ -108,7 +109,7 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
         ForceAmount(amount = amount * that.amount,
-                    unit = Fraction(Tuple(that.mass, length), time))
+                    unit = Fraction(T2(that.mass, length), time))
 
     // endregion
 }

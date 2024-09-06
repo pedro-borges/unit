@@ -2,7 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
-import org.pcb.unit.Tuple
+import org.pcb.unit.T2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Currency
@@ -15,7 +15,7 @@ import org.pcb.unit.toBigBigDecimal
 
 open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
         amount: Number,
-        unit: Tuple<C, T>)
+        unit: T2<C, T>)
     : Amount<Debt>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Debt::class,
@@ -29,31 +29,31 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         DebtAmount(amount = amount * that.amount * that.unit.scale,
-                   unit = Tuple(currency, time))
+                   unit = T2(currency, time))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         DebtAmount(amount = amount / that.amount / that.unit.scale,
-                   unit = Tuple(currency, time))
+                   unit = T2(currency, time))
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> plus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount + that.amount * convert(that.currency to currency,
                                                            that.time to time),
-                   unit = Tuple(currency, time))
+                   unit = T2(currency, time))
 
     @JvmName("plusDebt")
     operator fun plus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount + that.amount,
-                   unit = Tuple(currency, time))
+                   unit = T2(currency, time))
 
     operator fun <C : Unit<Currency>, T : Unit<Time>> minus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount - that.amount * convert(that.currency to currency,
                                                            that.time to time),
-                   unit = Tuple(currency, time))
+                   unit = T2(currency, time))
 
     @JvmName("minusDebt")
     operator fun minus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount - that.amount,
-                   unit = Tuple(currency, time))
+                   unit = T2(currency, time))
 
     // endregion
 

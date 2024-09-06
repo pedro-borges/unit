@@ -1,6 +1,6 @@
 package org.pcb.unit.units.electromagnetism
 
-import org.pcb.unit.Tuple
+import org.pcb.unit.T2
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.ElectricCurrent
 import org.pcb.unit.dimension.ElectricTension
@@ -17,7 +17,7 @@ import org.pcb.unit.units.base.Second.SECOND
 class Volt(amount: Number)
     : ElectricTensionAmount<Unit<Mass>, Unit<Length>, Unit<Time>, Unit<ElectricCurrent>>(
     amount = amount,
-    unit = Tuple(KILOGRAM, METER) / Tuple(SECOND, AMPERE))
+    unit = T2(KILOGRAM, METER) / T2(SECOND, AMPERE))
 {
     object VOLT : Unit<ElectricTension>(ElectricTension::class)
     {

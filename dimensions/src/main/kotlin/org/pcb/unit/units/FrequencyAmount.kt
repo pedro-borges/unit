@@ -15,12 +15,11 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Second.SECOND
-import org.pcb.unit.units.scalar.Numeric.NUMBER
 import org.pcb.unit.units.scalar.Numeric.ONE
 
 open class FrequencyAmount<T : Unit<Time>>(
         amount: Number,
-        unit: Fraction<NUMBER, T>)
+        unit: Fraction<Unit<Scalar>, T>)
     : Amount<Frequency>(amount = amount.toBigBigDecimal(),
                         unit = CompositeUnit(
                             domain = Frequency::class,
@@ -87,7 +86,7 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         SpeedAmount(amount = that.amount / amount,
-                    unit = that.length / time)
+                    unit = Fraction(that.length, time))
 
     // endregion
 
@@ -121,7 +120,7 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     operator fun <C : Unit<Currency>> times(that: CurrencyAmount<C>) =
         RentAmount(amount = that.amount / amount,
-                   unit = that.currency / time)
+                   unit = Fraction(that.currency, time))
 
     // endregion
 }

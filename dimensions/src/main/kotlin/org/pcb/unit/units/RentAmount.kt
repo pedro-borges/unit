@@ -14,6 +14,7 @@ import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.units.scalar.Numeric.ONE
 
 open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
         amount: Number,
@@ -89,12 +90,12 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     operator fun <C : Unit<Currency>> div(that: CurrencyAmount<C>) =
         FrequencyAmount(amount = amount / that.amount / convert(that.currency to currency),
-                        unit = 1 / time)
+                        unit = Fraction(ONE, time))
 
     @JvmName("divCurrency")
     operator fun div(that: CurrencyAmount<C>) =
         FrequencyAmount(amount = amount / that.amount,
-                        unit = 1 / time)
+                        unit = Fraction(ONE, time))
 
     // endregion
 }

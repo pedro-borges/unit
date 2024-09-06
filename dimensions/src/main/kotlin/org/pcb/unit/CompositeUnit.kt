@@ -20,14 +20,6 @@ open class CompositeUnit<D : Domain>(domain: KClass<D>,
                     acc * entry.key.scale.power(entry.value)
                 }
 
-    override fun <B : Unit<*>> times(second: B): Tuple<Unit<D>, B> = throw UnsupportedOperationException()
-    override fun <B : Unit<*>> div(second: B) = throw UnsupportedOperationException()
-    override operator fun <B : Tuple<*, *>> div(second: B) = throw UnsupportedOperationException()
-    override operator fun <B : Triple<*, *, *>> div(second: B) = throw UnsupportedOperationException()
-    override operator fun <B : Quadruple<*, *, *, *>> div(second: B) = throw UnsupportedOperationException()
-    override operator fun <B : Quintuple<*, *, *, *, *>> div(second: B) = throw UnsupportedOperationException()
-    override operator fun <B : Sextuple<*, *, *, *, *, *>> div(second: B) = throw UnsupportedOperationException()
-
     operator fun times(unit: Unit<*>) =
         CompositeUnit(Domain::class,
                       units.toMutableMap()

@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Fraction
-import org.pcb.unit.Tuple
+import org.pcb.unit.T2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Length
@@ -16,6 +16,7 @@ import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.units.scalar.Numeric.ONE
 
 open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
@@ -98,12 +99,12 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         FrequencyAmount(amount = amount / that.amount / convert(that.length to length),
-                        unit = 1 / time)
+                        unit = Fraction(ONE, time))
 
     @JvmName("divLength")
     operator fun div(that: LengthAmount<L>) =
         FrequencyAmount(amount = amount / that.amount,
-                        unit = 1 / time)
+                        unit = Fraction(ONE, time))
 
     // endregion
 
@@ -113,13 +114,13 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
         EnergyAmount(amount = amount * that.amount
                               * convert(that.length to length)
                               / convert(that.time to time),
-                     unit = Fraction(Tuple(that.mass, length),
+                     unit = Fraction(T2(that.mass, length),
                                      time))
 
     @JvmName("timesMomentum")
     operator fun <M : Unit<Mass>> times(that: MomentumAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = Fraction(Tuple(that.mass, length),
+                     unit = Fraction(T2(that.mass, length),
                                      time))
 
     // endregion

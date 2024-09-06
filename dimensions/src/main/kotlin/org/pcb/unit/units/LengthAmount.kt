@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Fraction
-import org.pcb.unit.Tuple
+import org.pcb.unit.T2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Length
@@ -69,7 +69,7 @@ open class LengthAmount<L : Unit<Length>>(
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
         SpeedAmount(amount = amount / that.amount,
-                    unit = length / that.time)
+                    unit = Fraction(length, that.time))
 
     // endregion
 
@@ -104,13 +104,13 @@ open class LengthAmount<L : Unit<Length>>(
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> times(that: ForceAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount * convert(that.length to length),
-                     unit = Fraction(Tuple(that.mass, length),
+                     unit = Fraction(T2(that.mass, length),
                                      that.time))
 
     @JvmName("timesForce")
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = Fraction(Tuple(that.mass, length),
+                     unit = Fraction(T2(that.mass, length),
                                      that.time))
 
     // endregion

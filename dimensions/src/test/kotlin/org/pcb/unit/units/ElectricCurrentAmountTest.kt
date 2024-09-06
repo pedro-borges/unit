@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.Tuple
+import org.pcb.unit.T2
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
@@ -113,7 +113,7 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = ElectricChargeAmount(amount = 2 * 2,
-                                            unit = Tuple(ELECTRICCURRENT1, TIME1)),
+                                            unit = T2(ELECTRICCURRENT1, TIME1)),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) *
                      TimeAmount(amount = 2,
@@ -125,11 +125,11 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 2 * 2,
-                                             unit = (MASS1 * LENGTH1) / (TIME1 * ELECTRICCURRENT1)),
+                                             unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) *
                      ElectricResistanceAmount(amount = 2,
-                                              unit = (MASS1 * LENGTH1) / (TIME1 * ELECTRICCURRENT1)))
+                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -137,11 +137,11 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 2 * 2,
-                                             unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)),
+                                             unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) *
                      ElectricResistanceAmount(amount = 200,
-                                              unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT2)))
+                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -149,11 +149,11 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 1,
-                                             unit = (MASS1 * LENGTH1) / (TIME1 * ELECTRICCURRENT1)),
+                                             unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) /
                      ElectricConductivityAmount(amount = 2,
-                                                unit = (TIME1 * ELECTRICCURRENT1) / (MASS1 * LENGTH1)))
+                                                unit = T2(TIME1, ELECTRICCURRENT1) / T2(MASS1, LENGTH1)))
     }
 
     @Test
@@ -161,11 +161,11 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 1,
-                                             unit = Tuple(MASS2, LENGTH2) / Tuple(TIME2, ELECTRICCURRENT1)),
+                                             unit = T2(MASS2, LENGTH2) / T2(TIME2, ELECTRICCURRENT1)),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) /
                      ElectricConductivityAmount(amount = 200,
-                                                unit = Tuple(TIME2, ELECTRICCURRENT2) / Tuple(MASS2, LENGTH2)))
+                                                unit = T2(TIME2, ELECTRICCURRENT2) / T2(MASS2, LENGTH2)))
     }
 
     @Test
@@ -173,11 +173,11 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = ElectricConductivityAmount(amount = 1,
-                                                  unit = (TIME1 * ELECTRICCURRENT1) / (MASS1 * LENGTH1)),
+                                                  unit = T2(TIME1, ELECTRICCURRENT1) / T2(MASS1, LENGTH1)),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) /
                      ElectricTensionAmount(amount = 2,
-                                           unit = (MASS1 * LENGTH1) / (TIME1 * ELECTRICCURRENT1)))
+                                           unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -185,11 +185,11 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = ElectricConductivityAmount(amount = 1,
-                                                  unit = (TIME2 * ELECTRICCURRENT1) / (MASS2 * LENGTH2)),
+                                                  unit = T2(TIME2, ELECTRICCURRENT1) / T2(MASS2, LENGTH2)),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) /
                      ElectricTensionAmount(amount = 20,
-                                           unit = (MASS2 * LENGTH2) / (TIME2 * ELECTRICCURRENT2)))
+                                           unit = T2(MASS2, LENGTH2) / T2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -197,11 +197,11 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = PowerAmount(amount = 2 * 2,
-                                   unit = Tuple(MASS1, LENGTH1) / TIME1),
+                                   unit = T2(MASS1, LENGTH1) / TIME1),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) *
                      ElectricTensionAmount(amount = 2,
-                                           unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)))
+                                           unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -209,11 +209,11 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = PowerAmount(amount = 2 * 2,
-                                   unit = Tuple(MASS2, LENGTH2) / TIME2),
+                                   unit = T2(MASS2, LENGTH2) / TIME2),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) *
                      ElectricTensionAmount(amount = 20,
-                                           unit = Tuple(MASS2, LENGTH2) / Tuple(TIME2, ELECTRICCURRENT2)))
+                                           unit = T2(MASS2, LENGTH2) / T2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -221,11 +221,11 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = Tuple(MASS1, LENGTH1) / TIME1),
+                                    unit = T2(MASS1, LENGTH1) / TIME1),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) *
                      MagneticFluxAmount(amount = 2,
-                                        unit = Tuple(MASS1, LENGTH1) / Tuple(TIME1, ELECTRICCURRENT1)))
+                                        unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -233,10 +233,10 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = Tuple(MASS2, LENGTH2) / TIME2),
+                                    unit = T2(MASS2, LENGTH2) / TIME2),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) *
                      MagneticFluxAmount(amount = 20,
-                                        unit = Tuple(MASS2, LENGTH2) / Tuple(TIME2, ELECTRICCURRENT2)))
+                                        unit = T2(MASS2, LENGTH2) / T2(TIME2, ELECTRICCURRENT2)))
     }
 }

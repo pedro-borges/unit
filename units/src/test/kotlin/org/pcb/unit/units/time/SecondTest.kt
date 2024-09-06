@@ -2,7 +2,6 @@ package org.pcb.unit.units.time
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.div
 import org.pcb.unit.units.TimeAmount
 import org.pcb.unit.units.base.Second
 import org.pcb.unit.units.electromagnetism.Farad
@@ -12,6 +11,7 @@ import org.pcb.unit.units.electromagnetism.Weber
 import org.pcb.unit.units.frequency.Hertz
 import org.pcb.unit.units.mechanics.Joule
 import org.pcb.unit.units.mechanics.Watt
+import org.pcb.unit.units.scalar.Numeric
 
 class SecondTest
 {
@@ -31,7 +31,7 @@ class SecondTest
     fun scalarDivHertz() =
         assertEquals(
             expected = Second(2 * 3),
-            actual = 2 / Hertz(3))
+            actual = Numeric(2) / Hertz(3))
 
     @Test
     fun jouleDivWatt() =

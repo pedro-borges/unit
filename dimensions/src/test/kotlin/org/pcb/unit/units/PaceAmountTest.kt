@@ -17,9 +17,9 @@ class PaceAmountTest
     {
         assertEquals(
             expected = PaceAmount(amount = 2 * 2,
-                                  unit = TIME1 / LENGTH1),
+                                  unit = Fraction(TIME1, LENGTH1)),
             actual = PaceAmount(amount = 2,
-                                unit = TIME1 / LENGTH1) *
+                                unit = Fraction(TIME1, LENGTH1)) *
                      Percent(amount = 2 * 100))
     }
 
@@ -28,9 +28,9 @@ class PaceAmountTest
     {
         assertEquals(
             expected = PaceAmount(amount = 1,
-                                  unit = TIME1 / LENGTH1),
+                                  unit = Fraction(TIME1, LENGTH1)),
             actual = PaceAmount(amount = 2,
-                                unit = TIME1 / LENGTH1) /
+                                unit = Fraction(TIME1, LENGTH1)) /
                      Percent(amount = 2 * 100))
     }
 
@@ -39,11 +39,11 @@ class PaceAmountTest
     {
         assertEquals(
             expected = PaceAmount(amount = 1,
-                                  unit = TIME1 / LENGTH1),
+                                  unit = Fraction(TIME1, LENGTH1)),
             actual = PaceAmount(amount = 0,
-                                unit = TIME1 / LENGTH1) +
+                                unit = Fraction(TIME1, LENGTH1)) +
                      PaceAmount(amount = 1,
-                                unit = TIME1 / LENGTH1))
+                                unit = Fraction(TIME1, LENGTH1)))
     }
 
     @Test
@@ -51,11 +51,11 @@ class PaceAmountTest
     {
         assertEquals(
             expected = PaceAmount(amount = 1,
-                                  unit = TIME1 / LENGTH1),
+                                  unit = Fraction(TIME1, LENGTH1)),
             actual = PaceAmount(amount = 0,
-                                unit = TIME1 / LENGTH1) +
+                                unit = Fraction(TIME1, LENGTH1)) +
                      PaceAmount(amount = 1,
-                                unit = TIME2 / LENGTH2))
+                                unit = Fraction(TIME2, LENGTH2)))
     }
 
     @Test
@@ -63,11 +63,11 @@ class PaceAmountTest
     {
         assertEquals(
             expected = PaceAmount(amount = 0,
-                                  unit = TIME1 / LENGTH1),
+                                  unit = Fraction(TIME1, LENGTH1)),
             actual = PaceAmount(amount = 1,
-                                unit = TIME1 / LENGTH1) -
+                                unit = Fraction(TIME1, LENGTH1)) -
                      PaceAmount(amount = 1,
-                                unit = TIME1 / LENGTH1))
+                                unit = Fraction(TIME1, LENGTH1)))
     }
 
     @Test
@@ -75,11 +75,11 @@ class PaceAmountTest
     {
         assertEquals(
             expected = PaceAmount(amount = 0,
-                                  unit = TIME1 / LENGTH1),
+                                  unit = Fraction(TIME1, LENGTH1)),
             actual = PaceAmount(amount = 1,
-                                unit = TIME1 / LENGTH1) -
+                                unit = Fraction(TIME1, LENGTH1)) -
                      PaceAmount(amount = 1,
-                                unit = TIME2 / LENGTH2))
+                                unit = Fraction(TIME2, LENGTH2)))
     }
 
     @Test
@@ -88,9 +88,9 @@ class PaceAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = PaceAmount(amount = 2,
-                                unit = TIME1 / LENGTH1) /
+                                unit = Fraction(TIME1, LENGTH1)) /
                      PaceAmount(amount = 2,
-                                unit = TIME1 / LENGTH1))
+                                unit = Fraction(TIME1, LENGTH1)))
     }
 
     @Test
@@ -99,9 +99,9 @@ class PaceAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = PaceAmount(amount = 2,
-                                unit = TIME1 / LENGTH1) /
+                                unit = Fraction(TIME1, LENGTH1)) /
                      PaceAmount(amount = 2,
-                                unit = TIME2 / LENGTH2))
+                                unit = Fraction(TIME2, LENGTH2)))
     }
 
     @Test
@@ -110,9 +110,9 @@ class PaceAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = PaceAmount(amount = 2,
-                                unit = TIME1 / LENGTH1) *
+                                unit = Fraction(TIME1, LENGTH1)) *
                      SpeedAmount(amount = 2,
-                                 unit = LENGTH1 / TIME1))
+                                 unit = Fraction(LENGTH1, TIME1)))
     }
 
     @Test
@@ -121,9 +121,9 @@ class PaceAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = PaceAmount(amount = 2,
-                                unit = TIME1 / LENGTH1) *
+                                unit = Fraction(TIME1, LENGTH1)) *
                      SpeedAmount(amount = 2,
-                                 unit = LENGTH2 / TIME2))
+                                 unit = Fraction(LENGTH2, TIME2)))
     }
 
     @Test

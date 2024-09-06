@@ -10,11 +10,9 @@ class Numeric(amount: Number)
     amount = amount,
     unit = ONE)
 {
-    object ONE : NUMBER(1)
-
-    open class NUMBER(scale: Number) : Unit<Scalar>(Scalar::class)
+    object ONE : Unit<Scalar>(Scalar::class)
     {
         override val symbol = ""
-        override val scale = scale.toBigBigDecimal()
+        override val scale = 1.toBigBigDecimal()
     }
 }

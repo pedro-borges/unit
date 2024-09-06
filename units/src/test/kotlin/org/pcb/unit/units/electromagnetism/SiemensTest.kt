@@ -2,10 +2,10 @@ package org.pcb.unit.units.electromagnetism
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.div
 import org.pcb.unit.units.ElectricConductivityAmount
 import org.pcb.unit.units.base.Ampere
 import org.pcb.unit.units.electromagnetism.Siemens.SIEMENS
+import org.pcb.unit.units.scalar.Numeric
 
 class SiemensTest
 {
@@ -29,5 +29,5 @@ class SiemensTest
     fun oneDivOhm() =
         assertEquals(
             expected = Siemens(6 / 3),
-            actual = 6 / Ohm(3))
+            actual = Numeric(6) / Ohm(3))
 }

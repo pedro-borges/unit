@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Fraction
-import org.pcb.unit.Tuple
+import org.pcb.unit.T2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Length
@@ -19,7 +19,7 @@ import org.pcb.unit.toBigBigDecimal
 
 open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
-        unit: Fraction<Tuple<M, L>, T>)
+        unit: Fraction<T2<M, L>, T>)
     : Amount<Momentum>(amount = amount.toBigBigDecimal(),
                        unit = CompositeUnit(
                            domain = Momentum::class,
@@ -35,12 +35,12 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MomentumAmount(amount = amount * that.amount * that.unit.scale,
-                       unit = Fraction(Tuple(mass, length),
+                       unit = Fraction(T2(mass, length),
                                        time))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         MomentumAmount(amount = amount / that.amount / that.unit.scale,
-                       unit = Fraction(Tuple(mass, length),
+                       unit = Fraction(T2(mass, length),
                                        time))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> plus(that: MomentumAmount<M, L, T>) =
@@ -48,13 +48,13 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                                 * convert(that.mass to mass,
                                           that.length to length)
                                 / convert(that.time to time),
-                       unit = Fraction(Tuple(mass, length),
+                       unit = Fraction(T2(mass, length),
                                        time))
 
     @JvmName("plusMomentum")
     operator fun plus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount + that.amount,
-                       unit = Fraction(Tuple(mass, length),
+                       unit = Fraction(T2(mass, length),
                                        time))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> minus(that: MomentumAmount<M, L, T>) =
@@ -62,13 +62,13 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                                 * convert(that.mass to mass,
                                           that.length to length)
                                 / convert(that.time to time),
-                       unit = Fraction(Tuple(mass, length),
+                       unit = Fraction(T2(mass, length),
                                        time))
 
     @JvmName("minusMomentum")
     operator fun minus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount - that.amount,
-                       unit = Fraction(Tuple(mass, length),
+                       unit = Fraction(T2(mass, length),
                                        time))
 
     // endregion
@@ -91,12 +91,12 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
         SpeedAmount(amount = amount / that.amount / convert(that.mass to mass),
-                    unit = length / time)
+                    unit = Fraction(length, time))
 
     @JvmName("divMass")
     operator fun div(that: MassAmount<M>) =
         SpeedAmount(amount = amount / that.amount,
-                    unit = length / time)
+                    unit = Fraction(length, time))
 
     // endregion
 
@@ -119,12 +119,12 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount / convert(that.time to time),
-                    unit = Fraction(Tuple(mass, length), time))
+                    unit = Fraction(T2(mass, length), time))
 
     @JvmName("divTime")
     operator fun div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount,
-                    unit = Fraction(Tuple(mass, length), time))
+                    unit = Fraction(T2(mass, length), time))
 
     // endregion
 
@@ -134,13 +134,13 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
         EnergyAmount(amount = amount * that.amount
                               * convert(that.length to length)
                               / convert(that.time to time),
-                     unit = Fraction(Tuple(mass, length),
+                     unit = Fraction(T2(mass, length),
                                      time))
 
     @JvmName("timesSpeed")
     operator fun times(that: SpeedAmount<L, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = Fraction(Tuple(mass, length),
+                     unit = Fraction(T2(mass, length),
                                      time))
 
     // endregion
