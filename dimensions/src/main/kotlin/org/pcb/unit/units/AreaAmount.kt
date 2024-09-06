@@ -6,8 +6,8 @@ import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Scalar
+import org.pcb.unit.div
 import org.pcb.unit.times
-import org.pcb.unit.to
 import org.pcb.unit.toBigBigDecimal
 
 open class AreaAmount<L2 : Unit<Length>>(
@@ -27,7 +27,7 @@ open class AreaAmount<L2 : Unit<Length>>(
                    unit = length)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        AreaAmount(amount = amount.to(that.amount).to(that.unit.scale),
+        AreaAmount(amount = amount / that.amount / that.unit.scale,
                    unit = length)
 
     operator fun <L2 : Unit<Length>> plus(that: AreaAmount<L2>) =
@@ -55,24 +55,24 @@ open class AreaAmount<L2 : Unit<Length>>(
     // region -> Natural
 
     operator fun <L : Unit<Length>> div(that: AreaAmount<L>) =
-        amount.to(that.amount).to(convert(that.length to length,
-                                          that.length to length))
+        amount / that.amount / convert(that.length to length,
+                                       that.length to length)
 
     @JvmName("divLength")
     operator fun div(that: AreaAmount<L2>) =
-        amount.to(that.amount)
+        amount / that.amount
 
     // endregion
 
     // region -> Length
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
-        LengthAmount(amount = amount.to(that.amount).to(convert(that.length to length)),
+        LengthAmount(amount = amount / that.amount / convert(that.length to length),
                      unit = length)
 
     @JvmName("divLength")
     operator fun div(that: LengthAmount<L2>) =
-        LengthAmount(amount = amount.to(that.amount),
+        LengthAmount(amount = amount / that.amount,
                      unit = length)
 
     // endregion

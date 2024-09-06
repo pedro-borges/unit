@@ -10,10 +10,10 @@ import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Speed
 import org.pcb.unit.dimension.Time
+import org.pcb.unit.div
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.to
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.Numeric.ONE
 
@@ -36,13 +36,13 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
                     unit = Pair(length, time))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        SpeedAmount(amount = amount.to(that.amount).to(that.unit.scale),
+        SpeedAmount(amount = amount / that.amount / that.unit.scale,
                     unit = Pair(length, time))
 
     operator fun <L : Unit<Length>, T : Unit<Time>> plus(that: SpeedAmount<L, T>) =
-        SpeedAmount(amount = amount + (that.amount
-                                       * convert(that.length to length)
-                                      ).to(convert(that.time to time)),
+        SpeedAmount(amount = amount + that.amount
+                             * convert(that.length to length)
+                             / convert(that.time to time),
                     unit = Pair(length, time))
 
     @JvmName("plusSpeed")
@@ -51,9 +51,9 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
                     unit = Pair(length, time))
 
     operator fun <L : Unit<Length>, T : Unit<Time>> minus(that: SpeedAmount<L, T>) =
-        SpeedAmount(amount = amount - (that.amount
-                                       * convert(that.length to length)
-                                      ).to(convert(that.time to time)),
+        SpeedAmount(amount = amount - that.amount
+                             * convert(that.length to length)
+                             / convert(that.time to time),
                     unit = Pair(length, time))
 
     @JvmName("minusSpeed")
@@ -65,11 +65,11 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
 
     // region -> Natural
     operator fun <L : Unit<Length>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
-        amount.to(that.amount).to(convert(that.length to length)) * convert(that.time to time)
+        amount / that.amount / convert(that.length to length) * convert(that.time to time)
 
     @JvmName("divSpeed")
     operator fun div(that: SpeedAmount<L, T>) =
-        amount.to(that.amount)
+        amount / that.amount
 
     // endregion
 
@@ -89,7 +89,7 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
     // region -> Acceleration
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
-        AccelerationAmount(amount = amount.to(that.amount).to(convert(that.time to time)),
+        AccelerationAmount(amount = amount / that.amount / convert(that.time to time),
                            unit = Pair(length, time))
 
     // endregion
@@ -97,12 +97,12 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
     // region -> Frequency
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
-        FrequencyAmount(amount = amount.to(that.amount).to(convert(that.length to length)),
+        FrequencyAmount(amount = amount / that.amount / convert(that.length to length),
                         unit = Pair(ONE, time))
 
     @JvmName("divLength")
     operator fun div(that: LengthAmount<L>) =
-        FrequencyAmount(amount = amount.to(that.amount),
+        FrequencyAmount(amount = amount / that.amount,
                         unit = Pair(ONE, time))
 
     // endregion
@@ -110,9 +110,9 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
     // region -> Energy
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> times(that: MomentumAmount<M, L, T>) =
-        EnergyAmount(amount = (amount * that.amount
-                               * convert(that.length to length)
-                              ).to(convert(that.time to time)),
+        EnergyAmount(amount = amount * that.amount
+                              * convert(that.length to length)
+                              / convert(that.time to time),
                      unit = Pair(T2(that.mass, length),
                                  time))
 

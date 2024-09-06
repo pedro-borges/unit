@@ -10,8 +10,8 @@ import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
+import org.pcb.unit.div
 import org.pcb.unit.times
-import org.pcb.unit.to
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.Numeric.ONE
 
@@ -32,7 +32,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
                      unit = scalar)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        ScalarAmount(amount = amount.to(that.amount).to(that.unit.scale),
+        ScalarAmount(amount = amount/that.amount/that.unit.scale,
                      unit = scalar)
 
     operator fun <S : Unit<Scalar>> plus(that: ScalarAmount<S>) =
@@ -58,7 +58,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
     // region -> Frequency
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
-        FrequencyAmount(amount = (amount * unit.scale).to(that.amount),
+        FrequencyAmount(amount = amount * unit.scale / that.amount,
                         unit = Pair(ONE, that.time))
 
     // endregion
@@ -83,7 +83,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
     // region -> ElectricConductivity
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
-        ElectricConductivityAmount(amount = (amount * unit.scale).to(that.amount),
+        ElectricConductivityAmount(amount = amount * unit.scale / that.amount,
                                    unit = Pair(T2(that.time, that.electricCurrent),
                                                T2(that.mass, that.length)))
 

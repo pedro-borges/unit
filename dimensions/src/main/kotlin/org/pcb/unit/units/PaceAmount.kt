@@ -8,10 +8,10 @@ import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Pace
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
+import org.pcb.unit.div
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.to
 import org.pcb.unit.toBigBigDecimal
 
 open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
@@ -33,13 +33,13 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
                    unit = Pair(time, length))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        PaceAmount(amount = amount.to(that.amount).to(that.unit.scale),
+        PaceAmount(amount = amount / that.amount / that.unit.scale,
                    unit = Pair(time, length))
 
     operator fun <T : Unit<Time>, L : Unit<Length>> plus(that: PaceAmount<T, L>) =
-        PaceAmount(amount = amount + (that.amount
-                                      * convert(that.time to time)
-                                     ).to(convert(that.length to length)),
+        PaceAmount(amount = amount + that.amount
+                            * convert(that.time to time)
+                            / convert(that.length to length),
                    unit = Pair(time, length))
 
     @JvmName("plusPace")
@@ -48,9 +48,9 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
                    unit = Pair(time, length))
 
     operator fun <T : Unit<Time>, L : Unit<Length>> minus(that: PaceAmount<T, L>) =
-        PaceAmount(amount = amount - (that.amount
-                                      * convert(that.time to time)
-                                     ).to(convert(that.length to length)),
+        PaceAmount(amount = amount - that.amount
+                            * convert(that.time to time)
+                            / convert(that.length to length),
                    unit = Pair(time, length))
 
     @JvmName("minusPace")
@@ -63,18 +63,18 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
     // region -> Natural
 
     operator fun <T : Unit<Time>, L : Unit<Length>> div(that: PaceAmount<T, L>) =
-        (amount.to(that.amount) * convert(that.time to time)).to(convert(that.length to length))
+        amount / that.amount * convert(that.time to time) / convert(that.length to length)
 
     @JvmName("divPace")
     operator fun div(that: PaceAmount<T, L>) =
-        amount.to(that.amount)
+        amount / that.amount
 
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
-        amount.to(that.amount).to(convert(that.time to time)) * convert(that.length to length)
+        amount / that.amount / convert(that.time to time) * convert(that.length to length)
 
     @JvmName("timesSpeed")
     operator fun times(that: SpeedAmount<L, T>) =
-        amount.to(that.amount)
+        amount / that.amount
 
     // endregion
 

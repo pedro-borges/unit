@@ -8,8 +8,8 @@ import org.pcb.unit.convert
 import org.pcb.unit.dimension.Currency
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
+import org.pcb.unit.div
 import org.pcb.unit.times
-import org.pcb.unit.to
 import org.pcb.unit.toBigBigDecimal
 
 open class CurrencyAmount<C : Unit<Currency>>(
@@ -29,7 +29,7 @@ open class CurrencyAmount<C : Unit<Currency>>(
                        unit = currency)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        CurrencyAmount(amount = amount.to(that.amount).to(that.unit.scale),
+        CurrencyAmount(amount = amount / that.amount / that.unit.scale,
                        unit = currency)
 
     operator fun <C : Unit<Currency>> plus(that: CurrencyAmount<C>) =
@@ -55,18 +55,18 @@ open class CurrencyAmount<C : Unit<Currency>>(
     // region -> Natural
 
     operator fun <C : Unit<Currency>> div(that: CurrencyAmount<C>) =
-        amount.to(that.amount).to(convert(that.currency to currency))
+        amount / that.amount / convert(that.currency to currency)
 
     @JvmName("divCurrency")
     operator fun div(that: CurrencyAmount<C>) =
-        amount.to(that.amount)
+        amount / that.amount
 
     // endregion
 
     // region -> Rent
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
-        RentAmount(amount = amount.to(that.amount),
+        RentAmount(amount = amount / that.amount,
                    unit = Pair(currency, that.time))
 
     // endregion

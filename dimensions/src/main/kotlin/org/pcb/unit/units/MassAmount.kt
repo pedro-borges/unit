@@ -9,8 +9,8 @@ import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
+import org.pcb.unit.div
 import org.pcb.unit.times
-import org.pcb.unit.to
 import org.pcb.unit.toBigBigDecimal
 
 open class MassAmount<M : Unit<Mass>>(
@@ -30,7 +30,7 @@ open class MassAmount<M : Unit<Mass>>(
                    unit = mass)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        MassAmount(amount = amount.to(that.amount).to(that.unit.scale),
+        MassAmount(amount = amount / that.amount / that.unit.scale,
                    unit = mass)
 
     operator fun <M : Unit<Mass>> plus(that: MassAmount<M>) =
@@ -56,11 +56,11 @@ open class MassAmount<M : Unit<Mass>>(
     // region -> Natural
 
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
-        amount.to(that.amount).to(convert(that.mass to mass))
+        amount / that.amount / convert(that.mass to mass)
 
     @JvmName("divMass")
     operator fun div(that: MassAmount<M>) =
-        amount.to(that.amount)
+        amount / that.amount
 
     // endregion
 

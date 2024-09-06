@@ -10,10 +10,10 @@ import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
+import org.pcb.unit.div
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.to
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Meter.METER
@@ -48,15 +48,15 @@ open class ForceAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>>(
                     unit = Pair(T2(mass, length), time))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        ForceAmount(amount = amount.to(that.amount).to(that.unit.scale),
+        ForceAmount(amount = amount / that.amount / that.unit.scale,
                     unit = Pair(T2(mass, length), time))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> plus(that: ForceAmount<M, L, T>) =
-        ForceAmount(amount = amount + (that.amount
-                                       * convert(that.mass to mass,
-                                                 that.length to length)
-                                      ).to(convert(that.time to time,
-                                                   that.time to time)),
+        ForceAmount(amount = amount + that.amount
+                             * convert(that.mass to mass,
+                                       that.length to length)
+                             / convert(that.time to time,
+                                       that.time to time),
                     unit = Pair(T2(mass, length), time))
 
     @JvmName("plusForce")
@@ -65,11 +65,11 @@ open class ForceAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>>(
                     unit = Pair(T2(mass, length), time))
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> minus(that: ForceAmount<M, L, T>) =
-        ForceAmount(amount = amount - (that.amount
-                                       * convert(that.mass to mass,
-                                                 that.length to length)
-                                      ).to(convert(that.time to time,
-                                                   that.time to time)),
+        ForceAmount(amount = amount - that.amount
+                             * convert(that.mass to mass,
+                                       that.length to length)
+                             / convert(that.time to time,
+                                       that.time to time),
                     unit = Pair(T2(mass, length), time))
 
     @JvmName("minusForce")
@@ -82,26 +82,27 @@ open class ForceAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>>(
     // region -> Natural
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> div(that: ForceAmount<M, L, T>) =
-        amount.to(that.amount).to(convert(that.mass to mass,
-                                          that.length to length)) *
+        amount / that.amount /
+        convert(that.mass to mass,
+                that.length to length) *
         convert(that.time to time,
                 that.time to time)
 
     @JvmName("divForce")
     operator fun div(that: ForceAmount<M, L2, T2>) =
-        amount.to(that.amount)
+        amount / that.amount
 
     // endregion
 
     // region -> Acceleration
 
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
-        AccelerationAmount(amount = amount.to(that.amount).to(convert(that.mass to mass)),
+        AccelerationAmount(amount = amount / that.amount / convert(that.mass to mass),
                            unit = Pair(length, time))
 
     @JvmName("divMass")
     operator fun div(that: MassAmount<M>) =
-        AccelerationAmount(amount = amount.to(that.amount),
+        AccelerationAmount(amount = amount / that.amount,
                            unit = Pair(length, time))
 
     // endregion
@@ -109,15 +110,15 @@ open class ForceAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>>(
     // region -> Mass
 
     operator fun <L : Unit<Length>, T : Unit<Time>> div(that: AccelerationAmount<L, T>) =
-        MassAmount(amount = amount.to(that.amount)
-                                .to(convert(that.length to length))
+        MassAmount(amount = amount / that.amount
+                            / convert(that.length to length)
                             * convert(that.time to time,
                                       that.time to time),
                    unit = mass)
 
     @JvmName("divAcceleration")
     operator fun div(that: AccelerationAmount<L2, T2>) =
-        MassAmount(amount = amount.to(that.amount),
+        MassAmount(amount = amount / that.amount,
                    unit = mass)
 
     // endregion

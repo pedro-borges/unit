@@ -9,8 +9,8 @@ import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
+import org.pcb.unit.div
 import org.pcb.unit.times
-import org.pcb.unit.to
 import org.pcb.unit.toBigBigDecimal
 
 open class LengthAmount<L : Unit<Length>>(
@@ -30,7 +30,7 @@ open class LengthAmount<L : Unit<Length>>(
                      unit = length)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        LengthAmount(amount = amount.to(that.amount).to(that.unit.scale),
+        LengthAmount(amount = amount / that.amount / that.unit.scale,
                      unit = length)
 
     operator fun <L : Unit<Length>> plus(that: LengthAmount<L>) =
@@ -56,18 +56,18 @@ open class LengthAmount<L : Unit<Length>>(
     // region -> Natural
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
-        amount.to(that.amount).to(convert(that.length to length))
+        amount / that.amount / convert(that.length to length)
 
     @JvmName("divLength")
     operator fun div(that: LengthAmount<L>) =
-        amount.to(that.amount)
+        amount / that.amount
 
     // endregion
 
     // region -> Speed
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
-        SpeedAmount(amount = amount.to(that.amount),
+        SpeedAmount(amount = amount / that.amount,
                     unit = Pair(length, that.time))
 
     // endregion

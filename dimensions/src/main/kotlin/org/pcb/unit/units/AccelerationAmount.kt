@@ -10,10 +10,10 @@ import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
+import org.pcb.unit.div
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.to
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.Numeric.ONE
 
@@ -36,14 +36,14 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
                            unit = Pair(length, time))
 
     override operator fun <U : Unit<Scalar>> div(that: ScalarAmount<U>) =
-        AccelerationAmount(amount = amount.to(that.amount).to(that.unit.scale),
+        AccelerationAmount(amount = amount / that.amount / that.unit.scale,
                            unit = Pair(length, time))
 
     operator fun <L : Unit<Length>, T : Unit<Time>> plus(that: AccelerationAmount<L, T>) =
-        AccelerationAmount(amount = amount + (that.amount
-                                              * convert(that.length to length)
-                                             ).to(convert(that.time to time,
-                                                          that.time to time)),
+        AccelerationAmount(amount = amount + that.amount
+                                    * convert(that.length to length)
+                                    / (convert(that.time to time,
+                                               that.time to time)),
                            unit = Pair(length, time))
 
     @JvmName("plusAcceleration")
@@ -52,10 +52,10 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
                            unit = Pair(length, time))
 
     operator fun <L : Unit<Length>, T : Unit<Time>> minus(that: AccelerationAmount<L, T>) =
-        AccelerationAmount(amount = amount - (that.amount
-                                              * convert(that.length to length)
-                                             ).to(convert(that.time to time,
-                                                          that.time to time)),
+        AccelerationAmount(amount = amount - that.amount
+                                    * convert(that.length to length)
+                                    / convert(that.time to time,
+                                              that.time to time),
                            unit = Pair(length, time))
 
     @JvmName("minusAcceleration")
@@ -68,11 +68,11 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
     // region -> Natural
 
     operator fun <L : Unit<Length>, T : Unit<Time>> div(that: AccelerationAmount<L, T>) =
-        amount.to(that.amount).to(convert(that.length to length)) * convert(that.time to time, that.time to time)
+        amount / that.amount / convert(that.length to length) * convert(that.time to time, that.time to time)
 
     @JvmName("divAcceleration")
     operator fun div(that: AccelerationAmount<L, T>) =
-        amount.to(that.amount)
+        amount / that.amount
 
     // endregion
 
@@ -92,14 +92,14 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
     // region -> Frequency
 
     operator fun <L : Unit<Length>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
-        FrequencyAmount(amount = amount.to(that.amount)
-                                     .to(convert(that.length to length))
+        FrequencyAmount(amount = amount / that.amount
+                                 / convert(that.length to length)
                                  * convert(that.time to time),
                         unit = Pair(ONE, time))
 
     @JvmName("divSpeed")
     operator fun div(that: SpeedAmount<L, T>) =
-        FrequencyAmount(amount = amount.to(that.amount),
+        FrequencyAmount(amount = amount / that.amount,
                         unit = Pair(ONE, time))
 
     // endregion
