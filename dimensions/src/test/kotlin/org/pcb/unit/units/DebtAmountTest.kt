@@ -1,13 +1,13 @@
 package org.pcb.unit
 
-import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.CurrencyAmount
 import org.pcb.unit.units.DebtAmount
 import org.pcb.unit.units.FrequencyAmount
+import org.pcb.unit.units.ScalarAmount
 import org.pcb.unit.units.TimeAmount
-import org.pcb.unit.units.scalar.Numeric.ONE
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
 import org.pcb.unit.units.test.CURRENCY2
@@ -90,7 +90,8 @@ class DebtAmountTest
     fun divSameDebt()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = DebtAmount(amount = 2,
                                 unit = T2(CURRENCY1, TIME1)) /
                      DebtAmount(amount = 2,
@@ -101,7 +102,8 @@ class DebtAmountTest
     fun divOtherDebt()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = DebtAmount(amount = 2,
                                 unit = T2(CURRENCY2, TIME2)) /
                      DebtAmount(amount = 200,
@@ -141,7 +143,7 @@ class DebtAmountTest
             actual = DebtAmount(amount = 2,
                                 unit = T2(CURRENCY1, TIME1)) *
                      FrequencyAmount(amount = 2,
-                                     unit = ONE to TIME1))
+                                     unit = NUMERIC to TIME1))
     }
 
     @Test
@@ -153,6 +155,6 @@ class DebtAmountTest
             actual = DebtAmount(amount = 2,
                                 unit = T2(CURRENCY2, TIME2)) *
                      FrequencyAmount(amount = 20,
-                                     unit = ONE to TIME1))
+                                     unit = NUMERIC to TIME1))
     }
 }

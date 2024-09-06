@@ -1,9 +1,9 @@
 package org.pcb.unit.units
 
-import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.T2
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
@@ -90,7 +90,8 @@ class TimeAmountTest
     fun divSameTime()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
                      TimeAmount(amount = 2,
@@ -101,7 +102,8 @@ class TimeAmountTest
     fun divOtherTime()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = TimeAmount(amount = 1,
                                 unit = TIME2) /
                      TimeAmount(amount = 10,

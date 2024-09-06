@@ -11,6 +11,7 @@ import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class CurrencyAmount<C : Unit<Currency>>(
         amount: Number,
@@ -55,11 +56,13 @@ open class CurrencyAmount<C : Unit<Currency>>(
     // region -> Natural
 
     operator fun <C : Unit<Currency>> div(that: CurrencyAmount<C>) =
-        amount / that.amount / convert(that.currency to currency)
+        ScalarAmount(amount = amount / that.amount / convert(that.currency to currency),
+                     unit = NUMERIC)
 
     @JvmName("divCurrency")
     operator fun div(that: CurrencyAmount<C>) =
-        amount / that.amount
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

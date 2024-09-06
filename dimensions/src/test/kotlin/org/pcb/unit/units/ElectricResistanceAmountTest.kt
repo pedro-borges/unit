@@ -1,6 +1,5 @@
 package org.pcb.unit
 
-import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.ElectricCapacitanceAmount
@@ -10,7 +9,9 @@ import org.pcb.unit.units.ElectricCurrentAmount
 import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.ElectricTensionAmount
 import org.pcb.unit.units.MagneticFluxAmount
+import org.pcb.unit.units.ScalarAmount
 import org.pcb.unit.units.TimeAmount
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
@@ -97,7 +98,8 @@ class ElectricResistanceAmountTest
     fun divSameElectricResistance()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = ElectricResistanceAmount(amount = 2,
                                               unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) /
                      ElectricResistanceAmount(amount = 2,
@@ -108,7 +110,8 @@ class ElectricResistanceAmountTest
     fun divOtherElectricResistance()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = ElectricResistanceAmount(amount = 2,
                                               unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) /
                      ElectricResistanceAmount(amount = 200,
@@ -119,7 +122,8 @@ class ElectricResistanceAmountTest
     fun timesSameElectricConductivity()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = ElectricResistanceAmount(amount = 2,
                                               unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) *
                      ElectricConductivityAmount(amount = 2,
@@ -130,7 +134,8 @@ class ElectricResistanceAmountTest
     fun timesOtherElectricConductivity()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = ElectricResistanceAmount(amount = 2,
                                               unit = T2(MASS2, LENGTH2) to T2(TIME1, ELECTRICCURRENT1)) *
                      ElectricConductivityAmount(amount = 200000000,

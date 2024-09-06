@@ -1,9 +1,9 @@
 package org.pcb.unit.units
 
-import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.T2
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
@@ -90,7 +90,8 @@ class ElectricCurrentAmountTest
     fun divSameElectricCurrent()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) /
                      ElectricCurrentAmount(amount = 2,
@@ -101,7 +102,8 @@ class ElectricCurrentAmountTest
     fun divOtherElectricCurrent()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT2) /
                      ElectricCurrentAmount(amount = 20,

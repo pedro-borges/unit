@@ -1,6 +1,5 @@
 package org.pcb.unit
 
-import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.AccelerationAmount
@@ -8,9 +7,10 @@ import org.pcb.unit.units.EnergyAmount
 import org.pcb.unit.units.FrequencyAmount
 import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.MomentumAmount
+import org.pcb.unit.units.ScalarAmount
 import org.pcb.unit.units.SpeedAmount
 import org.pcb.unit.units.TimeAmount
-import org.pcb.unit.units.scalar.Numeric.ONE
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
@@ -94,7 +94,8 @@ class SpeedAmountTest
     fun divSameSpeed()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 to TIME1) /
                      SpeedAmount(amount = 2,
@@ -105,7 +106,8 @@ class SpeedAmountTest
     fun divOtherSpeed()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 to TIME1) /
                      SpeedAmount(amount = 2,
@@ -165,7 +167,7 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
-                                       unit = ONE to TIME1),
+                                       unit = NUMERIC to TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 to TIME1) /
                      LengthAmount(amount = 2,
@@ -177,7 +179,7 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
-                                       unit = ONE to TIME2),
+                                       unit = NUMERIC to TIME2),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH2 to TIME2) /
                      LengthAmount(amount = 20,

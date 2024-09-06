@@ -1,13 +1,14 @@
 package org.pcb.unit
 
-import java.math.BigDecimal
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.pcb.unit.units.AccelerationAmount
 import org.pcb.unit.units.ForceAmount
 import org.pcb.unit.units.MassAmount
 import org.pcb.unit.units.MomentumAmount
+import org.pcb.unit.units.ScalarAmount
 import org.pcb.unit.units.SpeedAmount
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.MASS1
@@ -90,7 +91,8 @@ class MassAmountTest
     fun divSameMass()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = MassAmount(amount = 2,
                                 unit = MASS1) /
                      MassAmount(amount = 2,
@@ -101,7 +103,8 @@ class MassAmountTest
     fun divOtherMass()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = MassAmount(amount = 2,
                                 unit = MASS2) /
                      MassAmount(amount = 20,

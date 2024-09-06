@@ -9,6 +9,7 @@ import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class AreaAmount<L2 : Unit<Length>>(
         amount: Number,
@@ -55,12 +56,14 @@ open class AreaAmount<L2 : Unit<Length>>(
     // region -> Natural
 
     operator fun <L : Unit<Length>> div(that: AreaAmount<L>) =
-        amount / that.amount / convert(that.length to length,
-                                       that.length to length)
+        ScalarAmount(amount = amount / that.amount / convert(that.length to length,
+                                                             that.length to length),
+                     unit = NUMERIC)
 
     @JvmName("divLength")
     operator fun div(that: AreaAmount<L2>) =
-        amount / that.amount
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

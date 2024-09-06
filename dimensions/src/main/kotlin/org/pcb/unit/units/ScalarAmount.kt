@@ -13,7 +13,7 @@ import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.scalar.Numeric.ONE
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class ScalarAmount<S : Unit<Scalar>>(
         amount: Number,
@@ -59,7 +59,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         FrequencyAmount(amount = amount * unit.scale / that.amount,
-                        unit = ONE to that.time)
+                        unit = NUMERIC to that.time)
 
     // endregion
 

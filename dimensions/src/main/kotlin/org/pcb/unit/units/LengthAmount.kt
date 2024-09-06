@@ -12,6 +12,7 @@ import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class LengthAmount<L : Unit<Length>>(
         amount: Number,
@@ -56,11 +57,13 @@ open class LengthAmount<L : Unit<Length>>(
     // region -> Natural
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
-        amount / that.amount / convert(that.length to length)
+        ScalarAmount(amount = amount / that.amount / convert(that.length to length),
+                     unit = NUMERIC)
 
     @JvmName("divLength")
     operator fun div(that: LengthAmount<L>) =
-        amount / that.amount
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

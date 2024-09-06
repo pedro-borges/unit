@@ -1,8 +1,8 @@
 package org.pcb.unit.units
 
-import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
@@ -85,7 +85,8 @@ class PaceAmountTest
     fun divSamePace()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 to LENGTH1) /
                      PaceAmount(amount = 2,
@@ -96,7 +97,8 @@ class PaceAmountTest
     fun divOtherPace()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 to LENGTH1) /
                      PaceAmount(amount = 2,
@@ -107,7 +109,8 @@ class PaceAmountTest
     fun timesSameSpeed()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 to LENGTH1) *
                      SpeedAmount(amount = 2,
@@ -118,7 +121,8 @@ class PaceAmountTest
     fun timesOtherSpeed()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 to LENGTH1) *
                      SpeedAmount(amount = 2,

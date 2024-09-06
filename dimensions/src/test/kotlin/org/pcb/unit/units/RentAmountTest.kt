@@ -1,9 +1,8 @@
 package org.pcb.unit.units
 
-import java.math.BigDecimal
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
-import org.pcb.unit.units.scalar.Numeric.ONE
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
 import org.pcb.unit.units.test.CURRENCY2
@@ -86,7 +85,8 @@ class RentAmountTest
     fun divSameRent()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = RentAmount(amount = 2,
                                 unit = CURRENCY1 to TIME1) /
                      RentAmount(amount = 2,
@@ -97,7 +97,8 @@ class RentAmountTest
     fun divOtherRent()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = RentAmount(amount = 2,
                                 unit = CURRENCY1 to TIME1) /
                      RentAmount(amount = 2,
@@ -133,7 +134,7 @@ class RentAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
-                                       unit = ONE to TIME1),
+                                       unit = NUMERIC to TIME1),
             actual = RentAmount(amount = 2,
                                 unit = CURRENCY1 to TIME1) /
                      CurrencyAmount(amount = 2,
@@ -145,7 +146,7 @@ class RentAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
-                                       unit = ONE to TIME1),
+                                       unit = NUMERIC to TIME1),
             actual = RentAmount(amount = 2,
                                 unit = CURRENCY2 to TIME1) /
                      CurrencyAmount(amount = 20,

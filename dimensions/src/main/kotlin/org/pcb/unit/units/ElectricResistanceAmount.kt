@@ -20,6 +20,7 @@ import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class ElectricResistanceAmount<M : Unit<Mass>, L2 : Unit<Length>, T3 : Unit<Time>, EC2 : Unit<ElectricCurrent>>(
         amount: Number,
@@ -93,33 +94,38 @@ open class ElectricResistanceAmount<M : Unit<Mass>, L2 : Unit<Length>, T3 : Unit
     // region -> Natural
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
-        amount / that.amount / convert(that.mass to mass,
-                                       that.length to length,
-                                       that.length to length) *
-        convert(that.time to time,
-                that.time to time,
-                that.time to time,
-                that.electricCurrent to electricCurrent,
-                that.electricCurrent to electricCurrent)
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.mass to mass,
+                                        that.length to length,
+                                        that.length to length)
+                              * convert(that.time to time,
+                                        that.time to time,
+                                        that.time to time,
+                                        that.electricCurrent to electricCurrent,
+                                        that.electricCurrent to electricCurrent),
+                     unit = NUMERIC)
 
     @JvmName("divElectricResistance")
     operator fun div(that: ElectricResistanceAmount<M, L2, T3, EC2>) =
-        amount / that.amount
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> times(that: ElectricConductivityAmount<T, EC, M, L>) =
-        amount / that.amount *
-        convert(that.time to time,
-                that.time to time,
-                that.time to time,
-                that.electricCurrent to electricCurrent,
-                that.electricCurrent to electricCurrent) /
-        convert(that.mass to mass,
-                that.length to length,
-                that.length to length)
+        ScalarAmount(amount = amount / that.amount
+                              * convert(that.time to time,
+                                        that.time to time,
+                                        that.time to time,
+                                        that.electricCurrent to electricCurrent,
+                                        that.electricCurrent to electricCurrent)
+                              / convert(that.mass to mass,
+                                        that.length to length,
+                                        that.length to length),
+                     unit = NUMERIC)
 
     @JvmName("timesElectricResistance")
     operator fun times(that: ElectricConductivityAmount<T3, EC2, M, L2>) =
-        amount / that.amount
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

@@ -1,13 +1,14 @@
 package org.pcb.unit
 
-import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.ElectricChargeAmount
 import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.ElectricTensionAmount
 import org.pcb.unit.units.MagneticFluxAmount
+import org.pcb.unit.units.ScalarAmount
 import org.pcb.unit.units.TimeAmount
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
@@ -94,7 +95,8 @@ class MagneticFluxAmountTest
     fun divSameMagneticFlux()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = MagneticFluxAmount(amount = 2,
                                         unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) /
                      MagneticFluxAmount(amount = 2,
@@ -105,7 +107,8 @@ class MagneticFluxAmountTest
     fun divOtherMagneticFlux()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = MagneticFluxAmount(amount = 2,
                                         unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) /
                      MagneticFluxAmount(amount = 2,

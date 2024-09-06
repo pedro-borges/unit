@@ -20,6 +20,7 @@ import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class MagneticFluxAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>, EC : Unit<ElectricCurrent>>(
         amount: Number,
@@ -89,17 +90,19 @@ open class MagneticFluxAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>
     // region -> Natural
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: MagneticFluxAmount<M, L, T, EC>) =
-        amount / that.amount /
-        convert(that.mass to mass,
-                that.length to length,
-                that.length to length) *
-        convert(that.time to time,
-                that.time to time,
-                that.electricCurrent to electricCurrent)
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.mass to mass,
+                                        that.length to length,
+                                        that.length to length)
+                              * convert(that.time to time,
+                                        that.time to time,
+                                        that.electricCurrent to electricCurrent),
+                     unit = NUMERIC)
 
     @JvmName("divMagneticFlux")
     operator fun div(that: MagneticFluxAmount<M, L2, T2, EC>) =
-        amount / that.amount
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

@@ -1,6 +1,5 @@
 package org.pcb.unit
 
-import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.ElectricChargeAmount
@@ -12,8 +11,10 @@ import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.MagneticFluxAmount
 import org.pcb.unit.units.MomentumAmount
 import org.pcb.unit.units.PowerAmount
+import org.pcb.unit.units.ScalarAmount
 import org.pcb.unit.units.SpeedAmount
 import org.pcb.unit.units.TimeAmount
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
@@ -100,7 +101,8 @@ class EnergyAmountTest
     fun divSameEnergy()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = EnergyAmount(amount = 2,
                                   unit = T2(MASS1, LENGTH1) to TIME1) /
                      EnergyAmount(amount = 2,
@@ -111,7 +113,8 @@ class EnergyAmountTest
     fun divOtherEnergy()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = EnergyAmount(amount = 2,
                                   unit = T2(MASS2, LENGTH2) to TIME2) /
                      EnergyAmount(amount = 20,

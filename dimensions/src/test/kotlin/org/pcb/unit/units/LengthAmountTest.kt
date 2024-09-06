@@ -1,15 +1,16 @@
 package org.pcb.unit
 
-import java.math.BigDecimal
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.pcb.unit.units.AreaAmount
 import org.pcb.unit.units.EnergyAmount
 import org.pcb.unit.units.ForceAmount
 import org.pcb.unit.units.LengthAmount
+import org.pcb.unit.units.ScalarAmount
 import org.pcb.unit.units.SpeedAmount
 import org.pcb.unit.units.TimeAmount
 import org.pcb.unit.units.VolumeAmount
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
@@ -93,7 +94,8 @@ class LengthAmountTest
     fun divSameLength()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = LengthAmount(amount = 2,
                                   unit = LENGTH1) /
                      LengthAmount(amount = 2,
@@ -104,7 +106,8 @@ class LengthAmountTest
     fun divOtherLength()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = LengthAmount(amount = 2,
                                   unit = LENGTH2) /
                      LengthAmount(amount = 20,

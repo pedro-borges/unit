@@ -21,6 +21,7 @@ import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent>, M : Unit<Mass>, L2 : Unit<Length>>(
         amount: Number,
@@ -96,19 +97,22 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
     // region -> Natural
 
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> div(that: ElectricCapacitanceAmount<T, EC, M, L>) =
-        amount / that.amount / convert(that.time to time,
-                                       that.time to time,
-                                       that.time to time,
-                                       that.time to time,
-                                       that.electricCurrent to electricCurrent,
-                                       that.electricCurrent to electricCurrent) *
-        convert(that.mass to mass,
-                that.length to length,
-                that.length to length)
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.time to time,
+                                        that.time to time,
+                                        that.time to time,
+                                        that.time to time,
+                                        that.electricCurrent to electricCurrent,
+                                        that.electricCurrent to electricCurrent)
+                              * convert(that.mass to mass,
+                                        that.length to length,
+                                        that.length to length),
+                     unit = NUMERIC)
 
     @JvmName("divElectricCapacitance")
     operator fun div(that: ElectricCapacitanceAmount<T4, EC2, M, L2>) =
-        amount / that.amount
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.T2
-import org.pcb.unit.units.scalar.Numeric.ONE
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.scalar.Percent.PERCENT
 import org.pcb.unit.units.test.ELECTRICCURRENT1
@@ -18,9 +18,9 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = ScalarAmount(amount = 2 * 2,
-                                    unit = ONE),
+                                    unit = NUMERIC),
             actual = ScalarAmount(amount = 2,
-                                  unit = ONE) *
+                                  unit = NUMERIC) *
                      ScalarAmount(amount = 2 * 100,
                                   unit = PERCENT))
     }
@@ -30,9 +30,9 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = ScalarAmount(amount = 1,
-                                    unit = ONE),
+                                    unit = NUMERIC),
             actual = ScalarAmount(amount = 2,
-                                  unit = ONE) /
+                                  unit = NUMERIC) /
                      ScalarAmount(amount = 2 * 100,
                                   unit = PERCENT))
     }
@@ -42,11 +42,11 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = ScalarAmount(amount = 1,
-                                    unit = ONE),
+                                    unit = NUMERIC),
             actual = ScalarAmount(amount = 0,
-                                  unit = ONE) +
+                                  unit = NUMERIC) +
                      ScalarAmount(amount = 1,
-                                  unit = ONE))
+                                  unit = NUMERIC))
     }
 
     @Test
@@ -54,9 +54,9 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = ScalarAmount(amount = 1,
-                                    unit = ONE),
+                                    unit = NUMERIC),
             actual = ScalarAmount(amount = 0,
-                                  unit = ONE) +
+                                  unit = NUMERIC) +
                      ScalarAmount(amount = 100,
                                   unit = PERCENT))
     }
@@ -66,11 +66,11 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = ScalarAmount(amount = 0,
-                                    unit = ONE),
+                                    unit = NUMERIC),
             actual = ScalarAmount(amount = 1,
-                                  unit = ONE) -
+                                  unit = NUMERIC) -
                      ScalarAmount(amount = 1,
-                                  unit = ONE))
+                                  unit = NUMERIC))
     }
 
     @Test
@@ -78,9 +78,9 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = ScalarAmount(amount = 0,
-                                    unit = ONE),
+                                    unit = NUMERIC),
             actual = ScalarAmount(amount = 1,
-                                  unit = ONE) -
+                                  unit = NUMERIC) -
                      ScalarAmount(amount = 100,
                                   unit = PERCENT))
     }
@@ -90,7 +90,7 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
-                                       unit = ONE to TIME1),
+                                       unit = NUMERIC to TIME1),
             actual = Percent(amount = 2 * 100) /
                      TimeAmount(amount = 2,
                                 unit = TIME1))
@@ -104,7 +104,7 @@ class ScalarAmountTest
                                   unit = TIME1),
             actual = Percent(amount = 2 * 100) /
                      FrequencyAmount(amount = 2,
-                                     unit = ONE to TIME1))
+                                     unit = NUMERIC to TIME1))
     }
 
     @Test

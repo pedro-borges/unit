@@ -1,13 +1,14 @@
 package org.pcb.unit
 
-import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.ElectricCurrentAmount
 import org.pcb.unit.units.ElectricTensionAmount
 import org.pcb.unit.units.EnergyAmount
 import org.pcb.unit.units.PowerAmount
+import org.pcb.unit.units.ScalarAmount
 import org.pcb.unit.units.TimeAmount
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.LENGTH1
@@ -93,7 +94,8 @@ class PowerAmountTest
     fun divSamePower()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = PowerAmount(amount = 2,
                                  unit = T2(MASS1, LENGTH1) to TIME1) /
                      PowerAmount(amount = 2,
@@ -104,7 +106,8 @@ class PowerAmountTest
     fun divOtherPower()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = PowerAmount(amount = 2,
                                  unit = T2(MASS1, LENGTH1) to TIME1) /
                      PowerAmount(amount = 2,

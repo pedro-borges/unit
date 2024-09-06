@@ -8,9 +8,9 @@ import org.pcb.unit.units.ScalarAmount
 class Numeric(amount: Number)
     : ScalarAmount<Unit<Scalar>>(
     amount = amount,
-    unit = ONE)
+    unit = NUMERIC)
 {
-    object ONE : Unit<Scalar>(Scalar::class)
+    object NUMERIC : Unit<Scalar>(Scalar::class)
     {
         override val symbol = ""
         override val scale = 1.toBigBigDecimal()

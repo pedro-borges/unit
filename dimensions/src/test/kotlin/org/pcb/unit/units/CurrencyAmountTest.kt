@@ -1,10 +1,10 @@
 package org.pcb.unit.units
 
-import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.T2
 import org.pcb.unit.units.base.Second.SECOND
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
 import org.pcb.unit.units.test.CURRENCY2
@@ -85,7 +85,8 @@ class CurrencyAmountTest
     fun divSameCurrency()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = CurrencyAmount(amount = 2,
                                     unit = CURRENCY1) /
                      CurrencyAmount(amount = 2,
@@ -96,7 +97,8 @@ class CurrencyAmountTest
     fun divOtherCurrency()
     {
         assertEquals(
-            expected = BigDecimal(1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = CurrencyAmount(amount = 2,
                                     unit = CURRENCY2) /
                      CurrencyAmount(amount = 20,

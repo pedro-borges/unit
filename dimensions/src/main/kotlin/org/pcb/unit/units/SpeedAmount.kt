@@ -15,7 +15,7 @@ import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.scalar.Numeric.ONE
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
@@ -65,11 +65,15 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
 
     // region -> Natural
     operator fun <L : Unit<Length>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
-        amount / that.amount / convert(that.length to length) * convert(that.time to time)
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.length to length)
+                              * convert(that.time to time),
+                     unit = NUMERIC)
 
     @JvmName("divSpeed")
     operator fun div(that: SpeedAmount<L, T>) =
-        amount / that.amount
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 
@@ -98,12 +102,12 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         FrequencyAmount(amount = amount / that.amount / convert(that.length to length),
-                        unit = ONE to time)
+                        unit = NUMERIC to time)
 
     @JvmName("divLength")
     operator fun div(that: LengthAmount<L>) =
         FrequencyAmount(amount = amount / that.amount,
-                        unit = ONE to time)
+                        unit = NUMERIC to time)
 
     // endregion
 
