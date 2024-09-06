@@ -15,6 +15,6 @@ class Liter(amount: Number)
     object LITER : Unit<Volume>(Volume::class)
     {
         override val symbol = "L"
-        override val scale = 0.000001.toBigBigDecimal()
+        override val scale = 0.001.toBigBigDecimal()
     }
 }

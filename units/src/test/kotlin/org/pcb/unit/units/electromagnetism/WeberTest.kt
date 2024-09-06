@@ -9,6 +9,7 @@ import org.pcb.unit.units.base.Meter
 import org.pcb.unit.units.base.Second
 import org.pcb.unit.units.electromagnetism.Weber.WEBER
 import org.pcb.unit.units.mechanics.Joule
+import org.pcb.unit.units.space.SquareMeter
 
 class WeberTest
 {
@@ -47,8 +48,20 @@ class WeberTest
             actual = Second(2) * Volt(3))
 
     @Test
+    fun squareMeterTimesWeber() =
+        assertEquals(
+            expected = Weber(2 * 3),
+            actual = SquareMeter(2) * Tesla(3))
+
+    @Test
     fun voltTimesSecond() =
         assertEquals(
             expected = Weber(2 * 3),
             actual = Volt(2) * Second(3))
+
+    @Test
+    fun weberTimesSquareMeter() =
+        assertEquals(
+            expected = Weber(2 * 3),
+            actual = Tesla(2) * SquareMeter(3))
 }

@@ -2,10 +2,14 @@ package org.pcb.unit.units
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
+import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
+import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
+import org.pcb.unit.units.test.MASS1
+import org.pcb.unit.units.test.TIME1
 
 class AreaAmountTest
 {
@@ -149,5 +153,17 @@ class AreaAmountTest
                                 unit = LENGTH2) *
                      LengthAmount(amount = 20,
                                   unit = LENGTH1))
+    }
+
+    @Test
+    fun timesMagneticFluxDensity()
+    {
+        assertEquals(
+            expected = MagneticFluxAmount(amount = 2 * 2,
+                                          unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)),
+            actual = AreaAmount(amount = 2,
+                                unit = LENGTH1) *
+                     MagneticFluxDensityAmount(amount = 2,
+                                               unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)))
     }
 }

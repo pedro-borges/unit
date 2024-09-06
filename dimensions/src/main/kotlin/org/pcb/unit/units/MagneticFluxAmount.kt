@@ -221,4 +221,35 @@ open class MagneticFluxAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>
                               unit = electricCurrent)
 
     // endregion
+
+    // region -> MagneticFluxDensity
+
+    operator fun <L : Unit<Length>> div(that: AreaAmount<L>) =
+        MagneticFluxDensityAmount(amount = amount / that.amount / convert(that.length to length,
+                                                                          that.length to length),
+                                  unit = mass to U2(time, electricCurrent))
+
+    @JvmName("divArea")
+    operator fun div(that: AreaAmount<L2>) =
+        MagneticFluxDensityAmount(amount = amount / that.amount,
+                                  unit = mass to U2(time, electricCurrent))
+
+    // endregion
+
+    // region -> Area
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: MagneticFluxDensityAmount<M, T, EC>) =
+        AreaAmount(amount = amount / that.amount
+                            / convert(that.mass to mass)
+                            * convert(that.time to time,
+                                      that.time to time,
+                                      that.electricCurrent to electricCurrent),
+                   unit = length)
+
+    @JvmName("divMagneticFluxDensity")
+    operator fun div(that: MagneticFluxDensityAmount<M, T2, EC>) =
+        AreaAmount(amount = amount / that.amount,
+                   unit = length)
+
+    // endregion
 }

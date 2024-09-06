@@ -6,6 +6,7 @@ import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.ElectricCurrent
+import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.MagneticFlux
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
@@ -93,6 +94,14 @@ open class MagneticFluxDensityAmount<M : Unit<Mass>, T2 : Unit<Time>, EC : Unit<
     operator fun div(that: MagneticFluxDensityAmount<M, T2, EC>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
+
+    // endregion
+
+    // region -> MagneticFlux
+
+    operator fun <L : Unit<Length>> times(that: AreaAmount<L>) =
+        MagneticFluxAmount(amount = amount * that.amount,
+                           unit = U2(mass, that.length) to U2(time, electricCurrent))
 
     // endregion
 }

@@ -7,6 +7,7 @@ import org.pcb.unit.units.MagneticFluxDensityAmount
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Second.SECOND
+import org.pcb.unit.units.space.SquareMeter
 
 class TeslaTest
 {
@@ -18,4 +19,10 @@ class TeslaTest
     {
         Tesla(2) equivalent MagneticFluxDensityAmount(2, KILOGRAM to U2(SECOND, AMPERE))
     }
+
+    @Test
+    fun weberDivSquareMeter() =
+        assertEquals(
+            expected = Tesla(6 / 3),
+            actual = Weber(6) / SquareMeter(3))
 }

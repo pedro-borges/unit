@@ -2,10 +2,12 @@ package org.pcb.unit
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.units.AreaAmount
 import org.pcb.unit.units.ElectricChargeAmount
 import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.ElectricTensionAmount
 import org.pcb.unit.units.MagneticFluxAmount
+import org.pcb.unit.units.MagneticFluxDensityAmount
 import org.pcb.unit.units.ScalarAmount
 import org.pcb.unit.units.TimeAmount
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
@@ -209,5 +211,53 @@ class MagneticFluxAmountTest
                                         unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)) /
                      ElectricResistanceAmount(amount = 200,
                                               unit = U2(MASS2, LENGTH2) to U2(TIME2, ELECTRICCURRENT2)))
+    }
+
+    @Test
+    fun divSameArea()
+    {
+        assertEquals(
+            expected = MagneticFluxDensityAmount(amount = 1,
+                                                 unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)),
+            actual = MagneticFluxAmount(amount = 2,
+                                        unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)) /
+                     AreaAmount(amount = 2,
+                                unit = LENGTH1))
+    }
+
+    @Test
+    fun divOtherArea()
+    {
+        assertEquals(
+            expected = MagneticFluxDensityAmount(amount = 1,
+                                                 unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)),
+            actual = MagneticFluxAmount(amount = 2,
+                                        unit = U2(MASS1, LENGTH2) to U2(TIME1, ELECTRICCURRENT1)) /
+                     AreaAmount(amount = 200,
+                                unit = LENGTH1))
+    }
+
+    @Test
+    fun divSameMagneticFluxDensity()
+    {
+        assertEquals(
+            expected = AreaAmount(amount = 1,
+                                  unit = LENGTH1),
+            actual = MagneticFluxAmount(amount = 2,
+                                        unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)) /
+                     MagneticFluxDensityAmount(amount = 2,
+                                               unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)))
+    }
+
+    @Test
+    fun divOtherMagneticFluxDensity()
+    {
+        assertEquals(
+            expected = AreaAmount(amount = 1,
+                                  unit = LENGTH1),
+            actual = MagneticFluxAmount(amount = 2,
+                                        unit = U2(MASS2, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)) /
+                     MagneticFluxDensityAmount(amount = 20000,
+                                               unit = MASS1 to U2(TIME2, ELECTRICCURRENT2)))
     }
 }

@@ -2,13 +2,19 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
+import org.pcb.unit.dimension.Area
+import org.pcb.unit.dimension.ElectricCurrent
 import org.pcb.unit.dimension.Length
+import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
+import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class AreaAmount<L2 : Unit<Length>>(
@@ -21,6 +27,13 @@ open class AreaAmount<L2 : Unit<Length>>(
 {
     val length = unit
 
+    companion object
+    {
+        operator fun invoke(amount: Number, unit: Unit<Area>) =
+            AreaAmount(amount = amount.toBigBigDecimal() * unit.scale,
+                       unit = METER)
+    }
+
     // region -> Area
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
@@ -31,7 +44,7 @@ open class AreaAmount<L2 : Unit<Length>>(
         AreaAmount(amount = amount / that.amount / that.unit.scale,
                    unit = length)
 
-    operator fun <L2 : Unit<Length>> plus(that: AreaAmount<L2>) =
+    operator fun <L : Unit<Length>> plus(that: AreaAmount<L>) =
         AreaAmount(amount = amount + that.amount * convert(that.length to length,
                                                            that.length to length),
                    unit = length)
@@ -90,6 +103,14 @@ open class AreaAmount<L2 : Unit<Length>>(
     operator fun times(that: LengthAmount<L2>) =
         VolumeAmount(amount = amount * that.amount,
                      unit = length)
+
+    // endregion
+
+    // region -> MagneticFlux
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: MagneticFluxDensityAmount<M, T, EC>) =
+        MagneticFluxAmount(amount = amount * that.amount,
+                           unit = U2(that.mass, length) to U2(that.time, that.electricCurrent))
 
     // endregion
 }

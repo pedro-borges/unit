@@ -13,6 +13,6 @@ class DeciMeter(amount: Number)
     object DECIMETER : Unit<Length>(Length::class)
     {
         override val symbol = "dm"
-        override val scale = 0.01.toBigBigDecimal()
+        override val scale = 0.1.toBigBigDecimal()
     }
 }
