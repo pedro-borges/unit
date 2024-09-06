@@ -17,7 +17,7 @@ import org.pcb.unit.units.base.Second.SECOND
 class Volt(amount: Number)
     : ElectricTensionAmount<Unit<Mass>, Unit<Length>, Unit<Time>, Unit<ElectricCurrent>>(
     amount = amount,
-    unit = T2(KILOGRAM, METER) / T2(SECOND, AMPERE))
+    unit = T2(KILOGRAM, METER).to(T2(SECOND, AMPERE)))
 {
     object VOLT : Unit<ElectricTension>(ElectricTension::class)
     {

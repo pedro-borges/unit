@@ -17,7 +17,7 @@ import org.pcb.unit.units.base.Second.SECOND
 class Weber(amount: Number)
     : MagneticFluxAmount<Unit<Mass>, Unit<Length>, Unit<Time>, Unit<ElectricCurrent>>(
     amount = amount,
-    unit = T2(KILOGRAM, METER) / T2(SECOND, AMPERE))
+    unit = T2(KILOGRAM, METER).to(T2(SECOND, AMPERE)))
 {
     object WEBER : Unit<MagneticFlux>(MagneticFlux::class)
     {

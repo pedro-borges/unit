@@ -15,7 +15,7 @@ import org.pcb.unit.units.base.Second.SECOND
 class Watt(amount: Number)
     : PowerAmount<Unit<Mass>, Unit<Length>, Unit<Time>>(
     amount = amount,
-    unit = T2(KILOGRAM, METER) / SECOND)
+    unit = T2(KILOGRAM, METER).to(SECOND))
 {
     object WATT : Unit<Power>(Power::class)
     {

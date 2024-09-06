@@ -28,9 +28,9 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 2 * 2,
-                                                unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
+                                                unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)) *
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) *
                      Percent(amount = 2 * 100))
     }
 
@@ -39,9 +39,9 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 1,
-                                                unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
+                                                unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)) /
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) /
                      Percent(amount = 2 * 100))
     }
 
@@ -50,11 +50,11 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 1,
-                                                unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
+                                                unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricResistanceAmount(amount = 0,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)) +
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) +
                      ElectricResistanceAmount(amount = 1,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)))
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -62,11 +62,11 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 1,
-                                                unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
+                                                unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricResistanceAmount(amount = 0,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)) +
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) +
                      ElectricResistanceAmount(amount = 100,
-                                              unit = T2(MASS2, LENGTH2) / T2(TIME2, ELECTRICCURRENT2)))
+                                              unit = T2(MASS2, LENGTH2) to T2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -74,11 +74,11 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 0,
-                                                unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
+                                                unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricResistanceAmount(amount = 1,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)) -
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) -
                      ElectricResistanceAmount(amount = 1,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)))
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -86,11 +86,11 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 0,
-                                                unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
+                                                unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricResistanceAmount(amount = 1,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)) -
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) -
                      ElectricResistanceAmount(amount = 100,
-                                              unit = T2(MASS2, LENGTH2) / T2(TIME2, ELECTRICCURRENT2)))
+                                              unit = T2(MASS2, LENGTH2) to T2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -99,9 +99,9 @@ class ElectricResistanceAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)) /
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) /
                      ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)))
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -110,9 +110,9 @@ class ElectricResistanceAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)) /
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) /
                      ElectricResistanceAmount(amount = 200,
-                                              unit = T2(MASS2, LENGTH2) / T2(TIME2, ELECTRICCURRENT2)))
+                                              unit = T2(MASS2, LENGTH2) to T2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -121,9 +121,9 @@ class ElectricResistanceAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)) *
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) *
                      ElectricConductivityAmount(amount = 2,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) / T2(MASS1, LENGTH1)))
+                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)))
     }
 
     @Test
@@ -132,9 +132,9 @@ class ElectricResistanceAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS2, LENGTH2) / T2(TIME1, ELECTRICCURRENT1)) *
+                                              unit = T2(MASS2, LENGTH2) to T2(TIME1, ELECTRICCURRENT1)) *
                      ElectricConductivityAmount(amount = 200000000,
-                                                unit = T2(TIME2, ELECTRICCURRENT2) / T2(MASS1, LENGTH1)))
+                                                unit = T2(TIME2, ELECTRICCURRENT2) to T2(MASS1, LENGTH1)))
     }
 
     @Test
@@ -142,9 +142,9 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 2 * 2,
-                                             unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
+                                             unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)) *
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) *
                      ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1))
     }
@@ -154,9 +154,9 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 2 * 2,
-                                             unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT2)),
+                                             unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT2)),
             actual = ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT2)) *
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT2)) *
                      ElectricCurrentAmount(amount = 20,
                                            unit = ELECTRICCURRENT1))
     }
@@ -168,9 +168,9 @@ class ElectricResistanceAmountTest
             expected = TimeAmount(amount = 2 * 2,
                                   unit = TIME1),
             actual = ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)) *
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) *
                      ElectricCapacitanceAmount(amount = 2,
-                                               unit = T2(TIME1, ELECTRICCURRENT1) / T2(MASS1, LENGTH1)))
+                                               unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)))
     }
 
     @Test
@@ -180,9 +180,9 @@ class ElectricResistanceAmountTest
             expected = TimeAmount(amount = 2 * 2,
                                   unit = TIME1),
             actual = ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT2)) *
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT2)) *
                      ElectricCapacitanceAmount(amount = 20,
-                                               unit = T2(TIME2, ELECTRICCURRENT1) / T2(MASS2, LENGTH2)))
+                                               unit = T2(TIME2, ELECTRICCURRENT1) to T2(MASS2, LENGTH2)))
     }
 
     @Test
@@ -190,9 +190,9 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
+                                          unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)) *
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)) *
                      ElectricChargeAmount(amount = 2,
                                           unit = T2(ELECTRICCURRENT1, TIME1)))
     }
@@ -202,9 +202,9 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = T2(MASS1, LENGTH1) / T2(TIME2, ELECTRICCURRENT2)),
+                                          unit = T2(MASS1, LENGTH1) to T2(TIME2, ELECTRICCURRENT2)),
             actual = ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME2, ELECTRICCURRENT2)) *
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME2, ELECTRICCURRENT2)) *
                      ElectricChargeAmount(amount = 200,
                                           unit = T2(ELECTRICCURRENT1, TIME1)))
     }

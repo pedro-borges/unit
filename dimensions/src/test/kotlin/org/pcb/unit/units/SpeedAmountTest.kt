@@ -25,9 +25,9 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = SpeedAmount(amount = 2 * 2,
-                                   unit = Fraction(LENGTH1, TIME1)),
+                                   unit = LENGTH1 to TIME1),
             actual = SpeedAmount(amount = 2,
-                                 unit = Fraction(LENGTH1, TIME1)) *
+                                 unit = LENGTH1 to TIME1) *
                      Percent(amount = 2 * 100))
     }
 
@@ -36,9 +36,9 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = SpeedAmount(amount = 1,
-                                   unit = Fraction(LENGTH1, TIME1)),
+                                   unit = LENGTH1 to TIME1),
             actual = SpeedAmount(amount = 2,
-                                 unit = Fraction(LENGTH1, TIME1)) /
+                                 unit = LENGTH1 to TIME1) /
                      Percent(amount = 2 * 100))
     }
 
@@ -47,11 +47,11 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = SpeedAmount(amount = 1,
-                                   unit = Fraction(LENGTH1, TIME1)),
+                                   unit = LENGTH1 to TIME1),
             actual = SpeedAmount(amount = 0,
-                                 unit = Fraction(LENGTH1, TIME1)) +
+                                 unit = LENGTH1 to TIME1) +
                      SpeedAmount(amount = 1,
-                                 unit = Fraction(LENGTH1, TIME1)))
+                                 unit = LENGTH1 to TIME1))
     }
 
     @Test
@@ -59,11 +59,11 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = SpeedAmount(amount = 0 + (2 / 2),
-                                   unit = Fraction(LENGTH1, TIME1)),
+                                   unit = LENGTH1 to TIME1),
             actual = SpeedAmount(amount = 0,
-                                 unit = Fraction(LENGTH1, TIME1)) +
+                                 unit = LENGTH1 to TIME1) +
                      SpeedAmount(amount = 1,
-                                 unit = Fraction(LENGTH2, TIME2)))
+                                 unit = LENGTH2 to TIME2))
     }
 
     @Test
@@ -71,11 +71,11 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = SpeedAmount(amount = 0,
-                                   unit = Fraction(LENGTH1, TIME1)),
+                                   unit = LENGTH1 to TIME1),
             actual = SpeedAmount(amount = 1,
-                                 unit = Fraction(LENGTH1, TIME1)) -
+                                 unit = LENGTH1 to TIME1) -
                      SpeedAmount(amount = 1,
-                                 unit = Fraction(LENGTH1, TIME1)))
+                                 unit = LENGTH1 to TIME1))
     }
 
     @Test
@@ -83,11 +83,11 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = SpeedAmount(amount = 1 - (2 / 2),
-                                   unit = Fraction(LENGTH1, TIME1)),
+                                   unit = LENGTH1 to TIME1),
             actual = SpeedAmount(amount = 1,
-                                 unit = Fraction(LENGTH1, TIME1)) -
+                                 unit = LENGTH1 to TIME1) -
                      SpeedAmount(amount = 1,
-                                 unit = Fraction(LENGTH2, TIME2)))
+                                 unit = LENGTH2 to TIME2))
     }
 
     @Test
@@ -96,9 +96,9 @@ class SpeedAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = SpeedAmount(amount = 2,
-                                 unit = Fraction(LENGTH1, TIME1)) /
+                                 unit = LENGTH1 to TIME1) /
                      SpeedAmount(amount = 2,
-                                 unit = Fraction(LENGTH1, TIME1)))
+                                 unit = LENGTH1 to TIME1))
     }
 
     @Test
@@ -107,9 +107,9 @@ class SpeedAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = SpeedAmount(amount = 2,
-                                 unit = Fraction(LENGTH1, TIME1)) /
+                                 unit = LENGTH1 to TIME1) /
                      SpeedAmount(amount = 2,
-                                 unit = Fraction(LENGTH2, TIME2)))
+                                 unit = LENGTH2 to TIME2))
     }
 
     @Test
@@ -119,7 +119,7 @@ class SpeedAmountTest
             expected = LengthAmount(amount = 2 * 2,
                                     unit = LENGTH1),
             actual = SpeedAmount(amount = 2,
-                                 unit = Fraction(LENGTH1, TIME1)) *
+                                 unit = LENGTH1 to TIME1) *
                      TimeAmount(amount = 2,
                                 unit = TIME1))
     }
@@ -131,7 +131,7 @@ class SpeedAmountTest
             expected = LengthAmount(amount = 2 * 2,
                                     unit = LENGTH1),
             actual = SpeedAmount(amount = 2,
-                                 unit = Fraction(LENGTH1, TIME2)) *
+                                 unit = LENGTH1 to TIME2) *
                      TimeAmount(amount = 20,
                                 unit = TIME1))
     }
@@ -141,9 +141,9 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(amount = 1,
-                                          unit = Fraction(LENGTH1, TIME1)),
+                                          unit = LENGTH1 to TIME1),
             actual = SpeedAmount(amount = 2,
-                                 unit = Fraction(LENGTH1, TIME1)) /
+                                 unit = LENGTH1 to TIME1) /
                      TimeAmount(amount = 2,
                                 unit = TIME1))
     }
@@ -153,9 +153,9 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(amount = 1,
-                                          unit = Fraction(LENGTH2, TIME2)),
+                                          unit = LENGTH2 to TIME2),
             actual = SpeedAmount(amount = 2,
-                                 unit = Fraction(LENGTH2, TIME2)) /
+                                 unit = LENGTH2 to TIME2) /
                      TimeAmount(amount = 20,
                                 unit = TIME1))
     }
@@ -165,9 +165,9 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
-                                       unit = Fraction(ONE, TIME1)),
+                                       unit = ONE to TIME1),
             actual = SpeedAmount(amount = 2,
-                                 unit = Fraction(LENGTH1, TIME1)) /
+                                 unit = LENGTH1 to TIME1) /
                      LengthAmount(amount = 2,
                                   unit = LENGTH1))
     }
@@ -177,9 +177,9 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
-                                       unit = Fraction(ONE, TIME2)),
+                                       unit = ONE to TIME2),
             actual = SpeedAmount(amount = 2,
-                                 unit = Fraction(LENGTH2, TIME2)) /
+                                 unit = LENGTH2 to TIME2) /
                      LengthAmount(amount = 20,
                                   unit = LENGTH1))
     }
@@ -189,11 +189,11 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = T2(MASS1, LENGTH1) / TIME1),
+                                    unit = T2(MASS1, LENGTH1) to TIME1),
             actual = SpeedAmount(amount = 2,
-                                 unit = Fraction(LENGTH1, TIME1)) *
+                                 unit = LENGTH1 to TIME1) *
                      MomentumAmount(amount = 2,
-                                    unit = T2(MASS1, LENGTH1) / TIME1))
+                                    unit = T2(MASS1, LENGTH1) to TIME1))
     }
 
     @Test
@@ -201,10 +201,10 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = T2(MASS1, LENGTH1) / TIME1),
+                                    unit = T2(MASS1, LENGTH1) to TIME1),
             actual = SpeedAmount(amount = 2,
-                                 unit = Fraction(LENGTH1, TIME1)) *
+                                 unit = LENGTH1 to TIME1) *
                      MomentumAmount(amount = 2,
-                                    unit = T2(MASS1, LENGTH2) / TIME2))
+                                    unit = T2(MASS1, LENGTH2) to TIME2))
     }
 }

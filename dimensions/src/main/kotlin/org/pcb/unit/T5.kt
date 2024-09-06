@@ -7,10 +7,10 @@ data class T5<out A : Unit<*>, out B : Unit<*>, out C : Unit<*>, out D : Unit<*>
         val fourth: D,
         val fifth: E)
 {
-    operator fun <B : Unit<*>> div(second: B) = Pair(this, second)
-    operator fun <B : T2<*, *>> div(second: B) = Pair(this, second)
-    operator fun <B : T3<*, *, *>> div(second: B) = Pair(this, second)
-    operator fun <B : T4<*, *, *, *>> div(second: B) = Pair(this, second)
-    operator fun <B : T5<*, *, *, *, *>> div(second: B) = Pair(this, second)
-    operator fun <B : T6<*, *, *, *, *, *>> div(second: B) = Pair(this, second)
+    infix fun <B : Unit<*>> to(second: B) = Pair(this, second)
+    infix fun <B : T2<*, *>> to(second: B) = Pair(this, second)
+    infix fun <B : T3<*, *, *>> to(second: B) = Pair(this, second)
+    infix fun <B : T4<*, *, *, *>> to(second: B) = Pair(this, second)
+    infix fun <B : T5<*, *, *, *, *>> to(second: B) = Pair(this, second)
+    infix fun <B : T6<*, *, *, *, *, *>> to(second: B) = Pair(this, second)
 }

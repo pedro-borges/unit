@@ -2,7 +2,6 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
-import org.pcb.unit.Fraction
 import org.pcb.unit.T2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
@@ -10,8 +9,8 @@ import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
-import org.pcb.unit.div
 import org.pcb.unit.times
+import org.pcb.unit.to
 import org.pcb.unit.toBigBigDecimal
 
 open class LengthAmount<L : Unit<Length>>(
@@ -31,7 +30,7 @@ open class LengthAmount<L : Unit<Length>>(
                      unit = length)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        LengthAmount(amount = amount / that.amount / that.unit.scale,
+        LengthAmount(amount = amount.to(that.amount).to(that.unit.scale),
                      unit = length)
 
     operator fun <L : Unit<Length>> plus(that: LengthAmount<L>) =
@@ -57,19 +56,19 @@ open class LengthAmount<L : Unit<Length>>(
     // region -> Natural
 
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
-        amount / that.amount / convert(that.length to length)
+        amount.to(that.amount).to(convert(that.length to length))
 
     @JvmName("divLength")
     operator fun div(that: LengthAmount<L>) =
-        amount / that.amount
+        amount.to(that.amount)
 
     // endregion
 
     // region -> Speed
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
-        SpeedAmount(amount = amount / that.amount,
-                    unit = Fraction(length, that.time))
+        SpeedAmount(amount = amount.to(that.amount),
+                    unit = Pair(length, that.time))
 
     // endregion
 
@@ -104,14 +103,14 @@ open class LengthAmount<L : Unit<Length>>(
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> times(that: ForceAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount * convert(that.length to length),
-                     unit = Fraction(T2(that.mass, length),
-                                     that.time))
+                     unit = Pair(T2(that.mass, length),
+                                 that.time))
 
     @JvmName("timesForce")
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = Fraction(T2(that.mass, length),
-                                     that.time))
+                     unit = Pair(T2(that.mass, length),
+                                 that.time))
 
     // endregion
 }

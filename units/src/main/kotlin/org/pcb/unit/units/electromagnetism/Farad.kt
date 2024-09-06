@@ -17,7 +17,7 @@ import org.pcb.unit.units.base.Second.SECOND
 class Farad(amount: Number)
     : ElectricCapacitanceAmount<Unit<Time>, Unit<ElectricCurrent>, Unit<Mass>, Unit<Length>>(
     amount = amount,
-    unit = T2(SECOND, AMPERE) / T2(KILOGRAM, METER))
+    unit = T2(SECOND, AMPERE).to(T2(KILOGRAM, METER)))
 {
     object FARAD : Unit<ElectricCapacitance>(ElectricCapacitance::class)
     {

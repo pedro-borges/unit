@@ -2,7 +2,6 @@ package org.pcb.unit.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.Fraction
 import org.pcb.unit.T2
 import org.pcb.unit.units.scalar.Numeric.ONE
 import org.pcb.unit.units.scalar.Percent
@@ -91,7 +90,7 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
-                                       unit = Fraction(ONE, TIME1)),
+                                       unit = ONE to TIME1),
             actual = Percent(amount = 2 * 100) /
                      TimeAmount(amount = 2,
                                 unit = TIME1))
@@ -105,7 +104,7 @@ class ScalarAmountTest
                                   unit = TIME1),
             actual = Percent(amount = 2 * 100) /
                      FrequencyAmount(amount = 2,
-                                     unit = Fraction(ONE, TIME1)))
+                                     unit = ONE to TIME1))
     }
 
     @Test
@@ -113,10 +112,10 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 2 * 2,
-                                                unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)),
+                                                unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)),
             actual = Percent(amount = 2 * 100) /
                      ElectricConductivityAmount(amount = 2,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) / T2(MASS1, LENGTH1)))
+                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)))
     }
 
     @Test
@@ -124,9 +123,9 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = ElectricConductivityAmount(amount = 1,
-                                                  unit = T2(TIME1, ELECTRICCURRENT1) / T2(MASS1, LENGTH1)),
+                                                  unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)),
             actual = Percent(amount = 2 * 100) /
                      ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS1, LENGTH1) / T2(TIME1, ELECTRICCURRENT1)))
+                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)))
     }
 }

@@ -3,7 +3,6 @@ package org.pcb.unit.units
 import java.math.BigDecimal
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
-import org.pcb.unit.Fraction
 import org.pcb.unit.units.scalar.Numeric.ONE
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
@@ -18,9 +17,9 @@ class RentAmountTest
     {
         assertEquals(
             expected = RentAmount(amount = 2 * 2,
-                                  unit = Fraction(CURRENCY1, TIME1)),
+                                  unit = CURRENCY1 to TIME1),
             actual = RentAmount(amount = 2,
-                                unit = Fraction(CURRENCY1, TIME1)) *
+                                unit = CURRENCY1 to TIME1) *
                      Percent(amount = 2 * 100))
     }
 
@@ -29,9 +28,9 @@ class RentAmountTest
     {
         assertEquals(
             expected = RentAmount(amount = 1,
-                                  unit = Fraction(CURRENCY1, TIME1)),
+                                  unit = CURRENCY1 to TIME1),
             actual = RentAmount(amount = 2,
-                                unit = Fraction(CURRENCY1, TIME1)) /
+                                unit = CURRENCY1 to TIME1) /
                      Percent(amount = 2 * 100))
     }
 
@@ -40,11 +39,11 @@ class RentAmountTest
     {
         assertEquals(
             expected = RentAmount(amount = 1,
-                                  unit = Fraction(CURRENCY1, TIME1)),
+                                  unit = CURRENCY1 to TIME1),
             actual = RentAmount(amount = 0,
-                                unit = Fraction(CURRENCY1, TIME1)) +
+                                unit = CURRENCY1 to TIME1) +
                      RentAmount(amount = 1,
-                                unit = Fraction(CURRENCY1, TIME1)))
+                                unit = CURRENCY1 to TIME1))
     }
 
     @Test
@@ -52,11 +51,11 @@ class RentAmountTest
     {
         assertEquals(
             expected = RentAmount(amount = 1,
-                                  unit = Fraction(CURRENCY1, TIME1)),
+                                  unit = CURRENCY1 to TIME1),
             actual = RentAmount(amount = 0,
-                                unit = Fraction(CURRENCY1, TIME1)) +
+                                unit = CURRENCY1 to TIME1) +
                      RentAmount(amount = 1,
-                                unit = Fraction(CURRENCY2, TIME2)))
+                                unit = CURRENCY2 to TIME2))
     }
 
     @Test
@@ -64,11 +63,11 @@ class RentAmountTest
     {
         assertEquals(
             expected = RentAmount(amount = 0,
-                                  unit = Fraction(CURRENCY1, TIME1)),
+                                  unit = CURRENCY1 to TIME1),
             actual = RentAmount(amount = 1,
-                                unit = Fraction(CURRENCY1, TIME1)) -
+                                unit = CURRENCY1 to TIME1) -
                      RentAmount(amount = 1,
-                                unit = Fraction(CURRENCY1, TIME1)))
+                                unit = CURRENCY1 to TIME1))
     }
 
     @Test
@@ -76,11 +75,11 @@ class RentAmountTest
     {
         assertEquals(
             expected = RentAmount(amount = 0,
-                                  unit = Fraction(CURRENCY1, TIME1)),
+                                  unit = CURRENCY1 to TIME1),
             actual = RentAmount(amount = 1,
-                                unit = Fraction(CURRENCY1, TIME1)) -
+                                unit = CURRENCY1 to TIME1) -
                      RentAmount(amount = 1,
-                                unit = Fraction(CURRENCY2, TIME2)))
+                                unit = CURRENCY2 to TIME2))
     }
 
     @Test
@@ -89,9 +88,9 @@ class RentAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = RentAmount(amount = 2,
-                                unit = Fraction(CURRENCY1, TIME1)) /
+                                unit = CURRENCY1 to TIME1) /
                      RentAmount(amount = 2,
-                                unit = Fraction(CURRENCY1, TIME1)))
+                                unit = CURRENCY1 to TIME1))
     }
 
     @Test
@@ -100,9 +99,9 @@ class RentAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = RentAmount(amount = 2,
-                                unit = Fraction(CURRENCY1, TIME1)) /
+                                unit = CURRENCY1 to TIME1) /
                      RentAmount(amount = 2,
-                                unit = Fraction(CURRENCY2, TIME2)))
+                                unit = CURRENCY2 to TIME2))
     }
 
     @Test
@@ -112,7 +111,7 @@ class RentAmountTest
             expected = CurrencyAmount(amount = 2 * 2,
                                       unit = CURRENCY1),
             actual = RentAmount(amount = 2,
-                                unit = Fraction(CURRENCY1, TIME1)) *
+                                unit = CURRENCY1 to TIME1) *
                      TimeAmount(amount = 2,
                                 unit = TIME1))
     }
@@ -124,7 +123,7 @@ class RentAmountTest
             expected = CurrencyAmount(amount = 2 * 2,
                                       unit = CURRENCY1),
             actual = RentAmount(amount = 2,
-                                unit = Fraction(CURRENCY1, TIME2)) *
+                                unit = CURRENCY1 to TIME2) *
                      TimeAmount(amount = 20,
                                 unit = TIME1))
     }
@@ -134,9 +133,9 @@ class RentAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
-                                       unit = Fraction(ONE, TIME1)),
+                                       unit = ONE to TIME1),
             actual = RentAmount(amount = 2,
-                                unit = Fraction(CURRENCY1, TIME1)) /
+                                unit = CURRENCY1 to TIME1) /
                      CurrencyAmount(amount = 2,
                                     unit = CURRENCY1))
     }
@@ -146,9 +145,9 @@ class RentAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
-                                       unit = Fraction(ONE, TIME1)),
+                                       unit = ONE to TIME1),
             actual = RentAmount(amount = 2,
-                                unit = Fraction(CURRENCY2, TIME1)) /
+                                unit = CURRENCY2 to TIME1) /
                      CurrencyAmount(amount = 20,
                                     unit = CURRENCY1))
     }

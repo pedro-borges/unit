@@ -113,11 +113,11 @@ class MassAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 2 * 2,
-                                      unit = T2(MASS1, LENGTH1) / TIME1),
+                                      unit = T2(MASS1, LENGTH1) to TIME1),
             actual = MassAmount(amount = 2,
                                 unit = MASS1) *
                      SpeedAmount(amount = 2,
-                                 unit = Fraction(LENGTH1, TIME1)))
+                                 unit = LENGTH1 to TIME1))
     }
 
     @Test
@@ -125,10 +125,10 @@ class MassAmountTest
     {
         assertEquals(
             expected = ForceAmount(amount = 2 * 2,
-                                   unit = T2(MASS1, LENGTH1) / TIME1),
+                                   unit = T2(MASS1, LENGTH1) to TIME1),
             actual = MassAmount(amount = 2,
                                 unit = MASS1) *
                      AccelerationAmount(amount = 2,
-                                        unit = Fraction(LENGTH1, TIME1)))
+                                        unit = LENGTH1 to TIME1))
     }
 }

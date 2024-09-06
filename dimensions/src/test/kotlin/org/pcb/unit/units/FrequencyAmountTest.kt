@@ -3,7 +3,6 @@ package org.pcb.unit.units
 import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.Fraction
 import org.pcb.unit.T2
 import org.pcb.unit.units.scalar.Numeric.ONE
 import org.pcb.unit.units.scalar.Percent
@@ -20,9 +19,9 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 2 * 2,
-                                       unit = Fraction(ONE, TIME1)),
+                                       unit = ONE to TIME1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = Fraction(ONE, TIME1)) *
+                                     unit = ONE to TIME1) *
                      Percent(amount = 2 * 100))
     }
 
@@ -31,9 +30,9 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
-                                       unit = Fraction(ONE, TIME1)),
+                                       unit = ONE to TIME1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = Fraction(ONE, TIME1)) /
+                                     unit = ONE to TIME1) /
                      Percent(amount = 2 * 100))
     }
 
@@ -42,11 +41,11 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
-                                       unit = Fraction(ONE, TIME1)),
+                                       unit = ONE to TIME1),
             actual = FrequencyAmount(amount = 0,
-                                     unit = Fraction(ONE, TIME1)) +
+                                     unit = ONE to TIME1) +
                      FrequencyAmount(amount = 1,
-                                     unit = Fraction(ONE, TIME1)))
+                                     unit = ONE to TIME1))
     }
 
     @Test
@@ -54,11 +53,11 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
-                                       unit = Fraction(ONE, TIME1)),
+                                       unit = ONE to TIME1),
             actual = FrequencyAmount(amount = 0,
-                                     unit = Fraction(ONE, TIME1)) +
+                                     unit = ONE to TIME1) +
                      FrequencyAmount(amount = 10,
-                                     unit = Fraction(ONE, TIME2)))
+                                     unit = ONE to TIME2))
     }
 
     @Test
@@ -66,11 +65,11 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 0,
-                                       unit = Fraction(ONE, TIME1)),
+                                       unit = ONE to TIME1),
             actual = FrequencyAmount(amount = 1,
-                                     unit = Fraction(ONE, TIME1)) -
+                                     unit = ONE to TIME1) -
                      FrequencyAmount(amount = 1,
-                                     unit = Fraction(ONE, TIME1)))
+                                     unit = ONE to TIME1))
     }
 
     @Test
@@ -78,11 +77,11 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 0,
-                                       unit = Fraction(ONE, TIME1)),
+                                       unit = ONE to TIME1),
             actual = FrequencyAmount(amount = 1,
-                                     unit = Fraction(ONE, TIME1)) -
+                                     unit = ONE to TIME1) -
                      FrequencyAmount(amount = 10,
-                                     unit = Fraction(ONE, TIME2)))
+                                     unit = ONE to TIME2))
     }
 
     @Test
@@ -91,9 +90,9 @@ class FrequencyAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = Fraction(ONE, TIME1)) /
+                                     unit = ONE to TIME1) /
                      FrequencyAmount(amount = 2,
-                                     unit = Fraction(ONE, TIME1)))
+                                     unit = ONE to TIME1))
     }
 
     @Test
@@ -102,9 +101,9 @@ class FrequencyAmountTest
         assertEquals(
             expected = BigDecimal(1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = Fraction(ONE, TIME1)) /
+                                     unit = ONE to TIME1) /
                      FrequencyAmount(amount = 20,
-                                     unit = Fraction(ONE, TIME2)))
+                                     unit = ONE to TIME2))
     }
 
     @Test
@@ -112,9 +111,9 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = SpeedAmount(amount = 1,
-                                   unit = Fraction(LENGTH1, TIME1)),
+                                   unit = LENGTH1 to TIME1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = Fraction(ONE, TIME1)) *
+                                     unit = ONE to TIME1) *
                      LengthAmount(amount = 2,
                                   unit = LENGTH1))
     }
@@ -124,11 +123,11 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(amount = 1,
-                                          unit = Fraction(LENGTH1, TIME1)),
+                                          unit = LENGTH1 to TIME1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = Fraction(ONE, TIME1)) *
+                                     unit = ONE to TIME1) *
                      SpeedAmount(amount = 2,
-                                 unit = Fraction(LENGTH1, TIME1)))
+                                 unit = LENGTH1 to TIME1))
     }
 
     @Test
@@ -136,11 +135,11 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(amount = 1,
-                                          unit = Fraction(LENGTH1, TIME1)),
+                                          unit = LENGTH1 to TIME1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = Fraction(ONE, TIME1)) *
+                                     unit = ONE to TIME1) *
                      SpeedAmount(amount = 20,
-                                 unit = Fraction(LENGTH1, TIME2)))
+                                 unit = LENGTH1 to TIME2))
     }
 
     @Test
@@ -150,7 +149,7 @@ class FrequencyAmountTest
             expected = CurrencyAmount(amount = 1,
                                       unit = CURRENCY1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = Fraction(ONE, TIME1)) *
+                                     unit = ONE to TIME1) *
                      DebtAmount(amount = 2,
                                 unit = T2(CURRENCY1, TIME1)))
     }
@@ -162,7 +161,7 @@ class FrequencyAmountTest
             expected = CurrencyAmount(amount = 1,
                                       unit = CURRENCY1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = Fraction(ONE, TIME2)) *
+                                     unit = ONE to TIME2) *
                      DebtAmount(amount = 20,
                                 unit = T2(CURRENCY1, TIME1)))
     }
@@ -172,9 +171,9 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = RentAmount(amount = 1,
-                                  unit = Fraction(CURRENCY1, TIME1)),
+                                  unit = CURRENCY1 to TIME1),
             actual = FrequencyAmount(amount = 2,
-                                     unit = Fraction(ONE, TIME1)) *
+                                     unit = ONE to TIME1) *
                      CurrencyAmount(amount = 2,
                                     unit = CURRENCY1))
     }

@@ -2,7 +2,6 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
-import org.pcb.unit.Fraction
 import org.pcb.unit.T2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
@@ -11,8 +10,8 @@ import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
-import org.pcb.unit.div
 import org.pcb.unit.times
+import org.pcb.unit.to
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.Numeric.ONE
 
@@ -33,7 +32,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
                      unit = scalar)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        ScalarAmount(amount = amount / that.amount / that.unit.scale,
+        ScalarAmount(amount = amount.to(that.amount).to(that.unit.scale),
                      unit = scalar)
 
     operator fun <S : Unit<Scalar>> plus(that: ScalarAmount<S>) =
@@ -59,8 +58,8 @@ open class ScalarAmount<S : Unit<Scalar>>(
     // region -> Frequency
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
-        FrequencyAmount(amount = amount * unit.scale / that.amount,
-                        unit = Fraction(ONE, that.time))
+        FrequencyAmount(amount = (amount * unit.scale).to(that.amount),
+                        unit = Pair(ONE, that.time))
 
     // endregion
 
@@ -76,17 +75,17 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> div(that: ElectricConductivityAmount<T, EC, M, L>) =
         ElectricResistanceAmount(amount = amount * that.amount * unit.scale,
-                                 unit = Fraction(T2(that.mass, that.length),
-                                                 T2(that.time, that.electricCurrent)))
+                                 unit = Pair(T2(that.mass, that.length),
+                                             T2(that.time, that.electricCurrent)))
 
     // endregion
 
     // region -> ElectricConductivity
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
-        ElectricConductivityAmount(amount = amount * unit.scale / that.amount,
-                                   unit = Fraction(T2(that.time, that.electricCurrent),
-                                                   T2(that.mass, that.length)))
+        ElectricConductivityAmount(amount = (amount * unit.scale).to(that.amount),
+                                   unit = Pair(T2(that.time, that.electricCurrent),
+                                               T2(that.mass, that.length)))
 
     // endregion
 }

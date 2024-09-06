@@ -116,7 +116,7 @@ class LengthAmountTest
     {
         assertEquals(
             expected = SpeedAmount(amount = 1,
-                                   unit = Fraction(LENGTH1, TIME1)),
+                                   unit = LENGTH1 to TIME1),
             actual = LengthAmount(amount = 2,
                                   unit = LENGTH1) /
                      TimeAmount(amount = 2,
@@ -176,11 +176,11 @@ class LengthAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = T2(MASS1, LENGTH1) / TIME1),
+                                    unit = T2(MASS1, LENGTH1) to TIME1),
             actual = LengthAmount(amount = 2,
                                   unit = LENGTH1) *
                      ForceAmount(amount = 2,
-                                 unit = T2(MASS1, LENGTH1) / TIME1))
+                                 unit = T2(MASS1, LENGTH1) to TIME1))
     }
 
     @Test
@@ -188,10 +188,10 @@ class LengthAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = T2(MASS2, LENGTH2) / TIME2),
+                                    unit = T2(MASS2, LENGTH2) to TIME2),
             actual = LengthAmount(amount = 2,
                                   unit = LENGTH2) *
                      ForceAmount(amount = 20,
-                                 unit = T2(MASS2, LENGTH1) / TIME2))
+                                 unit = T2(MASS2, LENGTH1) to TIME2))
     }
 }

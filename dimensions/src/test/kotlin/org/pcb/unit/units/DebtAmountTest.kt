@@ -141,7 +141,7 @@ class DebtAmountTest
             actual = DebtAmount(amount = 2,
                                 unit = T2(CURRENCY1, TIME1)) *
                      FrequencyAmount(amount = 2,
-                                     unit = Fraction(ONE, TIME1)))
+                                     unit = ONE to TIME1))
     }
 
     @Test
@@ -153,6 +153,6 @@ class DebtAmountTest
             actual = DebtAmount(amount = 2,
                                 unit = T2(CURRENCY2, TIME2)) *
                      FrequencyAmount(amount = 20,
-                                     unit = Fraction(ONE, TIME1)))
+                                     unit = ONE to TIME1))
     }
 }
