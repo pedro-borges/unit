@@ -2,7 +2,7 @@ package org.pcb.unit.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.T2
+import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.scalar.Percent.PERCENT
@@ -112,10 +112,10 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 2 * 2,
-                                                unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)),
+                                                unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)),
             actual = Percent(amount = 2 * 100) /
                      ElectricConductivityAmount(amount = 2,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)))
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)))
     }
 
     @Test
@@ -123,9 +123,9 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = ElectricConductivityAmount(amount = 1,
-                                                  unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)),
+                                                  unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)),
             actual = Percent(amount = 2 * 100) /
                      ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)))
+                                              unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)))
     }
 }

@@ -2,7 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
-import org.pcb.unit.T2
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Acceleration
@@ -112,7 +112,7 @@ open class AccelerationAmount<L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
         ForceAmount(amount = amount * that.amount,
-                    unit = T2(that.mass, length) to time)
+                    unit = U2(that.mass, length) to time)
 
     // endregion
 }

@@ -2,7 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
-import org.pcb.unit.T2
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.ElectricCurrent
@@ -24,7 +24,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T3 : Unit<Time>>(
         amount: Number,
-        unit: Pair<T2<M, L>, T3>)
+        unit: Pair<U2<M, L>, T3>)
     : Amount<Force>(amount = amount.toBigBigDecimal(),
                     unit = CompositeUnit(
                         domain = Force::class,
@@ -40,18 +40,18 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T3 : Unit<Time>>(
     {
         operator fun invoke(amount: Number, unit: Unit<Power>) =
             PowerAmount(amount = amount.toBigBigDecimal() * unit.scale,
-                        unit = T2(KILOGRAM, METER) to SECOND)
+                        unit = U2(KILOGRAM, METER) to SECOND)
     }
 
     // region -> Energy
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         PowerAmount(amount = amount * that.amount * that.unit.scale,
-                    unit = T2(mass, length) to time)
+                    unit = U2(mass, length) to time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         PowerAmount(amount = amount / that.amount / that.unit.scale,
-                    unit = T2(mass, length) to time)
+                    unit = U2(mass, length) to time)
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> plus(that: PowerAmount<M, L, T>) =
         PowerAmount(amount = amount + that.amount
@@ -61,12 +61,12 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T3 : Unit<Time>>(
                              / convert(that.time to time,
                                        that.time to time,
                                        that.time to time),
-                    unit = T2(mass, length) to time)
+                    unit = U2(mass, length) to time)
 
     @JvmName("plusPower")
     operator fun plus(that: PowerAmount<M, L, T3>) =
         PowerAmount(amount = amount + that.amount,
-                    unit = T2(mass, length) to time)
+                    unit = U2(mass, length) to time)
 
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> minus(that: PowerAmount<M, L, T>) =
@@ -77,12 +77,12 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T3 : Unit<Time>>(
                              / convert(that.time to time,
                                        that.time to time,
                                        that.time to time),
-                    unit = T2(mass, length) to time)
+                    unit = U2(mass, length) to time)
 
     @JvmName("minusPower")
     operator fun minus(that: PowerAmount<M, L, T3>) =
         PowerAmount(amount = amount - that.amount,
-                    unit = T2(mass, length) to time)
+                    unit = U2(mass, length) to time)
 
     // endregion
 
@@ -109,12 +109,12 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T3 : Unit<Time>>(
 
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         EnergyAmount(amount = amount * that.amount * convert(that.time to time),
-                     unit = T2(mass, length) to time)
+                     unit = U2(mass, length) to time)
 
     @JvmName("timesTime")
     operator fun times(that: TimeAmount<T3>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = T2(mass, length) to time)
+                     unit = U2(mass, length) to time)
 
     // endregion
 
@@ -141,7 +141,7 @@ open class PowerAmount<M : Unit<Mass>, L : Unit<Length>, T3 : Unit<Time>>(
 
     operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
         ElectricTensionAmount(amount = amount / that.amount,
-                              unit = T2(mass, length) to T2(time, that.electricCurrent))
+                              unit = U2(mass, length) to U2(time, that.electricCurrent))
 
     // endregion
 }

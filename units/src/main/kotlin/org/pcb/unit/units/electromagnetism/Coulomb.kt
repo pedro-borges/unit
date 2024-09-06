@@ -1,6 +1,6 @@
 package org.pcb.unit.units.electromagnetism
 
-import org.pcb.unit.T2
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.ElectricCharge
 import org.pcb.unit.dimension.ElectricCurrent
@@ -13,7 +13,7 @@ import org.pcb.unit.units.base.Second.SECOND
 class Coulomb(amount: Number)
     : ElectricChargeAmount<Unit<ElectricCurrent>, Unit<Time>>(
     amount = amount,
-    unit = T2(AMPERE, SECOND))
+    unit = U2(AMPERE, SECOND))
 {
     object COULOMB : Unit<ElectricCharge>(ElectricCharge::class)
     {

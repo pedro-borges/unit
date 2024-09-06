@@ -2,7 +2,7 @@ package org.pcb.unit.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.T2
+import org.pcb.unit.U2
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
@@ -110,7 +110,7 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = DebtAmount(amount = 2 * 2,
-                                  unit = T2(CURRENCY1, SECOND)),
+                                  unit = U2(CURRENCY1, SECOND)),
             actual = CurrencyAmount(amount = 2,
                                     unit = CURRENCY1) *
                      TimeAmount(amount = 2,

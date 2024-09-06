@@ -26,9 +26,9 @@ class ElectricCapacitanceAmountTest
     {
         assertEquals(
             expected = ElectricCapacitanceAmount(amount = 2 * 2,
-                                                 unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)),
+                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)),
             actual = ElectricCapacitanceAmount(amount = 2,
-                                               unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) *
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) *
                      Percent(amount = 2 * 100))
     }
 
@@ -37,9 +37,9 @@ class ElectricCapacitanceAmountTest
     {
         assertEquals(
             expected = ElectricCapacitanceAmount(amount = 1,
-                                                 unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)),
+                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)),
             actual = ElectricCapacitanceAmount(amount = 2,
-                                               unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) /
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) /
                      Percent(amount = 2 * 100))
     }
 
@@ -48,11 +48,11 @@ class ElectricCapacitanceAmountTest
     {
         assertEquals(
             expected = ElectricCapacitanceAmount(amount = 1,
-                                                 unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)),
+                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)),
             actual = ElectricCapacitanceAmount(amount = 0,
-                                               unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) +
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) +
                      ElectricCapacitanceAmount(amount = 1,
-                                               unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)))
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)))
     }
 
     @Test
@@ -60,11 +60,11 @@ class ElectricCapacitanceAmountTest
     {
         assertEquals(
             expected = ElectricCapacitanceAmount(amount = 1,
-                                                 unit = T2(TIME2, ELECTRICCURRENT2) to T2(MASS1, LENGTH1)),
+                                                 unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, LENGTH1)),
             actual = ElectricCapacitanceAmount(amount = 0,
-                                               unit = T2(TIME2, ELECTRICCURRENT2) to T2(MASS1, LENGTH1)) +
+                                               unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, LENGTH1)) +
                      ElectricCapacitanceAmount(amount = 1000000000,
-                                               unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS2, LENGTH2)))
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, LENGTH2)))
     }
 
     @Test
@@ -72,11 +72,11 @@ class ElectricCapacitanceAmountTest
     {
         assertEquals(
             expected = ElectricCapacitanceAmount(amount = 0,
-                                                 unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)),
+                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)),
             actual = ElectricCapacitanceAmount(amount = 1,
-                                               unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) -
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) -
                      ElectricCapacitanceAmount(amount = 1,
-                                               unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)))
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)))
     }
 
     @Test
@@ -84,11 +84,11 @@ class ElectricCapacitanceAmountTest
     {
         assertEquals(
             expected = ElectricCapacitanceAmount(amount = 0,
-                                                 unit = T2(TIME2, ELECTRICCURRENT2) to T2(MASS1, LENGTH1)),
+                                                 unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, LENGTH1)),
             actual = ElectricCapacitanceAmount(amount = 1,
-                                               unit = T2(TIME2, ELECTRICCURRENT2) to T2(MASS1, LENGTH1)) -
+                                               unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, LENGTH1)) -
                      ElectricCapacitanceAmount(amount = 1000000000,
-                                               unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS2, LENGTH2)))
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, LENGTH2)))
     }
 
     @Test
@@ -98,9 +98,9 @@ class ElectricCapacitanceAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = ElectricCapacitanceAmount(amount = 2,
-                                               unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) /
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) /
                      ElectricCapacitanceAmount(amount = 2,
-                                               unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)))
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)))
     }
 
     @Test
@@ -110,9 +110,9 @@ class ElectricCapacitanceAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = ElectricCapacitanceAmount(amount = 2,
-                                               unit = T2(TIME2, ELECTRICCURRENT2) to T2(MASS1, LENGTH1)) /
+                                               unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, LENGTH1)) /
                      ElectricCapacitanceAmount(amount = 2000000000,
-                                               unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS2, LENGTH2)))
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, LENGTH2)))
     }
 
     @Test
@@ -120,11 +120,11 @@ class ElectricCapacitanceAmountTest
     {
         assertEquals(
             expected = ElectricChargeAmount(amount = 2 * 2,
-                                            unit = T2(ELECTRICCURRENT1, TIME1)),
+                                            unit = U2(ELECTRICCURRENT1, TIME1)),
             actual = ElectricCapacitanceAmount(amount = 2,
-                                               unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) *
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) *
                      ElectricTensionAmount(amount = 2,
-                                           unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)))
+                                           unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -132,11 +132,11 @@ class ElectricCapacitanceAmountTest
     {
         assertEquals(
             expected = ElectricChargeAmount(amount = 2 * 2,
-                                            unit = T2(ELECTRICCURRENT1, TIME1)),
+                                            unit = U2(ELECTRICCURRENT1, TIME1)),
             actual = ElectricCapacitanceAmount(amount = 2,
-                                               unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) *
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) *
                      ElectricTensionAmount(amount = 20,
-                                           unit = T2(MASS2, LENGTH2) to T2(TIME2, ELECTRICCURRENT2)))
+                                           unit = U2(MASS2, LENGTH2) to U2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -146,9 +146,9 @@ class ElectricCapacitanceAmountTest
             expected = TimeAmount(amount = 2 * 2,
                                   unit = TIME1),
             actual = ElectricCapacitanceAmount(amount = 2,
-                                               unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) *
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) *
                      ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)))
+                                              unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -158,8 +158,8 @@ class ElectricCapacitanceAmountTest
             expected = TimeAmount(amount = 2 * 2,
                                   unit = TIME1),
             actual = ElectricCapacitanceAmount(amount = 2,
-                                               unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) *
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) *
                      ElectricResistanceAmount(amount = 200,
-                                              unit = T2(MASS2, LENGTH2) to T2(TIME2, ELECTRICCURRENT2)))
+                                              unit = U2(MASS2, LENGTH2) to U2(TIME2, ELECTRICCURRENT2)))
     }
 }

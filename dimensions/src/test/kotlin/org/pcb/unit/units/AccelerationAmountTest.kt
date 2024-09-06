@@ -2,7 +2,7 @@ package org.pcb.unit.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.T2
+import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
@@ -160,7 +160,7 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = ForceAmount(amount = 2 * 2,
-                                   unit = T2(MASS1, LENGTH1) to TIME1),
+                                   unit = U2(MASS1, LENGTH1) to TIME1),
             actual = AccelerationAmount(amount = 2,
                                         unit = LENGTH1 to TIME1) *
                      MassAmount(amount = 2,

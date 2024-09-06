@@ -25,9 +25,9 @@ class PowerAmountTest
     {
         assertEquals(
             expected = PowerAmount(amount = 2 * 2,
-                                   unit = T2(MASS1, LENGTH1) to TIME1),
+                                   unit = U2(MASS1, LENGTH1) to TIME1),
             actual = PowerAmount(amount = 2,
-                                 unit = T2(MASS1, LENGTH1) to TIME1) *
+                                 unit = U2(MASS1, LENGTH1) to TIME1) *
                      Percent(amount = 2 * 100))
     }
 
@@ -36,9 +36,9 @@ class PowerAmountTest
     {
         assertEquals(
             expected = PowerAmount(amount = 1,
-                                   unit = T2(MASS1, LENGTH1) to TIME1),
+                                   unit = U2(MASS1, LENGTH1) to TIME1),
             actual = PowerAmount(amount = 2,
-                                 unit = T2(MASS1, LENGTH1) to TIME1) /
+                                 unit = U2(MASS1, LENGTH1) to TIME1) /
                      Percent(amount = 2 * 100))
     }
 
@@ -47,11 +47,11 @@ class PowerAmountTest
     {
         assertEquals(
             expected = PowerAmount(amount = 1,
-                                   unit = T2(MASS1, LENGTH1) to TIME1),
+                                   unit = U2(MASS1, LENGTH1) to TIME1),
             actual = PowerAmount(amount = 0,
-                                 unit = T2(MASS1, LENGTH1) to TIME1) +
+                                 unit = U2(MASS1, LENGTH1) to TIME1) +
                      PowerAmount(amount = 1,
-                                 unit = T2(MASS1, LENGTH1) to TIME1))
+                                 unit = U2(MASS1, LENGTH1) to TIME1))
     }
 
     @Test
@@ -59,11 +59,11 @@ class PowerAmountTest
     {
         assertEquals(
             expected = PowerAmount(amount = 1,
-                                   unit = T2(MASS1, LENGTH1) to TIME1),
+                                   unit = U2(MASS1, LENGTH1) to TIME1),
             actual = PowerAmount(amount = 0,
-                                 unit = T2(MASS1, LENGTH1) to TIME1) +
+                                 unit = U2(MASS1, LENGTH1) to TIME1) +
                      PowerAmount(amount = 1,
-                                 unit = T2(MASS2, LENGTH2) to TIME2))
+                                 unit = U2(MASS2, LENGTH2) to TIME2))
     }
 
     @Test
@@ -71,11 +71,11 @@ class PowerAmountTest
     {
         assertEquals(
             expected = PowerAmount(amount = 0,
-                                   unit = T2(MASS1, LENGTH1) to TIME1),
+                                   unit = U2(MASS1, LENGTH1) to TIME1),
             actual = PowerAmount(amount = 1,
-                                 unit = T2(MASS1, LENGTH1) to TIME1) -
+                                 unit = U2(MASS1, LENGTH1) to TIME1) -
                      PowerAmount(amount = 1,
-                                 unit = T2(MASS1, LENGTH1) to TIME1))
+                                 unit = U2(MASS1, LENGTH1) to TIME1))
     }
 
     @Test
@@ -83,11 +83,11 @@ class PowerAmountTest
     {
         assertEquals(
             expected = PowerAmount(amount = 0,
-                                   unit = T2(MASS1, LENGTH1) to TIME1),
+                                   unit = U2(MASS1, LENGTH1) to TIME1),
             actual = PowerAmount(amount = 1,
-                                 unit = T2(MASS1, LENGTH1) to TIME1) -
+                                 unit = U2(MASS1, LENGTH1) to TIME1) -
                      PowerAmount(amount = 1,
-                                 unit = T2(MASS2, LENGTH2) to TIME2))
+                                 unit = U2(MASS2, LENGTH2) to TIME2))
     }
 
     @Test
@@ -97,9 +97,9 @@ class PowerAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = PowerAmount(amount = 2,
-                                 unit = T2(MASS1, LENGTH1) to TIME1) /
+                                 unit = U2(MASS1, LENGTH1) to TIME1) /
                      PowerAmount(amount = 2,
-                                 unit = T2(MASS1, LENGTH1) to TIME1))
+                                 unit = U2(MASS1, LENGTH1) to TIME1))
     }
 
     @Test
@@ -109,9 +109,9 @@ class PowerAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = PowerAmount(amount = 2,
-                                 unit = T2(MASS1, LENGTH1) to TIME1) /
+                                 unit = U2(MASS1, LENGTH1) to TIME1) /
                      PowerAmount(amount = 2,
-                                 unit = T2(MASS2, LENGTH2) to TIME2))
+                                 unit = U2(MASS2, LENGTH2) to TIME2))
     }
 
     @Test
@@ -119,9 +119,9 @@ class PowerAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = T2(MASS1, LENGTH1) to TIME1),
+                                    unit = U2(MASS1, LENGTH1) to TIME1),
             actual = PowerAmount(amount = 2,
-                                 unit = T2(MASS1, LENGTH1) to TIME1) *
+                                 unit = U2(MASS1, LENGTH1) to TIME1) *
                      TimeAmount(amount = 2,
                                 unit = TIME1))
     }
@@ -131,9 +131,9 @@ class PowerAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = T2(MASS1, LENGTH1) to TIME2),
+                                    unit = U2(MASS1, LENGTH1) to TIME2),
             actual = PowerAmount(amount = 2,
-                                 unit = T2(MASS1, LENGTH1) to TIME2) *
+                                 unit = U2(MASS1, LENGTH1) to TIME2) *
                      TimeAmount(amount = 20,
                                 unit = TIME1))
     }
@@ -145,9 +145,9 @@ class PowerAmountTest
             expected = ElectricCurrentAmount(amount = 1,
                                              unit = ELECTRICCURRENT1),
             actual = PowerAmount(amount = 2,
-                                 unit = T2(MASS1, LENGTH1) to TIME1) /
+                                 unit = U2(MASS1, LENGTH1) to TIME1) /
                      ElectricTensionAmount(amount = 2,
-                                           unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)))
+                                           unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -157,9 +157,9 @@ class PowerAmountTest
             expected = ElectricCurrentAmount(amount = 1,
                                              unit = ELECTRICCURRENT1),
             actual = PowerAmount(amount = 2,
-                                 unit = T2(MASS1, LENGTH1) to TIME1) /
+                                 unit = U2(MASS1, LENGTH1) to TIME1) /
                      ElectricTensionAmount(amount = 2,
-                                           unit = T2(MASS2, LENGTH2) to T2(TIME2, ELECTRICCURRENT1)))
+                                           unit = U2(MASS2, LENGTH2) to U2(TIME2, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -167,9 +167,9 @@ class PowerAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 1,
-                                             unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)),
+                                             unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)),
             actual = PowerAmount(amount = 2,
-                                 unit = T2(MASS1, LENGTH1) to TIME1) /
+                                 unit = U2(MASS1, LENGTH1) to TIME1) /
                      ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1))
     }

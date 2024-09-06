@@ -32,9 +32,9 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = T2(MASS1, LENGTH1) to TIME1),
+                                    unit = U2(MASS1, LENGTH1) to TIME1),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) *
+                                  unit = U2(MASS1, LENGTH1) to TIME1) *
                      Percent(amount = 2 * 100))
     }
 
@@ -43,9 +43,9 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 1,
-                                    unit = T2(MASS1, LENGTH1) to TIME1),
+                                    unit = U2(MASS1, LENGTH1) to TIME1),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) /
+                                  unit = U2(MASS1, LENGTH1) to TIME1) /
                      Percent(amount = 2 * 100))
     }
 
@@ -54,11 +54,11 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 1,
-                                    unit = T2(MASS1, LENGTH1) to TIME1),
+                                    unit = U2(MASS1, LENGTH1) to TIME1),
             actual = EnergyAmount(amount = 0,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) +
+                                  unit = U2(MASS1, LENGTH1) to TIME1) +
                      EnergyAmount(amount = 1,
-                                  unit = T2(MASS1, LENGTH1) to TIME1))
+                                  unit = U2(MASS1, LENGTH1) to TIME1))
     }
 
     @Test
@@ -66,11 +66,11 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 1,
-                                    unit = T2(MASS2, LENGTH2) to TIME2),
+                                    unit = U2(MASS2, LENGTH2) to TIME2),
             actual = EnergyAmount(amount = 0,
-                                  unit = T2(MASS2, LENGTH2) to TIME2) +
+                                  unit = U2(MASS2, LENGTH2) to TIME2) +
                      EnergyAmount(amount = 10,
-                                  unit = T2(MASS1, LENGTH1) to TIME1))
+                                  unit = U2(MASS1, LENGTH1) to TIME1))
     }
 
     @Test
@@ -78,11 +78,11 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 0,
-                                    unit = T2(MASS1, LENGTH1) to TIME1),
+                                    unit = U2(MASS1, LENGTH1) to TIME1),
             actual = EnergyAmount(amount = 1,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) -
+                                  unit = U2(MASS1, LENGTH1) to TIME1) -
                      EnergyAmount(amount = 1,
-                                  unit = T2(MASS1, LENGTH1) to TIME1))
+                                  unit = U2(MASS1, LENGTH1) to TIME1))
     }
 
     @Test
@@ -90,11 +90,11 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 0,
-                                    unit = T2(MASS2, LENGTH2) to TIME2),
+                                    unit = U2(MASS2, LENGTH2) to TIME2),
             actual = EnergyAmount(amount = 1,
-                                  unit = T2(MASS2, LENGTH2) to TIME2) -
+                                  unit = U2(MASS2, LENGTH2) to TIME2) -
                      EnergyAmount(amount = 10,
-                                  unit = T2(MASS1, LENGTH1) to TIME1))
+                                  unit = U2(MASS1, LENGTH1) to TIME1))
     }
 
     @Test
@@ -104,9 +104,9 @@ class EnergyAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) /
+                                  unit = U2(MASS1, LENGTH1) to TIME1) /
                      EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1))
+                                  unit = U2(MASS1, LENGTH1) to TIME1))
     }
 
     @Test
@@ -116,9 +116,9 @@ class EnergyAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS2, LENGTH2) to TIME2) /
+                                  unit = U2(MASS2, LENGTH2) to TIME2) /
                      EnergyAmount(amount = 20,
-                                  unit = T2(MASS1, LENGTH1) to TIME1))
+                                  unit = U2(MASS1, LENGTH1) to TIME1))
     }
 
     @Test
@@ -126,9 +126,9 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = ForceAmount(amount = 1,
-                                   unit = T2(MASS1, LENGTH1) to TIME1),
+                                   unit = U2(MASS1, LENGTH1) to TIME1),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) /
+                                  unit = U2(MASS1, LENGTH1) to TIME1) /
                      LengthAmount(amount = 2,
                                   unit = LENGTH1))
     }
@@ -138,9 +138,9 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = ForceAmount(amount = 1,
-                                   unit = T2(MASS2, LENGTH2) to TIME2),
+                                   unit = U2(MASS2, LENGTH2) to TIME2),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS2, LENGTH2) to TIME2) /
+                                  unit = U2(MASS2, LENGTH2) to TIME2) /
                      LengthAmount(amount = 20,
                                   unit = LENGTH1))
     }
@@ -152,9 +152,9 @@ class EnergyAmountTest
             expected = LengthAmount(amount = 1,
                                     unit = LENGTH1),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) /
+                                  unit = U2(MASS1, LENGTH1) to TIME1) /
                      ForceAmount(amount = 2,
-                                 unit = T2(MASS1, LENGTH1) to TIME1))
+                                 unit = U2(MASS1, LENGTH1) to TIME1))
     }
 
     @Test
@@ -164,9 +164,9 @@ class EnergyAmountTest
             expected = LengthAmount(amount = 1,
                                     unit = LENGTH1),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) /
+                                  unit = U2(MASS1, LENGTH1) to TIME1) /
                      ForceAmount(amount = 2,
-                                 unit = T2(MASS2, LENGTH2) to TIME2))
+                                 unit = U2(MASS2, LENGTH2) to TIME2))
     }
 
     @Test
@@ -176,9 +176,9 @@ class EnergyAmountTest
             expected = TimeAmount(amount = 1,
                                   unit = TIME1),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) /
+                                  unit = U2(MASS1, LENGTH1) to TIME1) /
                      PowerAmount(amount = 2,
-                                 unit = T2(MASS1, LENGTH1) to TIME1))
+                                 unit = U2(MASS1, LENGTH1) to TIME1))
     }
 
     @Test
@@ -188,9 +188,9 @@ class EnergyAmountTest
             expected = TimeAmount(amount = 1,
                                   unit = TIME1),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) /
+                                  unit = U2(MASS1, LENGTH1) to TIME1) /
                      PowerAmount(amount = 2,
-                                 unit = T2(MASS2, LENGTH2) to TIME2))
+                                 unit = U2(MASS2, LENGTH2) to TIME2))
     }
 
     @Test
@@ -198,9 +198,9 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = PowerAmount(amount = 1,
-                                   unit = T2(MASS1, LENGTH1) to TIME1),
+                                   unit = U2(MASS1, LENGTH1) to TIME1),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) /
+                                  unit = U2(MASS1, LENGTH1) to TIME1) /
                      TimeAmount(amount = 2,
                                 unit = TIME1))
     }
@@ -210,9 +210,9 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = PowerAmount(amount = 1,
-                                   unit = T2(MASS1, LENGTH1) to TIME2),
+                                   unit = U2(MASS1, LENGTH1) to TIME2),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME2) /
+                                  unit = U2(MASS1, LENGTH1) to TIME2) /
                      TimeAmount(amount = 20,
                                 unit = TIME1))
     }
@@ -224,9 +224,9 @@ class EnergyAmountTest
             expected = SpeedAmount(amount = 1,
                                    unit = LENGTH1 to TIME1),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) /
+                                  unit = U2(MASS1, LENGTH1) to TIME1) /
                      MomentumAmount(amount = 2,
-                                    unit = T2(MASS1, LENGTH1) to TIME1))
+                                    unit = U2(MASS1, LENGTH1) to TIME1))
     }
 
     @Test
@@ -236,9 +236,9 @@ class EnergyAmountTest
             expected = SpeedAmount(amount = 1,
                                    unit = LENGTH2 to TIME2),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS2, LENGTH2) to TIME2) /
+                                  unit = U2(MASS2, LENGTH2) to TIME2) /
                      MomentumAmount(amount = 20,
-                                    unit = T2(MASS1, LENGTH1) to TIME1))
+                                    unit = U2(MASS1, LENGTH1) to TIME1))
     }
 
     @Test
@@ -246,9 +246,9 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 1,
-                                      unit = T2(MASS1, LENGTH1) to TIME1),
+                                      unit = U2(MASS1, LENGTH1) to TIME1),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) /
+                                  unit = U2(MASS1, LENGTH1) to TIME1) /
                      SpeedAmount(amount = 2,
                                  unit = LENGTH1 to TIME1))
     }
@@ -258,9 +258,9 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 1,
-                                      unit = T2(MASS1, LENGTH1) to TIME1),
+                                      unit = U2(MASS1, LENGTH1) to TIME1),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) /
+                                  unit = U2(MASS1, LENGTH1) to TIME1) /
                      SpeedAmount(amount = 2,
                                  unit = LENGTH2 to TIME2))
     }
@@ -270,11 +270,11 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 1,
-                                             unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)),
+                                             unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) /
+                                  unit = U2(MASS1, LENGTH1) to TIME1) /
                      ElectricChargeAmount(amount = 2,
-                                          unit = T2(ELECTRICCURRENT1, TIME1)))
+                                          unit = U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -282,11 +282,11 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 1,
-                                             unit = T2(MASS2, LENGTH2) to T2(TIME2, ELECTRICCURRENT2)),
+                                             unit = U2(MASS2, LENGTH2) to U2(TIME2, ELECTRICCURRENT2)),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS2, LENGTH2) to TIME2) /
+                                  unit = U2(MASS2, LENGTH2) to TIME2) /
                      ElectricChargeAmount(amount = 20,
-                                          unit = T2(ELECTRICCURRENT2, TIME1)))
+                                          unit = U2(ELECTRICCURRENT2, TIME1)))
     }
 
     @Test
@@ -294,11 +294,11 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = ElectricChargeAmount(amount = 1,
-                                            unit = T2(ELECTRICCURRENT1, TIME1)),
+                                            unit = U2(ELECTRICCURRENT1, TIME1)),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) /
+                                  unit = U2(MASS1, LENGTH1) to TIME1) /
                      ElectricTensionAmount(amount = 2,
-                                           unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)))
+                                           unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -306,11 +306,11 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = ElectricChargeAmount(amount = 1,
-                                            unit = T2(ELECTRICCURRENT2, TIME1)),
+                                            unit = U2(ELECTRICCURRENT2, TIME1)),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) /
+                                  unit = U2(MASS1, LENGTH1) to TIME1) /
                      ElectricTensionAmount(amount = 2,
-                                           unit = T2(MASS2, LENGTH2) to T2(TIME2, ELECTRICCURRENT2)))
+                                           unit = U2(MASS2, LENGTH2) to U2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -318,9 +318,9 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 1,
-                                          unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)),
+                                          unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) /
+                                  unit = U2(MASS1, LENGTH1) to TIME1) /
                      ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1))
     }
@@ -332,9 +332,9 @@ class EnergyAmountTest
             expected = ElectricCurrentAmount(amount = 1,
                                              unit = ELECTRICCURRENT1),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS1, LENGTH1) to TIME1) /
+                                  unit = U2(MASS1, LENGTH1) to TIME1) /
                      MagneticFluxAmount(amount = 2,
-                                        unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)))
+                                        unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -344,8 +344,8 @@ class EnergyAmountTest
             expected = ElectricCurrentAmount(amount = 1,
                                              unit = ELECTRICCURRENT2),
             actual = EnergyAmount(amount = 2,
-                                  unit = T2(MASS2, LENGTH2) to TIME2) /
+                                  unit = U2(MASS2, LENGTH2) to TIME2) /
                      MagneticFluxAmount(amount = 20,
-                                        unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT2)))
+                                        unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT2)))
     }
 }

@@ -2,7 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
-import org.pcb.unit.T2
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.ElectricCapacitance
@@ -25,7 +25,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent>, M : Unit<Mass>, L2 : Unit<Length>>(
         amount: Number,
-        unit: Pair<T2<T4, EC2>, T2<M, L2>>)
+        unit: Pair<U2<T4, EC2>, U2<M, L2>>)
     : Amount<ElectricCharge>(amount = amount.toBigBigDecimal(),
                              unit = CompositeUnit(
                                  domain = ElectricCharge::class,
@@ -43,18 +43,18 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
     {
         operator fun invoke(amount: Number, unit: Unit<ElectricCapacitance>) =
             ElectricCapacitanceAmount(amount = amount * unit.scale,
-                                      unit = T2(SECOND, AMPERE) to T2(KILOGRAM, METER))
+                                      unit = U2(SECOND, AMPERE) to U2(KILOGRAM, METER))
     }
 
     // region -> ElectricCharge
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricCapacitanceAmount(amount = amount * that.amount * that.unit.scale,
-                                  unit = T2(time, electricCurrent) to T2(mass, length))
+                                  unit = U2(time, electricCurrent) to U2(mass, length))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         ElectricCapacitanceAmount(amount = amount / that.amount / that.unit.scale,
-                                  unit = T2(time, electricCurrent) to T2(mass, length))
+                                  unit = U2(time, electricCurrent) to U2(mass, length))
 
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> plus(that: ElectricCapacitanceAmount<T, EC, M, L>) =
         ElectricCapacitanceAmount(amount = amount + that.amount
@@ -67,12 +67,12 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
                                            / convert(that.mass to mass,
                                                      that.length to length,
                                                      that.length to length),
-                                  unit = T2(time, electricCurrent) to T2(mass, length))
+                                  unit = U2(time, electricCurrent) to U2(mass, length))
 
     @JvmName("plusElectricCapacitance")
     operator fun plus(that: ElectricCapacitanceAmount<T4, EC2, M, L2>) =
         ElectricCapacitanceAmount(amount = amount + that.amount,
-                                  unit = T2(time, electricCurrent) to T2(mass, length))
+                                  unit = U2(time, electricCurrent) to U2(mass, length))
 
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> minus(that: ElectricCapacitanceAmount<T, EC, M, L>) =
         ElectricCapacitanceAmount(amount = amount - that.amount
@@ -85,12 +85,12 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
                                            / convert(that.mass to mass,
                                                      that.length to length,
                                                      that.length to length),
-                                  unit = T2(time, electricCurrent) to T2(mass, length))
+                                  unit = U2(time, electricCurrent) to U2(mass, length))
 
     @JvmName("minusElectricCapacitance")
     operator fun minus(that: ElectricCapacitanceAmount<T4, EC2, M, L2>) =
         ElectricCapacitanceAmount(amount = amount - that.amount,
-                                  unit = T2(time, electricCurrent) to T2(mass, length))
+                                  unit = U2(time, electricCurrent) to U2(mass, length))
 
     // endregion
 
@@ -127,12 +127,12 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
                                       * convert(that.mass to mass,
                                                 that.length to length,
                                                 that.length to length),
-                             unit = T2(electricCurrent, time))
+                             unit = U2(electricCurrent, time))
 
     @JvmName("timesElectricTension")
     operator fun <M : Unit<Mass>, L : Unit<Length>> times(that: ElectricTensionAmount<M, L, T4, EC2>) =
         ElectricChargeAmount(amount = amount * that.amount,
-                             unit = T2(electricCurrent, time))
+                             unit = U2(electricCurrent, time))
 
     //endregion
 

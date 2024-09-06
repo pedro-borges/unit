@@ -2,7 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
-import org.pcb.unit.T2
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.ElectricCurrent
@@ -75,7 +75,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> div(that: ElectricConductivityAmount<T, EC, M, L>) =
         ElectricResistanceAmount(amount = amount * that.amount * unit.scale,
-                                 unit = T2(that.mass, that.length) to T2(that.time, that.electricCurrent))
+                                 unit = U2(that.mass, that.length) to U2(that.time, that.electricCurrent))
 
     // endregion
 
@@ -83,7 +83,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
         ElectricConductivityAmount(amount = amount * unit.scale / that.amount,
-                                   unit = T2(that.time, that.electricCurrent) to T2(that.mass, that.length))
+                                   unit = U2(that.time, that.electricCurrent) to U2(that.mass, that.length))
 
     // endregion
 }

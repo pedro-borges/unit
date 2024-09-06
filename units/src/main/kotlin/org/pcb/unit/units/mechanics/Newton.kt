@@ -1,6 +1,6 @@
 package org.pcb.unit.units.mechanics
 
-import org.pcb.unit.T2
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Force
 import org.pcb.unit.dimension.Length
@@ -15,7 +15,7 @@ import org.pcb.unit.units.base.Second.SECOND
 class Newton(amount: Number)
     : ForceAmount<Unit<Mass>, Unit<Length>, Unit<Time>>(
     amount = amount,
-    unit = T2(KILOGRAM, METER).to(SECOND))
+    unit = U2(KILOGRAM, METER).to(SECOND))
 {
     object NEWTON : Unit<Force>(Force::class)
     {

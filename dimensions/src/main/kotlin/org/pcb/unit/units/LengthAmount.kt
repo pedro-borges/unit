@@ -2,7 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
-import org.pcb.unit.T2
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Length
@@ -106,12 +106,12 @@ open class LengthAmount<L : Unit<Length>>(
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> times(that: ForceAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount * convert(that.length to length),
-                     unit = T2(that.mass, length) to that.time)
+                     unit = U2(that.mass, length) to that.time)
 
     @JvmName("timesForce")
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = T2(that.mass, length) to that.time)
+                     unit = U2(that.mass, length) to that.time)
 
     // endregion
 }

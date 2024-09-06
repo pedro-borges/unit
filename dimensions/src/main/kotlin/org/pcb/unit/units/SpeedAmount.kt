@@ -2,7 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
-import org.pcb.unit.T2
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Length
@@ -117,12 +117,12 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
         EnergyAmount(amount = amount * that.amount
                               * convert(that.length to length)
                               / convert(that.time to time),
-                     unit = T2(that.mass, length) to time)
+                     unit = U2(that.mass, length) to time)
 
     @JvmName("timesMomentum")
     operator fun <M : Unit<Mass>> times(that: MomentumAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = T2(that.mass, length) to time)
+                     unit = U2(that.mass, length) to time)
 
     // endregion
 }

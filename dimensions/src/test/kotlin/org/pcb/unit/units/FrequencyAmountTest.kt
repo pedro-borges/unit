@@ -2,7 +2,7 @@ package org.pcb.unit.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.T2
+import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
@@ -152,7 +152,7 @@ class FrequencyAmountTest
             actual = FrequencyAmount(amount = 2,
                                      unit = NUMERIC to TIME1) *
                      DebtAmount(amount = 2,
-                                unit = T2(CURRENCY1, TIME1)))
+                                unit = U2(CURRENCY1, TIME1)))
     }
 
     @Test
@@ -164,7 +164,7 @@ class FrequencyAmountTest
             actual = FrequencyAmount(amount = 2,
                                      unit = NUMERIC to TIME2) *
                      DebtAmount(amount = 20,
-                                unit = T2(CURRENCY1, TIME1)))
+                                unit = U2(CURRENCY1, TIME1)))
     }
 
     @Test

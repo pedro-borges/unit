@@ -25,9 +25,9 @@ class ElectricConductivityAmountTest
     {
         assertEquals(
             expected = ElectricConductivityAmount(amount = 2 * 2,
-                                                  unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)),
+                                                  unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)),
             actual = ElectricConductivityAmount(amount = 2,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) *
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) *
                      Percent(amount = 2 * 100))
     }
 
@@ -36,9 +36,9 @@ class ElectricConductivityAmountTest
     {
         assertEquals(
             expected = ElectricConductivityAmount(amount = 1,
-                                                  unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)),
+                                                  unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)),
             actual = ElectricConductivityAmount(amount = 2,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) /
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) /
                      Percent(amount = 2 * 100))
     }
 
@@ -47,11 +47,11 @@ class ElectricConductivityAmountTest
     {
         assertEquals(
             expected = ElectricConductivityAmount(amount = 1,
-                                                  unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)),
+                                                  unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)),
             actual = ElectricConductivityAmount(amount = 0,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) +
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) +
                      ElectricConductivityAmount(amount = 1,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)))
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)))
     }
 
     @Test
@@ -59,11 +59,11 @@ class ElectricConductivityAmountTest
     {
         assertEquals(
             expected = ElectricConductivityAmount(amount = 1,
-                                                  unit = T2(TIME2, ELECTRICCURRENT2) to T2(MASS2, LENGTH2)),
+                                                  unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS2, LENGTH2)),
             actual = ElectricConductivityAmount(amount = 0,
-                                                unit = T2(TIME2, ELECTRICCURRENT2) to T2(MASS2, LENGTH2)) +
+                                                unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS2, LENGTH2)) +
                      ElectricConductivityAmount(amount = 100,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)))
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)))
     }
 
     @Test
@@ -71,11 +71,11 @@ class ElectricConductivityAmountTest
     {
         assertEquals(
             expected = ElectricConductivityAmount(amount = 0,
-                                                  unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)),
+                                                  unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)),
             actual = ElectricConductivityAmount(amount = 1,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) -
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) -
                      ElectricConductivityAmount(amount = 1,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)))
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)))
     }
 
     @Test
@@ -83,11 +83,11 @@ class ElectricConductivityAmountTest
     {
         assertEquals(
             expected = ElectricConductivityAmount(amount = 0,
-                                                  unit = T2(TIME2, ELECTRICCURRENT2) to T2(MASS2, LENGTH2)),
+                                                  unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS2, LENGTH2)),
             actual = ElectricConductivityAmount(amount = 1,
-                                                unit = T2(TIME2, ELECTRICCURRENT2) to T2(MASS2, LENGTH2)) -
+                                                unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS2, LENGTH2)) -
                      ElectricConductivityAmount(amount = 100,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)))
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)))
     }
 
     @Test
@@ -97,9 +97,9 @@ class ElectricConductivityAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = ElectricConductivityAmount(amount = 2,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) /
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) /
                      ElectricConductivityAmount(amount = 2,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)))
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)))
     }
 
     @Test
@@ -109,9 +109,9 @@ class ElectricConductivityAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = ElectricConductivityAmount(amount = 2,
-                                                unit = T2(TIME2, ELECTRICCURRENT2) to T2(MASS1, LENGTH1)) /
+                                                unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, LENGTH1)) /
                      ElectricConductivityAmount(amount = 200000000,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS2, LENGTH2)))
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, LENGTH2)))
     }
 
     @Test
@@ -121,9 +121,9 @@ class ElectricConductivityAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = ElectricConductivityAmount(amount = 2,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) *
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) *
                      ElectricResistanceAmount(amount = 2,
-                                              unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)))
+                                              unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -133,9 +133,9 @@ class ElectricConductivityAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = ElectricConductivityAmount(amount = 2,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) *
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) *
                      ElectricResistanceAmount(amount = 200,
-                                              unit = T2(MASS2, LENGTH2) to T2(TIME2, ELECTRICCURRENT2)))
+                                              unit = U2(MASS2, LENGTH2) to U2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -145,9 +145,9 @@ class ElectricConductivityAmountTest
             expected = ElectricCurrentAmount(amount = 2 * 2,
                                              unit = ELECTRICCURRENT1),
             actual = ElectricConductivityAmount(amount = 2,
-                                                unit = T2(TIME1, ELECTRICCURRENT1) to T2(MASS1, LENGTH1)) *
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)) *
                      ElectricTensionAmount(amount = 2,
-                                           unit = T2(MASS1, LENGTH1) to T2(TIME1, ELECTRICCURRENT1)))
+                                           unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -157,8 +157,8 @@ class ElectricConductivityAmountTest
             expected = ElectricCurrentAmount(amount = 2 * 2,
                                              unit = ELECTRICCURRENT2),
             actual = ElectricConductivityAmount(amount = 2,
-                                                unit = T2(TIME1, ELECTRICCURRENT2) to T2(MASS1, LENGTH1)) *
+                                                unit = U2(TIME1, ELECTRICCURRENT2) to U2(MASS1, LENGTH1)) *
                      ElectricTensionAmount(amount = 20,
-                                           unit = T2(MASS2, LENGTH2) to T2(TIME2, ELECTRICCURRENT1)))
+                                           unit = U2(MASS2, LENGTH2) to U2(TIME2, ELECTRICCURRENT1)))
     }
 }

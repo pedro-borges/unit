@@ -191,11 +191,11 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = T2(MASS1, LENGTH1) to TIME1),
+                                    unit = U2(MASS1, LENGTH1) to TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 to TIME1) *
                      MomentumAmount(amount = 2,
-                                    unit = T2(MASS1, LENGTH1) to TIME1))
+                                    unit = U2(MASS1, LENGTH1) to TIME1))
     }
 
     @Test
@@ -203,10 +203,10 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = T2(MASS1, LENGTH1) to TIME1),
+                                    unit = U2(MASS1, LENGTH1) to TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = LENGTH1 to TIME1) *
                      MomentumAmount(amount = 2,
-                                    unit = T2(MASS1, LENGTH2) to TIME2))
+                                    unit = U2(MASS1, LENGTH2) to TIME2))
     }
 }

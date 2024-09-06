@@ -2,7 +2,7 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
-import org.pcb.unit.T2
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Length
@@ -19,7 +19,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<T2<M, L>, T>)
+        unit: Pair<U2<M, L>, T>)
     : Amount<Momentum>(amount = amount.toBigBigDecimal(),
                        unit = CompositeUnit(
                            domain = Momentum::class,
@@ -35,35 +35,35 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MomentumAmount(amount = amount * that.amount * that.unit.scale,
-                       unit = T2(mass, length) to time)
+                       unit = U2(mass, length) to time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         MomentumAmount(amount = amount / that.amount / that.unit.scale,
-                       unit = T2(mass, length) to time)
+                       unit = U2(mass, length) to time)
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> plus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount + that.amount
                                 * convert(that.mass to mass,
                                           that.length to length)
                                 / convert(that.time to time),
-                       unit = T2(mass, length) to time)
+                       unit = U2(mass, length) to time)
 
     @JvmName("plusMomentum")
     operator fun plus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount + that.amount,
-                       unit = T2(mass, length) to time)
+                       unit = U2(mass, length) to time)
 
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> minus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount - that.amount
                                 * convert(that.mass to mass,
                                           that.length to length)
                                 / convert(that.time to time),
-                       unit = T2(mass, length) to time)
+                       unit = U2(mass, length) to time)
 
     @JvmName("minusMomentum")
     operator fun minus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount - that.amount,
-                       unit = T2(mass, length) to time)
+                       unit = U2(mass, length) to time)
 
     // endregion
 
@@ -115,12 +115,12 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount / convert(that.time to time),
-                    unit = T2(mass, length) to time)
+                    unit = U2(mass, length) to time)
 
     @JvmName("divTime")
     operator fun div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount,
-                    unit = T2(mass, length) to time)
+                    unit = U2(mass, length) to time)
 
     // endregion
 
@@ -130,12 +130,12 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
         EnergyAmount(amount = amount * that.amount
                               * convert(that.length to length)
                               / convert(that.time to time),
-                     unit = T2(mass, length) to time)
+                     unit = U2(mass, length) to time)
 
     @JvmName("timesSpeed")
     operator fun times(that: SpeedAmount<L, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = T2(mass, length) to time)
+                     unit = U2(mass, length) to time)
 
     // endregion
 }

@@ -1,6 +1,6 @@
 package org.pcb.unit.units.electromagnetism
 
-import org.pcb.unit.T2
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.ElectricCurrent
 import org.pcb.unit.dimension.Length
@@ -17,7 +17,7 @@ import org.pcb.unit.units.base.Second.SECOND
 class Weber(amount: Number)
     : MagneticFluxAmount<Unit<Mass>, Unit<Length>, Unit<Time>, Unit<ElectricCurrent>>(
     amount = amount,
-    unit = T2(KILOGRAM, METER).to(T2(SECOND, AMPERE)))
+    unit = U2(KILOGRAM, METER).to(U2(SECOND, AMPERE)))
 {
     object WEBER : Unit<MagneticFlux>(MagneticFlux::class)
     {
