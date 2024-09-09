@@ -5,8 +5,10 @@ import kotlin.test.assertEquals
 import org.pcb.unit.units.ElectricCurrentAmount
 import org.pcb.unit.units.ElectricTensionAmount
 import org.pcb.unit.units.EnergyAmount
+import org.pcb.unit.units.ForceAmount
 import org.pcb.unit.units.PowerAmount
 import org.pcb.unit.units.ScalarAmount
+import org.pcb.unit.units.SpeedAmount
 import org.pcb.unit.units.TimeAmount
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
@@ -136,6 +138,54 @@ class PowerAmountTest
                                  unit = U2(MASS1, LENGTH1) to TIME2) *
                      TimeAmount(amount = 20,
                                 unit = TIME1))
+    }
+
+    @Test
+    fun divSameSpeed()
+    {
+        assertEquals(
+            expected = ForceAmount(amount = 1,
+                                    unit = U2(MASS1, LENGTH1) to TIME1),
+            actual = PowerAmount(amount = 2,
+                                 unit = U2(MASS1, LENGTH1) to TIME1) /
+                     SpeedAmount(amount = 2,
+                                unit = LENGTH1 to TIME1))
+    }
+
+    @Test
+    fun divOtherSpeed()
+    {
+        assertEquals(
+            expected = ForceAmount(amount = 1,
+                                   unit = U2(MASS2, LENGTH2) to TIME1),
+            actual = PowerAmount(amount = 2,
+                                 unit = U2(MASS2, LENGTH2) to TIME1) /
+                     SpeedAmount(amount = 200,
+                                 unit = LENGTH1 to TIME2))
+    }
+
+    @Test
+    fun divSameForce()
+    {
+        assertEquals(
+            expected = SpeedAmount(amount = 1,
+                                    unit = LENGTH1 to TIME1),
+            actual = PowerAmount(amount = 2,
+                                 unit = U2(MASS1, LENGTH1) to TIME1) /
+                     ForceAmount(amount = 2,
+                                unit = U2(MASS1, LENGTH1) to TIME1))
+    }
+
+    @Test
+    fun divOtherForce()
+    {
+        assertEquals(
+            expected = SpeedAmount(amount = 1,
+                                   unit = LENGTH2 to TIME1),
+            actual = PowerAmount(amount = 2,
+                                 unit = U2(MASS2, LENGTH2) to TIME1) /
+                     ForceAmount(amount = 20000,
+                                 unit = U2(MASS1, LENGTH1) to TIME2))
     }
 
     @Test

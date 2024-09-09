@@ -125,4 +125,20 @@ open class SpeedAmount<L : Unit<Length>, T : Unit<Time>>(
                      unit = U2(that.mass, length) to time)
 
     // endregion
+
+    // region -> Power
+
+    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> times(that: ForceAmount<M, L, T>) =
+        PowerAmount(amount = amount * that.amount
+                              * convert(that.length to length)
+                              / convert(that.time to time,
+                                        that.time to time),
+                     unit = U2(that.mass, length) to time)
+
+    @JvmName("timesForce")
+    operator fun <M : Unit<Mass>> times(that: ForceAmount<M, L, T>) =
+        PowerAmount(amount = amount * that.amount,
+                     unit = U2(that.mass, length) to time)
+
+    // endregion
 }

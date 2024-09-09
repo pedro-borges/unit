@@ -4,9 +4,11 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.AccelerationAmount
 import org.pcb.unit.units.EnergyAmount
+import org.pcb.unit.units.ForceAmount
 import org.pcb.unit.units.FrequencyAmount
 import org.pcb.unit.units.LengthAmount
 import org.pcb.unit.units.MomentumAmount
+import org.pcb.unit.units.PowerAmount
 import org.pcb.unit.units.ScalarAmount
 import org.pcb.unit.units.SpeedAmount
 import org.pcb.unit.units.TimeAmount
@@ -15,6 +17,7 @@ import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.LENGTH2
 import org.pcb.unit.units.test.MASS1
+import org.pcb.unit.units.test.MASS2
 import org.pcb.unit.units.test.TIME1
 import org.pcb.unit.units.test.TIME2
 
@@ -208,5 +211,29 @@ class SpeedAmountTest
                                  unit = LENGTH1 to TIME1) *
                      MomentumAmount(amount = 2,
                                     unit = U2(MASS1, LENGTH2) to TIME2))
+    }
+
+    @Test
+    fun timesSameForce()
+    {
+        assertEquals(
+            expected = PowerAmount(amount = 2 * 2,
+                                    unit = U2(MASS1, LENGTH1) to TIME1),
+            actual = SpeedAmount(amount = 2,
+                                 unit = LENGTH1 to TIME1) *
+                     ForceAmount(amount = 2,
+                                    unit = U2(MASS1, LENGTH1) to TIME1))
+    }
+
+    @Test
+    fun timesOtherForce()
+    {
+        assertEquals(
+            expected = PowerAmount(amount = 2 * 2,
+                                    unit = U2(MASS2, LENGTH2) to TIME1),
+            actual = SpeedAmount(amount = 2,
+                                 unit = LENGTH2 to TIME1) *
+                     ForceAmount(amount = 2000,
+                                    unit = U2(MASS2, LENGTH1) to TIME2))
     }
 }

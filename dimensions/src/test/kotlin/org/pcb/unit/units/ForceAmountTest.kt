@@ -203,4 +203,28 @@ class ForceAmountTest
                      LengthAmount(amount = 20,
                                   unit = LENGTH1))
     }
+
+    @Test
+    fun timesSameSpeed()
+    {
+        assertEquals(
+            expected = PowerAmount(amount = 2 * 2,
+                                   unit = U2(MASS1, LENGTH1) to TIME1),
+            actual = ForceAmount(amount = 2,
+                                 unit = U2(MASS1, LENGTH1) to TIME1) *
+                     SpeedAmount(amount = 2,
+                                 unit = LENGTH1 to TIME1))
+    }
+
+    @Test
+    fun timesOtherSpeed()
+    {
+        assertEquals(
+            expected = PowerAmount(amount = 2 * 2,
+                                   unit = U2(MASS1, LENGTH2) to TIME1),
+            actual = ForceAmount(amount = 2,
+                                 unit = U2(MASS1, LENGTH2) to TIME1) *
+                     SpeedAmount(amount = 200,
+                                 unit = LENGTH1 to TIME2))
+    }
 }
