@@ -107,7 +107,7 @@ class PaceAmountTest
     fun timesSameSpeed()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = Numeric(amount = 2 * 2),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 to DISTANCE1) *
                      SpeedAmount(amount = 2,
@@ -118,7 +118,7 @@ class PaceAmountTest
     fun timesOtherSpeed()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = Numeric(amount = 2 * 2),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 to DISTANCE2) *
                      SpeedAmount(amount = 200,

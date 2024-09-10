@@ -64,6 +64,13 @@ open class TimeAmount<T : Unit<Time>>(
     operator fun div(that: TimeAmount<T>) =
         Numeric(amount = amount / that.amount)
 
+    @JvmName("timesHertz")
+    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
+        Numeric(amount = amount * that.amount / convert(that.time to time))
+
+    operator fun times(that: FrequencyAmount<T>) =
+        Numeric(amount = amount * that.amount)
+
     // endregion
 
     // region -> Pace

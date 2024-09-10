@@ -109,6 +109,28 @@ class FrequencyAmountTest
     }
 
     @Test
+    fun timesSameTime()
+    {
+        assertEquals(
+            expected = Numeric(amount = 2 * 2),
+            actual = FrequencyAmount(amount = 2,
+                                     unit = NUMERIC to TIME1) *
+                     TimeAmount(amount = 2,
+                                unit = TIME1))
+    }
+
+    @Test
+    fun timesOtherTime()
+    {
+        assertEquals(
+            expected = Numeric(amount = 2 * 2),
+            actual = FrequencyAmount(amount = 2,
+                                     unit = NUMERIC to TIME2) *
+                     TimeAmount(amount = 20,
+                                unit = TIME1))
+    }
+
+    @Test
     fun timesDistance()
     {
         assertEquals(

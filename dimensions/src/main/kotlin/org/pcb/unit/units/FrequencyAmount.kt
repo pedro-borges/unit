@@ -78,7 +78,7 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     @JvmName("timesTime")
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
-        Numeric(amount = amount * that.amount / convert(that.time to time))
+        Numeric(amount = amount * that.amount * convert(that.time to time))
 
     operator fun times(that: TimeAmount<T>) =
         Numeric(amount = amount * that.amount)

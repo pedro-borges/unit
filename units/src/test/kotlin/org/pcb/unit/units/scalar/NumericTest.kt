@@ -3,8 +3,10 @@ package org.pcb.unit.units.scalar
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.ScalarAmount
+import org.pcb.unit.units.base.Second
 import org.pcb.unit.units.electromagnetism.Ohm
 import org.pcb.unit.units.electromagnetism.Siemens
+import org.pcb.unit.units.frequency.Hertz
 import org.pcb.unit.units.mechanics.MeterPerSecond
 import org.pcb.unit.units.mechanics.SecondPerMeter
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
@@ -22,17 +24,33 @@ class NumericTest
     }
 
     @Test
+    fun hertzTimesSecond()
+    {
+        assertEquals(
+            expected = Numeric(2 * 3),
+            actual = Hertz(2) * Second(3))
+    }
+
+    @Test
+    fun meterPerSecondTimesSecondPerMeter()
+    {
+        assertEquals(
+            expected = Numeric(2 * 3),
+            actual = MeterPerSecond(2) * SecondPerMeter(3))
+    }
+
+    @Test
     fun ohmTimesSiemens() =
         assertEquals(
             expected = Numeric(2 * 3),
             actual = Ohm(2) * Siemens(3))
 
     @Test
-    fun siemensTimesOhm()
+    fun secondTimesHertz()
     {
         assertEquals(
             expected = Numeric(2 * 3),
-            actual = Siemens(2) * Ohm(3))
+            actual = Second(2) * Hertz(3))
     }
 
     @Test
@@ -42,10 +60,10 @@ class NumericTest
             actual = SecondPerMeter(2) * MeterPerSecond(3))
 
     @Test
-    fun meterPerSecondTimesSecondPerMeter()
+    fun siemensTimesOhm()
     {
         assertEquals(
             expected = Numeric(2 * 3),
-            actual = MeterPerSecond(2) * SecondPerMeter(3))
+            actual = Siemens(2) * Ohm(3))
     }
 }
