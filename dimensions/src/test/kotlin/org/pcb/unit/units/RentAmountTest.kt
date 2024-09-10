@@ -2,6 +2,7 @@ package org.pcb.unit.units
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
+import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
@@ -85,8 +86,7 @@ class RentAmountTest
     fun divSameRent()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = RentAmount(amount = 2,
                                 unit = CURRENCY1 to TIME1) /
                      RentAmount(amount = 2,
@@ -97,8 +97,7 @@ class RentAmountTest
     fun divOtherRent()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = RentAmount(amount = 2,
                                 unit = CURRENCY2 to TIME1) /
                      RentAmount(amount = 200,

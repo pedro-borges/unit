@@ -11,7 +11,7 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Meter.METER
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 
 open class VolumeAmount<L3 : Unit<Distance>>(
         amount: Number,
@@ -68,14 +68,12 @@ open class VolumeAmount<L3 : Unit<Distance>>(
 
     @JvmName("divVolume")
     operator fun <D : Unit<Distance>> div(that: VolumeAmount<D>) =
-        ScalarAmount(amount = amount / that.amount / convert(that.distance to distance,
+        Numeric(amount = amount / that.amount / convert(that.distance to distance,
                                                              that.distance to distance,
-                                                             that.distance to distance),
-                     unit = NUMERIC)
+                                                             that.distance to distance))
 
     operator fun div(that: VolumeAmount<L3>) =
-        ScalarAmount(amount = amount / that.amount,
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount)
 
     // endregion
 

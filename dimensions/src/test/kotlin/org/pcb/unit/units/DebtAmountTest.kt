@@ -3,6 +3,7 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
+import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
@@ -86,8 +87,7 @@ class DebtAmountTest
     fun divSameDebt()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = DebtAmount(amount = 2,
                                 unit = U2(CURRENCY1, TIME1)) /
                      DebtAmount(amount = 2,
@@ -98,8 +98,7 @@ class DebtAmountTest
     fun divOtherDebt()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = DebtAmount(amount = 2,
                                 unit = U2(CURRENCY2, TIME2)) /
                      DebtAmount(amount = 200,

@@ -12,7 +12,7 @@ import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 
 open class DistanceAmount<D : Unit<Distance>>(
         amount: Number,
@@ -58,12 +58,10 @@ open class DistanceAmount<D : Unit<Distance>>(
 
     @JvmName("divDistance")
     operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
-        ScalarAmount(amount = amount / that.amount / convert(that.distance to distance),
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount / convert(that.distance to distance))
 
     operator fun div(that: DistanceAmount<D>) =
-        ScalarAmount(amount = amount / that.amount,
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount)
 
     // endregion
 

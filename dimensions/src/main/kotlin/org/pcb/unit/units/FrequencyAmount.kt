@@ -17,6 +17,7 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Second.SECOND
+import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class FrequencyAmount<T : Unit<Time>>(
@@ -70,21 +71,17 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     @JvmName("divFrequency")
     operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
-        ScalarAmount(amount = amount / that.amount * convert(that.time to time),
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount * convert(that.time to time))
 
     operator fun div(that: FrequencyAmount<T>) =
-        ScalarAmount(amount = amount / that.amount,
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount)
 
     @JvmName("timesTime")
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
-        ScalarAmount(amount = amount * that.amount / convert(that.time to time),
-                     unit = NUMERIC)
+        Numeric(amount = amount * that.amount / convert(that.time to time))
 
     operator fun times(that: TimeAmount<T>) =
-        ScalarAmount(amount = amount * that.amount,
-                     unit = NUMERIC)
+        Numeric(amount = amount * that.amount)
 
     // endregion
 

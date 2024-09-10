@@ -3,6 +3,7 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
+import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.DISTANCE1
@@ -88,8 +89,7 @@ class SpeedAmountTest
     fun divSameSpeed()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = SpeedAmount(amount = 2,
                                  unit = DISTANCE1 to TIME1) /
                      SpeedAmount(amount = 2,
@@ -100,8 +100,7 @@ class SpeedAmountTest
     fun divOtherSpeed()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = SpeedAmount(amount = 2,
                                  unit = DISTANCE2 to TIME1) /
                      SpeedAmount(amount = 200,

@@ -13,7 +13,7 @@ import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 
 open class TimeAmount<T : Unit<Time>>(
         amount: Number,
@@ -59,12 +59,10 @@ open class TimeAmount<T : Unit<Time>>(
 
     @JvmName("divTime")
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
-        ScalarAmount(amount = amount / that.amount / convert(that.time to time),
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount / convert(that.time to time))
 
     operator fun div(that: TimeAmount<T>) =
-        ScalarAmount(amount = amount / that.amount,
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount)
 
     // endregion
 

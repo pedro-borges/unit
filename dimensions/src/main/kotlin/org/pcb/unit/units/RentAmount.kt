@@ -13,6 +13,7 @@ import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
@@ -65,14 +66,12 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     @JvmName("divRent")
     operator fun <C : Unit<Currency>, T : Unit<Time>> div(that: RentAmount<C, T>) =
-        ScalarAmount(amount = amount / that.amount
+        Numeric(amount = amount / that.amount
                               / convert(that.currency to currency)
-                              * convert(that.time to time),
-                     unit = NUMERIC)
+                              * convert(that.time to time))
 
     operator fun div(that: RentAmount<C, T>) =
-        ScalarAmount(amount = amount / that.amount,
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount)
 
     // endregion
 

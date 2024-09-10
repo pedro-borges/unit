@@ -17,7 +17,7 @@ import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Second.SECOND
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 
 open class MassFluxAmount<M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
@@ -76,14 +76,12 @@ open class MassFluxAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     @JvmName("divMassFlux")
     operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFluxAmount<M, T>) =
-        ScalarAmount(amount = amount / that.amount
+        Numeric(amount = amount / that.amount
                               / convert(that.mass to mass)
-                              * convert(that.time to time),
-                     unit = NUMERIC)
+                              * convert(that.time to time))
 
     operator fun div(that: MassFluxAmount<M, T>) =
-        ScalarAmount(amount = amount / that.amount,
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount)
 
     // endregion
 

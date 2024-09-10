@@ -3,6 +3,7 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
+import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.DISTANCE1
@@ -90,8 +91,7 @@ class ElectricConductivityAmountTest
     fun divSameElectricConductivity()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = ElectricConductivityAmount(amount = 2,
                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) /
                      ElectricConductivityAmount(amount = 2,
@@ -102,8 +102,7 @@ class ElectricConductivityAmountTest
     fun divOtherElectricConductivity()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = ElectricConductivityAmount(amount = 2,
                                                 unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, DISTANCE1)) /
                      ElectricConductivityAmount(amount = 200000000,
@@ -114,8 +113,7 @@ class ElectricConductivityAmountTest
     fun timesSameElectricResistance()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 2 * 2,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 2 * 2),
             actual = ElectricConductivityAmount(amount = 2,
                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) *
                      ElectricResistanceAmount(amount = 2,
@@ -126,8 +124,7 @@ class ElectricConductivityAmountTest
     fun timesOtherElectricResistance()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 2 * 2,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 2 * 2),
             actual = ElectricConductivityAmount(amount = 2,
                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)) *
                      ElectricResistanceAmount(amount = 200000000,

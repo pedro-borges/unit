@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
@@ -90,8 +90,7 @@ class ElectricTensionAmountTest
     fun divSameElectricTension()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = ElectricTensionAmount(amount = 2,
                                            unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
                      ElectricTensionAmount(amount = 2,
@@ -102,8 +101,7 @@ class ElectricTensionAmountTest
     fun divOtherElectricTension()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = ElectricTensionAmount(amount = 2,
                                            unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) /
                      ElectricTensionAmount(amount = 20000000,

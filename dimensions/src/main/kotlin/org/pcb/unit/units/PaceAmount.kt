@@ -13,7 +13,7 @@ import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 
 open class PaceAmount<T : Unit<Time>, D : Unit<Distance>>(
         amount: Number,
@@ -65,25 +65,21 @@ open class PaceAmount<T : Unit<Time>, D : Unit<Distance>>(
 
     @JvmName("divPace")
     operator fun <T : Unit<Time>, D : Unit<Distance>> div(that: PaceAmount<T, D>) =
-        ScalarAmount(amount = amount / that.amount
+        Numeric(amount = amount / that.amount
                               / convert(that.time to time)
-                              * convert(that.distance to distance),
-                     unit = NUMERIC)
+                              * convert(that.distance to distance))
 
     operator fun div(that: PaceAmount<T, D>) =
-        ScalarAmount(amount = amount / that.amount,
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount)
 
     @JvmName("timesSpeed")
     operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
-        ScalarAmount(amount = amount / that.amount
+        Numeric(amount = amount / that.amount
                               / convert(that.distance to distance)
-                              * convert(that.time to time),
-                     unit = NUMERIC)
+                              * convert(that.time to time))
 
     operator fun times(that: SpeedAmount<D, T>) =
-        ScalarAmount(amount = amount / that.amount,
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount)
 
     // endregion
 

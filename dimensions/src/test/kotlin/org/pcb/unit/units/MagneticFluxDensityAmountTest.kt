@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.ELECTRICCURRENT1
@@ -89,8 +89,7 @@ class MagneticFluxDensityAmountTest
     fun divSameMagneticFluxDensity()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = MagneticFluxDensityAmount(amount = 2,
                                                unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)) /
                      MagneticFluxDensityAmount(amount = 2,
@@ -101,8 +100,7 @@ class MagneticFluxDensityAmountTest
     fun divOtherMagneticFluxDensity()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = MagneticFluxDensityAmount(amount = 2,
                                                unit = MASS2 to U2(TIME1, ELECTRICCURRENT1)) /
                      MagneticFluxDensityAmount(amount = 20000,

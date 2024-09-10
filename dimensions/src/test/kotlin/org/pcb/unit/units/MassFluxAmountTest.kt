@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.MASS1
@@ -87,8 +87,7 @@ class MassFluxAmountTest
     fun divSameMassFlux()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = MassFluxAmount(amount = 2,
                                     unit = MASS1 to TIME1) /
                      MassFluxAmount(amount = 2,
@@ -99,8 +98,7 @@ class MassFluxAmountTest
     fun divOtherMassFlux()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = MassFluxAmount(amount = 2,
                                     unit = MASS2 to TIME1) /
                      MassFluxAmount(amount = 200,

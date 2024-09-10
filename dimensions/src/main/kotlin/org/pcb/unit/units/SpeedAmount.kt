@@ -17,6 +17,7 @@ import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
+import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
@@ -76,14 +77,12 @@ open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     @JvmName("divSpeed")
     operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
-        ScalarAmount(amount = amount / that.amount
+        Numeric(amount = amount / that.amount
                               / convert(that.distance to distance)
-                              * convert(that.time to time),
-                     unit = NUMERIC)
+                              * convert(that.time to time))
 
     operator fun div(that: SpeedAmount<D, T>) =
-        ScalarAmount(amount = amount / that.amount,
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount)
 
     // endregion
 

@@ -21,7 +21,7 @@ import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 
 open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent>, M : Unit<Mass>, D2 : Unit<Distance>>(
         amount: Number,
@@ -98,7 +98,7 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
 
     @JvmName("divElectricCapacitance")
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> div(that: ElectricCapacitanceAmount<T, EC, M, D>) =
-        ScalarAmount(amount = amount / that.amount
+        Numeric(amount = amount / that.amount
                               / convert(that.time to time,
                                         that.time to time,
                                         that.time to time,
@@ -107,12 +107,10 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
                                         that.electricCurrent to electricCurrent)
                               * convert(that.mass to mass,
                                         that.distance to distance,
-                                        that.distance to distance),
-                     unit = NUMERIC)
+                                        that.distance to distance))
 
     operator fun div(that: ElectricCapacitanceAmount<T4, EC2, M, D2>) =
-        ScalarAmount(amount = amount / that.amount,
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount)
 
     // endregion
 

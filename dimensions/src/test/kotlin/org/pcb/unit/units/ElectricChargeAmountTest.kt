@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
@@ -90,8 +90,7 @@ class ElectricChargeAmountTest
     fun divSameElectricCharge()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = ElectricChargeAmount(amount = 2,
                                           unit = U2(ELECTRICCURRENT1, TIME1)) /
                      ElectricChargeAmount(amount = 2,
@@ -102,8 +101,7 @@ class ElectricChargeAmountTest
     fun divOtherElectricCharge()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = ElectricChargeAmount(amount = 2,
                                           unit = U2(ELECTRICCURRENT2, TIME2)) /
                      ElectricChargeAmount(amount = 200,

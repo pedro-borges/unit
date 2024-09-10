@@ -20,7 +20,7 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 
 open class EnergyAmount<M : Unit<Mass>, D2 : Unit<Distance>, T2 : Unit<Time>>(
         amount: Number,
@@ -88,17 +88,15 @@ open class EnergyAmount<M : Unit<Mass>, D2 : Unit<Distance>, T2 : Unit<Time>>(
 
     @JvmName("divEnergy")
     operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: EnergyAmount<M, D, T>) =
-        ScalarAmount(amount = amount / that.amount
+        Numeric(amount = amount / that.amount
                               / convert(that.mass to mass,
                                         that.distance to distance,
                                         that.distance to distance)
                               * convert(that.time to time,
-                                        that.time to time),
-                     unit = NUMERIC)
+                                        that.time to time))
 
     operator fun div(that: EnergyAmount<M, D2, T2>) =
-        ScalarAmount(amount = amount / that.amount,
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount)
 
     // endregion
 

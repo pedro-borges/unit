@@ -15,7 +15,7 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Meter.METER
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 
 open class AreaAmount<D2 : Unit<Distance>>(
         amount: Number,
@@ -70,13 +70,11 @@ open class AreaAmount<D2 : Unit<Distance>>(
 
     @JvmName("divArea")
     operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
-        ScalarAmount(amount = amount / that.amount / convert(that.distance to distance,
-                                                             that.distance to distance),
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount / convert(that.distance to distance,
+                                                             that.distance to distance))
 
     operator fun div(that: AreaAmount<D2>) =
-        ScalarAmount(amount = amount / that.amount,
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount)
 
     // endregion
 

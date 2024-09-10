@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.pcb.unit.U2
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.MASS1
@@ -86,8 +86,7 @@ class MassAmountTest
     fun divSameMass()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = MassAmount(amount = 2,
                                 unit = MASS1) /
                      MassAmount(amount = 2,
@@ -98,8 +97,7 @@ class MassAmountTest
     fun divOtherMass()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = MassAmount(amount = 2,
                                 unit = MASS2) /
                      MassAmount(amount = 20,

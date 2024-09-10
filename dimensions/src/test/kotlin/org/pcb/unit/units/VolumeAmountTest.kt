@@ -2,7 +2,7 @@ package org.pcb.unit.units
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
@@ -83,8 +83,7 @@ class VolumeAmountTest
     fun divSameVolume()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = VolumeAmount(amount = 2,
                                   unit = DISTANCE1) /
                      VolumeAmount(amount = 2,
@@ -95,8 +94,7 @@ class VolumeAmountTest
     fun divOtherVolume()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = VolumeAmount(amount = 2,
                                   unit = DISTANCE2) /
                      VolumeAmount(amount = 2000,

@@ -16,7 +16,7 @@ import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Second.SECOND
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 
 open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
         amount: Number,
@@ -73,13 +73,11 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
 
     @JvmName("divElectricCharge")
     operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricChargeAmount<EC, T>) =
-        ScalarAmount(amount = amount / that.amount / convert(that.electricCurrent to electricCurrent,
-                                                             that.time to time),
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount / convert(that.electricCurrent to electricCurrent,
+                                                             that.time to time))
 
     operator fun div(that: ElectricChargeAmount<EC, T>) =
-        ScalarAmount(amount = amount / that.amount,
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount)
 
     // endregion
 

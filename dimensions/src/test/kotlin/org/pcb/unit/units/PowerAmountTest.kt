@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
@@ -89,8 +89,7 @@ class PowerAmountTest
     fun divSamePower()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = PowerAmount(amount = 2,
                                  unit = U2(MASS2, DISTANCE2) to TIME1) /
                      PowerAmount(amount = 2000000,
@@ -101,8 +100,7 @@ class PowerAmountTest
     fun divOtherPower()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
-                                    unit = NUMERIC),
+            expected = Numeric(amount = 1),
             actual = PowerAmount(amount = 2,
                                  unit = U2(MASS1, DISTANCE1) to TIME1) /
                      PowerAmount(amount = 2,

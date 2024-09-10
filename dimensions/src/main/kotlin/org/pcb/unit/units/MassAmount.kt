@@ -12,7 +12,7 @@ import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.scalar.Numeric
 
 open class MassAmount<M : Unit<Mass>>(
         amount: Number,
@@ -58,12 +58,10 @@ open class MassAmount<M : Unit<Mass>>(
 
     @JvmName("divMass")
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
-        ScalarAmount(amount = amount / that.amount / convert(that.mass to mass),
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount / convert(that.mass to mass))
 
     operator fun div(that: MassAmount<M>) =
-        ScalarAmount(amount = amount / that.amount,
-                     unit = NUMERIC)
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
