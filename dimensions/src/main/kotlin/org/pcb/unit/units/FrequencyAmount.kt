@@ -127,19 +127,19 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // endregion
 
-    // region -> ElectricConductivity
+    // region -> ElectricConductance
 
     @JvmName("timesCapacitance")
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> times(that: CapacitanceAmount<T, EC, M, D>) =
-        ElectricConductivityAmount(amount = that.amount * amount * convert(that.time to time,
-                                                                           that.time to time,
-                                                                           that.time to time,
-                                                                           that.time to time),
-                                   unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
+        ElectricConductanceAmount(amount = that.amount * amount * convert(that.time to time,
+                                                                          that.time to time,
+                                                                          that.time to time,
+                                                                          that.time to time),
+                                  unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
 
     operator fun <EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> times(that: CapacitanceAmount<T, EC, M, D>) =
-        ElectricConductivityAmount(amount = that.amount * amount,
-                                   unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
+        ElectricConductanceAmount(amount = that.amount * amount,
+                                  unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
 
     // endregion
 }

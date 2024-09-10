@@ -181,27 +181,27 @@ class ElectricTensionAmountTest
     }
 
     @Test
-    fun timesSameElectricConductivity()
+    fun timesSameElectricConductance()
     {
         assertEquals(
             expected = ElectricCurrentAmount(amount = 2 * 2,
                                              unit = ELECTRICCURRENT1),
             actual = ElectricTensionAmount(amount = 2,
                                            unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) *
-                     ElectricConductivityAmount(amount = 2,
-                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
+                     ElectricConductanceAmount(amount = 2,
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
     }
 
     @Test
-    fun timesOtherElectricConductivity()
+    fun timesOtherElectricConductance()
     {
         assertEquals(
             expected = ElectricCurrentAmount(amount = 2 * 2,
                                              unit = ELECTRICCURRENT1),
             actual = ElectricTensionAmount(amount = 2,
                                            unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) *
-                     ElectricConductivityAmount(amount = 200000000,
-                                                unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, DISTANCE1)))
+                     ElectricConductanceAmount(amount = 200000000,
+                                               unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, DISTANCE1)))
     }
 
     @Test

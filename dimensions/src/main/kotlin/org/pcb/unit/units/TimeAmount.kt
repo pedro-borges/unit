@@ -117,14 +117,14 @@ open class TimeAmount<T : Unit<Time>>(
         CapacitanceAmount(amount = amount / that.amount,
                           unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
 
-    @JvmName("timesElectricConductivity")
-    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> times(that: ElectricConductivityAmount<T, EC, M, D>) =
+    @JvmName("timesElectricConductance")
+    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> times(that: ElectricConductanceAmount<T, EC, M, D>) =
         CapacitanceAmount(amount = amount * that.amount * convert(that.time to time,
                                                                   that.time to time,
                                                                   that.time to time),
                           unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
 
-    operator fun <EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> times(that: ElectricConductivityAmount<T, EC, M, D>) =
+    operator fun <EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> times(that: ElectricConductanceAmount<T, EC, M, D>) =
         CapacitanceAmount(amount = amount * that.amount,
                           unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
 

@@ -86,28 +86,28 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
         ElectricTensionAmount(amount = amount * that.amount,
                               unit = U2(that.mass, that.distance) to U2(that.time, electricCurrent))
 
-    @JvmName("divElectricConductivity")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricConductivityAmount<T, EC, M, D>) =
+    @JvmName("divElectricConductance")
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricConductanceAmount<T, EC, M, D>) =
         ElectricTensionAmount(amount = amount / that.amount * convert(that.electricCurrent to electricCurrent,
                                                                       that.electricCurrent to electricCurrent),
                               unit = U2(that.mass, that.distance) to U2(that.time, electricCurrent))
 
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: ElectricConductivityAmount<T, EC, M, D>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: ElectricConductanceAmount<T, EC, M, D>) =
         ElectricTensionAmount(amount = amount / that.amount,
                               unit = U2(that.mass, that.distance) to U2(that.time, electricCurrent))
 
     // endregion
 
-    // region -> ElectricConductivity
+    // region -> ElectricConductance
 
     @JvmName("divElectricTension")
     operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricTensionAmount<M, D, T, EC>) =
-        ElectricConductivityAmount(amount = amount / that.amount * convert(that.electricCurrent to electricCurrent),
-                                   unit = U2(that.time, electricCurrent) to U2(that.mass, that.distance))
+        ElectricConductanceAmount(amount = amount / that.amount * convert(that.electricCurrent to electricCurrent),
+                                  unit = U2(that.time, electricCurrent) to U2(that.mass, that.distance))
 
     operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: ElectricTensionAmount<M, D, T, EC>) =
-        ElectricConductivityAmount(amount = amount / that.amount,
-                                   unit = U2(that.time, electricCurrent) to U2(that.mass, that.distance))
+        ElectricConductanceAmount(amount = amount / that.amount,
+                                  unit = U2(that.time, electricCurrent) to U2(that.mass, that.distance))
 
     // endregion
 

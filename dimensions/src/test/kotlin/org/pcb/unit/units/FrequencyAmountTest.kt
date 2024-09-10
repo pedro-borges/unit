@@ -206,8 +206,8 @@ class FrequencyAmountTest
     fun timesSameCapacitance()
     {
         assertEquals(
-            expected = ElectricConductivityAmount(amount = 2 * 2,
-                                                  unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            expected = ElectricConductanceAmount(amount = 2 * 2,
+                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = FrequencyAmount(amount = 2,
                                      unit = NUMERIC to TIME1) *
                      CapacitanceAmount(amount = 2,
@@ -218,8 +218,8 @@ class FrequencyAmountTest
     fun timesOtherCapacitance()
     {
         assertEquals(
-            expected = ElectricConductivityAmount(amount = 2 * 2,
-                                                  unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            expected = ElectricConductanceAmount(amount = 2 * 2,
+                                                 unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = FrequencyAmount(amount = 2,
                                      unit = NUMERIC to TIME2) *
                      CapacitanceAmount(amount = 20000,

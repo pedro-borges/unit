@@ -108,8 +108,8 @@ open class ElectricResistanceAmount<M : Unit<Mass>, D2 : Unit<Distance>, T3 : Un
     operator fun div(that: ElectricResistanceAmount<M, D2, T3, EC2>) =
         Numeric(amount = amount / that.amount)
 
-    @JvmName("timesElectricConductivity")
-    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> times(that: ElectricConductivityAmount<T, EC, M, D>) =
+    @JvmName("timesElectricConductance")
+    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> times(that: ElectricConductanceAmount<T, EC, M, D>) =
         Numeric(amount = amount * that.amount
                          * convert(that.mass to mass,
                                    that.distance to distance,
@@ -120,7 +120,7 @@ open class ElectricResistanceAmount<M : Unit<Mass>, D2 : Unit<Distance>, T3 : Un
                                    that.electricCurrent to electricCurrent,
                                    that.electricCurrent to electricCurrent))
 
-    operator fun times(that: ElectricConductivityAmount<T3, EC2, M, D2>) =
+    operator fun times(that: ElectricConductanceAmount<T3, EC2, M, D2>) =
         Numeric(amount = amount * that.amount)
 
     // endregion

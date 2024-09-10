@@ -143,35 +143,35 @@ class ElectricCurrentAmountTest
     }
 
     @Test
-    fun divSameElectricConductivity()
+    fun divSameElectricConductance()
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 1,
                                              unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT1)),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) /
-                     ElectricConductivityAmount(amount = 2,
-                                                unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)))
+                     ElectricConductanceAmount(amount = 2,
+                                               unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)))
     }
 
     @Test
-    fun divOtherElectricConductivity()
+    fun divOtherElectricConductance()
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 1,
                                              unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT1)),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) /
-                     ElectricConductivityAmount(amount = 200,
-                                                unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS2, DISTANCE2)))
+                     ElectricConductanceAmount(amount = 200,
+                                               unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS2, DISTANCE2)))
     }
 
     @Test
     fun divSameElectricTension()
     {
         assertEquals(
-            expected = ElectricConductivityAmount(amount = 1,
-                                                  unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)),
+            expected = ElectricConductanceAmount(amount = 1,
+                                                 unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) /
                      ElectricTensionAmount(amount = 2,
@@ -182,8 +182,8 @@ class ElectricCurrentAmountTest
     fun divOtherElectricTension()
     {
         assertEquals(
-            expected = ElectricConductivityAmount(amount = 1,
-                                                  unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)),
+            expected = ElectricConductanceAmount(amount = 1,
+                                                 unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) /
                      ElectricTensionAmount(amount = 20,

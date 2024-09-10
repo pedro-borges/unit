@@ -108,22 +108,22 @@ class ScalarAmountTest
     }
 
     @Test
-    fun divElectricConductivity()
+    fun divElectricConductance()
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 2 * 2,
                                                 unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
             actual = Percent(amount = 2 * 100) /
-                     ElectricConductivityAmount(amount = 2,
-                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
+                     ElectricConductanceAmount(amount = 2,
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
     }
 
     @Test
     fun divElectricResistance()
     {
         assertEquals(
-            expected = ElectricConductivityAmount(amount = 1,
-                                                  unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            expected = ElectricConductanceAmount(amount = 1,
+                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = Percent(amount = 2 * 100) /
                      ElectricResistanceAmount(amount = 2,
                                               unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))

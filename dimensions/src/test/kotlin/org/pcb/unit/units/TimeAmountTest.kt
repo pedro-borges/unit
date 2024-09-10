@@ -204,27 +204,27 @@ class TimeAmountTest
     }
 
     @Test
-    fun timesSameElectricConductivity()
+    fun timesSameElectricConductance()
     {
         assertEquals(
             expected = CapacitanceAmount(amount = 2 * 2,
                                          unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
-                     ElectricConductivityAmount(amount = 2,
-                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
+                     ElectricConductanceAmount(amount = 2,
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
     }
 
     @Test
-    fun timesOtherElectricConductivity()
+    fun timesOtherElectricConductance()
     {
         assertEquals(
             expected = CapacitanceAmount(amount = 2 * 2,
                                          unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME2) *
-                     ElectricConductivityAmount(amount = 2000,
-                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
+                     ElectricConductanceAmount(amount = 2000,
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
     }
 
     @Test

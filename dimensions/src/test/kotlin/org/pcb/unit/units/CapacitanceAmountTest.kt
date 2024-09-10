@@ -161,8 +161,8 @@ class CapacitanceAmountTest
     fun timesSameFrequency()
     {
         assertEquals(
-            expected = ElectricConductivityAmount(amount = 2 * 2,
-                                                  unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            expected = ElectricConductanceAmount(amount = 2 * 2,
+                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = CapacitanceAmount(amount = 2,
                                        unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) *
                      FrequencyAmount(amount = 2,
@@ -173,8 +173,8 @@ class CapacitanceAmountTest
     fun timesOtherFrequency()
     {
         assertEquals(
-            expected = ElectricConductivityAmount(amount = 2 * 2,
-                                                  unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            expected = ElectricConductanceAmount(amount = 2 * 2,
+                                                 unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = CapacitanceAmount(amount = 2,
                                        unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) *
                      FrequencyAmount(amount = 20,
@@ -185,8 +185,8 @@ class CapacitanceAmountTest
     fun divSameTime()
     {
         assertEquals(
-            expected = ElectricConductivityAmount(amount = 1,
-                                                  unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            expected = ElectricConductanceAmount(amount = 1,
+                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = CapacitanceAmount(amount = 2,
                                        unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) /
                      TimeAmount(amount = 2,
@@ -197,8 +197,8 @@ class CapacitanceAmountTest
     fun divOtherTime()
     {
         assertEquals(
-            expected = ElectricConductivityAmount(amount = 1,
-                                                  unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            expected = ElectricConductanceAmount(amount = 1,
+                                                 unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = CapacitanceAmount(amount = 2,
                                        unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) /
                      TimeAmount(amount = 20,
@@ -206,15 +206,15 @@ class CapacitanceAmountTest
     }
 
     @Test
-    fun divSameElectricConductivity()
+    fun divSameElectricConductance()
     {
         assertEquals(
             expected = TimeAmount(amount = 1,
                                   unit = TIME1),
             actual = CapacitanceAmount(amount = 2,
                                        unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) /
-                     ElectricConductivityAmount(amount = 2,
-                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
+                     ElectricConductanceAmount(amount = 2,
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
     }
 
     @Test
@@ -225,7 +225,7 @@ class CapacitanceAmountTest
                                   unit = TIME2),
             actual = CapacitanceAmount(amount = 2,
                                        unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, DISTANCE1)) /
-                     ElectricConductivityAmount(amount = 200000000,
-                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)))
+                     ElectricConductanceAmount(amount = 200000000,
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)))
     }
 }
