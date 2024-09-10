@@ -2,12 +2,11 @@ package org.pcb.unit.units.scalar
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.Unit
+import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.units.ScalarAmount
 import org.pcb.unit.units.electromagnetism.Ohm
 import org.pcb.unit.units.electromagnetism.Siemens
-import org.pcb.unit.units.mechanics.MeterPerSecond
-import org.pcb.unit.units.mechanics.Newton
-import org.pcb.unit.units.mechanics.Watt
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 class NumericTest
@@ -19,36 +18,20 @@ class NumericTest
     fun unit()
     {
         Numeric(2) equivalent ScalarAmount(2, NUMERIC)
+        assertEquals(Numeric(2), Numeric(1) + Numeric(1))
     }
 
     @Test
     fun ohmTimesSiemens() =
-        assertEquals(
+        assertEquals<ScalarAmount<out Unit<Scalar>>>(
             expected = Numeric(2 * 3),
             actual = Ohm(2) * Siemens(3))
 
     @Test
     fun siemensTimesOhm()
     {
-        val expected = Numeric(2 * 3)
-        val v1 = Siemens(2)
-        val v2 = Ohm(3)
-        val actual = v1 * v2
-        assertEquals(
-            expected = expected,
-            actual = actual)
+        assertEquals<ScalarAmount<out Unit<Scalar>>>(
+            expected = Numeric(2 * 3),
+            actual = Siemens(2) * Ohm(3))
     }
-
-    @Test
-    fun newtonTimesMeterPerSecond()
-    {
-        val expected = Watt(2 * 3)
-        val v1 = Newton(2)
-        val v2 = MeterPerSecond(3)
-        val actual = v1 * v2
-        assertEquals(
-            expected = expected,
-            actual = actual)
-    }
-
 }

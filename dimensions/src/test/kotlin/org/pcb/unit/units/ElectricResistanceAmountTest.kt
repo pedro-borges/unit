@@ -114,7 +114,7 @@ class ElectricResistanceAmountTest
     fun timesSameElectricConductivity()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
+            expected = ScalarAmount(amount = 2 * 2,
                                     unit = NUMERIC),
             actual = ElectricResistanceAmount(amount = 2,
                                               unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) *
@@ -126,7 +126,7 @@ class ElectricResistanceAmountTest
     fun timesOtherElectricConductivity()
     {
         assertEquals(
-            expected = ScalarAmount(amount = 1,
+            expected = ScalarAmount(amount = 2 * 2,
                                     unit = NUMERIC),
             actual = ElectricResistanceAmount(amount = 2,
                                               unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) *

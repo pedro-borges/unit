@@ -112,19 +112,19 @@ open class ElectricResistanceAmount<M : Unit<Mass>, D2 : Unit<Distance>, T3 : Un
 
     @JvmName("timesElectricConductivity")
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> times(that: ElectricConductivityAmount<T, EC, M, D>) =
-        ScalarAmount(amount = amount / that.amount
-                              * convert(that.time to time,
+        ScalarAmount(amount = amount * that.amount
+                              * convert(that.mass to mass,
+                                        that.distance to distance,
+                                        that.distance to distance)
+                              / convert(that.time to time,
                                         that.time to time,
                                         that.time to time,
                                         that.electricCurrent to electricCurrent,
-                                        that.electricCurrent to electricCurrent)
-                              / convert(that.mass to mass,
-                                        that.distance to distance,
-                                        that.distance to distance),
+                                        that.electricCurrent to electricCurrent),
                      unit = NUMERIC)
 
     operator fun times(that: ElectricConductivityAmount<T3, EC2, M, D2>) =
-        ScalarAmount(amount = amount / that.amount,
+        ScalarAmount(amount = amount * that.amount,
                      unit = NUMERIC)
 
     // endregion
