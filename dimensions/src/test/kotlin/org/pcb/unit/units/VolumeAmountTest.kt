@@ -2,10 +2,13 @@ package org.pcb.unit.units
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
+import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
+import org.pcb.unit.units.test.MASS2
+import org.pcb.unit.units.test.TIME2
 
 class VolumeAmountTest
 {
@@ -147,5 +150,29 @@ class VolumeAmountTest
                                   unit = DISTANCE2) /
                      AreaAmount(amount = 200,
                                 unit = DISTANCE1))
+    }
+
+    @Test
+    fun timesSamePressure()
+    {
+        assertEquals(
+            expected = EnergyAmount(amount = 2 * 2,
+                                    unit = U2(MASS2, DISTANCE1) to TIME2),
+            actual = VolumeAmount(amount = 2,
+                                  unit = DISTANCE1) *
+                     PressureAmount(amount = 2,
+                                    unit = MASS2 to U2(DISTANCE1, TIME2)))
+    }
+
+    @Test
+    fun timesOtherPressure()
+    {
+        assertEquals(
+            expected = EnergyAmount(amount = 2 * 2,
+                                    unit = U2(MASS2, DISTANCE1) to TIME2),
+            actual = VolumeAmount(amount = 2,
+                                  unit = DISTANCE1) *
+                     PressureAmount(amount = 20,
+                                    unit = MASS2 to U2(DISTANCE2, TIME2)))
     }
 }

@@ -335,4 +335,52 @@ class EnergyAmountTest
                      MagneticFluxAmount(amount = 200000,
                                         unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
     }
+
+    @Test
+    fun divSameVolume()
+    {
+        assertEquals(
+            expected = PressureAmount(amount = 1,
+                                      unit = MASS1 to U2(DISTANCE1, TIME1)),
+            actual = EnergyAmount(amount = 2,
+                                  unit = U2(MASS1, DISTANCE1) to TIME1) /
+                     VolumeAmount(amount = 2,
+                                  unit = DISTANCE1))
+    }
+
+    @Test
+    fun divOtherArea()
+    {
+        assertEquals(
+            expected = PressureAmount(amount = 1,
+                                      unit = MASS1 to U2(DISTANCE2, TIME1)),
+            actual = EnergyAmount(amount = 2,
+                                  unit = U2(MASS1, DISTANCE2) to TIME1) /
+                     VolumeAmount(amount = 2000,
+                                  unit = DISTANCE1))
+    }
+
+    @Test
+    fun divSamePressure()
+    {
+        assertEquals(
+            expected = VolumeAmount(amount = 1,
+                                    unit = DISTANCE1),
+            actual = EnergyAmount(amount = 2,
+                                  unit = U2(MASS1, DISTANCE1) to TIME1) /
+                     PressureAmount(amount = 2,
+                                    unit = MASS1 to U2(DISTANCE1, TIME1)))
+    }
+
+    @Test
+    fun divOtherPressure()
+    {
+        assertEquals(
+            expected = VolumeAmount(amount = 1,
+                                    unit = DISTANCE1),
+            actual = EnergyAmount(amount = 2,
+                                  unit = U2(MASS2, DISTANCE1) to TIME1) /
+                     PressureAmount(amount = 20000,
+                                    unit = MASS1 to U2(DISTANCE2, TIME2)))
+    }
 }

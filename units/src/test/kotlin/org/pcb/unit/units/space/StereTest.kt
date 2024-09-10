@@ -5,7 +5,9 @@ import kotlin.test.assertEquals
 import org.pcb.unit.units.VolumeAmount
 import org.pcb.unit.units.base.Meter
 import org.pcb.unit.units.base.Meter.METER
+import org.pcb.unit.units.mechanics.Joule
 import org.pcb.unit.units.space.Stere.STERE
+import org.pcb.unit.units.thermodynamics.Pascal
 
 class StereTest
 {
@@ -20,4 +22,10 @@ class StereTest
         Stere(1) equivalent VolumeAmount(1, METER)
         Stere(1) equivalent VolumeAmount(1, STERE)
     }
+
+    @Test
+    fun jouleDivPascal() =
+        assertEquals(
+            expected = Stere(6 / 3),
+            actual = Joule(6) / Pascal(3))
 }

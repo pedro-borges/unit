@@ -7,8 +7,10 @@ import org.pcb.unit.units.PressureAmount
 import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
+import org.pcb.unit.units.mechanics.Joule
 import org.pcb.unit.units.mechanics.Newton
 import org.pcb.unit.units.space.SquareMeter
+import org.pcb.unit.units.space.Stere
 import org.pcb.unit.units.thermodynamics.Pascal.PASCAL
 
 class PascalTest
@@ -28,4 +30,10 @@ class PascalTest
         assertEquals(
             expected = Pascal(6 / 3),
             actual = Newton(6) / SquareMeter(3))
+
+    @Test
+    fun jouleDivStere() =
+        assertEquals(
+            expected = Pascal(6 / 3),
+            actual = Joule(6) / Stere(3))
 }

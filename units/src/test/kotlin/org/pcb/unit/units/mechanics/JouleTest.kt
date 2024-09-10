@@ -15,6 +15,8 @@ import org.pcb.unit.units.electromagnetism.Coulomb
 import org.pcb.unit.units.electromagnetism.Volt
 import org.pcb.unit.units.electromagnetism.Weber
 import org.pcb.unit.units.mechanics.Joule.JOULE
+import org.pcb.unit.units.space.Stere
+import org.pcb.unit.units.thermodynamics.Pascal
 
 class JouleTest
 {
@@ -54,10 +56,22 @@ class JouleTest
             actual = Newton(2) * Meter(3))
 
     @Test
+    fun pascalTimesStere() =
+        assertEquals(
+            expected = Joule(2 * 3),
+            actual = Pascal(2) * Stere(3))
+
+    @Test
     fun secondTimesWatt() =
         assertEquals(
             expected = Joule(2 * 3),
             actual = Second(2) * Watt(3))
+
+    @Test
+    fun stereTimesPascal() =
+        assertEquals(
+            expected = Joule(2 * 3),
+            actual = Stere(2) * Pascal(3))
 
     @Test
     fun voltTimesCoulomb() =

@@ -250,4 +250,36 @@ open class EnergyAmount<M : Unit<Mass>, D2 : Unit<Distance>, T2 : Unit<Time>>(
                               unit = that.electricCurrent)
 
     // endregion
+
+    // region -> Pressure
+
+    @JvmName("divVolume")
+    operator fun <D : Unit<Distance>> div(that: VolumeAmount<D>) =
+        PressureAmount(amount = amount / that.amount / convert(that.distance to distance,
+                                                               that.distance to distance,
+                                                               that.distance to distance),
+                       unit = mass to U2(distance, time))
+
+    operator fun div(that: VolumeAmount<D2>) =
+        PressureAmount(amount = amount / that.amount,
+                       unit = mass to U2(distance, time))
+
+    // endregion
+
+    // region -> Volume
+
+    @JvmName("divPressure")
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: PressureAmount<M, D, T>) =
+        VolumeAmount(amount = amount / that.amount
+                              / convert(that.mass to mass)
+                              * convert(that.distance to distance,
+                                        that.time to time,
+                                        that.time to time),
+                     unit = distance)
+
+    operator fun div(that: PressureAmount<M, D2, T2>) =
+        VolumeAmount(amount = amount / that.amount,
+                     unit = distance)
+
+    // endregion
 }
