@@ -117,7 +117,7 @@ class TimeAmountTest
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
                      FrequencyAmount(amount = 2,
-                                unit = NUMERIC to TIME1))
+                                     unit = NUMERIC to TIME1))
     }
 
     @Test
@@ -128,7 +128,7 @@ class TimeAmountTest
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
                      FrequencyAmount(amount = 20,
-                                unit = NUMERIC to TIME2))
+                                     unit = NUMERIC to TIME2))
     }
 
     @Test

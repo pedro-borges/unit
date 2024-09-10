@@ -60,13 +60,13 @@ open class ElectricConductanceAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurrent
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> plus(that: ElectricConductanceAmount<T, EC, M, D>) =
         ElectricConductanceAmount(amount = amount + that.amount
                                            * convert(that.time to time,
-                                                      that.time to time,
-                                                      that.time to time,
-                                                      that.electricCurrent to electricCurrent,
-                                                      that.electricCurrent to electricCurrent)
+                                                     that.time to time,
+                                                     that.time to time,
+                                                     that.electricCurrent to electricCurrent,
+                                                     that.electricCurrent to electricCurrent)
                                            / convert(that.mass to mass,
-                                                      that.distance to distance,
-                                                      that.distance to distance),
+                                                     that.distance to distance,
+                                                     that.distance to distance),
                                   unit = U2(time, electricCurrent) to U2(mass, distance))
 
     operator fun plus(that: ElectricConductanceAmount<T3, EC2, M, D2>) =
@@ -77,13 +77,13 @@ open class ElectricConductanceAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurrent
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> minus(that: ElectricConductanceAmount<T, EC, M, D>) =
         ElectricConductanceAmount(amount = amount - that.amount
                                            * convert(that.time to time,
-                                                      that.time to time,
-                                                      that.time to time,
-                                                      that.electricCurrent to electricCurrent,
-                                                      that.electricCurrent to electricCurrent)
+                                                     that.time to time,
+                                                     that.time to time,
+                                                     that.electricCurrent to electricCurrent,
+                                                     that.electricCurrent to electricCurrent)
                                            / convert(that.mass to mass,
-                                                      that.distance to distance,
-                                                      that.distance to distance),
+                                                     that.distance to distance,
+                                                     that.distance to distance),
                                   unit = U2(time, electricCurrent) to U2(mass, distance))
 
     operator fun minus(that: ElectricConductanceAmount<T3, EC2, M, D2>) =
