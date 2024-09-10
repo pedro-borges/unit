@@ -139,11 +139,11 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = ElectricCapacitanceAmount(amount = 1,
-                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)),
+                                                 unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS2, DISTANCE2)),
             actual = ElectricChargeAmount(amount = 2,
-                                          unit = U2(ELECTRICCURRENT1, TIME1)) /
+                                          unit = U2(ELECTRICCURRENT2, TIME2)) /
                      ElectricTensionAmount(amount = 20000,
-                                           unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT2)))
+                                           unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -162,12 +162,12 @@ class ElectricChargeAmountTest
     fun divOtherElectricCapacitance()
     {
         assertEquals(
-            expected = ElectricTensionAmount(amount = 128 / 128,
-                                             unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)),
-            actual = ElectricChargeAmount(amount = 2000000,
-                                          unit = U2(ELECTRICCURRENT1, TIME1)) /
-                     ElectricCapacitanceAmount(amount = 2,
-                                               unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS2, DISTANCE2)))
+            expected = ElectricTensionAmount(amount = 1,
+                                             unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT2)),
+            actual = ElectricChargeAmount(amount = 2,
+                                          unit = U2(ELECTRICCURRENT2, TIME2)) /
+                     ElectricCapacitanceAmount(amount = 2000000,
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)))
     }
 
     @Test
@@ -211,10 +211,10 @@ class ElectricChargeAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+                                          unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricChargeAmount(amount = 2,
                                           unit = U2(ELECTRICCURRENT1, TIME1)) *
                      ElectricResistanceAmount(amount = 200000,
-                                              unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
+                                              unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT2)))
     }
 }

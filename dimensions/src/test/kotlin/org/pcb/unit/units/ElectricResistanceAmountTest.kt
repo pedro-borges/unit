@@ -55,11 +55,11 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 1,
-                                                unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+                                                unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricResistanceAmount(amount = 0,
-                                              unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) +
-                     ElectricResistanceAmount(amount = 100,
-                                              unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT2)))
+                                              unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) +
+                     ElectricResistanceAmount(amount = 100000000,
+                                              unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -79,11 +79,11 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 0,
-                                                unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+                                                unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricResistanceAmount(amount = 1,
-                                              unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) -
-                     ElectricResistanceAmount(amount = 100,
-                                              unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT2)))
+                                              unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) -
+                     ElectricResistanceAmount(amount = 100000000,
+                                              unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -105,9 +105,9 @@ class ElectricResistanceAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = ElectricResistanceAmount(amount = 2,
-                                              unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
-                     ElectricResistanceAmount(amount = 200,
-                                              unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT2)))
+                                              unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) /
+                     ElectricResistanceAmount(amount = 200000000,
+                                              unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -175,11 +175,11 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = TimeAmount(amount = 2 * 2,
-                                  unit = TIME1),
+                                  unit = TIME2),
             actual = ElectricResistanceAmount(amount = 2,
-                                              unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT2)) *
-                     ElectricCapacitanceAmount(amount = 20,
-                                               unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)))
+                                              unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)) *
+                     ElectricCapacitanceAmount(amount = 2000000000,
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)))
     }
 
     @Test

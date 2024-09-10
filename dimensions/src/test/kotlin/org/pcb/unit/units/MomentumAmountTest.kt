@@ -53,11 +53,11 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 1,
-                                      unit = U2(MASS2, DISTANCE2) to TIME2),
+                                      unit = U2(MASS2, DISTANCE2) to TIME1),
             actual = MomentumAmount(amount = 0,
-                                    unit = U2(MASS2, DISTANCE2) to TIME2) +
-                     MomentumAmount(amount = 10,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1))
+                                    unit = U2(MASS2, DISTANCE2) to TIME1) +
+                     MomentumAmount(amount = 1000,
+                                    unit = U2(MASS1, DISTANCE1) to TIME2))
     }
 
     @Test
@@ -77,11 +77,11 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 0,
-                                      unit = U2(MASS2, DISTANCE2) to TIME2),
+                                      unit = U2(MASS2, DISTANCE2) to TIME1),
             actual = MomentumAmount(amount = 1,
-                                    unit = U2(MASS2, DISTANCE2) to TIME2) -
-                     MomentumAmount(amount = 10,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1))
+                                    unit = U2(MASS2, DISTANCE2) to TIME1) -
+                     MomentumAmount(amount = 1000,
+                                    unit = U2(MASS1, DISTANCE1) to TIME2))
     }
 
     @Test
@@ -103,9 +103,9 @@ class MomentumAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS2, DISTANCE2) to TIME2) /
-                     MomentumAmount(amount = 20,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1))
+                                    unit = U2(MASS2, DISTANCE2) to TIME1) /
+                     MomentumAmount(amount = 2000,
+                                    unit = U2(MASS1, DISTANCE1) to TIME2))
     }
 
     @Test
@@ -149,11 +149,11 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MassAmount(amount = 1,
-                                  unit = MASS1),
+                                  unit = MASS2),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1) /
-                     SpeedAmount(amount = 2,
-                                 unit = DISTANCE2 to TIME2))
+                                    unit = U2(MASS2, DISTANCE2) to TIME1) /
+                     SpeedAmount(amount = 200,
+                                 unit = DISTANCE1 to TIME2))
     }
 
     @Test
@@ -197,11 +197,11 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1),
+                                    unit = U2(MASS2, DISTANCE2) to TIME1),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1) *
-                     SpeedAmount(amount = 2,
-                                 unit = DISTANCE2 to TIME2))
+                                    unit = U2(MASS2, DISTANCE2) to TIME1) *
+                     SpeedAmount(amount = 200,
+                                 unit = DISTANCE1 to TIME2))
     }
 
     @Test
@@ -221,9 +221,9 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MassFluxAmount(amount = 1,
-                                      unit = MASS1 to TIME1),
+                                      unit = MASS2 to TIME1),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS1, DISTANCE2) to TIME1) /
+                                    unit = U2(MASS2, DISTANCE2) to TIME1) /
                      DistanceAmount(amount = 20,
                                     unit = DISTANCE1))
     }

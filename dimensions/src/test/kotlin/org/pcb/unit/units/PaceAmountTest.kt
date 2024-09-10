@@ -50,11 +50,11 @@ class PaceAmountTest
     {
         assertEquals(
             expected = PaceAmount(amount = 1,
-                                  unit = TIME1 to DISTANCE1),
+                                  unit = TIME2 to DISTANCE1),
             actual = PaceAmount(amount = 0,
-                                unit = TIME1 to DISTANCE1) +
-                     PaceAmount(amount = 1,
-                                unit = TIME2 to DISTANCE2))
+                                unit = TIME2 to DISTANCE1) +
+                     PaceAmount(amount = 100,
+                                unit = TIME1 to DISTANCE2))
     }
 
     @Test
@@ -74,11 +74,11 @@ class PaceAmountTest
     {
         assertEquals(
             expected = PaceAmount(amount = 0,
-                                  unit = TIME1 to DISTANCE1),
+                                  unit = TIME2 to DISTANCE1),
             actual = PaceAmount(amount = 1,
-                                unit = TIME1 to DISTANCE1) -
-                     PaceAmount(amount = 1,
-                                unit = TIME2 to DISTANCE2))
+                                unit = TIME2 to DISTANCE1) -
+                     PaceAmount(amount = 100,
+                                unit = TIME1 to DISTANCE2))
     }
 
     @Test
@@ -100,9 +100,9 @@ class PaceAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = PaceAmount(amount = 2,
-                                unit = TIME1 to DISTANCE1) /
-                     PaceAmount(amount = 2,
-                                unit = TIME2 to DISTANCE2))
+                                unit = TIME2 to DISTANCE1) /
+                     PaceAmount(amount = 200,
+                                unit = TIME1 to DISTANCE2))
     }
 
     @Test
@@ -124,13 +124,13 @@ class PaceAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = PaceAmount(amount = 2,
-                                unit = TIME1 to DISTANCE1) *
-                     SpeedAmount(amount = 2,
-                                 unit = DISTANCE2 to TIME2))
+                                unit = TIME1 to DISTANCE2) *
+                     SpeedAmount(amount = 200,
+                                 unit = DISTANCE1 to TIME2))
     }
 
     @Test
-    fun timesSameSpace()
+    fun timesSameDistance()
     {
         assertEquals(
             expected = TimeAmount(amount = 2 * 2,
@@ -142,7 +142,7 @@ class PaceAmountTest
     }
 
     @Test
-    fun timesOtherSpace()
+    fun timesOtherDistance()
     {
         assertEquals(
             expected = TimeAmount(amount = 2 * 2,

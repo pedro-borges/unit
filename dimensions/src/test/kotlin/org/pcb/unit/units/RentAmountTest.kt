@@ -50,11 +50,11 @@ class RentAmountTest
     {
         assertEquals(
             expected = RentAmount(amount = 1,
-                                  unit = CURRENCY1 to TIME1),
+                                  unit = CURRENCY2 to TIME1),
             actual = RentAmount(amount = 0,
-                                unit = CURRENCY1 to TIME1) +
-                     RentAmount(amount = 1,
-                                unit = CURRENCY2 to TIME2))
+                                unit = CURRENCY2 to TIME1) +
+                     RentAmount(amount = 100,
+                                unit = CURRENCY1 to TIME2))
     }
 
     @Test
@@ -74,11 +74,11 @@ class RentAmountTest
     {
         assertEquals(
             expected = RentAmount(amount = 0,
-                                  unit = CURRENCY1 to TIME1),
+                                  unit = CURRENCY2 to TIME1),
             actual = RentAmount(amount = 1,
-                                unit = CURRENCY1 to TIME1) -
-                     RentAmount(amount = 1,
-                                unit = CURRENCY2 to TIME2))
+                                unit = CURRENCY2 to TIME1) -
+                     RentAmount(amount = 100,
+                                unit = CURRENCY1 to TIME2))
     }
 
     @Test
@@ -100,9 +100,9 @@ class RentAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = RentAmount(amount = 2,
-                                unit = CURRENCY1 to TIME1) /
-                     RentAmount(amount = 2,
-                                unit = CURRENCY2 to TIME2))
+                                unit = CURRENCY2 to TIME1) /
+                     RentAmount(amount = 200,
+                                unit = CURRENCY1 to TIME2))
     }
 
     @Test

@@ -110,7 +110,7 @@ class FrequencyAmountTest
     }
 
     @Test
-    fun timesSpace()
+    fun timesDistance()
     {
         assertEquals(
             expected = SpeedAmount(amount = 1,
@@ -201,7 +201,7 @@ class FrequencyAmountTest
                                                   unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = FrequencyAmount(amount = 2,
                                      unit = NUMERIC to TIME2) *
-                     ElectricCapacitanceAmount(amount = 20,
+                     ElectricCapacitanceAmount(amount = 20000,
                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
     }
 }

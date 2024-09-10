@@ -51,12 +51,12 @@ class MassFluxAmountTest
     fun plusOtherMassFlux()
     {
         assertEquals(
-            expected = MassFluxAmount(amount = 0 + (2 / 2),
-                                      unit = MASS1 to TIME1),
+            expected = MassFluxAmount(amount = 1,
+                                      unit = MASS2 to TIME1),
             actual = MassFluxAmount(amount = 0,
-                                    unit = MASS1 to TIME1) +
-                     MassFluxAmount(amount = 1,
-                                    unit = MASS2 to TIME2))
+                                    unit = MASS2 to TIME1) +
+                     MassFluxAmount(amount = 100,
+                                    unit = MASS1 to TIME2))
     }
 
     @Test
@@ -75,12 +75,12 @@ class MassFluxAmountTest
     fun minusOtherMassFlux()
     {
         assertEquals(
-            expected = MassFluxAmount(amount = 1 - (2 / 2),
-                                      unit = MASS1 to TIME1),
+            expected = MassFluxAmount(amount = 0,
+                                      unit = MASS2 to TIME1),
             actual = MassFluxAmount(amount = 1,
-                                    unit = MASS1 to TIME1) -
-                     MassFluxAmount(amount = 1,
-                                    unit = MASS2 to TIME2))
+                                    unit = MASS2 to TIME1) -
+                     MassFluxAmount(amount = 100,
+                                    unit = MASS1 to TIME2))
     }
 
     @Test
@@ -102,9 +102,9 @@ class MassFluxAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = MassFluxAmount(amount = 2,
-                                    unit = MASS1 to TIME1) /
-                     MassFluxAmount(amount = 2,
-                                    unit = MASS2 to TIME2))
+                                    unit = MASS2 to TIME1) /
+                     MassFluxAmount(amount = 200,
+                                    unit = MASS1 to TIME2))
     }
 
     @Test

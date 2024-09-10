@@ -55,11 +55,11 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 1,
-                                    unit = U2(MASS2, DISTANCE2) to TIME2),
+                                    unit = U2(MASS2, DISTANCE2) to TIME1),
             actual = EnergyAmount(amount = 0,
-                                  unit = U2(MASS2, DISTANCE2) to TIME2) +
-                     EnergyAmount(amount = 10,
-                                  unit = U2(MASS1, DISTANCE1) to TIME1))
+                                  unit = U2(MASS2, DISTANCE2) to TIME1) +
+                     EnergyAmount(amount = 100000,
+                                  unit = U2(MASS1, DISTANCE1) to TIME2))
     }
 
     @Test
@@ -79,11 +79,11 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 0,
-                                    unit = U2(MASS2, DISTANCE2) to TIME2),
+                                    unit = U2(MASS2, DISTANCE2) to TIME1),
             actual = EnergyAmount(amount = 1,
-                                  unit = U2(MASS2, DISTANCE2) to TIME2) -
-                     EnergyAmount(amount = 10,
-                                  unit = U2(MASS1, DISTANCE1) to TIME1))
+                                  unit = U2(MASS2, DISTANCE2) to TIME1) -
+                     EnergyAmount(amount = 100000,
+                                  unit = U2(MASS1, DISTANCE1) to TIME2))
     }
 
     @Test
@@ -105,13 +105,13 @@ class EnergyAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = EnergyAmount(amount = 2,
-                                  unit = U2(MASS2, DISTANCE2) to TIME2) /
-                     EnergyAmount(amount = 20,
-                                  unit = U2(MASS1, DISTANCE1) to TIME1))
+                                  unit = U2(MASS2, DISTANCE2) to TIME1) /
+                     EnergyAmount(amount = 200000,
+                                  unit = U2(MASS1, DISTANCE1) to TIME2))
     }
 
     @Test
-    fun divSameSpace()
+    fun divSameDistance()
     {
         assertEquals(
             expected = ForceAmount(amount = 1,
@@ -123,7 +123,7 @@ class EnergyAmountTest
     }
 
     @Test
-    fun divOtherSpace()
+    fun divOtherDistance()
     {
         assertEquals(
             expected = ForceAmount(amount = 1,
@@ -151,11 +151,11 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = DistanceAmount(amount = 1,
-                                      unit = DISTANCE1),
+                                      unit = DISTANCE2),
             actual = EnergyAmount(amount = 2,
-                                  unit = U2(MASS1, DISTANCE1) to TIME1) /
-                     ForceAmount(amount = 2,
-                                 unit = U2(MASS2, DISTANCE2) to TIME2))
+                                  unit = U2(MASS2, DISTANCE2) to TIME1) /
+                     ForceAmount(amount = 20000,
+                                 unit = U2(MASS1, DISTANCE1) to TIME2))
     }
 
     @Test
@@ -177,9 +177,9 @@ class EnergyAmountTest
             expected = TimeAmount(amount = 1,
                                   unit = TIME1),
             actual = EnergyAmount(amount = 2,
-                                  unit = U2(MASS1, DISTANCE1) to TIME1) /
-                     PowerAmount(amount = 2,
-                                 unit = U2(MASS2, DISTANCE2) to TIME2))
+                                  unit = U2(MASS2, DISTANCE2) to TIME1) /
+                     PowerAmount(amount = 2000000,
+                                 unit = U2(MASS1, DISTANCE1) to TIME2))
     }
 
     @Test
@@ -223,11 +223,11 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = SpeedAmount(amount = 1,
-                                   unit = DISTANCE2 to TIME2),
+                                   unit = DISTANCE2 to TIME1),
             actual = EnergyAmount(amount = 2,
-                                  unit = U2(MASS2, DISTANCE2) to TIME2) /
-                     MomentumAmount(amount = 20,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1))
+                                  unit = U2(MASS2, DISTANCE2) to TIME1) /
+                     MomentumAmount(amount = 2000,
+                                    unit = U2(MASS1, DISTANCE1) to TIME2))
     }
 
     @Test
@@ -247,11 +247,11 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 1,
-                                      unit = U2(MASS1, DISTANCE1) to TIME1),
+                                      unit = U2(MASS2, DISTANCE2) to TIME1),
             actual = EnergyAmount(amount = 2,
-                                  unit = U2(MASS1, DISTANCE1) to TIME1) /
-                     SpeedAmount(amount = 2,
-                                 unit = DISTANCE2 to TIME2))
+                                  unit = U2(MASS2, DISTANCE2) to TIME1) /
+                     SpeedAmount(amount = 200,
+                                 unit = DISTANCE1 to TIME2))
     }
 
     @Test
@@ -297,9 +297,9 @@ class EnergyAmountTest
             expected = ElectricChargeAmount(amount = 1,
                                             unit = U2(ELECTRICCURRENT2, TIME1)),
             actual = EnergyAmount(amount = 2,
-                                  unit = U2(MASS1, DISTANCE1) to TIME1) /
-                     ElectricTensionAmount(amount = 2,
-                                           unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT2)))
+                                  unit = U2(MASS2, DISTANCE2) to TIME1) /
+                     ElectricTensionAmount(amount = 2000000,
+                                           unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -333,8 +333,8 @@ class EnergyAmountTest
             expected = ElectricCurrentAmount(amount = 1,
                                              unit = ELECTRICCURRENT2),
             actual = EnergyAmount(amount = 2,
-                                  unit = U2(MASS2, DISTANCE2) to TIME2) /
-                     MagneticFluxAmount(amount = 20,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT2)))
+                                  unit = U2(MASS2, DISTANCE2) to TIME1) /
+                     MagneticFluxAmount(amount = 200000,
+                                        unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
     }
 }

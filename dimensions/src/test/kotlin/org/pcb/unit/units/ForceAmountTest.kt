@@ -53,11 +53,11 @@ class ForceAmountTest
     {
         assertEquals(
             expected = ForceAmount(amount = 1,
-                                   unit = U2(MASS1, DISTANCE1) to TIME1),
+                                   unit = U2(MASS2, DISTANCE2) to TIME1),
             actual = ForceAmount(amount = 0,
-                                 unit = U2(MASS1, DISTANCE1) to TIME1) +
-                     ForceAmount(amount = 1,
-                                 unit = U2(MASS2, DISTANCE2) to TIME2))
+                                 unit = U2(MASS2, DISTANCE2) to TIME1) +
+                     ForceAmount(amount = 10000,
+                                 unit = U2(MASS1, DISTANCE1) to TIME2))
     }
 
     @Test
@@ -77,11 +77,11 @@ class ForceAmountTest
     {
         assertEquals(
             expected = ForceAmount(amount = 0,
-                                   unit = U2(MASS1, DISTANCE1) to TIME1),
+                                   unit = U2(MASS2, DISTANCE2) to TIME1),
             actual = ForceAmount(amount = 1,
-                                 unit = U2(MASS1, DISTANCE1) to TIME1) -
-                     ForceAmount(amount = 1,
-                                 unit = U2(MASS2, DISTANCE2) to TIME2))
+                                 unit = U2(MASS2, DISTANCE2) to TIME1) -
+                     ForceAmount(amount = 10000,
+                                 unit = U2(MASS1, DISTANCE1) to TIME2))
     }
 
     @Test
@@ -103,9 +103,9 @@ class ForceAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = ForceAmount(amount = 2,
-                                 unit = U2(MASS1, DISTANCE1) to TIME1) /
-                     ForceAmount(amount = 2,
-                                 unit = U2(MASS2, DISTANCE2) to TIME2))
+                                 unit = U2(MASS2, DISTANCE2) to TIME1) /
+                     ForceAmount(amount = 20000,
+                                 unit = U2(MASS1, DISTANCE1) to TIME2))
     }
 
     @Test
@@ -151,9 +151,9 @@ class ForceAmountTest
             expected = MassAmount(amount = 1,
                                   unit = MASS1),
             actual = ForceAmount(amount = 2,
-                                 unit = U2(MASS1, DISTANCE1) to TIME1) /
-                     AccelerationAmount(amount = 20,
-                                        unit = DISTANCE2 to TIME2))
+                                 unit = U2(MASS1, DISTANCE2) to TIME1) /
+                     AccelerationAmount(amount = 2000,
+                                        unit = DISTANCE1 to TIME2))
     }
 
     @Test
@@ -181,7 +181,7 @@ class ForceAmountTest
     }
 
     @Test
-    fun timesSameSpace()
+    fun timesSameDistance()
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
@@ -193,7 +193,7 @@ class ForceAmountTest
     }
 
     @Test
-    fun timesOtherSpace()
+    fun timesOtherDistance()
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,

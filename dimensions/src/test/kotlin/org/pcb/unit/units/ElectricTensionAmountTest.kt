@@ -55,11 +55,11 @@ class ElectricTensionAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 1,
-                                             unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+                                             unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricTensionAmount(amount = 0,
-                                           unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) +
-                     ElectricTensionAmount(amount = 10,
-                                           unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT2)))
+                                           unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) +
+                     ElectricTensionAmount(amount = 10000000,
+                                           unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -79,11 +79,11 @@ class ElectricTensionAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 0,
-                                             unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+                                             unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricTensionAmount(amount = 1,
-                                           unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) -
-                     ElectricTensionAmount(amount = 10,
-                                           unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT2)))
+                                           unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) -
+                     ElectricTensionAmount(amount = 10000000,
+                                           unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -105,9 +105,9 @@ class ElectricTensionAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = ElectricTensionAmount(amount = 2,
-                                           unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
-                     ElectricTensionAmount(amount = 20,
-                                           unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT2)))
+                                           unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) /
+                     ElectricTensionAmount(amount = 20000000,
+                                           unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -201,9 +201,9 @@ class ElectricTensionAmountTest
             expected = ElectricCurrentAmount(amount = 2 * 2,
                                              unit = ELECTRICCURRENT1),
             actual = ElectricTensionAmount(amount = 2,
-                                           unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) *
-                     ElectricConductivityAmount(amount = 200,
-                                                unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS2, DISTANCE2)))
+                                           unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) *
+                     ElectricConductivityAmount(amount = 200000000,
+                                                unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, DISTANCE1)))
     }
 
     @Test

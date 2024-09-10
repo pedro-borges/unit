@@ -95,7 +95,7 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
 
     @JvmName("divElectricTension")
     operator fun <M : Unit<Mass>, D : Unit<Distance>, EC : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricTensionAmount<M, D, T, EC>) =
-        ElectricCapacitanceAmount(amount = amount / that.amount * convert(that.electricCurrent to electricCurrent,
+        ElectricCapacitanceAmount(amount = amount / that.amount / convert(that.electricCurrent to electricCurrent,
                                                                           that.time to time,
                                                                           that.time to time,
                                                                           that.time to time),

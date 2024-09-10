@@ -54,12 +54,12 @@ class TimeAmountTest
     fun plusOtherTime()
     {
         assertEquals(
-            expected = TimeAmount(amount = 10,
-                                  unit = TIME1),
+            expected = TimeAmount(amount = 1,
+                                  unit = TIME2),
             actual = TimeAmount(amount = 0,
-                                unit = TIME1) +
-                     TimeAmount(amount = 1,
-                                unit = TIME2))
+                                unit = TIME2) +
+                     TimeAmount(amount = 10,
+                                unit = TIME1))
     }
 
     @Test
@@ -78,7 +78,7 @@ class TimeAmountTest
     fun minusOtherTime()
     {
         assertEquals(
-            expected = TimeAmount(amount = 10 - 10,
+            expected = TimeAmount(amount = 0,
                                   unit = TIME2),
             actual = TimeAmount(amount = 1,
                                 unit = TIME2) -
@@ -111,7 +111,7 @@ class TimeAmountTest
     }
 
     @Test
-    fun divSpace()
+    fun divDistance()
     {
         assertEquals(
             expected = PaceAmount(amount = 1,
@@ -223,11 +223,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 1,
-                                                unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT2)),
-            actual = TimeAmount(amount = 20000,
-                                unit = TIME1) /
-                     ElectricCapacitanceAmount(amount = 2,
-                                               unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS2, DISTANCE2)))
+                                                unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT2)),
+            actual = TimeAmount(amount = 2,
+                                unit = TIME2) /
+                     ElectricCapacitanceAmount(amount = 20000,
+                                               unit = U2(TIME1, ELECTRICCURRENT2) to U2(MASS2, DISTANCE2)))
     }
 
     @Test

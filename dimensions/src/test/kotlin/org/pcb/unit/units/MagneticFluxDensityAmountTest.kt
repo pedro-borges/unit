@@ -104,9 +104,9 @@ class MagneticFluxDensityAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = MagneticFluxDensityAmount(amount = 2,
-                                               unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)) /
-                     MagneticFluxDensityAmount(amount = 200,
-                                               unit = MASS2 to U2(TIME2, ELECTRICCURRENT2)))
+                                               unit = MASS2 to U2(TIME1, ELECTRICCURRENT1)) /
+                     MagneticFluxDensityAmount(amount = 20000,
+                                               unit = MASS1 to U2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test

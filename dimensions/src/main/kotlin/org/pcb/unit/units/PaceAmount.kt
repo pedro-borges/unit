@@ -66,8 +66,8 @@ open class PaceAmount<T : Unit<Time>, D : Unit<Distance>>(
     @JvmName("divPace")
     operator fun <T : Unit<Time>, D : Unit<Distance>> div(that: PaceAmount<T, D>) =
         ScalarAmount(amount = amount / that.amount
-                              * convert(that.time to time)
-                              / convert(that.distance to distance),
+                              / convert(that.time to time)
+                              * convert(that.distance to distance),
                      unit = NUMERIC)
 
     operator fun div(that: PaceAmount<T, D>) =
@@ -77,8 +77,8 @@ open class PaceAmount<T : Unit<Time>, D : Unit<Distance>>(
     @JvmName("timesSpeed")
     operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
         ScalarAmount(amount = amount / that.amount
-                              / convert(that.time to time)
-                              * convert(that.distance to distance),
+                              / convert(that.distance to distance)
+                              * convert(that.time to time),
                      unit = NUMERIC)
 
     operator fun times(that: SpeedAmount<D, T>) =

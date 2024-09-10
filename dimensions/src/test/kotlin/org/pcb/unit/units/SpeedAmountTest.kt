@@ -52,12 +52,12 @@ class SpeedAmountTest
     fun plusOtherSpeed()
     {
         assertEquals(
-            expected = SpeedAmount(amount = 0 + (2 / 2),
-                                   unit = DISTANCE1 to TIME1),
+            expected = SpeedAmount(amount = 1,
+                                   unit = DISTANCE2 to TIME1),
             actual = SpeedAmount(amount = 0,
-                                 unit = DISTANCE1 to TIME1) +
-                     SpeedAmount(amount = 1,
-                                 unit = DISTANCE2 to TIME2))
+                                 unit = DISTANCE2 to TIME1) +
+                     SpeedAmount(amount = 100,
+                                 unit = DISTANCE1 to TIME2))
     }
 
     @Test
@@ -76,12 +76,12 @@ class SpeedAmountTest
     fun minusOtherSpeed()
     {
         assertEquals(
-            expected = SpeedAmount(amount = 1 - (2 / 2),
-                                   unit = DISTANCE1 to TIME1),
+            expected = SpeedAmount(amount = 0,
+                                   unit = DISTANCE2 to TIME1),
             actual = SpeedAmount(amount = 1,
-                                 unit = DISTANCE1 to TIME1) -
-                     SpeedAmount(amount = 1,
-                                 unit = DISTANCE2 to TIME2))
+                                 unit = DISTANCE2 to TIME1) -
+                     SpeedAmount(amount = 100,
+                                 unit = DISTANCE1 to TIME2))
     }
 
     @Test
@@ -103,9 +103,9 @@ class SpeedAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = SpeedAmount(amount = 2,
-                                 unit = DISTANCE1 to TIME1) /
-                     SpeedAmount(amount = 2,
-                                 unit = DISTANCE2 to TIME2))
+                                 unit = DISTANCE2 to TIME1) /
+                     SpeedAmount(amount = 200,
+                                 unit = DISTANCE1 to TIME2))
     }
 
     @Test
@@ -157,7 +157,7 @@ class SpeedAmountTest
     }
 
     @Test
-    fun divSameSpace()
+    fun divSameDistance()
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
@@ -169,7 +169,7 @@ class SpeedAmountTest
     }
 
     @Test
-    fun divOtherSpace()
+    fun divOtherDistance()
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
@@ -197,11 +197,11 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1),
+                                    unit = U2(MASS2, DISTANCE2) to TIME1),
             actual = SpeedAmount(amount = 2,
-                                 unit = DISTANCE1 to TIME1) *
-                     MomentumAmount(amount = 2,
-                                    unit = U2(MASS1, DISTANCE2) to TIME2))
+                                 unit = DISTANCE2 to TIME1) *
+                     MomentumAmount(amount = 200,
+                                    unit = U2(MASS2, DISTANCE1) to TIME2))
     }
 
     @Test
