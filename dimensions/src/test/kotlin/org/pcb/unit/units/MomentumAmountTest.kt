@@ -203,4 +203,52 @@ class MomentumAmountTest
                      SpeedAmount(amount = 2,
                                  unit = LENGTH2 to TIME2))
     }
+
+    @Test
+    fun divSameLength()
+    {
+        assertEquals(
+            expected = MassFlowRateAmount(amount = 1,
+                                          unit = MASS1 to TIME1),
+            actual = MomentumAmount(amount = 2,
+                                    unit = U2(MASS1, LENGTH1) to TIME1) /
+                     LengthAmount(amount = 2,
+                                  unit = LENGTH1))
+    }
+
+    @Test
+    fun divOtherLength()
+    {
+        assertEquals(
+            expected = MassFlowRateAmount(amount = 1,
+                                          unit = MASS1 to TIME1),
+            actual = MomentumAmount(amount = 2,
+                                    unit = U2(MASS1, LENGTH2) to TIME1) /
+                     LengthAmount(amount = 20,
+                                  unit = LENGTH1))
+    }
+
+    @Test
+    fun divSameMassFlowRate()
+    {
+        assertEquals(
+            expected = LengthAmount(amount = 1,
+                                    unit = LENGTH1),
+            actual = MomentumAmount(amount = 2,
+                                    unit = U2(MASS1, LENGTH1) to TIME1) /
+                     MassFlowRateAmount(amount = 2,
+                                        unit = MASS1 to TIME1))
+    }
+
+    @Test
+    fun divOtherMassFlowRate()
+    {
+        assertEquals(
+            expected = LengthAmount(amount = 1,
+                                    unit = LENGTH1),
+            actual = MomentumAmount(amount = 2,
+                                    unit = U2(MASS2, LENGTH1) to TIME1) /
+                     MassFlowRateAmount(amount = 200,
+                                        unit = MASS1 to TIME2))
+    }
 }

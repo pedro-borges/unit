@@ -190,4 +190,16 @@ class LengthAmountTest
                      ForceAmount(amount = 20,
                                  unit = U2(MASS2, LENGTH1) to TIME2))
     }
+
+    @Test
+    fun timesMassFlowRate()
+    {
+        assertEquals(
+            expected = MomentumAmount(amount = 2 * 2,
+                                    unit = U2(MASS1, LENGTH1) to TIME1),
+            actual = LengthAmount(amount = 2,
+                                  unit = LENGTH1) *
+                     MassFlowRateAmount(amount = 2,
+                                 unit = MASS1 to TIME1))
+    }
 }

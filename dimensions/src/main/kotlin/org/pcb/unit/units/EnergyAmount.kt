@@ -24,7 +24,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class EnergyAmount<M : Unit<Mass>, L2 : Unit<Length>, T2 : Unit<Time>>(
         amount: Number,
-        unit: Pair<org.pcb.unit.U2<M, L2>, T2>)
+        unit: Pair<U2<M, L2>, T2>)
     : Amount<Force>(amount = amount.toBigBigDecimal(),
                     unit = CompositeUnit(
                         domain = Force::class,

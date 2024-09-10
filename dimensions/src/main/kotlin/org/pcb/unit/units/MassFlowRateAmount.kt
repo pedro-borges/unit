@@ -2,8 +2,10 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
+import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.MassFlowRate
 import org.pcb.unit.dimension.Scalar
@@ -82,6 +84,14 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: MassFlowRateAmount<M, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
+
+    // endregion
+
+    // region -> Momentum
+
+    operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
+        MomentumAmount(amount = amount * that.amount,
+                       unit = U2(mass, that.length) to time)
 
     // endregion
 }

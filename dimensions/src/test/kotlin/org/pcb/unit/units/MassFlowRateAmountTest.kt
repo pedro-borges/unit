@@ -2,8 +2,10 @@ package org.pcb.unit.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
+import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.MASS1
 import org.pcb.unit.units.test.MASS2
 import org.pcb.unit.units.test.TIME1
@@ -103,5 +105,17 @@ class MassFlowRateAmountTest
                                  unit = MASS1 to TIME1) /
                      MassFlowRateAmount(amount = 2,
                                  unit = MASS2 to TIME2))
+    }
+
+    @Test
+    fun timesLength()
+    {
+        assertEquals(
+            expected = MomentumAmount(amount = 2 * 2,
+                                    unit = U2(MASS1, LENGTH1) to TIME1),
+            actual = MassFlowRateAmount(amount = 2,
+                                 unit = MASS1 to TIME1) *
+                     LengthAmount(amount = 2,
+                                 unit = LENGTH1))
     }
 }
