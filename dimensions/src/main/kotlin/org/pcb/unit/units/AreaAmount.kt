@@ -17,13 +17,13 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
-open class AreaAmount<D2: Unit<Distance>>(
+open class AreaAmount<D2 : Unit<Distance>>(
         amount: Number,
         unit: D2)
     : Amount<Distance>(amount = amount.toBigBigDecimal(),
-                     unit = CompositeUnit(
-                         domain = Distance::class,
-                         units = listOf(unit to 2)))
+                       unit = CompositeUnit(
+                           domain = Distance::class,
+                           units = listOf(unit to 2)))
 {
     val distance = unit
 
@@ -45,7 +45,7 @@ open class AreaAmount<D2: Unit<Distance>>(
                    unit = distance)
 
     @JvmName("plusArea")
-    operator fun <D: Unit<Distance>> plus(that: AreaAmount<D>) =
+    operator fun <D : Unit<Distance>> plus(that: AreaAmount<D>) =
         AreaAmount(amount = amount + that.amount * convert(that.distance to distance,
                                                            that.distance to distance),
                    unit = distance)
@@ -55,7 +55,7 @@ open class AreaAmount<D2: Unit<Distance>>(
                    unit = distance)
 
     @JvmName("minusArea")
-    operator fun <D: Unit<Distance>> minus(that: AreaAmount<D>) =
+    operator fun <D : Unit<Distance>> minus(that: AreaAmount<D>) =
         AreaAmount(amount = amount - that.amount * convert(that.distance to distance,
                                                            that.distance to distance),
                    unit = distance)
@@ -69,7 +69,7 @@ open class AreaAmount<D2: Unit<Distance>>(
     // region -> Natural
 
     @JvmName("divArea")
-    operator fun <D: Unit<Distance>> div(that: AreaAmount<D>) =
+    operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
         ScalarAmount(amount = amount / that.amount / convert(that.distance to distance,
                                                              that.distance to distance),
                      unit = NUMERIC)
@@ -83,20 +83,20 @@ open class AreaAmount<D2: Unit<Distance>>(
     // region -> Distance
 
     @JvmName("divDistance")
-    operator fun <D: Unit<Distance>> div(that: DistanceAmount<D>) =
+    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
         DistanceAmount(amount = amount / that.amount / convert(that.distance to distance),
-                     unit = distance)
+                       unit = distance)
 
     operator fun div(that: DistanceAmount<D2>) =
         DistanceAmount(amount = amount / that.amount,
-                     unit = distance)
+                       unit = distance)
 
     // endregion
 
     // region -> Volume
 
     @JvmName("timesDistance")
-    operator fun <D: Unit<Distance>> times(that: DistanceAmount<D>) =
+    operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =
         VolumeAmount(amount = amount * that.amount * convert(that.distance to distance),
                      unit = distance)
 

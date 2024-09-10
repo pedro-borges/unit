@@ -209,11 +209,11 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MassFluxAmount(amount = 1,
-                                          unit = MASS1 to TIME1),
+                                      unit = MASS1 to TIME1),
             actual = MomentumAmount(amount = 2,
                                     unit = U2(MASS1, DISTANCE1) to TIME1) /
                      DistanceAmount(amount = 2,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -221,11 +221,11 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MassFluxAmount(amount = 1,
-                                          unit = MASS1 to TIME1),
+                                      unit = MASS1 to TIME1),
             actual = MomentumAmount(amount = 2,
                                     unit = U2(MASS1, DISTANCE2) to TIME1) /
                      DistanceAmount(amount = 20,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -233,11 +233,11 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = DistanceAmount(amount = 1,
-                                    unit = DISTANCE1),
+                                      unit = DISTANCE1),
             actual = MomentumAmount(amount = 2,
                                     unit = U2(MASS1, DISTANCE1) to TIME1) /
                      MassFluxAmount(amount = 2,
-                                        unit = MASS1 to TIME1))
+                                    unit = MASS1 to TIME1))
     }
 
     @Test
@@ -245,10 +245,10 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = DistanceAmount(amount = 1,
-                                    unit = DISTANCE1),
+                                      unit = DISTANCE1),
             actual = MomentumAmount(amount = 2,
                                     unit = U2(MASS2, DISTANCE1) to TIME1) /
                      MassFluxAmount(amount = 200,
-                                        unit = MASS1 to TIME2))
+                                    unit = MASS1 to TIME2))
     }
 }

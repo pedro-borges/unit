@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.AreaAmount
 import org.pcb.unit.units.base.Meter
+import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.electromagnetism.Tesla
 import org.pcb.unit.units.electromagnetism.Weber
 import org.pcb.unit.units.space.SquareMeter.SQUARE_METER
@@ -17,8 +18,8 @@ class SquareMeterTest
     fun scales()
     {
         SquareMeter(4) equivalent Meter(2) * Meter(2)
-        val areaAmount = DeciMeter(20) * DeciMeter(20)
-        SquareMeter(4) equivalent areaAmount
+        SquareMeter(4) equivalent DeciMeter(20) * DeciMeter(20)
+        SquareMeter(2) equivalent AreaAmount(2, METER)
         SquareMeter(2) equivalent AreaAmount(2, SQUARE_METER)
     }
 

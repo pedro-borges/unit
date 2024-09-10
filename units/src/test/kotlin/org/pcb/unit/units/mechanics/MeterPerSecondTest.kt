@@ -4,7 +4,9 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.SpeedAmount
 import org.pcb.unit.units.base.Meter
+import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second
+import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.mechanics.MeterPerSecond.MPS
 
 class MeterPerSecondTest
@@ -16,6 +18,7 @@ class MeterPerSecondTest
     fun unit()
     {
         MeterPerSecond(1) equivalent Meter(2) / Second(2)
+        MeterPerSecond(2) equivalent SpeedAmount(2, METER to SECOND)
         MeterPerSecond(2) equivalent SpeedAmount(2, MPS)
     }
 

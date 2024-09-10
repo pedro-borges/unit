@@ -17,7 +17,7 @@ import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
-open class AccelerationAmount<D: Unit<Distance>, T2 : Unit<Time>>(
+open class AccelerationAmount<D : Unit<Distance>, T2 : Unit<Time>>(
         amount: Number,
         unit: Pair<D, T2>)
     : Amount<Acceleration>(amount = amount.toBigBigDecimal(),
@@ -40,7 +40,7 @@ open class AccelerationAmount<D: Unit<Distance>, T2 : Unit<Time>>(
                            unit = distance to time)
 
     @JvmName("plusAcceleration")
-    operator fun <D: Unit<Distance>, T : Unit<Time>> plus(that: AccelerationAmount<D, T>) =
+    operator fun <D : Unit<Distance>, T : Unit<Time>> plus(that: AccelerationAmount<D, T>) =
         AccelerationAmount(amount = amount + that.amount
                                     * convert(that.distance to distance)
                                     / (convert(that.time to time,
@@ -52,7 +52,7 @@ open class AccelerationAmount<D: Unit<Distance>, T2 : Unit<Time>>(
                            unit = distance to time)
 
     @JvmName("minusAcceleration")
-    operator fun <D: Unit<Distance>, T : Unit<Time>> minus(that: AccelerationAmount<D, T>) =
+    operator fun <D : Unit<Distance>, T : Unit<Time>> minus(that: AccelerationAmount<D, T>) =
         AccelerationAmount(amount = amount - that.amount
                                     * convert(that.distance to distance)
                                     / convert(that.time to time,
@@ -68,7 +68,7 @@ open class AccelerationAmount<D: Unit<Distance>, T2 : Unit<Time>>(
     // region -> Natural
 
     @JvmName("divAcceleration")
-    operator fun <D: Unit<Distance>, T : Unit<Time>> div(that: AccelerationAmount<D, T>) =
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: AccelerationAmount<D, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.distance to distance)
                               * convert(that.time to time, that.time to time),
@@ -96,7 +96,7 @@ open class AccelerationAmount<D: Unit<Distance>, T2 : Unit<Time>>(
     // region -> Frequency
 
     @JvmName("divSpeed")
-    operator fun <D: Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
         FrequencyAmount(amount = amount / that.amount
                                  / convert(that.distance to distance)
                                  * convert(that.time to time),

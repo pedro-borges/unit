@@ -17,7 +17,7 @@ import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
-open class MomentumAmount<M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>>(
+open class MomentumAmount<M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>>(
         amount: Number,
         unit: Pair<U2<M, D>, T>)
     : Amount<Momentum>(amount = amount.toBigBigDecimal(),
@@ -42,7 +42,7 @@ open class MomentumAmount<M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>>(
                        unit = U2(mass, distance) to time)
 
     @JvmName("plusMomentum")
-    operator fun <M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>> plus(that: MomentumAmount<M, D, T>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> plus(that: MomentumAmount<M, D, T>) =
         MomentumAmount(amount = amount + that.amount
                                 * convert(that.mass to mass,
                                           that.distance to distance)
@@ -54,7 +54,7 @@ open class MomentumAmount<M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>>(
                        unit = U2(mass, distance) to time)
 
     @JvmName("minusMomentum")
-    operator fun <M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>> minus(that: MomentumAmount<M, D, T>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> minus(that: MomentumAmount<M, D, T>) =
         MomentumAmount(amount = amount - that.amount
                                 * convert(that.mass to mass,
                                           that.distance to distance)
@@ -70,7 +70,7 @@ open class MomentumAmount<M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>>(
     // region -> Natural
 
     @JvmName("divMomentum")
-    operator fun <M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>> div(that: MomentumAmount<M, D, T>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: MomentumAmount<M, D, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.mass to mass,
                                         that.distance to distance)
@@ -99,7 +99,7 @@ open class MomentumAmount<M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>>(
     // region -> Mass
 
     @JvmName("divSpeed")
-    operator fun <D: Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
         MassAmount(amount = amount / that.amount
                             / convert(that.distance to distance)
                             * convert(that.time to time),
@@ -127,7 +127,7 @@ open class MomentumAmount<M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>>(
     // region -> Energy
 
     @JvmName("timesSpeed")
-    operator fun <D: Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
         EnergyAmount(amount = amount * that.amount
                               * convert(that.distance to distance)
                               / convert(that.time to time),
@@ -142,13 +142,13 @@ open class MomentumAmount<M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>>(
     // region -> MassFlux
 
     @JvmName("divDistance")
-    operator fun <D: Unit<Distance>> div(that: DistanceAmount<D>) =
+    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
         MassFluxAmount(amount = amount / that.amount / convert(that.distance to distance),
-                           unit = mass to time)
+                       unit = mass to time)
 
     operator fun div(that: DistanceAmount<D>) =
         MassFluxAmount(amount = amount / that.amount,
-                           unit = mass to time)
+                       unit = mass to time)
 
     // endregion
 
@@ -157,13 +157,13 @@ open class MomentumAmount<M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>>(
     @JvmName("divMassFlux")
     operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFluxAmount<M, T>) =
         DistanceAmount(amount = amount / that.amount
-                                    / convert(that.mass to mass)
-                                    * convert((that.time to time)),
-                           unit = distance)
+                                / convert(that.mass to mass)
+                                * convert((that.time to time)),
+                       unit = distance)
 
     operator fun div(that: MassFluxAmount<M, T>) =
         DistanceAmount(amount = amount / that.amount,
-                     unit = distance)
+                       unit = distance)
 
     // endregion
 }

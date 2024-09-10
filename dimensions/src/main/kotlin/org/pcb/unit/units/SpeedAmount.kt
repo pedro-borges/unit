@@ -19,7 +19,7 @@ import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
-open class SpeedAmount<D: Unit<Distance>, T : Unit<Time>>(
+open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
         amount: Number,
         unit: Pair<D, T>)
     : Amount<Speed>(amount = amount.toBigBigDecimal(),
@@ -49,7 +49,7 @@ open class SpeedAmount<D: Unit<Distance>, T : Unit<Time>>(
                     unit = distance to time)
 
     @JvmName("plusSpeed")
-    operator fun <D: Unit<Distance>, T : Unit<Time>> plus(that: SpeedAmount<D, T>) =
+    operator fun <D : Unit<Distance>, T : Unit<Time>> plus(that: SpeedAmount<D, T>) =
         SpeedAmount(amount = amount + that.amount
                              * convert(that.distance to distance)
                              / convert(that.time to time),
@@ -60,7 +60,7 @@ open class SpeedAmount<D: Unit<Distance>, T : Unit<Time>>(
                     unit = distance to time)
 
     @JvmName("minusSpeed")
-    operator fun <D: Unit<Distance>, T : Unit<Time>> minus(that: SpeedAmount<D, T>) =
+    operator fun <D : Unit<Distance>, T : Unit<Time>> minus(that: SpeedAmount<D, T>) =
         SpeedAmount(amount = amount - that.amount
                              * convert(that.distance to distance)
                              / convert(that.time to time),
@@ -75,7 +75,7 @@ open class SpeedAmount<D: Unit<Distance>, T : Unit<Time>>(
     // region -> Natural
 
     @JvmName("divSpeed")
-    operator fun <D: Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.distance to distance)
                               * convert(that.time to time),
@@ -92,11 +92,11 @@ open class SpeedAmount<D: Unit<Distance>, T : Unit<Time>>(
     @JvmName("timesTime")
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         DistanceAmount(amount = amount * that.amount * convert(that.time to time),
-                     unit = distance)
+                       unit = distance)
 
     operator fun times(that: TimeAmount<T>) =
         DistanceAmount(amount = amount * that.amount,
-                     unit = distance)
+                       unit = distance)
 
     // endregion
 
@@ -111,7 +111,7 @@ open class SpeedAmount<D: Unit<Distance>, T : Unit<Time>>(
     // region -> Frequency
 
     @JvmName("divDistance")
-    operator fun <D: Unit<Distance>> div(that: DistanceAmount<D>) =
+    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
         FrequencyAmount(amount = amount / that.amount / convert(that.distance to distance),
                         unit = NUMERIC to time)
 
@@ -124,7 +124,7 @@ open class SpeedAmount<D: Unit<Distance>, T : Unit<Time>>(
     // region -> Energy
 
     @JvmName("timesMomentum")
-    operator fun <M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>> times(that: MomentumAmount<M, D, T>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> times(that: MomentumAmount<M, D, T>) =
         EnergyAmount(amount = amount * that.amount
                               * convert(that.distance to distance)
                               / convert(that.time to time),
@@ -139,16 +139,16 @@ open class SpeedAmount<D: Unit<Distance>, T : Unit<Time>>(
     // region -> Power
 
     @JvmName("timesForce")
-    operator fun <M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>> times(that: ForceAmount<M, D, T>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> times(that: ForceAmount<M, D, T>) =
         PowerAmount(amount = amount * that.amount
-                              * convert(that.distance to distance)
-                              / convert(that.time to time,
-                                        that.time to time),
-                     unit = U2(that.mass, distance) to time)
+                             * convert(that.distance to distance)
+                             / convert(that.time to time,
+                                       that.time to time),
+                    unit = U2(that.mass, distance) to time)
 
     operator fun <M : Unit<Mass>> times(that: ForceAmount<M, D, T>) =
         PowerAmount(amount = amount * that.amount,
-                     unit = U2(that.mass, distance) to time)
+                    unit = U2(that.mass, distance) to time)
 
     // endregion
 }

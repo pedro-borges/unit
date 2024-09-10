@@ -73,7 +73,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     // region -> ElectricResistance
 
-    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D: Unit<Distance>> div(that: ElectricConductivityAmount<T, EC, M, D>) =
+    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> div(that: ElectricConductivityAmount<T, EC, M, D>) =
         ElectricResistanceAmount(amount = amount * that.amount * unit.scale,
                                  unit = U2(that.mass, that.distance) to U2(that.time, that.electricCurrent))
 
@@ -81,7 +81,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 
     // region -> ElectricConductivity
 
-    operator fun <M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, D, T, EC>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, D, T, EC>) =
         ElectricConductivityAmount(amount = amount * unit.scale / that.amount,
                                    unit = U2(that.time, that.electricCurrent) to U2(that.mass, that.distance))
 

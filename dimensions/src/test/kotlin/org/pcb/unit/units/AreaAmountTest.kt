@@ -112,11 +112,11 @@ class AreaAmountTest
     {
         assertEquals(
             expected = DistanceAmount(amount = 1,
-                                    unit = DISTANCE1),
+                                      unit = DISTANCE1),
             actual = AreaAmount(amount = 2,
                                 unit = DISTANCE1) /
                      DistanceAmount(amount = 2,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -124,11 +124,11 @@ class AreaAmountTest
     {
         assertEquals(
             expected = DistanceAmount(amount = 1,
-                                    unit = DISTANCE2),
+                                      unit = DISTANCE2),
             actual = AreaAmount(amount = 2,
                                 unit = DISTANCE2) /
                      DistanceAmount(amount = 20,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -140,7 +140,7 @@ class AreaAmountTest
             actual = AreaAmount(amount = 2,
                                 unit = DISTANCE1) *
                      DistanceAmount(amount = 2,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -152,7 +152,7 @@ class AreaAmountTest
             actual = AreaAmount(amount = 2,
                                 unit = DISTANCE2) *
                      DistanceAmount(amount = 20,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test

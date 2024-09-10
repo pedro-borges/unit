@@ -7,7 +7,7 @@ import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Distance
 import org.pcb.unit.dimension.ElectricCurrent
-import org.pcb.unit.dimension.MagneticFlux
+import org.pcb.unit.dimension.MagneticFluxDensity
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
@@ -37,7 +37,7 @@ open class MagneticFluxDensityAmount<M : Unit<Mass>, T2 : Unit<Time>, EC : Unit<
 
     companion object
     {
-        operator fun invoke(amount: Number, unit: Unit<MagneticFlux>) =
+        operator fun invoke(amount: Number, unit: Unit<MagneticFluxDensity>) =
             MagneticFluxDensityAmount(amount = amount.toBigBigDecimal() * unit.scale,
                                       unit = KILOGRAM to U2(SECOND, AMPERE))
     }
@@ -99,7 +99,7 @@ open class MagneticFluxDensityAmount<M : Unit<Mass>, T2 : Unit<Time>, EC : Unit<
 
     // region -> MagneticFlux
 
-    operator fun <D: Unit<Distance>> times(that: AreaAmount<D>) =
+    operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =
         MagneticFluxAmount(amount = amount * that.amount,
                            unit = U2(mass, that.distance) to U2(time, electricCurrent))
 

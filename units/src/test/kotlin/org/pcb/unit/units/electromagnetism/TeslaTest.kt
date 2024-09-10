@@ -7,6 +7,7 @@ import org.pcb.unit.units.MagneticFluxDensityAmount
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Second.SECOND
+import org.pcb.unit.units.electromagnetism.Tesla.TESLA
 import org.pcb.unit.units.space.SquareMeter
 
 class TeslaTest
@@ -18,6 +19,7 @@ class TeslaTest
     fun unit()
     {
         Tesla(2) equivalent MagneticFluxDensityAmount(2, KILOGRAM to U2(SECOND, AMPERE))
+        Tesla(2) equivalent MagneticFluxDensityAmount(2, TESLA)
     }
 
     @Test

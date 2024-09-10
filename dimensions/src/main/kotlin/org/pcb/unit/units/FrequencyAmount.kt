@@ -2,11 +2,14 @@ package org.pcb.unit.units
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Currency
 import org.pcb.unit.dimension.Distance
+import org.pcb.unit.dimension.ElectricCurrent
 import org.pcb.unit.dimension.Frequency
+import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
@@ -87,7 +90,7 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // region -> Speed
 
-    operator fun <D: Unit<Distance>> times(that: DistanceAmount<D>) =
+    operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =
         SpeedAmount(amount = that.amount / amount,
                     unit = that.distance to time)
 
@@ -96,11 +99,11 @@ open class FrequencyAmount<T : Unit<Time>>(
     // region -> Acceleration
 
     @JvmName("timesSpeed")
-    operator fun <D: Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
         AccelerationAmount(amount = that.amount / amount / convert(that.time to time),
                            unit = that.distance to time)
 
-    operator fun <D: Unit<Distance>> times(that: SpeedAmount<D, T>) =
+    operator fun <D : Unit<Distance>> times(that: SpeedAmount<D, T>) =
         AccelerationAmount(amount = that.amount / amount,
                            unit = that.distance to time)
 
@@ -124,6 +127,19 @@ open class FrequencyAmount<T : Unit<Time>>(
     operator fun <C : Unit<Currency>> times(that: CurrencyAmount<C>) =
         RentAmount(amount = that.amount / amount,
                    unit = that.currency to time)
+
+    // endregion
+
+    // region -> ElectricConductivity
+
+    @JvmName("timesElectricCapacitance")
+    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> times(that: ElectricCapacitanceAmount<T, EC, M, D>) =
+        ElectricConductivityAmount(amount = that.amount * amount * convert(that.time to time),
+                                   unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
+
+    operator fun <EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> times(that: ElectricCapacitanceAmount<T, EC, M, D>) =
+        ElectricConductivityAmount(amount = that.amount * amount,
+                                   unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
 
     // endregion
 }

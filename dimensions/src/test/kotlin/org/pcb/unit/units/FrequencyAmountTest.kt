@@ -7,6 +7,8 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
 import org.pcb.unit.units.test.DISTANCE1
+import org.pcb.unit.units.test.ELECTRICCURRENT1
+import org.pcb.unit.units.test.MASS1
 import org.pcb.unit.units.test.TIME1
 import org.pcb.unit.units.test.TIME2
 
@@ -116,7 +118,7 @@ class FrequencyAmountTest
             actual = FrequencyAmount(amount = 2,
                                      unit = NUMERIC to TIME1) *
                      DistanceAmount(amount = 2,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -177,5 +179,29 @@ class FrequencyAmountTest
                                      unit = NUMERIC to TIME1) *
                      CurrencyAmount(amount = 2,
                                     unit = CURRENCY1))
+    }
+
+    @Test
+    fun timesSameElectricCapacitance()
+    {
+        assertEquals(
+            expected = ElectricConductivityAmount(amount = 2 * 2,
+                                                  unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            actual = FrequencyAmount(amount = 2,
+                                     unit = NUMERIC to TIME1) *
+                     ElectricCapacitanceAmount(amount = 2,
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
+    }
+
+    @Test
+    fun timesOtherElectricCapacitance()
+    {
+        assertEquals(
+            expected = ElectricConductivityAmount(amount = 2 * 2,
+                                                  unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            actual = FrequencyAmount(amount = 2,
+                                     unit = NUMERIC to TIME2) *
+                     ElectricCapacitanceAmount(amount = 20,
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
     }
 }

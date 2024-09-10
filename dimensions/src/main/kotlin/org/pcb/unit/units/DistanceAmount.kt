@@ -14,13 +14,13 @@ import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
-open class DistanceAmount<D: Unit<Distance>>(
+open class DistanceAmount<D : Unit<Distance>>(
         amount: Number,
         unit: D)
     : Amount<Distance>(amount = amount.toBigBigDecimal(),
-                     unit = CompositeUnit(
-                         domain = Distance::class,
-                         units = listOf(unit to 1)))
+                       unit = CompositeUnit(
+                           domain = Distance::class,
+                           units = listOf(unit to 1)))
 {
     val distance = unit
 
@@ -28,36 +28,36 @@ open class DistanceAmount<D: Unit<Distance>>(
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         DistanceAmount(amount = amount * that.amount * that.unit.scale,
-                     unit = distance)
+                       unit = distance)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         DistanceAmount(amount = amount / that.amount / that.unit.scale,
-                     unit = distance)
+                       unit = distance)
 
     @JvmName("plusDistance")
-    operator fun <D: Unit<Distance>> plus(that: DistanceAmount<D>) =
+    operator fun <D : Unit<Distance>> plus(that: DistanceAmount<D>) =
         DistanceAmount(amount = amount + that.amount * convert(that.distance to distance),
-                     unit = distance)
+                       unit = distance)
 
     operator fun plus(that: DistanceAmount<D>) =
         DistanceAmount(amount = amount + that.amount,
-                     unit = distance)
+                       unit = distance)
 
     @JvmName("minusDistance")
-    operator fun <D: Unit<Distance>> minus(that: DistanceAmount<D>) =
+    operator fun <D : Unit<Distance>> minus(that: DistanceAmount<D>) =
         DistanceAmount(amount = amount - that.amount * convert(that.distance to distance),
-                     unit = distance)
+                       unit = distance)
 
     operator fun minus(that: DistanceAmount<D>) =
         DistanceAmount(amount = amount - that.amount,
-                     unit = distance)
+                       unit = distance)
 
     // endregion
 
     // region -> Natural
 
     @JvmName("divDistance")
-    operator fun <D: Unit<Distance>> div(that: DistanceAmount<D>) =
+    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
         ScalarAmount(amount = amount / that.amount / convert(that.distance to distance),
                      unit = NUMERIC)
 
@@ -78,7 +78,7 @@ open class DistanceAmount<D: Unit<Distance>>(
     // region -> Area
 
     @JvmName("timesDistance")
-    operator fun <D: Unit<Distance>> times(that: DistanceAmount<D>) =
+    operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =
         AreaAmount(amount = amount * that.amount * convert(that.distance to distance),
                    unit = distance)
 
@@ -91,7 +91,7 @@ open class DistanceAmount<D: Unit<Distance>>(
     // region -> Volume
 
     @JvmName("timesArea")
-    operator fun <D: Unit<Distance>> times(that: AreaAmount<D>) =
+    operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =
         VolumeAmount(amount = amount * that.amount * convert(that.distance to distance,
                                                              that.distance to distance),
                      unit = distance)
@@ -105,7 +105,7 @@ open class DistanceAmount<D: Unit<Distance>>(
     // region -> Energy
 
     @JvmName("timesForce")
-    operator fun <M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>> times(that: ForceAmount<M, D, T>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> times(that: ForceAmount<M, D, T>) =
         EnergyAmount(amount = amount * that.amount * convert(that.distance to distance),
                      unit = U2(that.mass, distance) to that.time)
 

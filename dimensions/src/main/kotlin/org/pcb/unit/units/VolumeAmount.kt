@@ -17,9 +17,9 @@ open class VolumeAmount<L3 : Unit<Distance>>(
         amount: Number,
         unit: L3)
     : Amount<Distance>(amount = amount.toBigBigDecimal(),
-                     unit = CompositeUnit(
-                         domain = Distance::class,
-                         units = listOf(unit to 3)))
+                       unit = CompositeUnit(
+                           domain = Distance::class,
+                           units = listOf(unit to 3)))
 {
     val distance = unit
 
@@ -41,7 +41,7 @@ open class VolumeAmount<L3 : Unit<Distance>>(
                      unit = distance)
 
     @JvmName("plusVolume")
-    operator fun <D: Unit<Distance>> plus(that: VolumeAmount<D>) =
+    operator fun <D : Unit<Distance>> plus(that: VolumeAmount<D>) =
         VolumeAmount(amount = amount + that.amount * convert(that.distance to distance,
                                                              that.distance to distance,
                                                              that.distance to distance),
@@ -52,7 +52,7 @@ open class VolumeAmount<L3 : Unit<Distance>>(
                      unit = distance)
 
     @JvmName("minusVolume")
-    operator fun <D: Unit<Distance>> minus(that: VolumeAmount<D>) =
+    operator fun <D : Unit<Distance>> minus(that: VolumeAmount<D>) =
         VolumeAmount(amount = amount - that.amount * convert(that.distance to distance,
                                                              that.distance to distance,
                                                              that.distance to distance),
@@ -67,7 +67,7 @@ open class VolumeAmount<L3 : Unit<Distance>>(
     // region -> Natural
 
     @JvmName("divVolume")
-    operator fun <D: Unit<Distance>> div(that: VolumeAmount<D>) =
+    operator fun <D : Unit<Distance>> div(that: VolumeAmount<D>) =
         ScalarAmount(amount = amount / that.amount / convert(that.distance to distance,
                                                              that.distance to distance,
                                                              that.distance to distance),
@@ -82,7 +82,7 @@ open class VolumeAmount<L3 : Unit<Distance>>(
     // region -> Area
 
     @JvmName("divDistance")
-    operator fun <D: Unit<Distance>> div(that: DistanceAmount<D>) =
+    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
         AreaAmount(amount = amount / that.amount / convert(that.distance to distance),
                    unit = distance)
 
@@ -95,14 +95,14 @@ open class VolumeAmount<L3 : Unit<Distance>>(
     // region -> Distance
 
     @JvmName("divArea")
-    operator fun <D: Unit<Distance>> div(that: AreaAmount<D>) =
+    operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
         DistanceAmount(amount = amount / that.amount / convert(that.distance to distance,
-                                                             that.distance to distance),
-                     unit = distance)
+                                                               that.distance to distance),
+                       unit = distance)
 
     operator fun div(that: AreaAmount<L3>) =
         DistanceAmount(amount = amount / that.amount,
-                     unit = distance)
+                       unit = distance)
 
     // endregion
 }

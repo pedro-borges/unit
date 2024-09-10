@@ -138,7 +138,7 @@ class PaceAmountTest
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 to DISTANCE1) *
                      DistanceAmount(amount = 2,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -150,6 +150,6 @@ class PaceAmountTest
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 to DISTANCE2) *
                      DistanceAmount(amount = 20,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 }

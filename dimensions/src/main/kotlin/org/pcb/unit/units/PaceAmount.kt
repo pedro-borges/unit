@@ -15,7 +15,7 @@ import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
-open class PaceAmount<T : Unit<Time>, D: Unit<Distance>>(
+open class PaceAmount<T : Unit<Time>, D : Unit<Distance>>(
         amount: Number,
         unit: Pair<T, D>)
     : Amount<Pace>(amount = amount.toBigBigDecimal(),
@@ -38,7 +38,7 @@ open class PaceAmount<T : Unit<Time>, D: Unit<Distance>>(
                    unit = time to distance)
 
     @JvmName("plusPace")
-    operator fun <T : Unit<Time>, D: Unit<Distance>> plus(that: PaceAmount<T, D>) =
+    operator fun <T : Unit<Time>, D : Unit<Distance>> plus(that: PaceAmount<T, D>) =
         PaceAmount(amount = amount + that.amount
                             * convert(that.time to time)
                             / convert(that.distance to distance),
@@ -49,7 +49,7 @@ open class PaceAmount<T : Unit<Time>, D: Unit<Distance>>(
                    unit = time to distance)
 
     @JvmName("minusPace")
-    operator fun <T : Unit<Time>, D: Unit<Distance>> minus(that: PaceAmount<T, D>) =
+    operator fun <T : Unit<Time>, D : Unit<Distance>> minus(that: PaceAmount<T, D>) =
         PaceAmount(amount = amount - that.amount
                             * convert(that.time to time)
                             / convert(that.distance to distance),
@@ -64,7 +64,7 @@ open class PaceAmount<T : Unit<Time>, D: Unit<Distance>>(
     // region -> Natural
 
     @JvmName("divPace")
-    operator fun <T : Unit<Time>, D: Unit<Distance>> div(that: PaceAmount<T, D>) =
+    operator fun <T : Unit<Time>, D : Unit<Distance>> div(that: PaceAmount<T, D>) =
         ScalarAmount(amount = amount / that.amount
                               * convert(that.time to time)
                               / convert(that.distance to distance),
@@ -75,7 +75,7 @@ open class PaceAmount<T : Unit<Time>, D: Unit<Distance>>(
                      unit = NUMERIC)
 
     @JvmName("timesSpeed")
-    operator fun <D: Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.time to time)
                               * convert(that.distance to distance),
@@ -90,7 +90,7 @@ open class PaceAmount<T : Unit<Time>, D: Unit<Distance>>(
     // region -> Time
 
     @JvmName("timesDistance")
-    operator fun <D: Unit<Distance>> times(that: DistanceAmount<D>) =
+    operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =
         TimeAmount(amount = amount * that.amount * convert(that.distance to distance),
                    unit = time)
 

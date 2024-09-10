@@ -6,6 +6,7 @@ import org.pcb.unit.units.TimeAmount
 import org.pcb.unit.units.base.Second
 import org.pcb.unit.units.electromagnetism.Farad
 import org.pcb.unit.units.electromagnetism.Ohm
+import org.pcb.unit.units.electromagnetism.Siemens
 import org.pcb.unit.units.electromagnetism.Volt
 import org.pcb.unit.units.electromagnetism.Weber
 import org.pcb.unit.units.frequency.Hertz
@@ -56,4 +57,10 @@ class SecondTest
         assertEquals(
             expected = Second(6 / 3),
             actual = Weber(6) / Volt(3))
+
+    @Test
+    fun faradDivSiemens() =
+        assertEquals(
+            expected = Second(6 / 3),
+            actual = Farad(6) / Siemens(3))
 }

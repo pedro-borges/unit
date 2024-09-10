@@ -23,10 +23,10 @@ open class MassFluxAmount<M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
         unit: Pair<M, T>)
     : Amount<MassFlux>(amount = amount.toBigBigDecimal(),
-                           unit = CompositeUnit(
-                               domain = MassFlux::class,
-                               units = listOf(unit.major to 1,
-                                              unit.minor to -1)))
+                       unit = CompositeUnit(
+                           domain = MassFlux::class,
+                           units = listOf(unit.major to 1,
+                                          unit.minor to -1)))
 {
     val mass = unit.major
     val time = unit.minor
@@ -35,40 +35,40 @@ open class MassFluxAmount<M : Unit<Mass>, T : Unit<Time>>(
     {
         operator fun invoke(amount: Number, unit: Unit<MassFlux>) =
             MassFluxAmount(amount = amount.toBigBigDecimal() * unit.scale,
-                               unit = KILOGRAM to SECOND)
+                           unit = KILOGRAM to SECOND)
     }
 
     // region -> Speed
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MassFluxAmount(amount = amount * that.amount * that.unit.scale,
-                           unit = mass to time)
+                       unit = mass to time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         MassFluxAmount(amount = amount / that.amount / that.unit.scale,
-                           unit = mass to time)
+                       unit = mass to time)
 
     @JvmName("plusMassFlux")
     operator fun <M : Unit<Mass>, T : Unit<Time>> plus(that: MassFluxAmount<M, T>) =
         MassFluxAmount(amount = amount + that.amount
-                                    * convert(that.mass to mass)
-                                    / convert(that.time to time),
-                           unit = mass to time)
+                                * convert(that.mass to mass)
+                                / convert(that.time to time),
+                       unit = mass to time)
 
     operator fun plus(that: MassFluxAmount<M, T>) =
         MassFluxAmount(amount = amount + that.amount,
-                           unit = mass to time)
+                       unit = mass to time)
 
     @JvmName("minusMassFlux")
     operator fun <M : Unit<Mass>, T : Unit<Time>> minus(that: MassFluxAmount<M, T>) =
         MassFluxAmount(amount = amount - that.amount
-                                    * convert(that.mass to mass)
-                                    / convert(that.time to time),
-                           unit = mass to time)
+                                * convert(that.mass to mass)
+                                / convert(that.time to time),
+                       unit = mass to time)
 
     operator fun minus(that: MassFluxAmount<M, T>) =
         MassFluxAmount(amount = amount - that.amount,
-                           unit = mass to time)
+                       unit = mass to time)
 
     // endregion
 
@@ -89,7 +89,7 @@ open class MassFluxAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> Momentum
 
-    operator fun <D: Unit<Distance>> times(that: DistanceAmount<D>) =
+    operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =
         MomentumAmount(amount = amount * that.amount,
                        unit = U2(mass, that.distance) to time)
 

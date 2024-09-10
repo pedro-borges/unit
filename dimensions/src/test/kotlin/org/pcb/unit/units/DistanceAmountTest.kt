@@ -19,9 +19,9 @@ class DistanceAmountTest
     {
         assertEquals(
             expected = DistanceAmount(amount = 2 * 2,
-                                    unit = DISTANCE1),
+                                      unit = DISTANCE1),
             actual = DistanceAmount(amount = 2,
-                                  unit = DISTANCE1) *
+                                    unit = DISTANCE1) *
                      Percent(amount = 2 * 100))
     }
 
@@ -30,9 +30,9 @@ class DistanceAmountTest
     {
         assertEquals(
             expected = DistanceAmount(amount = 1,
-                                    unit = DISTANCE1),
+                                      unit = DISTANCE1),
             actual = DistanceAmount(amount = 2,
-                                  unit = DISTANCE1) /
+                                    unit = DISTANCE1) /
                      Percent(amount = 2 * 100))
     }
 
@@ -41,11 +41,11 @@ class DistanceAmountTest
     {
         assertEquals(
             expected = DistanceAmount(amount = 1,
-                                    unit = DISTANCE1),
+                                      unit = DISTANCE1),
             actual = DistanceAmount(amount = 0,
-                                  unit = DISTANCE1) +
+                                    unit = DISTANCE1) +
                      DistanceAmount(amount = 1,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -53,11 +53,11 @@ class DistanceAmountTest
     {
         assertEquals(
             expected = DistanceAmount(amount = 1,
-                                    unit = DISTANCE2),
+                                      unit = DISTANCE2),
             actual = DistanceAmount(amount = 0,
-                                  unit = DISTANCE2) +
+                                    unit = DISTANCE2) +
                      DistanceAmount(amount = 10,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -65,11 +65,11 @@ class DistanceAmountTest
     {
         assertEquals(
             expected = DistanceAmount(amount = 0,
-                                    unit = DISTANCE1),
+                                      unit = DISTANCE1),
             actual = DistanceAmount(amount = 1,
-                                  unit = DISTANCE1) -
+                                    unit = DISTANCE1) -
                      DistanceAmount(amount = 1,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -78,9 +78,9 @@ class DistanceAmountTest
         assertEquals(
             expected = DistanceAmount(amount = 0, DISTANCE2),
             actual = DistanceAmount(amount = 1,
-                                  unit = DISTANCE2) -
+                                    unit = DISTANCE2) -
                      DistanceAmount(amount = 10,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -90,9 +90,9 @@ class DistanceAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = DistanceAmount(amount = 2,
-                                  unit = DISTANCE1) /
+                                    unit = DISTANCE1) /
                      DistanceAmount(amount = 2,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -102,9 +102,9 @@ class DistanceAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = DistanceAmount(amount = 2,
-                                  unit = DISTANCE2) /
+                                    unit = DISTANCE2) /
                      DistanceAmount(amount = 20,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -114,7 +114,7 @@ class DistanceAmountTest
             expected = SpeedAmount(amount = 1,
                                    unit = DISTANCE1 to TIME1),
             actual = DistanceAmount(amount = 2,
-                                  unit = DISTANCE1) /
+                                    unit = DISTANCE1) /
                      TimeAmount(amount = 2,
                                 unit = TIME1))
     }
@@ -126,9 +126,9 @@ class DistanceAmountTest
             expected = AreaAmount(amount = 2 * 2,
                                   unit = DISTANCE1),
             actual = DistanceAmount(amount = 2,
-                                  unit = DISTANCE1) *
+                                    unit = DISTANCE1) *
                      DistanceAmount(amount = 2,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -138,9 +138,9 @@ class DistanceAmountTest
             expected = AreaAmount(amount = 2 * 2,
                                   unit = DISTANCE2),
             actual = DistanceAmount(amount = 2,
-                                  unit = DISTANCE2) *
+                                    unit = DISTANCE2) *
                      DistanceAmount(amount = 20,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -150,7 +150,7 @@ class DistanceAmountTest
             expected = VolumeAmount(amount = 2 * 2,
                                     unit = DISTANCE1),
             actual = DistanceAmount(amount = 2,
-                                  unit = DISTANCE1) *
+                                    unit = DISTANCE1) *
                      AreaAmount(amount = 2,
                                 unit = DISTANCE1))
     }
@@ -162,7 +162,7 @@ class DistanceAmountTest
             expected = VolumeAmount(amount = 2 * 2,
                                     unit = DISTANCE2),
             actual = DistanceAmount(amount = 2,
-                                  unit = DISTANCE2) *
+                                    unit = DISTANCE2) *
                      AreaAmount(amount = 200,
                                 unit = DISTANCE1))
     }
@@ -174,7 +174,7 @@ class DistanceAmountTest
             expected = EnergyAmount(amount = 2 * 2,
                                     unit = U2(MASS1, DISTANCE1) to TIME1),
             actual = DistanceAmount(amount = 2,
-                                  unit = DISTANCE1) *
+                                    unit = DISTANCE1) *
                      ForceAmount(amount = 2,
                                  unit = U2(MASS1, DISTANCE1) to TIME1))
     }
@@ -186,7 +186,7 @@ class DistanceAmountTest
             expected = EnergyAmount(amount = 2 * 2,
                                     unit = U2(MASS2, DISTANCE2) to TIME2),
             actual = DistanceAmount(amount = 2,
-                                  unit = DISTANCE2) *
+                                    unit = DISTANCE2) *
                      ForceAmount(amount = 20,
                                  unit = U2(MASS2, DISTANCE1) to TIME2))
     }
@@ -196,10 +196,10 @@ class DistanceAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 2 * 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1),
+                                      unit = U2(MASS1, DISTANCE1) to TIME1),
             actual = DistanceAmount(amount = 2,
-                                  unit = DISTANCE1) *
+                                    unit = DISTANCE1) *
                      MassFluxAmount(amount = 2,
-                                 unit = MASS1 to TIME1))
+                                    unit = MASS1 to TIME1))
     }
 }

@@ -112,7 +112,7 @@ class VolumeAmountTest
             actual = VolumeAmount(amount = 2,
                                   unit = DISTANCE1) /
                      DistanceAmount(amount = 2,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -124,7 +124,7 @@ class VolumeAmountTest
             actual = VolumeAmount(amount = 2,
                                   unit = DISTANCE2) /
                      DistanceAmount(amount = 20,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -132,7 +132,7 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = DistanceAmount(amount = 1,
-                                    unit = DISTANCE1),
+                                      unit = DISTANCE1),
             actual = VolumeAmount(amount = 2,
                                   unit = DISTANCE1) /
                      AreaAmount(amount = 2,
@@ -144,7 +144,7 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = DistanceAmount(amount = 1,
-                                    unit = DISTANCE2),
+                                      unit = DISTANCE2),
             actual = VolumeAmount(amount = 2,
                                   unit = DISTANCE2) /
                      AreaAmount(amount = 200,

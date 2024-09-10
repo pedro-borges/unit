@@ -18,9 +18,9 @@ class MassFluxAmountTest
     {
         assertEquals(
             expected = MassFluxAmount(amount = 2 * 2,
-                                   unit = MASS1 to TIME1),
+                                      unit = MASS1 to TIME1),
             actual = MassFluxAmount(amount = 2,
-                                 unit = MASS1 to TIME1) *
+                                    unit = MASS1 to TIME1) *
                      Percent(amount = 2 * 100))
     }
 
@@ -29,9 +29,9 @@ class MassFluxAmountTest
     {
         assertEquals(
             expected = MassFluxAmount(amount = 1,
-                                   unit = MASS1 to TIME1),
+                                      unit = MASS1 to TIME1),
             actual = MassFluxAmount(amount = 2,
-                                 unit = MASS1 to TIME1) /
+                                    unit = MASS1 to TIME1) /
                      Percent(amount = 2 * 100))
     }
 
@@ -40,11 +40,11 @@ class MassFluxAmountTest
     {
         assertEquals(
             expected = MassFluxAmount(amount = 1,
-                                   unit = MASS1 to TIME1),
+                                      unit = MASS1 to TIME1),
             actual = MassFluxAmount(amount = 0,
-                                 unit = MASS1 to TIME1) +
+                                    unit = MASS1 to TIME1) +
                      MassFluxAmount(amount = 1,
-                                 unit = MASS1 to TIME1))
+                                    unit = MASS1 to TIME1))
     }
 
     @Test
@@ -52,11 +52,11 @@ class MassFluxAmountTest
     {
         assertEquals(
             expected = MassFluxAmount(amount = 0 + (2 / 2),
-                                   unit = MASS1 to TIME1),
+                                      unit = MASS1 to TIME1),
             actual = MassFluxAmount(amount = 0,
-                                 unit = MASS1 to TIME1) +
+                                    unit = MASS1 to TIME1) +
                      MassFluxAmount(amount = 1,
-                                 unit = MASS2 to TIME2))
+                                    unit = MASS2 to TIME2))
     }
 
     @Test
@@ -64,11 +64,11 @@ class MassFluxAmountTest
     {
         assertEquals(
             expected = MassFluxAmount(amount = 0,
-                                   unit = MASS1 to TIME1),
+                                      unit = MASS1 to TIME1),
             actual = MassFluxAmount(amount = 1,
-                                 unit = MASS1 to TIME1) -
+                                    unit = MASS1 to TIME1) -
                      MassFluxAmount(amount = 1,
-                                 unit = MASS1 to TIME1))
+                                    unit = MASS1 to TIME1))
     }
 
     @Test
@@ -76,11 +76,11 @@ class MassFluxAmountTest
     {
         assertEquals(
             expected = MassFluxAmount(amount = 1 - (2 / 2),
-                                   unit = MASS1 to TIME1),
+                                      unit = MASS1 to TIME1),
             actual = MassFluxAmount(amount = 1,
-                                 unit = MASS1 to TIME1) -
+                                    unit = MASS1 to TIME1) -
                      MassFluxAmount(amount = 1,
-                                 unit = MASS2 to TIME2))
+                                    unit = MASS2 to TIME2))
     }
 
     @Test
@@ -90,9 +90,9 @@ class MassFluxAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = MassFluxAmount(amount = 2,
-                                 unit = MASS1 to TIME1) /
+                                    unit = MASS1 to TIME1) /
                      MassFluxAmount(amount = 2,
-                                 unit = MASS1 to TIME1))
+                                    unit = MASS1 to TIME1))
     }
 
     @Test
@@ -102,9 +102,9 @@ class MassFluxAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = MassFluxAmount(amount = 2,
-                                 unit = MASS1 to TIME1) /
+                                    unit = MASS1 to TIME1) /
                      MassFluxAmount(amount = 2,
-                                 unit = MASS2 to TIME2))
+                                    unit = MASS2 to TIME2))
     }
 
     @Test
@@ -112,10 +112,10 @@ class MassFluxAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 2 * 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1),
+                                      unit = U2(MASS1, DISTANCE1) to TIME1),
             actual = MassFluxAmount(amount = 2,
-                                 unit = MASS1 to TIME1) *
+                                    unit = MASS1 to TIME1) *
                      DistanceAmount(amount = 2,
-                                 unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 }

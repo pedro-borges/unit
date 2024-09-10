@@ -119,7 +119,7 @@ class TimeAmountTest
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
                      DistanceAmount(amount = 2,
-                                  unit = DISTANCE1))
+                                    unit = DISTANCE1))
     }
 
     @Test
@@ -180,6 +180,30 @@ class TimeAmountTest
                                 unit = TIME1) /
                      ElectricResistanceAmount(amount = 2000,
                                               unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT2)))
+    }
+
+    @Test
+    fun timesSameElectricConductivity()
+    {
+        assertEquals(
+            expected = ElectricCapacitanceAmount(amount = 2 * 2,
+                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            actual = TimeAmount(amount = 2,
+                                unit = TIME1) *
+                     ElectricConductivityAmount(amount = 2,
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
+    }
+
+    @Test
+    fun timesOtherElectricConductivity()
+    {
+        assertEquals(
+            expected = ElectricCapacitanceAmount(amount = 2 * 2,
+                                                 unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            actual = TimeAmount(amount = 2,
+                                unit = TIME2) *
+                     ElectricConductivityAmount(amount = 2000,
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
     }
 
     @Test

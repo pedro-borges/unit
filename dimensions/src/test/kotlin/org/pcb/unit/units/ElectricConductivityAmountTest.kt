@@ -157,4 +157,76 @@ class ElectricConductivityAmountTest
                      ElectricTensionAmount(amount = 20,
                                            unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT1)))
     }
+
+    @Test
+    fun divSameFrequency()
+    {
+        assertEquals(
+            expected = ElectricCapacitanceAmount(amount = 1,
+                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            actual = ElectricConductivityAmount(amount = 2,
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) /
+                     FrequencyAmount(amount = 2,
+                                     unit = NUMERIC to TIME1))
+    }
+
+    @Test
+    fun divOtherFrequency()
+    {
+        assertEquals(
+            expected = ElectricCapacitanceAmount(amount = 1,
+                                                 unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            actual = ElectricConductivityAmount(amount = 2,
+                                                unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) /
+                     FrequencyAmount(amount = 20,
+                                     unit = NUMERIC to TIME1))
+    }
+
+    @Test
+    fun timesSameTime()
+    {
+        assertEquals(
+            expected = ElectricCapacitanceAmount(amount = 2 * 2,
+                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            actual = ElectricConductivityAmount(amount = 2,
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) *
+                     TimeAmount(amount = 2,
+                                unit = TIME1))
+    }
+
+    @Test
+    fun timesOtherTime()
+    {
+        assertEquals(
+            expected = ElectricCapacitanceAmount(amount = 2 * 2,
+                                                 unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            actual = ElectricConductivityAmount(amount = 2,
+                                                unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) *
+                     TimeAmount(amount = 20,
+                                unit = TIME1))
+    }
+
+    @Test
+    fun divSameElectricCapacitance()
+    {
+        assertEquals(
+            expected = FrequencyAmount(amount = 1,
+                                       unit = NUMERIC to TIME1),
+            actual = ElectricConductivityAmount(amount = 2,
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) /
+                     ElectricCapacitanceAmount(amount = 2,
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
+    }
+
+    @Test
+    fun divOtherElectricCapacitance()
+    {
+        assertEquals(
+            expected = FrequencyAmount(amount = 1,
+                                       unit = NUMERIC to TIME2),
+            actual = ElectricConductivityAmount(amount = 2,
+                                                unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, DISTANCE1)) /
+                     ElectricCapacitanceAmount(amount = 2000000000,
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)))
+    }
 }

@@ -2,9 +2,12 @@ package org.pcb.unit.units.electromagnetism
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.U2
 import org.pcb.unit.units.ElectricChargeAmount
 import org.pcb.unit.units.base.Ampere
+import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Second
+import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.electromagnetism.Coulomb.COULOMB
 import org.pcb.unit.units.mechanics.Joule
 
@@ -17,6 +20,7 @@ class CoulombTest
     fun unit()
     {
         Coulomb(2 * 2) equivalent Ampere(2) * Second(2)
+        Coulomb(2) equivalent ElectricChargeAmount(2, U2(AMPERE, SECOND))
         Coulomb(2) equivalent ElectricChargeAmount(2, COULOMB)
     }
 
