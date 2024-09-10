@@ -1,11 +1,8 @@
-package org.pcb.unit
+package org.pcb.unit.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.units.AreaAmount
-import org.pcb.unit.units.MagneticFluxAmount
-import org.pcb.unit.units.MagneticFluxDensityAmount
-import org.pcb.unit.units.ScalarAmount
+import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1

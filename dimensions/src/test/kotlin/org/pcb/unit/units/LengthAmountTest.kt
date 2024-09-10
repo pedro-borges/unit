@@ -1,15 +1,8 @@
-package org.pcb.unit
+package org.pcb.unit.units
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
-import org.pcb.unit.units.AreaAmount
-import org.pcb.unit.units.EnergyAmount
-import org.pcb.unit.units.ForceAmount
-import org.pcb.unit.units.LengthAmount
-import org.pcb.unit.units.ScalarAmount
-import org.pcb.unit.units.SpeedAmount
-import org.pcb.unit.units.TimeAmount
-import org.pcb.unit.units.VolumeAmount
+import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1

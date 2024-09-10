@@ -1,16 +1,8 @@
-package org.pcb.unit
+package org.pcb.unit.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.units.ElectricCapacitanceAmount
-import org.pcb.unit.units.ElectricChargeAmount
-import org.pcb.unit.units.ElectricCurrentAmount
-import org.pcb.unit.units.ElectricResistanceAmount
-import org.pcb.unit.units.ElectricTensionAmount
-import org.pcb.unit.units.EnergyAmount
-import org.pcb.unit.units.MagneticFluxAmount
-import org.pcb.unit.units.ScalarAmount
-import org.pcb.unit.units.TimeAmount
+import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.ELECTRICCURRENT1

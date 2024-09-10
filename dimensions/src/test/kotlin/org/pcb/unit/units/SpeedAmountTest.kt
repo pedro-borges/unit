@@ -1,17 +1,8 @@
-package org.pcb.unit
+package org.pcb.unit.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.units.AccelerationAmount
-import org.pcb.unit.units.EnergyAmount
-import org.pcb.unit.units.ForceAmount
-import org.pcb.unit.units.FrequencyAmount
-import org.pcb.unit.units.LengthAmount
-import org.pcb.unit.units.MomentumAmount
-import org.pcb.unit.units.PowerAmount
-import org.pcb.unit.units.ScalarAmount
-import org.pcb.unit.units.SpeedAmount
-import org.pcb.unit.units.TimeAmount
+import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1

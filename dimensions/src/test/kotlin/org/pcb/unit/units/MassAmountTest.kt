@@ -1,13 +1,8 @@
-package org.pcb.unit
+package org.pcb.unit.units
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
-import org.pcb.unit.units.AccelerationAmount
-import org.pcb.unit.units.ForceAmount
-import org.pcb.unit.units.MassAmount
-import org.pcb.unit.units.MomentumAmount
-import org.pcb.unit.units.ScalarAmount
-import org.pcb.unit.units.SpeedAmount
+import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.LENGTH1
