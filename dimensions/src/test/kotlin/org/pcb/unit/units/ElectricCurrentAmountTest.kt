@@ -237,4 +237,28 @@ class ElectricCurrentAmountTest
                      MagneticFluxAmount(amount = 20,
                                         unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT2)))
     }
+
+    @Test
+    fun timesSameInductance()
+    {
+        assertEquals(
+            expected = MagneticFluxAmount(amount = 2 * 2,
+                                          unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT1)),
+            actual = ElectricCurrentAmount(amount = 2,
+                                           unit = ELECTRICCURRENT1) *
+                     InductanceAmount(amount = 2,
+                                      unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT1)))
+    }
+
+    @Test
+    fun timesOtherInductance()
+    {
+        assertEquals(
+            expected = MagneticFluxAmount(amount = 2 * 2,
+                                          unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT1)),
+            actual = ElectricCurrentAmount(amount = 2,
+                                           unit = ELECTRICCURRENT1) *
+                     InductanceAmount(amount = 200,
+                                      unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT2)))
+    }
 }

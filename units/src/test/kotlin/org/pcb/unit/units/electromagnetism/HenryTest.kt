@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
 import org.pcb.unit.units.InductanceAmount
+import org.pcb.unit.units.base.Ampere
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Meter.METER
@@ -21,4 +22,10 @@ class HenryTest
         Henry(2) equivalent InductanceAmount(2, U2(KILOGRAM, METER) to U2(SECOND, AMPERE))
         Henry(2) equivalent InductanceAmount(2, HENRY)
     }
+
+    @Test
+    fun weberDivAmpere() =
+        assertEquals(
+            expected = Henry(6 / 3),
+            actual = Weber(6) / Ampere(3))
 }

@@ -234,4 +234,37 @@ open class MagneticFluxAmount<M : Unit<Mass>, D2 : Unit<Distance>, T2 : Unit<Tim
                    unit = distance)
 
     // endregion
+
+    // region -> Inductance
+
+    @JvmName("divElectricCurrent")
+    operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
+        InductanceAmount(amount = amount / that.amount / convert(that.electricCurrent to electricCurrent),
+                         unit = U2(mass, distance) to U2(time, electricCurrent))
+
+    operator fun div(that: ElectricCurrentAmount<EC>) =
+        InductanceAmount(amount = amount / that.amount,
+                         unit = U2(mass, distance) to U2(time, electricCurrent))
+
+    // endregion
+
+    // region -> ElectricCurrent
+
+    @JvmName("divInductance")
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: InductanceAmount<M, D, T, EC>) =
+        ElectricCurrentAmount(amount = amount / that.amount
+                                       / convert(that.mass to mass,
+                                                 that.distance to distance,
+                                                 that.distance to distance)
+                                       * convert(that.time to time,
+                                                 that.time to time,
+                                                 that.electricCurrent to electricCurrent,
+                                                 that.electricCurrent to electricCurrent),
+                              unit = electricCurrent)
+
+    operator fun div(that: InductanceAmount<M, D2, T2, EC>) =
+        ElectricCurrentAmount(amount = amount / that.amount,
+                              unit = electricCurrent)
+
+    // endregion
 }

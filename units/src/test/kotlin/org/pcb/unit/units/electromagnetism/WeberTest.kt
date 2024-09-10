@@ -30,10 +30,22 @@ class WeberTest
     }
 
     @Test
+    fun ampereTimesHenry() =
+        assertEquals(
+            expected = Weber(2 * 3),
+            actual = Ampere(2) * Henry(3))
+
+    @Test
     fun coulombTimesOhm() =
         assertEquals(
             expected = Weber(2 * 3),
             actual = Coulomb(2) * Ohm(3))
+
+    @Test
+    fun henryTimesAmpere() =
+        assertEquals(
+            expected = Weber(2 * 3),
+            actual = Henry(2) * Ampere(3))
 
     @Test
     fun jouleDivAmpere() =

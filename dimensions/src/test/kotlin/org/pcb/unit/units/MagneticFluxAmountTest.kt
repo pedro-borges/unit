@@ -299,4 +299,52 @@ class MagneticFluxAmountTest
                      MagneticFluxDensityAmount(amount = 20000,
                                                unit = MASS1 to U2(TIME2, ELECTRICCURRENT2)))
     }
+
+    @Test
+    fun divSameElectricCurrent()
+    {
+        assertEquals(
+            expected = InductanceAmount(amount = 1,
+                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+            actual = MagneticFluxAmount(amount = 2,
+                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
+                     ElectricCurrentAmount(amount = 2,
+                                           unit = ELECTRICCURRENT1))
+    }
+
+    @Test
+    fun divOtherElectricCurrent()
+    {
+        assertEquals(
+            expected = AreaAmount(amount = 1,
+                                  unit = DISTANCE1),
+            actual = MagneticFluxAmount(amount = 2,
+                                        unit = U2(MASS2, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
+                     MagneticFluxDensityAmount(amount = 20000,
+                                               unit = MASS1 to U2(TIME2, ELECTRICCURRENT2)))
+    }
+
+    @Test
+    fun divSameInductance()
+    {
+        assertEquals(
+            expected = ElectricCurrentAmount(amount = 1,
+                                             unit = ELECTRICCURRENT1),
+            actual = MagneticFluxAmount(amount = 2,
+                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
+                     InductanceAmount(amount = 2,
+                                      unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
+    }
+
+    @Test
+    fun divOtherInductance()
+    {
+        assertEquals(
+            expected = ElectricCurrentAmount(amount = 1,
+                                             unit = ELECTRICCURRENT1),
+            actual = MagneticFluxAmount(amount = 2,
+                                        unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) /
+                     InductanceAmount(amount = 20000000,
+                                      unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
+    }
 }

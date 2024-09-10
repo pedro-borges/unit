@@ -55,4 +55,10 @@ class AmpereTest
         assertEquals(
             expected = Ampere(6 / 3),
             actual = Watt(6) / Volt(3))
+
+    @Test
+    fun weberDivHenry() =
+        assertEquals(
+            expected = Ampere(6 / 3),
+            actual = Weber(6) / Henry(3))
 }

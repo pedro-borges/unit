@@ -136,4 +136,18 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
                      unit = U2(that.mass, that.distance) to that.time)
 
     // endregion
+
+    // region -> MagneticFlux
+
+    @JvmName("timesInductance")
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: InductanceAmount<M, D, T, EC>) =
+        MagneticFluxAmount(amount = amount * that.amount / convert(that.electricCurrent to electricCurrent,
+                                                                   that.electricCurrent to electricCurrent),
+                           unit = U2(that.mass, that.distance) to U2(that.time, electricCurrent))
+
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> times(that: InductanceAmount<M, D, T, EC>) =
+        MagneticFluxAmount(amount = amount * that.amount,
+                           unit = U2(that.mass, that.distance) to U2(that.time, electricCurrent))
+
+    // endregion
 }
