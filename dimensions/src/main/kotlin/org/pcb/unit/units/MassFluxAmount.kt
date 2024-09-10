@@ -7,7 +7,7 @@ import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
-import org.pcb.unit.dimension.MassFlowRate
+import org.pcb.unit.dimension.MassFlux
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
@@ -19,12 +19,12 @@ import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
-open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
+open class MassFluxAmount<M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
         unit: Pair<M, T>)
-    : Amount<MassFlowRate>(amount = amount.toBigBigDecimal(),
+    : Amount<MassFlux>(amount = amount.toBigBigDecimal(),
                            unit = CompositeUnit(
-                               domain = MassFlowRate::class,
+                               domain = MassFlux::class,
                                units = listOf(unit.major to 1,
                                               unit.minor to -1)))
 {
@@ -33,55 +33,55 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     companion object
     {
-        operator fun invoke(amount: Number, unit: Unit<MassFlowRate>) =
-            MassFlowRateAmount(amount = amount.toBigBigDecimal() * unit.scale,
+        operator fun invoke(amount: Number, unit: Unit<MassFlux>) =
+            MassFluxAmount(amount = amount.toBigBigDecimal() * unit.scale,
                                unit = KILOGRAM to SECOND)
     }
 
     // region -> Speed
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        MassFlowRateAmount(amount = amount * that.amount * that.unit.scale,
+        MassFluxAmount(amount = amount * that.amount * that.unit.scale,
                            unit = mass to time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        MassFlowRateAmount(amount = amount / that.amount / that.unit.scale,
+        MassFluxAmount(amount = amount / that.amount / that.unit.scale,
                            unit = mass to time)
 
-    @JvmName("plusMassFlowRate")
-    operator fun <M : Unit<Mass>, T : Unit<Time>> plus(that: MassFlowRateAmount<M, T>) =
-        MassFlowRateAmount(amount = amount + that.amount
+    @JvmName("plusMassFlux")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> plus(that: MassFluxAmount<M, T>) =
+        MassFluxAmount(amount = amount + that.amount
                                     * convert(that.mass to mass)
                                     / convert(that.time to time),
                            unit = mass to time)
 
-    operator fun plus(that: MassFlowRateAmount<M, T>) =
-        MassFlowRateAmount(amount = amount + that.amount,
+    operator fun plus(that: MassFluxAmount<M, T>) =
+        MassFluxAmount(amount = amount + that.amount,
                            unit = mass to time)
 
-    @JvmName("minusMassFlowRate")
-    operator fun <M : Unit<Mass>, T : Unit<Time>> minus(that: MassFlowRateAmount<M, T>) =
-        MassFlowRateAmount(amount = amount - that.amount
+    @JvmName("minusMassFlux")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> minus(that: MassFluxAmount<M, T>) =
+        MassFluxAmount(amount = amount - that.amount
                                     * convert(that.mass to mass)
                                     / convert(that.time to time),
                            unit = mass to time)
 
-    operator fun minus(that: MassFlowRateAmount<M, T>) =
-        MassFlowRateAmount(amount = amount - that.amount,
+    operator fun minus(that: MassFluxAmount<M, T>) =
+        MassFluxAmount(amount = amount - that.amount,
                            unit = mass to time)
 
     // endregion
 
     // region -> Natural
 
-    @JvmName("divMassFlowRate")
-    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFlowRateAmount<M, T>) =
+    @JvmName("divMassFlux")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFluxAmount<M, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.mass to mass)
                               * convert(that.time to time),
                      unit = NUMERIC)
 
-    operator fun div(that: MassFlowRateAmount<M, T>) =
+    operator fun div(that: MassFluxAmount<M, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 

@@ -117,7 +117,7 @@ open class LengthAmount<L : Unit<Length>>(
 
     // region -> Momentum
 
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: MassFlowRateAmount<M, T>) =
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: MassFluxAmount<M, T>) =
         MomentumAmount(amount = amount * that.amount,
                        unit = U2(that.mass, length) to that.time)
 

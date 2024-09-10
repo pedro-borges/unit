@@ -11,15 +11,15 @@ import org.pcb.unit.units.test.MASS2
 import org.pcb.unit.units.test.TIME1
 import org.pcb.unit.units.test.TIME2
 
-class MassFlowRateAmountTest
+class MassFluxAmountTest
 {
     @Test
     fun timesScalar()
     {
         assertEquals(
-            expected = MassFlowRateAmount(amount = 2 * 2,
+            expected = MassFluxAmount(amount = 2 * 2,
                                    unit = MASS1 to TIME1),
-            actual = MassFlowRateAmount(amount = 2,
+            actual = MassFluxAmount(amount = 2,
                                  unit = MASS1 to TIME1) *
                      Percent(amount = 2 * 100))
     }
@@ -28,82 +28,82 @@ class MassFlowRateAmountTest
     fun divScalar()
     {
         assertEquals(
-            expected = MassFlowRateAmount(amount = 1,
+            expected = MassFluxAmount(amount = 1,
                                    unit = MASS1 to TIME1),
-            actual = MassFlowRateAmount(amount = 2,
+            actual = MassFluxAmount(amount = 2,
                                  unit = MASS1 to TIME1) /
                      Percent(amount = 2 * 100))
     }
 
     @Test
-    fun plusSameMassFlowRate()
+    fun plusSameMassFlux()
     {
         assertEquals(
-            expected = MassFlowRateAmount(amount = 1,
+            expected = MassFluxAmount(amount = 1,
                                    unit = MASS1 to TIME1),
-            actual = MassFlowRateAmount(amount = 0,
+            actual = MassFluxAmount(amount = 0,
                                  unit = MASS1 to TIME1) +
-                     MassFlowRateAmount(amount = 1,
+                     MassFluxAmount(amount = 1,
                                  unit = MASS1 to TIME1))
     }
 
     @Test
-    fun plusOtherMassFlowRate()
+    fun plusOtherMassFlux()
     {
         assertEquals(
-            expected = MassFlowRateAmount(amount = 0 + (2 / 2),
+            expected = MassFluxAmount(amount = 0 + (2 / 2),
                                    unit = MASS1 to TIME1),
-            actual = MassFlowRateAmount(amount = 0,
+            actual = MassFluxAmount(amount = 0,
                                  unit = MASS1 to TIME1) +
-                     MassFlowRateAmount(amount = 1,
+                     MassFluxAmount(amount = 1,
                                  unit = MASS2 to TIME2))
     }
 
     @Test
-    fun minusSameMassFlowRate()
+    fun minusSameMassFlux()
     {
         assertEquals(
-            expected = MassFlowRateAmount(amount = 0,
+            expected = MassFluxAmount(amount = 0,
                                    unit = MASS1 to TIME1),
-            actual = MassFlowRateAmount(amount = 1,
+            actual = MassFluxAmount(amount = 1,
                                  unit = MASS1 to TIME1) -
-                     MassFlowRateAmount(amount = 1,
+                     MassFluxAmount(amount = 1,
                                  unit = MASS1 to TIME1))
     }
 
     @Test
-    fun minusOtherMassFlowRate()
+    fun minusOtherMassFlux()
     {
         assertEquals(
-            expected = MassFlowRateAmount(amount = 1 - (2 / 2),
+            expected = MassFluxAmount(amount = 1 - (2 / 2),
                                    unit = MASS1 to TIME1),
-            actual = MassFlowRateAmount(amount = 1,
+            actual = MassFluxAmount(amount = 1,
                                  unit = MASS1 to TIME1) -
-                     MassFlowRateAmount(amount = 1,
+                     MassFluxAmount(amount = 1,
                                  unit = MASS2 to TIME2))
     }
 
     @Test
-    fun divSameMassFlowRate()
+    fun divSameMassFlux()
     {
         assertEquals(
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
-            actual = MassFlowRateAmount(amount = 2,
+            actual = MassFluxAmount(amount = 2,
                                  unit = MASS1 to TIME1) /
-                     MassFlowRateAmount(amount = 2,
+                     MassFluxAmount(amount = 2,
                                  unit = MASS1 to TIME1))
     }
 
     @Test
-    fun divOtherMassFlowRate()
+    fun divOtherMassFlux()
     {
         assertEquals(
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
-            actual = MassFlowRateAmount(amount = 2,
+            actual = MassFluxAmount(amount = 2,
                                  unit = MASS1 to TIME1) /
-                     MassFlowRateAmount(amount = 2,
+                     MassFluxAmount(amount = 2,
                                  unit = MASS2 to TIME2))
     }
 
@@ -113,7 +113,7 @@ class MassFlowRateAmountTest
         assertEquals(
             expected = MomentumAmount(amount = 2 * 2,
                                     unit = U2(MASS1, LENGTH1) to TIME1),
-            actual = MassFlowRateAmount(amount = 2,
+            actual = MassFluxAmount(amount = 2,
                                  unit = MASS1 to TIME1) *
                      LengthAmount(amount = 2,
                                  unit = LENGTH1))

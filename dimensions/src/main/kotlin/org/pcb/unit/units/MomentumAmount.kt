@@ -139,29 +139,29 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> MassFlowRate
+    // region -> MassFlux
 
     @JvmName("divLength")
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
-        MassFlowRateAmount(amount = amount / that.amount / convert(that.length to length),
+        MassFluxAmount(amount = amount / that.amount / convert(that.length to length),
                            unit = mass to time)
 
     operator fun div(that: LengthAmount<L>) =
-        MassFlowRateAmount(amount = amount / that.amount,
+        MassFluxAmount(amount = amount / that.amount,
                            unit = mass to time)
 
     // endregion
 
     // region -> Length
 
-    @JvmName("divMassFlowRate")
-    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFlowRateAmount<M, T>) =
+    @JvmName("divMassFlux")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFluxAmount<M, T>) =
         LengthAmount(amount = amount / that.amount
                                     / convert(that.mass to mass)
                                     * convert((that.time to time)),
                            unit = length)
 
-    operator fun div(that: MassFlowRateAmount<M, T>) =
+    operator fun div(that: MassFluxAmount<M, T>) =
         LengthAmount(amount = amount / that.amount,
                      unit = length)
 

@@ -208,7 +208,7 @@ class MomentumAmountTest
     fun divSameLength()
     {
         assertEquals(
-            expected = MassFlowRateAmount(amount = 1,
+            expected = MassFluxAmount(amount = 1,
                                           unit = MASS1 to TIME1),
             actual = MomentumAmount(amount = 2,
                                     unit = U2(MASS1, LENGTH1) to TIME1) /
@@ -220,7 +220,7 @@ class MomentumAmountTest
     fun divOtherLength()
     {
         assertEquals(
-            expected = MassFlowRateAmount(amount = 1,
+            expected = MassFluxAmount(amount = 1,
                                           unit = MASS1 to TIME1),
             actual = MomentumAmount(amount = 2,
                                     unit = U2(MASS1, LENGTH2) to TIME1) /
@@ -229,26 +229,26 @@ class MomentumAmountTest
     }
 
     @Test
-    fun divSameMassFlowRate()
+    fun divSameMassFlux()
     {
         assertEquals(
             expected = LengthAmount(amount = 1,
                                     unit = LENGTH1),
             actual = MomentumAmount(amount = 2,
                                     unit = U2(MASS1, LENGTH1) to TIME1) /
-                     MassFlowRateAmount(amount = 2,
+                     MassFluxAmount(amount = 2,
                                         unit = MASS1 to TIME1))
     }
 
     @Test
-    fun divOtherMassFlowRate()
+    fun divOtherMassFlux()
     {
         assertEquals(
             expected = LengthAmount(amount = 1,
                                     unit = LENGTH1),
             actual = MomentumAmount(amount = 2,
                                     unit = U2(MASS2, LENGTH1) to TIME1) /
-                     MassFlowRateAmount(amount = 200,
+                     MassFluxAmount(amount = 200,
                                         unit = MASS1 to TIME2))
     }
 }
