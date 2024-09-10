@@ -124,8 +124,8 @@ class ElectricChargeAmountTest
     fun divSameElectricTension()
     {
         assertEquals(
-            expected = ElectricCapacitanceAmount(amount = 1,
-                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            expected = CapacitanceAmount(amount = 1,
+                                         unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = ElectricChargeAmount(amount = 2,
                                           unit = U2(ELECTRICCURRENT1, TIME1)) /
                      ElectricTensionAmount(amount = 2,
@@ -136,8 +136,8 @@ class ElectricChargeAmountTest
     fun divOtherElectricTension()
     {
         assertEquals(
-            expected = ElectricCapacitanceAmount(amount = 1,
-                                                 unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS2, DISTANCE2)),
+            expected = CapacitanceAmount(amount = 1,
+                                         unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS2, DISTANCE2)),
             actual = ElectricChargeAmount(amount = 2,
                                           unit = U2(ELECTRICCURRENT2, TIME2)) /
                      ElectricTensionAmount(amount = 20000,
@@ -145,27 +145,27 @@ class ElectricChargeAmountTest
     }
 
     @Test
-    fun divSameElectricCapacitance()
+    fun divSameCapacitance()
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 1,
                                              unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
             actual = ElectricChargeAmount(amount = 2,
                                           unit = U2(ELECTRICCURRENT1, TIME1)) /
-                     ElectricCapacitanceAmount(amount = 2,
-                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
+                     CapacitanceAmount(amount = 2,
+                                       unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
     }
 
     @Test
-    fun divOtherElectricCapacitance()
+    fun divOtherCapacitance()
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 1,
                                              unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT2)),
             actual = ElectricChargeAmount(amount = 2,
                                           unit = U2(ELECTRICCURRENT2, TIME2)) /
-                     ElectricCapacitanceAmount(amount = 2000000,
-                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)))
+                     CapacitanceAmount(amount = 2000000,
+                                       unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)))
     }
 
     @Test

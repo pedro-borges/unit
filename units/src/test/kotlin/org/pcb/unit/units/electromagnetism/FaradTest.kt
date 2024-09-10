@@ -3,7 +3,7 @@ package org.pcb.unit.units.electromagnetism
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.units.ElectricCapacitanceAmount
+import org.pcb.unit.units.CapacitanceAmount
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Kilogram.KILOGRAM
 import org.pcb.unit.units.base.Meter.METER
@@ -14,15 +14,15 @@ import org.pcb.unit.units.frequency.Hertz
 
 class FaradTest
 {
-    private infix fun Farad.equivalent(other: ElectricCapacitanceAmount<*, *, *, *>) =
+    private infix fun Farad.equivalent(other: CapacitanceAmount<*, *, *, *>) =
         assertEquals(this, Farad(0) + other)
 
     @Test
     fun unit()
     {
 //        Farad(2) equivalent Kilogram(2) TODO finish
-        Farad(2) equivalent ElectricCapacitanceAmount(2, U2(SECOND, AMPERE) to U2(KILOGRAM, METER))
-        Farad(2) equivalent ElectricCapacitanceAmount(2, FARAD)
+        Farad(2) equivalent CapacitanceAmount(2, U2(SECOND, AMPERE) to U2(KILOGRAM, METER))
+        Farad(2) equivalent CapacitanceAmount(2, FARAD)
     }
 
     @Test

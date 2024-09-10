@@ -229,27 +229,27 @@ class ElectricTensionAmountTest
     }
 
     @Test
-    fun timesSameElectricCapacitance()
+    fun timesSameCapacitance()
     {
         assertEquals(
             expected = ElectricChargeAmount(amount = 2 * 2,
                                             unit = U2(ELECTRICCURRENT1, TIME1)),
             actual = ElectricTensionAmount(amount = 2,
                                            unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) *
-                     ElectricCapacitanceAmount(amount = 2,
-                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
+                     CapacitanceAmount(amount = 2,
+                                       unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
     }
 
     @Test
-    fun timesOtherElectricCapacitance()
+    fun timesOtherCapacitance()
     {
         assertEquals(
             expected = ElectricChargeAmount(amount = 2 * 2,
                                             unit = U2(ELECTRICCURRENT2, TIME2)),
             actual = ElectricTensionAmount(amount = 2,
                                            unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)) *
-                     ElectricCapacitanceAmount(amount = 2000000000,
-                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)))
+                     CapacitanceAmount(amount = 2000000000,
+                                       unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)))
     }
 
     @Test

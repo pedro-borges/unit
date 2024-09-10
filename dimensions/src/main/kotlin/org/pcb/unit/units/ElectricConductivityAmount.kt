@@ -146,32 +146,32 @@ open class ElectricConductivityAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurren
 
     // endregion
 
-    // region -> ElectricCapacitance
+    // region -> Capacitance
 
     @JvmName("divFrequency")
     operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
-        ElectricCapacitanceAmount(amount = amount / that.amount / convert(that.time to time),
-                                  unit = U2(time, electricCurrent) to U2(mass, distance))
+        CapacitanceAmount(amount = amount / that.amount / convert(that.time to time),
+                          unit = U2(time, electricCurrent) to U2(mass, distance))
 
     operator fun div(that: FrequencyAmount<T3>) =
-        ElectricCapacitanceAmount(amount = amount / that.amount,
-                                  unit = U2(time, electricCurrent) to U2(mass, distance))
+        CapacitanceAmount(amount = amount / that.amount,
+                          unit = U2(time, electricCurrent) to U2(mass, distance))
 
     @JvmName("timesTime")
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
-        ElectricCapacitanceAmount(amount = amount * that.amount * convert(that.time to time),
-                                  unit = U2(time, electricCurrent) to U2(mass, distance))
+        CapacitanceAmount(amount = amount * that.amount * convert(that.time to time),
+                          unit = U2(time, electricCurrent) to U2(mass, distance))
 
     operator fun times(that: TimeAmount<T3>) =
-        ElectricCapacitanceAmount(amount = amount * that.amount,
-                                  unit = U2(time, electricCurrent) to U2(mass, distance))
+        CapacitanceAmount(amount = amount * that.amount,
+                          unit = U2(time, electricCurrent) to U2(mass, distance))
 
     // endregion
 
     // region -> Frequency
 
-    @JvmName("divElectricCapacitance")
-    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> div(that: ElectricCapacitanceAmount<T, EC, M, D>) =
+    @JvmName("divCapacitance")
+    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> div(that: CapacitanceAmount<T, EC, M, D>) =
         FrequencyAmount(amount = amount / that.amount
                                  / convert(that.mass to mass,
                                            that.distance to distance,
@@ -184,7 +184,7 @@ open class ElectricConductivityAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurren
                                            that.electricCurrent to electricCurrent),
                         unit = NUMERIC to time)
 
-    operator fun div(that: ElectricCapacitanceAmount<T3, EC2, M, D2>) =
+    operator fun div(that: CapacitanceAmount<T3, EC2, M, D2>) =
         FrequencyAmount(amount = amount / that.amount,
                         unit = NUMERIC to time)
 

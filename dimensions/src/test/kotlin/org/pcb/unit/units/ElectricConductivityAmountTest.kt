@@ -159,8 +159,8 @@ class ElectricConductivityAmountTest
     fun divSameFrequency()
     {
         assertEquals(
-            expected = ElectricCapacitanceAmount(amount = 1,
-                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            expected = CapacitanceAmount(amount = 1,
+                                         unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = ElectricConductivityAmount(amount = 2,
                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) /
                      FrequencyAmount(amount = 2,
@@ -171,8 +171,8 @@ class ElectricConductivityAmountTest
     fun divOtherFrequency()
     {
         assertEquals(
-            expected = ElectricCapacitanceAmount(amount = 1,
-                                                 unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            expected = CapacitanceAmount(amount = 1,
+                                         unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = ElectricConductivityAmount(amount = 2,
                                                 unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) /
                      FrequencyAmount(amount = 20,
@@ -183,8 +183,8 @@ class ElectricConductivityAmountTest
     fun timesSameTime()
     {
         assertEquals(
-            expected = ElectricCapacitanceAmount(amount = 2 * 2,
-                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            expected = CapacitanceAmount(amount = 2 * 2,
+                                         unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = ElectricConductivityAmount(amount = 2,
                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) *
                      TimeAmount(amount = 2,
@@ -195,8 +195,8 @@ class ElectricConductivityAmountTest
     fun timesOtherTime()
     {
         assertEquals(
-            expected = ElectricCapacitanceAmount(amount = 2 * 2,
-                                                 unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+            expected = CapacitanceAmount(amount = 2 * 2,
+                                         unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = ElectricConductivityAmount(amount = 2,
                                                 unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) *
                      TimeAmount(amount = 20,
@@ -204,26 +204,26 @@ class ElectricConductivityAmountTest
     }
 
     @Test
-    fun divSameElectricCapacitance()
+    fun divSameCapacitance()
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
                                        unit = NUMERIC to TIME1),
             actual = ElectricConductivityAmount(amount = 2,
                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) /
-                     ElectricCapacitanceAmount(amount = 2,
-                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
+                     CapacitanceAmount(amount = 2,
+                                       unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
     }
 
     @Test
-    fun divOtherElectricCapacitance()
+    fun divOtherCapacitance()
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
                                        unit = NUMERIC to TIME1),
             actual = ElectricConductivityAmount(amount = 2,
                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)) /
-                     ElectricCapacitanceAmount(amount = 2000000000,
-                                               unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, DISTANCE1)))
+                     CapacitanceAmount(amount = 2000000000,
+                                       unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, DISTANCE1)))
     }
 }

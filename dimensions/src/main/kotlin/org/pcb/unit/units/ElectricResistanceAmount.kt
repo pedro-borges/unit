@@ -140,8 +140,8 @@ open class ElectricResistanceAmount<M : Unit<Mass>, D2 : Unit<Distance>, T3 : Un
 
     // region -> Time
 
-    @JvmName("timesElectricCapacitance")
-    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> times(that: ElectricCapacitanceAmount<T, EC, M, D>) =
+    @JvmName("timesCapacitance")
+    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> times(that: CapacitanceAmount<T, EC, M, D>) =
         TimeAmount(amount = amount * that.amount
                             * convert(that.time to time,
                                       that.time to time,
@@ -154,7 +154,7 @@ open class ElectricResistanceAmount<M : Unit<Mass>, D2 : Unit<Distance>, T3 : Un
                                       that.distance to distance),
                    unit = time)
 
-    operator fun times(that: ElectricCapacitanceAmount<T3, EC2, M, D2>) =
+    operator fun times(that: CapacitanceAmount<T3, EC2, M, D2>) =
         TimeAmount(amount = amount * that.amount,
                    unit = time)
 
