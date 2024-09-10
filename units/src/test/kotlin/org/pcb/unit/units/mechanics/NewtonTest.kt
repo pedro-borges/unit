@@ -23,6 +23,12 @@ class NewtonTest
     @Test
     fun jouleDivMeter() =
         assertEquals(
-            expected = Newton(1),
-            actual = Joule(1) / Meter(1))
+            expected = Newton(6 / 3),
+            actual = Joule(6) / Meter(3))
+
+    @Test
+    fun wattDivMeterPerSecond() =
+        assertEquals(
+            expected = Newton(6 / 3),
+            actual = Watt(6) / MeterPerSecond(3))
 }

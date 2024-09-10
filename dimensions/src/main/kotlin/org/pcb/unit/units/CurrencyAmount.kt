@@ -33,20 +33,20 @@ open class CurrencyAmount<C : Unit<Currency>>(
         CurrencyAmount(amount = amount / that.amount / that.unit.scale,
                        unit = currency)
 
+    @JvmName("plusCurrency")
     operator fun <C : Unit<Currency>> plus(that: CurrencyAmount<C>) =
         CurrencyAmount(amount = this.amount + that.amount * convert(that.currency to currency),
                        unit = currency)
 
-    @JvmName("plusCurrency")
     operator fun plus(that: CurrencyAmount<C>) =
         CurrencyAmount(amount = this.amount + that.amount,
                        unit = currency)
 
+    @JvmName("minusCurrency")
     operator fun <C : Unit<Currency>> minus(that: CurrencyAmount<C>) =
         CurrencyAmount(amount = this.amount - that.amount * convert(that.currency to currency),
                        unit = currency)
 
-    @JvmName("minusCurrency")
     operator fun minus(that: CurrencyAmount<C>) =
         CurrencyAmount(amount = this.amount - that.amount,
                        unit = currency)
@@ -55,11 +55,11 @@ open class CurrencyAmount<C : Unit<Currency>>(
 
     // region -> Natural
 
+    @JvmName("divCurrency")
     operator fun <C : Unit<Currency>> div(that: CurrencyAmount<C>) =
         ScalarAmount(amount = amount / that.amount / convert(that.currency to currency),
                      unit = NUMERIC)
 
-    @JvmName("divCurrency")
     operator fun div(that: CurrencyAmount<C>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)

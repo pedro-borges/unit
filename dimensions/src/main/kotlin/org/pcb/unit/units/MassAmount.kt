@@ -34,20 +34,20 @@ open class MassAmount<M : Unit<Mass>>(
         MassAmount(amount = amount / that.amount / that.unit.scale,
                    unit = mass)
 
+    @JvmName("plusMass")
     operator fun <M : Unit<Mass>> plus(that: MassAmount<M>) =
         MassAmount(amount = amount + that.amount * convert(that.mass to mass),
                    unit = mass)
 
-    @JvmName("plusMass")
     operator fun plus(that: MassAmount<M>) =
         MassAmount(amount = amount + that.amount,
                    unit = mass)
 
+    @JvmName("minusMass")
     operator fun <M : Unit<Mass>> minus(that: MassAmount<M>) =
         MassAmount(amount = amount - that.amount * convert(that.mass to mass),
                    unit = mass)
 
-    @JvmName("minusMass")
     operator fun minus(that: MassAmount<M>) =
         MassAmount(amount = amount - that.amount,
                    unit = mass)
@@ -56,11 +56,11 @@ open class MassAmount<M : Unit<Mass>>(
 
     // region -> Natural
 
+    @JvmName("divMass")
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
         ScalarAmount(amount = amount / that.amount / convert(that.mass to mass),
                      unit = NUMERIC)
 
-    @JvmName("divMass")
     operator fun div(that: MassAmount<M>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)

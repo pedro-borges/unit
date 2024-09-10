@@ -44,22 +44,22 @@ open class AreaAmount<L2 : Unit<Length>>(
         AreaAmount(amount = amount / that.amount / that.unit.scale,
                    unit = length)
 
+    @JvmName("plusArea")
     operator fun <L : Unit<Length>> plus(that: AreaAmount<L>) =
         AreaAmount(amount = amount + that.amount * convert(that.length to length,
                                                            that.length to length),
                    unit = length)
 
-    @JvmName("plusArea")
     operator fun plus(that: AreaAmount<L2>) =
         AreaAmount(amount = amount + that.amount,
                    unit = length)
 
+    @JvmName("minusArea")
     operator fun <L : Unit<Length>> minus(that: AreaAmount<L>) =
         AreaAmount(amount = amount - that.amount * convert(that.length to length,
                                                            that.length to length),
                    unit = length)
 
-    @JvmName("minusArea")
     operator fun minus(that: AreaAmount<L2>) =
         AreaAmount(amount = amount - that.amount,
                    unit = length)
@@ -68,12 +68,12 @@ open class AreaAmount<L2 : Unit<Length>>(
 
     // region -> Natural
 
+    @JvmName("divArea")
     operator fun <L : Unit<Length>> div(that: AreaAmount<L>) =
         ScalarAmount(amount = amount / that.amount / convert(that.length to length,
                                                              that.length to length),
                      unit = NUMERIC)
 
-    @JvmName("divLength")
     operator fun div(that: AreaAmount<L2>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
@@ -82,11 +82,11 @@ open class AreaAmount<L2 : Unit<Length>>(
 
     // region -> Length
 
+    @JvmName("divLength")
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         LengthAmount(amount = amount / that.amount / convert(that.length to length),
                      unit = length)
 
-    @JvmName("divLength")
     operator fun div(that: LengthAmount<L2>) =
         LengthAmount(amount = amount / that.amount,
                      unit = length)
@@ -95,11 +95,11 @@ open class AreaAmount<L2 : Unit<Length>>(
 
     // region -> Volume
 
+    @JvmName("timesLength")
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         VolumeAmount(amount = amount * that.amount * convert(that.length to length),
                      unit = length)
 
-    @JvmName("timesLength")
     operator fun times(that: LengthAmount<L2>) =
         VolumeAmount(amount = amount * that.amount,
                      unit = length)

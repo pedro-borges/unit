@@ -43,20 +43,20 @@ open class FrequencyAmount<T : Unit<Time>>(
         FrequencyAmount(amount = amount / that.amount / that.unit.scale,
                         unit = NUMERIC to time)
 
+    @JvmName("plusFrequency")
     operator fun <T : Unit<Time>> plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount / convert(that.time to time),
                         unit = NUMERIC to time)
 
-    @JvmName("plusFrequency")
     operator fun plus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount + that.amount,
                         unit = NUMERIC to time)
 
+    @JvmName("minusFrequency")
     operator fun <T : Unit<Time>> minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount / convert(that.time to time),
                         unit = NUMERIC to time)
 
-    @JvmName("minusFrequency")
     operator fun minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount,
                         unit = NUMERIC to time)
@@ -65,20 +65,20 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // region -> Natural
 
+    @JvmName("divFrequency")
     operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
         ScalarAmount(amount = amount / that.amount * convert(that.time to time),
                      unit = NUMERIC)
 
-    @JvmName("divFrequency")
     operator fun div(that: FrequencyAmount<T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
+    @JvmName("timesTime")
     operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
         ScalarAmount(amount = amount * that.amount / convert(that.time to time),
                      unit = NUMERIC)
 
-    @JvmName("timesTime")
     operator fun times(that: TimeAmount<T>) =
         ScalarAmount(amount = amount * that.amount,
                      unit = NUMERIC)
@@ -95,11 +95,11 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // region -> Acceleration
 
+    @JvmName("timesSpeed")
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
         AccelerationAmount(amount = that.amount / amount / convert(that.time to time),
                            unit = that.length to time)
 
-    @JvmName("timesSpeed")
     operator fun <L : Unit<Length>> times(that: SpeedAmount<L, T>) =
         AccelerationAmount(amount = that.amount / amount,
                            unit = that.length to time)
@@ -108,11 +108,11 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // region -> Currency
 
+    @JvmName("timesDebt")
     operator fun <C : Unit<Currency>, T : Unit<Time>> times(that: DebtAmount<C, T>) =
         CurrencyAmount(amount = that.amount / amount * convert(that.time to time),
                        unit = that.currency)
 
-    @JvmName("timesDebt")
     operator fun <C : Unit<Currency>> times(that: DebtAmount<C, T>) =
         CurrencyAmount(amount = that.amount / amount,
                        unit = that.currency)

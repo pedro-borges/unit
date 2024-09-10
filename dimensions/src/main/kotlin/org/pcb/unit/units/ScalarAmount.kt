@@ -35,20 +35,20 @@ open class ScalarAmount<S : Unit<Scalar>>(
         ScalarAmount(amount = amount / that.amount / that.unit.scale,
                      unit = scalar)
 
+    @JvmName("plusScalar")
     operator fun <S : Unit<Scalar>> plus(that: ScalarAmount<S>) =
         ScalarAmount(amount = amount + that.amount * convert(that.scalar to scalar),
                      unit = scalar)
 
-    @JvmName("plusScalar")
     operator fun plus(that: ScalarAmount<S>) =
         ScalarAmount(amount = amount + that.amount,
                      unit = scalar)
 
+    @JvmName("minusScalar")
     operator fun <S : Unit<Scalar>> minus(that: ScalarAmount<S>) =
         ScalarAmount(amount = amount - that.amount * convert(that.scalar to scalar),
                      unit = scalar)
 
-    @JvmName("minusScalar")
     operator fun minus(that: ScalarAmount<S>) =
         ScalarAmount(amount = amount - that.amount,
                      unit = scalar)

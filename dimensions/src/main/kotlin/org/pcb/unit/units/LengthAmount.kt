@@ -34,20 +34,20 @@ open class LengthAmount<L : Unit<Length>>(
         LengthAmount(amount = amount / that.amount / that.unit.scale,
                      unit = length)
 
+    @JvmName("plusLength")
     operator fun <L : Unit<Length>> plus(that: LengthAmount<L>) =
         LengthAmount(amount = amount + that.amount * convert(that.length to length),
                      unit = length)
 
-    @JvmName("plusLength")
     operator fun plus(that: LengthAmount<L>) =
         LengthAmount(amount = amount + that.amount,
                      unit = length)
 
+    @JvmName("minusLength")
     operator fun <L : Unit<Length>> minus(that: LengthAmount<L>) =
         LengthAmount(amount = amount - that.amount * convert(that.length to length),
                      unit = length)
 
-    @JvmName("minusLength")
     operator fun minus(that: LengthAmount<L>) =
         LengthAmount(amount = amount - that.amount,
                      unit = length)
@@ -56,11 +56,11 @@ open class LengthAmount<L : Unit<Length>>(
 
     // region -> Natural
 
+    @JvmName("divLength")
     operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
         ScalarAmount(amount = amount / that.amount / convert(that.length to length),
                      unit = NUMERIC)
 
-    @JvmName("divLength")
     operator fun div(that: LengthAmount<L>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
@@ -77,11 +77,11 @@ open class LengthAmount<L : Unit<Length>>(
 
     // region -> Area
 
+    @JvmName("timesLength")
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         AreaAmount(amount = amount * that.amount * convert(that.length to length),
                    unit = length)
 
-    @JvmName("timesLength")
     operator fun times(that: LengthAmount<L>) =
         AreaAmount(amount = amount * that.amount,
                    unit = length)
@@ -90,12 +90,12 @@ open class LengthAmount<L : Unit<Length>>(
 
     // region -> Volume
 
+    @JvmName("timesArea")
     operator fun <L : Unit<Length>> times(that: AreaAmount<L>) =
         VolumeAmount(amount = amount * that.amount * convert(that.length to length,
                                                              that.length to length),
                      unit = length)
 
-    @JvmName("timesArea")
     operator fun times(that: AreaAmount<L>) =
         VolumeAmount(amount = amount * that.amount,
                      unit = length)
@@ -104,11 +104,11 @@ open class LengthAmount<L : Unit<Length>>(
 
     // region -> Energy
 
+    @JvmName("timesForce")
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> times(that: ForceAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount * convert(that.length to length),
                      unit = U2(that.mass, length) to that.time)
 
-    @JvmName("timesForce")
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<M, L, T>) =
         EnergyAmount(amount = amount * that.amount,
                      unit = U2(that.mass, length) to that.time)

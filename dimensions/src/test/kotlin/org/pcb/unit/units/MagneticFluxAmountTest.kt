@@ -4,8 +4,10 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.AreaAmount
 import org.pcb.unit.units.ElectricChargeAmount
+import org.pcb.unit.units.ElectricCurrentAmount
 import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.ElectricTensionAmount
+import org.pcb.unit.units.EnergyAmount
 import org.pcb.unit.units.MagneticFluxAmount
 import org.pcb.unit.units.MagneticFluxDensityAmount
 import org.pcb.unit.units.ScalarAmount
@@ -187,6 +189,54 @@ class MagneticFluxAmountTest
                                         unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)) /
                      ElectricChargeAmount(amount = 2,
                                           unit = U2(ELECTRICCURRENT2, TIME2)))
+    }
+
+    @Test
+    fun timesSameEnergy()
+    {
+        assertEquals(
+            expected = ElectricCurrentAmount(amount = 2 * 2,
+                                             unit = ELECTRICCURRENT1),
+            actual = MagneticFluxAmount(amount = 2,
+                                        unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)) *
+                     EnergyAmount(amount = 2,
+                                  unit = U2(MASS1, LENGTH1) to TIME1))
+    }
+
+    @Test
+    fun timesOtherEnergy()
+    {
+        assertEquals(
+            expected = ElectricCurrentAmount(amount = 2 * 2,
+                                             unit = ELECTRICCURRENT1),
+            actual = MagneticFluxAmount(amount = 2,
+                                        unit = U2(MASS2, LENGTH2) to U2(TIME1, ELECTRICCURRENT1)) *
+                     EnergyAmount(amount = 200000,
+                                  unit = U2(MASS1, LENGTH1) to TIME2))
+    }
+
+    @Test
+    fun timesSameElectricCurrent()
+    {
+        assertEquals(
+            expected = EnergyAmount(amount = 2 * 2,
+                                    unit = U2(MASS1, LENGTH1) to TIME1),
+            actual = MagneticFluxAmount(amount = 2,
+                                        unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)) *
+                     ElectricCurrentAmount(amount = 2,
+                                           unit = ELECTRICCURRENT1))
+    }
+
+    @Test
+    fun timesOtherElectricCurrent()
+    {
+        assertEquals(
+            expected = EnergyAmount(amount = 2 * 2,
+                                    unit = U2(MASS1, LENGTH1) to TIME1),
+            actual = MagneticFluxAmount(amount = 2,
+                                        unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT2)) *
+                     ElectricCurrentAmount(amount = 20,
+                                           unit = ELECTRICCURRENT1))
     }
 
     @Test

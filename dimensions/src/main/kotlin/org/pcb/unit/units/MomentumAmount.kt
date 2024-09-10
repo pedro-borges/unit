@@ -41,6 +41,7 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
         MomentumAmount(amount = amount / that.amount / that.unit.scale,
                        unit = U2(mass, length) to time)
 
+    @JvmName("plusMomentum")
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> plus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount + that.amount
                                 * convert(that.mass to mass,
@@ -48,11 +49,11 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                                 / convert(that.time to time),
                        unit = U2(mass, length) to time)
 
-    @JvmName("plusMomentum")
     operator fun plus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount + that.amount,
                        unit = U2(mass, length) to time)
 
+    @JvmName("minusMomentum")
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> minus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount - that.amount
                                 * convert(that.mass to mass,
@@ -60,7 +61,6 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                                 / convert(that.time to time),
                        unit = U2(mass, length) to time)
 
-    @JvmName("minusMomentum")
     operator fun minus(that: MomentumAmount<M, L, T>) =
         MomentumAmount(amount = amount - that.amount,
                        unit = U2(mass, length) to time)
@@ -69,6 +69,7 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // region -> Natural
 
+    @JvmName("divMomentum")
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> div(that: MomentumAmount<M, L, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.mass to mass,
@@ -76,7 +77,6 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
                               * convert(that.time to time),
                      unit = NUMERIC)
 
-    @JvmName("divMomentum")
     operator fun div(that: MomentumAmount<M, L, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
@@ -85,11 +85,11 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // region -> Speed
 
+    @JvmName("divMass")
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
         SpeedAmount(amount = amount / that.amount / convert(that.mass to mass),
                     unit = length to time)
 
-    @JvmName("divMass")
     operator fun div(that: MassAmount<M>) =
         SpeedAmount(amount = amount / that.amount,
                     unit = length to time)
@@ -98,13 +98,13 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // region -> Mass
 
+    @JvmName("divSpeed")
     operator fun <L : Unit<Length>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
         MassAmount(amount = amount / that.amount
                             / convert(that.length to length)
                             * convert(that.time to time),
                    unit = mass)
 
-    @JvmName("divSpeed")
     operator fun div(that: SpeedAmount<L, T>) =
         MassAmount(amount = amount / that.amount,
                    unit = mass)
@@ -113,11 +113,11 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // region -> Force
 
+    @JvmName("divTime")
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount / convert(that.time to time),
                     unit = U2(mass, length) to time)
 
-    @JvmName("divTime")
     operator fun div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount,
                     unit = U2(mass, length) to time)
@@ -126,13 +126,13 @@ open class MomentumAmount<M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>>(
 
     // region -> Energy
 
+    @JvmName("timesSpeed")
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
         EnergyAmount(amount = amount * that.amount
                               * convert(that.length to length)
                               / convert(that.time to time),
                      unit = U2(mass, length) to time)
 
-    @JvmName("timesSpeed")
     operator fun times(that: SpeedAmount<L, T>) =
         EnergyAmount(amount = amount * that.amount,
                      unit = U2(mass, length) to time)

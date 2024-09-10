@@ -23,20 +23,32 @@ class WattTest
     }
 
     @Test
+    fun ampereTimesVolt() =
+        assertEquals(
+            expected = Watt(2 * 3),
+            actual = Ampere(2) * Volt(3))
+
+    @Test
     fun jouleDivSecond() =
         assertEquals(
             expected = Watt(6 / 3),
             actual = Joule(6) / Second(3))
 
     @Test
+    fun meterPerSecondTimesNewton() =
+        assertEquals(
+            expected = Watt(2 * 3),
+            actual = MeterPerSecond(2) * Newton(3))
+
+    @Test
+    fun newtonTimesMeterPerSecond() =
+        assertEquals(
+            expected = Watt(2 * 3),
+            actual = Newton(2) * MeterPerSecond(3))
+
+    @Test
     fun voltTimesAmpere() =
         assertEquals(
             expected = Watt(2 * 3),
             actual = Volt(2) * Ampere(3))
-
-    @Test
-    fun ampereTimesVolt() =
-        assertEquals(
-            expected = Watt(2 * 3),
-            actual = Ampere(2) * Volt(3))
 }

@@ -56,6 +56,7 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
         ElectricCapacitanceAmount(amount = amount / that.amount / that.unit.scale,
                                   unit = U2(time, electricCurrent) to U2(mass, length))
 
+    @JvmName("plusElectricCapacitance")
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> plus(that: ElectricCapacitanceAmount<T, EC, M, L>) =
         ElectricCapacitanceAmount(amount = amount + that.amount
                                            * convert(that.time to time,
@@ -69,11 +70,11 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
                                                      that.length to length),
                                   unit = U2(time, electricCurrent) to U2(mass, length))
 
-    @JvmName("plusElectricCapacitance")
     operator fun plus(that: ElectricCapacitanceAmount<T4, EC2, M, L2>) =
         ElectricCapacitanceAmount(amount = amount + that.amount,
                                   unit = U2(time, electricCurrent) to U2(mass, length))
 
+    @JvmName("minusElectricCapacitance")
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> minus(that: ElectricCapacitanceAmount<T, EC, M, L>) =
         ElectricCapacitanceAmount(amount = amount - that.amount
                                            * convert(that.time to time,
@@ -87,7 +88,6 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
                                                      that.length to length),
                                   unit = U2(time, electricCurrent) to U2(mass, length))
 
-    @JvmName("minusElectricCapacitance")
     operator fun minus(that: ElectricCapacitanceAmount<T4, EC2, M, L2>) =
         ElectricCapacitanceAmount(amount = amount - that.amount,
                                   unit = U2(time, electricCurrent) to U2(mass, length))
@@ -96,6 +96,7 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
 
     // region -> Natural
 
+    @JvmName("divElectricCapacitance")
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, L : Unit<Length>> div(that: ElectricCapacitanceAmount<T, EC, M, L>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.time to time,
@@ -109,7 +110,6 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
                                         that.length to length),
                      unit = NUMERIC)
 
-    @JvmName("divElectricCapacitance")
     operator fun div(that: ElectricCapacitanceAmount<T4, EC2, M, L2>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
@@ -118,6 +118,7 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
 
     // region -> ElectricCharge
 
+    @JvmName("timesElectricTension")
     operator fun <M : Unit<Mass>, L : Unit<Length>, EC : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricTensionAmount<M, L, T, EC>) =
         ElectricChargeAmount(amount = amount * that.amount
                                       / convert(that.electricCurrent to electricCurrent,
@@ -129,7 +130,6 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
                                                 that.length to length),
                              unit = U2(electricCurrent, time))
 
-    @JvmName("timesElectricTension")
     operator fun <M : Unit<Mass>, L : Unit<Length>> times(that: ElectricTensionAmount<M, L, T4, EC2>) =
         ElectricChargeAmount(amount = amount * that.amount,
                              unit = U2(electricCurrent, time))
@@ -138,6 +138,7 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
 
     // region -> Time
 
+    @JvmName("timesElectricResistance")
     operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: ElectricResistanceAmount<M, L, T, EC>) =
         TimeAmount(amount = amount * that.amount
                             / convert(that.time to time,
@@ -150,7 +151,6 @@ open class ElectricCapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent
                                       that.length to length),
                    unit = time)
 
-    @JvmName("timesElectricCapacitance")
     operator fun times(that: ElectricCapacitanceAmount<T4, EC2, M, L2>) =
         TimeAmount(amount = amount * that.amount,
                    unit = time)

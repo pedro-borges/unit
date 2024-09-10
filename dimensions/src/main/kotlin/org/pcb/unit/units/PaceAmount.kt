@@ -37,24 +37,24 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
         PaceAmount(amount = amount / that.amount / that.unit.scale,
                    unit = time to length)
 
+    @JvmName("plusPace")
     operator fun <T : Unit<Time>, L : Unit<Length>> plus(that: PaceAmount<T, L>) =
         PaceAmount(amount = amount + that.amount
                             * convert(that.time to time)
                             / convert(that.length to length),
                    unit = time to length)
 
-    @JvmName("plusPace")
     operator fun plus(that: PaceAmount<T, L>) =
         PaceAmount(amount = amount + that.amount,
                    unit = time to length)
 
+    @JvmName("minusPace")
     operator fun <T : Unit<Time>, L : Unit<Length>> minus(that: PaceAmount<T, L>) =
         PaceAmount(amount = amount - that.amount
                             * convert(that.time to time)
                             / convert(that.length to length),
                    unit = time to length)
 
-    @JvmName("minusPace")
     operator fun minus(that: PaceAmount<T, L>) =
         PaceAmount(amount = amount - that.amount,
                    unit = time to length)
@@ -63,24 +63,24 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
 
     // region -> Natural
 
+    @JvmName("divPace")
     operator fun <T : Unit<Time>, L : Unit<Length>> div(that: PaceAmount<T, L>) =
         ScalarAmount(amount = amount / that.amount
                               * convert(that.time to time)
                               / convert(that.length to length),
                      unit = NUMERIC)
 
-    @JvmName("divPace")
     operator fun div(that: PaceAmount<T, L>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
+    @JvmName("timesSpeed")
     operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.time to time)
                               * convert(that.length to length),
                      unit = NUMERIC)
 
-    @JvmName("timesSpeed")
     operator fun times(that: SpeedAmount<L, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
@@ -89,11 +89,11 @@ open class PaceAmount<T : Unit<Time>, L : Unit<Length>>(
 
     // region -> Time
 
+    @JvmName("timesLength")
     operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
         TimeAmount(amount = amount * that.amount * convert(that.length to length),
                    unit = time)
 
-    @JvmName("timesLength")
     operator fun times(that: LengthAmount<L>) =
         TimeAmount(amount = amount * that.amount,
                    unit = time)
