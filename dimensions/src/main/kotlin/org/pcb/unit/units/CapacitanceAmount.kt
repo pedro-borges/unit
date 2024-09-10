@@ -149,8 +149,25 @@ open class CapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent>, M : U
                                       that.distance to distance),
                    unit = time)
 
-    operator fun times(that: CapacitanceAmount<T4, EC2, M, D2>) =
+    operator fun times(that: ElectricResistanceAmount<M, D2, T4, EC2>) =
         TimeAmount(amount = amount * that.amount,
+                   unit = time)
+
+    @JvmName("divElectricConductance")
+    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> div(that: ElectricConductanceAmount<T, EC, M, D>) =
+        TimeAmount(amount = amount / that.amount
+                            / convert(that.time to time,
+                                      that.time to time,
+                                      that.time to time,
+                                      that.electricCurrent to electricCurrent,
+                                      that.electricCurrent to electricCurrent)
+                            * convert(that.mass to mass,
+                                      that.distance to distance,
+                                      that.distance to distance),
+                   unit = time)
+
+    operator fun div(that: ElectricConductanceAmount<T4, EC2, M, D2>) =
+        TimeAmount(amount = amount / that.amount,
                    unit = time)
 
     // endregion
@@ -174,27 +191,6 @@ open class CapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent>, M : U
     operator fun div(that: TimeAmount<T4>) =
         ElectricConductanceAmount(amount = amount / that.amount,
                                   unit = U2(time, electricCurrent) to U2(mass, distance))
-
-    // endregion
-
-    // region -> Time
-
-    @JvmName("divElectricConductance")
-    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> div(that: ElectricConductanceAmount<T, EC, M, D>) =
-        TimeAmount(amount = amount / that.amount
-                            / convert(that.time to time,
-                                      that.time to time,
-                                      that.time to time,
-                                      that.electricCurrent to electricCurrent,
-                                      that.electricCurrent to electricCurrent)
-                            * convert(that.mass to mass,
-                                      that.distance to distance,
-                                      that.distance to distance),
-                   unit = time)
-
-    operator fun div(that: ElectricConductanceAmount<T4, EC2, M, D2>) =
-        TimeAmount(amount = amount / that.amount,
-                   unit = time)
 
     // endregion
 }

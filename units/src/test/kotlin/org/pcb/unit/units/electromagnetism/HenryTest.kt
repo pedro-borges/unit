@@ -1,0 +1,24 @@
+package org.pcb.unit.units.electromagnetism
+
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import org.pcb.unit.U2
+import org.pcb.unit.units.InductanceAmount
+import org.pcb.unit.units.base.Ampere.AMPERE
+import org.pcb.unit.units.base.Kilogram.KILOGRAM
+import org.pcb.unit.units.base.Meter.METER
+import org.pcb.unit.units.base.Second.SECOND
+import org.pcb.unit.units.electromagnetism.Henry.HENRY
+
+class HenryTest
+{
+    private infix fun Henry.equivalent(other: InductanceAmount<*, *, *, *>) =
+        assertEquals(this, Henry(0) + other)
+
+    @Test
+    fun unit()
+    {
+        Henry(2) equivalent InductanceAmount(2, U2(KILOGRAM, METER) to U2(SECOND, AMPERE))
+        Henry(2) equivalent InductanceAmount(2, HENRY)
+    }
+}
