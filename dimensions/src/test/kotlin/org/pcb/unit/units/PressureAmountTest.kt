@@ -135,11 +135,11 @@ class PressureAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                   unit = U2(MASS1, DISTANCE1) to TIME1),
+                                    unit = U2(MASS1, DISTANCE1) to TIME1),
             actual = PressureAmount(amount = 2,
                                     unit = MASS1 to U2(DISTANCE1, TIME1)) *
                      VolumeAmount(amount = 2,
-                                unit = DISTANCE1))
+                                  unit = DISTANCE1))
     }
 
     @Test
@@ -147,10 +147,10 @@ class PressureAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                   unit = U2(MASS1, DISTANCE2) to TIME1),
+                                    unit = U2(MASS1, DISTANCE2) to TIME1),
             actual = PressureAmount(amount = 2,
                                     unit = MASS1 to U2(DISTANCE2, TIME1)) *
                      VolumeAmount(amount = 2000,
-                                unit = DISTANCE1))
+                                  unit = DISTANCE1))
     }
 }
