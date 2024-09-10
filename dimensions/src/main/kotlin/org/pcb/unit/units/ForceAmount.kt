@@ -164,4 +164,35 @@ open class ForceAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
                     unit = U2(mass, distance) to time)
 
     // endregion
+
+    // region -> Area
+
+    @JvmName("divArea")
+    operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
+        PressureAmount(amount = amount / that.amount / convert(that.distance to distance,
+                                                               that.distance to distance),
+                       unit = mass to U2(distance, time))
+
+    operator fun div(that: AreaAmount<D>) =
+        PressureAmount(amount = amount / that.amount,
+                       unit = mass to U2(distance, time))
+
+    // endregion
+
+    // region -> Pressure
+
+    @JvmName("divPressure")
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: PressureAmount<M, D, T>) =
+        AreaAmount(amount = amount / that.amount
+                            / convert(that.mass to mass)
+                            * convert(that.distance to distance,
+                                      that.time to time,
+                                      that.time to time),
+                   unit = distance)
+
+    operator fun div(that: PressureAmount<M, D, T2>) =
+        AreaAmount(amount = amount / that.amount,
+                   unit = distance)
+
+    // endregion
 }

@@ -93,4 +93,18 @@ open class PressureAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
         Numeric(amount = amount / that.amount)
 
     // endregion
+
+    // region Force
+
+    @JvmName("timesArea")
+    operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =
+        ForceAmount(amount = amount * that.amount * convert(that.distance to distance,
+                                                            that.distance to distance),
+                    unit = U2(mass, distance) to time)
+
+    operator fun times(that: AreaAmount<D>) =
+        ForceAmount(amount = amount * that.amount,
+                    unit = U2(mass, distance) to time)
+
+    // endregion
 }

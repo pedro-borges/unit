@@ -7,7 +7,9 @@ import org.pcb.unit.units.base.Meter
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.electromagnetism.Tesla
 import org.pcb.unit.units.electromagnetism.Weber
+import org.pcb.unit.units.mechanics.Newton
 import org.pcb.unit.units.space.SquareMeter.SQUARE_METER
+import org.pcb.unit.units.thermodynamics.Pascal
 
 class SquareMeterTest
 {
@@ -24,7 +26,13 @@ class SquareMeterTest
     }
 
     @Test
-    fun weberDivSquareMeter() =
+    fun newtonDivPascal() =
+        assertEquals(
+            expected = SquareMeter(6 / 3),
+            actual = Newton(6) / Pascal(3))
+
+    @Test
+    fun weberDivTesla() =
         assertEquals(
             expected = SquareMeter(6 / 3),
             actual = Weber(6) / Tesla(3))

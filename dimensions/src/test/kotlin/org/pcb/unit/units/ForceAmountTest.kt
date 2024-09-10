@@ -225,4 +225,52 @@ class ForceAmountTest
                      SpeedAmount(amount = 200,
                                  unit = DISTANCE1 to TIME2))
     }
+
+    @Test
+    fun divSameArea()
+    {
+        assertEquals(
+            expected = PressureAmount(amount = 1,
+                                      unit = MASS1 to U2(DISTANCE1, TIME1)),
+            actual = ForceAmount(amount = 2,
+                                 unit = U2(MASS1, DISTANCE1) to TIME1) /
+                     AreaAmount(amount = 2,
+                                unit = DISTANCE1))
+    }
+
+    @Test
+    fun divOtherArea()
+    {
+        assertEquals(
+            expected = PressureAmount(amount = 1,
+                                      unit = MASS1 to U2(DISTANCE2, TIME1)),
+            actual = ForceAmount(amount = 2,
+                                 unit = U2(MASS1, DISTANCE2) to TIME1) /
+                     AreaAmount(amount = 200,
+                                unit = DISTANCE1))
+    }
+
+    @Test
+    fun divSamePressure()
+    {
+        assertEquals(
+            expected = AreaAmount(amount = 1,
+                                  unit = DISTANCE1),
+            actual = ForceAmount(amount = 2,
+                                 unit = U2(MASS1, DISTANCE1) to TIME1) /
+                     PressureAmount(amount = 2,
+                                    unit = MASS1 to U2(DISTANCE1, TIME1)))
+    }
+
+    @Test
+    fun divOtherPressure()
+    {
+        assertEquals(
+            expected = AreaAmount(amount = 1,
+                                  unit = DISTANCE1),
+            actual = ForceAmount(amount = 2,
+                                 unit = U2(MASS2, DISTANCE1) to TIME1) /
+                     PressureAmount(amount = 20000,
+                                    unit = MASS1 to U2(DISTANCE2, TIME2)))
+    }
 }

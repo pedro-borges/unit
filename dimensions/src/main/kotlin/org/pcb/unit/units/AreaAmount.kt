@@ -111,4 +111,17 @@ open class AreaAmount<D2 : Unit<Distance>>(
                            unit = U2(that.mass, distance) to U2(that.time, that.electricCurrent))
 
     // endregion
+
+    // region -> Force
+
+    @JvmName("timesPressure")
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> times(that: PressureAmount<M, D, T>) =
+        ForceAmount(amount = amount * that.amount / convert(that.distance to distance),
+                    unit = U2(that.mass, distance) to that.time)
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: PressureAmount<M, D2, T>) =
+        ForceAmount(amount = amount * that.amount,
+                    unit = U2(that.mass, distance) to that.time)
+
+    // endregion
 }

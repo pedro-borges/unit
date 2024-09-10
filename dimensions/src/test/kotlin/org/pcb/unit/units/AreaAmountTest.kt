@@ -164,4 +164,28 @@ class AreaAmountTest
                      MagneticFluxDensityAmount(amount = 2,
                                                unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)))
     }
+
+    @Test
+    fun timesSamePressure()
+    {
+        assertEquals(
+            expected = ForceAmount(amount = 2 * 2,
+                                   unit = U2(MASS1, DISTANCE1) to TIME1),
+            actual = AreaAmount(amount = 2,
+                                unit = DISTANCE1) *
+                     PressureAmount(amount = 2,
+                                    unit = MASS1 to U2(DISTANCE1, TIME1)))
+    }
+
+    @Test
+    fun timesOtherPressure()
+    {
+        assertEquals(
+            expected = ForceAmount(amount = 2 * 2,
+                                   unit = U2(MASS1, DISTANCE1) to TIME1),
+            actual = AreaAmount(amount = 2,
+                                unit = DISTANCE1) *
+                     PressureAmount(amount = 20,
+                                    unit = MASS1 to U2(DISTANCE2, TIME1)))
+    }
 }

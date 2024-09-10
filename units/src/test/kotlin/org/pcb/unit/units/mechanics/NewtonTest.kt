@@ -11,6 +11,8 @@ import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.mechanics.Newton.NEWTON
+import org.pcb.unit.units.space.SquareMeter
+import org.pcb.unit.units.thermodynamics.Pascal
 
 class NewtonTest
 {
@@ -30,6 +32,18 @@ class NewtonTest
         assertEquals(
             expected = Newton(6 / 3),
             actual = Joule(6) / Meter(3))
+
+    @Test
+    fun pascalTimesSquareMeter() =
+        assertEquals(
+            expected = Newton(2 * 3),
+            actual = Pascal(2) * SquareMeter(3))
+
+    @Test
+    fun squareMeterTimesPascal() =
+        assertEquals(
+            expected = Newton(2 * 3),
+            actual = SquareMeter(2) * Pascal(3))
 
     @Test
     fun wattDivMeterPerSecond() =

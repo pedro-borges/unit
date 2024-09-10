@@ -19,9 +19,9 @@ class PressureAmountTest
     {
         assertEquals(
             expected = PressureAmount(amount = 2 * 2,
-                                   unit = MASS1 to U2(DISTANCE1, TIME1)),
+                                      unit = MASS1 to U2(DISTANCE1, TIME1)),
             actual = PressureAmount(amount = 2,
-                                 unit = MASS1 to U2(DISTANCE1, TIME1)) *
+                                    unit = MASS1 to U2(DISTANCE1, TIME1)) *
                      Percent(amount = 2 * 100))
     }
 
@@ -30,9 +30,9 @@ class PressureAmountTest
     {
         assertEquals(
             expected = PressureAmount(amount = 1,
-                                   unit = MASS1 to U2(DISTANCE1, TIME1)),
+                                      unit = MASS1 to U2(DISTANCE1, TIME1)),
             actual = PressureAmount(amount = 2,
-                                 unit = MASS1 to U2(DISTANCE1, TIME1)) /
+                                    unit = MASS1 to U2(DISTANCE1, TIME1)) /
                      Percent(amount = 2 * 100))
     }
 
@@ -41,11 +41,11 @@ class PressureAmountTest
     {
         assertEquals(
             expected = PressureAmount(amount = 1,
-                                   unit = MASS1 to U2(DISTANCE1, TIME1)),
+                                      unit = MASS1 to U2(DISTANCE1, TIME1)),
             actual = PressureAmount(amount = 0,
-                                 unit = MASS1 to U2(DISTANCE1, TIME1)) +
+                                    unit = MASS1 to U2(DISTANCE1, TIME1)) +
                      PressureAmount(amount = 1,
-                                 unit = MASS1 to U2(DISTANCE1, TIME1)))
+                                    unit = MASS1 to U2(DISTANCE1, TIME1)))
     }
 
     @Test
@@ -53,11 +53,11 @@ class PressureAmountTest
     {
         assertEquals(
             expected = PressureAmount(amount = 1,
-                                   unit = MASS2 to U2(DISTANCE1, TIME1)),
+                                      unit = MASS2 to U2(DISTANCE1, TIME1)),
             actual = PressureAmount(amount = 0,
-                                 unit = MASS2 to U2(DISTANCE1, TIME1)) +
+                                    unit = MASS2 to U2(DISTANCE1, TIME1)) +
                      PressureAmount(amount = 10000,
-                                 unit = MASS1 to U2(DISTANCE2, TIME2)))
+                                    unit = MASS1 to U2(DISTANCE2, TIME2)))
     }
 
     @Test
@@ -65,11 +65,11 @@ class PressureAmountTest
     {
         assertEquals(
             expected = PressureAmount(amount = 0,
-                                   unit = MASS1 to U2(DISTANCE1, TIME1)),
+                                      unit = MASS1 to U2(DISTANCE1, TIME1)),
             actual = PressureAmount(amount = 1,
-                                 unit = MASS1 to U2(DISTANCE1, TIME1)) -
+                                    unit = MASS1 to U2(DISTANCE1, TIME1)) -
                      PressureAmount(amount = 1,
-                                 unit = MASS1 to U2(DISTANCE1, TIME1)))
+                                    unit = MASS1 to U2(DISTANCE1, TIME1)))
     }
 
     @Test
@@ -77,11 +77,11 @@ class PressureAmountTest
     {
         assertEquals(
             expected = PressureAmount(amount = 0,
-                                   unit = MASS2 to U2(DISTANCE1, TIME1)),
+                                      unit = MASS2 to U2(DISTANCE1, TIME1)),
             actual = PressureAmount(amount = 1,
-                                 unit = MASS2 to U2(DISTANCE1, TIME1)) -
+                                    unit = MASS2 to U2(DISTANCE1, TIME1)) -
                      PressureAmount(amount = 10000,
-                                 unit = MASS1 to U2(DISTANCE2, TIME2)))
+                                    unit = MASS1 to U2(DISTANCE2, TIME2)))
     }
 
     @Test
@@ -90,9 +90,9 @@ class PressureAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = PressureAmount(amount = 2,
-                                 unit = MASS1 to U2(DISTANCE1, TIME1)) /
+                                    unit = MASS1 to U2(DISTANCE1, TIME1)) /
                      PressureAmount(amount = 2,
-                                 unit = MASS1 to U2(DISTANCE1, TIME1)))
+                                    unit = MASS1 to U2(DISTANCE1, TIME1)))
     }
 
     @Test
@@ -101,8 +101,32 @@ class PressureAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = PressureAmount(amount = 2,
-                                 unit = MASS2 to U2(DISTANCE1, TIME1)) /
+                                    unit = MASS2 to U2(DISTANCE1, TIME1)) /
                      PressureAmount(amount = 20000,
-                                 unit = MASS1 to U2(DISTANCE2, TIME2)))
+                                    unit = MASS1 to U2(DISTANCE2, TIME2)))
+    }
+
+    @Test
+    fun timesSameArea()
+    {
+        assertEquals(
+            expected = ForceAmount(amount = 2 * 2,
+                                   unit = U2(MASS1, DISTANCE1) to TIME1),
+            actual = PressureAmount(amount = 2,
+                                    unit = MASS1 to U2(DISTANCE1, TIME1)) *
+                     AreaAmount(amount = 2,
+                                unit = DISTANCE1))
+    }
+
+    @Test
+    fun timesOtherArea()
+    {
+        assertEquals(
+            expected = ForceAmount(amount = 2 * 2,
+                                   unit = U2(MASS1, DISTANCE2) to TIME1),
+            actual = PressureAmount(amount = 2,
+                                    unit = MASS1 to U2(DISTANCE2, TIME1)) *
+                     AreaAmount(amount = 200,
+                                unit = DISTANCE1))
     }
 }
