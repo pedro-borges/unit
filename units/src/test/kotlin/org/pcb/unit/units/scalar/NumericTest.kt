@@ -5,6 +5,8 @@ import kotlin.test.assertEquals
 import org.pcb.unit.units.ScalarAmount
 import org.pcb.unit.units.electromagnetism.Ohm
 import org.pcb.unit.units.electromagnetism.Siemens
+import org.pcb.unit.units.mechanics.MeterPerSecond
+import org.pcb.unit.units.mechanics.SecondPerMeter
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 class NumericTest
@@ -31,5 +33,19 @@ class NumericTest
         assertEquals(
             expected = Numeric(2 * 3),
             actual = Siemens(2) * Ohm(3))
+    }
+
+    @Test
+    fun secondPerMeterTimesMeterPerSecond() =
+        assertEquals(
+            expected = Numeric(2 * 3),
+            actual = SecondPerMeter(2) * MeterPerSecond(3))
+
+    @Test
+    fun meterPerSecondTimesSecondPerMeter()
+    {
+        assertEquals(
+            expected = Numeric(2 * 3),
+            actual = MeterPerSecond(2) * SecondPerMeter(3))
     }
 }

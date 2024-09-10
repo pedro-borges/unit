@@ -84,6 +84,16 @@ open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
     operator fun div(that: SpeedAmount<D, T>) =
         Numeric(amount = amount / that.amount)
 
+
+    @JvmName("timesPace")
+    operator fun <T : Unit<Time>, D : Unit<Distance>> times(that: PaceAmount<T, D>) =
+        Numeric(amount = amount * that.amount
+                         * convert(that.time to time)
+                         / convert(that.distance to distance))
+
+    operator fun times(that: PaceAmount<T, D>) =
+        Numeric(amount = amount * that.amount)
+
     // endregion
 
     // region -> Distance
