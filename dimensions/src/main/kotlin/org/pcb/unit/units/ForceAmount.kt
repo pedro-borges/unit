@@ -84,10 +84,10 @@ open class ForceAmount<M : Unit<Mass>, D2 : Unit<Distance>, T2 : Unit<Time>>(
     @JvmName("divForce")
     operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: ForceAmount<M, D, T>) =
         Numeric(amount = amount / that.amount
-                              / convert(that.mass to mass,
-                                        that.distance to distance)
-                              * convert(that.time to time,
-                                        that.time to time))
+                         / convert(that.mass to mass,
+                                   that.distance to distance)
+                         * convert(that.time to time,
+                                   that.time to time))
 
     operator fun div(that: ForceAmount<M, D2, T2>) =
         Numeric(amount = amount / that.amount)

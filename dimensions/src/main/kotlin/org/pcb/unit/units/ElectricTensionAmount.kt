@@ -94,13 +94,13 @@ open class ElectricTensionAmount<M : Unit<Mass>, D2 : Unit<Distance>, T3 : Unit<
     @JvmName("divElectricTension")
     operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricTensionAmount<M, D, T, EC>) =
         Numeric(amount = amount / that.amount
-                              / convert(that.mass to mass,
-                                        that.distance to distance,
-                                        that.distance to distance)
-                              * convert(that.time to time,
-                                        that.time to time,
-                                        that.time to time,
-                                        that.electricCurrent to electricCurrent))
+                         / convert(that.mass to mass,
+                                   that.distance to distance,
+                                   that.distance to distance)
+                         * convert(that.time to time,
+                                   that.time to time,
+                                   that.time to time,
+                                   that.electricCurrent to electricCurrent))
 
     operator fun div(that: ElectricTensionAmount<M, D2, T3, EC>) =
         Numeric(amount = amount / that.amount)

@@ -74,7 +74,7 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
     @JvmName("divElectricCharge")
     operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricChargeAmount<EC, T>) =
         Numeric(amount = amount / that.amount / convert(that.electricCurrent to electricCurrent,
-                                                             that.time to time))
+                                                        that.time to time))
 
     operator fun div(that: ElectricChargeAmount<EC, T>) =
         Numeric(amount = amount / that.amount)

@@ -85,10 +85,10 @@ open class MagneticFluxDensityAmount<M : Unit<Mass>, T2 : Unit<Time>, EC : Unit<
     @JvmName("divMagneticFluxDensity")
     operator fun <M : Unit<Mass>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: MagneticFluxDensityAmount<M, T, EC>) =
         Numeric(amount = amount / that.amount
-                              / convert(that.mass to mass)
-                              * convert(that.time to time,
-                                        that.time to time,
-                                        that.electricCurrent to electricCurrent))
+                         / convert(that.mass to mass)
+                         * convert(that.time to time,
+                                   that.time to time,
+                                   that.electricCurrent to electricCurrent))
 
     operator fun div(that: MagneticFluxDensityAmount<M, T2, EC>) =
         Numeric(amount = amount / that.amount)

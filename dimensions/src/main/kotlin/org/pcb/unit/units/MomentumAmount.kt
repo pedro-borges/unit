@@ -72,9 +72,9 @@ open class MomentumAmount<M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>>(
     @JvmName("divMomentum")
     operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: MomentumAmount<M, D, T>) =
         Numeric(amount = amount / that.amount
-                              / convert(that.mass to mass,
-                                        that.distance to distance)
-                              * convert(that.time to time))
+                         / convert(that.mass to mass,
+                                   that.distance to distance)
+                         * convert(that.time to time))
 
     operator fun div(that: MomentumAmount<M, D, T>) =
         Numeric(amount = amount / that.amount)

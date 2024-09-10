@@ -71,8 +71,8 @@ open class AccelerationAmount<D : Unit<Distance>, T2 : Unit<Time>>(
     @JvmName("divAcceleration")
     operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: AccelerationAmount<D, T>) =
         Numeric(amount = amount / that.amount
-                              / convert(that.distance to distance)
-                              * convert(that.time to time, that.time to time))
+                         / convert(that.distance to distance)
+                         * convert(that.time to time, that.time to time))
 
     operator fun div(that: AccelerationAmount<D, T2>) =
         Numeric(amount = amount / that.amount)

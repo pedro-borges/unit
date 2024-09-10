@@ -71,7 +71,7 @@ open class AreaAmount<D2 : Unit<Distance>>(
     @JvmName("divArea")
     operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
         Numeric(amount = amount / that.amount / convert(that.distance to distance,
-                                                             that.distance to distance))
+                                                        that.distance to distance))
 
     operator fun div(that: AreaAmount<D2>) =
         Numeric(amount = amount / that.amount)

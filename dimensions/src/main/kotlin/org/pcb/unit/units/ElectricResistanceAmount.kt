@@ -96,14 +96,14 @@ open class ElectricResistanceAmount<M : Unit<Mass>, D2 : Unit<Distance>, T3 : Un
     @JvmName("divElectricResistance")
     operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, D, T, EC>) =
         Numeric(amount = amount / that.amount
-                              / convert(that.mass to mass,
-                                        that.distance to distance,
-                                        that.distance to distance)
-                              * convert(that.time to time,
-                                        that.time to time,
-                                        that.time to time,
-                                        that.electricCurrent to electricCurrent,
-                                        that.electricCurrent to electricCurrent))
+                         / convert(that.mass to mass,
+                                   that.distance to distance,
+                                   that.distance to distance)
+                         * convert(that.time to time,
+                                   that.time to time,
+                                   that.time to time,
+                                   that.electricCurrent to electricCurrent,
+                                   that.electricCurrent to electricCurrent))
 
     operator fun div(that: ElectricResistanceAmount<M, D2, T3, EC2>) =
         Numeric(amount = amount / that.amount)
@@ -111,14 +111,14 @@ open class ElectricResistanceAmount<M : Unit<Mass>, D2 : Unit<Distance>, T3 : Un
     @JvmName("timesElectricConductivity")
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> times(that: ElectricConductivityAmount<T, EC, M, D>) =
         Numeric(amount = amount * that.amount
-                              * convert(that.mass to mass,
-                                        that.distance to distance,
-                                        that.distance to distance)
-                              / convert(that.time to time,
-                                        that.time to time,
-                                        that.time to time,
-                                        that.electricCurrent to electricCurrent,
-                                        that.electricCurrent to electricCurrent))
+                         * convert(that.mass to mass,
+                                   that.distance to distance,
+                                   that.distance to distance)
+                         / convert(that.time to time,
+                                   that.time to time,
+                                   that.time to time,
+                                   that.electricCurrent to electricCurrent,
+                                   that.electricCurrent to electricCurrent))
 
     operator fun times(that: ElectricConductivityAmount<T3, EC2, M, D2>) =
         Numeric(amount = amount * that.amount)

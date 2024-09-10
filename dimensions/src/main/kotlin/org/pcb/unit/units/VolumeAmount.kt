@@ -69,8 +69,8 @@ open class VolumeAmount<L3 : Unit<Distance>>(
     @JvmName("divVolume")
     operator fun <D : Unit<Distance>> div(that: VolumeAmount<D>) =
         Numeric(amount = amount / that.amount / convert(that.distance to distance,
-                                                             that.distance to distance,
-                                                             that.distance to distance))
+                                                        that.distance to distance,
+                                                        that.distance to distance))
 
     operator fun div(that: VolumeAmount<L3>) =
         Numeric(amount = amount / that.amount)

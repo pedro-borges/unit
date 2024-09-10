@@ -77,8 +77,8 @@ open class MassFluxAmount<M : Unit<Mass>, T : Unit<Time>>(
     @JvmName("divMassFlux")
     operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFluxAmount<M, T>) =
         Numeric(amount = amount / that.amount
-                              / convert(that.mass to mass)
-                              * convert(that.time to time))
+                         / convert(that.mass to mass)
+                         * convert(that.time to time))
 
     operator fun div(that: MassFluxAmount<M, T>) =
         Numeric(amount = amount / that.amount)
