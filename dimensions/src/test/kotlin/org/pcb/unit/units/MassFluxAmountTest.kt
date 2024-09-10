@@ -5,7 +5,7 @@ import kotlin.test.assertEquals
 import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
-import org.pcb.unit.units.test.LENGTH1
+import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.MASS1
 import org.pcb.unit.units.test.MASS2
 import org.pcb.unit.units.test.TIME1
@@ -108,14 +108,14 @@ class MassFluxAmountTest
     }
 
     @Test
-    fun timesLength()
+    fun timesDistance()
     {
         assertEquals(
             expected = MomentumAmount(amount = 2 * 2,
-                                    unit = U2(MASS1, LENGTH1) to TIME1),
+                                    unit = U2(MASS1, DISTANCE1) to TIME1),
             actual = MassFluxAmount(amount = 2,
                                  unit = MASS1 to TIME1) *
-                     LengthAmount(amount = 2,
-                                 unit = LENGTH1))
+                     DistanceAmount(amount = 2,
+                                 unit = DISTANCE1))
     }
 }

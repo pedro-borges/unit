@@ -5,9 +5,9 @@ import kotlin.test.assertEquals
 import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
+import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
-import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.MASS1
 import org.pcb.unit.units.test.MASS2
 import org.pcb.unit.units.test.TIME1
@@ -114,10 +114,10 @@ class MagneticFluxDensityAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)),
+                                          unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
             actual = MagneticFluxDensityAmount(amount = 2,
                                                unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)) *
                      AreaAmount(amount = 2,
-                                unit = LENGTH1))
+                                unit = DISTANCE1))
     }
 }

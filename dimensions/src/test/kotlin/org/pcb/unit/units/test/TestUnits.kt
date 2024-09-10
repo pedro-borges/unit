@@ -2,8 +2,8 @@ package org.pcb.unit.units.test
 
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Currency
+import org.pcb.unit.dimension.Distance
 import org.pcb.unit.dimension.ElectricCurrent
-import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.toBigBigDecimal
@@ -32,13 +32,13 @@ object ELECTRICCURRENT2 : Unit<ElectricCurrent>(ElectricCurrent::class)
     override val scale = 10.toBigBigDecimal()
 }
 
-object LENGTH1 : Unit<Length>(Length::class)
+object DISTANCE1 : Unit<Distance>(Distance::class)
 {
     override val symbol = "L1"
     override val scale = 1.toBigBigDecimal()
 }
 
-object LENGTH2 : Unit<Length>(Length::class)
+object DISTANCE2 : Unit<Distance>(Distance::class)
 {
     override val symbol = "L2"
     override val scale = 10.toBigBigDecimal()

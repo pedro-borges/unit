@@ -2,13 +2,13 @@ package org.pcb.unit.units.space
 
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Area
-import org.pcb.unit.dimension.Length
+import org.pcb.unit.dimension.Distance
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.AreaAmount
 import org.pcb.unit.units.base.Meter.METER
 
 class SquareMeter(amount: Number)
-    : AreaAmount<Unit<Length>>(
+    : AreaAmount<Unit<Distance>>(
     amount = amount,
     unit = METER)
 {

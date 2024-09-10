@@ -5,10 +5,10 @@ import kotlin.test.assertEquals
 import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
+import org.pcb.unit.units.test.DISTANCE1
+import org.pcb.unit.units.test.DISTANCE2
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
-import org.pcb.unit.units.test.LENGTH1
-import org.pcb.unit.units.test.LENGTH2
 import org.pcb.unit.units.test.MASS1
 import org.pcb.unit.units.test.MASS2
 import org.pcb.unit.units.test.TIME1
@@ -115,11 +115,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = PaceAmount(amount = 1,
-                                  unit = TIME1 to LENGTH1),
+                                  unit = TIME1 to DISTANCE1),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
-                     LengthAmount(amount = 2,
-                                  unit = LENGTH1))
+                     DistanceAmount(amount = 2,
+                                  unit = DISTANCE1))
     }
 
     @Test
@@ -127,11 +127,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = U2(MASS1, LENGTH1) to TIME1),
+                                    unit = U2(MASS1, DISTANCE1) to TIME1),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
                      PowerAmount(amount = 2,
-                                 unit = U2(MASS1, LENGTH1) to TIME1))
+                                 unit = U2(MASS1, DISTANCE1) to TIME1))
     }
 
     @Test
@@ -139,11 +139,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = U2(MASS1, LENGTH1) to TIME1),
+                                    unit = U2(MASS1, DISTANCE1) to TIME1),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
                      PowerAmount(amount = 2000,
-                                 unit = U2(MASS1, LENGTH1) to TIME2))
+                                 unit = U2(MASS1, DISTANCE1) to TIME2))
     }
 
     @Test
@@ -163,11 +163,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = ElectricCapacitanceAmount(amount = 1,
-                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)),
+                                                 unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
                      ElectricResistanceAmount(amount = 2,
-                                              unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)))
+                                              unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -175,11 +175,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = ElectricCapacitanceAmount(amount = 1,
-                                                 unit = U2(TIME1, ELECTRICCURRENT2) to U2(MASS2, LENGTH2)),
+                                                 unit = U2(TIME1, ELECTRICCURRENT2) to U2(MASS2, DISTANCE2)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
                      ElectricResistanceAmount(amount = 2000,
-                                              unit = U2(MASS2, LENGTH2) to U2(TIME2, ELECTRICCURRENT2)))
+                                              unit = U2(MASS2, DISTANCE2) to U2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test
@@ -187,11 +187,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 1,
-                                                unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)),
+                                                unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
                      ElectricCapacitanceAmount(amount = 2,
-                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)))
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
     }
 
     @Test
@@ -199,11 +199,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 1,
-                                                unit = U2(MASS2, LENGTH2) to U2(TIME1, ELECTRICCURRENT2)),
+                                                unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT2)),
             actual = TimeAmount(amount = 20000,
                                 unit = TIME1) /
                      ElectricCapacitanceAmount(amount = 2,
-                                               unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS2, LENGTH2)))
+                                               unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS2, DISTANCE2)))
     }
 
     @Test
@@ -211,11 +211,11 @@ class TimeAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)),
+                                          unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
                      ElectricTensionAmount(amount = 2,
-                                           unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)))
+                                           unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -223,10 +223,10 @@ class TimeAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = U2(MASS1, LENGTH1) to U2(TIME2, ELECTRICCURRENT1)),
+                                          unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT1)),
             actual = TimeAmount(amount = 2,
                                 unit = TIME2) *
                      ElectricTensionAmount(amount = 2000,
-                                           unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)))
+                                           unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
     }
 }

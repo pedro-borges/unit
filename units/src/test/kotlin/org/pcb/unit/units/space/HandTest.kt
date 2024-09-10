@@ -2,12 +2,12 @@ package org.pcb.unit.units.space
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.units.LengthAmount
+import org.pcb.unit.units.DistanceAmount
 import org.pcb.unit.units.base.Meter
 
 class HandTest
 {
-    private infix fun Hand.equivalent(other: LengthAmount<*>) =
+    private infix fun Hand.equivalent(other: DistanceAmount<*>) =
         assertEquals(this, Hand(0) + other)
 
     @Test

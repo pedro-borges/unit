@@ -1,16 +1,16 @@
 package org.pcb.unit.units.space
 
 import org.pcb.unit.Unit
-import org.pcb.unit.dimension.Length
+import org.pcb.unit.dimension.Distance
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.LengthAmount
+import org.pcb.unit.units.DistanceAmount
 
 class Foot(amount: Number)
-    : LengthAmount<Unit<Length>>(
+    : DistanceAmount<Unit<Distance>>(
     amount = amount,
     unit = FOOT)
 {
-    object FOOT : Unit<Length>(Length::class)
+    object FOOT : Unit<Distance>(Distance::class)
     {
         override val symbol = "ft"
         override val scale = 0.3048.toBigBigDecimal()

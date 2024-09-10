@@ -5,7 +5,7 @@ import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
-import org.pcb.unit.dimension.Length
+import org.pcb.unit.dimension.Distance
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
@@ -69,17 +69,17 @@ open class MassAmount<M : Unit<Mass>>(
 
     // region -> Momentum
 
-    operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
+    operator fun <D: Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
         MomentumAmount(amount = amount * that.amount,
-                       unit = U2(mass, that.length) to that.time)
+                       unit = U2(mass, that.distance) to that.time)
 
     // endregion
 
     // region -> Force
 
-    operator fun <L : Unit<Length>, T : Unit<Time>> times(that: AccelerationAmount<L, T>) =
+    operator fun <D: Unit<Distance>, T : Unit<Time>> times(that: AccelerationAmount<D, T>) =
         ForceAmount(amount = amount * that.amount,
-                    unit = U2(mass, that.length) to that.time)
+                    unit = U2(mass, that.distance) to that.time)
 
     // endregion
 }

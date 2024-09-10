@@ -5,8 +5,8 @@ import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
+import org.pcb.unit.dimension.Distance
 import org.pcb.unit.dimension.ElectricCurrent
-import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
@@ -70,24 +70,24 @@ open class TimeAmount<T : Unit<Time>>(
 
     // region -> Pace
 
-    operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
+    operator fun <D: Unit<Distance>> div(that: DistanceAmount<D>) =
         PaceAmount(amount = amount / that.amount,
-                   unit = time to that.length)
+                   unit = time to that.distance)
 
     // endregion
 
     // region -> Energy
 
     @JvmName("timesPower")
-    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>> times(that: PowerAmount<M, L, T>) =
+    operator fun <M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>> times(that: PowerAmount<M, D, T>) =
         EnergyAmount(amount = amount * that.amount / convert(that.time to time,
                                                              that.time to time,
                                                              that.time to time),
-                     unit = U2(that.mass, that.length) to time)
+                     unit = U2(that.mass, that.distance) to time)
 
-    operator fun <M : Unit<Mass>, L : Unit<Length>> times(that: PowerAmount<M, L, T>) =
+    operator fun <M : Unit<Mass>, D: Unit<Distance>> times(that: PowerAmount<M, D, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = U2(that.mass, that.length) to time)
+                     unit = U2(that.mass, that.distance) to time)
 
     // endregion
 
@@ -102,46 +102,46 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> ElectricCapacitance
 
     @JvmName("divElectricResistance")
-    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
+    operator fun <M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, D, T, EC>) =
         ElectricCapacitanceAmount(amount = amount / that.amount * convert(that.time to time,
                                                                           that.time to time,
                                                                           that.time to time),
-                                  unit = U2(time, that.electricCurrent) to U2(that.mass, that.length))
+                                  unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
 
-    operator fun <M : Unit<Mass>, L : Unit<Length>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, L, T, EC>) =
+    operator fun <M : Unit<Mass>, D: Unit<Distance>, EC : Unit<ElectricCurrent>> div(that: ElectricResistanceAmount<M, D, T, EC>) =
         ElectricCapacitanceAmount(amount = amount / that.amount,
-                                  unit = U2(time, that.electricCurrent) to U2(that.mass, that.length))
+                                  unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
 
     // endregion
 
     // region -> ElectricResistance
 
     @JvmName("divElectricCapacitance")
-    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricCapacitanceAmount<T, EC, M, L>) =
+    operator fun <M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricCapacitanceAmount<T, EC, M, D>) =
         ElectricResistanceAmount(amount = amount / that.amount / convert(that.time to time,
                                                                          that.time to time,
                                                                          that.time to time,
                                                                          that.time to time),
-                                 unit = U2(that.mass, that.length) to U2(time, that.electricCurrent))
+                                 unit = U2(that.mass, that.distance) to U2(time, that.electricCurrent))
 
-    operator fun <M : Unit<Mass>, L : Unit<Length>, EC : Unit<ElectricCurrent>> div(that: ElectricCapacitanceAmount<T, EC, M, L>) =
+    operator fun <M : Unit<Mass>, D: Unit<Distance>, EC : Unit<ElectricCurrent>> div(that: ElectricCapacitanceAmount<T, EC, M, D>) =
         ElectricResistanceAmount(amount = amount / that.amount,
-                                 unit = U2(that.mass, that.length) to U2(time, that.electricCurrent))
+                                 unit = U2(that.mass, that.distance) to U2(time, that.electricCurrent))
 
     // endregion
 
     // region -> MagneticFlux
 
     @JvmName("timesElectricTension")
-    operator fun <M : Unit<Mass>, L : Unit<Length>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: ElectricTensionAmount<M, L, T, EC>) =
+    operator fun <M : Unit<Mass>, D: Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: ElectricTensionAmount<M, D, T, EC>) =
         MagneticFluxAmount(amount = amount * that.amount * convert(that.time to time,
                                                                    that.time to time,
                                                                    that.time to time),
-                           unit = U2(that.mass, that.length) to U2(time, that.electricCurrent))
+                           unit = U2(that.mass, that.distance) to U2(time, that.electricCurrent))
 
-    operator fun <M : Unit<Mass>, L : Unit<Length>, EC : Unit<ElectricCurrent>> times(that: ElectricTensionAmount<M, L, T, EC>) =
+    operator fun <M : Unit<Mass>, D: Unit<Distance>, EC : Unit<ElectricCurrent>> times(that: ElectricTensionAmount<M, D, T, EC>) =
         MagneticFluxAmount(amount = amount * that.amount,
-                           unit = U2(that.mass, that.length) to U2(time, that.electricCurrent))
+                           unit = U2(that.mass, that.distance) to U2(time, that.electricCurrent))
 
     // endregion
 }

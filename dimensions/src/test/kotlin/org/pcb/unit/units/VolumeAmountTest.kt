@@ -4,8 +4,8 @@ import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
-import org.pcb.unit.units.test.LENGTH1
-import org.pcb.unit.units.test.LENGTH2
+import org.pcb.unit.units.test.DISTANCE1
+import org.pcb.unit.units.test.DISTANCE2
 
 class VolumeAmountTest
 {
@@ -14,9 +14,9 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = VolumeAmount(amount = 2 * 2,
-                                    unit = LENGTH1),
+                                    unit = DISTANCE1),
             actual = VolumeAmount(amount = 2,
-                                  unit = LENGTH1) *
+                                  unit = DISTANCE1) *
                      Percent(amount = 2 * 100))
     }
 
@@ -25,9 +25,9 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = VolumeAmount(amount = 1,
-                                    unit = LENGTH1),
+                                    unit = DISTANCE1),
             actual = VolumeAmount(amount = 2,
-                                  unit = LENGTH1) /
+                                  unit = DISTANCE1) /
                      Percent(amount = 2 * 100))
     }
 
@@ -36,11 +36,11 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = VolumeAmount(amount = 1,
-                                    unit = LENGTH1),
+                                    unit = DISTANCE1),
             actual = VolumeAmount(amount = 0,
-                                  unit = LENGTH1) +
+                                  unit = DISTANCE1) +
                      VolumeAmount(amount = 1,
-                                  unit = LENGTH1))
+                                  unit = DISTANCE1))
     }
 
     @Test
@@ -48,11 +48,11 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = VolumeAmount(amount = 1,
-                                    unit = LENGTH2),
+                                    unit = DISTANCE2),
             actual = VolumeAmount(amount = 0,
-                                  unit = LENGTH2) +
+                                  unit = DISTANCE2) +
                      VolumeAmount(amount = 1000,
-                                  unit = LENGTH1))
+                                  unit = DISTANCE1))
     }
 
     @Test
@@ -60,11 +60,11 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = VolumeAmount(amount = 0,
-                                    unit = LENGTH1),
+                                    unit = DISTANCE1),
             actual = VolumeAmount(amount = 1,
-                                  unit = LENGTH1) -
+                                  unit = DISTANCE1) -
                      VolumeAmount(amount = 1,
-                                  unit = LENGTH1))
+                                  unit = DISTANCE1))
     }
 
     @Test
@@ -72,11 +72,11 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = VolumeAmount(amount = 0,
-                                    unit = LENGTH2),
+                                    unit = DISTANCE2),
             actual = VolumeAmount(amount = 1,
-                                  unit = LENGTH2) -
+                                  unit = DISTANCE2) -
                      VolumeAmount(amount = 1000,
-                                  unit = LENGTH1))
+                                  unit = DISTANCE1))
     }
 
     @Test
@@ -86,9 +86,9 @@ class VolumeAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = VolumeAmount(amount = 2,
-                                  unit = LENGTH1) /
+                                  unit = DISTANCE1) /
                      VolumeAmount(amount = 2,
-                                  unit = LENGTH1))
+                                  unit = DISTANCE1))
     }
 
     @Test
@@ -98,56 +98,56 @@ class VolumeAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = VolumeAmount(amount = 2,
-                                  unit = LENGTH2) /
+                                  unit = DISTANCE2) /
                      VolumeAmount(amount = 2000,
-                                  unit = LENGTH1))
+                                  unit = DISTANCE1))
     }
 
     @Test
-    fun divSameLength()
+    fun divSameDistance()
     {
         assertEquals(
             expected = AreaAmount(amount = 1,
-                                  unit = LENGTH1),
+                                  unit = DISTANCE1),
             actual = VolumeAmount(amount = 2,
-                                  unit = LENGTH1) /
-                     LengthAmount(amount = 2,
-                                  unit = LENGTH1))
+                                  unit = DISTANCE1) /
+                     DistanceAmount(amount = 2,
+                                  unit = DISTANCE1))
     }
 
     @Test
-    fun divOtherLength()
+    fun divOtherDistance()
     {
         assertEquals(
             expected = AreaAmount(amount = 1,
-                                  unit = LENGTH2),
+                                  unit = DISTANCE2),
             actual = VolumeAmount(amount = 2,
-                                  unit = LENGTH2) /
-                     LengthAmount(amount = 20,
-                                  unit = LENGTH1))
+                                  unit = DISTANCE2) /
+                     DistanceAmount(amount = 20,
+                                  unit = DISTANCE1))
     }
 
     @Test
     fun divSameArea()
     {
         assertEquals(
-            expected = LengthAmount(amount = 1,
-                                    unit = LENGTH1),
+            expected = DistanceAmount(amount = 1,
+                                    unit = DISTANCE1),
             actual = VolumeAmount(amount = 2,
-                                  unit = LENGTH1) /
+                                  unit = DISTANCE1) /
                      AreaAmount(amount = 2,
-                                unit = LENGTH1))
+                                unit = DISTANCE1))
     }
 
     @Test
     fun divOtherArea()
     {
         assertEquals(
-            expected = LengthAmount(amount = 1,
-                                    unit = LENGTH2),
+            expected = DistanceAmount(amount = 1,
+                                    unit = DISTANCE2),
             actual = VolumeAmount(amount = 2,
-                                  unit = LENGTH2) /
+                                  unit = DISTANCE2) /
                      AreaAmount(amount = 200,
-                                unit = LENGTH1))
+                                unit = DISTANCE1))
     }
 }

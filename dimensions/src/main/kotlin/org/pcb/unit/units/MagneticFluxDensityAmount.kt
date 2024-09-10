@@ -5,8 +5,8 @@ import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
+import org.pcb.unit.dimension.Distance
 import org.pcb.unit.dimension.ElectricCurrent
-import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.MagneticFlux
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
@@ -99,9 +99,9 @@ open class MagneticFluxDensityAmount<M : Unit<Mass>, T2 : Unit<Time>, EC : Unit<
 
     // region -> MagneticFlux
 
-    operator fun <L : Unit<Length>> times(that: AreaAmount<L>) =
+    operator fun <D: Unit<Distance>> times(that: AreaAmount<D>) =
         MagneticFluxAmount(amount = amount * that.amount,
-                           unit = U2(mass, that.length) to U2(time, electricCurrent))
+                           unit = U2(mass, that.distance) to U2(time, electricCurrent))
 
     // endregion
 }

@@ -2,12 +2,12 @@ package org.pcb.unit.units.space
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.units.LengthAmount
+import org.pcb.unit.units.DistanceAmount
 import org.pcb.unit.units.base.Meter
 
 class ThouTest
 {
-    private infix fun Thou.equivalent(other: LengthAmount<*>) =
+    private infix fun Thou.equivalent(other: DistanceAmount<*>) =
         assertEquals(this, Thou(0) + other)
 
     @Test

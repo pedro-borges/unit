@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test
 import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
+import org.pcb.unit.units.test.DISTANCE1
+import org.pcb.unit.units.test.DISTANCE2
 import org.pcb.unit.units.test.ELECTRICCURRENT1
-import org.pcb.unit.units.test.LENGTH1
-import org.pcb.unit.units.test.LENGTH2
 import org.pcb.unit.units.test.MASS1
 import org.pcb.unit.units.test.TIME1
 
@@ -18,9 +18,9 @@ class AreaAmountTest
     {
         assertEquals(
             expected = AreaAmount(amount = 2 * 2,
-                                  unit = LENGTH1),
+                                  unit = DISTANCE1),
             actual = AreaAmount(amount = 2,
-                                unit = LENGTH1) *
+                                unit = DISTANCE1) *
                      Percent(amount = 2 * 100))
     }
 
@@ -29,9 +29,9 @@ class AreaAmountTest
     {
         assertEquals(
             expected = AreaAmount(amount = 1,
-                                  unit = LENGTH1),
+                                  unit = DISTANCE1),
             actual = AreaAmount(amount = 2,
-                                unit = LENGTH1) /
+                                unit = DISTANCE1) /
                      Percent(amount = 2 * 100))
     }
 
@@ -40,11 +40,11 @@ class AreaAmountTest
     {
         assertEquals(
             expected = AreaAmount(amount = 1,
-                                  unit = LENGTH1),
+                                  unit = DISTANCE1),
             actual = AreaAmount(amount = 0,
-                                unit = LENGTH1) +
+                                unit = DISTANCE1) +
                      AreaAmount(amount = 1,
-                                unit = LENGTH1))
+                                unit = DISTANCE1))
     }
 
     @Test
@@ -52,11 +52,11 @@ class AreaAmountTest
     {
         assertEquals(
             expected = AreaAmount(amount = 1,
-                                  unit = LENGTH2),
+                                  unit = DISTANCE2),
             actual = AreaAmount(amount = 0,
-                                unit = LENGTH2) +
+                                unit = DISTANCE2) +
                      AreaAmount(amount = 100,
-                                unit = LENGTH1))
+                                unit = DISTANCE1))
     }
 
     @Test
@@ -64,11 +64,11 @@ class AreaAmountTest
     {
         assertEquals(
             expected = AreaAmount(amount = 0,
-                                  unit = LENGTH1),
+                                  unit = DISTANCE1),
             actual = AreaAmount(amount = 1,
-                                unit = LENGTH1) -
+                                unit = DISTANCE1) -
                      AreaAmount(amount = 1,
-                                unit = LENGTH1))
+                                unit = DISTANCE1))
     }
 
     @Test
@@ -76,11 +76,11 @@ class AreaAmountTest
     {
         assertEquals(
             expected = AreaAmount(amount = 0,
-                                  unit = LENGTH2),
+                                  unit = DISTANCE2),
             actual = AreaAmount(amount = 1,
-                                unit = LENGTH2) -
+                                unit = DISTANCE2) -
                      AreaAmount(amount = 100,
-                                unit = LENGTH1))
+                                unit = DISTANCE1))
     }
 
     @Test
@@ -90,9 +90,9 @@ class AreaAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = AreaAmount(amount = 2,
-                                unit = LENGTH1) /
+                                unit = DISTANCE1) /
                      AreaAmount(amount = 2,
-                                unit = LENGTH1))
+                                unit = DISTANCE1))
     }
 
     @Test
@@ -102,57 +102,57 @@ class AreaAmountTest
             expected = ScalarAmount(amount = 1,
                                     unit = NUMERIC),
             actual = AreaAmount(amount = 2,
-                                unit = LENGTH2) /
+                                unit = DISTANCE2) /
                      AreaAmount(amount = 200,
-                                unit = LENGTH1))
+                                unit = DISTANCE1))
     }
 
     @Test
-    fun divSameLength()
+    fun divSameDistance()
     {
         assertEquals(
-            expected = LengthAmount(amount = 1,
-                                    unit = LENGTH1),
+            expected = DistanceAmount(amount = 1,
+                                    unit = DISTANCE1),
             actual = AreaAmount(amount = 2,
-                                unit = LENGTH1) /
-                     LengthAmount(amount = 2,
-                                  unit = LENGTH1))
+                                unit = DISTANCE1) /
+                     DistanceAmount(amount = 2,
+                                  unit = DISTANCE1))
     }
 
     @Test
-    fun divOtherLength()
+    fun divOtherDistance()
     {
         assertEquals(
-            expected = LengthAmount(amount = 1,
-                                    unit = LENGTH2),
+            expected = DistanceAmount(amount = 1,
+                                    unit = DISTANCE2),
             actual = AreaAmount(amount = 2,
-                                unit = LENGTH2) /
-                     LengthAmount(amount = 20,
-                                  unit = LENGTH1))
+                                unit = DISTANCE2) /
+                     DistanceAmount(amount = 20,
+                                  unit = DISTANCE1))
     }
 
     @Test
-    fun timesSameLength()
-    {
-        assertEquals(
-            expected = VolumeAmount(amount = 2 * 2,
-                                    unit = LENGTH1),
-            actual = AreaAmount(amount = 2,
-                                unit = LENGTH1) *
-                     LengthAmount(amount = 2,
-                                  unit = LENGTH1))
-    }
-
-    @Test
-    fun timesOtherLength()
+    fun timesSameDistance()
     {
         assertEquals(
             expected = VolumeAmount(amount = 2 * 2,
-                                    unit = LENGTH2),
+                                    unit = DISTANCE1),
             actual = AreaAmount(amount = 2,
-                                unit = LENGTH2) *
-                     LengthAmount(amount = 20,
-                                  unit = LENGTH1))
+                                unit = DISTANCE1) *
+                     DistanceAmount(amount = 2,
+                                  unit = DISTANCE1))
+    }
+
+    @Test
+    fun timesOtherDistance()
+    {
+        assertEquals(
+            expected = VolumeAmount(amount = 2 * 2,
+                                    unit = DISTANCE2),
+            actual = AreaAmount(amount = 2,
+                                unit = DISTANCE2) *
+                     DistanceAmount(amount = 20,
+                                  unit = DISTANCE1))
     }
 
     @Test
@@ -160,9 +160,9 @@ class AreaAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)),
+                                          unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
             actual = AreaAmount(amount = 2,
-                                unit = LENGTH1) *
+                                unit = DISTANCE1) *
                      MagneticFluxDensityAmount(amount = 2,
                                                unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)))
     }

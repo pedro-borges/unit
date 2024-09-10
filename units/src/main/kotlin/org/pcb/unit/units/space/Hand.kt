@@ -1,16 +1,16 @@
 package org.pcb.unit.units.space
 
 import org.pcb.unit.Unit
-import org.pcb.unit.dimension.Length
+import org.pcb.unit.dimension.Distance
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.LengthAmount
+import org.pcb.unit.units.DistanceAmount
 
 class Hand(amount: Number)
-    : LengthAmount<Unit<Length>>(
+    : DistanceAmount<Unit<Distance>>(
     amount = amount,
     unit = HAND)
 {
-    object HAND : Unit<Length>(Length::class)
+    object HAND : Unit<Distance>(Distance::class)
     {
         override val symbol = "hh"
         override val scale = 0.1016.toBigBigDecimal()

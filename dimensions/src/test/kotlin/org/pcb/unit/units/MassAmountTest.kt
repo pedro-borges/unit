@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
-import org.pcb.unit.units.test.LENGTH1
+import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.MASS1
 import org.pcb.unit.units.test.MASS2
 import org.pcb.unit.units.test.TIME1
@@ -111,11 +111,11 @@ class MassAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 2 * 2,
-                                      unit = U2(MASS1, LENGTH1) to TIME1),
+                                      unit = U2(MASS1, DISTANCE1) to TIME1),
             actual = MassAmount(amount = 2,
                                 unit = MASS1) *
                      SpeedAmount(amount = 2,
-                                 unit = LENGTH1 to TIME1))
+                                 unit = DISTANCE1 to TIME1))
     }
 
     @Test
@@ -123,10 +123,10 @@ class MassAmountTest
     {
         assertEquals(
             expected = ForceAmount(amount = 2 * 2,
-                                   unit = U2(MASS1, LENGTH1) to TIME1),
+                                   unit = U2(MASS1, DISTANCE1) to TIME1),
             actual = MassAmount(amount = 2,
                                 unit = MASS1) *
                      AccelerationAmount(amount = 2,
-                                        unit = LENGTH1 to TIME1))
+                                        unit = DISTANCE1 to TIME1))
     }
 }

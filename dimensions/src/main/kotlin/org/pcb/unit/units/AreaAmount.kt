@@ -6,8 +6,8 @@ import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Area
+import org.pcb.unit.dimension.Distance
 import org.pcb.unit.dimension.ElectricCurrent
-import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
@@ -17,15 +17,15 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
-open class AreaAmount<L2 : Unit<Length>>(
+open class AreaAmount<D2: Unit<Distance>>(
         amount: Number,
-        unit: L2)
-    : Amount<Length>(amount = amount.toBigBigDecimal(),
+        unit: D2)
+    : Amount<Distance>(amount = amount.toBigBigDecimal(),
                      unit = CompositeUnit(
-                         domain = Length::class,
+                         domain = Distance::class,
                          units = listOf(unit to 2)))
 {
-    val length = unit
+    val distance = unit
 
     companion object
     {
@@ -38,71 +38,71 @@ open class AreaAmount<L2 : Unit<Length>>(
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         AreaAmount(amount = amount * that.amount * that.unit.scale,
-                   unit = length)
+                   unit = distance)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         AreaAmount(amount = amount / that.amount / that.unit.scale,
-                   unit = length)
+                   unit = distance)
 
     @JvmName("plusArea")
-    operator fun <L : Unit<Length>> plus(that: AreaAmount<L>) =
-        AreaAmount(amount = amount + that.amount * convert(that.length to length,
-                                                           that.length to length),
-                   unit = length)
+    operator fun <D: Unit<Distance>> plus(that: AreaAmount<D>) =
+        AreaAmount(amount = amount + that.amount * convert(that.distance to distance,
+                                                           that.distance to distance),
+                   unit = distance)
 
-    operator fun plus(that: AreaAmount<L2>) =
+    operator fun plus(that: AreaAmount<D2>) =
         AreaAmount(amount = amount + that.amount,
-                   unit = length)
+                   unit = distance)
 
     @JvmName("minusArea")
-    operator fun <L : Unit<Length>> minus(that: AreaAmount<L>) =
-        AreaAmount(amount = amount - that.amount * convert(that.length to length,
-                                                           that.length to length),
-                   unit = length)
+    operator fun <D: Unit<Distance>> minus(that: AreaAmount<D>) =
+        AreaAmount(amount = amount - that.amount * convert(that.distance to distance,
+                                                           that.distance to distance),
+                   unit = distance)
 
-    operator fun minus(that: AreaAmount<L2>) =
+    operator fun minus(that: AreaAmount<D2>) =
         AreaAmount(amount = amount - that.amount,
-                   unit = length)
+                   unit = distance)
 
     // endregion
 
     // region -> Natural
 
     @JvmName("divArea")
-    operator fun <L : Unit<Length>> div(that: AreaAmount<L>) =
-        ScalarAmount(amount = amount / that.amount / convert(that.length to length,
-                                                             that.length to length),
+    operator fun <D: Unit<Distance>> div(that: AreaAmount<D>) =
+        ScalarAmount(amount = amount / that.amount / convert(that.distance to distance,
+                                                             that.distance to distance),
                      unit = NUMERIC)
 
-    operator fun div(that: AreaAmount<L2>) =
+    operator fun div(that: AreaAmount<D2>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
     // endregion
 
-    // region -> Length
+    // region -> Distance
 
-    @JvmName("divLength")
-    operator fun <L : Unit<Length>> div(that: LengthAmount<L>) =
-        LengthAmount(amount = amount / that.amount / convert(that.length to length),
-                     unit = length)
+    @JvmName("divDistance")
+    operator fun <D: Unit<Distance>> div(that: DistanceAmount<D>) =
+        DistanceAmount(amount = amount / that.amount / convert(that.distance to distance),
+                     unit = distance)
 
-    operator fun div(that: LengthAmount<L2>) =
-        LengthAmount(amount = amount / that.amount,
-                     unit = length)
+    operator fun div(that: DistanceAmount<D2>) =
+        DistanceAmount(amount = amount / that.amount,
+                     unit = distance)
 
     // endregion
 
     // region -> Volume
 
-    @JvmName("timesLength")
-    operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
-        VolumeAmount(amount = amount * that.amount * convert(that.length to length),
-                     unit = length)
+    @JvmName("timesDistance")
+    operator fun <D: Unit<Distance>> times(that: DistanceAmount<D>) =
+        VolumeAmount(amount = amount * that.amount * convert(that.distance to distance),
+                     unit = distance)
 
-    operator fun times(that: LengthAmount<L2>) =
+    operator fun times(that: DistanceAmount<D2>) =
         VolumeAmount(amount = amount * that.amount,
-                     unit = length)
+                     unit = distance)
 
     // endregion
 
@@ -110,7 +110,7 @@ open class AreaAmount<L2 : Unit<Length>>(
 
     operator fun <M : Unit<Mass>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: MagneticFluxDensityAmount<M, T, EC>) =
         MagneticFluxAmount(amount = amount * that.amount,
-                           unit = U2(that.mass, length) to U2(that.time, that.electricCurrent))
+                           unit = U2(that.mass, distance) to U2(that.time, that.electricCurrent))
 
     // endregion
 }

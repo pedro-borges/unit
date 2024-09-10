@@ -5,7 +5,7 @@ import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
-import org.pcb.unit.dimension.Length
+import org.pcb.unit.dimension.Distance
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.MassFlux
 import org.pcb.unit.dimension.Scalar
@@ -89,9 +89,9 @@ open class MassFluxAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> Momentum
 
-    operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
+    operator fun <D: Unit<Distance>> times(that: DistanceAmount<D>) =
         MomentumAmount(amount = amount * that.amount,
-                       unit = U2(mass, that.length) to time)
+                       unit = U2(mass, that.distance) to time)
 
     // endregion
 }

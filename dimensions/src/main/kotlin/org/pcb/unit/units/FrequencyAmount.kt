@@ -5,8 +5,8 @@ import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Unit
 import org.pcb.unit.convert
 import org.pcb.unit.dimension.Currency
+import org.pcb.unit.dimension.Distance
 import org.pcb.unit.dimension.Frequency
-import org.pcb.unit.dimension.Length
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
@@ -87,22 +87,22 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // region -> Speed
 
-    operator fun <L : Unit<Length>> times(that: LengthAmount<L>) =
+    operator fun <D: Unit<Distance>> times(that: DistanceAmount<D>) =
         SpeedAmount(amount = that.amount / amount,
-                    unit = that.length to time)
+                    unit = that.distance to time)
 
     // endregion
 
     // region -> Acceleration
 
     @JvmName("timesSpeed")
-    operator fun <L : Unit<Length>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
+    operator fun <D: Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
         AccelerationAmount(amount = that.amount / amount / convert(that.time to time),
-                           unit = that.length to time)
+                           unit = that.distance to time)
 
-    operator fun <L : Unit<Length>> times(that: SpeedAmount<L, T>) =
+    operator fun <D: Unit<Distance>> times(that: SpeedAmount<D, T>) =
         AccelerationAmount(amount = that.amount / amount,
-                           unit = that.length to time)
+                           unit = that.distance to time)
 
     // endregion
 

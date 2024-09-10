@@ -6,8 +6,8 @@ import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.scalar.Percent.PERCENT
+import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.ELECTRICCURRENT1
-import org.pcb.unit.units.test.LENGTH1
 import org.pcb.unit.units.test.MASS1
 import org.pcb.unit.units.test.TIME1
 
@@ -112,10 +112,10 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 2 * 2,
-                                                unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)),
+                                                unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
             actual = Percent(amount = 2 * 100) /
                      ElectricConductivityAmount(amount = 2,
-                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)))
+                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
     }
 
     @Test
@@ -123,9 +123,9 @@ class ScalarAmountTest
     {
         assertEquals(
             expected = ElectricConductivityAmount(amount = 1,
-                                                  unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, LENGTH1)),
+                                                  unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = Percent(amount = 2 * 100) /
                      ElectricResistanceAmount(amount = 2,
-                                              unit = U2(MASS1, LENGTH1) to U2(TIME1, ELECTRICCURRENT1)))
+                                              unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
     }
 }

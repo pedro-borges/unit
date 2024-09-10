@@ -6,7 +6,7 @@ import org.pcb.unit.U2
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
-import org.pcb.unit.units.test.LENGTH1
+import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.TIME1
 import org.pcb.unit.units.test.TIME2
 
@@ -112,11 +112,11 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = SpeedAmount(amount = 1,
-                                   unit = LENGTH1 to TIME1),
+                                   unit = DISTANCE1 to TIME1),
             actual = FrequencyAmount(amount = 2,
                                      unit = NUMERIC to TIME1) *
-                     LengthAmount(amount = 2,
-                                  unit = LENGTH1))
+                     DistanceAmount(amount = 2,
+                                  unit = DISTANCE1))
     }
 
     @Test
@@ -124,11 +124,11 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(amount = 1,
-                                          unit = LENGTH1 to TIME1),
+                                          unit = DISTANCE1 to TIME1),
             actual = FrequencyAmount(amount = 2,
                                      unit = NUMERIC to TIME1) *
                      SpeedAmount(amount = 2,
-                                 unit = LENGTH1 to TIME1))
+                                 unit = DISTANCE1 to TIME1))
     }
 
     @Test
@@ -136,11 +136,11 @@ class FrequencyAmountTest
     {
         assertEquals(
             expected = AccelerationAmount(amount = 1,
-                                          unit = LENGTH1 to TIME1),
+                                          unit = DISTANCE1 to TIME1),
             actual = FrequencyAmount(amount = 2,
                                      unit = NUMERIC to TIME1) *
                      SpeedAmount(amount = 20,
-                                 unit = LENGTH1 to TIME2))
+                                 unit = DISTANCE1 to TIME2))
     }
 
     @Test
