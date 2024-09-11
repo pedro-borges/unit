@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.DistanceAmount
 import org.pcb.unit.units.base.Meter
+import org.pcb.unit.units.space.Mile.MILE
 
 class MileTest
 {
@@ -24,5 +25,7 @@ class MileTest
         Mile(1) equivalent Furlong(8)
         Mile(1) equivalent Mile(1)
         Mile(3) equivalent League(1)
+
+        Mile(1) equivalent DistanceAmount(1, MILE)
     }
 }

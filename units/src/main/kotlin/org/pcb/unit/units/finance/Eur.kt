@@ -1,13 +1,18 @@
 package org.pcb.unit.units.finance
 
+import org.pcb.unit.Magnitude
+import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Currency
 import org.pcb.unit.units.CurrencyAmount
 
-class Eur(amount: Number)
+class Eur(amount: Number,
+          magnitude: Magnitude = UNI)
     : CurrencyAmount<Unit<Currency>>(
     amount = amount,
-    unit = EUR)
+    unit = EurUnit(magnitude))
 {
-    object EUR : Unit<Currency>(Currency::class, "EUR", CurrencyConverter[EUR])
+    open class EurUnit(magnitude: Magnitude) : Unit<Currency>(Currency::class, magnitude.symbol + "€", CurrencyConverter[EUR] * magnitude.scale)
+
+    object EUR : EurUnit(UNI)
 }

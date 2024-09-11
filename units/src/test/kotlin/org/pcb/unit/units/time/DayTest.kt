@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.TimeAmount
 import org.pcb.unit.units.base.Second
+import org.pcb.unit.units.time.Day.DAY
 
 class DayTest
 {
@@ -17,5 +18,7 @@ class DayTest
         Day(1) equivalent Minute(60 * 24)
         Day(1) equivalent Hour(24)
         Day(1) equivalent Day(1)
+
+        Day(1) equivalent TimeAmount(1, DAY)
     }
 }

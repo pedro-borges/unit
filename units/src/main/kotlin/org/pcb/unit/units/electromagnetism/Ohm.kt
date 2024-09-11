@@ -1,5 +1,7 @@
 package org.pcb.unit.units.electromagnetism
 
+import org.pcb.unit.Magnitude
+import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Distance
@@ -8,17 +10,20 @@ import org.pcb.unit.dimension.ElectricResistance
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.kilo
-import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.base.Ampere.AMPERE
-import org.pcb.unit.units.base.Gram.GRAM
+import org.pcb.unit.units.base.Gram.GramUnit
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
 
-class Ohm(amount: Number)
+class Ohm(amount: Number,
+          magnitude: Magnitude = UNI)
     : ElectricResistanceAmount<Unit<Mass>, Unit<Distance>, Unit<Time>, Unit<ElectricCurrent>>(
     amount = amount,
-    unit = U2(kilo(GRAM), METER) to U2(SECOND, AMPERE))
+    unit = U2(kilo(GramUnit(magnitude)), METER) to U2(SECOND, AMPERE))
 {
-    object OHM : Unit<ElectricResistance>(ElectricResistance::class, "Ω", 1.toBigBigDecimal())
+    open class OhmUnit(magnitude: Magnitude)
+        : Unit<ElectricResistance>(ElectricResistance::class, magnitude.symbol + "Ω", magnitude.scale)
+
+    object OHM : OhmUnit(UNI)
 }

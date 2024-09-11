@@ -29,7 +29,7 @@ class JouleTest
     fun unit()
     {
         Joule(2) equivalent Gram(2, KILO) * (Meter(2) / Second(2)) * (Meter(2) / Second(2))
-        Joule(2) equivalent EnergyAmount(2, U2(kilo(GRAM), METER) to (SECOND))
+        Joule(2) equivalent EnergyAmount(2, U2(kilo(GRAM), METER) to SECOND)
         Joule(2) equivalent EnergyAmount(2, JOULE)
     }
 

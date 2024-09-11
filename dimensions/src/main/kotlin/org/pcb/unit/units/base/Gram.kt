@@ -6,15 +6,16 @@ import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.MassAmount
-import org.pcb.unit.units.base.Gram.GRAMS
+import org.pcb.unit.units.base.Gram.GramUnit
 
 class Gram(amount: Number,
            magnitude: Magnitude = UNI)
-    : MassAmount<GRAMS>(
+    : MassAmount<GramUnit>(
     amount = amount.toBigBigDecimal(),
-    unit = GRAMS(magnitude))
+    unit = GramUnit(magnitude))
 {
-    open class GRAMS(magnitude: Magnitude = UNI) :Unit<Mass>(Mass::class, magnitude.symbol + "g", magnitude.scale * 0.001.toBigBigDecimal())
+    open class GramUnit(magnitude: Magnitude) : Unit<Mass>(Mass::class, magnitude.symbol + "g", magnitude.scale * 0.001.toBigBigDecimal())
 
-    object GRAM : GRAMS(UNI)
+    object GRAM : GramUnit(UNI)
 }
+

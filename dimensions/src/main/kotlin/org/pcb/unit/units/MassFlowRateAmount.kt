@@ -24,10 +24,10 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
         unit: Pair<M, T>)
     : Amount<MassFlowRate>(amount = amount.toBigBigDecimal(),
-                       unit = CompositeUnit(
-                           domain = MassFlowRate::class,
-                           units = mapOf(unit.major to 1,
-                                         unit.minor to -1)))
+                           unit = CompositeUnit(
+                               domain = MassFlowRate::class,
+                               units = mapOf(unit.major to 1,
+                                             unit.minor to -1)))
 {
     val mass = unit.major
     val time = unit.minor

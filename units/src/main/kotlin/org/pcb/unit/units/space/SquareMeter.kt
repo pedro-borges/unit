@@ -1,16 +1,21 @@
 package org.pcb.unit.units.space
 
+import org.pcb.unit.Magnitude
+import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Area
 import org.pcb.unit.dimension.Distance
-import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.AreaAmount
-import org.pcb.unit.units.base.Meter.METER
+import org.pcb.unit.units.base.Meter.MeterUnit
 
-class SquareMeter(amount: Number)
+class SquareMeter(amount: Number,
+                  magnitude: Magnitude = UNI)
     : AreaAmount<Unit<Distance>>(
     amount = amount,
-    unit = METER)
+    unit = MeterUnit(magnitude))
 {
-    object SQUARE_METER : Unit<Area>(Area::class, "sqm", 1.toBigBigDecimal())
+    open class SqmUnit(magnitude: Magnitude)
+        : Unit<Area>(Area::class, magnitude.symbol + "sqm", magnitude.scale)
+
+    object SQM : SqmUnit(UNI)
 }

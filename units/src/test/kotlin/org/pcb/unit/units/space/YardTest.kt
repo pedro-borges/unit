@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.DistanceAmount
 import org.pcb.unit.units.base.Meter
+import org.pcb.unit.units.space.Yard.YARD
 
 class YardTest
 {
@@ -24,5 +25,7 @@ class YardTest
         Yard(22 * 10) equivalent Furlong(1)
         Yard(22 * 10 * 8) equivalent Mile(1)
         Yard(22 * 10 * 8 * 3) equivalent League(1)
+
+        Yard(1) equivalent DistanceAmount(1, YARD)
     }
 }

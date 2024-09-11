@@ -3,11 +3,11 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Percent
 import org.pcb.unit.units.test.CURRENCY1
 import org.pcb.unit.units.test.CURRENCY2
+import org.pcb.unit.units.test.TIME1
 
 class CurrencyAmountTest
 {
@@ -108,11 +108,11 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = DebtAmount(amount = 2 * 2,
-                                  unit = U2(CURRENCY1, SECOND)),
+                                  unit = U2(CURRENCY1, TIME1)),
             actual = CurrencyAmount(amount = 2,
                                     unit = CURRENCY1) *
                      TimeAmount(amount = 2,
-                                unit = SECOND))
+                                unit = TIME1))
     }
 
     @Test
@@ -120,10 +120,10 @@ class CurrencyAmountTest
     {
         assertEquals(
             expected = RentAmount(amount = 1,
-                                  unit = CURRENCY1 to SECOND),
+                                  unit = CURRENCY1 to TIME1),
             actual = CurrencyAmount(amount = 2,
                                     unit = CURRENCY1) /
                      TimeAmount(amount = 2,
-                                unit = SECOND))
+                                unit = TIME1))
     }
 }

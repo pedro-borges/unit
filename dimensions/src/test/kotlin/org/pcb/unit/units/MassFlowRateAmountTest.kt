@@ -122,11 +122,11 @@ class MassFlowRateAmountTest
     {
         assertEquals(
             expected = MassAmount(amount = 2 * 2,
-                                      unit = MASS1),
+                                  unit = MASS1),
             actual = MassFlowRateAmount(amount = 2,
                                         unit = MASS1 to TIME1) *
                      TimeAmount(amount = 2,
-                                    unit = TIME1))
+                                unit = TIME1))
     }
 
     @Test
@@ -134,10 +134,10 @@ class MassFlowRateAmountTest
     {
         assertEquals(
             expected = MassAmount(amount = 2 * 2,
-                                      unit = MASS1),
+                                  unit = MASS1),
             actual = MassFlowRateAmount(amount = 2,
                                         unit = MASS1 to TIME2) *
                      TimeAmount(amount = 20,
-                                    unit = TIME1))
+                                unit = TIME1))
     }
 }

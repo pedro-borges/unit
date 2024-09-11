@@ -1,14 +1,20 @@
 package org.pcb.unit.units.space
 
+import org.pcb.unit.Magnitude
+import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Distance
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.DistanceAmount
 
-class Hand(amount: Number)
+class Hand(amount: Number,
+           magnitude: Magnitude = UNI)
     : DistanceAmount<Unit<Distance>>(
     amount = amount,
-    unit = HAND)
+    unit = HandUnit(magnitude))
 {
-    object HAND : Unit<Distance>(Distance::class, "hh", 0.1016.toBigBigDecimal())
+    open class HandUnit(magnitude: Magnitude)
+        : Unit<Distance>(Distance::class, magnitude.symbol + "hh", magnitude.scale * 0.1016.toBigBigDecimal())
+
+    object HAND : HandUnit(UNI)
 }

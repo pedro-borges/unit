@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.DistanceAmount
 import org.pcb.unit.units.base.Meter
+import org.pcb.unit.units.space.Chain.CHAIN
 
 class ChainTest
 {
@@ -24,5 +25,7 @@ class ChainTest
         Chain(10) equivalent Furlong(1)
         Chain(10 * 8) equivalent Mile(1)
         Chain(10 * 8 * 3) equivalent League(1)
+
+        Chain(1) equivalent DistanceAmount(1, CHAIN)
     }
 }

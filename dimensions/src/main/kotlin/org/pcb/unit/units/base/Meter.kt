@@ -1,14 +1,20 @@
 package org.pcb.unit.units.base
 
+import org.pcb.unit.Magnitude
+import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Distance
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.DistanceAmount
 
-class Meter(amount: Number)
+class Meter(amount: Number,
+            magnitude: Magnitude = UNI)
     : DistanceAmount<Unit<Distance>>(
     amount = amount.toBigBigDecimal(),
-    unit = METER)
+    unit = MeterUnit(magnitude))
 {
-    object METER : Unit<Distance>(Distance::class, "m", 1.toBigBigDecimal())
+    open class MeterUnit(magnitude: Magnitude) : Unit<Distance>(Distance::class, magnitude.symbol + "m", magnitude.scale)
+
+    object METER : MeterUnit(UNI)
 }
+

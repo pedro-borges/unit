@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.DistanceAmount
 import org.pcb.unit.units.base.Meter
+import org.pcb.unit.units.space.Thou.THOU
 
 class ThouTest
 {
@@ -24,5 +25,7 @@ class ThouTest
         Thou(1000 * 4 * 3 * 3 * 22 * 10) equivalent Furlong(1)
         Thou(1000 * 4 * 3 * 3 * 22 * 10 * 8) equivalent Mile(1)
         Thou(1000 * 4 * 3 * 3 * 22 * 10 * 8 * 3) equivalent League(1)
+
+        Thou(1) equivalent DistanceAmount(1, THOU)
     }
 }

@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.DistanceAmount
 import org.pcb.unit.units.base.Meter
+import org.pcb.unit.units.space.League.LEAGUE
 
 class LeagueTest
 {
@@ -24,5 +25,7 @@ class LeagueTest
         League(1) equivalent Furlong(3 * 8)
         League(1) equivalent Mile(3)
         League(1) equivalent League(1)
+
+        League(1) equivalent DistanceAmount(1, LEAGUE)
     }
 }

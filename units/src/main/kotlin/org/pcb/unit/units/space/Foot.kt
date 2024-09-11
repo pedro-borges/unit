@@ -1,14 +1,20 @@
 package org.pcb.unit.units.space
 
+import org.pcb.unit.Magnitude
+import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Distance
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.DistanceAmount
 
-class Foot(amount: Number)
+class Foot(amount: Number,
+           magnitude: Magnitude = UNI)
     : DistanceAmount<Unit<Distance>>(
     amount = amount,
-    unit = FOOT)
+    unit = FootUnit(magnitude))
 {
-    object FOOT : Unit<Distance>(Distance::class, "ft", 0.3048.toBigBigDecimal())
+    open class FootUnit(magnitude: Magnitude)
+        : Unit<Distance>(Distance::class, magnitude.symbol + "ft", magnitude.scale * 0.3048.toBigBigDecimal())
+
+    object FOOT : FootUnit(UNI)
 }

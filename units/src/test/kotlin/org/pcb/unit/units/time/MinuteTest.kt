@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.units.TimeAmount
 import org.pcb.unit.units.base.Second
+import org.pcb.unit.units.time.Minute.MINUTE
 
 class MinuteTest
 {
@@ -17,5 +18,7 @@ class MinuteTest
         Minute(1) equivalent Minute(1)
         Minute(60) equivalent Hour(1)
         Minute(60 * 24) equivalent Day(1)
+
+        Minute(1) equivalent TimeAmount(1, MINUTE)
     }
 }
