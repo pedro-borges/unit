@@ -1,10 +1,11 @@
-package org.pcb.unit
+package org.pcb.unit.config
 
-import org.pcb.unit.Renderer.Color.CYAN
-import org.pcb.unit.Renderer.Color.NONE
-import org.pcb.unit.Renderer.Color.RED
+import org.pcb.unit.Unit
+import org.pcb.unit.config.FancyRenderer.Color.CYAN
+import org.pcb.unit.config.FancyRenderer.Color.NONE
+import org.pcb.unit.config.FancyRenderer.Color.RED
 
-object Renderer
+object FancyRenderer : Renderer
 {
     var separator = "﹒"
     var scaleColor = CYAN
@@ -24,7 +25,7 @@ object Renderer
         WHITE("\u001b[37m"),
     }
 
-    fun render(units: Map<Unit<*>, Int>) =
+    override fun render(units: Map<Unit<*>, Int>) =
         units.asSequence()
             .sortedByDescending { it.value }
             .map { scaleColor.iso + it.key.magnitude.symbol + unitColor.iso + it.key.symbol + exponentColor.iso + it.value.toPowerString() + NONE.iso }
