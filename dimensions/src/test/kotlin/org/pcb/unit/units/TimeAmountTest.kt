@@ -144,6 +144,30 @@ class TimeAmountTest
     }
 
     @Test
+    fun timesSameMassFlowRate()
+    {
+        assertEquals(
+            expected = MassAmount(amount = 2 * 2,
+                                  unit = MASS1),
+            actual = TimeAmount(amount = 2,
+                                unit = TIME1) *
+                     MassFlowRateAmount(amount = 2,
+                                        unit = MASS1 to TIME1))
+    }
+
+    @Test
+    fun timesOtherMassFlowRate()
+    {
+        assertEquals(
+            expected = MassAmount(amount = 2 * 2,
+                                  unit = MASS1),
+            actual = TimeAmount(amount = 2,
+                                unit = TIME1) *
+                     MassFlowRateAmount(amount = 20,
+                                        unit = MASS1 to TIME2))
+    }
+
+    @Test
     fun timesSamePower()
     {
         assertEquals(

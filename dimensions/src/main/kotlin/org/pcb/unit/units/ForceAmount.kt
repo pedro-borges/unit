@@ -11,11 +11,12 @@ import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
+import org.pcb.unit.kilo
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
-import org.pcb.unit.units.base.Kilogram.KILOGRAM
+import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric
@@ -26,9 +27,9 @@ open class ForceAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
     : Amount<Force>(amount = amount.toBigBigDecimal(),
                     unit = CompositeUnit(
                         domain = Force::class,
-                        units = listOf(unit.major.first to 1,
-                                       unit.major.second to 1,
-                                       unit.minor to -2)))
+                        units = mapOf(unit.major.first to 1,
+                                      unit.major.second to 1,
+                                      unit.minor to -2)))
 {
     val mass = unit.major.first
     val distance = unit.major.second
@@ -38,7 +39,7 @@ open class ForceAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
     {
         operator fun invoke(amount: Number, unit: Unit<Force>) =
             ForceAmount(amount = amount.toBigBigDecimal() * unit.scale,
-                        unit = U2(KILOGRAM, METER) to SECOND)
+                        unit = U2(kilo(GRAM), METER) to SECOND)
     }
 
     // region -> Force

@@ -10,9 +10,5 @@ class Meter(amount: Number)
     amount = amount.toBigBigDecimal(),
     unit = METER)
 {
-    object METER : Unit<Distance>(Distance::class)
-    {
-        override val symbol = "m"
-        override val scale = 1.toBigBigDecimal()
-    }
+    object METER : Unit<Distance>(Distance::class, "m", 1.toBigBigDecimal())
 }

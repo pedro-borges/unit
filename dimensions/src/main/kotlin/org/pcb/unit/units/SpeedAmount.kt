@@ -26,8 +26,8 @@ open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
     : Amount<Speed>(amount = amount.toBigBigDecimal(),
                     unit = CompositeUnit(
                         domain = Speed::class,
-                        units = listOf(unit.major to 1,
-                                       unit.minor to -1)))
+                        units = mapOf(unit.major to 1,
+                                      unit.minor to -1)))
 {
     val distance = unit.major
     val time = unit.minor

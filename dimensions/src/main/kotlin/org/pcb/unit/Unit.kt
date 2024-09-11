@@ -4,11 +4,8 @@ import java.math.BigDecimal
 import kotlin.reflect.KClass
 import org.pcb.unit.dimension.Domain
 
-abstract class Unit<D : Domain>(val domain: KClass<out D>)
+abstract class Unit<D : Domain>(val domain: KClass<D>, val symbol: String, val scale: BigDecimal)
 {
-    abstract val symbol: String
-    abstract val scale: BigDecimal
-
     override fun equals(other: Any?): Boolean
     {
         return when

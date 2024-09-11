@@ -24,8 +24,8 @@ open class AccelerationAmount<D : Unit<Distance>, T2 : Unit<Time>>(
     : Amount<Acceleration>(amount = amount.toBigBigDecimal(),
                            unit = CompositeUnit(
                                domain = Acceleration::class,
-                               units = listOf(unit.major to 1,
-                                              unit.minor to -2)))
+                               units = mapOf(unit.major to 1,
+                                             unit.minor to -2)))
 {
     val distance = unit.major
     val time = unit.minor

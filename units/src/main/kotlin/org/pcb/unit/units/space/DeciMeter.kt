@@ -10,9 +10,5 @@ class DeciMeter(amount: Number)
     amount = amount,
     unit = DECIMETER)
 {
-    object DECIMETER : Unit<Distance>(Distance::class)
-    {
-        override val symbol = "dm"
-        override val scale = 0.1.toBigBigDecimal()
-    }
+    object DECIMETER : Unit<Distance>(Distance::class, "dm", 0.1.toBigBigDecimal())
 }

@@ -10,9 +10,5 @@ class Stone(amount: Number)
     amount = amount,
     unit = STONE)
 {
-    object STONE : Unit<Mass>(Mass::class)
-    {
-        override val symbol = "st"
-        override val scale = 6.35029318.toBigBigDecimal()
-    }
+    object STONE : Unit<Mass>(Mass::class, "st", 6.35029318.toBigBigDecimal())
 }

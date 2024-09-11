@@ -6,20 +6,17 @@ import org.pcb.unit.dimension.Distance
 import org.pcb.unit.dimension.Energy
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
+import org.pcb.unit.kilo
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.EnergyAmount
-import org.pcb.unit.units.base.Kilogram.KILOGRAM
+import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
 
 class Joule(amount: Number)
     : EnergyAmount<Unit<Mass>, Unit<Distance>, Unit<Time>>(
     amount = amount,
-    unit = U2(KILOGRAM, METER) to SECOND)
+    unit = U2(kilo(GRAM), METER) to SECOND)
 {
-    object JOULE : Unit<Energy>(Energy::class)
-    {
-        override val symbol = "J"
-        override val scale = 1.toBigBigDecimal()
-    }
+    object JOULE : Unit<Energy>(Energy::class, "J", 1.toBigBigDecimal())
 }

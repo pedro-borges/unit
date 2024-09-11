@@ -10,9 +10,5 @@ class Furlong(amount: Number)
     amount = amount,
     unit = FURLONG)
 {
-    object FURLONG : Unit<Distance>(Distance::class)
-    {
-        override val symbol = "fur"
-        override val scale = 201.168.toBigBigDecimal()
-    }
+    object FURLONG : Unit<Distance>(Distance::class, "fur", 201.168.toBigBigDecimal())
 }

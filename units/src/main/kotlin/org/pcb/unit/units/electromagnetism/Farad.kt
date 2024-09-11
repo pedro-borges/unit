@@ -7,21 +7,18 @@ import org.pcb.unit.dimension.Distance
 import org.pcb.unit.dimension.ElectricCurrent
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
+import org.pcb.unit.kilo
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.CapacitanceAmount
 import org.pcb.unit.units.base.Ampere.AMPERE
-import org.pcb.unit.units.base.Kilogram.KILOGRAM
+import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
 
 class Farad(amount: Number)
     : CapacitanceAmount<Unit<Time>, Unit<ElectricCurrent>, Unit<Mass>, Unit<Distance>>(
     amount = amount,
-    unit = U2(SECOND, AMPERE) to U2(KILOGRAM, METER))
+    unit = U2(SECOND, AMPERE) to U2(kilo(GRAM), METER))
 {
-    object FARAD : Unit<Capacitance>(Capacitance::class)
-    {
-        override val symbol = "F"
-        override val scale = 1.toBigBigDecimal()
-    }
+    object FARAD : Unit<Capacitance>(Capacitance::class, "F", 1.toBigBigDecimal())
 }

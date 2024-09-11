@@ -8,62 +8,22 @@ import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.toBigBigDecimal
 
-object CURRENCY1 : Unit<Currency>(Currency::class)
-{
-    override val symbol = "C1"
-    override val scale = 1.toBigBigDecimal()
-}
+object CURRENCY1 : Unit<Currency>(Currency::class, "C1", 1.toBigBigDecimal())
 
-object CURRENCY2 : Unit<Currency>(Currency::class)
-{
-    override val symbol = "C2"
-    override val scale = 10.toBigBigDecimal()
-}
+object CURRENCY2 : Unit<Currency>(Currency::class, "C2", 10.toBigBigDecimal())
 
-object ELECTRICCURRENT1 : Unit<ElectricCurrent>(ElectricCurrent::class)
-{
-    override val symbol = "ECu1"
-    override val scale = 1.toBigBigDecimal()
-}
+object ELECTRICCURRENT1 : Unit<ElectricCurrent>(ElectricCurrent::class, "ECu1", 1.toBigBigDecimal())
 
-object ELECTRICCURRENT2 : Unit<ElectricCurrent>(ElectricCurrent::class)
-{
-    override val symbol = "ECu2"
-    override val scale = 10.toBigBigDecimal()
-}
+object ELECTRICCURRENT2 : Unit<ElectricCurrent>(ElectricCurrent::class, "ECu2", 10.toBigBigDecimal())
 
-object DISTANCE1 : Unit<Distance>(Distance::class)
-{
-    override val symbol = "L1"
-    override val scale = 1.toBigBigDecimal()
-}
+object DISTANCE1 : Unit<Distance>(Distance::class, "L1", 1.toBigBigDecimal())
 
-object DISTANCE2 : Unit<Distance>(Distance::class)
-{
-    override val symbol = "L2"
-    override val scale = 10.toBigBigDecimal()
-}
+object DISTANCE2 : Unit<Distance>(Distance::class, "L2", 10.toBigBigDecimal())
 
-object MASS1 : Unit<Mass>(Mass::class)
-{
-    override val symbol = "M1"
-    override val scale = 1.toBigBigDecimal()
-}
+object MASS1 : Unit<Mass>(Mass::class, "M1", 1.toBigBigDecimal())
 
-object MASS2 : Unit<Mass>(Mass::class)
-{
-    override val symbol = "M2"
-    override val scale = 10.toBigBigDecimal()
-}
+object MASS2 : Unit<Mass>(Mass::class, "M2", 10.toBigBigDecimal())
 
-object TIME1 : Unit<Time>(Time::class)
-{
-    override val symbol = "T1"
-    override val scale = 1.toBigBigDecimal()
-}
+object TIME1 : Unit<Time>(Time::class, "T1", 1.toBigBigDecimal())
 
-object TIME2 : Unit<Time>(Time::class)
-{
-    override val symbol = "T2"
-    override val scale = 10.toBigBigDecimal()
-}
+object TIME2 : Unit<Time>(Time::class, "T2", 10.toBigBigDecimal())

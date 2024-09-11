@@ -10,9 +10,5 @@ class Chain(amount: Number)
     amount = amount,
     unit = CHAIN)
 {
-    object CHAIN : Unit<Distance>(Distance::class)
-    {
-        override val symbol = "ch"
-        override val scale = 20.1168.toBigBigDecimal()
-    }
+    object CHAIN : Unit<Distance>(Distance::class, "ch", 20.1168.toBigBigDecimal())
 }

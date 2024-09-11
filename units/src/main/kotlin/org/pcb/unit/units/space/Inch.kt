@@ -10,9 +10,5 @@ class Inch(amount: Number)
     amount = amount,
     unit = INCH)
 {
-    object INCH : Unit<Distance>(Distance::class)
-    {
-        override val symbol = "in"
-        override val scale = 0.0254.toBigBigDecimal()
-    }
+    object INCH : Unit<Distance>(Distance::class, "in", 0.0254.toBigBigDecimal())
 }

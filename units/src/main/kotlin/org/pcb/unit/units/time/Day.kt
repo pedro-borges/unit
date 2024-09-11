@@ -10,9 +10,5 @@ class Day(amount: Number)
     amount = amount,
     unit = DAY)
 {
-    object DAY : Unit<Time>(Time::class)
-    {
-        override val symbol = "D"
-        override val scale = 86400.toBigBigDecimal()
-    }
+    object DAY : Unit<Time>(Time::class, "D", 86400.toBigBigDecimal())
 }

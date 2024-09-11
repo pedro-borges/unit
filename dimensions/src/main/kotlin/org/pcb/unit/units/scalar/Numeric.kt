@@ -10,9 +10,5 @@ class Numeric(amount: Number)
     amount = amount,
     unit = NUMERIC)
 {
-    object NUMERIC : Unit<Scalar>(Scalar::class)
-    {
-        override val symbol = ""
-        override val scale = 1.toBigBigDecimal()
-    }
+    object NUMERIC : Unit<Scalar>(Scalar::class, "", 1.toBigBigDecimal())
 }

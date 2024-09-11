@@ -15,9 +15,5 @@ class Coulomb(amount: Number)
     amount = amount,
     unit = U2(AMPERE, SECOND))
 {
-    object COULOMB : Unit<ElectricCharge>(ElectricCharge::class)
-    {
-        override val symbol = "C"
-        override val scale = 1.toBigBigDecimal()
-    }
+    object COULOMB : Unit<ElectricCharge>(ElectricCharge::class, "C", 1.toBigBigDecimal())
 }

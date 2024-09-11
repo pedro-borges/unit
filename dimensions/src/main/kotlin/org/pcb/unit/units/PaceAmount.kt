@@ -21,8 +21,8 @@ open class PaceAmount<T : Unit<Time>, D : Unit<Distance>>(
     : Amount<Pace>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Pace::class,
-                       units = listOf(unit.major to 1,
-                                      unit.minor to -1)))
+                       units = mapOf(unit.major to 1,
+                                     unit.minor to -1)))
 {
     val time = unit.major
     val distance = unit.minor

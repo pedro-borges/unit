@@ -10,9 +10,5 @@ class Second(amount: Number)
     amount = amount,
     unit = SECOND)
 {
-    object SECOND : Unit<Time>(Time::class)
-    {
-        override val symbol = "s"
-        override val scale = 1.toBigBigDecimal()
-    }
+    object SECOND : Unit<Time>(Time::class, "s", 1.toBigBigDecimal())
 }

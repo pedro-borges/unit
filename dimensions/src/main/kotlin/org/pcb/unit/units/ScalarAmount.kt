@@ -21,7 +21,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
     : Amount<Scalar>(amount = amount.toBigBigDecimal(),
                      unit = CompositeUnit(
                          domain = Scalar::class,
-                         units = listOf(unit to 1)))
+                         units = mapOf(unit to 1)))
 {
     val scalar = unit
 

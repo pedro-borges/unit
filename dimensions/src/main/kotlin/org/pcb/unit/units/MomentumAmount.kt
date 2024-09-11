@@ -23,9 +23,9 @@ open class MomentumAmount<M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>>(
     : Amount<Momentum>(amount = amount.toBigBigDecimal(),
                        unit = CompositeUnit(
                            domain = Momentum::class,
-                           units = listOf(unit.major.first to 1,
-                                          unit.major.second to 1,
-                                          unit.minor to -1)))
+                           units = mapOf(unit.major.first to 1,
+                                         unit.major.second to 1,
+                                         unit.minor to -1)))
 {
     val mass = unit.major.first
     val distance = unit.major.second
@@ -137,29 +137,29 @@ open class MomentumAmount<M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> MassFlux
+    // region -> MassFlowRate
 
     @JvmName("divDistance")
     operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
-        MassFluxAmount(amount = amount / that.amount / convert(that.distance to distance),
-                       unit = mass to time)
+        MassFlowRateAmount(amount = amount / that.amount / convert(that.distance to distance),
+                           unit = mass to time)
 
     operator fun div(that: DistanceAmount<D>) =
-        MassFluxAmount(amount = amount / that.amount,
-                       unit = mass to time)
+        MassFlowRateAmount(amount = amount / that.amount,
+                           unit = mass to time)
 
     // endregion
 
     // region -> Distance
 
-    @JvmName("divMassFlux")
-    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFluxAmount<M, T>) =
+    @JvmName("divMassFlowRate")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFlowRateAmount<M, T>) =
         DistanceAmount(amount = amount / that.amount
                                 / convert(that.mass to mass)
                                 * convert((that.time to time)),
                        unit = distance)
 
-    operator fun div(that: MassFluxAmount<M, T>) =
+    operator fun div(that: MassFlowRateAmount<M, T>) =
         DistanceAmount(amount = amount / that.amount,
                        unit = distance)
 

@@ -10,9 +10,5 @@ class Yard(amount: Number)
     amount = amount,
     unit = YARD)
 {
-    object YARD : Unit<Distance>(Distance::class)
-    {
-        override val symbol = "yd"
-        override val scale = 0.9144.toBigBigDecimal()
-    }
+    object YARD : Unit<Distance>(Distance::class, "yd", 0.9144.toBigBigDecimal())
 }

@@ -12,24 +12,25 @@ import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
+import org.pcb.unit.kilo
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Ampere.AMPERE
-import org.pcb.unit.units.base.Kilogram.KILOGRAM
+import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric
 
 open class MagneticFluxDensityAmount<M : Unit<Mass>, T2 : Unit<Time>, EC : Unit<ElectricCurrent>>(
         amount: Number,
         unit: Pair<M, U2<T2, EC>>)
-    : Amount<ElectricCurrent>(amount = amount.toBigBigDecimal(),
-                              unit = CompositeUnit(
-                                  domain = ElectricCurrent::class,
-                                  units = listOf(unit.major to 1,
-                                                 unit.minor.first to -2,
-                                                 unit.minor.second to -1)))
+    : Amount<MagneticFluxDensity>(amount = amount.toBigBigDecimal(),
+                                  unit = CompositeUnit(
+                                      domain = MagneticFluxDensity::class,
+                                      units = mapOf(unit.major to 1,
+                                                    unit.minor.first to -2,
+                                                    unit.minor.second to -1)))
 {
     val mass = unit.major
     val time = unit.minor.first
@@ -39,7 +40,7 @@ open class MagneticFluxDensityAmount<M : Unit<Mass>, T2 : Unit<Time>, EC : Unit<
     {
         operator fun invoke(amount: Number, unit: Unit<MagneticFluxDensity>) =
             MagneticFluxDensityAmount(amount = amount.toBigBigDecimal() * unit.scale,
-                                      unit = KILOGRAM to U2(SECOND, AMPERE))
+                                      unit = kilo(GRAM) to U2(SECOND, AMPERE))
     }
 
     // region -> ElectricTension

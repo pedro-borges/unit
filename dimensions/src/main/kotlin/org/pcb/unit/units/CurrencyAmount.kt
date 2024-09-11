@@ -19,7 +19,7 @@ open class CurrencyAmount<C : Unit<Currency>>(
     : Amount<Currency>(amount = amount.toBigBigDecimal(),
                        unit = CompositeUnit(
                            domain = Currency::class,
-                           units = listOf(unit to 1)))
+                           units = mapOf(unit to 1)))
 {
     val currency = unit
 

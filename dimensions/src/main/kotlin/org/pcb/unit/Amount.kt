@@ -7,10 +7,9 @@ import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.units.ScalarAmount
 
 abstract class Amount<D : Domain>(val amount: BigDecimal,
-                                  val unit: CompositeUnit<D>)
+                                  var unit: CompositeUnit<D>)
 {
     abstract operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>): Amount<D>
-
     abstract operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>): Amount<D>
 
     override fun equals(other: Any?) =

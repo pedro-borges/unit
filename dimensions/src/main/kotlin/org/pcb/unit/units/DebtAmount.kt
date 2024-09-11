@@ -20,8 +20,8 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
     : Amount<Debt>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Debt::class,
-                       units = listOf(unit.first to 1,
-                                      unit.second to 1)))
+                       units = mapOf(unit.first to 1,
+                                     unit.second to 1)))
 {
     val currency = unit.first
     val time = unit.second

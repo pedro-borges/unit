@@ -12,12 +12,13 @@ import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
+import org.pcb.unit.kilo
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Ampere.AMPERE
-import org.pcb.unit.units.base.Kilogram.KILOGRAM
+import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric
@@ -25,13 +26,13 @@ import org.pcb.unit.units.scalar.Numeric
 open class ElectricResistanceAmount<M : Unit<Mass>, D2 : Unit<Distance>, T3 : Unit<Time>, EC2 : Unit<ElectricCurrent>>(
         amount: Number,
         unit: Pair<U2<M, D2>, U2<T3, EC2>>)
-    : Amount<ElectricCurrent>(amount = amount.toBigBigDecimal(),
-                              unit = CompositeUnit(
-                                  domain = ElectricCurrent::class,
-                                  units = listOf(unit.major.first to 1,
-                                                 unit.major.second to 2,
-                                                 unit.minor.first to -3,
-                                                 unit.minor.second to -2)))
+    : Amount<ElectricResistance>(amount = amount.toBigBigDecimal(),
+                                 unit = CompositeUnit(
+                                     domain = ElectricResistance::class,
+                                     units = mapOf(unit.major.first to 1,
+                                                   unit.major.second to 2,
+                                                   unit.minor.first to -3,
+                                                   unit.minor.second to -2)))
 {
     val mass = unit.major.first
     val distance = unit.major.second
@@ -42,7 +43,7 @@ open class ElectricResistanceAmount<M : Unit<Mass>, D2 : Unit<Distance>, T3 : Un
     {
         operator fun invoke(amount: Number, unit: Unit<ElectricResistance>) =
             ElectricResistanceAmount(amount = amount.toBigBigDecimal() * unit.scale,
-                                     unit = U2(KILOGRAM, METER) to U2(SECOND, AMPERE))
+                                     unit = U2(kilo(GRAM), METER) to U2(SECOND, AMPERE))
     }
 
     // region -> ElectricTension

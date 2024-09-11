@@ -21,7 +21,7 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
     : Amount<ElectricCurrent>(amount = amount.toBigBigDecimal(),
                               unit = CompositeUnit(
                                   domain = ElectricCurrent::class,
-                                  units = listOf(unit to 1)))
+                                  units = mapOf(unit to 1)))
 {
     val electricCurrent = unit
 

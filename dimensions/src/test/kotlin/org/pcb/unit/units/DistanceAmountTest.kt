@@ -190,14 +190,14 @@ class DistanceAmountTest
     }
 
     @Test
-    fun timesMassFlux()
+    fun timesMassFlowRate()
     {
         assertEquals(
             expected = MomentumAmount(amount = 2 * 2,
                                       unit = U2(MASS1, DISTANCE1) to TIME1),
             actual = DistanceAmount(amount = 2,
                                     unit = DISTANCE1) *
-                     MassFluxAmount(amount = 2,
-                                    unit = MASS1 to TIME1))
+                     MassFlowRateAmount(amount = 2,
+                                        unit = MASS1 to TIME1))
     }
 }

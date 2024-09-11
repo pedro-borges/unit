@@ -20,7 +20,7 @@ open class MassAmount<M : Unit<Mass>>(
     : Amount<Mass>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Mass::class,
-                       units = listOf(unit to 1)))
+                       units = mapOf(unit to 1)))
 {
     val mass = unit
 
@@ -65,6 +65,19 @@ open class MassAmount<M : Unit<Mass>>(
 
     // endregion
 
+    // region -> Time
+
+    @JvmName("divMassFlowRate")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFlowRateAmount<M, T>) =
+        TimeAmount(amount = amount / that.amount / convert(that.mass to mass),
+                   unit = that.time)
+
+    operator fun <T : Unit<Time>> div(that: MassFlowRateAmount<M, T>) =
+        TimeAmount(amount = amount / that.amount,
+                   unit = that.time)
+
+    // endregion
+
     // region -> Momentum
 
     operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
@@ -78,6 +91,14 @@ open class MassAmount<M : Unit<Mass>>(
     operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: AccelerationAmount<D, T>) =
         ForceAmount(amount = amount * that.amount,
                     unit = U2(mass, that.distance) to that.time)
+
+    // endregion
+
+    // region -> MassFlowRate
+
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        MassFlowRateAmount(amount = amount / that.amount,
+                           unit = mass to that.time)
 
     // endregion
 }

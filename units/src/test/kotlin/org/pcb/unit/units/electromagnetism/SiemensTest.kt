@@ -3,10 +3,11 @@ package org.pcb.unit.units.electromagnetism
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
+import org.pcb.unit.kilo
 import org.pcb.unit.units.ElectricConductanceAmount
 import org.pcb.unit.units.base.Ampere
 import org.pcb.unit.units.base.Ampere.AMPERE
-import org.pcb.unit.units.base.Kilogram.KILOGRAM
+import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.electromagnetism.Siemens.SIEMENS
@@ -22,7 +23,7 @@ class SiemensTest
     fun unit()
     {
 //        Siemens(0.25) equivalent Kilogram(2) * (Meter(2) / Second(2)) * (Meter(2) / Second(2)) / Second(2) / Ampere(2) / Ampere(2) TODO
-        Siemens(2) equivalent ElectricConductanceAmount(2, U2(SECOND, AMPERE) to U2(KILOGRAM, METER))
+        Siemens(2) equivalent ElectricConductanceAmount(2, U2(SECOND, AMPERE) to U2(kilo(GRAM), METER))
         Siemens(2) equivalent ElectricConductanceAmount(2, SIEMENS)
     }
 

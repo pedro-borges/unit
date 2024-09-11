@@ -10,9 +10,5 @@ class Kilogram(amount: Number)
     amount = amount.toBigBigDecimal(),
     unit = KILOGRAM)
 {
-    object KILOGRAM : Unit<Mass>(Mass::class)
-    {
-        override val symbol = "Kg"
-        override val scale = 1.toBigBigDecimal()
-    }
+    object KILOGRAM : Unit<Mass>(Mass::class, "Kg", 1.toBigBigDecimal())
 }

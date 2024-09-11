@@ -10,9 +10,5 @@ class Mile(amount: Number)
     amount = amount,
     unit = MILE)
 {
-    object MILE : Unit<Distance>(Distance::class)
-    {
-        override val symbol = "mi"
-        override val scale = 1609.344.toBigBigDecimal()
-    }
+    object MILE : Unit<Distance>(Distance::class, "mi", 1609.344.toBigBigDecimal())
 }

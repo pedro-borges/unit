@@ -26,7 +26,7 @@ open class FrequencyAmount<T : Unit<Time>>(
     : Amount<Frequency>(amount = amount.toBigBigDecimal(),
                         unit = CompositeUnit(
                             domain = Frequency::class,
-                            units = listOf(unit.minor to -1)))
+                            units = mapOf(unit.minor to -1)))
 {
     val time = unit.minor
 

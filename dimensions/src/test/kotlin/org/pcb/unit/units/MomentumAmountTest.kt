@@ -206,8 +206,8 @@ class MomentumAmountTest
     fun divSameDistance()
     {
         assertEquals(
-            expected = MassFluxAmount(amount = 1,
-                                      unit = MASS1 to TIME1),
+            expected = MassFlowRateAmount(amount = 1,
+                                          unit = MASS1 to TIME1),
             actual = MomentumAmount(amount = 2,
                                     unit = U2(MASS1, DISTANCE1) to TIME1) /
                      DistanceAmount(amount = 2,
@@ -218,8 +218,8 @@ class MomentumAmountTest
     fun divOtherDistance()
     {
         assertEquals(
-            expected = MassFluxAmount(amount = 1,
-                                      unit = MASS2 to TIME1),
+            expected = MassFlowRateAmount(amount = 1,
+                                          unit = MASS2 to TIME1),
             actual = MomentumAmount(amount = 2,
                                     unit = U2(MASS2, DISTANCE2) to TIME1) /
                      DistanceAmount(amount = 20,
@@ -227,26 +227,26 @@ class MomentumAmountTest
     }
 
     @Test
-    fun divSameMassFlux()
+    fun divSameMassFlowRate()
     {
         assertEquals(
             expected = DistanceAmount(amount = 1,
                                       unit = DISTANCE1),
             actual = MomentumAmount(amount = 2,
                                     unit = U2(MASS1, DISTANCE1) to TIME1) /
-                     MassFluxAmount(amount = 2,
-                                    unit = MASS1 to TIME1))
+                     MassFlowRateAmount(amount = 2,
+                                        unit = MASS1 to TIME1))
     }
 
     @Test
-    fun divOtherMassFlux()
+    fun divOtherMassFlowRate()
     {
         assertEquals(
             expected = DistanceAmount(amount = 1,
                                       unit = DISTANCE1),
             actual = MomentumAmount(amount = 2,
                                     unit = U2(MASS2, DISTANCE1) to TIME1) /
-                     MassFluxAmount(amount = 200,
-                                    unit = MASS1 to TIME2))
+                     MassFlowRateAmount(amount = 200,
+                                        unit = MASS1 to TIME2))
     }
 }

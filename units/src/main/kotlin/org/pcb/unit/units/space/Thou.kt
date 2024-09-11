@@ -10,9 +10,5 @@ class Thou(amount: Number)
     amount = amount,
     unit = THOU)
 {
-    object THOU : Unit<Distance>(Distance::class)
-    {
-        override val symbol = "th"
-        override val scale = 0.0000254.toBigBigDecimal()
-    }
+    object THOU : Unit<Distance>(Distance::class, "th", 0.0000254.toBigBigDecimal())
 }

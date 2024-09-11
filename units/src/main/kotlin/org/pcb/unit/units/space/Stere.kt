@@ -12,9 +12,5 @@ class Stere(amount: Number)
     amount = amount,
     unit = METER)
 {
-    object STERE : Unit<Volume>(Volume::class)
-    {
-        override val symbol = "st"
-        override val scale = 1.toBigBigDecimal()
-    }
+    object STERE : Unit<Volume>(Volume::class, "st", 1.toBigBigDecimal())
 }

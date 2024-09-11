@@ -21,7 +21,7 @@ open class TimeAmount<T : Unit<Time>>(
     : Amount<Time>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Time::class,
-                       units = listOf(unit to 1)))
+                       units = mapOf(unit to 1)))
 {
     val time = unit
 
@@ -78,6 +78,19 @@ open class TimeAmount<T : Unit<Time>>(
     operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
         PaceAmount(amount = amount / that.amount,
                    unit = time to that.distance)
+
+    // endregion
+
+    // region -> Mass
+
+    @JvmName("timesMassFlowRate")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: MassFlowRateAmount<M, T>) =
+        MassAmount(amount = amount * that.amount / convert(that.time to time),
+                   unit = that.mass)
+
+    operator fun <M : Unit<Mass>> times(that: MassFlowRateAmount<M, T>) =
+        MassAmount(amount = amount * that.amount,
+                   unit = that.mass)
 
     // endregion
 

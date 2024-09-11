@@ -10,9 +10,5 @@ class Foot(amount: Number)
     amount = amount,
     unit = FOOT)
 {
-    object FOOT : Unit<Distance>(Distance::class)
-    {
-        override val symbol = "ft"
-        override val scale = 0.3048.toBigBigDecimal()
-    }
+    object FOOT : Unit<Distance>(Distance::class, "ft", 0.3048.toBigBigDecimal())
 }

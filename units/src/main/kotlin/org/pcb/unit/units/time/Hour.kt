@@ -10,9 +10,5 @@ class Hour(amount: Number)
     amount = amount,
     unit = HOUR)
 {
-    object HOUR : Unit<Time>(Time::class)
-    {
-        override val symbol = "h"
-        override val scale = 3600.toBigBigDecimal()
-    }
+    object HOUR : Unit<Time>(Time::class, "h", 3600.toBigBigDecimal())
 }

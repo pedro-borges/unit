@@ -10,9 +10,5 @@ class Drachm(amount: Number)
     amount = amount,
     unit = DRACHM)
 {
-    object DRACHM : Unit<Mass>(Mass::class)
-    {
-        override val symbol = "dr"
-        override val scale = 0.0017718451953125.toBigBigDecimal()
-    }
+    object DRACHM : Unit<Mass>(Mass::class, "dr", 0.0017718451953125.toBigBigDecimal())
 }

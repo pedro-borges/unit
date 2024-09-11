@@ -12,9 +12,5 @@ class SquareMeter(amount: Number)
     amount = amount,
     unit = METER)
 {
-    object SQUARE_METER : Unit<Area>(Area::class)
-    {
-        override val symbol = "sqm"
-        override val scale = 1.toBigBigDecimal()
-    }
+    object SQUARE_METER : Unit<Area>(Area::class, "sqm", 1.toBigBigDecimal())
 }

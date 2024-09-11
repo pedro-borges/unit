@@ -14,9 +14,5 @@ class SecondPerMeter(amount: Number)
     amount = amount,
     unit = SECOND to METER)
 {
-    object SPM : Unit<Pace>(Pace::class)
-    {
-        override val symbol = "Spm"
-        override val scale = 1.toBigBigDecimal()
-    }
+    object SPM : Unit<Pace>(Pace::class, "Spm", 1.toBigBigDecimal())
 }

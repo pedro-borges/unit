@@ -24,8 +24,8 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
     : Amount<ElectricCharge>(amount = amount.toBigBigDecimal(),
                              unit = CompositeUnit(
                                  domain = ElectricCharge::class,
-                                 units = listOf(unit.first to 1,
-                                                unit.second to 1)))
+                                 units = mapOf(unit.first to 1,
+                                               unit.second to 1)))
 {
     val electricCurrent = unit.first
     val time = unit.second

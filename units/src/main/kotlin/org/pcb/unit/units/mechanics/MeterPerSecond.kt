@@ -14,9 +14,5 @@ class MeterPerSecond(amount: Number)
     amount = amount,
     unit = METER to SECOND)
 {
-    object MPS : Unit<Speed>(Speed::class)
-    {
-        override val symbol = "Mps"
-        override val scale = 1.toBigBigDecimal()
-    }
+    object MPS : Unit<Speed>(Speed::class, "Mps", 1.toBigBigDecimal())
 }

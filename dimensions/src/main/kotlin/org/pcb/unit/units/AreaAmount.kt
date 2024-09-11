@@ -20,10 +20,10 @@ import org.pcb.unit.units.scalar.Numeric
 open class AreaAmount<D2 : Unit<Distance>>(
         amount: Number,
         unit: D2)
-    : Amount<Distance>(amount = amount.toBigBigDecimal(),
-                       unit = CompositeUnit(
-                           domain = Distance::class,
-                           units = listOf(unit to 2)))
+    : Amount<Area>(amount = amount.toBigBigDecimal(),
+                   unit = CompositeUnit(
+                       domain = Area::class,
+                       units = mapOf(unit to 2)))
 {
     val distance = unit
 

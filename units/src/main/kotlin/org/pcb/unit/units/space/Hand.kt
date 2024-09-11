@@ -10,9 +10,5 @@ class Hand(amount: Number)
     amount = amount,
     unit = HAND)
 {
-    object HAND : Unit<Distance>(Distance::class)
-    {
-        override val symbol = "hh"
-        override val scale = 0.1016.toBigBigDecimal()
-    }
+    object HAND : Unit<Distance>(Distance::class, "hh", 0.1016.toBigBigDecimal())
 }

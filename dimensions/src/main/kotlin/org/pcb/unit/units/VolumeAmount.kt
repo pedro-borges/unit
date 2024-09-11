@@ -19,10 +19,10 @@ import org.pcb.unit.units.scalar.Numeric
 open class VolumeAmount<D3 : Unit<Distance>>(
         amount: Number,
         unit: D3)
-    : Amount<Distance>(amount = amount.toBigBigDecimal(),
-                       unit = CompositeUnit(
-                           domain = Distance::class,
-                           units = listOf(unit to 3)))
+    : Amount<Volume>(amount = amount.toBigBigDecimal(),
+                     unit = CompositeUnit(
+                         domain = Volume::class,
+                         units = mapOf(unit to 3)))
 {
     val distance = unit
 

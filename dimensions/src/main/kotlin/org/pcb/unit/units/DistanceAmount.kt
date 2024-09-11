@@ -20,7 +20,7 @@ open class DistanceAmount<D : Unit<Distance>>(
     : Amount<Distance>(amount = amount.toBigBigDecimal(),
                        unit = CompositeUnit(
                            domain = Distance::class,
-                           units = listOf(unit to 1)))
+                           units = mapOf(unit to 1)))
 {
     val distance = unit
 
@@ -115,7 +115,7 @@ open class DistanceAmount<D : Unit<Distance>>(
 
     // region -> Momentum
 
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: MassFluxAmount<M, T>) =
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: MassFlowRateAmount<M, T>) =
         MomentumAmount(amount = amount * that.amount,
                        unit = U2(that.mass, distance) to that.time)
 

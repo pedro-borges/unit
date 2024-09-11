@@ -22,8 +22,8 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
     : Amount<Rent>(amount = amount.toBigBigDecimal(),
                    unit = CompositeUnit(
                        domain = Rent::class,
-                       units = listOf(unit.major to 1,
-                                      unit.minor to -1)))
+                       units = mapOf(unit.major to 1,
+                                     unit.minor to -1)))
 {
     val currency = unit.major
     val time = unit.minor

@@ -9,9 +9,5 @@ class Eur(amount: Number)
     amount = amount,
     unit = EUR)
 {
-    object EUR : Unit<Currency>(Currency::class)
-    {
-        override val symbol = "EUR"
-        override val scale = CurrencyConverter[this]
-    }
+    object EUR : Unit<Currency>(Currency::class, "EUR", CurrencyConverter[EUR])
 }

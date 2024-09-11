@@ -13,9 +13,5 @@ class Hertz(amount: Number)
     amount = amount,
     unit = NUMERIC to SECOND)
 {
-    object HERTZ : Unit<Frequency>(Frequency::class)
-    {
-        override val symbol = "Hz"
-        override val scale = 1.toBigBigDecimal()
-    }
+    object HERTZ : Unit<Frequency>(Frequency::class, "Hz", 1.toBigBigDecimal())
 }

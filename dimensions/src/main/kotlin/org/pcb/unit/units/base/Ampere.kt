@@ -10,9 +10,5 @@ class Ampere(amount: Number)
     amount = amount,
     unit = AMPERE)
 {
-    object AMPERE : Unit<ElectricCurrent>(ElectricCurrent::class)
-    {
-        override val symbol = "A"
-        override val scale = 1.toBigBigDecimal()
-    }
+    object AMPERE : Unit<ElectricCurrent>(ElectricCurrent::class, "A", 1.toBigBigDecimal())
 }

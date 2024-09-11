@@ -12,12 +12,13 @@ import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
+import org.pcb.unit.kilo
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Ampere.AMPERE
-import org.pcb.unit.units.base.Kilogram.KILOGRAM
+import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric
@@ -26,13 +27,13 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 open class ElectricConductanceAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurrent>, M : Unit<Mass>, D2 : Unit<Distance>>(
         amount: Number,
         unit: Pair<U2<T3, EC2>, U2<M, D2>>)
-    : Amount<ElectricCurrent>(amount = amount.toBigBigDecimal(),
-                              unit = CompositeUnit(
-                                  domain = ElectricCurrent::class,
-                                  units = listOf(unit.major.first to 3,
-                                                 unit.major.second to 2,
-                                                 unit.minor.first to -1,
-                                                 unit.minor.second to -2)))
+    : Amount<ElectricConductance>(amount = amount.toBigBigDecimal(),
+                                  unit = CompositeUnit(
+                                      domain = ElectricConductance::class,
+                                      units = mapOf(unit.major.first to 3,
+                                                    unit.major.second to 2,
+                                                    unit.minor.first to -1,
+                                                    unit.minor.second to -2)))
 {
     val time = unit.major.first
     val electricCurrent = unit.major.second
@@ -43,7 +44,7 @@ open class ElectricConductanceAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurrent
     {
         operator fun invoke(amount: Number, unit: Unit<ElectricConductance>) =
             ElectricConductanceAmount(amount = amount.toBigBigDecimal() * unit.scale,
-                                      unit = U2(SECOND, AMPERE) to U2(KILOGRAM, METER))
+                                      unit = U2(SECOND, AMPERE) to U2(kilo(GRAM), METER))
     }
 
     // region -> ElectricTension

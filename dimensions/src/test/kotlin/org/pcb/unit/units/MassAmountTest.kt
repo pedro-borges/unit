@@ -105,6 +105,30 @@ class MassAmountTest
     }
 
     @Test
+    fun divSameMassFlowRate()
+    {
+        assertEquals(
+            expected = TimeAmount(amount = 1,
+                                  unit = TIME1),
+            actual = MassAmount(amount = 2,
+                                unit = MASS1) /
+                     MassFlowRateAmount(amount = 2,
+                                        unit = MASS1 to TIME1))
+    }
+
+    @Test
+    fun divOtherMassFlowRate()
+    {
+        assertEquals(
+            expected = TimeAmount(amount = 1,
+                                  unit = TIME1),
+            actual = MassAmount(amount = 2,
+                                unit = MASS2) /
+                     MassFlowRateAmount(amount = 20,
+                                        unit = MASS1 to TIME1))
+    }
+
+    @Test
     fun timesSpeed()
     {
         assertEquals(
@@ -126,5 +150,17 @@ class MassAmountTest
                                 unit = MASS1) *
                      AccelerationAmount(amount = 2,
                                         unit = DISTANCE1 to TIME1))
+    }
+
+    @Test
+    fun divTime()
+    {
+        assertEquals(
+            expected = MassFlowRateAmount(amount = 1,
+                                          unit = MASS1 to TIME1),
+            actual = MassAmount(amount = 2,
+                                unit = MASS1) /
+                     TimeAmount(amount = 2,
+                                unit = TIME1))
     }
 }

@@ -10,9 +10,5 @@ class League(amount: Number)
     amount = amount,
     unit = LEAGUE)
 {
-    object LEAGUE : Unit<Distance>(Distance::class)
-    {
-        override val symbol = "lea"
-        override val scale = 4828.032.toBigBigDecimal()
-    }
+    object LEAGUE : Unit<Distance>(Distance::class, "lea", 4828.032.toBigBigDecimal())
 }
