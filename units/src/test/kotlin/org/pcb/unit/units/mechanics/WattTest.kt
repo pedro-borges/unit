@@ -2,12 +2,13 @@ package org.pcb.unit.units.mechanics
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.Magnitude.KILO
 import org.pcb.unit.U2
 import org.pcb.unit.kilo
 import org.pcb.unit.units.PowerAmount
 import org.pcb.unit.units.base.Ampere
+import org.pcb.unit.units.base.Gram
 import org.pcb.unit.units.base.Gram.GRAM
-import org.pcb.unit.units.base.Kilogram
 import org.pcb.unit.units.base.Meter
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second
@@ -23,7 +24,7 @@ class WattTest
     @Test
     fun unit()
     {
-        Watt(1) equivalent Kilogram(2) * (Meter(2) / Second(2)) * (Meter(2) / Second(2)) / Second(2)
+        Watt(1) equivalent Gram(2, KILO) * (Meter(2) / Second(2)) * (Meter(2) / Second(2)) / Second(2)
         Watt(2) equivalent PowerAmount(2, U2(kilo(GRAM), METER) to SECOND)
         Watt(2) equivalent PowerAmount(2, WATT)
     }

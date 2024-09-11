@@ -2,8 +2,9 @@ package org.pcb.unit.units.mass
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.Magnitude.KILO
 import org.pcb.unit.units.MassAmount
-import org.pcb.unit.units.base.Kilogram
+import org.pcb.unit.units.base.Gram
 import org.pcb.units.amount.mass.Pound
 
 class OunceTest
@@ -14,7 +15,7 @@ class OunceTest
     @Test
     fun scales()
     {
-        Ounce(1) equivalent Kilogram(0.028349523125)
+        Ounce(1) equivalent Gram(0.028349523125, KILO)
 
         Ounce(1) equivalent Drachm(16)
         Ounce(1) equivalent Ounce(1)

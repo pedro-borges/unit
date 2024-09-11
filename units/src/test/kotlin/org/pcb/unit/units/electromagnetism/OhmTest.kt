@@ -2,13 +2,14 @@ package org.pcb.unit.units.electromagnetism
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.Magnitude.KILO
 import org.pcb.unit.U2
 import org.pcb.unit.kilo
 import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.base.Ampere
 import org.pcb.unit.units.base.Ampere.AMPERE
+import org.pcb.unit.units.base.Gram
 import org.pcb.unit.units.base.Gram.GRAM
-import org.pcb.unit.units.base.Kilogram
 import org.pcb.unit.units.base.Meter
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second
@@ -24,7 +25,7 @@ class OhmTest
     @Test
     fun unit()
     {
-        Ohm(0.25) equivalent Kilogram(2) * (Meter(2) / Second(2)) * (Meter(2) / Second(2)) / Second(2) / Ampere(2) / Ampere(2)
+        Ohm(0.25) equivalent Gram(2, KILO) * (Meter(2) / Second(2)) * (Meter(2) / Second(2)) / Second(2) / Ampere(2) / Ampere(2)
         Ohm(2) equivalent ElectricResistanceAmount(2, U2(kilo(GRAM), METER) to U2(SECOND, AMPERE))
         Ohm(2) equivalent ElectricResistanceAmount(2, OHM)
     }

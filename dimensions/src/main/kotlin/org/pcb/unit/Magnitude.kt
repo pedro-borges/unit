@@ -24,6 +24,7 @@ import org.pcb.unit.Magnitude.QUETTA
 import org.pcb.unit.Magnitude.RONNA
 import org.pcb.unit.Magnitude.RONTO
 import org.pcb.unit.Magnitude.TERA
+import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Magnitude.YOCTO
 import org.pcb.unit.Magnitude.YOTTA
 import org.pcb.unit.Magnitude.ZEPTO
@@ -45,6 +46,7 @@ enum class Magnitude(val symbol: String,
     KILO("k", TEN.power(3)),
     HECTO("h", TEN.power(2)),
     DECA("da", TEN.power(1)),
+    UNI("", TEN.power(0)),
     DECI("d", TEN.power(-1)),
     CENTI("c", TEN.power(-2)),
     MILLI("m", TEN.power(-3)),
@@ -72,6 +74,7 @@ fun <D : Dimension> mega(unit: Unit<D>) = object : Unit<D>(unit.domain, MEGA.sym
 fun <D : Dimension> kilo(unit: Unit<D>) = object : Unit<D>(unit.domain, KILO.symbol + unit.symbol, unit.scale * KILO.scale) {}
 fun <D : Dimension> hecto(unit: Unit<D>) = object : Unit<D>(unit.domain, HECTO.symbol + unit.symbol, unit.scale * HECTO.scale) {}
 fun <D : Dimension> deca(unit: Unit<D>) = object : Unit<D>(unit.domain, DECA.symbol + unit.symbol, unit.scale * DECA.scale) {}
+fun <D : Dimension> uni(unit: Unit<D>) = object : Unit<D>(unit.domain, UNI.symbol + unit.symbol, unit.scale * UNI.scale) {}
 fun <D : Dimension> deci(unit: Unit<D>) = object : Unit<D>(unit.domain, DECI.symbol + unit.symbol, unit.scale * DECI.scale) {}
 fun <D : Dimension> centi(unit: Unit<D>) = object : Unit<D>(unit.domain, CENTI.symbol + unit.symbol, unit.scale * CENTI.scale) {}
 fun <D : Dimension> milli(unit: Unit<D>) = object : Unit<D>(unit.domain, MILLI.symbol + unit.symbol, unit.scale * MILLI.scale) {}
