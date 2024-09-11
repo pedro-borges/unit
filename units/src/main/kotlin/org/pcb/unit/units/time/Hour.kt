@@ -14,7 +14,7 @@ class Hour(amount: Number,
     unit = HourUnit(magnitude))
 {
     open class HourUnit(magnitude: Magnitude)
-        : Unit<Time>(Time::class, magnitude.symbol + "h", magnitude.scale * 3600.toBigBigDecimal())
+        : Unit<Time>(Time::class, "h", magnitude, 3600.toBigBigDecimal())
 
     object HOUR : HourUnit(UNI)
 }

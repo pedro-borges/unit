@@ -10,6 +10,7 @@ import org.pcb.unit.dimension.MagneticFlux
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.kilo
+import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.MagneticFluxAmount
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Gram.GramUnit
@@ -23,7 +24,7 @@ class Weber(amount: Number,
     unit = U2(kilo(GramUnit(magnitude)), METER) to U2(SECOND, AMPERE))
 {
     open class WeberUnit(magnitude: Magnitude)
-        : Unit<MagneticFlux>(MagneticFlux::class, magnitude.symbol + "Wb", magnitude.scale)
+        : Unit<MagneticFlux>(MagneticFlux::class, "Wb", magnitude, 1.toBigBigDecimal())
 
     object WEBER : WeberUnit(UNI)
 }

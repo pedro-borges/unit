@@ -14,7 +14,7 @@ class Drachm(amount: Number,
     unit = DrachmUnit(magnitude))
 {
     open class DrachmUnit(magnitude: Magnitude)
-        : Unit<Mass>(Mass::class, magnitude.symbol + "dr", magnitude.scale * 0.0017718451953125.toBigBigDecimal())
+        : Unit<Mass>(Mass::class, "dr", magnitude, 0.0017718451953125.toBigBigDecimal())
 
     object DRACHM : DrachmUnit(UNI)
 }

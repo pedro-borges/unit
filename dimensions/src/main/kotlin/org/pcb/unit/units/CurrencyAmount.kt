@@ -12,6 +12,7 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.Numeric
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class CurrencyAmount<C : Unit<Currency>>(
         amount: Number,
@@ -26,11 +27,11 @@ open class CurrencyAmount<C : Unit<Currency>>(
     // region -> Currency
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        CurrencyAmount(amount = amount * that.amount * that.unit.scale,
+        CurrencyAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                        unit = currency)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        CurrencyAmount(amount = amount / that.amount / that.unit.scale,
+        CurrencyAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                        unit = currency)
 
     @JvmName("plusCurrency")

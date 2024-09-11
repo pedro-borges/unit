@@ -13,6 +13,7 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.Numeric
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class MassAmount<M : Unit<Mass>>(
         amount: Number,
@@ -27,11 +28,11 @@ open class MassAmount<M : Unit<Mass>>(
     // region -> Mass
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        MassAmount(amount = amount * that.amount * that.unit.scale,
+        MassAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                    unit = mass)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        MassAmount(amount = amount / that.amount / that.unit.scale,
+        MassAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                    unit = mass)
 
     @JvmName("plusMass")

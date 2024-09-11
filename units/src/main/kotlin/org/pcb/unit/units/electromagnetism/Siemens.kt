@@ -10,6 +10,7 @@ import org.pcb.unit.dimension.ElectricCurrent
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.kilo
+import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.ElectricConductanceAmount
 import org.pcb.unit.units.base.Ampere.AmpereUnit
 import org.pcb.unit.units.base.Gram.GramUnit
@@ -23,7 +24,7 @@ class Siemens(amount: Number,
     unit = U2(SECOND, AmpereUnit(magnitude)) to U2(kilo(GramUnit(magnitude)), METER))
 {
     open class SiemensUnit(magnitude: Magnitude)
-        : Unit<ElectricConductance>(ElectricConductance::class, magnitude.symbol + "S", magnitude.scale)
+        : Unit<ElectricConductance>(ElectricConductance::class, "S", magnitude, 1.toBigBigDecimal())
 
     object SIEMENS : SiemensUnit(UNI)
 }

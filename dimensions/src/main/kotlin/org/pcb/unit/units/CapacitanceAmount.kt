@@ -22,6 +22,7 @@ import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class CapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent>, M : Unit<Mass>, D2 : Unit<Distance>>(
         amount: Number,
@@ -49,11 +50,11 @@ open class CapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent>, M : U
     // region -> ElectricCharge
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        CapacitanceAmount(amount = amount * that.amount * that.unit.scale,
+        CapacitanceAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                           unit = U2(time, electricCurrent) to U2(mass, distance))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        CapacitanceAmount(amount = amount / that.amount / that.unit.scale,
+        CapacitanceAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                           unit = U2(time, electricCurrent) to U2(mass, distance))
 
     @JvmName("plusCapacitance")

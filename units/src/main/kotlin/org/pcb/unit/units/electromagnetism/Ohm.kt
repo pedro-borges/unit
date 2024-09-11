@@ -10,6 +10,7 @@ import org.pcb.unit.dimension.ElectricResistance
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.kilo
+import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.ElectricResistanceAmount
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Gram.GramUnit
@@ -23,7 +24,7 @@ class Ohm(amount: Number,
     unit = U2(kilo(GramUnit(magnitude)), METER) to U2(SECOND, AMPERE))
 {
     open class OhmUnit(magnitude: Magnitude)
-        : Unit<ElectricResistance>(ElectricResistance::class, magnitude.symbol + "Ω", magnitude.scale)
+        : Unit<ElectricResistance>(ElectricResistance::class, "Ω", magnitude, 1.toBigBigDecimal())
 
     object OHM : OhmUnit(UNI)
 }

@@ -14,7 +14,7 @@ class Inch(amount: Number,
     unit = InchUnit(magnitude))
 {
     open class InchUnit(magnitude: Magnitude)
-        : Unit<Distance>(Distance::class, magnitude.symbol + "in", magnitude.scale * 0.0254.toBigBigDecimal())
+        : Unit<Distance>(Distance::class, "in", magnitude, 0.0254.toBigBigDecimal())
 
     object INCH : InchUnit(UNI)
 }

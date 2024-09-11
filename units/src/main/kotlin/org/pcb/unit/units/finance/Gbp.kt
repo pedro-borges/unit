@@ -13,7 +13,7 @@ class Gbp(amount: Number,
     unit = GbpUnit(magnitude))
 {
     open class GbpUnit(magnitude: Magnitude)
-        : Unit<Currency>(Currency::class, magnitude.symbol + "£", magnitude.scale * CurrencyConverter[GBP])
+        : Unit<Currency>(Currency::class, "£", magnitude, CurrencyConverter[GBP])
 
     object GBP : GbpUnit(UNI)
 }

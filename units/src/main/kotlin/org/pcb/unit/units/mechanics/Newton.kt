@@ -9,6 +9,7 @@ import org.pcb.unit.dimension.Force
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.kilo
+import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.ForceAmount
 import org.pcb.unit.units.base.Gram.GramUnit
 import org.pcb.unit.units.base.Meter.METER
@@ -21,7 +22,7 @@ class Newton(amount: Number,
     unit = U2(kilo(GramUnit(magnitude)), METER) to SECOND)
 {
     open class NewtonUnit(magnitude: Magnitude)
-        : Unit<Force>(Force::class, magnitude.symbol + "N", magnitude.scale)
+        : Unit<Force>(Force::class, "N", magnitude, 1.toBigBigDecimal())
 
     object NEWTON : NewtonUnit(UNI)
 }

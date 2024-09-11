@@ -28,11 +28,11 @@ open class ScalarAmount<S : Unit<Scalar>>(
     // region -> Natural
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        ScalarAmount(amount = amount * that.amount * that.unit.scale,
+        ScalarAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                      unit = scalar)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        ScalarAmount(amount = amount / that.amount / that.unit.scale,
+        ScalarAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                      unit = scalar)
 
     @JvmName("plusScalar")

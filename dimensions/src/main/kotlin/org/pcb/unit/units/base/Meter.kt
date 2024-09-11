@@ -13,7 +13,8 @@ class Meter(amount: Number,
     amount = amount.toBigBigDecimal(),
     unit = MeterUnit(magnitude))
 {
-    open class MeterUnit(magnitude: Magnitude) : Unit<Distance>(Distance::class, magnitude.symbol + "m", magnitude.scale)
+    open class MeterUnit(magnitude: Magnitude)
+        : Unit<Distance>(Distance::class, "m", magnitude, 1.toBigBigDecimal())
 
     object METER : MeterUnit(UNI)
 }

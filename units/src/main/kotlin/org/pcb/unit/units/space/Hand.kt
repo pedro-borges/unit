@@ -14,7 +14,7 @@ class Hand(amount: Number,
     unit = HandUnit(magnitude))
 {
     open class HandUnit(magnitude: Magnitude)
-        : Unit<Distance>(Distance::class, magnitude.symbol + "hh", magnitude.scale * 0.1016.toBigBigDecimal())
+        : Unit<Distance>(Distance::class, "hh", magnitude, 0.1016.toBigBigDecimal())
 
     object HAND : HandUnit(UNI)
 }

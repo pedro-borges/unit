@@ -13,6 +13,7 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.Numeric
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
         amount: Number,
@@ -29,11 +30,11 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
     // region -> Debt
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        DebtAmount(amount = amount * that.amount * that.unit.scale,
+        DebtAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                    unit = U2(currency, time))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        DebtAmount(amount = amount / that.amount / that.unit.scale,
+        DebtAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                    unit = U2(currency, time))
 
     @JvmName("plusDebt")

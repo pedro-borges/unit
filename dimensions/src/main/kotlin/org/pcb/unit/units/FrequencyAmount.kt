@@ -40,11 +40,11 @@ open class FrequencyAmount<T : Unit<Time>>(
     // region -> Frequency
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        FrequencyAmount(amount = amount * that.amount * that.unit.scale,
+        FrequencyAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                         unit = NUMERIC to time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        FrequencyAmount(amount = amount / that.amount / that.unit.scale,
+        FrequencyAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                         unit = NUMERIC to time)
 
     @JvmName("plusFrequency")

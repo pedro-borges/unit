@@ -14,7 +14,8 @@ class Gram(amount: Number,
     amount = amount.toBigBigDecimal(),
     unit = GramUnit(magnitude))
 {
-    open class GramUnit(magnitude: Magnitude) : Unit<Mass>(Mass::class, magnitude.symbol + "g", magnitude.scale * 0.001.toBigBigDecimal())
+    open class GramUnit(magnitude: Magnitude)
+        : Unit<Mass>(Mass::class, "g", magnitude, 0.001.toBigBigDecimal())
 
     object GRAM : GramUnit(UNI)
 }

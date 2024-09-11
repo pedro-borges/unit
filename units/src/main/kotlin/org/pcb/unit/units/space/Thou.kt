@@ -14,7 +14,7 @@ class Thou(amount: Number,
     unit = ThouUnit(magnitude))
 {
     open class ThouUnit(magnitude: Magnitude)
-        : Unit<Distance>(Distance::class, magnitude.symbol + "th", magnitude.scale * 0.0000254.toBigBigDecimal())
+        : Unit<Distance>(Distance::class, "th", magnitude, 0.0000254.toBigBigDecimal())
 
     object THOU : ThouUnit(UNI)
 }

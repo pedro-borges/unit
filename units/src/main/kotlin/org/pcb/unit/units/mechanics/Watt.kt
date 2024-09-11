@@ -22,7 +22,7 @@ class Watt(amount: Number,
     unit = U2(kilo(GramUnit(magnitude)), METER) to SECOND)
 {
     open class WattUnit(magnitude: Magnitude)
-        : Unit<Power>(Power::class, magnitude.symbol + "W", magnitude.scale)
+        : Unit<Power>(Power::class, "W", magnitude, 1.toBigBigDecimal())
 
-    object WATT : Unit<Power>(Power::class, "W", 1.toBigBigDecimal())
+    object WATT : WattUnit(UNI)
 }

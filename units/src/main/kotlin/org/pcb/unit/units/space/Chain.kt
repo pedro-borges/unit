@@ -14,7 +14,7 @@ class Chain(amount: Number,
     unit = ChainUnit(magnitude))
 {
     open class ChainUnit(magnitude: Magnitude)
-        : Unit<Distance>(Distance::class, magnitude.symbol + "ch", magnitude.scale * 20.1168.toBigBigDecimal())
+        : Unit<Distance>(Distance::class, "ch", magnitude, 20.1168.toBigBigDecimal())
 
     object CHAIN : ChainUnit(UNI)
 }

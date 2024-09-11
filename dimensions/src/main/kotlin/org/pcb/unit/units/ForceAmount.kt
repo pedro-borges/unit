@@ -20,6 +20,7 @@ import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class ForceAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
         amount: Number,
@@ -45,11 +46,11 @@ open class ForceAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
     // region -> Force
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        ForceAmount(amount = amount * that.amount * that.unit.scale,
+        ForceAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                     unit = U2(mass, distance) to time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        ForceAmount(amount = amount / that.amount / that.unit.scale,
+        ForceAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                     unit = U2(mass, distance) to time)
 
     @JvmName("plusForce")

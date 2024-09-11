@@ -2,6 +2,8 @@ package org.pcb.unit.units.space
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.Magnitude.KILO
+import org.pcb.unit.Magnitude.MEGA
 import org.pcb.unit.units.VolumeAmount
 import org.pcb.unit.units.base.Meter
 import org.pcb.unit.units.base.Meter.METER
@@ -21,6 +23,11 @@ class StereTest
         Stere(1) equivalent Meter(1) * Meter(1) * Meter(1)
         Stere(1) equivalent VolumeAmount(1, METER)
         Stere(1) equivalent VolumeAmount(1, STERE)
+
+        Stere(1000) equivalent Liter(1000000)
+        Stere(1, KILO) equivalent Liter(1000000)
+        Stere(1, KILO) equivalent Liter(1000, KILO)
+        Stere(1, KILO) equivalent Liter(1, MEGA)
     }
 
     @Test

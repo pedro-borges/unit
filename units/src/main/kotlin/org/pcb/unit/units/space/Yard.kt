@@ -14,7 +14,7 @@ class Yard(amount: Number,
     unit = YardUnit(magnitude))
 {
     open class YardUnit(magnitude: Magnitude)
-        : Unit<Distance>(Distance::class, magnitude.symbol + "yd", magnitude.scale * 0.9144.toBigBigDecimal())
+        : Unit<Distance>(Distance::class, "yd", magnitude, 0.9144.toBigBigDecimal())
 
     object YARD : YardUnit(UNI)
 }

@@ -19,6 +19,7 @@ import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
@@ -42,11 +43,11 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
     // region -> Speed
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        MassFlowRateAmount(amount = amount * that.amount * that.unit.scale,
+        MassFlowRateAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                            unit = mass to time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        MassFlowRateAmount(amount = amount / that.amount / that.unit.scale,
+        MassFlowRateAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                            unit = mass to time)
 
     @JvmName("plusMassFlowRate")

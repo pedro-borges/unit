@@ -14,7 +14,7 @@ class Pound(amount: Number,
     unit = PoundUnit(magnitude))
 {
     open class PoundUnit(magnitude: Magnitude)
-        : Unit<Mass>(Mass::class, magnitude.symbol + "lb", magnitude.scale * 0.45359237.toBigBigDecimal())
+        : Unit<Mass>(Mass::class, "lb", magnitude, 0.45359237.toBigBigDecimal())
 
     object POUND : PoundUnit(UNI)
 }

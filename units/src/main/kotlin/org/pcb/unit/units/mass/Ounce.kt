@@ -14,7 +14,7 @@ class Ounce(amount: Number,
     unit = OunceUnit(magnitude))
 {
     open class OunceUnit(magnitude: Magnitude)
-        : Unit<Mass>(Mass::class, magnitude.symbol + "oz", magnitude.scale * 0.028349523125.toBigBigDecimal())
+        : Unit<Mass>(Mass::class, "oz", magnitude, 0.028349523125.toBigBigDecimal())
 
     object OUNCE : OunceUnit(UNI)
 }

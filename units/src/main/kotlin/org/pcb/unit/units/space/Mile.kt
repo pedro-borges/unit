@@ -14,7 +14,7 @@ class Mile(amount: Number,
     unit = MileUnit(magnitude))
 {
     open class MileUnit(magnitude: Magnitude)
-        : Unit<Distance>(Distance::class, magnitude.symbol + "mi", magnitude.scale * 1609.344.toBigBigDecimal())
+        : Unit<Distance>(Distance::class, "mi", magnitude, 1609.344.toBigBigDecimal())
 
-    object MILE : Unit<Distance>(Distance::class, "mi", 1609.344.toBigBigDecimal())
+    object MILE : MileUnit(UNI)
 }

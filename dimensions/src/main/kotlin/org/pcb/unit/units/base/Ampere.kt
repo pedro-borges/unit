@@ -4,6 +4,7 @@ import org.pcb.unit.Magnitude
 import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.ElectricCurrent
+import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.ElectricCurrentAmount
 
 class Ampere(amount: Number,
@@ -12,7 +13,8 @@ class Ampere(amount: Number,
     amount = amount,
     unit = AmpereUnit(magnitude))
 {
-    open class AmpereUnit(magnitude: Magnitude) : Unit<ElectricCurrent>(ElectricCurrent::class, magnitude.symbol + "m", magnitude.scale)
+    open class AmpereUnit(magnitude: Magnitude)
+        : Unit<ElectricCurrent>(ElectricCurrent::class, "m", magnitude, 1.toBigBigDecimal())
 
     object AMPERE : AmpereUnit(UNI)
 }

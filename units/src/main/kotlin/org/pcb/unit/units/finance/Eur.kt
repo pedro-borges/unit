@@ -12,7 +12,8 @@ class Eur(amount: Number,
     amount = amount,
     unit = EurUnit(magnitude))
 {
-    open class EurUnit(magnitude: Magnitude) : Unit<Currency>(Currency::class, magnitude.symbol + "€", CurrencyConverter[EUR] * magnitude.scale)
+    open class EurUnit(magnitude: Magnitude)
+        : Unit<Currency>(Currency::class, "€", magnitude, CurrencyConverter[EUR])
 
     object EUR : EurUnit(UNI)
 }

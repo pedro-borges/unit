@@ -14,7 +14,7 @@ class Day(amount: Number,
     unit = DayUnit(magnitude))
 {
     open class DayUnit(magnitude: Magnitude)
-        : Unit<Time>(Time::class, magnitude.symbol + "D", magnitude.scale * 86400.toBigBigDecimal())
+        : Unit<Time>(Time::class, "D", magnitude, 86400.toBigBigDecimal())
 
     object DAY : DayUnit(UNI)
 }

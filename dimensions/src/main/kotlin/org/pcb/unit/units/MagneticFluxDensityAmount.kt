@@ -21,6 +21,7 @@ import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class MagneticFluxDensityAmount<M : Unit<Mass>, T2 : Unit<Time>, EC : Unit<ElectricCurrent>>(
         amount: Number,
@@ -46,11 +47,11 @@ open class MagneticFluxDensityAmount<M : Unit<Mass>, T2 : Unit<Time>, EC : Unit<
     // region -> ElectricTension
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        MagneticFluxDensityAmount(amount = amount * that.amount * that.unit.scale,
+        MagneticFluxDensityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                   unit = mass to U2(time, electricCurrent))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        MagneticFluxDensityAmount(amount = amount / that.amount / that.unit.scale,
+        MagneticFluxDensityAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                                   unit = mass to U2(time, electricCurrent))
 
     @JvmName("plusMagneticFluxDensity")

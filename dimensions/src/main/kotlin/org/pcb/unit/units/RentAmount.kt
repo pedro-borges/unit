@@ -31,11 +31,11 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
     // region -> Rent
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        RentAmount(amount = amount * that.amount * that.unit.scale,
+        RentAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                    unit = currency to time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        RentAmount(amount = amount / that.amount / that.unit.scale,
+        RentAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                    unit = currency to time)
 
     @JvmName("plusRent")

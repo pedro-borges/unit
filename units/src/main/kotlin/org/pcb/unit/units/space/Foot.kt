@@ -14,7 +14,7 @@ class Foot(amount: Number,
     unit = FootUnit(magnitude))
 {
     open class FootUnit(magnitude: Magnitude)
-        : Unit<Distance>(Distance::class, magnitude.symbol + "ft", magnitude.scale * 0.3048.toBigBigDecimal())
+        : Unit<Distance>(Distance::class, "ft", magnitude, 0.3048.toBigBigDecimal())
 
     object FOOT : FootUnit(UNI)
 }

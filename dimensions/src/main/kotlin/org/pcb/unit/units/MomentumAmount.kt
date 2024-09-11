@@ -16,6 +16,7 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.Numeric
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class MomentumAmount<M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>>(
         amount: Number,
@@ -34,11 +35,11 @@ open class MomentumAmount<M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>>(
     // region -> Momentum
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        MomentumAmount(amount = amount * that.amount * that.unit.scale,
+        MomentumAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                        unit = U2(mass, distance) to time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        MomentumAmount(amount = amount / that.amount / that.unit.scale,
+        MomentumAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                        unit = U2(mass, distance) to time)
 
     @JvmName("plusMomentum")

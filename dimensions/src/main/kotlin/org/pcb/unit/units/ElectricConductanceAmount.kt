@@ -50,11 +50,11 @@ open class ElectricConductanceAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurrent
     // region -> ElectricTension
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        ElectricConductanceAmount(amount = amount * that.amount * that.unit.scale,
+        ElectricConductanceAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                   unit = U2(time, electricCurrent) to U2(mass, distance))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        ElectricConductanceAmount(amount = amount / that.amount / that.unit.scale,
+        ElectricConductanceAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                                   unit = U2(time, electricCurrent) to U2(mass, distance))
 
     @JvmName("plusElectricConductance")

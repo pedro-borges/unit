@@ -16,6 +16,7 @@ import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.scalar.Numeric
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class AreaAmount<D2 : Unit<Distance>>(
         amount: Number,
@@ -37,11 +38,11 @@ open class AreaAmount<D2 : Unit<Distance>>(
     // region -> Area
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        AreaAmount(amount = amount * that.amount * that.unit.scale,
+        AreaAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                    unit = distance)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        AreaAmount(amount = amount / that.amount / that.unit.scale,
+        AreaAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                    unit = distance)
 
     @JvmName("plusArea")

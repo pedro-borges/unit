@@ -11,10 +11,10 @@ class Stone(amount: Number,
             magnitude: Magnitude = UNI)
     : MassAmount<Unit<Mass>>(
     amount = amount,
-    unit = StoneUnit(UNI))
+    unit = StoneUnit(magnitude))
 {
     open class StoneUnit(magnitude: Magnitude)
-        : Unit<Mass>(Mass::class, magnitude.symbol + "st", magnitude.scale * 6.35029318.toBigBigDecimal())
+        : Unit<Mass>(Mass::class, "st", magnitude, 6.35029318.toBigBigDecimal())
 
     object STONE : StoneUnit(UNI)
 }

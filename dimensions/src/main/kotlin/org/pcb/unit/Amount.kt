@@ -16,13 +16,13 @@ abstract class Amount<D : Dimension>(val amount: BigDecimal,
         when
         {
             this === other     -> true
-            other is Amount<*> -> amount * unit.scale == other.amount * other.unit.scale &&
+            other is Amount<*> -> amount * unit.magnitude.scale == other.amount * other.unit.magnitude.scale &&
                                   unit.domain == other.unit.domain
             else               -> false
         }
 
     override fun hashCode() =
-        Objects.hash(amount, unit)
+        Objects.hash(amount * unit.magnitude.scale, unit)
 
     override fun toString() =
         "${amount.stripTrailingZeros().toPlainString()}$unit (${unit.domain.simpleName})"

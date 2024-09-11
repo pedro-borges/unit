@@ -4,6 +4,7 @@ import org.pcb.unit.Magnitude
 import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Time
+import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.TimeAmount
 
 class Second(amount: Number,
@@ -12,7 +13,8 @@ class Second(amount: Number,
     amount = amount,
     unit = SecondUnit(magnitude))
 {
-    open class SecondUnit(magnitude: Magnitude) : Unit<Time>(Time::class, magnitude.symbol + "s", magnitude.scale)
+    open class SecondUnit(magnitude: Magnitude)
+        : Unit<Time>(Time::class, "s", magnitude, 1.toBigBigDecimal())
 
     object SECOND : SecondUnit(UNI)
 }

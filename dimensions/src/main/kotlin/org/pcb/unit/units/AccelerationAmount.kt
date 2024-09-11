@@ -33,11 +33,11 @@ open class AccelerationAmount<D : Unit<Distance>, T2 : Unit<Time>>(
     // region -> Acceleration
 
     override operator fun <U : Unit<Scalar>> times(that: ScalarAmount<U>) =
-        AccelerationAmount(amount = amount * that.amount * that.unit.scale,
+        AccelerationAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                            unit = distance to time)
 
     override operator fun <U : Unit<Scalar>> div(that: ScalarAmount<U>) =
-        AccelerationAmount(amount = amount / that.amount / that.unit.scale,
+        AccelerationAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                            unit = distance to time)
 
     @JvmName("plusAcceleration")

@@ -14,7 +14,7 @@ class Minute(amount: Number,
     unit = MinuteUnit(magnitude))
 {
     open class MinuteUnit(magnitude: Magnitude)
-        : Unit<Time>(Time::class, magnitude.symbol + "min", magnitude.scale * 60.toBigBigDecimal())
+        : Unit<Time>(Time::class, "min", magnitude, 60.toBigBigDecimal())
 
     object MINUTE : MinuteUnit(UNI)
 }

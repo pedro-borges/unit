@@ -14,7 +14,7 @@ class Furlong(amount: Number,
     unit = FurlongUnit(magnitude))
 {
     open class FurlongUnit(magnitude: Magnitude)
-        : Unit<Distance>(Distance::class, magnitude.symbol + "fur", magnitude.scale * 201.168.toBigBigDecimal())
+        : Unit<Distance>(Distance::class, "fur", magnitude, 201.168.toBigBigDecimal())
 
     object FURLONG : FurlongUnit(UNI)
 }

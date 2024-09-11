@@ -10,6 +10,7 @@ import org.pcb.unit.dimension.Inductance
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.kilo
+import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.InductanceAmount
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Gram.GramUnit
@@ -23,7 +24,7 @@ class Henry(amount: Number,
     unit = U2(kilo(GramUnit(magnitude)), METER) to U2(SECOND, AMPERE))
 {
     open class HenryUnit(magnitude: Magnitude)
-        : Unit<Inductance>(Inductance::class, magnitude.symbol + "H", magnitude.scale)
+        : Unit<Inductance>(Inductance::class, "H", magnitude, 1.toBigBigDecimal())
 
     object HENRY : HenryUnit(UNI)
 }

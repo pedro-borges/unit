@@ -5,6 +5,7 @@ import kotlin.test.assertEquals
 import org.pcb.unit.Magnitude.KILO
 import org.pcb.unit.units.MassAmount
 import org.pcb.unit.units.base.Gram
+import org.pcb.unit.units.mass.Drachm.DRACHM
 import org.pcb.units.amount.mass.Pound
 
 class DrachmTest
@@ -21,5 +22,7 @@ class DrachmTest
         Drachm(16) equivalent Ounce(1)
         Drachm(16 * 16) equivalent Pound(1)
         Drachm(16 * 16 * 14) equivalent Stone(1)
+
+        Drachm(1) equivalent MassAmount(1, DRACHM)
     }
 }

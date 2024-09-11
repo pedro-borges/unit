@@ -9,6 +9,7 @@ import org.pcb.unit.dimension.MagneticFluxDensity
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.kilo
+import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.MagneticFluxDensityAmount
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Gram.GramUnit
@@ -21,7 +22,7 @@ class Tesla(amount: Number,
     unit = kilo(GramUnit(magnitude)) to U2(SECOND, AMPERE))
 {
     open class TeslaUnit(magnitude: Magnitude)
-        : Unit<MagneticFluxDensity>(MagneticFluxDensity::class, magnitude.symbol + "T", magnitude.scale)
+        : Unit<MagneticFluxDensity>(MagneticFluxDensity::class, "T", magnitude, 1.toBigBigDecimal())
 
     object TESLA : TeslaUnit(UNI)
 }

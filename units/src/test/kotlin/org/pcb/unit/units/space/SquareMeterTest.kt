@@ -3,6 +3,7 @@ package org.pcb.unit.units.space
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.Magnitude.DECI
+import org.pcb.unit.Magnitude.HECTO
 import org.pcb.unit.units.AreaAmount
 import org.pcb.unit.units.base.Meter
 import org.pcb.unit.units.base.Meter.METER
@@ -24,6 +25,11 @@ class SquareMeterTest
         SquareMeter(4) equivalent Meter(20, DECI) * Meter(20, DECI)
         SquareMeter(2) equivalent AreaAmount(2, METER)
         SquareMeter(2) equivalent AreaAmount(2, SQM)
+
+        SquareMeter(1, HECTO) equivalent SquareMeter(100)
+        SquareMeter(1, HECTO) equivalent SquareMeter(1, HECTO)
+
+        println(SquareMeter(1, HECTO))
     }
 
     @Test

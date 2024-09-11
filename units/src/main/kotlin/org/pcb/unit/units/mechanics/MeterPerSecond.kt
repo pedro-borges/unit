@@ -6,6 +6,7 @@ import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Distance
 import org.pcb.unit.dimension.Speed
 import org.pcb.unit.dimension.Time
+import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.SpeedAmount
 import org.pcb.unit.units.base.Meter.MeterUnit
 import org.pcb.unit.units.base.Second.SECOND
@@ -17,7 +18,7 @@ class MeterPerSecond(amount: Number,
     unit = MeterUnit(magnitude) to SECOND)
 {
     open class MpsUnit(magnitude: Magnitude)
-        : Unit<Speed>(Speed::class, magnitude.symbol + "Mps", magnitude.scale)
+        : Unit<Speed>(Speed::class, "Mps", magnitude, 1.toBigBigDecimal())
 
     object MPS : MpsUnit(UNI)
 }

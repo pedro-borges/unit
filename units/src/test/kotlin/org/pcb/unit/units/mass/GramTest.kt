@@ -5,6 +5,7 @@ import kotlin.test.assertEquals
 import org.pcb.unit.Magnitude.KILO
 import org.pcb.unit.units.MassAmount
 import org.pcb.unit.units.base.Gram
+import org.pcb.unit.units.base.Gram.GRAM
 
 class GramTest
 {
@@ -15,5 +16,7 @@ class GramTest
     fun scales()
     {
         Gram(1) equivalent Gram(0.001, KILO)
+
+        Gram(1) equivalent MassAmount(1, GRAM)
     }
 }

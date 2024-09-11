@@ -6,6 +6,7 @@ import org.pcb.unit.Magnitude.KILO
 import org.pcb.unit.units.MassAmount
 import org.pcb.unit.units.base.Gram
 import org.pcb.units.amount.mass.Pound
+import org.pcb.units.amount.mass.Pound.POUND
 
 class PoundTest
 {
@@ -21,5 +22,7 @@ class PoundTest
         Pound(1) equivalent Ounce(16)
         Pound(1) equivalent Pound(1)
         Pound(14) equivalent Stone(1)
+
+        Pound(1) equivalent MassAmount(1, POUND)
     }
 }

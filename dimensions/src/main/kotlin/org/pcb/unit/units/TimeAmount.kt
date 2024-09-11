@@ -14,6 +14,7 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.Numeric
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class TimeAmount<T : Unit<Time>>(
         amount: Number,
@@ -28,11 +29,11 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> Time
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        TimeAmount(amount = amount * that.amount * that.unit.scale,
+        TimeAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                    unit = time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        TimeAmount(amount = amount / that.amount / that.unit.scale,
+        TimeAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                    unit = time)
 
     @JvmName("plusTime")

@@ -8,6 +8,7 @@ open class CompositeUnit<D : Dimension>(domain: KClass<D>,
                                         val units: Map<Unit<*>, Int>)
     : Unit<D>(domain,
               Renderer.render(units),
+              Magnitude.get(units.entries.map { it.key.magnitude.power * it.value }.fold(0) { acc, power -> acc + power}),
               units.entries.fold(1.toBigDecimal()) { acc, entry -> acc * entry.key.scale.power(entry.value) })
 {
     fun times(unit: Unit<*>) =

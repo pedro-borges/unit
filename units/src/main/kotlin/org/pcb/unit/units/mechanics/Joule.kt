@@ -9,6 +9,7 @@ import org.pcb.unit.dimension.Energy
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.kilo
+import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.EnergyAmount
 import org.pcb.unit.units.base.Gram.GramUnit
 import org.pcb.unit.units.base.Meter.METER
@@ -21,7 +22,7 @@ class Joule(amount: Number,
     unit = U2(kilo(GramUnit(magnitude)), METER) to SECOND)
 {
     open class JouleUnit(magnitude: Magnitude)
-        : Unit<Energy>(Energy::class, magnitude.symbol + "J", magnitude.scale)
+        : Unit<Energy>(Energy::class, "J", magnitude, 1.toBigBigDecimal())
 
     object JOULE : JouleUnit(UNI)
 }

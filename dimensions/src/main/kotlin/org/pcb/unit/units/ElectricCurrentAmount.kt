@@ -14,6 +14,7 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.scalar.Numeric
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
         amount: Number,
@@ -28,11 +29,11 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
     // region -> ElectricCurrent
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        ElectricCurrentAmount(amount = amount * that.amount * that.unit.scale,
+        ElectricCurrentAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                               unit = electricCurrent)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        ElectricCurrentAmount(amount = amount / that.amount / that.unit.scale,
+        ElectricCurrentAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                               unit = electricCurrent)
 
     @JvmName("plusElectricCurrent")

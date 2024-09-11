@@ -39,7 +39,9 @@ fun Collection<Pair<Unit<*>, Int>>.sumToMap(): Map<Unit<*>, Int>
 
 fun convert(vararg units: Pair<Unit<*>, Unit<*>>): BigDecimal =
     units.fold(1.toBigBigDecimal()) { acc, unit ->
-        (acc * unit.first.scale).toBigBigDecimal().divide(unit.second.scale, 42, HALF_EVEN).stripTrailingZeros()
+        (acc * unit.first.scale).toBigBigDecimal()
+            .divide(unit.second.magnitude.scale.divide(unit.first.magnitude.scale), 42, HALF_EVEN)
+            .divide(unit.second.scale, 42, HALF_EVEN).stripTrailingZeros()
     }
 
 operator fun Number.times(other: BigDecimal): BigDecimal = toBigBigDecimal().multiply(other, DECIMAL128).stripTrailingZeros()

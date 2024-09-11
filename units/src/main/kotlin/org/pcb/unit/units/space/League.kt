@@ -14,7 +14,7 @@ class League(amount: Number,
     unit = LeagueUnit(magnitude))
 {
     open class LeagueUnit(magnitude: Magnitude)
-        : Unit<Distance>(Distance::class, magnitude.symbol + "lea", magnitude.scale * 4828.032.toBigBigDecimal())
+        : Unit<Distance>(Distance::class, "lea", magnitude, 4828.032.toBigBigDecimal())
 
     object LEAGUE : LeagueUnit(UNI)
 }

@@ -22,6 +22,7 @@ import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric
+import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class ElectricTensionAmount<M : Unit<Mass>, D2 : Unit<Distance>, T3 : Unit<Time>, EC : Unit<ElectricCurrent>>(
         amount: Number,
@@ -49,11 +50,11 @@ open class ElectricTensionAmount<M : Unit<Mass>, D2 : Unit<Distance>, T3 : Unit<
     // region -> ElectricTension
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        ElectricTensionAmount(amount = amount * that.amount * that.unit.scale,
+        ElectricTensionAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                               unit = U2(mass, distance) to U2(time, electricCurrent))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        ElectricTensionAmount(amount = amount / that.amount / that.unit.scale,
+        ElectricTensionAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                               unit = U2(mass, distance) to U2(time, electricCurrent))
 
     @JvmName("plusElectricTension")
