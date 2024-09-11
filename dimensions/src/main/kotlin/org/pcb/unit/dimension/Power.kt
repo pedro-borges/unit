@@ -1,3 +1,3 @@
 package org.pcb.unit.dimension
 
-interface Power : Domain
+interface Power : Dimension

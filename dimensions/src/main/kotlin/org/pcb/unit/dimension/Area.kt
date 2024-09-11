@@ -1,3 +1,3 @@
 package org.pcb.unit.dimension
 
-interface Area : Domain
+interface Area : Dimension

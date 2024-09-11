@@ -1,3 +1,3 @@
 package org.pcb.unit.dimension
 
-interface MagneticFluxDensity : Domain
+interface MagneticFluxDensity : Dimension

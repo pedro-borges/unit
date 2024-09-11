@@ -1,3 +1,3 @@
 package org.pcb.unit.dimension
 
-interface Pressure : Domain
+interface Pressure : Dimension

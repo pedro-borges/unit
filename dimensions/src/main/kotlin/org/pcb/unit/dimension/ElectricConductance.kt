@@ -1,3 +1,3 @@
 package org.pcb.unit.dimension
 
-interface ElectricConductance : Domain
+interface ElectricConductance : Dimension

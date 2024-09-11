@@ -2,26 +2,26 @@ package org.pcb.unit
 
 import java.util.Objects
 import kotlin.reflect.KClass
-import org.pcb.unit.dimension.Domain
+import org.pcb.unit.dimension.Dimension
 
-open class CompositeUnit<D : Domain>(domain: KClass<D>,
-                                     val units: Map<Unit<*>, Int>)
+open class CompositeUnit<D : Dimension>(domain: KClass<D>,
+                                        val units: Map<Unit<*>, Int>)
     : Unit<D>(domain,
               Renderer.render(units),
               units.entries.fold(1.toBigDecimal()) { acc, entry -> acc * entry.key.scale.power(entry.value) })
 {
     fun times(unit: Unit<*>) =
-        CompositeUnit(Domain::class,
+        CompositeUnit(Dimension::class,
                       units.toMutableMap()
                           .also { it.putOrRemove(unit, (it[unit] ?: 0) + 1) })
 
     operator fun div(unit: Unit<*>) =
-        CompositeUnit(Domain::class,
+        CompositeUnit(Dimension::class,
                       units.toMutableMap()
                           .also { it.putOrRemove(unit, (it[unit] ?: 0) - 1) })
 
     operator fun times(composite: CompositeUnit<*>) =
-        CompositeUnit(Domain::class,
+        CompositeUnit(Dimension::class,
                       units.toMutableMap()
                           .also {
                               composite.units.forEach { that ->
@@ -31,7 +31,7 @@ open class CompositeUnit<D : Domain>(domain: KClass<D>,
                           })
 
     operator fun div(composite: CompositeUnit<*>) =
-        CompositeUnit(Domain::class,
+        CompositeUnit(Dimension::class,
                       units.toMutableMap()
                           .also {
                               composite.units.forEach { that ->

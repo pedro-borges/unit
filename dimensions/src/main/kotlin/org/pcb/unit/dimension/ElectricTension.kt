@@ -1,3 +1,3 @@
 package org.pcb.unit.dimension
 
-interface ElectricTension : Domain
+interface ElectricTension : Dimension

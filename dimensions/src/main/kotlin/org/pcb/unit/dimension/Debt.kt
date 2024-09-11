@@ -1,3 +1,3 @@
 package org.pcb.unit.dimension
 
-interface Debt : Domain
+interface Debt : Dimension

@@ -1,3 +1,3 @@
 package org.pcb.unit.dimension
 
-interface Force : Domain
+interface Force : Dimension

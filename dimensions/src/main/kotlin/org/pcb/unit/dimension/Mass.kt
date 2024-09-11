@@ -1,3 +1,3 @@
 package org.pcb.unit.dimension
 
-interface Mass : Domain
+interface Mass : Dimension

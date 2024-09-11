@@ -1,3 +1,3 @@
 package org.pcb.unit.dimension
 
-interface Pace : Domain
+interface Pace : Dimension

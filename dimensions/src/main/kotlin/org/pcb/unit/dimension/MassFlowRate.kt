@@ -1,3 +1,3 @@
 package org.pcb.unit.dimension
 
-interface MassFlowRate : Domain
+interface MassFlowRate : Dimension

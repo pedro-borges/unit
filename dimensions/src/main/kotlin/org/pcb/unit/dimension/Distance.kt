@@ -1,3 +1,3 @@
 package org.pcb.unit.dimension
 
-interface Distance : Domain
+interface Distance : Dimension

@@ -1,3 +1,3 @@
 package org.pcb.unit.dimension
 
-interface Frequency : Domain
+interface Frequency : Dimension
