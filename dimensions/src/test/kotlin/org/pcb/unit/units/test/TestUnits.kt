@@ -1,5 +1,7 @@
 package org.pcb.unit.units.test
 
+import org.pcb.unit.Magnitude
+import org.pcb.unit.Magnitude.DECA
 import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Currency
@@ -7,15 +9,23 @@ import org.pcb.unit.dimension.Distance
 import org.pcb.unit.dimension.ElectricCurrent
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Time
-import org.pcb.unit.toBigBigDecimal
 
-object CURRENCY1 : Unit<Currency>(Currency::class, "C1", UNI, 1.toBigBigDecimal())
-object CURRENCY2 : Unit<Currency>(Currency::class, "C2", UNI, 10.toBigBigDecimal())
-object ELECTRICCURRENT1 : Unit<ElectricCurrent>(ElectricCurrent::class, "ECu1", UNI, 1.toBigBigDecimal())
-object ELECTRICCURRENT2 : Unit<ElectricCurrent>(ElectricCurrent::class, "ECu2", UNI, 10.toBigBigDecimal())
-object DISTANCE1 : Unit<Distance>(Distance::class, "L1", UNI, 1.toBigBigDecimal())
-object DISTANCE2 : Unit<Distance>(Distance::class, "L2", UNI, 10.toBigBigDecimal())
-object MASS1 : Unit<Mass>(Mass::class, "M1", UNI, 1.toBigBigDecimal())
-object MASS2 : Unit<Mass>(Mass::class, "M2", UNI, 10.toBigBigDecimal())
-object TIME1 : Unit<Time>(Time::class, "T1", UNI, 1.toBigBigDecimal())
-object TIME2 : Unit<Time>(Time::class, "T2", UNI, 10.toBigBigDecimal())
+open class CURRENCY(magnitude: Magnitude) : Unit<Currency>(Currency::class, magnitude.symbol + "C", UNI, magnitude.scale)
+object CURRENCY1 : CURRENCY(UNI)
+object CURRENCY2 : CURRENCY(DECA)
+
+open class ELECTRICCURRENT(magnitude: Magnitude) : Unit<ElectricCurrent>(ElectricCurrent::class, magnitude.symbol + "EC", UNI, magnitude.scale)
+object ELECTRICCURRENT1 : ELECTRICCURRENT(UNI)
+object ELECTRICCURRENT2 : ELECTRICCURRENT(DECA)
+
+open class DISTANCE(magnitude: Magnitude) : Unit<Distance>(Distance::class, magnitude.symbol + "D", UNI, magnitude.scale)
+object DISTANCE1 : DISTANCE(UNI)
+object DISTANCE2 : DISTANCE(DECA)
+
+open class MASS(magnitude: Magnitude) : Unit<Mass>(Mass::class, magnitude.symbol + "M", UNI, magnitude.scale)
+object MASS1 : MASS(UNI)
+object MASS2 : MASS(DECA)
+
+open class TIME(magnitude: Magnitude) : Unit<Time>(Time::class, magnitude.symbol + "T", UNI, magnitude.scale)
+object TIME1 : TIME(UNI)
+object TIME2 : TIME(DECA)

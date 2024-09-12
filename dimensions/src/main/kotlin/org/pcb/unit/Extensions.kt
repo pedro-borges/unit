@@ -49,3 +49,26 @@ operator fun Number.div(other: BigDecimal): BigDecimal = toBigBigDecimal().divid
 
 val <A, B> Pair<A, B>.major: A get() = first
 val <A, B> Pair<A, B>.minor get() = second
+
+
+fun Int.toPowerString() =
+    when
+    {
+        this == 1 -> ""
+        this == 0 -> throw IllegalStateException("Unexpected power of 0")
+        else      -> toSuperscript()
+    }
+
+fun Int.toSuperscript() =
+    toString()
+        .replace('-', '⁻')
+        .replace('0', '⁰')
+        .replace('1', '¹')
+        .replace('2', '²')
+        .replace('3', '³')
+        .replace('4', '⁴')
+        .replace('5', '⁵')
+        .replace('6', '⁶')
+        .replace('7', '⁷')
+        .replace('8', '⁸')
+        .replace('9', '⁹')
