@@ -19,9 +19,9 @@ class IlluminanceAmountTest
     {
         assertEquals(
             expected = IlluminanceAmount(amount = 2 * 2,
-                                          unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1),
+                                         unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1),
             actual = IlluminanceAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1) *
+                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1) *
                      ScalarAmount(amount = 20,
                                   unit = NUMBER2))
     }
@@ -31,9 +31,9 @@ class IlluminanceAmountTest
     {
         assertEquals(
             expected = IlluminanceAmount(amount = 1,
-                                          unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1),
+                                         unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1),
             actual = IlluminanceAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1) /
+                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1) /
                      ScalarAmount(amount = 20,
                                   unit = NUMBER2))
     }
@@ -43,11 +43,11 @@ class IlluminanceAmountTest
     {
         assertEquals(
             expected = IlluminanceAmount(amount = 1,
-                                          unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1),
+                                         unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1),
             actual = IlluminanceAmount(amount = 0,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1) +
+                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1) +
                      IlluminanceAmount(amount = 1,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1))
+                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1))
     }
 
     @Test
@@ -55,11 +55,11 @@ class IlluminanceAmountTest
     {
         assertEquals(
             expected = IlluminanceAmount(amount = 1,
-                                          unit = U2(LUMINOUSINTENSITY2, ANGLE2) to DISTANCE1),
+                                         unit = U2(LUMINOUSINTENSITY2, ANGLE2) to DISTANCE1),
             actual = IlluminanceAmount(amount = 0,
-                                        unit = U2(LUMINOUSINTENSITY2, ANGLE2) to DISTANCE1) +
+                                       unit = U2(LUMINOUSINTENSITY2, ANGLE2) to DISTANCE1) +
                      IlluminanceAmount(amount = 100000,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE2))
+                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE2))
     }
 
     @Test
@@ -67,11 +67,11 @@ class IlluminanceAmountTest
     {
         assertEquals(
             expected = IlluminanceAmount(amount = 0,
-                                          unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1),
+                                         unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1),
             actual = IlluminanceAmount(amount = 1,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1) -
+                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1) -
                      IlluminanceAmount(amount = 1,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1))
+                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1))
     }
 
     @Test
@@ -79,11 +79,11 @@ class IlluminanceAmountTest
     {
         assertEquals(
             expected = IlluminanceAmount(amount = 0,
-                                          unit = U2(LUMINOUSINTENSITY2, ANGLE2) to DISTANCE1),
+                                         unit = U2(LUMINOUSINTENSITY2, ANGLE2) to DISTANCE1),
             actual = IlluminanceAmount(amount = 1,
-                                        unit = U2(LUMINOUSINTENSITY2, ANGLE2) to DISTANCE1) -
+                                       unit = U2(LUMINOUSINTENSITY2, ANGLE2) to DISTANCE1) -
                      IlluminanceAmount(amount = 100000,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE2))
+                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE2))
     }
 
     @Test
@@ -92,9 +92,9 @@ class IlluminanceAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = IlluminanceAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1) /
+                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1) /
                      IlluminanceAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1))
+                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1))
     }
 
     @Test
@@ -103,8 +103,8 @@ class IlluminanceAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = IlluminanceAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY2, ANGLE2) to DISTANCE1) /
+                                       unit = U2(LUMINOUSINTENSITY2, ANGLE2) to DISTANCE1) /
                      IlluminanceAmount(amount = 200000,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE2))
+                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE2))
     }
 }
