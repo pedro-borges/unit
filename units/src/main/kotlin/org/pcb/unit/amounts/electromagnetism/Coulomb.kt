@@ -21,5 +21,5 @@ class Coulomb(amount: Number,
     open class CoulombUnit(magnitude: Magnitude)
         : Unit<ElectricCharge>(ElectricCharge::class, "C", 1.toBigDecimal(), magnitude)
 
-    object COULOMB : org.pcb.unit.amounts.electromagnetism.Coulomb.CoulombUnit(UNI)
+    object COULOMB : CoulombUnit(UNI)
 }

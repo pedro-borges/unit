@@ -4,13 +4,12 @@ import org.pcb.unit.Magnitude
 import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.MassAmount
-import org.pcb.unit.amounts.base.Gram.GramUnit
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.toBigDecimal
 
 class Gram(amount: Number,
            magnitude: Magnitude = UNI)
-    : MassAmount<GramUnit>(
+    : MassAmount<Unit<Mass>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
     unit = GRAM)
 {

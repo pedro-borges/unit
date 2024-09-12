@@ -82,4 +82,31 @@ open class LuminousFluxAmount<LI : Unit<LuminousIntensity>, A : Unit<Angle>>(
         Numeric(amount = amount / that.amount)
 
     // endregion
+
+    // region -> SolidAngle
+
+    @JvmName("divLuminousIntensity")
+    operator fun <LI : Unit<LuminousIntensity>> div(that: LuminousIntensityAmount<LI>) =
+        SolidAngleAmount(amount = amount / that.amount / convert(that.luminousIntensity to luminousIntensity),
+                         unit = angle)
+
+    operator fun div(that: LuminousIntensityAmount<LI>) =
+        SolidAngleAmount(amount = amount / that.amount,
+                         unit = angle)
+
+    // endregion
+
+    // region -> LuminousIntensity
+
+    @JvmName("divSolidAngle")
+    operator fun <A : Unit<Angle>> div(that: SolidAngleAmount<A>) =
+        LuminousIntensityAmount(amount = amount / that.amount / convert(that.angle to angle,
+                                                                        that.angle to angle),
+                                unit = luminousIntensity)
+
+    operator fun div(that: SolidAngleAmount<A>) =
+        LuminousIntensityAmount(amount = amount / that.amount,
+                                unit = luminousIntensity)
+
+    // endregion
 }

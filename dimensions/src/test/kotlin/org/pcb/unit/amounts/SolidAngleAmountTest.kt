@@ -2,9 +2,11 @@ package org.pcb.unit.amounts
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
+import org.pcb.unit.U2
 import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.units.test.ANGLE1
 import org.pcb.unit.units.test.ANGLE2
+import org.pcb.unit.units.test.LUMINOUSINTENSITY1
 import org.pcb.unit.units.test.NUMBER2
 
 class SolidAngleAmountTest
@@ -101,5 +103,17 @@ class SolidAngleAmountTest
                                       unit = ANGLE2) /
                      SolidAngleAmount(amount = 200,
                                       unit = ANGLE1))
+    }
+
+    @Test
+    fun timesLuminousIntensity()
+    {
+        assertEquals(
+            expected = LuminousFluxAmount(amount = 2 * 2,
+                                          unit = U2(LUMINOUSINTENSITY1, ANGLE1)),
+            actual = SolidAngleAmount(amount = 2,
+                                      unit = ANGLE1) *
+                     LuminousIntensityAmount(amount = 2,
+                                             unit = LUMINOUSINTENSITY1))
     }
 }

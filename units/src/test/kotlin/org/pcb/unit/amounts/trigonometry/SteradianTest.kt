@@ -5,8 +5,10 @@ import kotlin.test.assertEquals
 import org.pcb.unit.Magnitude.DECI
 import org.pcb.unit.Magnitude.HECTO
 import org.pcb.unit.amounts.SolidAngleAmount
+import org.pcb.unit.amounts.base.Candela
 import org.pcb.unit.amounts.base.Radian
 import org.pcb.unit.amounts.base.Radian.RADIAN
+import org.pcb.unit.amounts.optics.Lumen
 import org.pcb.unit.amounts.trigonometry.Steradian.STERADIAN
 
 class SteradianTest
@@ -25,4 +27,10 @@ class SteradianTest
         Steradian(1, HECTO) equivalent Steradian(100)
         Steradian(1, HECTO) equivalent Steradian(1, HECTO)
     }
+
+    @Test
+    fun lumenDivCandela() =
+        assertEquals(
+            expected = Steradian(6 / 3),
+            actual = Lumen(6) / Candela(3))
 }

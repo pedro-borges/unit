@@ -5,12 +5,13 @@ import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.SolidAngleAmount
 import org.pcb.unit.amounts.base.Radian.RADIAN
+import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.SolidAngle
 import org.pcb.unit.toBigDecimal
 
 class Steradian(amount: Number,
                 magnitude: Magnitude = UNI)
-    : SolidAngleAmount<RADIAN>(
+    : SolidAngleAmount<Unit<Angle>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
     unit = RADIAN)
 {

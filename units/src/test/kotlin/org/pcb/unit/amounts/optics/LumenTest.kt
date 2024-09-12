@@ -4,9 +4,11 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
 import org.pcb.unit.amounts.LuminousFluxAmount
+import org.pcb.unit.amounts.base.Candela
 import org.pcb.unit.amounts.base.Candela.CANDELA
 import org.pcb.unit.amounts.base.Radian.RADIAN
 import org.pcb.unit.amounts.optics.Lumen.LUMEN
+import org.pcb.unit.amounts.trigonometry.Steradian
 
 class LumenTest
 {
@@ -19,4 +21,16 @@ class LumenTest
         Lumen(2) equivalent LuminousFluxAmount(2, U2(CANDELA, RADIAN))
         Lumen(2) equivalent LuminousFluxAmount(2, LUMEN)
     }
+
+    @Test
+    fun candelaTimesSteradian() =
+        assertEquals(
+            expected = Lumen(2 * 3),
+            actual = Candela(2) * Steradian(3))
+
+    @Test
+    fun steradianTimesCandela() =
+        assertEquals(
+            expected = Lumen(2 * 3),
+            actual = Steradian(2) * Candela(3))
 }

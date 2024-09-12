@@ -2,10 +2,12 @@ package org.pcb.unit.amounts
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
+import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.LuminousIntensity
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.div
@@ -60,6 +62,14 @@ open class LuminousIntensityAmount<LI : Unit<LuminousIntensity>>(
 
     operator fun div(that: LuminousIntensityAmount<LI>) =
         Numeric(amount = amount / that.amount)
+
+    // endregion
+
+    // region -> LuminousFlux
+
+    operator fun <A : Unit<Angle>> times(that: SolidAngleAmount<A>) =
+        LuminousFluxAmount(amount = amount * that.amount,
+                           unit = U2(luminousIntensity, that.angle))
 
     // endregion
 }

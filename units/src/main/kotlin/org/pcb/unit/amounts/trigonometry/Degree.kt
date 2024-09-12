@@ -6,14 +6,13 @@ import org.pcb.unit.Magnitude
 import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.AngleAmount
-import org.pcb.unit.amounts.trigonometry.Degree.DEGREE
 import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.div
 import org.pcb.unit.toBigDecimal
 
 class Degree(amount: Number,
              magnitude: Magnitude = UNI)
-    : AngleAmount<DEGREE>(
+    : AngleAmount<Unit<Angle>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
     unit = DEGREE)
 {

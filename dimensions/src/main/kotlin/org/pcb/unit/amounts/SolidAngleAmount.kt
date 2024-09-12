@@ -2,12 +2,14 @@ package org.pcb.unit.amounts
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Radian.RADIAN
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
+import org.pcb.unit.dimensions.LuminousIntensity
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.SolidAngle
 import org.pcb.unit.div
@@ -72,6 +74,14 @@ open class SolidAngleAmount<A : Unit<Angle>>(
 
     operator fun div(that: SolidAngleAmount<A>) =
         Numeric(amount = amount / that.amount)
+
+    // endregion
+
+    // region -> LuminousFlux
+
+    operator fun <LI : Unit<LuminousIntensity>> times(that: LuminousIntensityAmount<LI>) =
+        LuminousFluxAmount(amount = amount * that.amount,
+                           unit = U2(that.luminousIntensity, angle))
 
     // endregion
 }

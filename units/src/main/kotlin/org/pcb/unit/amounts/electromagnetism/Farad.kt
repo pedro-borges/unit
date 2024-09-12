@@ -26,5 +26,5 @@ class Farad(amount: Number,
     open class FaradUnit(magnitude: Magnitude)
         : Unit<Capacitance>(Capacitance::class, "F", 1.toBigDecimal(), magnitude)
 
-    object FARAD : org.pcb.unit.amounts.electromagnetism.Farad.FaradUnit(UNI)
+    object FARAD : FaradUnit(UNI)
 }

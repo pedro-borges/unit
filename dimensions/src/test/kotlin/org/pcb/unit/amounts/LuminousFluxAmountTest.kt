@@ -105,4 +105,52 @@ class LuminousFluxAmountTest
                      LuminousFluxAmount(amount = 2000,
                                         unit = U2(LUMINOUSINTENSITY1, ANGLE1)))
     }
+
+    @Test
+    fun divSameLuminousIntensity()
+    {
+        assertEquals(
+            expected = SolidAngleAmount(amount = 1,
+                                        unit = ANGLE1),
+            actual = LuminousFluxAmount(amount = 2,
+                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)) /
+                     LuminousIntensityAmount(amount = 2,
+                                             unit = LUMINOUSINTENSITY1))
+    }
+
+    @Test
+    fun divOtherLuminousIntensity()
+    {
+        assertEquals(
+            expected = SolidAngleAmount(amount = 1,
+                                        unit = ANGLE1),
+            actual = LuminousFluxAmount(amount = 2,
+                                        unit = U2(LUMINOUSINTENSITY2, ANGLE1)) /
+                     LuminousIntensityAmount(amount = 20,
+                                             unit = LUMINOUSINTENSITY1))
+    }
+
+    @Test
+    fun divSameSolidAngle()
+    {
+        assertEquals(
+            expected = LuminousIntensityAmount(amount = 1,
+                                               unit = LUMINOUSINTENSITY1),
+            actual = LuminousFluxAmount(amount = 2,
+                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)) /
+                     SolidAngleAmount(amount = 2,
+                                      unit = ANGLE1))
+    }
+
+    @Test
+    fun divOtherSolidAngle()
+    {
+        assertEquals(
+            expected = LuminousIntensityAmount(amount = 1,
+                                               unit = LUMINOUSINTENSITY1),
+            actual = LuminousFluxAmount(amount = 2,
+                                        unit = U2(LUMINOUSINTENSITY1, ANGLE2)) /
+                     SolidAngleAmount(amount = 200,
+                                      unit = ANGLE1))
+    }
 }
