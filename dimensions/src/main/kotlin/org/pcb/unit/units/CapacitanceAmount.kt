@@ -47,7 +47,7 @@ open class CapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent>, M : U
                               unit = U2(SECOND, AMPERE) to U2(kilo(GRAM), METER))
     }
 
-    // region -> ElectricCharge
+    // region -> Capacitance
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         CapacitanceAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),

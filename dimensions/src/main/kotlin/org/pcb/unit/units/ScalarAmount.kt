@@ -25,7 +25,7 @@ open class ScalarAmount<S : Unit<Scalar>>(
 {
     val scalar = unit
 
-    // region -> Natural
+    // region -> Scalar
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ScalarAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),

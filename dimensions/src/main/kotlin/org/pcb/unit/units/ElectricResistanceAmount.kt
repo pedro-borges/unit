@@ -47,7 +47,7 @@ open class ElectricResistanceAmount<M : Unit<Mass>, D2 : Unit<Distance>, T3 : Un
                                      unit = U2(kilo(GRAM), METER) to U2(SECOND, AMPERE))
     }
 
-    // region -> ElectricTension
+    // region -> ElectricResistance
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricResistanceAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),

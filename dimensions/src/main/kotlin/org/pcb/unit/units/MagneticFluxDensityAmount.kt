@@ -44,7 +44,7 @@ open class MagneticFluxDensityAmount<M : Unit<Mass>, T2 : Unit<Time>, EC : Unit<
                                       unit = kilo(GRAM) to U2(SECOND, AMPERE))
     }
 
-    // region -> ElectricTension
+    // region -> MagneticFluxDensity
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MagneticFluxDensityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),

@@ -40,7 +40,7 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
                                unit = kilo(GRAM) to SECOND)
     }
 
-    // region -> Speed
+    // region -> MassFlowRate
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MassFlowRateAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),

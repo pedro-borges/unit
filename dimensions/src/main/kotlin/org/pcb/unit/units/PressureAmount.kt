@@ -43,7 +43,7 @@ open class PressureAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
                            unit = kilo(GRAM) to U2(METER, SECOND))
     }
 
-    // region -> Force
+    // region -> Pressure
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         PressureAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
@@ -96,7 +96,7 @@ open class PressureAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
 
     // endregion
 
-    // region Force
+    // region -> Force
 
     @JvmName("timesArea")
     operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =

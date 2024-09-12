@@ -47,7 +47,7 @@ open class ElectricConductanceAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurrent
                                       unit = U2(SECOND, AMPERE) to U2(kilo(GRAM), METER))
     }
 
-    // region -> ElectricTension
+    // region -> ElectricConductance
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricConductanceAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
