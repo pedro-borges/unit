@@ -8,6 +8,7 @@ import org.pcb.unit.amounts.base.Candela
 import org.pcb.unit.amounts.base.Candela.CANDELA
 import org.pcb.unit.amounts.base.Radian.RADIAN
 import org.pcb.unit.amounts.optics.Lumen.LUMEN
+import org.pcb.unit.amounts.space.SquareMeter
 import org.pcb.unit.amounts.trigonometry.Steradian
 
 class LumenTest
@@ -27,6 +28,18 @@ class LumenTest
         assertEquals(
             expected = Lumen(2 * 3),
             actual = Candela(2) * Steradian(3))
+
+    @Test
+    fun luxTimesSquareMeter() =
+        assertEquals(
+            expected = Lumen(2 * 3),
+            actual = Lux(2) * SquareMeter(3))
+
+    @Test
+    fun squareMeterTimesLux() =
+        assertEquals(
+            expected = Lumen(2 * 3),
+            actual = SquareMeter(2) * Lux(3))
 
     @Test
     fun steradianTimesCandela() =

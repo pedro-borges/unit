@@ -6,6 +6,7 @@ import org.pcb.unit.U2
 import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.units.test.ANGLE1
 import org.pcb.unit.units.test.ANGLE2
+import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.LUMINOUSINTENSITY1
 import org.pcb.unit.units.test.LUMINOUSINTENSITY2
 import org.pcb.unit.units.test.NUMBER2
@@ -152,5 +153,41 @@ class LuminousFluxAmountTest
                                         unit = U2(LUMINOUSINTENSITY1, ANGLE2)) /
                      SolidAngleAmount(amount = 200,
                                       unit = ANGLE1))
+    }
+
+    @Test
+    fun divArea()
+    {
+        assertEquals(
+            expected = IlluminanceAmount(amount = 1,
+                                         unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1),
+            actual = LuminousFluxAmount(amount = 2,
+                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)) /
+                     AreaAmount(amount = 2,
+                                unit = DISTANCE1))
+    }
+
+    @Test
+    fun divSameIlluminance()
+    {
+        assertEquals(
+            expected = AreaAmount(amount = 1,
+                                  unit = DISTANCE1),
+            actual = LuminousFluxAmount(amount = 2,
+                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)) /
+                     IlluminanceAmount(amount = 2,
+                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1))
+    }
+
+    @Test
+    fun divOtherIlluminance()
+    {
+        assertEquals(
+            expected = AreaAmount(amount = 1,
+                                  unit = DISTANCE1),
+            actual = LuminousFluxAmount(amount = 2,
+                                        unit = U2(LUMINOUSINTENSITY2, ANGLE2)) /
+                     IlluminanceAmount(amount = 2000,
+                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1))
     }
 }

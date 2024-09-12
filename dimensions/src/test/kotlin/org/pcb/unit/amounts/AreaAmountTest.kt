@@ -4,9 +4,11 @@ import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.pcb.unit.U2
 import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.units.test.ANGLE1
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
 import org.pcb.unit.units.test.ELECTRICCURRENT1
+import org.pcb.unit.units.test.LUMINOUSINTENSITY1
 import org.pcb.unit.units.test.MASS1
 import org.pcb.unit.units.test.NUMBER2
 import org.pcb.unit.units.test.TIME1
@@ -189,5 +191,29 @@ class AreaAmountTest
                                 unit = DISTANCE1) *
                      PressureAmount(amount = 20,
                                     unit = MASS1 to U2(DISTANCE2, TIME1)))
+    }
+
+    @Test
+    fun timesSameIlluminance()
+    {
+        assertEquals(
+            expected = LuminousFluxAmount(amount = 2 * 2,
+                                          unit = U2(LUMINOUSINTENSITY1, ANGLE1)),
+            actual = AreaAmount(amount = 2,
+                                unit = DISTANCE1) *
+                     IlluminanceAmount(amount = 2,
+                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1))
+    }
+
+    @Test
+    fun timesOtherIlluminance()
+    {
+        assertEquals(
+            expected = LuminousFluxAmount(amount = 2 * 2,
+                                          unit = U2(LUMINOUSINTENSITY1, ANGLE1)),
+            actual = AreaAmount(amount = 2,
+                                unit = DISTANCE2) *
+                     IlluminanceAmount(amount = 200,
+                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1))
     }
 }

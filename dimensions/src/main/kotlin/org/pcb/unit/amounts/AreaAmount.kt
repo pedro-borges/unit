@@ -8,9 +8,11 @@ import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
+import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Area
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.ElectricCurrent
+import org.pcb.unit.dimensions.LuminousIntensity
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.Time
@@ -125,4 +127,18 @@ open class AreaAmount<D2 : Unit<Distance>>(
                     unit = U2(that.mass, distance) to that.time)
 
     // endregion
+
+    // region -> LuminousFlux
+
+    @JvmName("timesIlluminance")
+    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>, D : Unit<Distance>> times(that: IlluminanceAmount<LI, A, D>) =
+        LuminousFluxAmount(amount = amount * that.amount * convert(that.distance to distance,
+                                                                   that.distance to distance),
+                           unit = U2(that.luminousIntensity, that.angle))
+
+    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>> times(that: IlluminanceAmount<LI, A, D2>) =
+        LuminousFluxAmount(amount = amount * that.amount,
+                           unit = U2(that.luminousIntensity, that.angle))
+
+    //endregion
 }

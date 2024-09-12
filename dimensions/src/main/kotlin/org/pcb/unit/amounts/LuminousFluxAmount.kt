@@ -10,6 +10,7 @@ import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Radian.RADIAN
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
+import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.LuminousFlux
 import org.pcb.unit.dimensions.LuminousIntensity
 import org.pcb.unit.dimensions.Scalar
@@ -107,6 +108,29 @@ open class LuminousFluxAmount<LI : Unit<LuminousIntensity>, A : Unit<Angle>>(
     operator fun div(that: SolidAngleAmount<A>) =
         LuminousIntensityAmount(amount = amount / that.amount,
                                 unit = luminousIntensity)
+
+    // endregion
+
+    // region -> Illuminance
+
+    operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
+        IlluminanceAmount(amount = amount / that.amount,
+                          unit = U2(luminousIntensity, angle) to that.distance)
+
+    // endregion
+
+    // region -> Area
+
+    @JvmName("divIlluminance")
+    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>, D : Unit<Distance>> div(that: IlluminanceAmount<LI, A, D>) =
+        AreaAmount(amount = amount / that.amount / convert(that.luminousIntensity to luminousIntensity,
+                                                           that.angle to angle,
+                                                           that.angle to angle),
+                   unit = that.distance)
+
+    operator fun <D : Unit<Distance>> div(that: IlluminanceAmount<LI, A, D>) =
+        AreaAmount(amount = amount / that.amount,
+                   unit = that.distance)
 
     // endregion
 }

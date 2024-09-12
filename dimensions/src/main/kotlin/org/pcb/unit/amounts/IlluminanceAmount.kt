@@ -97,4 +97,18 @@ open class IlluminanceAmount<LI : Unit<LuminousIntensity>, A : Unit<Angle>, D : 
         Numeric(amount = amount / that.amount)
 
     // endregion
+
+    // region -> LuminousFlux
+
+    @JvmName("timesArea")
+    operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =
+        LuminousFluxAmount(amount = amount * that.amount * convert(that.distance to distance,
+                                                                   that.distance to distance),
+                           unit = U2(luminousIntensity, angle))
+
+    operator fun times(that: AreaAmount<D>) =
+        LuminousFluxAmount(amount = amount * that.amount,
+                           unit = U2(luminousIntensity, angle))
+
+    // endregion
 }
