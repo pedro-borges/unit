@@ -18,9 +18,9 @@ open class SolidAngleAmount<A : Unit<Angle>>(
         amount: Number,
         unit: A)
     : Amount<SolidAngle>(amount = amount.toBigDecimal(),
-                   unit = CompositeUnit(
-                       domain = SolidAngle::class,
-                       units = mapOf(unit to 1)))
+                         unit = CompositeUnit(
+                             domain = SolidAngle::class,
+                             units = mapOf(unit to 1)))
 {
     val angle = unit
 

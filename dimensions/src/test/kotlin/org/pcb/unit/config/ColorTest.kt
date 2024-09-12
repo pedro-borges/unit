@@ -9,7 +9,7 @@ class ColorTest
     fun testColors()
     {
         println(Color.entries
-            .map { it.iso + it.name + NONE.iso }
-            .joinToString(" "))
+                    .map { it.iso + it.name + NONE.iso }
+                    .joinToString(" "))
     }
 }

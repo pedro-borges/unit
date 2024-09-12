@@ -14,9 +14,9 @@ class SolidAngleAmountTest
     {
         assertEquals(
             expected = SolidAngleAmount(amount = 2 * 2,
-                                  unit = ANGLE1),
+                                        unit = ANGLE1),
             actual = SolidAngleAmount(amount = 2,
-                                unit = ANGLE1) *
+                                      unit = ANGLE1) *
                      ScalarAmount(amount = 20,
                                   unit = NUMBER2))
     }
@@ -26,9 +26,9 @@ class SolidAngleAmountTest
     {
         assertEquals(
             expected = SolidAngleAmount(amount = 1,
-                                  unit = ANGLE1),
+                                        unit = ANGLE1),
             actual = SolidAngleAmount(amount = 2,
-                                unit = ANGLE1) /
+                                      unit = ANGLE1) /
                      ScalarAmount(amount = 20,
                                   unit = NUMBER2))
     }
@@ -38,11 +38,11 @@ class SolidAngleAmountTest
     {
         assertEquals(
             expected = SolidAngleAmount(amount = 1,
-                                  unit = ANGLE1),
+                                        unit = ANGLE1),
             actual = SolidAngleAmount(amount = 0,
-                                unit = ANGLE1) +
+                                      unit = ANGLE1) +
                      SolidAngleAmount(amount = 1,
-                                unit = ANGLE1))
+                                      unit = ANGLE1))
     }
 
     @Test
@@ -50,11 +50,11 @@ class SolidAngleAmountTest
     {
         assertEquals(
             expected = SolidAngleAmount(amount = 1,
-                                  unit = ANGLE2),
+                                        unit = ANGLE2),
             actual = SolidAngleAmount(amount = 0,
-                                unit = ANGLE2) +
+                                      unit = ANGLE2) +
                      SolidAngleAmount(amount = 100,
-                                unit = ANGLE1))
+                                      unit = ANGLE1))
     }
 
     @Test
@@ -62,11 +62,11 @@ class SolidAngleAmountTest
     {
         assertEquals(
             expected = SolidAngleAmount(amount = 0,
-                                  unit = ANGLE1),
+                                        unit = ANGLE1),
             actual = SolidAngleAmount(amount = 1,
-                                unit = ANGLE1) -
+                                      unit = ANGLE1) -
                      SolidAngleAmount(amount = 1,
-                                unit = ANGLE1))
+                                      unit = ANGLE1))
     }
 
     @Test
@@ -74,11 +74,11 @@ class SolidAngleAmountTest
     {
         assertEquals(
             expected = SolidAngleAmount(amount = 0,
-                                  unit = ANGLE2),
+                                        unit = ANGLE2),
             actual = SolidAngleAmount(amount = 1,
-                                unit = ANGLE2) -
+                                      unit = ANGLE2) -
                      SolidAngleAmount(amount = 100,
-                                unit = ANGLE1))
+                                      unit = ANGLE1))
     }
 
     @Test
@@ -87,9 +87,9 @@ class SolidAngleAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = SolidAngleAmount(amount = 2,
-                                unit = ANGLE1) /
+                                      unit = ANGLE1) /
                      SolidAngleAmount(amount = 2,
-                                unit = ANGLE1))
+                                      unit = ANGLE1))
     }
 
     @Test
@@ -98,8 +98,8 @@ class SolidAngleAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = SolidAngleAmount(amount = 2,
-                                unit = ANGLE2) /
+                                      unit = ANGLE2) /
                      SolidAngleAmount(amount = 200,
-                                unit = ANGLE1))
+                                      unit = ANGLE1))
     }
 }
