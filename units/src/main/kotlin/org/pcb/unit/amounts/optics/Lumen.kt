@@ -1,0 +1,23 @@
+package org.pcb.unit.amounts.optics
+
+import org.pcb.unit.Magnitude
+import org.pcb.unit.Magnitude.UNI
+import org.pcb.unit.U2
+import org.pcb.unit.Unit
+import org.pcb.unit.amounts.LuminousFluxAmount
+import org.pcb.unit.amounts.base.Candela.CANDELA
+import org.pcb.unit.amounts.base.Radian.RADIAN
+import org.pcb.unit.dimensions.LuminousFlux
+import org.pcb.unit.toBigDecimal
+
+class Lumen(amount: Number,
+            magnitude: Magnitude = UNI)
+    : LuminousFluxAmount<CANDELA, RADIAN>(
+    amount = amount.toBigDecimal().movePointRight(magnitude.power),
+    unit = U2(CANDELA, RADIAN))
+{
+    open class LumenUnit(magnitude: Magnitude)
+        : Unit<LuminousFlux>(LuminousFlux::class, "lm", 1.toBigDecimal(), magnitude)
+
+    object LUMEN : LumenUnit(UNI)
+}
