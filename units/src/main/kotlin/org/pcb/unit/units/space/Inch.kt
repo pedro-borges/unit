@@ -4,14 +4,15 @@ import org.pcb.unit.Magnitude
 import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Distance
+import org.pcb.unit.times
 import org.pcb.unit.toBigBigDecimal
 import org.pcb.unit.units.DistanceAmount
 
 class Inch(amount: Number,
            magnitude: Magnitude = UNI)
     : DistanceAmount<Unit<Distance>>(
-    amount = amount,
-    unit = InchUnit(magnitude))
+    amount = amount * magnitude.scale,
+    unit = INCH)
 {
     open class InchUnit(magnitude: Magnitude)
         : Unit<Distance>(Distance::class, "in", magnitude, 0.0254.toBigBigDecimal())
