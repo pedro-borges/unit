@@ -7,6 +7,7 @@ import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Currency
 import org.pcb.unit.dimension.Distance
 import org.pcb.unit.dimension.ElectricCurrent
+import org.pcb.unit.dimension.LuminousIntensity
 import org.pcb.unit.dimension.Mass
 import org.pcb.unit.dimension.Temperature
 import org.pcb.unit.dimension.Time
@@ -22,6 +23,10 @@ object DISTANCE2 : DISTANCE(DECA)
 open class ELECTRICCURRENT(magnitude: Magnitude) : Unit<ElectricCurrent>(ElectricCurrent::class, magnitude.symbol + "EC", UNI, magnitude.scale)
 object ELECTRICCURRENT1 : ELECTRICCURRENT(UNI)
 object ELECTRICCURRENT2 : ELECTRICCURRENT(DECA)
+
+open class LUMINOUSINTENSITY(magnitude: Magnitude) : Unit<LuminousIntensity>(LuminousIntensity::class, magnitude.symbol + "EC", UNI, magnitude.scale)
+object LUMINOUSINTENSITY1 : LUMINOUSINTENSITY(UNI)
+object LUMINOUSINTENSITY2 : LUMINOUSINTENSITY(DECA)
 
 open class MASS(magnitude: Magnitude) : Unit<Mass>(Mass::class, magnitude.symbol + "M", UNI, magnitude.scale)
 object MASS1 : MASS(UNI)
