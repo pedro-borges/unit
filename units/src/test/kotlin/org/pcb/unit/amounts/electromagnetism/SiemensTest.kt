@@ -3,6 +3,7 @@ package org.pcb.unit.amounts.electromagnetism
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
+import org.pcb.unit.amounts.ElectricConductanceAmount
 import org.pcb.unit.amounts.base.Ampere
 import org.pcb.unit.amounts.base.Ampere.AMPERE
 import org.pcb.unit.amounts.base.Gram.GRAM
@@ -12,7 +13,6 @@ import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.amounts.electromagnetism.Siemens.SIEMENS
 import org.pcb.unit.amounts.frequency.Hertz
 import org.pcb.unit.kilo
-import org.pcb.unit.units.ElectricConductanceAmount
 
 class SiemensTest
 {

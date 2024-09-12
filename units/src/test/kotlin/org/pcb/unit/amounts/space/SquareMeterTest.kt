@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.Magnitude.DECI
 import org.pcb.unit.Magnitude.HECTO
+import org.pcb.unit.amounts.AreaAmount
 import org.pcb.unit.amounts.base.Meter
 import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.electromagnetism.Tesla
@@ -11,7 +12,6 @@ import org.pcb.unit.amounts.electromagnetism.Weber
 import org.pcb.unit.amounts.mechanics.Newton
 import org.pcb.unit.amounts.space.SquareMeter.SQM
 import org.pcb.unit.amounts.thermodynamics.Pascal
-import org.pcb.unit.units.AreaAmount
 
 class SquareMeterTest
 {

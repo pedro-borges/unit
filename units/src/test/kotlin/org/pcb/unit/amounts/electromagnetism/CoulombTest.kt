@@ -3,13 +3,13 @@ package org.pcb.unit.amounts.electromagnetism
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
+import org.pcb.unit.amounts.ElectricChargeAmount
 import org.pcb.unit.amounts.base.Ampere
 import org.pcb.unit.amounts.base.Ampere.AMPERE
 import org.pcb.unit.amounts.base.Second
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.amounts.electromagnetism.Coulomb.COULOMB
 import org.pcb.unit.amounts.mechanics.Joule
-import org.pcb.unit.units.ElectricChargeAmount
 
 class CoulombTest
 {

@@ -3,12 +3,12 @@ package org.pcb.unit.amounts.frequency
 import org.pcb.unit.Magnitude
 import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
+import org.pcb.unit.amounts.FrequencyAmount
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.dimensions.Frequency
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.toBigDecimal
-import org.pcb.unit.units.FrequencyAmount
 
 class Hertz(amount: Number,
             magnitude: Magnitude = UNI)

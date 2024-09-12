@@ -3,6 +3,7 @@ package org.pcb.unit.amounts.thermodynamics
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
+import org.pcb.unit.amounts.PressureAmount
 import org.pcb.unit.amounts.base.Gram.GRAM
 import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Second.SECOND
@@ -12,7 +13,6 @@ import org.pcb.unit.amounts.space.SquareMeter
 import org.pcb.unit.amounts.space.Stere
 import org.pcb.unit.amounts.thermodynamics.Pascal.PASCAL
 import org.pcb.unit.kilo
-import org.pcb.unit.units.PressureAmount
 
 class PascalTest
 {

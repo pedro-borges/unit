@@ -3,12 +3,12 @@ package org.pcb.unit.amounts.space
 import org.pcb.unit.Magnitude
 import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
+import org.pcb.unit.amounts.VolumeAmount
 import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.deci
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Volume
 import org.pcb.unit.toBigDecimal
-import org.pcb.unit.units.VolumeAmount
 
 class Liter(amount: Number,
             magnitude: Magnitude = UNI)

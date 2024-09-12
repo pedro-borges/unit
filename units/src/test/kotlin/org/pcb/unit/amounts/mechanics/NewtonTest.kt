@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.Magnitude.KILO
 import org.pcb.unit.U2
+import org.pcb.unit.amounts.ForceAmount
 import org.pcb.unit.amounts.base.Gram
 import org.pcb.unit.amounts.base.Gram.GRAM
 import org.pcb.unit.amounts.base.Meter
@@ -14,7 +15,6 @@ import org.pcb.unit.amounts.mechanics.Newton.NEWTON
 import org.pcb.unit.amounts.space.SquareMeter
 import org.pcb.unit.amounts.thermodynamics.Pascal
 import org.pcb.unit.kilo
-import org.pcb.unit.units.ForceAmount
 
 class NewtonTest
 {

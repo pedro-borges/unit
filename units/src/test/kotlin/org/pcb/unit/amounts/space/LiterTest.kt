@@ -5,11 +5,11 @@ import kotlin.test.assertEquals
 import org.pcb.unit.Magnitude.DECI
 import org.pcb.unit.Magnitude.KILO
 import org.pcb.unit.Magnitude.MEGA
+import org.pcb.unit.amounts.VolumeAmount
 import org.pcb.unit.amounts.base.Meter
 import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.space.Liter.LITER
 import org.pcb.unit.deci
-import org.pcb.unit.units.VolumeAmount
 
 class LiterTest
 {

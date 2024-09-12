@@ -3,7 +3,7 @@ package org.pcb.unit.config
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.units.ElectricResistanceAmount
+import org.pcb.unit.amounts.ElectricResistanceAmount
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.MASS1

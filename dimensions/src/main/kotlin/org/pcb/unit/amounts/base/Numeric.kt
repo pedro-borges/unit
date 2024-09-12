@@ -3,9 +3,9 @@ package org.pcb.unit.amounts.base
 import org.pcb.unit.Magnitude
 import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
+import org.pcb.unit.amounts.ScalarAmount
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.toBigDecimal
-import org.pcb.unit.units.ScalarAmount
 
 class Numeric(amount: Number,
               magnitude: Magnitude = UNI)

@@ -2,13 +2,13 @@ package org.pcb.unit.amounts.frequency
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.amounts.FrequencyAmount
 import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.amounts.electromagnetism.Siemens
 import org.pcb.unit.amounts.frequency.Hertz.HERTZ
-import org.pcb.unit.units.FrequencyAmount
 
 class HertzTest
 {

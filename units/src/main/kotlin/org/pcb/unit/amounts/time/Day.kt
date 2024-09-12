@@ -3,9 +3,9 @@ package org.pcb.unit.amounts.time
 import org.pcb.unit.Magnitude
 import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
+import org.pcb.unit.amounts.TimeAmount
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.toBigDecimal
-import org.pcb.unit.units.TimeAmount
 
 class Day(amount: Number,
           magnitude: Magnitude = UNI)

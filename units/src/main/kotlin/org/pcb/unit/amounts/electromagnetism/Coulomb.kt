@@ -4,13 +4,13 @@ import org.pcb.unit.Magnitude
 import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
+import org.pcb.unit.amounts.ElectricChargeAmount
 import org.pcb.unit.amounts.base.Ampere.AMPERE
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.dimensions.ElectricCharge
 import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.toBigDecimal
-import org.pcb.unit.units.ElectricChargeAmount
 
 class Coulomb(amount: Number,
               magnitude: Magnitude = UNI)

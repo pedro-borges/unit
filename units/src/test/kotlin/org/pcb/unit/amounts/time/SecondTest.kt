@@ -2,6 +2,7 @@ package org.pcb.unit.amounts.time
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.amounts.TimeAmount
 import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Second
 import org.pcb.unit.amounts.base.Second.SECOND
@@ -12,7 +13,6 @@ import org.pcb.unit.amounts.electromagnetism.Weber
 import org.pcb.unit.amounts.frequency.Hertz
 import org.pcb.unit.amounts.mechanics.Joule
 import org.pcb.unit.amounts.mechanics.Watt
-import org.pcb.unit.units.TimeAmount
 
 class SecondTest
 {

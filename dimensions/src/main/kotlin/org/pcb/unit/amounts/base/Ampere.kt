@@ -3,9 +3,9 @@ package org.pcb.unit.amounts.base
 import org.pcb.unit.Magnitude
 import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
+import org.pcb.unit.amounts.ElectricCurrentAmount
 import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.toBigDecimal
-import org.pcb.unit.units.ElectricCurrentAmount
 
 class Ampere(amount: Number,
              magnitude: Magnitude = UNI)

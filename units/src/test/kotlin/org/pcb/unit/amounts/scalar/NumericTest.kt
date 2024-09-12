@@ -2,6 +2,7 @@ package org.pcb.unit.amounts.scalar
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.amounts.ScalarAmount
 import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second
@@ -10,7 +11,6 @@ import org.pcb.unit.amounts.electromagnetism.Siemens
 import org.pcb.unit.amounts.frequency.Hertz
 import org.pcb.unit.amounts.mechanics.MeterPerSecond
 import org.pcb.unit.amounts.mechanics.SecondPerMeter
-import org.pcb.unit.units.ScalarAmount
 
 class NumericTest
 {

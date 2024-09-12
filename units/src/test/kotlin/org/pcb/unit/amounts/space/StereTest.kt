@@ -4,12 +4,12 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.Magnitude.KILO
 import org.pcb.unit.Magnitude.MEGA
+import org.pcb.unit.amounts.VolumeAmount
 import org.pcb.unit.amounts.base.Meter
 import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.mechanics.Joule
 import org.pcb.unit.amounts.space.Stere.STERE
 import org.pcb.unit.amounts.thermodynamics.Pascal
-import org.pcb.unit.units.VolumeAmount
 
 class StereTest
 {

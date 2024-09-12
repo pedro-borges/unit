@@ -2,12 +2,12 @@ package org.pcb.unit.amounts.mechanics
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.amounts.SpeedAmount
 import org.pcb.unit.amounts.base.Meter
 import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Second
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.amounts.mechanics.MeterPerSecond.MPS
-import org.pcb.unit.units.SpeedAmount
 
 class MeterPerSecondTest
 {

@@ -2,12 +2,12 @@ package org.pcb.unit.amounts.electromagnetism
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import org.pcb.unit.amounts.ElectricCurrentAmount
 import org.pcb.unit.amounts.base.Ampere
 import org.pcb.unit.amounts.base.Ampere.AMPERE
 import org.pcb.unit.amounts.base.Second
 import org.pcb.unit.amounts.mechanics.Joule
 import org.pcb.unit.amounts.mechanics.Watt
-import org.pcb.unit.units.ElectricCurrentAmount
 
 class AmpereTest
 {

@@ -4,6 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.Magnitude.KILO
 import org.pcb.unit.U2
+import org.pcb.unit.amounts.PowerAmount
 import org.pcb.unit.amounts.base.Ampere
 import org.pcb.unit.amounts.base.Gram
 import org.pcb.unit.amounts.base.Gram.GRAM
@@ -14,7 +15,6 @@ import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.amounts.electromagnetism.Volt
 import org.pcb.unit.amounts.mechanics.Watt.WATT
 import org.pcb.unit.kilo
-import org.pcb.unit.units.PowerAmount
 
 class WattTest
 {
