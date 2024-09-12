@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.units.base.Numeric
+import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.units.test.CURRENCY1
 import org.pcb.unit.units.test.CURRENCY2
 import org.pcb.unit.units.test.NUMBER2

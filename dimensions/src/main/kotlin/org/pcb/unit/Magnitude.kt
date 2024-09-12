@@ -27,7 +27,7 @@ import org.pcb.unit.Magnitude.YOCTO
 import org.pcb.unit.Magnitude.YOTTA
 import org.pcb.unit.Magnitude.ZEPTO
 import org.pcb.unit.Magnitude.ZETTA
-import org.pcb.unit.dimension.Dimension
+import org.pcb.unit.dimensions.Dimension
 
 enum class Magnitude(val symbol: String,
                      val power: Int)

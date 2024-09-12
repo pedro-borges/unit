@@ -4,7 +4,7 @@ import java.math.BigDecimal
 import java.util.Objects
 import kotlin.reflect.KClass
 import org.pcb.unit.config.Configuration
-import org.pcb.unit.dimension.Dimension
+import org.pcb.unit.dimensions.Dimension
 
 abstract class Unit<D : Dimension>(
         val domain: KClass<D>,

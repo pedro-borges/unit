@@ -3,14 +3,14 @@ package org.pcb.unit.units
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Unit
+import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
-import org.pcb.unit.dimension.Angle
-import org.pcb.unit.dimension.Scalar
+import org.pcb.unit.dimensions.Angle
+import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
-import org.pcb.unit.units.base.Numeric
-import org.pcb.unit.units.base.Numeric.NUMERIC
 
 open class AngleAmount<T : Unit<Angle>>(
         amount: Number,

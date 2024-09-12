@@ -4,25 +4,25 @@ import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
+import org.pcb.unit.amounts.base.Ampere.AMPERE
+import org.pcb.unit.amounts.base.Gram.GRAM
+import org.pcb.unit.amounts.base.Meter.METER
+import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
+import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
-import org.pcb.unit.dimension.Capacitance
-import org.pcb.unit.dimension.Distance
-import org.pcb.unit.dimension.ElectricCurrent
-import org.pcb.unit.dimension.Mass
-import org.pcb.unit.dimension.Scalar
-import org.pcb.unit.dimension.Time
+import org.pcb.unit.dimensions.Capacitance
+import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.ElectricCurrent
+import org.pcb.unit.dimensions.Mass
+import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
 import org.pcb.unit.kilo
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
-import org.pcb.unit.units.base.Ampere.AMPERE
-import org.pcb.unit.units.base.Gram.GRAM
-import org.pcb.unit.units.base.Meter.METER
-import org.pcb.unit.units.base.Numeric
-import org.pcb.unit.units.base.Numeric.NUMERIC
-import org.pcb.unit.units.base.Second.SECOND
 
 open class CapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent>, M : Unit<Mass>, D2 : Unit<Distance>>(
         amount: Number,

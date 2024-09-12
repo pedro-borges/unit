@@ -3,7 +3,7 @@ package org.pcb.unit
 import java.util.Objects
 import kotlin.reflect.KClass
 import org.pcb.unit.config.Configuration
-import org.pcb.unit.dimension.Dimension
+import org.pcb.unit.dimensions.Dimension
 
 open class CompositeUnit<D : Dimension>(domain: KClass<D>,
                                         val units: Map<Unit<*>, Int>)

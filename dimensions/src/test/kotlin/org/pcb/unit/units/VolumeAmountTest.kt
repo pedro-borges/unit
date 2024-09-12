@@ -3,7 +3,7 @@ package org.pcb.unit.units
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.pcb.unit.U2
-import org.pcb.unit.units.base.Numeric
+import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
 import org.pcb.unit.units.test.MASS2

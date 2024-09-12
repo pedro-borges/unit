@@ -3,18 +3,18 @@ package org.pcb.unit.units
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Unit
+import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
-import org.pcb.unit.dimension.Currency
-import org.pcb.unit.dimension.Rent
-import org.pcb.unit.dimension.Scalar
-import org.pcb.unit.dimension.Time
+import org.pcb.unit.dimensions.Currency
+import org.pcb.unit.dimensions.Rent
+import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
-import org.pcb.unit.units.base.Numeric
-import org.pcb.unit.units.base.Numeric.NUMERIC
 
 open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
         amount: Number,

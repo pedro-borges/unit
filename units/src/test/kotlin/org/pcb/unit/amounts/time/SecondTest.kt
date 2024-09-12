@@ -1,0 +1,68 @@
+package org.pcb.unit.amounts.time
+
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Second
+import org.pcb.unit.amounts.base.Second.SECOND
+import org.pcb.unit.amounts.electromagnetism.Ohm
+import org.pcb.unit.amounts.electromagnetism.Siemens
+import org.pcb.unit.amounts.electromagnetism.Volt
+import org.pcb.unit.amounts.electromagnetism.Weber
+import org.pcb.unit.amounts.frequency.Hertz
+import org.pcb.unit.amounts.mechanics.Joule
+import org.pcb.unit.amounts.mechanics.Watt
+import org.pcb.unit.units.TimeAmount
+
+class SecondTest
+{
+    private infix fun Second.equivalent(other: TimeAmount<*>) =
+        assertEquals(this, Second(0) + other)
+
+    @Test
+    fun scales()
+    {
+        Second(1) equivalent Second(1)
+        Second(60) equivalent Minute(1)
+        Second(60 * 60) equivalent Hour(1)
+        Second(60 * 60 * 24) equivalent Day(1)
+
+        Second(1) equivalent TimeAmount(1, SECOND)
+    }
+
+    @Test
+    fun scalarDivHertz() =
+        assertEquals(
+            expected = Second(2 * 3),
+            actual = Numeric(2) / Hertz(3))
+
+    @Test
+    fun jouleDivWatt() =
+        assertEquals(
+            expected = Second(6 / 3),
+            actual = Joule(6) / Watt(3))
+
+    @Test
+    fun ohmTimesFarad() =
+        assertEquals(
+            expected = Second(2 * 3),
+            actual = Ohm(2) * org.pcb.unit.amounts.electromagnetism.Farad(3))
+
+    @Test
+    fun faradTimesOhm() =
+        assertEquals(
+            expected = Second(2 * 3),
+            actual = org.pcb.unit.amounts.electromagnetism.Farad(2) * Ohm(3))
+
+    @Test
+    fun weberDivVolt() =
+        assertEquals(
+            expected = Second(6 / 3),
+            actual = Weber(6) / Volt(3))
+
+    @Test
+    fun faradDivSiemens() =
+        assertEquals(
+            expected = Second(6 / 3),
+            actual = org.pcb.unit.amounts.electromagnetism.Farad(6) / Siemens(3))
+}

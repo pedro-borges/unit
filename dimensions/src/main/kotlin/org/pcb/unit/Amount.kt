@@ -4,8 +4,8 @@ import java.math.BigDecimal
 import java.util.Objects
 import org.pcb.unit.config.Configuration
 import org.pcb.unit.config.Configuration.displayMathContext
-import org.pcb.unit.dimension.Dimension
-import org.pcb.unit.dimension.Scalar
+import org.pcb.unit.dimensions.Dimension
+import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.units.ScalarAmount
 
 abstract class Amount<D : Dimension>(val amount: BigDecimal,

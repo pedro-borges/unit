@@ -6,15 +6,15 @@ import org.pcb.unit.Magnitude.DECA
 import org.pcb.unit.Magnitude.DECI
 import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
-import org.pcb.unit.dimension.Angle
-import org.pcb.unit.dimension.Currency
-import org.pcb.unit.dimension.Distance
-import org.pcb.unit.dimension.ElectricCurrent
-import org.pcb.unit.dimension.LuminousIntensity
-import org.pcb.unit.dimension.Mass
-import org.pcb.unit.dimension.Scalar
-import org.pcb.unit.dimension.Temperature
-import org.pcb.unit.dimension.Time
+import org.pcb.unit.dimensions.Angle
+import org.pcb.unit.dimensions.Currency
+import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.ElectricCurrent
+import org.pcb.unit.dimensions.LuminousIntensity
+import org.pcb.unit.dimensions.Mass
+import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Temperature
+import org.pcb.unit.dimensions.Time
 import org.pcb.unit.power
 
 open class ANGLE(magnitude: Magnitude) : Unit<Angle>(Angle::class, magnitude.symbol + "M", TEN.power(magnitude.power), UNI)

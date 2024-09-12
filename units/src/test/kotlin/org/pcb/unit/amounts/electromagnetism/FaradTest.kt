@@ -1,0 +1,57 @@
+package org.pcb.unit.amounts.electromagnetism
+
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import org.pcb.unit.U2
+import org.pcb.unit.amounts.base.Ampere.AMPERE
+import org.pcb.unit.amounts.base.Gram.GRAM
+import org.pcb.unit.amounts.base.Meter.METER
+import org.pcb.unit.amounts.base.Second
+import org.pcb.unit.amounts.base.Second.SECOND
+import org.pcb.unit.amounts.electromagnetism.Farad.FARAD
+import org.pcb.unit.amounts.frequency.Hertz
+import org.pcb.unit.kilo
+import org.pcb.unit.units.CapacitanceAmount
+
+class FaradTest
+{
+    private infix fun Farad.equivalent(other: CapacitanceAmount<*, *, *, *>) =
+        assertEquals(this, Farad(0) + other)
+
+    @Test
+    fun unit()
+    {
+        Farad(2) equivalent CapacitanceAmount(2, U2(SECOND, AMPERE) to U2(kilo(GRAM), METER))
+        Farad(2) equivalent CapacitanceAmount(2, FARAD)
+    }
+
+    @Test
+    fun coulombDivVolt() =
+        assertEquals(
+            expected = Farad(6 / 3),
+            actual = Coulomb(6) / Volt(3))
+
+    @Test
+    fun secondDivOhm() =
+        assertEquals(
+            expected = Farad(6 / 3),
+            actual = Second(6) / Ohm(3))
+
+    @Test
+    fun secondTimesSiemens() =
+        assertEquals(
+            expected = Farad(2 * 3),
+            actual = Second(2) * Siemens(3))
+
+    @Test
+    fun siemensDivHertz() =
+        assertEquals(
+            expected = Farad(6 / 3),
+            actual = Siemens(6) / Hertz(3))
+
+    @Test
+    fun siemensTimesSecond() =
+        assertEquals(
+            expected = Farad(2 * 3),
+            actual = Siemens(2) * Second(3))
+}

@@ -1,0 +1,62 @@
+package org.pcb.unit.amounts.electromagnetism
+
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import org.pcb.unit.U2
+import org.pcb.unit.amounts.base.Ampere
+import org.pcb.unit.amounts.base.Ampere.AMPERE
+import org.pcb.unit.amounts.base.Second
+import org.pcb.unit.amounts.base.Second.SECOND
+import org.pcb.unit.amounts.electromagnetism.Coulomb.COULOMB
+import org.pcb.unit.amounts.mechanics.Joule
+import org.pcb.unit.units.ElectricChargeAmount
+
+class CoulombTest
+{
+    private infix fun Coulomb.equivalent(other: ElectricChargeAmount<*, *>) =
+        assertEquals(this, Coulomb(0) + other)
+
+    @Test
+    fun unit()
+    {
+        Coulomb(2 * 2) equivalent Ampere(2) * Second(2)
+        Coulomb(2) equivalent ElectricChargeAmount(2, U2(AMPERE, SECOND))
+        Coulomb(2) equivalent ElectricChargeAmount(2, COULOMB)
+    }
+
+    @Test
+    fun ampereTimesSecond() =
+        assertEquals(
+            expected = Coulomb(2 * 3),
+            actual = Ampere(2) * Second(3))
+
+    @Test
+    fun faradTimesVolt() =
+        assertEquals(
+            expected = Coulomb(2 * 3),
+            actual = Farad(2) * Volt(3))
+
+    @Test
+    fun jouleDivVolt() =
+        assertEquals(
+            expected = Coulomb(6 / 3),
+            actual = Joule(6) / Volt(3))
+
+    @Test
+    fun secondTimesAmpere() =
+        assertEquals(
+            expected = Coulomb(2 * 3),
+            actual = Second(2) * Ampere(3))
+
+    @Test
+    fun voltTimesFarad() =
+        assertEquals(
+            expected = Coulomb(2 * 3),
+            actual = Volt(2) * Farad(3))
+
+    @Test
+    fun weberDivOhm() =
+        assertEquals(
+            expected = Coulomb(6 / 3),
+            actual = Weber(6) / Ohm(3))
+}

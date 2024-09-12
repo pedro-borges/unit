@@ -2,7 +2,7 @@ package org.pcb.unit.units
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.units.base.Numeric
+import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
 import org.pcb.unit.units.test.NUMBER2

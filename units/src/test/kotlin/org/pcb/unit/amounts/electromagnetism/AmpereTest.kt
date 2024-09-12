@@ -1,0 +1,64 @@
+package org.pcb.unit.amounts.electromagnetism
+
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import org.pcb.unit.amounts.base.Ampere
+import org.pcb.unit.amounts.base.Ampere.AMPERE
+import org.pcb.unit.amounts.base.Second
+import org.pcb.unit.amounts.mechanics.Joule
+import org.pcb.unit.amounts.mechanics.Watt
+import org.pcb.unit.units.ElectricCurrentAmount
+
+class AmpereTest
+{
+    private infix fun Ampere.equivalent(other: ElectricCurrentAmount<*>) =
+        assertEquals(this, Ampere(0) + other)
+
+    @Test
+    fun unit()
+    {
+        Ampere(2) equivalent ElectricCurrentAmount(2, AMPERE)
+    }
+
+    @Test
+    fun coulombDivSecond() =
+        assertEquals(
+            expected = Ampere(6 / 3),
+            actual = Coulomb(6) / Second(3))
+
+    @Test
+    fun jouleDivWeber() =
+        assertEquals(
+            expected = Ampere(6 / 3),
+            actual = Joule(6) / Weber(3))
+
+    @Test
+    fun siemensTimesVolt() =
+        assertEquals(
+            expected = Ampere(2 * 3),
+            actual = Siemens(2) * Volt(3))
+
+    @Test
+    fun voltDivOhm() =
+        assertEquals(
+            expected = Ampere(6 / 3),
+            actual = Volt(6) / Ohm(3))
+
+    @Test
+    fun voltTimesSiemens() =
+        assertEquals(
+            expected = Ampere(2 * 3),
+            actual = Volt(2) * Siemens(3))
+
+    @Test
+    fun wattDivVolt() =
+        assertEquals(
+            expected = Ampere(6 / 3),
+            actual = Watt(6) / Volt(3))
+
+    @Test
+    fun weberDivHenry() =
+        assertEquals(
+            expected = Ampere(6 / 3),
+            actual = Weber(6) / Henry(3))
+}
