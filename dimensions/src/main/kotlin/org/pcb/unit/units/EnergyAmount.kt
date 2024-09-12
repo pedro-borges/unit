@@ -16,7 +16,7 @@ import org.pcb.unit.kilo
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
@@ -26,7 +26,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 open class EnergyAmount<M : Unit<Mass>, D2 : Unit<Distance>, T2 : Unit<Time>>(
         amount: Number,
         unit: Pair<U2<M, D2>, T2>)
-    : Amount<Energy>(amount = amount.toBigBigDecimal(),
+    : Amount<Energy>(amount = amount.toBigDecimal(),
                      unit = CompositeUnit(
                          domain = Energy::class,
                          units = mapOf(unit.major.first to 1,
@@ -40,7 +40,7 @@ open class EnergyAmount<M : Unit<Mass>, D2 : Unit<Distance>, T2 : Unit<Time>>(
     companion object
     {
         operator fun invoke(amount: Number, unit: Unit<Energy>) =
-            EnergyAmount(amount = amount.toBigBigDecimal() * unit.scale,
+            EnergyAmount(amount = amount.toBigDecimal() * unit.scale,
                          unit = U2(kilo(GRAM), METER) to SECOND)
     }
 

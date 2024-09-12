@@ -15,7 +15,7 @@ import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
@@ -23,7 +23,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 open class FrequencyAmount<T : Unit<Time>>(
         amount: Number,
         unit: Pair<Unit<Scalar>, T>)
-    : Amount<Frequency>(amount = amount.toBigBigDecimal(),
+    : Amount<Frequency>(amount = amount.toBigDecimal(),
                         unit = CompositeUnit(
                             domain = Frequency::class,
                             units = mapOf(unit.minor to -1)))
@@ -33,7 +33,7 @@ open class FrequencyAmount<T : Unit<Time>>(
     companion object
     {
         operator fun invoke(amount: Number, unit: Unit<Frequency>) =
-            FrequencyAmount(amount = amount.toBigBigDecimal() / unit.scale,
+            FrequencyAmount(amount = amount.toBigDecimal() / unit.scale,
                             unit = NUMERIC to SECOND)
     }
 

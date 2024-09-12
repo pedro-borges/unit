@@ -8,14 +8,14 @@ import org.pcb.unit.dimension.Angle
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.div
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class AngleAmount<T : Unit<Angle>>(
         amount: Number,
         unit: T)
-    : Amount<Angle>(amount = amount.toBigBigDecimal(),
+    : Amount<Angle>(amount = amount.toBigDecimal(),
                     unit = CompositeUnit(
                         domain = Angle::class,
                         units = mapOf(unit to 1)))

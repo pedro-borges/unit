@@ -16,7 +16,7 @@ import org.pcb.unit.kilo
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
@@ -27,7 +27,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 open class ElectricConductanceAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurrent>, M : Unit<Mass>, D2 : Unit<Distance>>(
         amount: Number,
         unit: Pair<U2<T3, EC2>, U2<M, D2>>)
-    : Amount<ElectricConductance>(amount = amount.toBigBigDecimal(),
+    : Amount<ElectricConductance>(amount = amount.toBigDecimal(),
                                   unit = CompositeUnit(
                                       domain = ElectricConductance::class,
                                       units = mapOf(unit.major.first to 3,
@@ -43,7 +43,7 @@ open class ElectricConductanceAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurrent
     companion object
     {
         operator fun invoke(amount: Number, unit: Unit<ElectricConductance>) =
-            ElectricConductanceAmount(amount = amount.toBigBigDecimal() * unit.scale,
+            ElectricConductanceAmount(amount = amount.toBigDecimal() * unit.scale,
                                       unit = U2(SECOND, AMPERE) to U2(kilo(GRAM), METER))
     }
 

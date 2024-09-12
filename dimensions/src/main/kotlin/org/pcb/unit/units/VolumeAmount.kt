@@ -12,7 +12,7 @@ import org.pcb.unit.dimension.Time
 import org.pcb.unit.dimension.Volume
 import org.pcb.unit.div
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
@@ -20,7 +20,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 open class VolumeAmount<D3 : Unit<Distance>>(
         amount: Number,
         unit: D3)
-    : Amount<Volume>(amount = amount.toBigBigDecimal(),
+    : Amount<Volume>(amount = amount.toBigDecimal(),
                      unit = CompositeUnit(
                          domain = Volume::class,
                          units = mapOf(unit to 3)))
@@ -30,7 +30,7 @@ open class VolumeAmount<D3 : Unit<Distance>>(
     companion object
     {
         operator fun invoke(amount: Number, unit: Unit<Volume>) =
-            VolumeAmount(amount = amount.toBigBigDecimal() * unit.scale,
+            VolumeAmount(amount = amount.toBigDecimal() * unit.scale,
                          unit = METER)
     }
 

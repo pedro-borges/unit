@@ -19,6 +19,7 @@ class LiterTest
     @Test
     fun scales()
     {
+        Liter(1, KILO) equivalent Stere(1)
         Liter(1) equivalent Meter(1, DECI) * Meter(1, DECI) * Meter(1, DECI)
         Liter(1) equivalent VolumeAmount(1, deci(METER))
         Liter(1) equivalent VolumeAmount(1, LITER)

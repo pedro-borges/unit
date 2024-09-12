@@ -14,7 +14,7 @@ import org.pcb.unit.div
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric
@@ -23,7 +23,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
         amount: Number,
         unit: Pair<D, T>)
-    : Amount<Speed>(amount = amount.toBigBigDecimal(),
+    : Amount<Speed>(amount = amount.toBigDecimal(),
                     unit = CompositeUnit(
                         domain = Speed::class,
                         units = mapOf(unit.major to 1,
@@ -35,7 +35,7 @@ open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
     companion object
     {
         operator fun invoke(amount: Number, unit: Unit<Speed>) =
-            SpeedAmount(amount = amount.toBigBigDecimal() * unit.scale,
+            SpeedAmount(amount = amount.toBigDecimal() * unit.scale,
                         unit = METER to SECOND)
     }
 

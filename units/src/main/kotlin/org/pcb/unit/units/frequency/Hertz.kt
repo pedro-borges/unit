@@ -5,8 +5,7 @@ import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Frequency
 import org.pcb.unit.dimension.Time
-import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.FrequencyAmount
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
@@ -14,11 +13,11 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 class Hertz(amount: Number,
             magnitude: Magnitude = UNI)
     : FrequencyAmount<Unit<Time>>(
-    amount = amount * magnitude.scale,
+    amount = amount.toBigDecimal().movePointRight(magnitude.power),
     unit = NUMERIC to SECOND)
 {
     open class HertzUnit(magnitude: Magnitude)
-        : Unit<Frequency>(Frequency::class, "Hz", magnitude, 1.toBigBigDecimal())
+        : Unit<Frequency>(Frequency::class, "Hz", 1.toBigDecimal(), magnitude)
 
     object HERTZ : HertzUnit(UNI)
 }

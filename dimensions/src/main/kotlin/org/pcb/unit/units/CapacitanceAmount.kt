@@ -16,7 +16,7 @@ import org.pcb.unit.kilo
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
@@ -27,7 +27,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 open class CapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent>, M : Unit<Mass>, D2 : Unit<Distance>>(
         amount: Number,
         unit: Pair<U2<T4, EC2>, U2<M, D2>>)
-    : Amount<Capacitance>(amount = amount.toBigBigDecimal(),
+    : Amount<Capacitance>(amount = amount.toBigDecimal(),
                           unit = CompositeUnit(
                               domain = Capacitance::class,
                               units = mapOf(unit.major.first to 4,

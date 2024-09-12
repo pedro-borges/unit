@@ -12,14 +12,14 @@ import org.pcb.unit.div
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
         amount: Number,
         unit: Pair<C, T>)
-    : Amount<Rent>(amount = amount.toBigBigDecimal(),
+    : Amount<Rent>(amount = amount.toBigDecimal(),
                    unit = CompositeUnit(
                        domain = Rent::class,
                        units = mapOf(unit.major to 1,

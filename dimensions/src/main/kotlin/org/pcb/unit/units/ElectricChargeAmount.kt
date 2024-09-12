@@ -13,7 +13,7 @@ import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric
@@ -22,7 +22,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
         amount: Number,
         unit: U2<EC, T>)
-    : Amount<ElectricCharge>(amount = amount.toBigBigDecimal(),
+    : Amount<ElectricCharge>(amount = amount.toBigDecimal(),
                              unit = CompositeUnit(
                                  domain = ElectricCharge::class,
                                  units = mapOf(unit.first to 1,
@@ -34,7 +34,7 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
     companion object
     {
         operator fun invoke(amount: Number, unit: Unit<ElectricCharge>) =
-            ElectricChargeAmount(amount = amount.toBigBigDecimal() * unit.scale,
+            ElectricChargeAmount(amount = amount.toBigDecimal() * unit.scale,
                                  unit = U2(AMPERE, SECOND))
     }
 

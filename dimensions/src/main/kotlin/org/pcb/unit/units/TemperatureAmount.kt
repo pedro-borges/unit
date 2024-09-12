@@ -8,15 +8,15 @@ import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Temperature
 import org.pcb.unit.div
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class TemperatureAmount<T : Unit<Temperature>>(
         amount: Number,
         unit: T)
-    : Amount<Temperature>(amount = amount.toBigBigDecimal(),
-                   unit = CompositeUnit(
+    : Amount<Temperature>(amount = amount.toBigDecimal(),
+                          unit = CompositeUnit(
                        domain = Temperature::class,
                        units = mapOf(unit to 1)))
 {

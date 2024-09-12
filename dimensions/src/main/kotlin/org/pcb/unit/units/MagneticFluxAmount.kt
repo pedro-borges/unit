@@ -16,7 +16,7 @@ import org.pcb.unit.kilo
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
@@ -27,7 +27,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 open class MagneticFluxAmount<M : Unit<Mass>, D2 : Unit<Distance>, T2 : Unit<Time>, EC : Unit<ElectricCurrent>>(
         amount: Number,
         unit: Pair<U2<M, D2>, U2<T2, EC>>)
-    : Amount<MagneticFlux>(amount = amount.toBigBigDecimal(),
+    : Amount<MagneticFlux>(amount = amount.toBigDecimal(),
                            unit = CompositeUnit(
                                domain = MagneticFlux::class,
                                units = mapOf(unit.major.first to 1,
@@ -43,7 +43,7 @@ open class MagneticFluxAmount<M : Unit<Mass>, D2 : Unit<Distance>, T2 : Unit<Tim
     companion object
     {
         operator fun invoke(amount: Number, unit: Unit<MagneticFlux>) =
-            MagneticFluxAmount(amount = amount.toBigBigDecimal() * unit.scale,
+            MagneticFluxAmount(amount = amount.toBigDecimal() * unit.scale,
                                unit = U2(kilo(GRAM), METER) to U2(SECOND, AMPERE))
     }
 

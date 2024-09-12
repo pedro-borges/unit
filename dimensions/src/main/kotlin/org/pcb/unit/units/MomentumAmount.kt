@@ -14,14 +14,14 @@ import org.pcb.unit.div
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class MomentumAmount<M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>>(
         amount: Number,
         unit: Pair<U2<M, D>, T>)
-    : Amount<Momentum>(amount = amount.toBigBigDecimal(),
+    : Amount<Momentum>(amount = amount.toBigDecimal(),
                        unit = CompositeUnit(
                            domain = Momentum::class,
                            units = mapOf(unit.major.first to 1,

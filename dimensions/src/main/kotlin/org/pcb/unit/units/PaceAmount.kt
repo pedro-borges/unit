@@ -12,14 +12,14 @@ import org.pcb.unit.div
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class PaceAmount<T : Unit<Time>, D : Unit<Distance>>(
         amount: Number,
         unit: Pair<T, D>)
-    : Amount<Pace>(amount = amount.toBigBigDecimal(),
+    : Amount<Pace>(amount = amount.toBigDecimal(),
                    unit = CompositeUnit(
                        domain = Pace::class,
                        units = mapOf(unit.major to 1,

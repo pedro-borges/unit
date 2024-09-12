@@ -15,7 +15,7 @@ import org.pcb.unit.kilo
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
@@ -25,7 +25,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 open class PressureAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
         amount: Number,
         unit: Pair<M, U2<D, T2>>)
-    : Amount<Pressure>(amount = amount.toBigBigDecimal(),
+    : Amount<Pressure>(amount = amount.toBigDecimal(),
                        unit = CompositeUnit(
                            domain = Pressure::class,
                            units = mapOf(unit.major to 1,
@@ -39,7 +39,7 @@ open class PressureAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
     companion object
     {
         operator fun invoke(amount: Number, unit: Unit<Pressure>) =
-            PressureAmount(amount = amount.toBigBigDecimal() * unit.scale,
+            PressureAmount(amount = amount.toBigDecimal() * unit.scale,
                            unit = kilo(GRAM) to U2(METER, SECOND))
     }
 

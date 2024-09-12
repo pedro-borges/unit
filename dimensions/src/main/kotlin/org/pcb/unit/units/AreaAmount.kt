@@ -13,7 +13,7 @@ import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
@@ -21,7 +21,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 open class AreaAmount<D2 : Unit<Distance>>(
         amount: Number,
         unit: D2)
-    : Amount<Area>(amount = amount.toBigBigDecimal(),
+    : Amount<Area>(amount = amount.toBigDecimal(),
                    unit = CompositeUnit(
                        domain = Area::class,
                        units = mapOf(unit to 2)))
@@ -31,7 +31,7 @@ open class AreaAmount<D2 : Unit<Distance>>(
     companion object
     {
         operator fun invoke(amount: Number, unit: Unit<Area>) =
-            AreaAmount(amount = amount.toBigBigDecimal() * unit.scale,
+            AreaAmount(amount = amount.toBigDecimal() * unit.scale,
                        unit = METER)
     }
 

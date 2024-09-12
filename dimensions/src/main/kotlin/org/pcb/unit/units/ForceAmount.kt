@@ -15,7 +15,7 @@ import org.pcb.unit.kilo
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
 import org.pcb.unit.units.base.Second.SECOND
@@ -25,7 +25,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 open class ForceAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
         amount: Number,
         unit: Pair<U2<M, D>, T2>)
-    : Amount<Force>(amount = amount.toBigBigDecimal(),
+    : Amount<Force>(amount = amount.toBigDecimal(),
                     unit = CompositeUnit(
                         domain = Force::class,
                         units = mapOf(unit.major.first to 1,
@@ -39,7 +39,7 @@ open class ForceAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
     companion object
     {
         operator fun invoke(amount: Number, unit: Unit<Force>) =
-            ForceAmount(amount = amount.toBigBigDecimal() * unit.scale,
+            ForceAmount(amount = amount.toBigDecimal() * unit.scale,
                         unit = U2(kilo(GRAM), METER) to SECOND)
     }
 

@@ -10,14 +10,14 @@ import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class CurrencyAmount<C : Unit<Currency>>(
         amount: Number,
         unit: C)
-    : Amount<Currency>(amount = amount.toBigBigDecimal(),
+    : Amount<Currency>(amount = amount.toBigDecimal(),
                        unit = CompositeUnit(
                            domain = Currency::class,
                            units = mapOf(unit to 1)))

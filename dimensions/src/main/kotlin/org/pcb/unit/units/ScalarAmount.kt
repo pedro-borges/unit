@@ -12,13 +12,13 @@ import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class ScalarAmount<S : Unit<Scalar>>(
         amount: Number,
         unit: S)
-    : Amount<Scalar>(amount = amount.toBigBigDecimal(),
+    : Amount<Scalar>(amount = amount.toBigDecimal(),
                      unit = CompositeUnit(
                          domain = Scalar::class,
                          units = mapOf(unit to 1)))

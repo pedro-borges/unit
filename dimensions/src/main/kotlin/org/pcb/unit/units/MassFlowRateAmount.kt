@@ -15,7 +15,7 @@ import org.pcb.unit.kilo
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.scalar.Numeric
@@ -24,7 +24,7 @@ import org.pcb.unit.units.scalar.Numeric.NUMERIC
 open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
         unit: Pair<M, T>)
-    : Amount<MassFlowRate>(amount = amount.toBigBigDecimal(),
+    : Amount<MassFlowRate>(amount = amount.toBigDecimal(),
                            unit = CompositeUnit(
                                domain = MassFlowRate::class,
                                units = mapOf(unit.major to 1,
@@ -36,7 +36,7 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
     companion object
     {
         operator fun invoke(amount: Number, unit: Unit<MassFlowRate>) =
-            MassFlowRateAmount(amount = amount.toBigBigDecimal() * unit.scale,
+            MassFlowRateAmount(amount = amount.toBigDecimal() * unit.scale,
                                unit = kilo(GRAM) to SECOND)
     }
 

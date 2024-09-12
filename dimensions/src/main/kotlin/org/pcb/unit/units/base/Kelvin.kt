@@ -4,19 +4,17 @@ import org.pcb.unit.Magnitude
 import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Temperature
-import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.TemperatureAmount
 
 class Kelvin(amount: Number,
              magnitude: Magnitude = UNI)
     : TemperatureAmount<Unit<Temperature>>(
-    amount = amount * magnitude.scale,
+    amount = amount.toBigDecimal().movePointRight(magnitude.power),
     unit = KELVIN)
 {
     open class KelvinUnit(magnitude: Magnitude)
-        : Unit<Temperature>(Temperature::class, "K", magnitude, 1.toBigBigDecimal())
+        : Unit<Temperature>(Temperature::class, "K", 1.toBigDecimal(), magnitude)
 
     object KELVIN : KelvinUnit(UNI)
 }
-

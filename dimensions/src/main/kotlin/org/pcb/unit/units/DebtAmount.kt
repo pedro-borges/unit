@@ -11,14 +11,14 @@ import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
         amount: Number,
         unit: U2<C, T>)
-    : Amount<Debt>(amount = amount.toBigBigDecimal(),
+    : Amount<Debt>(amount = amount.toBigDecimal(),
                    unit = CompositeUnit(
                        domain = Debt::class,
                        units = mapOf(unit.first to 1,

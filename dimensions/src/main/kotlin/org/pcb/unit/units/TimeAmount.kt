@@ -12,14 +12,14 @@ import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class TimeAmount<T : Unit<Time>>(
         amount: Number,
         unit: T)
-    : Amount<Time>(amount = amount.toBigBigDecimal(),
+    : Amount<Time>(amount = amount.toBigDecimal(),
                    unit = CompositeUnit(
                        domain = Time::class,
                        units = mapOf(unit to 1)))

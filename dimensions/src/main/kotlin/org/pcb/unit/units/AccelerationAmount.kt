@@ -14,14 +14,14 @@ import org.pcb.unit.div
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class AccelerationAmount<D : Unit<Distance>, T2 : Unit<Time>>(
         amount: Number,
         unit: Pair<D, T2>)
-    : Amount<Acceleration>(amount = amount.toBigBigDecimal(),
+    : Amount<Acceleration>(amount = amount.toBigDecimal(),
                            unit = CompositeUnit(
                                domain = Acceleration::class,
                                units = mapOf(unit.major to 1,

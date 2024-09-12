@@ -1,15 +1,18 @@
 package org.pcb.unit
 
 import java.math.BigDecimal
-import java.math.MathContext.DECIMAL128
-import java.math.RoundingMode.HALF_EVEN
+import java.math.MathContext
+import org.pcb.unit.config.Configuration.calculationMathContext
 
-fun Number.toBigBigDecimal(): BigDecimal =
+fun Number.toBigDecimal(): BigDecimal =
     when
     {
-        this is BigDecimal -> setScale(33, HALF_EVEN)
-        else               -> BigDecimal(toString()).setScale(33, HALF_EVEN)
+        this is BigDecimal -> this.stripTrailingZeros()
+        else               -> BigDecimal(toString()).stripTrailingZeros()
     }
+
+fun BigDecimal.setScale(mathContext: MathContext): BigDecimal =
+    setScale(mathContext.precision, mathContext.roundingMode)
 
 fun MutableMap<Unit<*>, Int>.putOrRemove(unit: Unit<*>, value: Int)
 {
@@ -19,12 +22,16 @@ fun MutableMap<Unit<*>, Int>.putOrRemove(unit: Unit<*>, value: Int)
 
 fun BigDecimal.power(power: Int): BigDecimal
 {
-    var result = 1.toBigBigDecimal()
-    for (a in 1..kotlin.math.abs(power))
-    {
-        if (power > 0) result = result.multiply(this, DECIMAL128)
-        if (power < 0) result = result.divide(this, DECIMAL128)
-    }
+    var result = 1.toBigDecimal()
+
+    if (power > 0)
+        for (a in 1..kotlin.math.abs(power))
+            result = result.multiply(this, calculationMathContext)
+
+    if (power < 0)
+        for (a in 1..kotlin.math.abs(power))
+            result = result.divide(this, calculationMathContext)
+
     return result
 }
 
@@ -38,18 +45,18 @@ fun Collection<Pair<Unit<*>, Int>>.sumToMap(): Map<Unit<*>, Int>
 }
 
 fun convert(vararg units: Pair<Unit<*>, Unit<*>>): BigDecimal =
-    units.fold(1.toBigBigDecimal()) { acc, unit ->
-        (acc * unit.first.scale).toBigBigDecimal()
-            .divide(unit.second.magnitude.scale.divide(unit.first.magnitude.scale), 42, HALF_EVEN)
-            .divide(unit.second.scale, 42, HALF_EVEN).stripTrailingZeros()
+    units.fold(1.toBigDecimal()) { acc, unit ->
+        (acc * unit.first.scale).toBigDecimal()
+            .movePointLeft(unit.second.magnitude.power - unit.first.magnitude.power)
+            .divide(unit.second.scale, calculationMathContext)
+            .stripTrailingZeros()
     }
 
-operator fun Number.times(other: BigDecimal): BigDecimal = toBigBigDecimal().multiply(other, DECIMAL128).stripTrailingZeros()
-operator fun Number.div(other: BigDecimal): BigDecimal = toBigBigDecimal().divide(other, 42, HALF_EVEN).stripTrailingZeros()
+operator fun Number.times(other: BigDecimal): BigDecimal = toBigDecimal().multiply(other, calculationMathContext).stripTrailingZeros()
+operator fun Number.div(other: BigDecimal): BigDecimal = toBigDecimal().divide(other, calculationMathContext).stripTrailingZeros()
 
 val <A, B> Pair<A, B>.major: A get() = first
 val <A, B> Pair<A, B>.minor get() = second
-
 
 fun Int.toPowerString() =
     when

@@ -11,14 +11,14 @@ import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
-import org.pcb.unit.toBigBigDecimal
+import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.scalar.Numeric
 import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class DistanceAmount<D : Unit<Distance>>(
         amount: Number,
         unit: D)
-    : Amount<Distance>(amount = amount.toBigBigDecimal(),
+    : Amount<Distance>(amount = amount.toBigDecimal(),
                        unit = CompositeUnit(
                            domain = Distance::class,
                            units = mapOf(unit to 1)))
