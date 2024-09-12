@@ -27,4 +27,3 @@ class Tesla(amount: Number,
 
     object TESLA : TeslaUnit(UNI)
 }
-

@@ -24,4 +24,3 @@ class Coulomb(amount: Number,
 
     object COULOMB : CoulombUnit(UNI)
 }
-

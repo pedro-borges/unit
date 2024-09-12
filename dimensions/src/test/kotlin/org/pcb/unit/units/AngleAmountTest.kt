@@ -1,0 +1,103 @@
+package org.pcb.unit.units
+
+import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
+import org.pcb.unit.units.scalar.Numeric
+import org.pcb.unit.units.scalar.Percent
+import org.pcb.unit.units.test.ANGLE1
+import org.pcb.unit.units.test.ANGLE2
+
+class AngleAmountTest
+{
+    @Test
+    fun timesScalar()
+    {
+        assertEquals(
+            expected = AngleAmount(amount = 2 * 2,
+                                  unit = ANGLE1),
+            actual = AngleAmount(amount = 2,
+                                unit = ANGLE1) *
+                     Percent(amount = 2 * 100))
+    }
+
+    @Test
+    fun divScalar()
+    {
+        assertEquals(
+            expected = AngleAmount(amount = 1,
+                                  unit = ANGLE1),
+            actual = AngleAmount(amount = 2,
+                                unit = ANGLE1) /
+                     Percent(amount = 2 * 100))
+    }
+
+    @Test
+    fun plusSameAngle()
+    {
+        assertEquals(
+            expected = AngleAmount(amount = 1,
+                                  unit = ANGLE1),
+            actual = AngleAmount(amount = 0,
+                                unit = ANGLE1) +
+                     AngleAmount(amount = 1,
+                                unit = ANGLE1))
+    }
+
+    @Test
+    fun plusOtherAngle()
+    {
+        assertEquals(
+            expected = AngleAmount(amount = 1,
+                                  unit = ANGLE2),
+            actual = AngleAmount(amount = 0,
+                                unit = ANGLE2) +
+                     AngleAmount(amount = 10,
+                                unit = ANGLE1))
+    }
+
+    @Test
+    fun minusSameAngle()
+    {
+        assertEquals(
+            expected = AngleAmount(amount = 0,
+                                  unit = ANGLE1),
+            actual = AngleAmount(amount = 1,
+                                unit = ANGLE1) -
+                     AngleAmount(amount = 1,
+                                unit = ANGLE1))
+    }
+
+    @Test
+    fun minusOtherAngle()
+    {
+        assertEquals(
+            expected = AngleAmount(amount = 0,
+                                  unit = ANGLE2),
+            actual = AngleAmount(amount = 1,
+                                unit = ANGLE2) -
+                     AngleAmount(amount = 10,
+                                unit = ANGLE1))
+    }
+
+    @Test
+    fun divSameAngle()
+    {
+        assertEquals(
+            expected = Numeric(amount = 1),
+            actual = AngleAmount(amount = 2,
+                                unit = ANGLE1) /
+                     AngleAmount(amount = 2,
+                                unit = ANGLE1))
+    }
+
+    @Test
+    fun divOtherAngle()
+    {
+        assertEquals(
+            expected = Numeric(amount = 1),
+            actual = AngleAmount(amount = 2,
+                                unit = ANGLE2) /
+                     AngleAmount(amount = 20,
+                                unit = ANGLE1))
+    }
+}
