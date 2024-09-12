@@ -12,10 +12,10 @@ import org.pcb.unit.units.base.Gram
 import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter
 import org.pcb.unit.units.base.Meter.METER
+import org.pcb.unit.units.base.Numeric
 import org.pcb.unit.units.base.Second
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.electromagnetism.Ohm.OHM
-import org.pcb.unit.units.scalar.Numeric
 
 class OhmTest
 {

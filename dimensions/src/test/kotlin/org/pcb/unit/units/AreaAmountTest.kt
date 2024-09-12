@@ -3,12 +3,12 @@ package org.pcb.unit.units
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.pcb.unit.U2
-import org.pcb.unit.units.scalar.Numeric
-import org.pcb.unit.units.scalar.Percent
+import org.pcb.unit.units.base.Numeric
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.MASS1
+import org.pcb.unit.units.test.NUMBER2
 import org.pcb.unit.units.test.TIME1
 
 class AreaAmountTest
@@ -21,7 +21,8 @@ class AreaAmountTest
                                   unit = DISTANCE1),
             actual = AreaAmount(amount = 2,
                                 unit = DISTANCE1) *
-                     Percent(amount = 2 * 100))
+                     ScalarAmount(amount = 20,
+                                  unit = NUMBER2))
     }
 
     @Test
@@ -32,7 +33,8 @@ class AreaAmountTest
                                   unit = DISTANCE1),
             actual = AreaAmount(amount = 2,
                                 unit = DISTANCE1) /
-                     Percent(amount = 2 * 100))
+                     ScalarAmount(amount = 20,
+                                  unit = NUMBER2))
     }
 
     @Test

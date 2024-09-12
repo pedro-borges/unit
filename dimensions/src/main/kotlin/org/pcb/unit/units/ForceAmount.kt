@@ -18,9 +18,9 @@ import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
+import org.pcb.unit.units.base.Numeric
+import org.pcb.unit.units.base.Numeric.NUMERIC
 import org.pcb.unit.units.base.Second.SECOND
-import org.pcb.unit.units.scalar.Numeric
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class ForceAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
         amount: Number,
@@ -135,7 +135,6 @@ open class ForceAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
     operator fun times(that: TimeAmount<T2>) =
         MomentumAmount(amount = amount * that.amount,
                        unit = U2(mass, distance) to time)
-
 
     // endregion
 

@@ -9,16 +9,16 @@ import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
-import org.pcb.unit.units.scalar.Numeric
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.base.Numeric
+import org.pcb.unit.units.base.Numeric.NUMERIC
 
 open class LuminousIntensityAmount<LI : Unit<LuminousIntensity>>(
         amount: Number,
         unit: LI)
     : Amount<LuminousIntensity>(amount = amount.toBigDecimal(),
                                 unit = CompositeUnit(
-                       domain = LuminousIntensity::class,
-                       units = mapOf(unit to 1)))
+                                    domain = LuminousIntensity::class,
+                                    units = mapOf(unit to 1)))
 {
     val luminousIntensity = unit
 

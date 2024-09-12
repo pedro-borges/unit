@@ -16,9 +16,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Meter.METER
+import org.pcb.unit.units.base.Numeric
+import org.pcb.unit.units.base.Numeric.NUMERIC
 import org.pcb.unit.units.base.Second.SECOND
-import org.pcb.unit.units.scalar.Numeric
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
         amount: Number,
@@ -83,7 +83,6 @@ open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     operator fun div(that: SpeedAmount<D, T>) =
         Numeric(amount = amount / that.amount)
-
 
     @JvmName("timesPace")
     operator fun <T : Unit<Time>, D : Unit<Distance>> times(that: PaceAmount<T, D>) =

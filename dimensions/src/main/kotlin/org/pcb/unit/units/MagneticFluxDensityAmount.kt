@@ -19,9 +19,9 @@ import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Gram.GRAM
+import org.pcb.unit.units.base.Numeric
+import org.pcb.unit.units.base.Numeric.NUMERIC
 import org.pcb.unit.units.base.Second.SECOND
-import org.pcb.unit.units.scalar.Numeric
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class MagneticFluxDensityAmount<M : Unit<Mass>, T2 : Unit<Time>, EC : Unit<ElectricCurrent>>(
         amount: Number,

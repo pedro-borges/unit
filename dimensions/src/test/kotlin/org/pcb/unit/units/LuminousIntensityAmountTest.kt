@@ -2,10 +2,10 @@ package org.pcb.unit.units
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
-import org.pcb.unit.units.scalar.Numeric
-import org.pcb.unit.units.scalar.Percent
+import org.pcb.unit.units.base.Numeric
 import org.pcb.unit.units.test.LUMINOUSINTENSITY1
 import org.pcb.unit.units.test.LUMINOUSINTENSITY2
+import org.pcb.unit.units.test.NUMBER2
 
 class LuminousIntensityAmountTest
 {
@@ -14,10 +14,11 @@ class LuminousIntensityAmountTest
     {
         assertEquals(
             expected = LuminousIntensityAmount(amount = 2 * 2,
-                                  unit = LUMINOUSINTENSITY1),
+                                               unit = LUMINOUSINTENSITY1),
             actual = LuminousIntensityAmount(amount = 2,
-                                unit = LUMINOUSINTENSITY1) *
-                     Percent(amount = 2 * 100))
+                                             unit = LUMINOUSINTENSITY1) *
+                     ScalarAmount(amount = 20,
+                                  unit = NUMBER2))
     }
 
     @Test
@@ -25,10 +26,11 @@ class LuminousIntensityAmountTest
     {
         assertEquals(
             expected = LuminousIntensityAmount(amount = 1,
-                                  unit = LUMINOUSINTENSITY1),
+                                               unit = LUMINOUSINTENSITY1),
             actual = LuminousIntensityAmount(amount = 2,
-                                unit = LUMINOUSINTENSITY1) /
-                     Percent(amount = 2 * 100))
+                                             unit = LUMINOUSINTENSITY1) /
+                     ScalarAmount(amount = 20,
+                                  unit = NUMBER2))
     }
 
     @Test
@@ -36,11 +38,11 @@ class LuminousIntensityAmountTest
     {
         assertEquals(
             expected = LuminousIntensityAmount(amount = 1,
-                                  unit = LUMINOUSINTENSITY1),
+                                               unit = LUMINOUSINTENSITY1),
             actual = LuminousIntensityAmount(amount = 0,
-                                unit = LUMINOUSINTENSITY1) +
+                                             unit = LUMINOUSINTENSITY1) +
                      LuminousIntensityAmount(amount = 1,
-                                unit = LUMINOUSINTENSITY1))
+                                             unit = LUMINOUSINTENSITY1))
     }
 
     @Test
@@ -48,11 +50,11 @@ class LuminousIntensityAmountTest
     {
         assertEquals(
             expected = LuminousIntensityAmount(amount = 1,
-                                  unit = LUMINOUSINTENSITY2),
+                                               unit = LUMINOUSINTENSITY2),
             actual = LuminousIntensityAmount(amount = 0,
-                                unit = LUMINOUSINTENSITY2) +
+                                             unit = LUMINOUSINTENSITY2) +
                      LuminousIntensityAmount(amount = 10,
-                                unit = LUMINOUSINTENSITY1))
+                                             unit = LUMINOUSINTENSITY1))
     }
 
     @Test
@@ -60,11 +62,11 @@ class LuminousIntensityAmountTest
     {
         assertEquals(
             expected = LuminousIntensityAmount(amount = 0,
-                                  unit = LUMINOUSINTENSITY1),
+                                               unit = LUMINOUSINTENSITY1),
             actual = LuminousIntensityAmount(amount = 1,
-                                unit = LUMINOUSINTENSITY1) -
+                                             unit = LUMINOUSINTENSITY1) -
                      LuminousIntensityAmount(amount = 1,
-                                unit = LUMINOUSINTENSITY1))
+                                             unit = LUMINOUSINTENSITY1))
     }
 
     @Test
@@ -72,11 +74,11 @@ class LuminousIntensityAmountTest
     {
         assertEquals(
             expected = LuminousIntensityAmount(amount = 0,
-                                  unit = LUMINOUSINTENSITY2),
+                                               unit = LUMINOUSINTENSITY2),
             actual = LuminousIntensityAmount(amount = 1,
-                                unit = LUMINOUSINTENSITY2) -
+                                             unit = LUMINOUSINTENSITY2) -
                      LuminousIntensityAmount(amount = 10,
-                                unit = LUMINOUSINTENSITY1))
+                                             unit = LUMINOUSINTENSITY1))
     }
 
     @Test
@@ -85,9 +87,9 @@ class LuminousIntensityAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = LuminousIntensityAmount(amount = 2,
-                                unit = LUMINOUSINTENSITY1) /
+                                             unit = LUMINOUSINTENSITY1) /
                      LuminousIntensityAmount(amount = 2,
-                                unit = LUMINOUSINTENSITY1))
+                                             unit = LUMINOUSINTENSITY1))
     }
 
     @Test
@@ -96,8 +98,8 @@ class LuminousIntensityAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = LuminousIntensityAmount(amount = 2,
-                                unit = LUMINOUSINTENSITY2) /
+                                             unit = LUMINOUSINTENSITY2) /
                      LuminousIntensityAmount(amount = 20,
-                                unit = LUMINOUSINTENSITY1))
+                                             unit = LUMINOUSINTENSITY1))
     }
 }

@@ -2,10 +2,10 @@ package org.pcb.unit.units
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
-import org.pcb.unit.units.scalar.Numeric
-import org.pcb.unit.units.scalar.Percent
+import org.pcb.unit.units.base.Numeric
 import org.pcb.unit.units.test.ANGLE1
 import org.pcb.unit.units.test.ANGLE2
+import org.pcb.unit.units.test.NUMBER2
 
 class AngleAmountTest
 {
@@ -14,10 +14,11 @@ class AngleAmountTest
     {
         assertEquals(
             expected = AngleAmount(amount = 2 * 2,
-                                  unit = ANGLE1),
+                                   unit = ANGLE1),
             actual = AngleAmount(amount = 2,
-                                unit = ANGLE1) *
-                     Percent(amount = 2 * 100))
+                                 unit = ANGLE1) *
+                     ScalarAmount(amount = 20,
+                                  unit = NUMBER2))
     }
 
     @Test
@@ -25,10 +26,11 @@ class AngleAmountTest
     {
         assertEquals(
             expected = AngleAmount(amount = 1,
-                                  unit = ANGLE1),
+                                   unit = ANGLE1),
             actual = AngleAmount(amount = 2,
-                                unit = ANGLE1) /
-                     Percent(amount = 2 * 100))
+                                 unit = ANGLE1) /
+                     ScalarAmount(amount = 20,
+                                  unit = NUMBER2))
     }
 
     @Test
@@ -36,11 +38,11 @@ class AngleAmountTest
     {
         assertEquals(
             expected = AngleAmount(amount = 1,
-                                  unit = ANGLE1),
+                                   unit = ANGLE1),
             actual = AngleAmount(amount = 0,
-                                unit = ANGLE1) +
+                                 unit = ANGLE1) +
                      AngleAmount(amount = 1,
-                                unit = ANGLE1))
+                                 unit = ANGLE1))
     }
 
     @Test
@@ -48,11 +50,11 @@ class AngleAmountTest
     {
         assertEquals(
             expected = AngleAmount(amount = 1,
-                                  unit = ANGLE2),
+                                   unit = ANGLE2),
             actual = AngleAmount(amount = 0,
-                                unit = ANGLE2) +
+                                 unit = ANGLE2) +
                      AngleAmount(amount = 10,
-                                unit = ANGLE1))
+                                 unit = ANGLE1))
     }
 
     @Test
@@ -60,11 +62,11 @@ class AngleAmountTest
     {
         assertEquals(
             expected = AngleAmount(amount = 0,
-                                  unit = ANGLE1),
+                                   unit = ANGLE1),
             actual = AngleAmount(amount = 1,
-                                unit = ANGLE1) -
+                                 unit = ANGLE1) -
                      AngleAmount(amount = 1,
-                                unit = ANGLE1))
+                                 unit = ANGLE1))
     }
 
     @Test
@@ -72,11 +74,11 @@ class AngleAmountTest
     {
         assertEquals(
             expected = AngleAmount(amount = 0,
-                                  unit = ANGLE2),
+                                   unit = ANGLE2),
             actual = AngleAmount(amount = 1,
-                                unit = ANGLE2) -
+                                 unit = ANGLE2) -
                      AngleAmount(amount = 10,
-                                unit = ANGLE1))
+                                 unit = ANGLE1))
     }
 
     @Test
@@ -85,9 +87,9 @@ class AngleAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = AngleAmount(amount = 2,
-                                unit = ANGLE1) /
+                                 unit = ANGLE1) /
                      AngleAmount(amount = 2,
-                                unit = ANGLE1))
+                                 unit = ANGLE1))
     }
 
     @Test
@@ -96,8 +98,8 @@ class AngleAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = AngleAmount(amount = 2,
-                                unit = ANGLE2) /
+                                 unit = ANGLE2) /
                      AngleAmount(amount = 20,
-                                unit = ANGLE1))
+                                 unit = ANGLE1))
     }
 }

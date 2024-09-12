@@ -3,6 +3,7 @@ package org.pcb.unit.units.test
 import java.math.BigDecimal.TEN
 import org.pcb.unit.Magnitude
 import org.pcb.unit.Magnitude.DECA
+import org.pcb.unit.Magnitude.DECI
 import org.pcb.unit.Magnitude.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.dimension.Angle
@@ -11,6 +12,7 @@ import org.pcb.unit.dimension.Distance
 import org.pcb.unit.dimension.ElectricCurrent
 import org.pcb.unit.dimension.LuminousIntensity
 import org.pcb.unit.dimension.Mass
+import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.dimension.Temperature
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.power
@@ -38,6 +40,10 @@ object LUMINOUSINTENSITY2 : LUMINOUSINTENSITY(DECA)
 open class MASS(magnitude: Magnitude) : Unit<Mass>(Mass::class, magnitude.symbol + "M", TEN.power(magnitude.power), UNI)
 object MASS1 : MASS(UNI)
 object MASS2 : MASS(DECA)
+
+open class NUMBER(magnitude: Magnitude) : Unit<Scalar>(Scalar::class, magnitude.symbol, TEN.power(magnitude.power), UNI)
+object NUMBER1 : NUMBER(UNI)
+object NUMBER2 : NUMBER(DECI)
 
 open class TIME(magnitude: Magnitude) : Unit<Time>(Time::class, magnitude.symbol + "T", TEN.power(magnitude.power), UNI)
 object TIME1 : TIME(UNI)

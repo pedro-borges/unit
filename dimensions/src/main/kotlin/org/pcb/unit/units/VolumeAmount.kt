@@ -14,8 +14,8 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Meter.METER
-import org.pcb.unit.units.scalar.Numeric
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.base.Numeric
+import org.pcb.unit.units.base.Numeric.NUMERIC
 
 open class VolumeAmount<D3 : Unit<Distance>>(
         amount: Number,

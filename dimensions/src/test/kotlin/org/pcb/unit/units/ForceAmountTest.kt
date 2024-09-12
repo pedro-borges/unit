@@ -3,12 +3,12 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.units.scalar.Numeric
-import org.pcb.unit.units.scalar.Percent
+import org.pcb.unit.units.base.Numeric
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
 import org.pcb.unit.units.test.MASS1
 import org.pcb.unit.units.test.MASS2
+import org.pcb.unit.units.test.NUMBER2
 import org.pcb.unit.units.test.TIME1
 import org.pcb.unit.units.test.TIME2
 
@@ -22,7 +22,8 @@ class ForceAmountTest
                                    unit = U2(MASS1, DISTANCE1) to TIME1),
             actual = ForceAmount(amount = 2,
                                  unit = U2(MASS1, DISTANCE1) to TIME1) *
-                     Percent(amount = 2 * 100))
+                     ScalarAmount(amount = 20,
+                                  unit = NUMBER2))
     }
 
     @Test
@@ -33,7 +34,8 @@ class ForceAmountTest
                                    unit = U2(MASS1, DISTANCE1) to TIME1),
             actual = ForceAmount(amount = 2,
                                  unit = U2(MASS1, DISTANCE1) to TIME1) /
-                     Percent(amount = 2 * 100))
+                     ScalarAmount(amount = 20,
+                                  unit = NUMBER2))
     }
 
     @Test

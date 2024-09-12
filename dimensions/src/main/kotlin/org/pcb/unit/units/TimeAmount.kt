@@ -13,8 +13,8 @@ import org.pcb.unit.dimension.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
-import org.pcb.unit.units.scalar.Numeric
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
+import org.pcb.unit.units.base.Numeric
+import org.pcb.unit.units.base.Numeric.NUMERIC
 
 open class TimeAmount<T : Unit<Time>>(
         amount: Number,
@@ -141,7 +141,6 @@ open class TimeAmount<T : Unit<Time>>(
     operator fun <EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> times(that: ElectricConductanceAmount<T, EC, M, D>) =
         CapacitanceAmount(amount = amount * that.amount,
                           unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
-
 
     // endregion
 

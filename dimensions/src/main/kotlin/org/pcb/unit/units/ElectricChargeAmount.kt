@@ -15,9 +15,9 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.base.Ampere.AMPERE
+import org.pcb.unit.units.base.Numeric
+import org.pcb.unit.units.base.Numeric.NUMERIC
 import org.pcb.unit.units.base.Second.SECOND
-import org.pcb.unit.units.scalar.Numeric
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
         amount: Number,

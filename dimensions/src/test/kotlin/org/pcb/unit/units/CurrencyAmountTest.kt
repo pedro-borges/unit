@@ -3,10 +3,10 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.units.scalar.Numeric
-import org.pcb.unit.units.scalar.Percent
+import org.pcb.unit.units.base.Numeric
 import org.pcb.unit.units.test.CURRENCY1
 import org.pcb.unit.units.test.CURRENCY2
+import org.pcb.unit.units.test.NUMBER2
 import org.pcb.unit.units.test.TIME1
 
 class CurrencyAmountTest
@@ -19,7 +19,8 @@ class CurrencyAmountTest
                                       unit = CURRENCY1),
             actual = CurrencyAmount(amount = 2,
                                     unit = CURRENCY1) *
-                     Percent(amount = 2 * 100))
+                     ScalarAmount(amount = 20,
+                                  unit = NUMBER2))
     }
 
     @Test
@@ -30,7 +31,8 @@ class CurrencyAmountTest
                                       unit = CURRENCY1),
             actual = CurrencyAmount(amount = 2,
                                     unit = CURRENCY1) /
-                     Percent(amount = 2 * 100))
+                     ScalarAmount(amount = 20,
+                                  unit = NUMBER2))
     }
 
     @Test

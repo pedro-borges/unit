@@ -7,8 +7,8 @@ import org.pcb.unit.dimension.Frequency
 import org.pcb.unit.dimension.Time
 import org.pcb.unit.toBigDecimal
 import org.pcb.unit.units.FrequencyAmount
+import org.pcb.unit.units.base.Numeric.NUMERIC
 import org.pcb.unit.units.base.Second.SECOND
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
 
 class Hertz(amount: Number,
             magnitude: Magnitude = UNI)

@@ -3,13 +3,13 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.units.scalar.Numeric
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
-import org.pcb.unit.units.scalar.Percent
+import org.pcb.unit.units.base.Numeric
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
 import org.pcb.unit.units.test.MASS1
 import org.pcb.unit.units.test.MASS2
+import org.pcb.unit.units.test.NUMBER1
+import org.pcb.unit.units.test.NUMBER2
 import org.pcb.unit.units.test.TIME1
 import org.pcb.unit.units.test.TIME2
 
@@ -23,7 +23,8 @@ class SpeedAmountTest
                                    unit = DISTANCE1 to TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = DISTANCE1 to TIME1) *
-                     Percent(amount = 2 * 100))
+                     ScalarAmount(amount = 20,
+                                  unit = NUMBER2))
     }
 
     @Test
@@ -34,7 +35,8 @@ class SpeedAmountTest
                                    unit = DISTANCE1 to TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = DISTANCE1 to TIME1) /
-                     Percent(amount = 2 * 100))
+                     ScalarAmount(amount = 20,
+                                  unit = NUMBER2))
     }
 
     @Test
@@ -182,7 +184,7 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
-                                       unit = NUMERIC to TIME1),
+                                       unit = NUMBER1 to TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = DISTANCE1 to TIME1) /
                      DistanceAmount(amount = 2,
@@ -194,7 +196,7 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
-                                       unit = NUMERIC to TIME2),
+                                       unit = NUMBER1 to TIME2),
             actual = SpeedAmount(amount = 2,
                                  unit = DISTANCE2 to TIME2) /
                      DistanceAmount(amount = 20,

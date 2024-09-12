@@ -9,10 +9,10 @@ import org.pcb.unit.units.base.Ampere
 import org.pcb.unit.units.base.Ampere.AMPERE
 import org.pcb.unit.units.base.Gram.GRAM
 import org.pcb.unit.units.base.Meter.METER
+import org.pcb.unit.units.base.Numeric
 import org.pcb.unit.units.base.Second.SECOND
 import org.pcb.unit.units.electromagnetism.Siemens.SIEMENS
 import org.pcb.unit.units.frequency.Hertz
-import org.pcb.unit.units.scalar.Numeric
 
 class SiemensTest
 {

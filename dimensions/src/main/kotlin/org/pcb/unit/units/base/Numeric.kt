@@ -1,4 +1,4 @@
-package org.pcb.unit.units.scalar
+package org.pcb.unit.units.base
 
 import org.pcb.unit.Magnitude
 import org.pcb.unit.Magnitude.UNI

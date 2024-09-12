@@ -3,11 +3,11 @@ package org.pcb.unit.units
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.units.scalar.Numeric
-import org.pcb.unit.units.scalar.Numeric.NUMERIC
-import org.pcb.unit.units.scalar.Percent
+import org.pcb.unit.units.base.Numeric
 import org.pcb.unit.units.test.CURRENCY1
 import org.pcb.unit.units.test.CURRENCY2
+import org.pcb.unit.units.test.NUMBER1
+import org.pcb.unit.units.test.NUMBER2
 import org.pcb.unit.units.test.TIME1
 import org.pcb.unit.units.test.TIME2
 
@@ -21,7 +21,8 @@ class DebtAmountTest
                                   unit = U2(CURRENCY1, TIME1)),
             actual = DebtAmount(amount = 2,
                                 unit = U2(CURRENCY1, TIME1)) *
-                     Percent(amount = 2 * 100))
+                     ScalarAmount(amount = 20,
+                                  unit = NUMBER2))
     }
 
     @Test
@@ -32,7 +33,8 @@ class DebtAmountTest
                                   unit = U2(CURRENCY1, TIME1)),
             actual = DebtAmount(amount = 2,
                                 unit = U2(CURRENCY1, TIME1)) /
-                     Percent(amount = 2 * 100))
+                     ScalarAmount(amount = 20,
+                                  unit = NUMBER2))
     }
 
     @Test
@@ -138,7 +140,7 @@ class DebtAmountTest
             actual = DebtAmount(amount = 2,
                                 unit = U2(CURRENCY1, TIME1)) *
                      FrequencyAmount(amount = 2,
-                                     unit = NUMERIC to TIME1))
+                                     unit = NUMBER1 to TIME1))
     }
 
     @Test
@@ -150,6 +152,6 @@ class DebtAmountTest
             actual = DebtAmount(amount = 2,
                                 unit = U2(CURRENCY2, TIME2)) *
                      FrequencyAmount(amount = 20,
-                                     unit = NUMERIC to TIME1))
+                                     unit = NUMBER1 to TIME1))
     }
 }
