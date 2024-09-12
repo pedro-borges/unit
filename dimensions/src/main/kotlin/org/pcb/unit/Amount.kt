@@ -2,6 +2,7 @@ package org.pcb.unit
 
 import java.math.BigDecimal
 import java.util.Objects
+import org.pcb.unit.config.Configuration
 import org.pcb.unit.dimension.Dimension
 import org.pcb.unit.dimension.Scalar
 import org.pcb.unit.units.ScalarAmount
@@ -25,5 +26,5 @@ abstract class Amount<D : Dimension>(val amount: BigDecimal,
         Objects.hash(amount * unit.magnitude.scale, unit)
 
     override fun toString() =
-        "${amount.stripTrailingZeros().toPlainString()}$unit (${unit.domain.simpleName})"
+        Configuration.renderer.render(this)
 }

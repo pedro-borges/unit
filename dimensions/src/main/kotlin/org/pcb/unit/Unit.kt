@@ -3,6 +3,7 @@ package org.pcb.unit
 import java.math.BigDecimal
 import java.util.Objects
 import kotlin.reflect.KClass
+import org.pcb.unit.config.Configuration
 import org.pcb.unit.dimension.Dimension
 
 abstract class Unit<D : Dimension>(val domain: KClass<D>, val symbol: String, val magnitude: Magnitude, val scale: BigDecimal)
@@ -18,4 +19,7 @@ abstract class Unit<D : Dimension>(val domain: KClass<D>, val symbol: String, va
 
     override fun hashCode() =
         Objects.hash(symbol, scale * magnitude.scale)
+
+    override fun toString() =
+        Configuration.renderer.render(this)
 }

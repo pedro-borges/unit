@@ -1,35 +1,32 @@
 package org.pcb.unit.config
 
+import org.pcb.unit.Amount
 import org.pcb.unit.Unit
-import org.pcb.unit.config.FancyRenderer.Color.CYAN
-import org.pcb.unit.config.FancyRenderer.Color.NONE
-import org.pcb.unit.config.FancyRenderer.Color.RED
+import org.pcb.unit.config.Color.CYAN
+import org.pcb.unit.config.Color.NONE
+import org.pcb.unit.config.Color.RED
 
 object FancyRenderer : Renderer
 {
     var separator = "﹒"
-    var scaleColor = CYAN
-    var unitColor = NONE
-    var exponentColor = RED
+    var scaleColor = CYAN.iso
+    var unitColor = NONE.iso
+    var exponentColor = RED.iso
+    var magnitudeScale = 2
 
-    enum class Color(val iso: String)
-    {
-        NONE("\u001b[0m"),
-        BLACK("\u001b[30m"),
-        RED("\u001b[31m"),
-        GREEN("\u001b[32m"),
-        YELLOW("\u001b[33m"),
-        BLUE("\u001b[34m"),
-        MAGENTA("\u001b[35m"),
-        CYAN("\u001b[36m"),
-        WHITE("\u001b[37m"),
-    }
+    override fun render(amount: Amount<*>) =
+        amount.amount.stripTrailingZeros().toPlainString() + render(amount.unit.units)
 
     override fun render(units: Map<Unit<*>, Int>) =
         units.asSequence()
             .sortedByDescending { it.value }
-            .map { scaleColor.iso + it.key.magnitude.symbol + unitColor.iso + it.key.symbol + exponentColor.iso + it.value.toPowerString() + NONE.iso }
+            .map { it.key.toString() + exponentColor + it.value.toPowerString() + NONE.iso }
             .joinToString(separator = separator)
+
+    override fun render(unit: Unit<*>): String
+    {
+        return scaleColor + unit.magnitude.symbol + unitColor + unit.symbol
+    }
 
     private fun Int.toPowerString() =
         when

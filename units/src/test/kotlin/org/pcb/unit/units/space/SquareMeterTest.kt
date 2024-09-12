@@ -28,8 +28,6 @@ class SquareMeterTest
 
         SquareMeter(1, HECTO) equivalent SquareMeter(100)
         SquareMeter(1, HECTO) equivalent SquareMeter(1, HECTO)
-
-        println(SquareMeter(1, HECTO))
     }
 
     @Test
