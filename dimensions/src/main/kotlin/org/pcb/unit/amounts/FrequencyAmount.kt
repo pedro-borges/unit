@@ -97,11 +97,11 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     @JvmName("timesSpeed")
     operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
-        org.pcb.unit.amounts.AccelerationAmount(amount = that.amount / amount / convert(that.time to time),
+        AccelerationAmount(amount = that.amount / amount / convert(that.time to time),
                                                 unit = that.distance to time)
 
     operator fun <D : Unit<Distance>> times(that: SpeedAmount<D, T>) =
-        org.pcb.unit.amounts.AccelerationAmount(amount = that.amount / amount,
+        AccelerationAmount(amount = that.amount / amount,
                                                 unit = that.distance to time)
 
     // endregion

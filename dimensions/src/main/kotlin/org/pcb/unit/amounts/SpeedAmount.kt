@@ -111,7 +111,7 @@ open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
     // region -> Acceleration
 
     operator fun <U : Unit<Time>> div(that: TimeAmount<U>) =
-        org.pcb.unit.amounts.AccelerationAmount(amount = amount / that.amount / convert(that.time to time),
+        AccelerationAmount(amount = amount / that.amount / convert(that.time to time),
                                                 unit = distance to time)
 
     // endregion

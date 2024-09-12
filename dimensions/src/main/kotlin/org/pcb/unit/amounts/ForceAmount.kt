@@ -100,11 +100,11 @@ open class ForceAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
 
     @JvmName("divMass")
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
-        org.pcb.unit.amounts.AccelerationAmount(amount = amount / that.amount / convert(that.mass to mass),
+        AccelerationAmount(amount = amount / that.amount / convert(that.mass to mass),
                                                 unit = distance to time)
 
     operator fun div(that: MassAmount<M>) =
-        org.pcb.unit.amounts.AccelerationAmount(amount = amount / that.amount,
+        AccelerationAmount(amount = amount / that.amount,
                                                 unit = distance to time)
 
     // endregion
@@ -112,14 +112,14 @@ open class ForceAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
     // region -> Mass
 
     @JvmName("divAcceleration")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: org.pcb.unit.amounts.AccelerationAmount<D, T>) =
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: AccelerationAmount<D, T>) =
         MassAmount(amount = amount / that.amount
                             / convert(that.distance to distance)
                             * convert(that.time to time,
                                       that.time to time),
                    unit = mass)
 
-    operator fun div(that: org.pcb.unit.amounts.AccelerationAmount<D, T2>) =
+    operator fun div(that: AccelerationAmount<D, T2>) =
         MassAmount(amount = amount / that.amount,
                    unit = mass)
 
