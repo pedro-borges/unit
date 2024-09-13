@@ -2,6 +2,7 @@ package org.pcb.unit.amounts
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
+import org.pcb.unit.U2
 import org.pcb.unit.U3
 import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.units.test.ANGLE1
@@ -106,5 +107,53 @@ class LuminousEnergyAmountTest
                                           unit = U3(LUMINOUSINTENSITY2, ANGLE2, TIME2)) /
                      LuminousEnergyAmount(amount = 20000,
                                           unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)))
+    }
+
+    @Test
+    fun divSameTime()
+    {
+        assertEquals(
+            expected = LuminousFluxAmount(amount = 1,
+                                          unit = U2(LUMINOUSINTENSITY1, ANGLE1)),
+            actual = LuminousEnergyAmount(amount = 2,
+                                          unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)) /
+                     TimeAmount(amount = 2,
+                                unit = TIME1))
+    }
+
+    @Test
+    fun divOtherTime()
+    {
+        assertEquals(
+            expected = LuminousFluxAmount(amount = 1,
+                                          unit = U2(LUMINOUSINTENSITY1, ANGLE1)),
+            actual = LuminousEnergyAmount(amount = 2,
+                                          unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME2)) /
+                     TimeAmount(amount = 20,
+                                unit = TIME1))
+    }
+
+    @Test
+    fun divSameLuminousFlux()
+    {
+        assertEquals(
+            expected = TimeAmount(amount = 1,
+                                  unit = TIME1),
+            actual = LuminousEnergyAmount(amount = 2,
+                                          unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)) /
+                     LuminousFluxAmount(amount = 2,
+                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)))
+    }
+
+    @Test
+    fun divOtherLuminousFlux()
+    {
+        assertEquals(
+            expected = TimeAmount(amount = 1,
+                                  unit = TIME1),
+            actual = LuminousEnergyAmount(amount = 2,
+                                          unit = U3(LUMINOUSINTENSITY2, ANGLE2, TIME1)) /
+                     LuminousFluxAmount(amount = 2000,
+                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)))
     }
 }

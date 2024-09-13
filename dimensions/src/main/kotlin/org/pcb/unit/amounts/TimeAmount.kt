@@ -3,12 +3,15 @@ package org.pcb.unit.amounts
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
+import org.pcb.unit.U3
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
+import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.ElectricCurrent
+import org.pcb.unit.dimensions.LuminousIntensity
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.Time
@@ -172,6 +175,14 @@ open class TimeAmount<T : Unit<Time>>(
     operator fun <M : Unit<Mass>, D : Unit<Distance>, EC : Unit<ElectricCurrent>> times(that: ElectricTensionAmount<M, D, T, EC>) =
         MagneticFluxAmount(amount = amount * that.amount,
                            unit = U2(that.mass, that.distance) to U2(time, that.electricCurrent))
+
+    // endregion
+
+    // region -> LuminousEnergy
+
+    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>> times(that: LuminousFluxAmount<LI, A>) =
+        LuminousEnergyAmount(amount = amount * that.amount,
+                             unit = U3(that.luminousIntensity, that.angle, time))
 
     // endregion
 }

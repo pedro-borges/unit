@@ -3,6 +3,7 @@ package org.pcb.unit.amounts
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
+import org.pcb.unit.U3
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Candela.CANDELA
 import org.pcb.unit.amounts.base.Numeric
@@ -14,6 +15,7 @@ import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.LuminousFlux
 import org.pcb.unit.dimensions.LuminousIntensity
 import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
@@ -131,6 +133,14 @@ open class LuminousFluxAmount<LI : Unit<LuminousIntensity>, A : Unit<Angle>>(
     operator fun <D : Unit<Distance>> div(that: IlluminanceAmount<LI, A, D>) =
         AreaAmount(amount = amount / that.amount,
                    unit = that.distance)
+
+    // endregion
+
+    // region -> LuminousEnergy
+
+    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
+        LuminousEnergyAmount(amount = amount * that.amount,
+                             unit = U3(luminousIntensity, angle, that.time))
 
     // endregion
 }

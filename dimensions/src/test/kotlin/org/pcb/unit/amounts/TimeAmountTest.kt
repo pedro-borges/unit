@@ -3,11 +3,14 @@ package org.pcb.unit.amounts
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
+import org.pcb.unit.U3
 import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.units.test.ANGLE1
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
 import org.pcb.unit.units.test.ELECTRICCURRENT1
 import org.pcb.unit.units.test.ELECTRICCURRENT2
+import org.pcb.unit.units.test.LUMINOUSINTENSITY1
 import org.pcb.unit.units.test.MASS1
 import org.pcb.unit.units.test.MASS2
 import org.pcb.unit.units.test.NUMBER1
@@ -299,5 +302,17 @@ class TimeAmountTest
                                 unit = TIME2) *
                      ElectricTensionAmount(amount = 2000,
                                            unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
+    }
+
+    @Test
+    fun timesLuminousFlux()
+    {
+        assertEquals(
+            expected = LuminousEnergyAmount(amount = 2 * 2,
+                                            unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)),
+            actual = TimeAmount(amount = 2,
+                                unit = TIME1) *
+                     LuminousFluxAmount(amount = 2,
+                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)))
     }
 }

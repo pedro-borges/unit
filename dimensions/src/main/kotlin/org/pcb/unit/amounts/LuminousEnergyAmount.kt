@@ -2,6 +2,7 @@ package org.pcb.unit.amounts
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.U2
 import org.pcb.unit.U3
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Candela.CANDELA
@@ -78,7 +79,7 @@ open class LuminousEnergyAmount<LI : Unit<LuminousIntensity>, A : Unit<Angle>, T
 
     // region -> Natural
 
-    @JvmName("divLuminousFlux")
+    @JvmName("divLuminousEnergy")
     operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>, T : Unit<Time>> div(that: LuminousEnergyAmount<LI, A, T>) =
         Numeric(amount = amount / that.amount / convert(that.luminousIntensity to luminousIntensity,
                                                         that.angle to angle,
@@ -87,6 +88,34 @@ open class LuminousEnergyAmount<LI : Unit<LuminousIntensity>, A : Unit<Angle>, T
 
     operator fun div(that: LuminousEnergyAmount<LI, A, T>) =
         Numeric(amount = amount / that.amount)
+
+    // endregion
+
+    // region -> LuminousFlux
+
+    @JvmName("divTime")
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        LuminousFluxAmount(amount = amount / that.amount / convert(that.time to time),
+                           unit = U2(luminousIntensity, angle))
+
+    operator fun div(that: TimeAmount<T>) =
+        LuminousFluxAmount(amount = amount / that.amount,
+                           unit = U2(luminousIntensity, angle))
+
+    // endregion
+
+    // region -> Time
+
+    @JvmName("divLuminousFlux")
+    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>> div(that: LuminousFluxAmount<LI, A>) =
+        TimeAmount(amount = amount / that.amount / convert(that.luminousIntensity to luminousIntensity,
+                                                           that.angle to angle,
+                                                           that.angle to angle),
+                   unit = time)
+
+    operator fun div(that: LuminousFluxAmount<LI, A>) =
+        TimeAmount(amount = amount / that.amount,
+                   unit = time)
 
     // endregion
 }

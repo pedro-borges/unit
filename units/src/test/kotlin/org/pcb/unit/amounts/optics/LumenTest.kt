@@ -7,6 +7,7 @@ import org.pcb.unit.amounts.LuminousFluxAmount
 import org.pcb.unit.amounts.base.Candela
 import org.pcb.unit.amounts.base.Candela.CANDELA
 import org.pcb.unit.amounts.base.Radian.RADIAN
+import org.pcb.unit.amounts.base.Second
 import org.pcb.unit.amounts.optics.Lumen.LUMEN
 import org.pcb.unit.amounts.space.SquareMeter
 import org.pcb.unit.amounts.trigonometry.Steradian
@@ -46,4 +47,10 @@ class LumenTest
         assertEquals(
             expected = Lumen(2 * 3),
             actual = Steradian(2) * Candela(3))
+
+    @Test
+    fun talbotDivSecond() =
+        assertEquals(
+            expected = Lumen(6 / 3),
+            actual = Talbot(6) / Second(3))
 }

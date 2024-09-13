@@ -3,6 +3,7 @@ package org.pcb.unit.amounts
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.pcb.unit.U2
+import org.pcb.unit.U3
 import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.units.test.ANGLE1
 import org.pcb.unit.units.test.ANGLE2
@@ -10,6 +11,7 @@ import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.LUMINOUSINTENSITY1
 import org.pcb.unit.units.test.LUMINOUSINTENSITY2
 import org.pcb.unit.units.test.NUMBER2
+import org.pcb.unit.units.test.TIME2
 
 class LuminousFluxAmountTest
 {
@@ -189,5 +191,17 @@ class LuminousFluxAmountTest
                                         unit = U2(LUMINOUSINTENSITY2, ANGLE2)) /
                      IlluminanceAmount(amount = 2000,
                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1))
+    }
+
+    @Test
+    fun timesTime()
+    {
+        assertEquals(
+            expected = LuminousEnergyAmount(amount = 2 * 2,
+                                            unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME2)),
+            actual = LuminousFluxAmount(amount = 2,
+                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)) *
+                     TimeAmount(amount = 2,
+                                unit = TIME2))
     }
 }
