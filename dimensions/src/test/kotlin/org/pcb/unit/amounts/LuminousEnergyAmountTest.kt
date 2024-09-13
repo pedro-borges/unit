@@ -1,0 +1,110 @@
+package org.pcb.unit.amounts
+
+import kotlin.test.assertEquals
+import org.junit.jupiter.api.Test
+import org.pcb.unit.U3
+import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.units.test.ANGLE1
+import org.pcb.unit.units.test.ANGLE2
+import org.pcb.unit.units.test.LUMINOUSINTENSITY1
+import org.pcb.unit.units.test.LUMINOUSINTENSITY2
+import org.pcb.unit.units.test.NUMBER2
+import org.pcb.unit.units.test.TIME1
+import org.pcb.unit.units.test.TIME2
+
+class LuminousEnergyAmountTest
+{
+    @Test
+    fun timesScalar()
+    {
+        assertEquals(
+            expected = LuminousEnergyAmount(amount = 2 * 2,
+                                            unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)),
+            actual = LuminousEnergyAmount(amount = 2,
+                                          unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)) *
+                     ScalarAmount(amount = 20,
+                                  unit = NUMBER2))
+    }
+
+    @Test
+    fun divScalar()
+    {
+        assertEquals(
+            expected = LuminousEnergyAmount(amount = 1,
+                                            unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)),
+            actual = LuminousEnergyAmount(amount = 2,
+                                          unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)) /
+                     ScalarAmount(amount = 20,
+                                  unit = NUMBER2))
+    }
+
+    @Test
+    fun plusSameLuminousEnergy()
+    {
+        assertEquals(
+            expected = LuminousEnergyAmount(amount = 1,
+                                            unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)),
+            actual = LuminousEnergyAmount(amount = 0,
+                                          unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)) +
+                     LuminousEnergyAmount(amount = 1,
+                                          unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)))
+    }
+
+    @Test
+    fun plusOtherLuminousEnergy()
+    {
+        assertEquals(
+            expected = LuminousEnergyAmount(amount = 1,
+                                            unit = U3(LUMINOUSINTENSITY2, ANGLE2, TIME2)),
+            actual = LuminousEnergyAmount(amount = 0,
+                                          unit = U3(LUMINOUSINTENSITY2, ANGLE2, TIME2)) +
+                     LuminousEnergyAmount(amount = 10000,
+                                          unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)))
+    }
+
+    @Test
+    fun minusSameLuminousEnergy()
+    {
+        assertEquals(
+            expected = LuminousEnergyAmount(amount = 0,
+                                            unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)),
+            actual = LuminousEnergyAmount(amount = 1,
+                                          unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)) -
+                     LuminousEnergyAmount(amount = 1,
+                                          unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)))
+    }
+
+    @Test
+    fun minusOtherLuminousEnergy()
+    {
+        assertEquals(
+            expected = LuminousEnergyAmount(amount = 0,
+                                            unit = U3(LUMINOUSINTENSITY2, ANGLE2, TIME2)),
+            actual = LuminousEnergyAmount(amount = 1,
+                                          unit = U3(LUMINOUSINTENSITY2, ANGLE2, TIME2)) -
+                     LuminousEnergyAmount(amount = 10000,
+                                          unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)))
+    }
+
+    @Test
+    fun divSameLuminousEnergy()
+    {
+        assertEquals(
+            expected = Numeric(amount = 1),
+            actual = LuminousEnergyAmount(amount = 2,
+                                          unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)) /
+                     LuminousEnergyAmount(amount = 2,
+                                          unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)))
+    }
+
+    @Test
+    fun divOtherLuminousEnergy()
+    {
+        assertEquals(
+            expected = Numeric(amount = 1),
+            actual = LuminousEnergyAmount(amount = 2,
+                                          unit = U3(LUMINOUSINTENSITY2, ANGLE2, TIME2)) /
+                     LuminousEnergyAmount(amount = 20000,
+                                          unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME1)))
+    }
+}
