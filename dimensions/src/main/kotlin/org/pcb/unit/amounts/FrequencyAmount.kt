@@ -67,7 +67,7 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divFrequency")
     operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =

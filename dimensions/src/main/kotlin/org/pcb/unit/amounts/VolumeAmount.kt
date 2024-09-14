@@ -68,7 +68,7 @@ open class VolumeAmount<D3 : Unit<Distance>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divVolume")
     operator fun <D : Unit<Distance>> div(that: VolumeAmount<D>) =

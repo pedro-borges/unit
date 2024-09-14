@@ -52,7 +52,7 @@ open class TemperatureAmount<T : Unit<Temperature>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divTemperature")
     operator fun <T : Unit<Temperature>> div(that: TemperatureAmount<T>) =

@@ -59,7 +59,7 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divDebt")
     operator fun <C : Unit<Currency>, T : Unit<Time>> div(that: DebtAmount<C, T>) =

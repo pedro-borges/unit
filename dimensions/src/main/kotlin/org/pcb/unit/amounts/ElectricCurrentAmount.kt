@@ -56,7 +56,7 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divElectricCurrent")
     operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =

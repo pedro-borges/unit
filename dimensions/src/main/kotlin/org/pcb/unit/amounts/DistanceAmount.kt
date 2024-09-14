@@ -55,7 +55,7 @@ open class DistanceAmount<D : Unit<Distance>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divDistance")
     operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =

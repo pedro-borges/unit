@@ -65,7 +65,7 @@ open class SolidAngleAmount<A : Unit<Angle>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divSolidAngle")
     operator fun <A : Unit<Angle>> div(that: SolidAngleAmount<A>) =

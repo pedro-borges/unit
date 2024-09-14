@@ -52,7 +52,7 @@ open class AngleAmount<A : Unit<Angle>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divAngle")
     operator fun <A : Unit<Angle>> div(that: AngleAmount<A>) =

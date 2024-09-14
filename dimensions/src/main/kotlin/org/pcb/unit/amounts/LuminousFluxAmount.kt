@@ -73,7 +73,7 @@ open class LuminousFluxAmount<LI : Unit<LuminousIntensity>, A : Unit<Angle>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divLuminousFlux")
     operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>> div(that: LuminousFluxAmount<LI, A>) =

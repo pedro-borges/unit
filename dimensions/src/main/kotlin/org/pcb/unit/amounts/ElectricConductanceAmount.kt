@@ -93,7 +93,7 @@ open class ElectricConductanceAmount<T3 : Unit<Time>, EC2 : Unit<ElectricCurrent
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divElectricConductance")
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> div(that: ElectricConductanceAmount<T, EC, M, D>) =

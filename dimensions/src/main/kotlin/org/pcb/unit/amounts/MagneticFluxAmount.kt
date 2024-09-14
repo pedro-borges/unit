@@ -89,7 +89,7 @@ open class MagneticFluxAmount<M : Unit<Mass>, D2 : Unit<Distance>, T2 : Unit<Tim
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divMagneticFlux")
     operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: MagneticFluxAmount<M, D, T, EC>) =

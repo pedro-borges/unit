@@ -69,7 +69,7 @@ open class AreaAmount<D2 : Unit<Distance>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divArea")
     operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =

@@ -54,7 +54,7 @@ open class LuminousIntensityAmount<LI : Unit<LuminousIntensity>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divLuminousIntensity")
     operator fun <LI : Unit<LuminousIntensity>> div(that: LuminousIntensityAmount<LI>) =

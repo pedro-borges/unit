@@ -54,7 +54,7 @@ open class CurrencyAmount<C : Unit<Currency>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divCurrency")
     operator fun <C : Unit<Currency>> div(that: CurrencyAmount<C>) =

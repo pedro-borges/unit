@@ -68,7 +68,7 @@ open class MomentumAmount<M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divMomentum")
     operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: MomentumAmount<M, D, T>) =

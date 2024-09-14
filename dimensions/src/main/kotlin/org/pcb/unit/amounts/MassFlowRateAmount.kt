@@ -74,7 +74,7 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divMassFlowRate")
     operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFlowRateAmount<M, T>) =

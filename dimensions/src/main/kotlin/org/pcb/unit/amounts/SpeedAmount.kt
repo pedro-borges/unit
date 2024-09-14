@@ -73,7 +73,7 @@ open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divSpeed")
     operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =

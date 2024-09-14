@@ -91,7 +91,7 @@ open class InductanceAmount<M : Unit<Mass>, D2 : Unit<Distance>, T2 : Unit<Time>
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divInductance")
     operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: InductanceAmount<M, D, T, EC>) =

@@ -55,7 +55,7 @@ open class MassAmount<M : Unit<Mass>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divMass")
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =

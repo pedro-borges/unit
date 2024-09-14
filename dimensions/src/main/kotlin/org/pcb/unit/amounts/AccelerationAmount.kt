@@ -66,7 +66,7 @@ open class AccelerationAmount<D : Unit<Distance>, T2 : Unit<Time>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divAcceleration")
     operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: AccelerationAmount<D, T>) =

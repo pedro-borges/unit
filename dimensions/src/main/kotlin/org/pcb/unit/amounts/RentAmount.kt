@@ -62,7 +62,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divRent")
     operator fun <C : Unit<Currency>, T : Unit<Time>> div(that: RentAmount<C, T>) =

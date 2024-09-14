@@ -86,7 +86,7 @@ open class PowerAmount<M : Unit<Mass>, D2 : Unit<Distance>, T3 : Unit<Time>>(
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divPower")
     operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: PowerAmount<M, D, T>) =

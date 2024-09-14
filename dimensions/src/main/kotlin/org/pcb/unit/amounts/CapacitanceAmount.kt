@@ -95,7 +95,7 @@ open class CapacitanceAmount<T4 : Unit<Time>, EC2 : Unit<ElectricCurrent>, M : U
 
     // endregion
 
-    // region -> Natural
+    // region -> Numeric
 
     @JvmName("divCapacitance")
     operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> div(that: CapacitanceAmount<T, EC, M, D>) =
