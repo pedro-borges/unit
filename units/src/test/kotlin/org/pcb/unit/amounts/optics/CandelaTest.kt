@@ -5,6 +5,7 @@ import kotlin.test.assertEquals
 import org.pcb.unit.amounts.LuminousIntensityAmount
 import org.pcb.unit.amounts.base.Candela
 import org.pcb.unit.amounts.base.Candela.CANDELA
+import org.pcb.unit.amounts.space.SquareMeter
 import org.pcb.unit.amounts.trigonometry.Steradian
 
 class CandelaTest
@@ -23,4 +24,16 @@ class CandelaTest
         assertEquals(
             expected = Candela(6 / 3),
             actual = Lumen(6) / Steradian(3))
+
+    @Test
+    fun nitTimesSquareMeter() =
+        assertEquals(
+            expected = Candela(2 * 3),
+            actual = Nit(2) * SquareMeter(3))
+
+    @Test
+    fun squareMeterTimesNit() =
+        assertEquals(
+            expected = Candela(2 * 3),
+            actual = SquareMeter(2) * Nit(3))
 }

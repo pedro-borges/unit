@@ -104,4 +104,28 @@ class LuminanceAmountTest
                      LuminanceAmount(amount = 2000,
                                      unit = LUMINOUSINTENSITY1 to DISTANCE2))
     }
+
+    @Test
+    fun timesSameArea()
+    {
+        assertEquals(
+            expected = LuminousIntensityAmount(amount = 2 * 2,
+                                               unit = LUMINOUSINTENSITY1),
+            actual = LuminanceAmount(amount = 2,
+                                     unit = LUMINOUSINTENSITY1 to DISTANCE1) *
+                     AreaAmount(amount = 2,
+                                unit = DISTANCE1))
+    }
+
+    @Test
+    fun timesOtherArea()
+    {
+        assertEquals(
+            expected = LuminousIntensityAmount(amount = 2 * 2,
+                                               unit = LUMINOUSINTENSITY1),
+            actual = LuminanceAmount(amount = 2,
+                                     unit = LUMINOUSINTENSITY1 to DISTANCE2) *
+                     AreaAmount(amount = 200,
+                                unit = DISTANCE1))
+    }
 }
