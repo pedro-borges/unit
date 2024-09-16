@@ -26,11 +26,11 @@ open class EnergyDensityAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Tim
         amount: Number,
         unit: Pair<M, U2<D, T2>>)
     : Amount<EnergyDensity>(amount = amount.toBigDecimal(),
-                       unit = CompositeUnit(
-                           domain = EnergyDensity::class,
-                           units = mapOf(unit.major to 1,
-                                         unit.minor.first to -1,
-                                         unit.minor.second to -2)))
+                            unit = CompositeUnit(
+                                domain = EnergyDensity::class,
+                                units = mapOf(unit.major to 1,
+                                              unit.minor.first to -1,
+                                              unit.minor.second to -2)))
 {
     val mass = unit.major
     val distance = unit.minor.first
@@ -40,44 +40,44 @@ open class EnergyDensityAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Tim
     {
         operator fun invoke(amount: Number, unit: Unit<EnergyDensity>) =
             EnergyDensityAmount(amount = amount * unit.scale,
-                           unit = kilo(GRAM) to U2(METER, SECOND))
+                                unit = kilo(GRAM) to U2(METER, SECOND))
     }
 
     // region -> EnergyDensity
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         EnergyDensityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
-                       unit = mass to U2(distance, time))
+                            unit = mass to U2(distance, time))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         EnergyDensityAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
-                       unit = mass to U2(distance, time))
+                            unit = mass to U2(distance, time))
 
     @JvmName("plusEnergyDensity")
     operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> plus(that: EnergyDensityAmount<M, D, T>) =
         EnergyDensityAmount(amount = amount + that.amount
-                                * convert(that.mass to mass)
-                                / convert(that.distance to distance,
-                                          that.time to time,
-                                          that.time to time),
-                       unit = mass to U2(distance, time))
+                                     * convert(that.mass to mass)
+                                     / convert(that.distance to distance,
+                                               that.time to time,
+                                               that.time to time),
+                            unit = mass to U2(distance, time))
 
     operator fun plus(that: EnergyDensityAmount<M, D, T2>) =
         EnergyDensityAmount(amount = amount + that.amount,
-                       unit = mass to U2(distance, time))
+                            unit = mass to U2(distance, time))
 
     @JvmName("minusEnergyDensity")
     operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> minus(that: EnergyDensityAmount<M, D, T>) =
         EnergyDensityAmount(amount = amount - that.amount
-                                * convert(that.mass to mass)
-                                / convert(that.distance to distance,
-                                          that.time to time,
-                                          that.time to time),
-                       unit = mass to U2(distance, time))
+                                     * convert(that.mass to mass)
+                                     / convert(that.distance to distance,
+                                               that.time to time,
+                                               that.time to time),
+                            unit = mass to U2(distance, time))
 
     operator fun minus(that: EnergyDensityAmount<M, D, T2>) =
         EnergyDensityAmount(amount = amount - that.amount,
-                       unit = mass to U2(distance, time))
+                            unit = mass to U2(distance, time))
 
     // endregion
 

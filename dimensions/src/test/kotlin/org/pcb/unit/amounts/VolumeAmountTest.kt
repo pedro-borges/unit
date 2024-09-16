@@ -163,7 +163,7 @@ class VolumeAmountTest
             actual = VolumeAmount(amount = 2,
                                   unit = DISTANCE1) *
                      EnergyDensityAmount(amount = 2,
-                                    unit = MASS2 to U2(DISTANCE1, TIME2)))
+                                         unit = MASS2 to U2(DISTANCE1, TIME2)))
     }
 
     @Test
@@ -175,6 +175,6 @@ class VolumeAmountTest
             actual = VolumeAmount(amount = 2,
                                   unit = DISTANCE1) *
                      EnergyDensityAmount(amount = 20,
-                                    unit = MASS2 to U2(DISTANCE2, TIME2)))
+                                         unit = MASS2 to U2(DISTANCE2, TIME2)))
     }
 }

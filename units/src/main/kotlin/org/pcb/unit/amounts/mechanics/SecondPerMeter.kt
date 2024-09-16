@@ -1,7 +1,7 @@
 package org.pcb.unit.amounts.mechanics
 
 import org.pcb.unit.Magnitude
-import org.pcb.unit.Magnitude.UNI
+import org.pcb.unit.Magnitude.Companion.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.PaceAmount
 import org.pcb.unit.amounts.base.Meter.METER

@@ -10,7 +10,7 @@ open class CompositeUnit<D : Dimension>(domain: KClass<D>,
     : Unit<D>(domain,
               Configuration.renderer.render(units),
               units.entries.fold(1.toBigDecimal()) { acc, entry -> acc * entry.key.scale.power(entry.value) },
-              Magnitude.get(units.entries.map { it.key.magnitude.power * it.value }.fold(0) { acc, power -> acc + power }))
+              SIScale.get(units.entries.map { it.key.magnitude.power * it.value }.fold(0) { acc, power -> acc + power }))
 {
     fun times(unit: Unit<*>) =
         CompositeUnit(Dimension::class,

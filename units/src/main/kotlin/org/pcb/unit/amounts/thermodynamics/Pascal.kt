@@ -1,7 +1,7 @@
 package org.pcb.unit.amounts.thermodynamics
 
 import org.pcb.unit.Magnitude
-import org.pcb.unit.Magnitude.UNI
+import org.pcb.unit.Magnitude.Companion.UNI
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.EnergyDensityAmount
@@ -22,7 +22,7 @@ class Pascal(amount: Number,
     unit = kilo(GRAM) to U2(METER, SECOND))
 {
     open class PascalUnit(magnitude: Magnitude)
-        : Unit<EnergyDensity>(EnergyDensity::class, "N", 1.toBigDecimal(), magnitude)
+        : Unit<EnergyDensity>(EnergyDensity::class, "Pa", 1.toBigDecimal(), magnitude)
 
     object PASCAL : PascalUnit(UNI)
 }

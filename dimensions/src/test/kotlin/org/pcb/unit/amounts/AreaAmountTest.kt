@@ -178,7 +178,7 @@ class AreaAmountTest
             actual = AreaAmount(amount = 2,
                                 unit = DISTANCE1) *
                      EnergyDensityAmount(amount = 2,
-                                    unit = MASS1 to U2(DISTANCE1, TIME1)))
+                                         unit = MASS1 to U2(DISTANCE1, TIME1)))
     }
 
     @Test
@@ -190,7 +190,7 @@ class AreaAmountTest
             actual = AreaAmount(amount = 2,
                                 unit = DISTANCE1) *
                      EnergyDensityAmount(amount = 20,
-                                    unit = MASS1 to U2(DISTANCE2, TIME1)))
+                                         unit = MASS1 to U2(DISTANCE2, TIME1)))
     }
 
     @Test

@@ -2,8 +2,8 @@ package org.pcb.unit.amounts.trigonometry
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.Magnitude.DECI
-import org.pcb.unit.Magnitude.HECTO
+import org.pcb.unit.SIScale.DECI
+import org.pcb.unit.SIScale.HECTO
 import org.pcb.unit.amounts.SolidAngleAmount
 import org.pcb.unit.amounts.base.Candela
 import org.pcb.unit.amounts.base.Radian

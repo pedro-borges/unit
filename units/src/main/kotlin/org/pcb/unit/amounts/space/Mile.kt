@@ -1,7 +1,7 @@
 package org.pcb.unit.amounts.space
 
 import org.pcb.unit.Magnitude
-import org.pcb.unit.Magnitude.UNI
+import org.pcb.unit.Magnitude.Companion.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.DistanceAmount
 import org.pcb.unit.dimensions.Distance

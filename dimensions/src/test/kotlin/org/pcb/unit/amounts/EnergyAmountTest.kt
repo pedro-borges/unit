@@ -343,7 +343,7 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = EnergyDensityAmount(amount = 1,
-                                      unit = MASS1 to U2(DISTANCE1, TIME1)),
+                                           unit = MASS1 to U2(DISTANCE1, TIME1)),
             actual = EnergyAmount(amount = 2,
                                   unit = U2(MASS1, DISTANCE1) to TIME1) /
                      VolumeAmount(amount = 2,
@@ -355,7 +355,7 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = EnergyDensityAmount(amount = 1,
-                                      unit = MASS1 to U2(DISTANCE2, TIME1)),
+                                           unit = MASS1 to U2(DISTANCE2, TIME1)),
             actual = EnergyAmount(amount = 2,
                                   unit = U2(MASS1, DISTANCE2) to TIME1) /
                      VolumeAmount(amount = 2000,
@@ -371,7 +371,7 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   unit = U2(MASS1, DISTANCE1) to TIME1) /
                      EnergyDensityAmount(amount = 2,
-                                    unit = MASS1 to U2(DISTANCE1, TIME1)))
+                                         unit = MASS1 to U2(DISTANCE1, TIME1)))
     }
 
     @Test
@@ -383,6 +383,6 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   unit = U2(MASS2, DISTANCE1) to TIME1) /
                      EnergyDensityAmount(amount = 20000,
-                                    unit = MASS1 to U2(DISTANCE2, TIME2)))
+                                         unit = MASS1 to U2(DISTANCE2, TIME2)))
     }
 }

@@ -2,7 +2,7 @@ package org.pcb.unit.amounts.mechanics
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.Magnitude.KILO
+import org.pcb.unit.SIScale.KILO
 import org.pcb.unit.U2
 import org.pcb.unit.amounts.PowerAmount
 import org.pcb.unit.amounts.base.Ampere

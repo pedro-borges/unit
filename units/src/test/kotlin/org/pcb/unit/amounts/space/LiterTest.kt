@@ -2,9 +2,9 @@ package org.pcb.unit.amounts.space
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.Magnitude.DECI
-import org.pcb.unit.Magnitude.KILO
-import org.pcb.unit.Magnitude.MEGA
+import org.pcb.unit.SIScale.DECI
+import org.pcb.unit.SIScale.KILO
+import org.pcb.unit.SIScale.MEGA
 import org.pcb.unit.amounts.VolumeAmount
 import org.pcb.unit.amounts.base.Meter
 import org.pcb.unit.amounts.base.Meter.METER

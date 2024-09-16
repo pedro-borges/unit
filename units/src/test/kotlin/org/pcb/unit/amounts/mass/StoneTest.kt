@@ -2,7 +2,7 @@ package org.pcb.unit.amounts.mass
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.Magnitude.KILO
+import org.pcb.unit.SIScale.KILO
 import org.pcb.unit.amounts.MassAmount
 import org.pcb.unit.amounts.base.Gram
 import org.pcb.unit.amounts.mass.Stone.STONE

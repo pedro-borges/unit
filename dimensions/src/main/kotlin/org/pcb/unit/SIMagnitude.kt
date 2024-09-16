@@ -2,35 +2,56 @@
 
 package org.pcb.unit
 
-import org.pcb.unit.Magnitude.ATTO
-import org.pcb.unit.Magnitude.CENTI
-import org.pcb.unit.Magnitude.DECA
-import org.pcb.unit.Magnitude.DECI
-import org.pcb.unit.Magnitude.EXA
-import org.pcb.unit.Magnitude.FEMTO
-import org.pcb.unit.Magnitude.GIGA
-import org.pcb.unit.Magnitude.HECTO
-import org.pcb.unit.Magnitude.KILO
-import org.pcb.unit.Magnitude.MEGA
-import org.pcb.unit.Magnitude.MICRO
-import org.pcb.unit.Magnitude.MILLI
-import org.pcb.unit.Magnitude.NANO
-import org.pcb.unit.Magnitude.PETA
-import org.pcb.unit.Magnitude.PICO
-import org.pcb.unit.Magnitude.QUECTO
-import org.pcb.unit.Magnitude.QUETTA
-import org.pcb.unit.Magnitude.RONNA
-import org.pcb.unit.Magnitude.RONTO
-import org.pcb.unit.Magnitude.TERA
-import org.pcb.unit.Magnitude.UNI
-import org.pcb.unit.Magnitude.YOCTO
-import org.pcb.unit.Magnitude.YOTTA
-import org.pcb.unit.Magnitude.ZEPTO
-import org.pcb.unit.Magnitude.ZETTA
+import org.pcb.unit.SIScale.ATTO
+import org.pcb.unit.SIScale.CENTI
+import org.pcb.unit.SIScale.Companion.get
+import org.pcb.unit.SIScale.DECA
+import org.pcb.unit.SIScale.DECI
+import org.pcb.unit.SIScale.EXA
+import org.pcb.unit.SIScale.FEMTO
+import org.pcb.unit.SIScale.GIGA
+import org.pcb.unit.SIScale.HECTO
+import org.pcb.unit.SIScale.KILO
+import org.pcb.unit.SIScale.MEGA
+import org.pcb.unit.SIScale.MICRO
+import org.pcb.unit.SIScale.MILLI
+import org.pcb.unit.SIScale.NANO
+import org.pcb.unit.SIScale.PETA
+import org.pcb.unit.SIScale.PICO
+import org.pcb.unit.SIScale.QUECTO
+import org.pcb.unit.SIScale.QUETTA
+import org.pcb.unit.SIScale.RONNA
+import org.pcb.unit.SIScale.RONTO
+import org.pcb.unit.SIScale.TERA
+import org.pcb.unit.SIScale.YOCTO
+import org.pcb.unit.SIScale.YOTTA
+import org.pcb.unit.SIScale.ZEPTO
+import org.pcb.unit.SIScale.ZETTA
 import org.pcb.unit.dimensions.Dimension
 
-enum class Magnitude(val symbol: String,
-                     val power: Int)
+interface Magnitude
+{
+    val symbol: String
+    val power: Int
+
+    operator fun times(that: Magnitude) =
+        get(power + that.power)
+
+    companion object
+    {
+        val UNI = object : Magnitude
+        {
+            override val symbol = ""
+            override val power = 0
+        }
+    }
+}
+
+class Scale(override val symbol: String,
+            override val power: Int) : Magnitude
+
+enum class SIScale(override val symbol: String,
+                   override val power: Int) : Magnitude
 {
     QUETTA("Q", 30),
     RONNA("R", 27),
@@ -44,7 +65,6 @@ enum class Magnitude(val symbol: String,
     KILO("k", 3),
     HECTO("h", 2),
     DECA("da", 1),
-    UNI("", 0),
     DECI("d", -1),
     CENTI("c", -2),
     MILLI("m", -3),
@@ -58,14 +78,11 @@ enum class Magnitude(val symbol: String,
     RONTO("r", -27),
     QUECTO("q", -30);
 
-    operator fun times(that: Magnitude) =
-        get(power + that.power)
-
     companion object
     {
         fun get(power: Int) =
             entries.firstOrNull { it.power == power }
-            ?: throw IllegalArgumentException("No magnitude for 10^$power")
+            ?: Scale("10" + power.toSuperscript(), power)
     }
 }
 
@@ -82,7 +99,6 @@ fun <D : Dimension> mega(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.sym
 fun <D : Dimension> kilo(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, KILO * unit.magnitude) {}
 fun <D : Dimension> hecto(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, HECTO * unit.magnitude) {}
 fun <D : Dimension> deca(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, DECA * unit.magnitude) {}
-fun <D : Dimension> uni(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, UNI * unit.magnitude) {}
 fun <D : Dimension> deci(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, DECI * unit.magnitude) {}
 fun <D : Dimension> centi(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, CENTI * unit.magnitude) {}
 fun <D : Dimension> milli(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, MILLI * unit.magnitude) {}

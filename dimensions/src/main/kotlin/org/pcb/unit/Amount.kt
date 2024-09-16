@@ -18,15 +18,16 @@ abstract class Amount<D : Dimension>(val amount: BigDecimal,
         when
         {
             this === other     -> true
-            other is Amount<*> -> amount.movePointRight(unit.magnitude.power).setScale(displayMathContext) ==
-                                  other.amount.movePointRight(other.unit.magnitude.power).setScale(displayMathContext) &&
+            other is Amount<*> -> normalizedAmount() == other.normalizedAmount() &&
                                   unit.domain == other.unit.domain
             else               -> false
         }
 
     override fun hashCode() =
-        Objects.hash(amount.movePointRight(unit.magnitude.power).setScale(displayMathContext), unit)
+        Objects.hash((amount / unit.scale).movePointRight(unit.magnitude.power).setScale(displayMathContext), unit)
 
     override fun toString() =
         Configuration.renderer.render(this)
+
+    private fun normalizedAmount() = (amount / unit.scale).movePointRight(unit.magnitude.power).setScale(displayMathContext)
 }

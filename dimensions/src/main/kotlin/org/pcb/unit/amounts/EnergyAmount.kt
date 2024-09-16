@@ -256,13 +256,13 @@ open class EnergyAmount<M : Unit<Mass>, D2 : Unit<Distance>, T2 : Unit<Time>>(
     @JvmName("divVolume")
     operator fun <D : Unit<Distance>> div(that: VolumeAmount<D>) =
         EnergyDensityAmount(amount = amount / that.amount / convert(that.distance to distance,
-                                                               that.distance to distance,
-                                                               that.distance to distance),
-                       unit = mass to U2(distance, time))
+                                                                    that.distance to distance,
+                                                                    that.distance to distance),
+                            unit = mass to U2(distance, time))
 
     operator fun div(that: VolumeAmount<D2>) =
         EnergyDensityAmount(amount = amount / that.amount,
-                       unit = mass to U2(distance, time))
+                            unit = mass to U2(distance, time))
 
     // endregion
 
