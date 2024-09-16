@@ -16,7 +16,7 @@ import org.pcb.unit.kilo
 class FaradTest
 {
     private infix fun Farad.equivalent(other: CapacitanceAmount<*, *, *, *>) =
-        assertEquals(this, Farad(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun unit()

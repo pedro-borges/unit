@@ -14,7 +14,7 @@ import org.pcb.unit.deci
 class LiterTest
 {
     private infix fun Liter.equivalent(other: VolumeAmount<*>) =
-        assertEquals(this, Liter(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

@@ -9,7 +9,7 @@ import org.pcb.unit.amounts.space.Inch.INCH
 class InchTest
 {
     private infix fun Inch.equivalent(other: DistanceAmount<*>) =
-        assertEquals(this, Inch(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

@@ -9,7 +9,7 @@ import org.pcb.unit.amounts.space.Foot.FOOT
 class FootTest
 {
     private infix fun Foot.equivalent(other: DistanceAmount<*>) =
-        assertEquals(this, Foot(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

@@ -10,7 +10,7 @@ import org.pcb.unit.amounts.trigonometry.Degree.DEGREE
 class DegreeTest
 {
     private infix fun Degree.equivalent(other: AngleAmount<*>) =
-        assertEquals(this, Degree(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

@@ -21,7 +21,7 @@ import org.pcb.unit.kilo
 class WeberTest
 {
     private infix fun Weber.equivalent(other: MagneticFluxAmount<*, *, *, *>) =
-        assertEquals(this, Weber(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun unit()

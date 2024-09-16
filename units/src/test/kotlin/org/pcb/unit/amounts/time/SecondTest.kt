@@ -19,7 +19,7 @@ import org.pcb.unit.amounts.optics.Talbot
 class SecondTest
 {
     private infix fun Second.equivalent(other: TimeAmount<*>) =
-        assertEquals(this, Second(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

@@ -9,7 +9,7 @@ import org.pcb.unit.amounts.space.Hand.HAND
 class HandTest
 {
     private infix fun Hand.equivalent(other: DistanceAmount<*>) =
-        assertEquals(this, Hand(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

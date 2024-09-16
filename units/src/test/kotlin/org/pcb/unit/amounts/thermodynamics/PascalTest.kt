@@ -17,13 +17,14 @@ import org.pcb.unit.kilo
 class PascalTest
 {
     private infix fun Pascal.equivalent(other: EnergyDensityAmount<*, *, *>) =
-        assertEquals(this, Pascal(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun unit()
     {
         Pascal(2) equivalent EnergyDensityAmount(2, kilo(GRAM) to U2(METER, SECOND))
         Pascal(2) equivalent EnergyDensityAmount(2, PASCAL)
+        Pascal(2 * 100000) equivalent Bar(2)
     }
 
     @Test

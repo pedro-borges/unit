@@ -15,7 +15,7 @@ import org.pcb.unit.amounts.trigonometry.Steradian
 class LumenTest
 {
     private infix fun Lumen.equivalent(other: LuminousFluxAmount<*, *>) =
-        assertEquals(this, Lumen(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

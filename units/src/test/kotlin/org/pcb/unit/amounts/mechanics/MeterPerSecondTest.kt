@@ -12,7 +12,7 @@ import org.pcb.unit.amounts.mechanics.MeterPerSecond.MPS
 class MeterPerSecondTest
 {
     private infix fun MeterPerSecond.equivalent(other: SpeedAmount<*, *>) =
-        assertEquals(this, MeterPerSecond(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun unit()

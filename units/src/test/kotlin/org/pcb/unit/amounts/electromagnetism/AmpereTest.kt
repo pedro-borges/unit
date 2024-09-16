@@ -12,7 +12,7 @@ import org.pcb.unit.amounts.mechanics.Watt
 class AmpereTest
 {
     private infix fun Ampere.equivalent(other: ElectricCurrentAmount<*>) =
-        assertEquals(this, Ampere(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun unit()

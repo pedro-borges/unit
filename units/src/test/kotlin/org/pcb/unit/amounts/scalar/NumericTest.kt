@@ -15,7 +15,7 @@ import org.pcb.unit.amounts.mechanics.SecondPerMeter
 class NumericTest
 {
     private infix fun Numeric.equivalent(other: ScalarAmount<*>) =
-        assertEquals(this, Numeric(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun unit()

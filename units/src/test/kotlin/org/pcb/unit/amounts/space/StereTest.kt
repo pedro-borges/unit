@@ -14,7 +14,7 @@ import org.pcb.unit.amounts.thermodynamics.Pascal
 class StereTest
 {
     private infix fun Stere.equivalent(other: VolumeAmount<*>) =
-        assertEquals(this, Stere(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

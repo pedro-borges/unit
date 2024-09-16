@@ -11,7 +11,7 @@ import org.pcb.unit.amounts.trigonometry.Steradian
 class CandelaTest
 {
     private infix fun Candela.equivalent(other: LuminousIntensityAmount<*>) =
-        assertEquals(this, Candela(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

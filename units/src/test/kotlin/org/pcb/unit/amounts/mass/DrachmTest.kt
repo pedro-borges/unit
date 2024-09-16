@@ -10,7 +10,7 @@ import org.pcb.unit.amounts.mass.Drachm.DRACHM
 class DrachmTest
 {
     private infix fun Drachm.equivalent(other: MassAmount<*>) =
-        assertEquals(this, Drachm(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

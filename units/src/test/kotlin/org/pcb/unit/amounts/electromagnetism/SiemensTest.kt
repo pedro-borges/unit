@@ -17,7 +17,7 @@ import org.pcb.unit.kilo
 class SiemensTest
 {
     private infix fun Siemens.equivalent(other: ElectricConductanceAmount<*, *, *, *>) =
-        assertEquals(this, Siemens(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun unit()

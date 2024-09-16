@@ -10,7 +10,7 @@ import org.pcb.unit.amounts.base.Gram.GRAM
 class GramTest
 {
     private infix fun Gram.equivalent(other: MassAmount<*>) =
-        assertEquals(this, Gram(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

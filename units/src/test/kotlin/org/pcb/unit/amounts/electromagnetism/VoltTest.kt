@@ -21,7 +21,7 @@ import org.pcb.unit.kilo
 class VoltTest
 {
     private infix fun Volt.equivalent(other: ElectricTensionAmount<*, *, *, *>) =
-        assertEquals(this, Volt(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun unit()

@@ -9,7 +9,7 @@ import org.pcb.unit.amounts.time.Day.DAY
 class DayTest
 {
     private infix fun Day.equivalent(other: TimeAmount<*>) =
-        assertEquals(this, Day(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

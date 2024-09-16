@@ -11,7 +11,7 @@ import org.pcb.unit.amounts.trigonometry.Degree.DEGREE
 class RadianTest
 {
     private infix fun Radian.equivalent(other: AngleAmount<*>) =
-        assertEquals(this, Radian(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

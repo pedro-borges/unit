@@ -14,7 +14,7 @@ import org.pcb.unit.kilo
 class TeslaTest
 {
     private infix fun Tesla.equivalent(other: MagneticFluxDensityAmount<*, *, *>) =
-        assertEquals(this, Tesla(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun unit()

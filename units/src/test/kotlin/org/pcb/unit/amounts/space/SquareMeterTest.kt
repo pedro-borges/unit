@@ -20,7 +20,7 @@ import org.pcb.unit.amounts.thermodynamics.Pascal
 class SquareMeterTest
 {
     private infix fun SquareMeter.equivalent(other: AreaAmount<*>) =
-        assertEquals(this, SquareMeter(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

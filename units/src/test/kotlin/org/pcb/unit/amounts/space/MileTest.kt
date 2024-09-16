@@ -9,7 +9,7 @@ import org.pcb.unit.amounts.space.Mile.MILE
 class MileTest
 {
     private infix fun Mile.equivalent(other: DistanceAmount<*>) =
-        assertEquals(this, Mile(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

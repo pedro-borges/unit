@@ -9,7 +9,7 @@ import org.pcb.unit.amounts.space.Chain.CHAIN
 class ChainTest
 {
     private infix fun Chain.equivalent(other: DistanceAmount<*>) =
-        assertEquals(this, Chain(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

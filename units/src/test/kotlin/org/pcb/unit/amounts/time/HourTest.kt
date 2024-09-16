@@ -9,7 +9,7 @@ import org.pcb.unit.amounts.time.Hour.HOUR
 class HourTest
 {
     private infix fun Hour.equivalent(other: TimeAmount<*>) =
-        assertEquals(this, Hour(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

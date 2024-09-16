@@ -9,7 +9,7 @@ import org.pcb.unit.amounts.space.League.LEAGUE
 class LeagueTest
 {
     private infix fun League.equivalent(other: DistanceAmount<*>) =
-        assertEquals(this, League(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

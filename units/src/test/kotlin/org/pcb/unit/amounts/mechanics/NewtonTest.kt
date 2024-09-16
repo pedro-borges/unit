@@ -19,7 +19,7 @@ import org.pcb.unit.kilo
 class NewtonTest
 {
     private infix fun Newton.equivalent(other: ForceAmount<*, *, *>) =
-        assertEquals(this, Newton(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun unit()

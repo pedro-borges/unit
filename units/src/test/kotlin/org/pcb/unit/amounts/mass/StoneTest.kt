@@ -10,7 +10,7 @@ import org.pcb.unit.amounts.mass.Stone.STONE
 class StoneTest
 {
     private infix fun Stone.equivalent(other: MassAmount<*>) =
-        assertEquals(this, Stone(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

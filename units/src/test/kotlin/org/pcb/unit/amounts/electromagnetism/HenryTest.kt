@@ -15,7 +15,7 @@ import org.pcb.unit.kilo
 class HenryTest
 {
     private infix fun Henry.equivalent(other: InductanceAmount<*, *, *, *>) =
-        assertEquals(this, Henry(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun unit()

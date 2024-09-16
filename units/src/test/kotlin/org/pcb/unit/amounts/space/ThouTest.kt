@@ -9,7 +9,7 @@ import org.pcb.unit.amounts.space.Thou.THOU
 class ThouTest
 {
     private infix fun Thou.equivalent(other: DistanceAmount<*>) =
-        assertEquals(this, Thou(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

@@ -22,7 +22,7 @@ import org.pcb.unit.kilo
 class JouleTest
 {
     private infix fun Joule.equivalent(other: EnergyAmount<*, *, *>) =
-        assertEquals(this, Joule(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun unit()

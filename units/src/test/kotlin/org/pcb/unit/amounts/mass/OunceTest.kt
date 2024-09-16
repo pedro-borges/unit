@@ -10,7 +10,7 @@ import org.pcb.unit.amounts.mass.Ounce.OUNCE
 class OunceTest
 {
     private infix fun Ounce.equivalent(other: MassAmount<*>) =
-        assertEquals(this, Ounce(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

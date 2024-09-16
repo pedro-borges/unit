@@ -13,7 +13,7 @@ import org.pcb.unit.amounts.space.SquareMeter
 class LuxTest
 {
     private infix fun Lux.equivalent(other: IlluminanceAmount<*, *, *>) =
-        assertEquals(this, Lux(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

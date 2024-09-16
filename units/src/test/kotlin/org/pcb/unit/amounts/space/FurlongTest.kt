@@ -9,7 +9,7 @@ import org.pcb.unit.amounts.space.Furlong.FURLONG
 class FurlongTest
 {
     private infix fun Furlong.equivalent(other: DistanceAmount<*>) =
-        assertEquals(this, Furlong(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

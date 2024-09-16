@@ -14,7 +14,7 @@ import org.pcb.unit.amounts.mechanics.Joule
 class CoulombTest
 {
     private infix fun Coulomb.equivalent(other: ElectricChargeAmount<*, *>) =
-        assertEquals(this, Coulomb(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun unit()

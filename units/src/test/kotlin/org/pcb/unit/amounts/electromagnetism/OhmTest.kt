@@ -20,7 +20,7 @@ import org.pcb.unit.kilo
 class OhmTest
 {
     private infix fun Ohm.equivalent(other: ElectricResistanceAmount<*, *, *, *>) =
-        assertEquals(this, Ohm(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun unit()

@@ -14,7 +14,7 @@ import org.pcb.unit.amounts.trigonometry.Steradian.STERADIAN
 class SteradianTest
 {
     private infix fun Steradian.equivalent(other: SolidAngleAmount<*>) =
-        assertEquals(this, Steradian(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

@@ -17,7 +17,7 @@ import org.pcb.unit.kilo
 class BarTest
 {
     private infix fun Bar.equivalent(other: EnergyDensityAmount<*, *, *>) =
-        assertEquals(this, Bar(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun unit()

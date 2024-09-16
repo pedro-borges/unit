@@ -29,5 +29,8 @@ abstract class Amount<D : Dimension>(val amount: BigDecimal,
     override fun toString() =
         Configuration.renderer.render(this)
 
-    private fun normalizedAmount() = (amount / unit.scale).movePointRight(unit.magnitude.power).setScale(displayMathContext)
+    private fun normalizedAmount() =
+        (amount * unit.scale)
+            .movePointRight(unit.magnitude.power)
+            .setScale(displayMathContext)
 }

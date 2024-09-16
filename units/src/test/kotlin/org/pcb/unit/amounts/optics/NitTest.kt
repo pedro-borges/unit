@@ -12,7 +12,7 @@ import org.pcb.unit.amounts.space.SquareMeter
 class NitTest
 {
     private infix fun Nit.equivalent(other: LuminanceAmount<*, *>) =
-        assertEquals(this, Nit(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

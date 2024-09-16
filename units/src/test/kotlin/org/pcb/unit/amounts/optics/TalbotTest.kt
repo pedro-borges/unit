@@ -13,7 +13,7 @@ import org.pcb.unit.amounts.optics.Talbot.TALBOT
 class TalbotTest
 {
     private infix fun Talbot.equivalent(other: LuminousEnergyAmount<*, *, *>) =
-        assertEquals(this, Talbot(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()

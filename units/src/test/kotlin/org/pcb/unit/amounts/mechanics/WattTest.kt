@@ -19,7 +19,7 @@ import org.pcb.unit.kilo
 class WattTest
 {
     private infix fun Watt.equivalent(other: PowerAmount<*, *, *>) =
-        assertEquals(this, Watt(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun unit()

@@ -9,7 +9,7 @@ import org.pcb.unit.amounts.space.Yard.YARD
 class YardTest
 {
     private infix fun Yard.equivalent(other: DistanceAmount<*>) =
-        assertEquals(this, Yard(0) + other)
+        assertEquals(this, other)
 
     @Test
     fun scales()
