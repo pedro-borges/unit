@@ -12,15 +12,15 @@ import org.pcb.unit.units.test.NUMBER2
 import org.pcb.unit.units.test.TIME1
 import org.pcb.unit.units.test.TIME2
 
-class PressureAmountTest
+class EnergyDensityAmountTest
 {
     @Test
     fun timesScalar()
     {
         assertEquals(
-            expected = PressureAmount(amount = 2 * 2,
+            expected = EnergyDensityAmount(amount = 2 * 2,
                                       unit = MASS1 to U2(DISTANCE1, TIME1)),
-            actual = PressureAmount(amount = 2,
+            actual = EnergyDensityAmount(amount = 2,
                                     unit = MASS1 to U2(DISTANCE1, TIME1)) *
                      ScalarAmount(amount = 20,
                                   unit = NUMBER2))
@@ -30,81 +30,81 @@ class PressureAmountTest
     fun divScalar()
     {
         assertEquals(
-            expected = PressureAmount(amount = 1,
+            expected = EnergyDensityAmount(amount = 1,
                                       unit = MASS1 to U2(DISTANCE1, TIME1)),
-            actual = PressureAmount(amount = 2,
+            actual = EnergyDensityAmount(amount = 2,
                                     unit = MASS1 to U2(DISTANCE1, TIME1)) /
                      ScalarAmount(amount = 20,
                                   unit = NUMBER2))
     }
 
     @Test
-    fun plusSamePressure()
+    fun plusSameEnergyDensity()
     {
         assertEquals(
-            expected = PressureAmount(amount = 1,
+            expected = EnergyDensityAmount(amount = 1,
                                       unit = MASS1 to U2(DISTANCE1, TIME1)),
-            actual = PressureAmount(amount = 0,
+            actual = EnergyDensityAmount(amount = 0,
                                     unit = MASS1 to U2(DISTANCE1, TIME1)) +
-                     PressureAmount(amount = 1,
+                     EnergyDensityAmount(amount = 1,
                                     unit = MASS1 to U2(DISTANCE1, TIME1)))
     }
 
     @Test
-    fun plusOtherPressure()
+    fun plusOtherEnergyDensity()
     {
         assertEquals(
-            expected = PressureAmount(amount = 1,
+            expected = EnergyDensityAmount(amount = 1,
                                       unit = MASS2 to U2(DISTANCE1, TIME1)),
-            actual = PressureAmount(amount = 0,
+            actual = EnergyDensityAmount(amount = 0,
                                     unit = MASS2 to U2(DISTANCE1, TIME1)) +
-                     PressureAmount(amount = 10000,
+                     EnergyDensityAmount(amount = 10000,
                                     unit = MASS1 to U2(DISTANCE2, TIME2)))
     }
 
     @Test
-    fun minusSamePressure()
+    fun minusSameEnergyDensity()
     {
         assertEquals(
-            expected = PressureAmount(amount = 0,
+            expected = EnergyDensityAmount(amount = 0,
                                       unit = MASS1 to U2(DISTANCE1, TIME1)),
-            actual = PressureAmount(amount = 1,
+            actual = EnergyDensityAmount(amount = 1,
                                     unit = MASS1 to U2(DISTANCE1, TIME1)) -
-                     PressureAmount(amount = 1,
+                     EnergyDensityAmount(amount = 1,
                                     unit = MASS1 to U2(DISTANCE1, TIME1)))
     }
 
     @Test
-    fun minusOtherPressure()
+    fun minusOtherEnergyDensity()
     {
         assertEquals(
-            expected = PressureAmount(amount = 0,
+            expected = EnergyDensityAmount(amount = 0,
                                       unit = MASS2 to U2(DISTANCE1, TIME1)),
-            actual = PressureAmount(amount = 1,
+            actual = EnergyDensityAmount(amount = 1,
                                     unit = MASS2 to U2(DISTANCE1, TIME1)) -
-                     PressureAmount(amount = 10000,
+                     EnergyDensityAmount(amount = 10000,
                                     unit = MASS1 to U2(DISTANCE2, TIME2)))
     }
 
     @Test
-    fun divSamePressure()
+    fun divSameEnergyDensity()
     {
         assertEquals(
             expected = Numeric(amount = 1),
-            actual = PressureAmount(amount = 2,
+            actual = EnergyDensityAmount(amount = 2,
                                     unit = MASS1 to U2(DISTANCE1, TIME1)) /
-                     PressureAmount(amount = 2,
+                     EnergyDensityAmount(amount = 2,
                                     unit = MASS1 to U2(DISTANCE1, TIME1)))
     }
 
     @Test
-    fun divOtherPressure()
+    fun divOtherEnergyDensity()
     {
         assertEquals(
             expected = Numeric(amount = 1),
-            actual = PressureAmount(amount = 2,
+            actual = EnergyDensityAmount(amount = 2,
                                     unit = MASS2 to U2(DISTANCE1, TIME1)) /
-                     PressureAmount(amount = 20000,
+                     EnergyDensityAmount(amount = 20000,
                                     unit = MASS1 to U2(DISTANCE2, TIME2)))
     }
 
@@ -114,7 +114,7 @@ class PressureAmountTest
         assertEquals(
             expected = ForceAmount(amount = 2 * 2,
                                    unit = U2(MASS1, DISTANCE1) to TIME1),
-            actual = PressureAmount(amount = 2,
+            actual = EnergyDensityAmount(amount = 2,
                                     unit = MASS1 to U2(DISTANCE1, TIME1)) *
                      AreaAmount(amount = 2,
                                 unit = DISTANCE1))
@@ -126,7 +126,7 @@ class PressureAmountTest
         assertEquals(
             expected = ForceAmount(amount = 2 * 2,
                                    unit = U2(MASS1, DISTANCE2) to TIME1),
-            actual = PressureAmount(amount = 2,
+            actual = EnergyDensityAmount(amount = 2,
                                     unit = MASS1 to U2(DISTANCE2, TIME1)) *
                      AreaAmount(amount = 200,
                                 unit = DISTANCE1))
@@ -138,7 +138,7 @@ class PressureAmountTest
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
                                     unit = U2(MASS1, DISTANCE1) to TIME1),
-            actual = PressureAmount(amount = 2,
+            actual = EnergyDensityAmount(amount = 2,
                                     unit = MASS1 to U2(DISTANCE1, TIME1)) *
                      VolumeAmount(amount = 2,
                                   unit = DISTANCE1))
@@ -150,7 +150,7 @@ class PressureAmountTest
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
                                     unit = U2(MASS1, DISTANCE2) to TIME1),
-            actual = PressureAmount(amount = 2,
+            actual = EnergyDensityAmount(amount = 2,
                                     unit = MASS1 to U2(DISTANCE2, TIME1)) *
                      VolumeAmount(amount = 2000,
                                   unit = DISTANCE1))

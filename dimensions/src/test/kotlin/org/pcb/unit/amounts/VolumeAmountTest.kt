@@ -155,26 +155,26 @@ class VolumeAmountTest
     }
 
     @Test
-    fun timesSamePressure()
+    fun timesSameEnergyDensity()
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
                                     unit = U2(MASS2, DISTANCE1) to TIME2),
             actual = VolumeAmount(amount = 2,
                                   unit = DISTANCE1) *
-                     PressureAmount(amount = 2,
+                     EnergyDensityAmount(amount = 2,
                                     unit = MASS2 to U2(DISTANCE1, TIME2)))
     }
 
     @Test
-    fun timesOtherPressure()
+    fun timesOtherEnergyDensity()
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
                                     unit = U2(MASS2, DISTANCE1) to TIME2),
             actual = VolumeAmount(amount = 2,
                                   unit = DISTANCE1) *
-                     PressureAmount(amount = 20,
+                     EnergyDensityAmount(amount = 20,
                                     unit = MASS2 to U2(DISTANCE2, TIME2)))
     }
 }

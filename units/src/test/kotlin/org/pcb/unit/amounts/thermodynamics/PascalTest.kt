@@ -3,7 +3,7 @@ package org.pcb.unit.amounts.thermodynamics
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.amounts.PressureAmount
+import org.pcb.unit.amounts.EnergyDensityAmount
 import org.pcb.unit.amounts.base.Gram.GRAM
 import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Second.SECOND
@@ -16,14 +16,14 @@ import org.pcb.unit.kilo
 
 class PascalTest
 {
-    private infix fun Pascal.equivalent(other: PressureAmount<*, *, *>) =
+    private infix fun Pascal.equivalent(other: EnergyDensityAmount<*, *, *>) =
         assertEquals(this, Pascal(0) + other)
 
     @Test
     fun unit()
     {
-        Pascal(2) equivalent PressureAmount(2, kilo(GRAM) to U2(METER, SECOND))
-        Pascal(2) equivalent PressureAmount(2, PASCAL)
+        Pascal(2) equivalent EnergyDensityAmount(2, kilo(GRAM) to U2(METER, SECOND))
+        Pascal(2) equivalent EnergyDensityAmount(2, PASCAL)
     }
 
     @Test

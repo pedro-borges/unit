@@ -232,7 +232,7 @@ class ForceAmountTest
     fun divSameArea()
     {
         assertEquals(
-            expected = PressureAmount(amount = 1,
+            expected = EnergyDensityAmount(amount = 1,
                                       unit = MASS1 to U2(DISTANCE1, TIME1)),
             actual = ForceAmount(amount = 2,
                                  unit = U2(MASS1, DISTANCE1) to TIME1) /
@@ -244,7 +244,7 @@ class ForceAmountTest
     fun divOtherArea()
     {
         assertEquals(
-            expected = PressureAmount(amount = 1,
+            expected = EnergyDensityAmount(amount = 1,
                                       unit = MASS1 to U2(DISTANCE2, TIME1)),
             actual = ForceAmount(amount = 2,
                                  unit = U2(MASS1, DISTANCE2) to TIME1) /
@@ -253,26 +253,26 @@ class ForceAmountTest
     }
 
     @Test
-    fun divSamePressure()
+    fun divSameEnergyDensity()
     {
         assertEquals(
             expected = AreaAmount(amount = 1,
                                   unit = DISTANCE1),
             actual = ForceAmount(amount = 2,
                                  unit = U2(MASS1, DISTANCE1) to TIME1) /
-                     PressureAmount(amount = 2,
+                     EnergyDensityAmount(amount = 2,
                                     unit = MASS1 to U2(DISTANCE1, TIME1)))
     }
 
     @Test
-    fun divOtherPressure()
+    fun divOtherEnergyDensity()
     {
         assertEquals(
             expected = AreaAmount(amount = 1,
                                   unit = DISTANCE1),
             actual = ForceAmount(amount = 2,
                                  unit = U2(MASS2, DISTANCE1) to TIME1) /
-                     PressureAmount(amount = 20000,
+                     EnergyDensityAmount(amount = 20000,
                                     unit = MASS1 to U2(DISTANCE2, TIME2)))
     }
 }

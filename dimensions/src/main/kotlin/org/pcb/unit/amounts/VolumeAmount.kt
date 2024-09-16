@@ -110,12 +110,12 @@ open class VolumeAmount<D3 : Unit<Distance>>(
 
     // region -> Energy
 
-    @JvmName("timesPressure")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> times(that: PressureAmount<M, D, T>) =
+    @JvmName("timesEnergyDensity")
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> times(that: EnergyDensityAmount<M, D, T>) =
         EnergyAmount(amount = amount * that.amount / convert(that.distance to distance),
                      unit = U2(that.mass, distance) to that.time)
 
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: PressureAmount<M, D3, T>) =
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<M, D3, T>) =
         EnergyAmount(amount = amount * that.amount,
                      unit = U2(that.mass, distance) to that.time)
 

@@ -11,8 +11,8 @@ import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.EnergyDensity
 import org.pcb.unit.dimensions.Mass
-import org.pcb.unit.dimensions.Pressure
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
@@ -22,12 +22,12 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class PressureAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
+open class EnergyDensityAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
         amount: Number,
         unit: Pair<M, U2<D, T2>>)
-    : Amount<Pressure>(amount = amount.toBigDecimal(),
+    : Amount<EnergyDensity>(amount = amount.toBigDecimal(),
                        unit = CompositeUnit(
-                           domain = Pressure::class,
+                           domain = EnergyDensity::class,
                            units = mapOf(unit.major to 1,
                                          unit.minor.first to -1,
                                          unit.minor.second to -2)))
@@ -38,60 +38,60 @@ open class PressureAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
 
     companion object
     {
-        operator fun invoke(amount: Number, unit: Unit<Pressure>) =
-            PressureAmount(amount = amount * unit.scale,
+        operator fun invoke(amount: Number, unit: Unit<EnergyDensity>) =
+            EnergyDensityAmount(amount = amount * unit.scale,
                            unit = kilo(GRAM) to U2(METER, SECOND))
     }
 
-    // region -> Pressure
+    // region -> EnergyDensity
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        PressureAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
+        EnergyDensityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                        unit = mass to U2(distance, time))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        PressureAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
+        EnergyDensityAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                        unit = mass to U2(distance, time))
 
-    @JvmName("plusPressure")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> plus(that: PressureAmount<M, D, T>) =
-        PressureAmount(amount = amount + that.amount
+    @JvmName("plusEnergyDensity")
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> plus(that: EnergyDensityAmount<M, D, T>) =
+        EnergyDensityAmount(amount = amount + that.amount
                                 * convert(that.mass to mass)
                                 / convert(that.distance to distance,
                                           that.time to time,
                                           that.time to time),
                        unit = mass to U2(distance, time))
 
-    operator fun plus(that: PressureAmount<M, D, T2>) =
-        PressureAmount(amount = amount + that.amount,
+    operator fun plus(that: EnergyDensityAmount<M, D, T2>) =
+        EnergyDensityAmount(amount = amount + that.amount,
                        unit = mass to U2(distance, time))
 
-    @JvmName("minusPressure")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> minus(that: PressureAmount<M, D, T>) =
-        PressureAmount(amount = amount - that.amount
+    @JvmName("minusEnergyDensity")
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> minus(that: EnergyDensityAmount<M, D, T>) =
+        EnergyDensityAmount(amount = amount - that.amount
                                 * convert(that.mass to mass)
                                 / convert(that.distance to distance,
                                           that.time to time,
                                           that.time to time),
                        unit = mass to U2(distance, time))
 
-    operator fun minus(that: PressureAmount<M, D, T2>) =
-        PressureAmount(amount = amount - that.amount,
+    operator fun minus(that: EnergyDensityAmount<M, D, T2>) =
+        EnergyDensityAmount(amount = amount - that.amount,
                        unit = mass to U2(distance, time))
 
     // endregion
 
     // region -> Numeric
 
-    @JvmName("divPressure")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: PressureAmount<M, D, T>) =
+    @JvmName("divEnergyDensity")
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: EnergyDensityAmount<M, D, T>) =
         Numeric(amount = amount / that.amount
                          / convert(that.mass to mass)
                          * convert(that.distance to distance,
                                    that.time to time,
                                    that.time to time))
 
-    operator fun div(that: PressureAmount<M, D, T2>) =
+    operator fun div(that: EnergyDensityAmount<M, D, T2>) =
         Numeric(amount = amount / that.amount)
 
     // endregion
