@@ -16,7 +16,7 @@ class Lumen(amount: Number,
             magnitude: Magnitude = UNI)
     : LuminousFluxAmount<Unit<Angle>, Unit<LuminousIntensity>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
-    unit = U2(CANDELA, RADIAN))
+    unit = U2(RADIAN, CANDELA))
 {
     open class LumenUnit(magnitude: Magnitude)
         : Unit<LuminousFlux>(LuminousFlux::class, "lm", 1.toBigDecimal(), magnitude)

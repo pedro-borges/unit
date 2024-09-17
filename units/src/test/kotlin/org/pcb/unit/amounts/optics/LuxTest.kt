@@ -18,7 +18,7 @@ class LuxTest
     @Test
     fun scales()
     {
-        Lux(2) equivalent IlluminanceAmount(2, U2(CANDELA, RADIAN) to METER)
+        Lux(2) equivalent IlluminanceAmount(2, U2(RADIAN, CANDELA) to METER)
         Lux(2) equivalent IlluminanceAmount(2, LUX)
     }
 

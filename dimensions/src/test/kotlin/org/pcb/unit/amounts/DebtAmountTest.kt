@@ -135,7 +135,7 @@ class DebtAmountTest
     fun timesSameFrequency()
     {
         assertEquals(
-            expected = CurrencyAmount(amount = 1,
+            expected = CurrencyAmount(amount = 2 * 2,
                                       unit = CURRENCY1),
             actual = DebtAmount(amount = 2,
                                 unit = U2(CURRENCY1, TIME1)) *
@@ -147,11 +147,11 @@ class DebtAmountTest
     fun timesOtherFrequency()
     {
         assertEquals(
-            expected = CurrencyAmount(amount = 1,
+            expected = CurrencyAmount(amount = 2 * 2,
                                       unit = CURRENCY2),
             actual = DebtAmount(amount = 2,
-                                unit = U2(CURRENCY2, TIME2)) *
+                                unit = U2(CURRENCY2, TIME1)) *
                      FrequencyAmount(amount = 20,
-                                     unit = NUMBER1 to TIME1))
+                                     unit = NUMBER1 to TIME2))
     }
 }

@@ -7,7 +7,6 @@ import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Second
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.amounts.electromagnetism.Farad
-import org.pcb.unit.amounts.electromagnetism.Henry
 import org.pcb.unit.amounts.electromagnetism.Ohm
 import org.pcb.unit.amounts.electromagnetism.Siemens
 import org.pcb.unit.amounts.electromagnetism.Volt
@@ -55,14 +54,14 @@ class SecondTest
     @Test
     fun numericDivHertz() =
         assertEquals(
-            expected = Second(2 * 3),
-            actual = Numeric(2) / Hertz(3))
+            expected = Second(6 / 3),
+            actual = Numeric(6) / Hertz(3))
 
     @Test
-    fun ohmTimesHenry() =
+    fun ohmTimesFarad() =
         assertEquals(
             expected = Second(2 * 3),
-            actual = Ohm(2) * Henry(3))
+            actual = Ohm(2) * Farad(3))
 
     @Test
     fun talbotDivLumen() =

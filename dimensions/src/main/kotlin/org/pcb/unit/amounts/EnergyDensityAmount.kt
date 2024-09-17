@@ -81,10 +81,41 @@ open class EnergyDensityAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
 
     // endregion
 
-    // region -> Numeric
+    // region -> Energy
+
+    @JvmName("timesVolume")
+    operator fun <D : Unit<Distance>> times(that: VolumeAmount<D>) =
+        EnergyAmount(amount = amount * that.amount
+                              * convert(that.distance to distance,
+                                        that.distance to distance,
+                                        that.distance to distance),
+                     unit = U2(distance, mass) to time)
+
+    operator fun times(that: VolumeAmount<D>) =
+        EnergyAmount(amount = amount * that.amount,
+                     unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> Force
+
+    @JvmName("timesArea")
+    operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =
+        ForceAmount(amount = amount * that.amount
+                             * convert(that.distance to distance,
+                                       that.distance to distance),
+                    unit = U2(distance, mass) to time)
+
+    operator fun times(that: AreaAmount<D>) =
+        ForceAmount(amount = amount * that.amount,
+                    unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> Scalar
 
     @JvmName("divEnergyDensity")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: EnergyDensityAmount<D, M, T>) =
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyDensityAmount<D, M, T>) =
         Numeric(amount = amount / that.amount
                          / convert(that.mass to mass)
                          * convert(that.distance to distance,
@@ -93,35 +124,6 @@ open class EnergyDensityAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
 
     operator fun div(that: EnergyDensityAmount<D, M, T>) =
         Numeric(amount = amount / that.amount)
-
-    // endregion
-
-    // region -> Force
-
-    @JvmName("timesArea")
-    operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =
-        ForceAmount(amount = amount * that.amount * convert(that.distance to distance,
-                                                            that.distance to distance),
-                    unit = U2(mass, distance) to time)
-
-    operator fun times(that: AreaAmount<D>) =
-        ForceAmount(amount = amount * that.amount,
-                    unit = U2(mass, distance) to time)
-
-    // endregion
-
-    // region -> Energy
-
-    @JvmName("timesVolume")
-    operator fun <D : Unit<Distance>> times(that: VolumeAmount<D>) =
-        EnergyAmount(amount = amount * that.amount * convert(that.distance to distance,
-                                                             that.distance to distance,
-                                                             that.distance to distance),
-                     unit = U2(mass, distance) to time)
-
-    operator fun times(that: VolumeAmount<D>) =
-        EnergyAmount(amount = amount * that.amount,
-                     unit = U2(mass, distance) to time)
 
     // endregion
 }

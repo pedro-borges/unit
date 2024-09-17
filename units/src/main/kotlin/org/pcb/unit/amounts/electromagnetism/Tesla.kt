@@ -19,7 +19,7 @@ class Tesla(amount: Number,
             magnitude: Magnitude = UNI)
     : MagneticFluxDensityAmount<Unit<ElectricCurrent>, Unit<Mass>, Unit<Time>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
-    unit = kilo(GRAM) to U2(SECOND, AMPERE))
+    unit = kilo(GRAM) to U2(AMPERE, SECOND))
 {
     open class TeslaUnit(magnitude: Magnitude)
         : Unit<MagneticFluxDensity>(MagneticFluxDensity::class, "T", 1.toBigDecimal(), magnitude)

@@ -21,9 +21,9 @@ class MagneticFluxAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+                                          unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) *
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)) *
                      ScalarAmount(amount = 20,
                                   unit = NUMBER2))
     }
@@ -33,9 +33,9 @@ class MagneticFluxAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 1,
-                                          unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+                                          unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)) /
                      ScalarAmount(amount = 20,
                                   unit = NUMBER2))
     }
@@ -45,11 +45,11 @@ class MagneticFluxAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 1,
-                                          unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+                                          unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxAmount(amount = 0,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) +
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)) +
                      MagneticFluxAmount(amount = 1,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -57,11 +57,11 @@ class MagneticFluxAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 1,
-                                          unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)),
+                                          unit = U2(DISTANCE2, MASS2) to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxAmount(amount = 0,
-                                        unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) +
+                                        unit = U2(DISTANCE2, MASS2) to U2(ELECTRICCURRENT1, TIME1)) +
                      MagneticFluxAmount(amount = 1000000,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT2, TIME2)))
     }
 
     @Test
@@ -69,11 +69,11 @@ class MagneticFluxAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 0,
-                                          unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+                                          unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxAmount(amount = 1,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) -
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)) -
                      MagneticFluxAmount(amount = 1,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -81,11 +81,11 @@ class MagneticFluxAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 0,
-                                          unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)),
+                                          unit = U2(DISTANCE2, MASS2) to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxAmount(amount = 1,
-                                        unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) -
+                                        unit = U2(DISTANCE2, MASS2) to U2(ELECTRICCURRENT1, TIME1)) -
                      MagneticFluxAmount(amount = 1000000,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT2, TIME2)))
     }
 
     @Test
@@ -94,9 +94,9 @@ class MagneticFluxAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)) /
                      MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -105,9 +105,9 @@ class MagneticFluxAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE2, MASS2) to U2(ELECTRICCURRENT1, TIME1)) /
                      MagneticFluxAmount(amount = 2000000,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT2, TIME2)))
     }
 
     @Test
@@ -117,9 +117,9 @@ class MagneticFluxAmountTest
             expected = TimeAmount(amount = 1,
                                   unit = TIME1),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)) /
                      ElectricTensionAmount(amount = 2,
-                                           unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
+                                           unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -129,9 +129,9 @@ class MagneticFluxAmountTest
             expected = TimeAmount(amount = 1,
                                   unit = TIME1),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE2, MASS2) to U2(ELECTRICCURRENT1, TIME1)) /
                      ElectricTensionAmount(amount = 20000000,
-                                           unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
+                                           unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT2, TIME2)))
     }
 
     @Test
@@ -139,9 +139,9 @@ class MagneticFluxAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 1,
-                                             unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+                                             unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)) /
                      TimeAmount(amount = 2,
                                 unit = TIME1))
     }
@@ -151,9 +151,9 @@ class MagneticFluxAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 1,
-                                             unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT1)),
+                                             unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME2)),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME2)) /
                      TimeAmount(amount = 20,
                                 unit = TIME1))
     }
@@ -163,9 +163,9 @@ class MagneticFluxAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 1,
-                                                unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+                                                unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)) /
                      ElectricChargeAmount(amount = 2,
                                           unit = U2(ELECTRICCURRENT1, TIME1)))
     }
@@ -175,35 +175,35 @@ class MagneticFluxAmountTest
     {
         assertEquals(
             expected = ElectricResistanceAmount(amount = 1,
-                                                unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)),
+                                                unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT2, TIME2)),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)) /
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT2, TIME2)) /
                      ElectricChargeAmount(amount = 200,
                                           unit = U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
-    fun timesSameEnergy()
+    fun timesSameInductance()
     {
         assertEquals(
-            expected = ElectricCurrentAmount(amount = 2 * 2,
+            expected = ElectricCurrentAmount(amount = 1,
                                              unit = ELECTRICCURRENT1),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) *
-                     EnergyAmount(amount = 2,
-                                  unit = U2(MASS1, DISTANCE1) to TIME1))
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)) /
+                     InductanceAmount(amount = 2,
+                                      unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
-    fun timesOtherEnergy()
+    fun timesOtherInductance()
     {
         assertEquals(
-            expected = ElectricCurrentAmount(amount = 2 * 2,
+            expected = ElectricCurrentAmount(amount = 1,
                                              unit = ELECTRICCURRENT1),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) *
-                     EnergyAmount(amount = 200000,
-                                  unit = U2(MASS1, DISTANCE1) to TIME2))
+                                        unit = U2(DISTANCE2, MASS2) to U2(ELECTRICCURRENT1, TIME1)) /
+                     InductanceAmount(amount = 20000000,
+                                      unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT2, TIME2)))
     }
 
     @Test
@@ -211,9 +211,9 @@ class MagneticFluxAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1),
+                                    unit = U2(DISTANCE1, MASS1) to TIME1),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) *
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)) *
                      ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1))
     }
@@ -223,9 +223,9 @@ class MagneticFluxAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1),
+                                    unit = U2(DISTANCE1, MASS1) to TIME1),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT2)) *
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT2, TIME1)) *
                      ElectricCurrentAmount(amount = 20,
                                            unit = ELECTRICCURRENT1))
     }
@@ -237,9 +237,9 @@ class MagneticFluxAmountTest
             expected = ElectricChargeAmount(amount = 1,
                                             unit = U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)) /
                      ElectricResistanceAmount(amount = 2,
-                                              unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
+                                              unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -249,9 +249,9 @@ class MagneticFluxAmountTest
             expected = ElectricChargeAmount(amount = 1,
                                             unit = U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE2, MASS2) to U2(ELECTRICCURRENT1, TIME1)) /
                      ElectricResistanceAmount(amount = 200000000,
-                                              unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
+                                              unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT2, TIME2)))
     }
 
     @Test
@@ -259,9 +259,9 @@ class MagneticFluxAmountTest
     {
         assertEquals(
             expected = MagneticFluxDensityAmount(amount = 1,
-                                                 unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)),
+                                                 unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)) /
                      AreaAmount(amount = 2,
                                 unit = DISTANCE1))
     }
@@ -271,9 +271,9 @@ class MagneticFluxAmountTest
     {
         assertEquals(
             expected = MagneticFluxDensityAmount(amount = 1,
-                                                 unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)),
+                                                 unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE2, MASS1) to U2(ELECTRICCURRENT1, TIME1)) /
                      AreaAmount(amount = 200,
                                 unit = DISTANCE1))
     }
@@ -285,9 +285,9 @@ class MagneticFluxAmountTest
             expected = AreaAmount(amount = 1,
                                   unit = DISTANCE1),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)) /
                      MagneticFluxDensityAmount(amount = 2,
-                                               unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)))
+                                               unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -297,9 +297,9 @@ class MagneticFluxAmountTest
             expected = AreaAmount(amount = 1,
                                   unit = DISTANCE1),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS2, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE1, MASS2) to U2(ELECTRICCURRENT1, TIME1)) /
                      MagneticFluxDensityAmount(amount = 20000,
-                                               unit = MASS1 to U2(TIME2, ELECTRICCURRENT2)))
+                                               unit = MASS1 to U2(ELECTRICCURRENT2, TIME2)))
     }
 
     @Test
@@ -307,9 +307,9 @@ class MagneticFluxAmountTest
     {
         assertEquals(
             expected = InductanceAmount(amount = 1,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)) /
                      ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1))
     }
@@ -321,9 +321,9 @@ class MagneticFluxAmountTest
             expected = AreaAmount(amount = 1,
                                   unit = DISTANCE1),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS2, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE1, MASS2) to U2(ELECTRICCURRENT1, TIME1)) /
                      MagneticFluxDensityAmount(amount = 20000,
-                                               unit = MASS1 to U2(TIME2, ELECTRICCURRENT2)))
+                                               unit = MASS1 to U2(ELECTRICCURRENT2, TIME2)))
     }
 
     @Test
@@ -333,9 +333,9 @@ class MagneticFluxAmountTest
             expected = ElectricCurrentAmount(amount = 1,
                                              unit = ELECTRICCURRENT1),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)) /
                      InductanceAmount(amount = 2,
-                                      unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
+                                      unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -345,8 +345,8 @@ class MagneticFluxAmountTest
             expected = ElectricCurrentAmount(amount = 1,
                                              unit = ELECTRICCURRENT1),
             actual = MagneticFluxAmount(amount = 2,
-                                        unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) /
+                                        unit = U2(DISTANCE2, MASS2) to U2(ELECTRICCURRENT1, TIME1)) /
                      InductanceAmount(amount = 20000000,
-                                      unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
+                                      unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT2, TIME2)))
     }
 }

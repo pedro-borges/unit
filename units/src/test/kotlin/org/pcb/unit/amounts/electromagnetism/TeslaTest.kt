@@ -19,7 +19,7 @@ class TeslaTest
     @Test
     fun unit()
     {
-        Tesla(2) equivalent MagneticFluxDensityAmount(2, kilo(GRAM) to U2(SECOND, AMPERE))
+        Tesla(2) equivalent MagneticFluxDensityAmount(2, kilo(GRAM) to U2(AMPERE, SECOND))
         Tesla(2) equivalent MagneticFluxDensityAmount(2, TESLA)
     }
 

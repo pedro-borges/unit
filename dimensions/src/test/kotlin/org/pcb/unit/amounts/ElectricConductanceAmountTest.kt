@@ -119,7 +119,7 @@ class ElectricConductanceAmountTest
             actual = ElectricConductanceAmount(amount = 2,
                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) *
                      ElectricResistanceAmount(amount = 2,
-                                              unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
+                                              unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -130,7 +130,7 @@ class ElectricConductanceAmountTest
             actual = ElectricConductanceAmount(amount = 2,
                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)) *
                      ElectricResistanceAmount(amount = 200000000,
-                                              unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
+                                              unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT2, TIME2)))
     }
 
     @Test
@@ -142,7 +142,7 @@ class ElectricConductanceAmountTest
             actual = ElectricConductanceAmount(amount = 2,
                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) *
                      ElectricTensionAmount(amount = 2,
-                                           unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
+                                           unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -154,7 +154,7 @@ class ElectricConductanceAmountTest
             actual = ElectricConductanceAmount(amount = 2,
                                                unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)) *
                      ElectricTensionAmount(amount = 20000000,
-                                           unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
+                                           unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT2, TIME2)))
     }
 
     @Test
@@ -174,11 +174,11 @@ class ElectricConductanceAmountTest
     {
         assertEquals(
             expected = CapacitanceAmount(amount = 1,
-                                         unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
+                                         unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)),
             actual = ElectricConductanceAmount(amount = 2,
-                                               unit = U2(TIME2, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) /
+                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) /
                      FrequencyAmount(amount = 20,
-                                     unit = NUMBER1 to TIME1))
+                                     unit = NUMBER1 to TIME2))
     }
 
     @Test
@@ -222,10 +222,10 @@ class ElectricConductanceAmountTest
     {
         assertEquals(
             expected = FrequencyAmount(amount = 1,
-                                       unit = NUMBER1 to TIME1),
+                                       unit = NUMBER1 to TIME2),
             actual = ElectricConductanceAmount(amount = 2,
-                                               unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)) /
+                                               unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, DISTANCE1)) /
                      CapacitanceAmount(amount = 2000000000,
-                                       unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, DISTANCE1)))
+                                       unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)))
     }
 }

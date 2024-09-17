@@ -19,7 +19,7 @@ class Joule(amount: Number,
             magnitude: Magnitude = UNI)
     : EnergyAmount<Unit<Distance>, Unit<Mass>, Unit<Time>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
-    unit = U2(kilo(GRAM), METER) to SECOND)
+    unit = U2(METER, kilo(GRAM)) to SECOND)
 {
     open class JouleUnit(magnitude: Magnitude)
         : Unit<Energy>(Energy::class, "J", 1.toBigDecimal(), magnitude)

@@ -9,6 +9,7 @@ import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Radian.RADIAN
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
+import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.LuminousIntensity
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.SolidAngle
@@ -65,15 +66,25 @@ open class SolidAngleAmount<A : Unit<Angle>>(
 
     // endregion
 
-    // region -> Numeric
+    // region -> Angle
 
-    @JvmName("divSolidAngle")
-    operator fun <A : Unit<Angle>> div(that: SolidAngleAmount<A>) =
-        Numeric(amount = amount / that.amount / convert(that.angle to angle,
-                                                        that.angle to angle))
+    @JvmName("divAngle")
+    operator fun <A : Unit<Angle>> div(that: AngleAmount<A>) =
+        AngleAmount(amount = amount / that.amount
+                             / convert(that.angle to angle),
+                    unit = angle)
 
-    operator fun div(that: SolidAngleAmount<A>) =
-        Numeric(amount = amount / that.amount)
+    operator fun div(that: AngleAmount<A>) =
+        AngleAmount(amount = amount / that.amount,
+                    unit = angle)
+
+    // endregion
+
+    // region -> Illuminance
+
+    operator fun <D : Unit<Distance>, LI : Unit<LuminousIntensity>> times(that: LuminanceAmount<D, LI>) =
+        IlluminanceAmount(amount = amount * that.amount,
+                          unit = U2(angle, that.luminousIntensity) to that.distance)
 
     // endregion
 
@@ -81,7 +92,20 @@ open class SolidAngleAmount<A : Unit<Angle>>(
 
     operator fun <LI : Unit<LuminousIntensity>> times(that: LuminousIntensityAmount<LI>) =
         LuminousFluxAmount(amount = amount * that.amount,
-                           unit = U2(that.luminousIntensity, angle))
+                           unit = U2(angle, that.luminousIntensity))
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divSolidAngle")
+    operator fun <A : Unit<Angle>> div(that: SolidAngleAmount<A>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.angle to angle,
+                                   that.angle to angle))
+
+    operator fun div(that: SolidAngleAmount<A>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 }

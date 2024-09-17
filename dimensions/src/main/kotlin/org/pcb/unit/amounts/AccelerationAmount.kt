@@ -66,33 +66,26 @@ open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> Numeric
+    // region -> Force
 
-    @JvmName("divAcceleration")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: AccelerationAmount<D, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance)
-                         * convert(that.time to time, that.time to time))
-
-    operator fun div(that: AccelerationAmount<D, T>) =
-        Numeric(amount = amount / that.amount)
-
-    // endregion
-
-    // region -> Speed
-
-    @JvmName("timesTime")
-    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
-        SpeedAmount(amount = amount * that.amount * convert(that.time to time),
-                    unit = distance to time)
-
-    operator fun times(that: TimeAmount<T>) =
-        SpeedAmount(amount = amount * that.amount,
-                    unit = distance to time)
+    operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
+        ForceAmount(amount = amount * that.amount,
+                    unit = U2(distance, that.mass) to time)
 
     // endregion
 
     // region -> Frequency
+
+    @JvmName("timesPace")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<D, T>) =
+        FrequencyAmount(amount = amount * that.amount
+                                 * convert(that.time to time)
+                                 / convert(that.distance to distance),
+                        unit = NUMERIC to time)
+
+    operator fun times(that: PaceAmount<D, T>) =
+        FrequencyAmount(amount = amount * that.amount,
+                        unit = NUMERIC to time)
 
     @JvmName("divSpeed")
     operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
@@ -107,11 +100,56 @@ open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> Force
+    // region -> Power
 
-    operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
-        ForceAmount(amount = amount * that.amount,
-                    unit = U2(that.mass, distance) to time)
+    @JvmName("timesMomentum")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: MomentumAmount<D, M, T>) =
+        PowerAmount(amount = amount * that.amount
+                             * convert(that.distance to distance)
+                             / convert(that.time to time),
+                    unit = U2(distance, that.mass) to time)
+
+    operator fun <M : Unit<Mass>> times(that: MomentumAmount<D, M, T>) =
+        PowerAmount(amount = amount * that.amount,
+                    unit = U2(distance, that.mass) to time)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divAcceleration")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: AccelerationAmount<D, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.distance to distance)
+                         * convert(that.time to time,
+                                   that.time to time))
+
+    operator fun div(that: AccelerationAmount<D, T>) =
+        Numeric(amount = amount / that.amount)
+
+    // endregion
+
+    // region -> Speed
+
+    @JvmName("divFrequency")
+    operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
+        SpeedAmount(amount = amount / that.amount
+                             * convert(that.time to time),
+                    unit = distance to time)
+
+    operator fun div(that: FrequencyAmount<T>) =
+        SpeedAmount(amount = amount / that.amount,
+                    unit = distance to time)
+
+    @JvmName("timesTime")
+    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
+        SpeedAmount(amount = amount * that.amount
+                             * convert(that.time to time),
+                    unit = distance to time)
+
+    operator fun times(that: TimeAmount<T>) =
+        SpeedAmount(amount = amount * that.amount,
+                    unit = distance to time)
 
     // endregion
 }

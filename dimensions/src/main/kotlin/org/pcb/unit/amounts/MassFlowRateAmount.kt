@@ -10,6 +10,7 @@ import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.MassFlowRate
 import org.pcb.unit.dimensions.Scalar
@@ -74,7 +75,123 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> Numeric
+    // region -> ElectricCharge
+
+    @JvmName("divMagneticFluxDensity")
+    operator fun <EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: MagneticFluxDensityAmount<EC, M, T>) =
+        ElectricChargeAmount(amount = amount / that.amount
+                                      / convert(that.mass to mass)
+                                      * convert(that.time to time,
+                                                that.time to time),
+                             unit = U2(that.electricCurrent, time))
+
+    operator fun <EC : Unit<ElectricCurrent>> div(that: MagneticFluxDensityAmount<EC, M, T>) =
+        ElectricChargeAmount(amount = amount / that.amount,
+                             unit = U2(that.electricCurrent, time))
+
+    // endregion
+
+    // region -> Force
+
+    @JvmName("divPace")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<D, T>) =
+        ForceAmount(amount = amount / that.amount
+                             / convert(that.time to time),
+                    unit = U2(that.distance, mass) to time)
+
+    operator fun <D : Unit<Distance>> div(that: PaceAmount<D, T>) =
+        ForceAmount(amount = amount / that.amount,
+                    unit = U2(that.distance, mass) to time)
+
+    @JvmName("timesSpeed")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
+        ForceAmount(amount = amount * that.amount
+                             / convert(that.time to time),
+                    unit = U2(that.distance, mass) to time)
+
+    operator fun <D : Unit<Distance>> times(that: SpeedAmount<D, T>) =
+        ForceAmount(amount = amount * that.amount,
+                    unit = U2(that.distance, mass) to time)
+
+    // endregion
+
+    // region -> Frequency
+
+    @JvmName("divMass")
+    operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
+        FrequencyAmount(amount = amount / that.amount
+                                 / convert(that.mass to mass),
+                        unit = NUMERIC to time)
+
+    operator fun div(that: MassAmount<M>) =
+        FrequencyAmount(amount = amount / that.amount,
+                        unit = NUMERIC to time)
+
+    // endregion
+
+    // region -> MagneticFluxDensity
+
+    @JvmName("divElectricCharge")
+    operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricChargeAmount<EC, T>) =
+        MagneticFluxDensityAmount(amount = amount / that.amount
+                                           / convert(that.time to time),
+                                  unit = mass to U2(that.electricCurrent, time))
+
+    operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricChargeAmount<EC, T>) =
+        MagneticFluxDensityAmount(amount = amount / that.amount,
+                                  unit = mass to U2(that.electricCurrent, time))
+
+    // endregion
+
+    // region -> Mass
+
+    @JvmName("divFrequency")
+    operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
+        MassAmount(amount = amount / that.amount
+                            * convert(that.time to time),
+                   unit = mass)
+
+    operator fun div(that: FrequencyAmount<T>) =
+        MassAmount(amount = amount / that.amount,
+                   unit = mass)
+
+    @JvmName("timesTime")
+    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
+        MassAmount(amount = amount * that.amount
+                            * convert(that.time to time),
+                   unit = mass)
+
+    operator fun times(that: TimeAmount<T>) =
+        MassAmount(amount = amount * that.amount,
+                   unit = mass)
+
+    // endregion
+
+    // region -> Momentum
+
+    operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =
+        MomentumAmount(amount = amount * that.amount,
+                       unit = U2(that.distance, mass) to time)
+
+    // endregion
+
+    // region -> Pace
+
+    @JvmName("divForce")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ForceAmount<D, M, T>) =
+        PaceAmount(amount = amount / that.amount
+                            / convert(that.mass to mass)
+                            * convert(that.time to time,
+                                      that.time to time),
+                   unit = time to that.distance)
+
+    operator fun <D : Unit<Distance>> div(that: ForceAmount<D, M, T>) =
+        PaceAmount(amount = amount / that.amount,
+                   unit = time to that.distance)
+
+    // endregion
+
+    // region -> Scalar
 
     @JvmName("divMassFlowRate")
     operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFlowRateAmount<M, T>) =
@@ -84,27 +201,6 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     operator fun div(that: MassFlowRateAmount<M, T>) =
         Numeric(amount = amount / that.amount)
-
-    // endregion
-
-    // region -> Mass
-
-    @JvmName("timesTime")
-    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
-        MassAmount(amount = amount * that.amount * convert(that.time to time),
-                   unit = mass)
-
-    operator fun times(that: TimeAmount<T>) =
-        MassAmount(amount = amount * that.amount * convert(that.time to time),
-                   unit = mass)
-
-    // endregion
-
-    // region -> Momentum
-
-    operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =
-        MomentumAmount(amount = amount * that.amount,
-                       unit = U2(mass, that.distance) to time)
 
     // endregion
 }

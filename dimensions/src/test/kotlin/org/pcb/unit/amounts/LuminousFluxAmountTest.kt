@@ -20,9 +20,9 @@ class LuminousFluxAmountTest
     {
         assertEquals(
             expected = LuminousFluxAmount(amount = 2 * 2,
-                                          unit = U2(LUMINOUSINTENSITY1, ANGLE1)),
+                                          unit = U2(ANGLE1, LUMINOUSINTENSITY1)),
             actual = LuminousFluxAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)) *
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY1)) *
                      ScalarAmount(amount = 20,
                                   unit = NUMBER2))
     }
@@ -32,9 +32,9 @@ class LuminousFluxAmountTest
     {
         assertEquals(
             expected = LuminousFluxAmount(amount = 1,
-                                          unit = U2(LUMINOUSINTENSITY1, ANGLE1)),
+                                          unit = U2(ANGLE1, LUMINOUSINTENSITY1)),
             actual = LuminousFluxAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)) /
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY1)) /
                      ScalarAmount(amount = 20,
                                   unit = NUMBER2))
     }
@@ -44,11 +44,11 @@ class LuminousFluxAmountTest
     {
         assertEquals(
             expected = LuminousFluxAmount(amount = 1,
-                                          unit = U2(LUMINOUSINTENSITY1, ANGLE1)),
+                                          unit = U2(ANGLE1, LUMINOUSINTENSITY1)),
             actual = LuminousFluxAmount(amount = 0,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)) +
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY1)) +
                      LuminousFluxAmount(amount = 1,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)))
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY1)))
     }
 
     @Test
@@ -56,11 +56,11 @@ class LuminousFluxAmountTest
     {
         assertEquals(
             expected = LuminousFluxAmount(amount = 1,
-                                          unit = U2(LUMINOUSINTENSITY2, ANGLE2)),
+                                          unit = U2(ANGLE2, LUMINOUSINTENSITY2)),
             actual = LuminousFluxAmount(amount = 0,
-                                        unit = U2(LUMINOUSINTENSITY2, ANGLE2)) +
+                                        unit = U2(ANGLE2, LUMINOUSINTENSITY2)) +
                      LuminousFluxAmount(amount = 1000,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)))
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY1)))
     }
 
     @Test
@@ -68,11 +68,11 @@ class LuminousFluxAmountTest
     {
         assertEquals(
             expected = LuminousFluxAmount(amount = 0,
-                                          unit = U2(LUMINOUSINTENSITY1, ANGLE1)),
+                                          unit = U2(ANGLE1, LUMINOUSINTENSITY1)),
             actual = LuminousFluxAmount(amount = 1,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)) -
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY1)) -
                      LuminousFluxAmount(amount = 1,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)))
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY1)))
     }
 
     @Test
@@ -80,11 +80,11 @@ class LuminousFluxAmountTest
     {
         assertEquals(
             expected = LuminousFluxAmount(amount = 0,
-                                          unit = U2(LUMINOUSINTENSITY2, ANGLE2)),
+                                          unit = U2(ANGLE2, LUMINOUSINTENSITY2)),
             actual = LuminousFluxAmount(amount = 1,
-                                        unit = U2(LUMINOUSINTENSITY2, ANGLE2)) -
+                                        unit = U2(ANGLE2, LUMINOUSINTENSITY2)) -
                      LuminousFluxAmount(amount = 1000,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)))
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY1)))
     }
 
     @Test
@@ -93,9 +93,9 @@ class LuminousFluxAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = LuminousFluxAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)) /
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY1)) /
                      LuminousFluxAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)))
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY1)))
     }
 
     @Test
@@ -104,9 +104,9 @@ class LuminousFluxAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = LuminousFluxAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY2, ANGLE2)) /
+                                        unit = U2(ANGLE2, LUMINOUSINTENSITY2)) /
                      LuminousFluxAmount(amount = 2000,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)))
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY1)))
     }
 
     @Test
@@ -116,7 +116,7 @@ class LuminousFluxAmountTest
             expected = SolidAngleAmount(amount = 1,
                                         unit = ANGLE1),
             actual = LuminousFluxAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)) /
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY1)) /
                      LuminousIntensityAmount(amount = 2,
                                              unit = LUMINOUSINTENSITY1))
     }
@@ -128,7 +128,7 @@ class LuminousFluxAmountTest
             expected = SolidAngleAmount(amount = 1,
                                         unit = ANGLE1),
             actual = LuminousFluxAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY2, ANGLE1)) /
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY2)) /
                      LuminousIntensityAmount(amount = 20,
                                              unit = LUMINOUSINTENSITY1))
     }
@@ -140,7 +140,7 @@ class LuminousFluxAmountTest
             expected = LuminousIntensityAmount(amount = 1,
                                                unit = LUMINOUSINTENSITY1),
             actual = LuminousFluxAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)) /
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY1)) /
                      SolidAngleAmount(amount = 2,
                                       unit = ANGLE1))
     }
@@ -152,7 +152,7 @@ class LuminousFluxAmountTest
             expected = LuminousIntensityAmount(amount = 1,
                                                unit = LUMINOUSINTENSITY1),
             actual = LuminousFluxAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE2)) /
+                                        unit = U2(ANGLE2, LUMINOUSINTENSITY1)) /
                      SolidAngleAmount(amount = 200,
                                       unit = ANGLE1))
     }
@@ -162,9 +162,9 @@ class LuminousFluxAmountTest
     {
         assertEquals(
             expected = IlluminanceAmount(amount = 1,
-                                         unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1),
+                                         unit = U2(ANGLE1, LUMINOUSINTENSITY1) to DISTANCE1),
             actual = LuminousFluxAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)) /
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY1)) /
                      AreaAmount(amount = 2,
                                 unit = DISTANCE1))
     }
@@ -176,9 +176,9 @@ class LuminousFluxAmountTest
             expected = AreaAmount(amount = 1,
                                   unit = DISTANCE1),
             actual = LuminousFluxAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)) /
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY1)) /
                      IlluminanceAmount(amount = 2,
-                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1))
+                                       unit = U2(ANGLE1, LUMINOUSINTENSITY1) to DISTANCE1))
     }
 
     @Test
@@ -188,9 +188,9 @@ class LuminousFluxAmountTest
             expected = AreaAmount(amount = 1,
                                   unit = DISTANCE1),
             actual = LuminousFluxAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY2, ANGLE2)) /
+                                        unit = U2(ANGLE2, LUMINOUSINTENSITY2)) /
                      IlluminanceAmount(amount = 2000,
-                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1))
+                                       unit = U2(ANGLE1, LUMINOUSINTENSITY1) to DISTANCE1))
     }
 
     @Test
@@ -198,9 +198,9 @@ class LuminousFluxAmountTest
     {
         assertEquals(
             expected = LuminousEnergyAmount(amount = 2 * 2,
-                                            unit = U3(LUMINOUSINTENSITY1, ANGLE1, TIME2)),
+                                            unit = U3(ANGLE1, LUMINOUSINTENSITY1, TIME2)),
             actual = LuminousFluxAmount(amount = 2,
-                                        unit = U2(LUMINOUSINTENSITY1, ANGLE1)) *
+                                        unit = U2(ANGLE1, LUMINOUSINTENSITY1)) *
                      TimeAmount(amount = 2,
                                 unit = TIME2))
     }

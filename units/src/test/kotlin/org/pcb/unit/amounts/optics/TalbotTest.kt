@@ -18,7 +18,7 @@ class TalbotTest
     @Test
     fun scales()
     {
-        Talbot(2) equivalent LuminousEnergyAmount(2, U3(CANDELA, RADIAN, SECOND))
+        Talbot(2) equivalent LuminousEnergyAmount(2, U3(RADIAN, CANDELA, SECOND))
         Talbot(2) equivalent LuminousEnergyAmount(2, TALBOT)
     }
 

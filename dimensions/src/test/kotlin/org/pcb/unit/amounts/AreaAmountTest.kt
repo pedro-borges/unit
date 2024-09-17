@@ -162,11 +162,11 @@ class AreaAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+                                          unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)),
             actual = AreaAmount(amount = 2,
                                 unit = DISTANCE1) *
                      MagneticFluxDensityAmount(amount = 2,
-                                               unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)))
+                                               unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -174,7 +174,7 @@ class AreaAmountTest
     {
         assertEquals(
             expected = ForceAmount(amount = 2 * 2,
-                                   unit = U2(MASS1, DISTANCE1) to TIME1),
+                                   unit = U2(DISTANCE1, MASS1) to TIME1),
             actual = AreaAmount(amount = 2,
                                 unit = DISTANCE1) *
                      EnergyDensityAmount(amount = 2,
@@ -186,7 +186,7 @@ class AreaAmountTest
     {
         assertEquals(
             expected = ForceAmount(amount = 2 * 2,
-                                   unit = U2(MASS1, DISTANCE1) to TIME1),
+                                   unit = U2(DISTANCE1, MASS1) to TIME1),
             actual = AreaAmount(amount = 2,
                                 unit = DISTANCE1) *
                      EnergyDensityAmount(amount = 20,
@@ -198,11 +198,11 @@ class AreaAmountTest
     {
         assertEquals(
             expected = LuminousFluxAmount(amount = 2 * 2,
-                                          unit = U2(LUMINOUSINTENSITY1, ANGLE1)),
+                                          unit = U2(ANGLE1, LUMINOUSINTENSITY1)),
             actual = AreaAmount(amount = 2,
                                 unit = DISTANCE1) *
                      IlluminanceAmount(amount = 2,
-                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1))
+                                       unit = U2(ANGLE1, LUMINOUSINTENSITY1) to DISTANCE1))
     }
 
     @Test
@@ -210,11 +210,11 @@ class AreaAmountTest
     {
         assertEquals(
             expected = LuminousFluxAmount(amount = 2 * 2,
-                                          unit = U2(LUMINOUSINTENSITY1, ANGLE1)),
+                                          unit = U2(ANGLE1, LUMINOUSINTENSITY1)),
             actual = AreaAmount(amount = 2,
-                                unit = DISTANCE2) *
+                                unit = DISTANCE1) *
                      IlluminanceAmount(amount = 200,
-                                       unit = U2(LUMINOUSINTENSITY1, ANGLE1) to DISTANCE1))
+                                       unit = U2(ANGLE1, LUMINOUSINTENSITY1) to DISTANCE2))
     }
 
     @Test
@@ -236,8 +236,8 @@ class AreaAmountTest
             expected = LuminousIntensityAmount(amount = 2 * 2,
                                                unit = LUMINOUSINTENSITY1),
             actual = AreaAmount(amount = 2,
-                                unit = DISTANCE2) *
+                                unit = DISTANCE1) *
                      LuminanceAmount(amount = 200,
-                                     unit = LUMINOUSINTENSITY1 to DISTANCE1))
+                                     unit = LUMINOUSINTENSITY1 to DISTANCE2))
     }
 }

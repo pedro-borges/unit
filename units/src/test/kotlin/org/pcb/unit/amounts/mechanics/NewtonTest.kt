@@ -25,7 +25,7 @@ class NewtonTest
     fun unit()
     {
         Newton(1) equivalent Gram(2, KILO) * (Meter(2) / Second(2)) / Second(2)
-        Newton(2) equivalent ForceAmount(2, U2(kilo(GRAM), METER) to SECOND)
+        Newton(2) equivalent ForceAmount(2, U2(METER, kilo(GRAM)) to SECOND)
         Newton(2) equivalent ForceAmount(2, NEWTON)
     }
 

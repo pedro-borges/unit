@@ -159,7 +159,7 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = U2(MASS2, DISTANCE1) to TIME2),
+                                    unit = U2(DISTANCE1, MASS2) to TIME2),
             actual = VolumeAmount(amount = 2,
                                   unit = DISTANCE1) *
                      EnergyDensityAmount(amount = 2,
@@ -171,7 +171,7 @@ class VolumeAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = U2(MASS2, DISTANCE1) to TIME2),
+                                    unit = U2(DISTANCE1, MASS2) to TIME2),
             actual = VolumeAmount(amount = 2,
                                   unit = DISTANCE1) *
                      EnergyDensityAmount(amount = 20,

@@ -19,9 +19,9 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 2 * 2,
-                                      unit = U2(MASS1, DISTANCE1) to TIME1),
+                                      unit = U2(DISTANCE1, MASS1) to TIME1),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1) *
+                                    unit = U2(DISTANCE1, MASS1) to TIME1) *
                      ScalarAmount(amount = 20,
                                   unit = NUMBER2))
     }
@@ -31,9 +31,9 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 1,
-                                      unit = U2(MASS1, DISTANCE1) to TIME1),
+                                      unit = U2(DISTANCE1, MASS1) to TIME1),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1) /
+                                    unit = U2(DISTANCE1, MASS1) to TIME1) /
                      ScalarAmount(amount = 20,
                                   unit = NUMBER2))
     }
@@ -43,11 +43,11 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 1,
-                                      unit = U2(MASS1, DISTANCE1) to TIME1),
+                                      unit = U2(DISTANCE1, MASS1) to TIME1),
             actual = MomentumAmount(amount = 0,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1) +
+                                    unit = U2(DISTANCE1, MASS1) to TIME1) +
                      MomentumAmount(amount = 1,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1))
+                                    unit = U2(DISTANCE1, MASS1) to TIME1))
     }
 
     @Test
@@ -55,11 +55,11 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 1,
-                                      unit = U2(MASS2, DISTANCE2) to TIME1),
+                                      unit = U2(DISTANCE2, MASS2) to TIME1),
             actual = MomentumAmount(amount = 0,
-                                    unit = U2(MASS2, DISTANCE2) to TIME1) +
+                                    unit = U2(DISTANCE2, MASS2) to TIME1) +
                      MomentumAmount(amount = 1000,
-                                    unit = U2(MASS1, DISTANCE1) to TIME2))
+                                    unit = U2(DISTANCE1, MASS1) to TIME2))
     }
 
     @Test
@@ -67,11 +67,11 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 0,
-                                      unit = U2(MASS1, DISTANCE1) to TIME1),
+                                      unit = U2(DISTANCE1, MASS1) to TIME1),
             actual = MomentumAmount(amount = 1,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1) -
+                                    unit = U2(DISTANCE1, MASS1) to TIME1) -
                      MomentumAmount(amount = 1,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1))
+                                    unit = U2(DISTANCE1, MASS1) to TIME1))
     }
 
     @Test
@@ -79,11 +79,11 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 0,
-                                      unit = U2(MASS2, DISTANCE2) to TIME1),
+                                      unit = U2(DISTANCE2, MASS2) to TIME1),
             actual = MomentumAmount(amount = 1,
-                                    unit = U2(MASS2, DISTANCE2) to TIME1) -
+                                    unit = U2(DISTANCE2, MASS2) to TIME1) -
                      MomentumAmount(amount = 1000,
-                                    unit = U2(MASS1, DISTANCE1) to TIME2))
+                                    unit = U2(DISTANCE1, MASS1) to TIME2))
     }
 
     @Test
@@ -92,9 +92,9 @@ class MomentumAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1) /
+                                    unit = U2(DISTANCE1, MASS1) to TIME1) /
                      MomentumAmount(amount = 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1))
+                                    unit = U2(DISTANCE1, MASS1) to TIME1))
     }
 
     @Test
@@ -103,9 +103,9 @@ class MomentumAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS2, DISTANCE2) to TIME1) /
+                                    unit = U2(DISTANCE2, MASS2) to TIME1) /
                      MomentumAmount(amount = 2000,
-                                    unit = U2(MASS1, DISTANCE1) to TIME2))
+                                    unit = U2(DISTANCE1, MASS1) to TIME2))
     }
 
     @Test
@@ -115,7 +115,7 @@ class MomentumAmountTest
             expected = SpeedAmount(amount = 1,
                                    unit = DISTANCE1 to TIME1),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1) /
+                                    unit = U2(DISTANCE1, MASS1) to TIME1) /
                      MassAmount(amount = 2,
                                 unit = MASS1))
     }
@@ -127,7 +127,7 @@ class MomentumAmountTest
             expected = SpeedAmount(amount = 1,
                                    unit = DISTANCE1 to TIME1),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS2, DISTANCE1) to TIME1) /
+                                    unit = U2(DISTANCE1, MASS2) to TIME1) /
                      MassAmount(amount = 20,
                                 unit = MASS1))
     }
@@ -139,7 +139,7 @@ class MomentumAmountTest
             expected = MassAmount(amount = 1,
                                   unit = MASS1),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1) /
+                                    unit = U2(DISTANCE1, MASS1) to TIME1) /
                      SpeedAmount(amount = 2,
                                  unit = DISTANCE1 to TIME1))
     }
@@ -151,7 +151,7 @@ class MomentumAmountTest
             expected = MassAmount(amount = 1,
                                   unit = MASS2),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS2, DISTANCE2) to TIME1) /
+                                    unit = U2(DISTANCE2, MASS2) to TIME1) /
                      SpeedAmount(amount = 200,
                                  unit = DISTANCE1 to TIME2))
     }
@@ -161,9 +161,9 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = ForceAmount(amount = 1,
-                                   unit = U2(MASS1, DISTANCE1) to TIME1),
+                                   unit = U2(DISTANCE1, MASS1) to TIME1),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1) /
+                                    unit = U2(DISTANCE1, MASS1) to TIME1) /
                      TimeAmount(amount = 2,
                                 unit = TIME1))
     }
@@ -173,9 +173,9 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = ForceAmount(amount = 1,
-                                   unit = U2(MASS1, DISTANCE1) to TIME2),
+                                   unit = U2(DISTANCE1, MASS1) to TIME2),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME2) /
+                                    unit = U2(DISTANCE1, MASS1) to TIME2) /
                      TimeAmount(amount = 20,
                                 unit = TIME1))
     }
@@ -185,9 +185,9 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1),
+                                    unit = U2(DISTANCE1, MASS1) to TIME1),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1) *
+                                    unit = U2(DISTANCE1, MASS1) to TIME1) *
                      SpeedAmount(amount = 2,
                                  unit = DISTANCE1 to TIME1))
     }
@@ -197,9 +197,9 @@ class MomentumAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = U2(MASS2, DISTANCE2) to TIME1),
+                                    unit = U2(DISTANCE2, MASS2) to TIME1),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS2, DISTANCE2) to TIME1) *
+                                    unit = U2(DISTANCE2, MASS2) to TIME1) *
                      SpeedAmount(amount = 200,
                                  unit = DISTANCE1 to TIME2))
     }
@@ -211,7 +211,7 @@ class MomentumAmountTest
             expected = MassFlowRateAmount(amount = 1,
                                           unit = MASS1 to TIME1),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1) /
+                                    unit = U2(DISTANCE1, MASS1) to TIME1) /
                      DistanceAmount(amount = 2,
                                     unit = DISTANCE1))
     }
@@ -223,7 +223,7 @@ class MomentumAmountTest
             expected = MassFlowRateAmount(amount = 1,
                                           unit = MASS2 to TIME1),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS2, DISTANCE2) to TIME1) /
+                                    unit = U2(DISTANCE2, MASS2) to TIME1) /
                      DistanceAmount(amount = 20,
                                     unit = DISTANCE1))
     }
@@ -235,7 +235,7 @@ class MomentumAmountTest
             expected = DistanceAmount(amount = 1,
                                       unit = DISTANCE1),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1) /
+                                    unit = U2(DISTANCE1, MASS1) to TIME1) /
                      MassFlowRateAmount(amount = 2,
                                         unit = MASS1 to TIME1))
     }
@@ -247,7 +247,7 @@ class MomentumAmountTest
             expected = DistanceAmount(amount = 1,
                                       unit = DISTANCE1),
             actual = MomentumAmount(amount = 2,
-                                    unit = U2(MASS2, DISTANCE1) to TIME1) /
+                                    unit = U2(DISTANCE1, MASS2) to TIME1) /
                      MassFlowRateAmount(amount = 200,
                                         unit = MASS1 to TIME2))
     }

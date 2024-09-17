@@ -208,11 +208,11 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1),
+                                    unit = U2(DISTANCE1, MASS1) to TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = DISTANCE1 to TIME1) *
                      MomentumAmount(amount = 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME1))
+                                    unit = U2(DISTANCE1, MASS1) to TIME1))
     }
 
     @Test
@@ -220,11 +220,11 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = U2(MASS2, DISTANCE2) to TIME1),
+                                    unit = U2(DISTANCE2, MASS2) to TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = DISTANCE2 to TIME1) *
                      MomentumAmount(amount = 200,
-                                    unit = U2(MASS2, DISTANCE1) to TIME2))
+                                    unit = U2(DISTANCE1, MASS2) to TIME2))
     }
 
     @Test
@@ -236,7 +236,7 @@ class SpeedAmountTest
             actual = SpeedAmount(amount = 2,
                                  unit = DISTANCE1 to TIME1) *
                      ForceAmount(amount = 2,
-                                 unit = U2(MASS1, DISTANCE1) to TIME1))
+                                 unit = U2(DISTANCE1, MASS1) to TIME1))
     }
 
     @Test
@@ -248,6 +248,6 @@ class SpeedAmountTest
             actual = SpeedAmount(amount = 2,
                                  unit = DISTANCE2 to TIME1) *
                      ForceAmount(amount = 2000,
-                                 unit = U2(MASS2, DISTANCE1) to TIME2))
+                                 unit = U2(DISTANCE1, MASS2) to TIME2))
     }
 }

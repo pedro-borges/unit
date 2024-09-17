@@ -21,7 +21,7 @@ class Ohm(amount: Number,
           magnitude: Magnitude = UNI)
     : ElectricResistanceAmount<Unit<Distance>, Unit<ElectricCurrent>, Unit<Mass>, Unit<Time>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
-    unit = U2(kilo(GRAM), METER) to U2(SECOND, AMPERE))
+    unit = U2(METER, kilo(GRAM)) to U2(AMPERE, SECOND))
 {
     open class OhmUnit(magnitude: Magnitude)
         : Unit<ElectricResistance>(ElectricResistance::class, "Ω", 1.toBigDecimal(), magnitude)

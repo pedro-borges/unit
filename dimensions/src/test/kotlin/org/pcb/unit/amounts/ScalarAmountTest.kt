@@ -100,7 +100,7 @@ class ScalarAmountTest
     fun divFrequency()
     {
         assertEquals(
-            expected = TimeAmount(amount = 2 * 2,
+            expected = TimeAmount(amount = 1,
                                   unit = TIME1),
             actual = ScalarAmount(amount = 2,
                                   unit = NUMBER1) /
@@ -112,8 +112,8 @@ class ScalarAmountTest
     fun divElectricConductance()
     {
         assertEquals(
-            expected = ElectricResistanceAmount(amount = 2 * 2,
-                                                unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+            expected = ElectricResistanceAmount(amount = 1,
+                                                unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)),
             actual = ScalarAmount(amount = 2,
                                   unit = NUMBER1) /
                      ElectricConductanceAmount(amount = 2,
@@ -129,6 +129,6 @@ class ScalarAmountTest
             actual = ScalarAmount(amount = 2,
                                   unit = NUMBER1) /
                      ElectricResistanceAmount(amount = 2,
-                                              unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
+                                              unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)))
     }
 }

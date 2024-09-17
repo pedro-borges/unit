@@ -18,7 +18,7 @@ class Talbot(amount: Number,
              magnitude: Magnitude = UNI)
     : LuminousEnergyAmount<Unit<Angle>, Unit<LuminousIntensity>, Unit<Time>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
-    unit = U3(CANDELA, RADIAN, SECOND))
+    unit = U3(RADIAN, CANDELA, SECOND))
 {
     open class TalbotUnit(magnitude: Magnitude)
         : Unit<LuminousEnergy>(LuminousEnergy::class, "T", 1.toBigDecimal(), magnitude)

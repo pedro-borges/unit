@@ -114,7 +114,7 @@ class PowerAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME2),
+                                    unit = U2(DISTANCE1, MASS1) to TIME2),
             actual = PowerAmount(amount = 2,
                                  unit = U2(DISTANCE1, MASS1) to TIME2) *
                      TimeAmount(amount = 20,
@@ -126,7 +126,7 @@ class PowerAmountTest
     {
         assertEquals(
             expected = EnergyAmount(amount = 2 * 2,
-                                    unit = U2(MASS1, DISTANCE1) to TIME2),
+                                    unit = U2(DISTANCE1, MASS1) to TIME2),
             actual = PowerAmount(amount = 2,
                                  unit = U2(DISTANCE1, MASS1) to TIME2) *
                      TimeAmount(amount = 20,
@@ -138,7 +138,7 @@ class PowerAmountTest
     {
         assertEquals(
             expected = ForceAmount(amount = 1,
-                                   unit = U2(MASS1, DISTANCE1) to TIME1),
+                                   unit = U2(DISTANCE1, MASS1) to TIME1),
             actual = PowerAmount(amount = 2,
                                  unit = U2(DISTANCE1, MASS1) to TIME1) /
                      SpeedAmount(amount = 2,
@@ -150,7 +150,7 @@ class PowerAmountTest
     {
         assertEquals(
             expected = ForceAmount(amount = 1,
-                                   unit = U2(MASS2, DISTANCE2) to TIME1),
+                                   unit = U2(DISTANCE2, MASS2) to TIME1),
             actual = PowerAmount(amount = 2,
                                  unit = U2(DISTANCE2, MASS2) to TIME1) /
                      SpeedAmount(amount = 200,
@@ -166,7 +166,7 @@ class PowerAmountTest
             actual = PowerAmount(amount = 2,
                                  unit = U2(DISTANCE1, MASS1) to TIME1) /
                      ForceAmount(amount = 2,
-                                 unit = U2(MASS1, DISTANCE1) to TIME1))
+                                 unit = U2(DISTANCE1, MASS1) to TIME1))
     }
 
     @Test
@@ -178,7 +178,7 @@ class PowerAmountTest
             actual = PowerAmount(amount = 2,
                                  unit = U2(DISTANCE2, MASS2) to TIME1) /
                      ForceAmount(amount = 20000,
-                                 unit = U2(MASS1, DISTANCE1) to TIME2))
+                                 unit = U2(DISTANCE1, MASS1) to TIME2))
     }
 
     @Test
@@ -190,7 +190,7 @@ class PowerAmountTest
             actual = PowerAmount(amount = 2,
                                  unit = U2(DISTANCE1, MASS1) to TIME1) /
                      ElectricTensionAmount(amount = 2,
-                                           unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
+                                           unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -202,7 +202,7 @@ class PowerAmountTest
             actual = PowerAmount(amount = 2,
                                  unit = U2(DISTANCE2, MASS2) to TIME1) /
                      ElectricTensionAmount(amount = 2000000,
-                                           unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT1)))
+                                           unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME2)))
     }
 
     @Test
@@ -210,7 +210,7 @@ class PowerAmountTest
     {
         assertEquals(
             expected = ElectricTensionAmount(amount = 1,
-                                             unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+                                             unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)),
             actual = PowerAmount(amount = 2,
                                  unit = U2(DISTANCE1, MASS1) to TIME1) /
                      ElectricCurrentAmount(amount = 2,

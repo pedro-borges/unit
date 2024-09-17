@@ -20,7 +20,7 @@ class HenryTest
     @Test
     fun unit()
     {
-        Henry(2) equivalent InductanceAmount(2, U2(kilo(GRAM), METER) to U2(SECOND, AMPERE))
+        Henry(2) equivalent InductanceAmount(2, U2(METER, kilo(GRAM)) to U2(AMPERE, SECOND))
         Henry(2) equivalent InductanceAmount(2, HENRY)
     }
 

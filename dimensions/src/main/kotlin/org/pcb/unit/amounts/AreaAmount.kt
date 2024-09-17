@@ -69,23 +69,12 @@ open class AreaAmount<D : Unit<Distance>>(
 
     // endregion
 
-    // region -> Numeric
-
-    @JvmName("divArea")
-    operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
-        Numeric(amount = amount / that.amount / convert(that.distance to distance,
-                                                        that.distance to distance))
-
-    operator fun div(that: AreaAmount<D>) =
-        Numeric(amount = amount / that.amount)
-
-    // endregion
-
     // region -> Distance
 
     @JvmName("divDistance")
     operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
-        DistanceAmount(amount = amount / that.amount / convert(that.distance to distance),
+        DistanceAmount(amount = amount / that.amount
+                                / convert(that.distance to distance),
                        unit = distance)
 
     operator fun div(that: DistanceAmount<D>) =
@@ -94,11 +83,77 @@ open class AreaAmount<D : Unit<Distance>>(
 
     // endregion
 
+    // region -> Force
+
+    @JvmName("timesEnergyDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<D, M, T>) =
+        ForceAmount(amount = amount * that.amount
+                             / convert(that.distance to distance),
+                    unit = U2(distance, that.mass) to that.time)
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<D, M, T>) =
+        ForceAmount(amount = amount * that.amount,
+                    unit = U2(distance, that.mass) to that.time)
+
+    // endregion
+
+    // region -> LuminousFlux
+
+    @JvmName("timesIlluminance")
+    operator fun <A : Unit<Angle>, D : Unit<Distance>, LI : Unit<LuminousIntensity>> times(that: IlluminanceAmount<A, D, LI>) =
+        LuminousFluxAmount(amount = amount * that.amount
+                                    / convert(that.distance to distance,
+                                              that.distance to distance),
+                           unit = U2(that.angle, that.luminousIntensity))
+
+    operator fun <A : Unit<Angle>, LI : Unit<LuminousIntensity>> times(that: IlluminanceAmount<A, D, LI>) =
+        LuminousFluxAmount(amount = amount * that.amount,
+                           unit = U2(that.angle, that.luminousIntensity))
+
+    // endregion
+
+    // region -> LuminousIntensity
+
+    @JvmName("timesLuminance")
+    operator fun <D : Unit<Distance>, LI : Unit<LuminousIntensity>> times(that: LuminanceAmount<D, LI>) =
+        LuminousIntensityAmount(amount = amount * that.amount
+                                         / convert(that.distance to distance,
+                                                   that.distance to distance),
+                                unit = that.luminousIntensity)
+
+    operator fun <LI : Unit<LuminousIntensity>> times(that: LuminanceAmount<D, LI>) =
+        LuminousIntensityAmount(amount = amount * that.amount,
+                                unit = that.luminousIntensity)
+
+    // endregion
+
+    // region -> MagneticFlux
+
+    operator fun <EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: MagneticFluxDensityAmount<EC, M, T>) =
+        MagneticFluxAmount(amount = amount * that.amount,
+                           unit = U2(distance, that.mass) to U2(that.electricCurrent, that.time))
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divArea")
+    operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.distance to distance,
+                                   that.distance to distance))
+
+    operator fun div(that: AreaAmount<D>) =
+        Numeric(amount = amount / that.amount)
+
+    // endregion
+
     // region -> Volume
 
     @JvmName("timesDistance")
     operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =
-        VolumeAmount(amount = amount * that.amount * convert(that.distance to distance),
+        VolumeAmount(amount = amount * that.amount
+                              * convert(that.distance to distance),
                      unit = distance)
 
     operator fun times(that: DistanceAmount<D>) =
@@ -106,53 +161,4 @@ open class AreaAmount<D : Unit<Distance>>(
                      unit = distance)
 
     // endregion
-
-    // region -> MagneticFlux
-
-    operator fun <M : Unit<Mass>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: MagneticFluxDensityAmount<EC, M, T>) =
-        MagneticFluxAmount(amount = amount * that.amount,
-                           unit = U2(that.mass, distance) to U2(that.time, that.electricCurrent))
-
-    // endregion
-
-    // region -> Force
-
-    @JvmName("timesEnergyDensity")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> times(that: EnergyDensityAmount<D, M, T>) =
-        ForceAmount(amount = amount * that.amount / convert(that.distance to distance),
-                    unit = U2(that.mass, distance) to that.time)
-
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<D, M, T>) =
-        ForceAmount(amount = amount * that.amount,
-                    unit = U2(that.mass, distance) to that.time)
-
-    // endregion
-
-    // region -> LuminousFlux
-
-    @JvmName("timesIlluminance")
-    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>, D : Unit<Distance>> times(that: IlluminanceAmount<A, D, LI>) =
-        LuminousFluxAmount(amount = amount * that.amount * convert(that.distance to distance,
-                                                                   that.distance to distance),
-                           unit = U2(that.luminousIntensity, that.angle))
-
-    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>> times(that: IlluminanceAmount<A, D, LI>) =
-        LuminousFluxAmount(amount = amount * that.amount,
-                           unit = U2(that.luminousIntensity, that.angle))
-
-    //endregion
-
-    // region -> LuminousIntensity
-
-    @JvmName("timesLuminance")
-    operator fun <LI : Unit<LuminousIntensity>, D : Unit<Distance>> times(that: LuminanceAmount<D, LI>) =
-        LuminousIntensityAmount(amount = amount * that.amount * convert(that.distance to distance,
-                                                                        that.distance to distance),
-                                unit = that.luminousIntensity)
-
-    operator fun <LI : Unit<LuminousIntensity>> times(that: LuminanceAmount<D, LI>) =
-        LuminousIntensityAmount(amount = amount * that.amount,
-                                unit = that.luminousIntensity)
-
-    //endregion
 }

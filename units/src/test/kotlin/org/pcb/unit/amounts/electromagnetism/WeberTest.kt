@@ -27,7 +27,7 @@ class WeberTest
     fun unit()
     {
         Weber(1) equivalent Gram(2, KILO) * (Meter(2) / Second(2)) * (Meter(2) / Second(2)) / Ampere(2)
-        Weber(2) equivalent MagneticFluxAmount(2, U2(kilo(GRAM), METER) to (U2(SECOND, AMPERE)))
+        Weber(2) equivalent MagneticFluxAmount(2, U2(METER, kilo(GRAM)) to (U2(AMPERE, SECOND)))
         Weber(2) equivalent MagneticFluxAmount(2, WEBER)
     }
 

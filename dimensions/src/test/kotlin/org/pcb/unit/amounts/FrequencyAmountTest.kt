@@ -135,7 +135,7 @@ class FrequencyAmountTest
     fun timesDistance()
     {
         assertEquals(
-            expected = SpeedAmount(amount = 1,
+            expected = SpeedAmount(amount = 2 * 2,
                                    unit = DISTANCE1 to TIME1),
             actual = FrequencyAmount(amount = 2,
                                      unit = NUMBER1 to TIME1) *
@@ -147,7 +147,7 @@ class FrequencyAmountTest
     fun timesSameSpeed()
     {
         assertEquals(
-            expected = AccelerationAmount(amount = 1,
+            expected = AccelerationAmount(amount = 2 * 2,
                                           unit = DISTANCE1 to TIME1),
             actual = FrequencyAmount(amount = 2,
                                      unit = NUMBER1 to TIME1) *
@@ -159,7 +159,7 @@ class FrequencyAmountTest
     fun timesOtherSpeed()
     {
         assertEquals(
-            expected = AccelerationAmount(amount = 1,
+            expected = AccelerationAmount(amount = 2 * 2,
                                           unit = DISTANCE1 to TIME1),
             actual = FrequencyAmount(amount = 2,
                                      unit = NUMBER1 to TIME1) *
@@ -171,7 +171,7 @@ class FrequencyAmountTest
     fun timesSameDebt()
     {
         assertEquals(
-            expected = CurrencyAmount(amount = 1,
+            expected = CurrencyAmount(amount = 2 * 2,
                                       unit = CURRENCY1),
             actual = FrequencyAmount(amount = 2,
                                      unit = NUMBER1 to TIME1) *
@@ -183,7 +183,7 @@ class FrequencyAmountTest
     fun timesOtherDebt()
     {
         assertEquals(
-            expected = CurrencyAmount(amount = 1,
+            expected = CurrencyAmount(amount = 2 * 2,
                                       unit = CURRENCY1),
             actual = FrequencyAmount(amount = 2,
                                      unit = NUMBER1 to TIME2) *
@@ -195,7 +195,7 @@ class FrequencyAmountTest
     fun timesCurrency()
     {
         assertEquals(
-            expected = RentAmount(amount = 1,
+            expected = RentAmount(amount = 2 * 2,
                                   unit = CURRENCY1 to TIME1),
             actual = FrequencyAmount(amount = 2,
                                      unit = NUMBER1 to TIME1) *

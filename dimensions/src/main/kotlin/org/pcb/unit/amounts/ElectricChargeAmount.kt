@@ -70,90 +70,171 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> Numeric
+    // region -> Capacitance
 
-    @JvmName("divElectricCharge")
-    operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricChargeAmount<EC, T>) =
-        Numeric(amount = amount / that.amount / convert(that.electricCurrent to electricCurrent,
-                                                        that.time to time))
+    @JvmName("divElectricTension")
+    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricTensionAmount<D, EC, M, T>) =
+        CapacitanceAmount(amount = amount / that.amount
+                                   * convert(that.electricCurrent to electricCurrent,
+                                             that.time to time,
+                                             that.time to time,
+                                             that.time to time),
+                          unit = U2(time, electricCurrent) to U2(that.mass, that.distance))
 
-    operator fun div(that: ElectricChargeAmount<EC, T>) =
-        Numeric(amount = amount / that.amount)
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: ElectricTensionAmount<D, EC, M, T>) =
+        CapacitanceAmount(amount = amount / that.amount,
+                          unit = U2(time, electricCurrent) to U2(that.mass, that.distance))
+
+    // endregion
+
+    // region -> ElectricConductance
+
+    @JvmName("divMagneticFlux")
+    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: MagneticFluxAmount<D, EC, M, T>) =
+        ElectricConductanceAmount(amount = amount / that.amount
+                                           * convert(that.electricCurrent to electricCurrent,
+                                                     that.time to time,
+                                                     that.time to time),
+                                  unit = U2(time, electricCurrent) to U2(that.mass, that.distance))
+
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: MagneticFluxAmount<D, EC, M, T>) =
+        ElectricConductanceAmount(amount = amount / that.amount,
+                                  unit = U2(time, electricCurrent) to U2(that.mass, that.distance))
 
     // endregion
 
     // region -> ElectricCurrent
 
-    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
-        ElectricCurrentAmount(amount = amount / that.amount / convert(that.time to time),
+    @JvmName("timesFrequency")
+    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
+        ElectricCurrentAmount(amount = amount * that.amount
+                                       / convert(that.time to time),
                               unit = electricCurrent)
 
-    // endregion
+    operator fun times(that: FrequencyAmount<T>) =
+        ElectricCurrentAmount(amount = amount * that.amount,
+                              unit = electricCurrent)
 
-    // region -> Capacitance
+    @JvmName("divTime")
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        ElectricCurrentAmount(amount = amount / that.amount
+                                       / convert(that.time to time),
+                              unit = electricCurrent)
 
-    @JvmName("divElectricTension")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, EC : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricTensionAmount<D, EC, M, T>) =
-        CapacitanceAmount(amount = amount / that.amount / convert(that.electricCurrent to electricCurrent,
-                                                                  that.time to time,
-                                                                  that.time to time,
-                                                                  that.time to time),
-                          unit = U2(time, electricCurrent) to U2(that.mass, that.distance))
-
-    operator fun <M : Unit<Mass>, D : Unit<Distance>> div(that: ElectricTensionAmount<D, EC, M, T>) =
-        CapacitanceAmount(amount = amount / that.amount,
-                          unit = U2(time, electricCurrent) to U2(that.mass, that.distance))
+    operator fun div(that: TimeAmount<T>) =
+        ElectricCurrentAmount(amount = amount / that.amount,
+                              unit = electricCurrent)
 
     // endregion
 
     // region -> ElectricTension
 
     @JvmName("divCapacitance")
-    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> div(that: CapacitanceAmount<D, EC, M, T>) =
-        ElectricTensionAmount(amount = amount / that.amount / convert(that.electricCurrent to electricCurrent,
-                                                                      that.electricCurrent to electricCurrent,
-                                                                      that.time to time,
-                                                                      that.time to time,
-                                                                      that.time to time,
-                                                                      that.time to time),
-                              unit = U2(that.mass, that.distance) to U2(time, electricCurrent))
+    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: CapacitanceAmount<D, EC, M, T>) =
+        ElectricTensionAmount(amount = amount / that.amount
+                                       / convert(that.electricCurrent to electricCurrent,
+                                                 that.electricCurrent to electricCurrent,
+                                                 that.time to time,
+                                                 that.time to time,
+                                                 that.time to time,
+                                                 that.time to time),
+                              unit = U2(that.distance, that.mass) to U2(electricCurrent, time))
 
-    operator fun <M : Unit<Mass>, D : Unit<Distance>> div(that: CapacitanceAmount<D, EC, M, T>) =
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: CapacitanceAmount<D, EC, M, T>) =
         ElectricTensionAmount(amount = amount / that.amount,
-                              unit = U2(that.mass, that.distance) to U2(time, electricCurrent))
+                              unit = U2(that.distance, that.mass) to U2(electricCurrent, time))
 
     // endregion
 
     // region -> Energy
 
     @JvmName("timesElectricTension")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, EC : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricTensionAmount<D, EC, M, T>) =
-        EnergyAmount(amount = amount * that.amount / convert(that.electricCurrent to electricCurrent,
-                                                             that.time to time,
-                                                             that.time to time,
-                                                             that.time to time),
-                     unit = U2(that.mass, that.distance) to time)
+    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricTensionAmount<D, EC, M, T>) =
+        EnergyAmount(amount = amount * that.amount
+                              / convert(that.electricCurrent to electricCurrent,
+                                        that.time to time,
+                                        that.time to time,
+                                        that.time to time),
+                     unit = U2(that.distance, that.mass) to time)
 
-    operator fun <M : Unit<Mass>, D : Unit<Distance>> times(that: ElectricTensionAmount<D, EC, M, T>) =
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: ElectricTensionAmount<D, EC, M, T>) =
         EnergyAmount(amount = amount * that.amount,
-                     unit = U2(that.mass, that.distance) to time)
+                     unit = U2(that.distance, that.mass) to time)
 
     // endregion
 
     // region -> MagneticFlux
 
-    @JvmName("timesElectricResistance")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, EC : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricResistanceAmount<D, EC, M, T>) =
-        MagneticFluxAmount(amount = amount * that.amount / convert(that.electricCurrent to electricCurrent,
-                                                                   that.electricCurrent to electricCurrent,
-                                                                   that.time to time,
-                                                                   that.time to time,
-                                                                   that.time to time),
-                           unit = U2(that.mass, that.distance) to U2(time, electricCurrent))
+    @JvmName("divElectricConductance")
+    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricConductanceAmount<D, EC, M, T>) =
+        MagneticFluxAmount(amount = amount / that.amount
+                                    / convert(that.electricCurrent to electricCurrent,
+                                              that.electricCurrent to electricCurrent,
+                                              that.time to time,
+                                              that.time to time,
+                                              that.time to time),
+                           unit = U2(that.distance, that.mass) to U2(electricCurrent, time))
 
-    operator fun <M : Unit<Mass>, D : Unit<Distance>> times(that: ElectricResistanceAmount<D, EC, M, T>) =
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: ElectricConductanceAmount<D, EC, M, T>) =
+        MagneticFluxAmount(amount = amount / that.amount,
+                           unit = U2(that.distance, that.mass) to U2(electricCurrent, time))
+
+    @JvmName("timesElectricResistance")
+    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricResistanceAmount<D, EC, M, T>) =
+        MagneticFluxAmount(amount = amount * that.amount
+                                    / convert(that.electricCurrent to electricCurrent,
+                                              that.electricCurrent to electricCurrent,
+                                              that.time to time,
+                                              that.time to time,
+                                              that.time to time),
+                           unit = U2(that.distance, that.mass) to U2(electricCurrent, time))
+
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: ElectricResistanceAmount<D, EC, M, T>) =
         MagneticFluxAmount(amount = amount * that.amount,
-                           unit = U2(that.mass, that.distance) to U2(time, electricCurrent))
+                           unit = U2(that.distance, that.mass) to U2(electricCurrent, time))
+
+    // endregion
+
+    // region -> MassFlowRate
+
+    @JvmName("timesMagneticFluxDensity")
+    operator fun <EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: MagneticFluxDensityAmount<EC, M, T>) =
+        MassFlowRateAmount(amount = amount * that.amount
+                                    / convert(that.electricCurrent to electricCurrent,
+                                              that.time to time,
+                                              that.time to time),
+                           unit = that.mass to time)
+
+    operator fun <M : Unit<Mass>> times(that: MagneticFluxDensityAmount<EC, M, T>) =
+        MassFlowRateAmount(amount = amount * that.amount,
+                           unit = that.mass to time)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divElectricCharge")
+    operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricChargeAmount<EC, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.electricCurrent to electricCurrent,
+                                   that.time to time))
+
+    operator fun div(that: ElectricChargeAmount<EC, T>) =
+        Numeric(amount = amount / that.amount)
+
+    // endregion
+
+    // region -> Time
+
+    @JvmName("divElectricCurrent")
+    operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
+        TimeAmount(amount = amount / that.amount
+                            / convert(that.electricCurrent to electricCurrent),
+                   unit = time)
+
+    operator fun div(that: ElectricCurrentAmount<EC>) =
+        TimeAmount(amount = amount / that.amount,
+                   unit = time)
 
     // endregion
 }

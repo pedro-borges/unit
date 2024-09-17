@@ -19,7 +19,7 @@ class Newton(amount: Number,
              magnitude: Magnitude = UNI)
     : ForceAmount<Unit<Distance>, Unit<Mass>, Unit<Time>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
-    unit = U2(kilo(GRAM), METER) to SECOND)
+    unit = U2(METER, kilo(GRAM)) to SECOND)
 {
     open class NewtonUnit(magnitude: Magnitude)
         : Unit<Force>(Force::class, "N", 1.toBigDecimal(), magnitude)

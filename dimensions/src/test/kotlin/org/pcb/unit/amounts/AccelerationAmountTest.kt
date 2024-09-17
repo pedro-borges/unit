@@ -161,7 +161,7 @@ class AccelerationAmountTest
     {
         assertEquals(
             expected = ForceAmount(amount = 2 * 2,
-                                   unit = U2(MASS1, DISTANCE1) to TIME1),
+                                   unit = U2(DISTANCE1, MASS1) to TIME1),
             actual = AccelerationAmount(amount = 2,
                                         unit = DISTANCE1 to TIME1) *
                      MassAmount(amount = 2,

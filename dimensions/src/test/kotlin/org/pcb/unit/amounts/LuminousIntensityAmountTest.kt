@@ -111,7 +111,7 @@ class LuminousIntensityAmountTest
     {
         assertEquals(
             expected = LuminousFluxAmount(amount = 2 * 2,
-                                          unit = U2(LUMINOUSINTENSITY1, ANGLE1)),
+                                          unit = U2(ANGLE1, LUMINOUSINTENSITY1)),
             actual = LuminousIntensityAmount(amount = 2,
                                              unit = LUMINOUSINTENSITY1) *
                      SolidAngleAmount(amount = 2,

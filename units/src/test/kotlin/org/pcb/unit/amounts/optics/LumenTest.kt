@@ -20,7 +20,7 @@ class LumenTest
     @Test
     fun scales()
     {
-        Lumen(2) equivalent LuminousFluxAmount(2, U2(CANDELA, RADIAN))
+        Lumen(2) equivalent LuminousFluxAmount(2, U2(RADIAN, CANDELA))
         Lumen(2) equivalent LuminousFluxAmount(2, LUMEN)
     }
 

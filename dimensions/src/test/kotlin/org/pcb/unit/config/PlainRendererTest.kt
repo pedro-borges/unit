@@ -21,8 +21,8 @@ class PlainRendererTest
         assertEquals(
             expected = "10 D²M¹EC⁻²T⁻³",
             actual = sut.render(ElectricResistanceAmount(amount = 10,
-                                                         unit = U2(MASS1, DISTANCE1) to
-                                                                 U2(TIME1, ELECTRICCURRENT1))))
+                                                         unit = U2(DISTANCE1, MASS1) to
+                                                                 U2(ELECTRICCURRENT1, TIME1))))
     }
 
     @Test

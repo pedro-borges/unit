@@ -112,7 +112,7 @@ class MassFlowRateAmountTest
     {
         assertEquals(
             expected = MomentumAmount(amount = 2 * 2,
-                                      unit = U2(MASS1, DISTANCE1) to TIME1),
+                                      unit = U2(DISTANCE1, MASS1) to TIME1),
             actual = MassFlowRateAmount(amount = 2,
                                         unit = MASS1 to TIME1) *
                      DistanceAmount(amount = 2,

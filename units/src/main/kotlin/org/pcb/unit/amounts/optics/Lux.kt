@@ -18,7 +18,7 @@ class Lux(amount: Number,
           magnitude: Magnitude = UNI)
     : IlluminanceAmount<Unit<Angle>, Unit<Distance>, Unit<LuminousIntensity>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
-    unit = U2(CANDELA, RADIAN) to METER)
+    unit = U2(RADIAN, CANDELA) to METER)
 {
     open class LuxUnit(magnitude: Magnitude)
         : Unit<Illuminance>(Illuminance::class, "lx", 1.toBigDecimal(), magnitude)

@@ -2,12 +2,14 @@ package org.pcb.unit.amounts
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Candela.CANDELA
 import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
+import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Luminance
 import org.pcb.unit.dimensions.LuminousIntensity
@@ -73,10 +75,45 @@ open class LuminanceAmount<D : Unit<Distance>, LI : Unit<LuminousIntensity>>(
 
     // endregion
 
-    // region -> Numeric
+    // region -> Illuminance
+
+    operator fun <A : Unit<Angle>> times(that: SolidAngleAmount<A>) =
+        IlluminanceAmount(amount = amount * that.amount,
+                          unit = U2(that.angle, luminousIntensity) to distance)
+
+    // endregion
+
+    // region -> Luminance
+
+    operator fun div(that: Numeric) =
+        LuminanceAmount(amount = amount / that.amount,
+                        unit = luminousIntensity to distance)
+
+    operator fun times(that: Numeric) =
+        LuminanceAmount(amount = amount * that.amount,
+                        unit = luminousIntensity to distance)
+
+    // endregion
+
+    // region -> LuminousIntensity
+
+    @JvmName("timesArea")
+    operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =
+        LuminousIntensityAmount(amount = amount * that.amount
+                                         * convert(that.distance to distance,
+                                                   that.distance to distance),
+                                unit = luminousIntensity)
+
+    operator fun times(that: AreaAmount<D>) =
+        LuminousIntensityAmount(amount = amount * that.amount,
+                                unit = luminousIntensity)
+
+    // endregion
+
+    // region -> Scalar
 
     @JvmName("divLuminance")
-    operator fun <LI : Unit<LuminousIntensity>, D : Unit<Distance>> div(that: LuminanceAmount<D, LI>) =
+    operator fun <D : Unit<Distance>, LI : Unit<LuminousIntensity>> div(that: LuminanceAmount<D, LI>) =
         Numeric(amount = amount / that.amount
                          / convert(that.luminousIntensity to luminousIntensity)
                          * convert(that.distance to distance,
@@ -84,20 +121,6 @@ open class LuminanceAmount<D : Unit<Distance>, LI : Unit<LuminousIntensity>>(
 
     operator fun div(that: LuminanceAmount<D, LI>) =
         Numeric(amount = amount / that.amount)
-
-    // endregion
-
-    // region -> LuminousFlux
-
-    @JvmName("timesArea")
-    operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =
-        LuminousIntensityAmount(amount = amount * that.amount * convert(that.distance to distance,
-                                                                        that.distance to distance),
-                                unit = luminousIntensity)
-
-    operator fun times(that: AreaAmount<D>) =
-        LuminousIntensityAmount(amount = amount * that.amount,
-                                unit = luminousIntensity)
 
     // endregion
 }

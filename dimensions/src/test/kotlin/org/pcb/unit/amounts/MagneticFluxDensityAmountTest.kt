@@ -20,9 +20,9 @@ class MagneticFluxDensityAmountTest
     {
         assertEquals(
             expected = MagneticFluxDensityAmount(amount = 2 * 2,
-                                                 unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)),
+                                                 unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxDensityAmount(amount = 2,
-                                               unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)) *
+                                               unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)) *
                      ScalarAmount(amount = 20,
                                   unit = NUMBER2))
     }
@@ -32,9 +32,9 @@ class MagneticFluxDensityAmountTest
     {
         assertEquals(
             expected = MagneticFluxDensityAmount(amount = 1,
-                                                 unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)),
+                                                 unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxDensityAmount(amount = 2,
-                                               unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)) /
+                                               unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)) /
                      ScalarAmount(amount = 20,
                                   unit = NUMBER2))
     }
@@ -44,11 +44,11 @@ class MagneticFluxDensityAmountTest
     {
         assertEquals(
             expected = MagneticFluxDensityAmount(amount = 1,
-                                                 unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)),
+                                                 unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxDensityAmount(amount = 0,
-                                               unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)) +
+                                               unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)) +
                      MagneticFluxDensityAmount(amount = 1,
-                                               unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)))
+                                               unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -56,11 +56,11 @@ class MagneticFluxDensityAmountTest
     {
         assertEquals(
             expected = MagneticFluxDensityAmount(amount = 1,
-                                                 unit = MASS2 to U2(TIME1, ELECTRICCURRENT1)),
+                                                 unit = MASS2 to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxDensityAmount(amount = 0,
-                                               unit = MASS2 to U2(TIME1, ELECTRICCURRENT1)) +
+                                               unit = MASS2 to U2(ELECTRICCURRENT1, TIME1)) +
                      MagneticFluxDensityAmount(amount = 10000,
-                                               unit = MASS1 to U2(TIME2, ELECTRICCURRENT2)))
+                                               unit = MASS1 to U2(ELECTRICCURRENT2, TIME2)))
     }
 
     @Test
@@ -68,11 +68,11 @@ class MagneticFluxDensityAmountTest
     {
         assertEquals(
             expected = MagneticFluxDensityAmount(amount = 0,
-                                                 unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)),
+                                                 unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxDensityAmount(amount = 1,
-                                               unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)) -
+                                               unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)) -
                      MagneticFluxDensityAmount(amount = 1,
-                                               unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)))
+                                               unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -80,11 +80,11 @@ class MagneticFluxDensityAmountTest
     {
         assertEquals(
             expected = MagneticFluxDensityAmount(amount = 0,
-                                                 unit = MASS2 to U2(TIME1, ELECTRICCURRENT1)),
+                                                 unit = MASS2 to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxDensityAmount(amount = 1,
-                                               unit = MASS2 to U2(TIME1, ELECTRICCURRENT1)) -
+                                               unit = MASS2 to U2(ELECTRICCURRENT1, TIME1)) -
                      MagneticFluxDensityAmount(amount = 10000,
-                                               unit = MASS1 to U2(TIME2, ELECTRICCURRENT2)))
+                                               unit = MASS1 to U2(ELECTRICCURRENT2, TIME2)))
     }
 
     @Test
@@ -93,9 +93,9 @@ class MagneticFluxDensityAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = MagneticFluxDensityAmount(amount = 2,
-                                               unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)) /
+                                               unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)) /
                      MagneticFluxDensityAmount(amount = 2,
-                                               unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)))
+                                               unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)))
     }
 
     @Test
@@ -104,9 +104,9 @@ class MagneticFluxDensityAmountTest
         assertEquals(
             expected = Numeric(amount = 1),
             actual = MagneticFluxDensityAmount(amount = 2,
-                                               unit = MASS2 to U2(TIME1, ELECTRICCURRENT1)) /
+                                               unit = MASS2 to U2(ELECTRICCURRENT1, TIME1)) /
                      MagneticFluxDensityAmount(amount = 20000,
-                                               unit = MASS1 to U2(TIME2, ELECTRICCURRENT2)))
+                                               unit = MASS1 to U2(ELECTRICCURRENT2, TIME2)))
     }
 
     @Test
@@ -114,9 +114,9 @@ class MagneticFluxDensityAmountTest
     {
         assertEquals(
             expected = MagneticFluxAmount(amount = 2 * 2,
-                                          unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)),
+                                          unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)),
             actual = MagneticFluxDensityAmount(amount = 2,
-                                               unit = MASS1 to U2(TIME1, ELECTRICCURRENT1)) *
+                                               unit = MASS1 to U2(ELECTRICCURRENT1, TIME1)) *
                      AreaAmount(amount = 2,
                                 unit = DISTANCE1))
     }

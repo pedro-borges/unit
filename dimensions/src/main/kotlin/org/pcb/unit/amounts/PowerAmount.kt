@@ -86,76 +86,30 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> Numeric
+    // region -> Acceleration
 
-    @JvmName("divPower")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: PowerAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.mass to mass,
-                                   that.distance to distance,
-                                   that.distance to distance)
-                         * convert(that.time to time,
-                                   that.time to time,
-                                   that.time to time))
+    @JvmName("divMomentum")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MomentumAmount<D, M, T>) =
+        AccelerationAmount(amount = amount / that.amount
+                                    / convert(that.distance to distance,
+                                              that.mass to mass)
+                                    * convert(that.time to time),
+                           unit = distance to time)
 
-    operator fun div(that: PowerAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount)
-
-    // endregion
-
-    // region -> Energy
-
-    @JvmName("timesTime")
-    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
-        EnergyAmount(amount = amount * that.amount * convert(that.time to time),
-                     unit = U2(mass, distance) to time)
-
-    operator fun times(that: TimeAmount<T>) =
-        EnergyAmount(amount = amount * that.amount,
-                     unit = U2(mass, distance) to time)
-
-    // endregion
-
-    // region -> Force
-
-    @JvmName("divSpeed")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
-        ForceAmount(amount = amount / that.amount
-                             / convert(that.distance to distance)
-                             * convert(that.time to time),
-                    unit = U2(mass, distance) to time)
-
-    operator fun div(that: SpeedAmount<D, T>) =
-        ForceAmount(amount = amount / that.amount,
-                    unit = U2(mass, distance) to time)
-
-    // endregion
-
-    // region -> Speed
-
-    @JvmName("divForce")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: ForceAmount<D, M, T>) =
-        SpeedAmount(amount = amount / that.amount
-                             / convert(that.mass to mass,
-                                       that.distance to distance)
-                             * convert(that.time to time,
-                                       that.time to time),
-                    unit = distance to time)
-
-    operator fun div(that: ForceAmount<D, M, T>) =
-        SpeedAmount(amount = amount / that.amount,
-                    unit = distance to time)
+    operator fun div(that: MomentumAmount<D, M, T>) =
+        AccelerationAmount(amount = amount / that.amount,
+                           unit = distance to time)
 
     // endregion
 
     // region -> ElectricCurrent
 
     @JvmName("divElectricTension")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: ElectricTensionAmount<D, EC, M, T>) =
+    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricTensionAmount<D, EC, M, T>) =
         ElectricCurrentAmount(amount = amount / that.amount
-                                       / convert(that.mass to mass,
+                                       / convert(that.distance to distance,
                                                  that.distance to distance,
-                                                 that.distance to distance)
+                                                 that.mass to mass)
                                        * convert(that.time to time,
                                                  that.time to time,
                                                  that.time to time),
@@ -171,7 +125,125 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
         ElectricTensionAmount(amount = amount / that.amount,
-                              unit = U2(mass, distance) to U2(time, that.electricCurrent))
+                              unit = U2(distance, mass) to U2(that.electricCurrent, time))
+
+    // endregion
+
+    // region -> Energy
+
+    @JvmName("divFrequency")
+    operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
+        EnergyAmount(amount = amount / that.amount
+                              * convert(that.time to time),
+                     unit = U2(distance, mass) to time)
+
+    operator fun div(that: FrequencyAmount<T>) =
+        EnergyAmount(amount = amount / that.amount,
+                     unit = U2(distance, mass) to time)
+
+    @JvmName("timesTime")
+    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
+        EnergyAmount(amount = amount * that.amount
+                              * convert(that.time to time),
+                     unit = U2(distance, mass) to time)
+
+    operator fun times(that: TimeAmount<T>) =
+        EnergyAmount(amount = amount * that.amount,
+                     unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> Force
+
+    @JvmName("timesPace")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<D, T>) =
+        ForceAmount(amount = amount * that.amount
+                             * convert(that.time to time)
+                             / convert(that.distance to distance),
+                    unit = U2(distance, mass) to time)
+
+    operator fun times(that: PaceAmount<D, T>) =
+        ForceAmount(amount = amount * that.amount,
+                    unit = U2(distance, mass) to time)
+
+    @JvmName("divSpeed")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
+        ForceAmount(amount = amount / that.amount
+                             / convert(that.distance to distance)
+                             * convert(that.time to time),
+                    unit = U2(distance, mass) to time)
+
+    operator fun div(that: SpeedAmount<D, T>) =
+        ForceAmount(amount = amount / that.amount,
+                    unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> Frequency
+
+    @JvmName("divEnergy")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyAmount<D, M, T>) =
+        FrequencyAmount(amount = amount / that.amount
+                                 / convert(that.distance to distance,
+                                           that.distance to distance,
+                                           that.mass to mass)
+                                 * convert(that.time to time,
+                                           that.time to time),
+                        unit = NUMERIC to time)
+
+    operator fun div(that: EnergyAmount<D, M, T>) =
+        FrequencyAmount(amount = amount / that.amount,
+                        unit = NUMERIC to time)
+
+    // endregion
+
+    // region -> Momentum
+
+    @JvmName("divAcceleration")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: AccelerationAmount<D, T>) =
+        MomentumAmount(amount = amount / that.amount
+                                / convert(that.distance to distance)
+                                * convert(that.time to time,
+                                          that.time to time),
+                       unit = U2(distance, mass) to time)
+
+    operator fun div(that: AccelerationAmount<D, T>) =
+        MomentumAmount(amount = amount / that.amount,
+                       unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divPower")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: PowerAmount<D, M, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.distance to distance,
+                                   that.distance to distance,
+                                   that.mass to mass)
+                         * convert(that.time to time,
+                                   that.time to time,
+                                   that.time to time))
+
+    operator fun div(that: PowerAmount<D, M, T>) =
+        Numeric(amount = amount / that.amount)
+
+    // endregion
+
+    // region -> Speed
+
+    @JvmName("divForce")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ForceAmount<D, M, T>) =
+        SpeedAmount(amount = amount / that.amount
+                             / convert(that.distance to distance,
+                                       that.mass to mass)
+                             * convert(that.time to time,
+                                       that.time to time),
+                    unit = distance to time)
+
+    operator fun div(that: ForceAmount<D, M, T>) =
+        SpeedAmount(amount = amount / that.amount,
+                    unit = distance to time)
 
     // endregion
 }

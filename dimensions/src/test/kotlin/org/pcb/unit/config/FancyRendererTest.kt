@@ -18,7 +18,7 @@ class FancyRendererTest
         assertEquals(
             expected = "10 \u001B[36m\u001B[0mD\u001B[31m²\u001B[0m﹒\u001B[36m\u001B[0mM\u001B[31m\u001B[0m﹒\u001B[36m\u001B[0mEC\u001B[31m⁻²\u001B[0m﹒\u001B[36m\u001B[0mT\u001B[31m⁻³\u001B[0m",
             actual = FancyRenderer().render(ElectricResistanceAmount(amount = 10,
-                                                                     unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1))))
+                                                                     unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1))))
     }
 
     @Test
