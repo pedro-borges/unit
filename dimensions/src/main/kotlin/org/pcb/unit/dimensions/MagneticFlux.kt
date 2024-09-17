@@ -1,3 +1,36 @@
 package org.pcb.unit.dimensions
 
-interface MagneticFlux : Dimension
+import org.pcb.unit.Composite
+
+@Suppress("UNUSED_PARAMETER")
+@Composite(distance = 2,
+           mass = 1,
+           electricCurrent = -1,
+           time = -2)
+object MagneticFlux : Dimension
+{
+    operator fun div(that: Scalar) = MagneticFlux
+    operator fun times(that: Scalar) = MagneticFlux
+
+    operator fun div(that: MagneticFlux) = Scalar
+
+    operator fun div(that: MagneticFluxDensity) = Area
+
+    operator fun div(that: ElectricResistance) = ElectricCharge
+    operator fun times(that: ElectricConductance) = ElectricCharge
+
+    operator fun div(that: Inductance) = ElectricCurrent
+
+    operator fun div(that: ElectricCharge) = ElectricResistance
+
+    operator fun div(that: Time) = ElectricTension
+    operator fun times(that: Frequency) = ElectricTension
+
+    operator fun times(that: ElectricCurrent) = Energy
+
+    operator fun div(that: ElectricCurrent) = Inductance
+
+    operator fun div(that: Area) = MagneticFluxDensity
+
+    operator fun div(that: ElectricTension) = Time
+}

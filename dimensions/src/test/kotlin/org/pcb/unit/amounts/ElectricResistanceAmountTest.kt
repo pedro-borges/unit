@@ -164,8 +164,8 @@ class ElectricResistanceAmountTest
                                   unit = TIME1),
             actual = ElectricResistanceAmount(amount = 2,
                                               unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)) *
-                     CapacitanceAmount(amount = 2,
-                                       unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)))
+                     InductanceAmount(amount = 2,
+                                      unit = U2(MASS1, DISTANCE1) to U2(TIME1, ELECTRICCURRENT1)))
     }
 
     @Test
@@ -173,11 +173,11 @@ class ElectricResistanceAmountTest
     {
         assertEquals(
             expected = TimeAmount(amount = 2 * 2,
-                                  unit = TIME2),
+                                  unit = TIME1),
             actual = ElectricResistanceAmount(amount = 2,
-                                              unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)) *
-                     CapacitanceAmount(amount = 2000000000,
-                                       unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS2, DISTANCE2)))
+                                              unit = U2(MASS2, DISTANCE2) to U2(TIME1, ELECTRICCURRENT1)) *
+                     InductanceAmount(amount = 20000000,
+                                      unit = U2(MASS1, DISTANCE1) to U2(TIME2, ELECTRICCURRENT2)))
     }
 
     @Test

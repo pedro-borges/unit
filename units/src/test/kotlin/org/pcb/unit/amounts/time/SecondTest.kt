@@ -6,6 +6,8 @@ import org.pcb.unit.amounts.TimeAmount
 import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Second
 import org.pcb.unit.amounts.base.Second.SECOND
+import org.pcb.unit.amounts.electromagnetism.Farad
+import org.pcb.unit.amounts.electromagnetism.Henry
 import org.pcb.unit.amounts.electromagnetism.Ohm
 import org.pcb.unit.amounts.electromagnetism.Siemens
 import org.pcb.unit.amounts.electromagnetism.Volt
@@ -36,13 +38,13 @@ class SecondTest
     fun faradDivSiemens() =
         assertEquals(
             expected = Second(6 / 3),
-            actual = org.pcb.unit.amounts.electromagnetism.Farad(6) / Siemens(3))
+            actual = Farad(6) / Siemens(3))
 
     @Test
     fun faradTimesOhm() =
         assertEquals(
             expected = Second(2 * 3),
-            actual = org.pcb.unit.amounts.electromagnetism.Farad(2) * Ohm(3))
+            actual = Farad(2) * Ohm(3))
 
     @Test
     fun jouleDivWatt() =
@@ -57,10 +59,10 @@ class SecondTest
             actual = Numeric(2) / Hertz(3))
 
     @Test
-    fun ohmTimesFarad() =
+    fun ohmTimesHenry() =
         assertEquals(
             expected = Second(2 * 3),
-            actual = Ohm(2) * org.pcb.unit.amounts.electromagnetism.Farad(3))
+            actual = Ohm(2) * Henry(3))
 
     @Test
     fun talbotDivLumen() =

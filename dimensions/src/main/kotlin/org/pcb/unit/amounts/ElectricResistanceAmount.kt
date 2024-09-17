@@ -143,20 +143,18 @@ open class ElectricResistanceAmount<M : Unit<Mass>, D2 : Unit<Distance>, T3 : Un
     // region -> Time
 
     @JvmName("timesCapacitance")
-    operator fun <T : Unit<Time>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, D : Unit<Distance>> times(that: CapacitanceAmount<T, EC, M, D>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: InductanceAmount<M, D, T, EC>) =
         TimeAmount(amount = amount * that.amount
-                            * convert(that.time to time,
-                                      that.time to time,
-                                      that.time to time,
+                            * convert(that.mass to mass,
+                                      that.distance to distance,
+                                      that.distance to distance)
+                            / convert(that.time to time,
                                       that.time to time,
                                       that.electricCurrent to electricCurrent,
-                                      that.electricCurrent to electricCurrent)
-                            / convert(that.mass to mass,
-                                      that.distance to distance,
-                                      that.distance to distance),
+                                      that.electricCurrent to electricCurrent),
                    unit = time)
 
-    operator fun times(that: CapacitanceAmount<T3, EC2, M, D2>) =
+    operator fun times(that: InductanceAmount<M, D2, T3, EC2>) =
         TimeAmount(amount = amount * that.amount,
                    unit = time)
 
