@@ -18,7 +18,6 @@ class AmountTest
             Reflections("org.pcb.unit.dimensions")
                 .getSubTypesOf(Dimension::class.java)
                 .sortedBy { it.simpleName }
-//                .filter { it.simpleName == "ElectricCharge" }
                 .toList()
     }
 
