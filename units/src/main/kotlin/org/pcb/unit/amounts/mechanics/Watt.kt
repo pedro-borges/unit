@@ -17,9 +17,9 @@ import org.pcb.unit.toBigDecimal
 
 class Watt(amount: Number,
            magnitude: Magnitude = UNI)
-    : PowerAmount<Unit<Mass>, Unit<Distance>, Unit<Time>>(
+    : PowerAmount<Unit<Distance>, Unit<Mass>, Unit<Time>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
-    unit = U2(kilo(GRAM), METER) to SECOND)
+    unit = U2(METER, kilo(GRAM)) to SECOND)
 {
     open class WattUnit(magnitude: Magnitude)
         : Unit<Power>(Power::class, "W", 1.toBigDecimal(), magnitude)

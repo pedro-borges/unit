@@ -17,7 +17,7 @@ import org.pcb.unit.toBigDecimal
 
 class Tesla(amount: Number,
             magnitude: Magnitude = UNI)
-    : MagneticFluxDensityAmount<Unit<Mass>, Unit<Time>, Unit<ElectricCurrent>>(
+    : MagneticFluxDensityAmount<Unit<ElectricCurrent>, Unit<Mass>, Unit<Time>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
     unit = kilo(GRAM) to U2(SECOND, AMPERE))
 {

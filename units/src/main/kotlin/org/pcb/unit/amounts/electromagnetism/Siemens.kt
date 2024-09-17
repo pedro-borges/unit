@@ -19,7 +19,7 @@ import org.pcb.unit.toBigDecimal
 
 class Siemens(amount: Number,
               magnitude: Magnitude = UNI)
-    : ElectricConductanceAmount<Unit<Time>, Unit<ElectricCurrent>, Unit<Mass>, Unit<Distance>>(
+    : ElectricConductanceAmount<Unit<Distance>, Unit<ElectricCurrent>, Unit<Mass>, Unit<Time>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
     unit = U2(SECOND, AMPERE) to U2(kilo(GRAM), METER))
 {

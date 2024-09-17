@@ -85,11 +85,11 @@ open class LuminousIntensityAmount<LI : Unit<LuminousIntensity>>(
     // region -> Area
 
     @JvmName("divLuminance")
-    operator fun <LI : Unit<LuminousIntensity>, D : Unit<Distance>> div(that: LuminanceAmount<LI, D>) =
+    operator fun <LI : Unit<LuminousIntensity>, D : Unit<Distance>> div(that: LuminanceAmount<D, LI>) =
         AreaAmount(amount = amount / that.amount / convert(that.luminousIntensity to luminousIntensity),
                    unit = that.distance)
 
-    operator fun <D : Unit<Distance>> div(that: LuminanceAmount<LI, D>) =
+    operator fun <D : Unit<Distance>> div(that: LuminanceAmount<D, LI>) =
         AreaAmount(amount = amount / that.amount / convert(that.luminousIntensity to luminousIntensity),
                    unit = that.distance)
 

@@ -20,9 +20,9 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class AreaAmount<D2 : Unit<Distance>>(
+open class AreaAmount<D : Unit<Distance>>(
         amount: Number,
-        unit: D2)
+        unit: D)
     : Amount<Area>(amount = amount.toBigDecimal(),
                    unit = CompositeUnit(
                        domain = Area::class,
@@ -53,7 +53,7 @@ open class AreaAmount<D2 : Unit<Distance>>(
                                                            that.distance to distance),
                    unit = distance)
 
-    operator fun plus(that: AreaAmount<D2>) =
+    operator fun plus(that: AreaAmount<D>) =
         AreaAmount(amount = amount + that.amount,
                    unit = distance)
 
@@ -63,7 +63,7 @@ open class AreaAmount<D2 : Unit<Distance>>(
                                                            that.distance to distance),
                    unit = distance)
 
-    operator fun minus(that: AreaAmount<D2>) =
+    operator fun minus(that: AreaAmount<D>) =
         AreaAmount(amount = amount - that.amount,
                    unit = distance)
 
@@ -76,7 +76,7 @@ open class AreaAmount<D2 : Unit<Distance>>(
         Numeric(amount = amount / that.amount / convert(that.distance to distance,
                                                         that.distance to distance))
 
-    operator fun div(that: AreaAmount<D2>) =
+    operator fun div(that: AreaAmount<D>) =
         Numeric(amount = amount / that.amount)
 
     // endregion
@@ -88,7 +88,7 @@ open class AreaAmount<D2 : Unit<Distance>>(
         DistanceAmount(amount = amount / that.amount / convert(that.distance to distance),
                        unit = distance)
 
-    operator fun div(that: DistanceAmount<D2>) =
+    operator fun div(that: DistanceAmount<D>) =
         DistanceAmount(amount = amount / that.amount,
                        unit = distance)
 
@@ -101,7 +101,7 @@ open class AreaAmount<D2 : Unit<Distance>>(
         VolumeAmount(amount = amount * that.amount * convert(that.distance to distance),
                      unit = distance)
 
-    operator fun times(that: DistanceAmount<D2>) =
+    operator fun times(that: DistanceAmount<D>) =
         VolumeAmount(amount = amount * that.amount,
                      unit = distance)
 
@@ -109,7 +109,7 @@ open class AreaAmount<D2 : Unit<Distance>>(
 
     // region -> MagneticFlux
 
-    operator fun <M : Unit<Mass>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: MagneticFluxDensityAmount<M, T, EC>) =
+    operator fun <M : Unit<Mass>, T : Unit<Time>, EC : Unit<ElectricCurrent>> times(that: MagneticFluxDensityAmount<EC, M, T>) =
         MagneticFluxAmount(amount = amount * that.amount,
                            unit = U2(that.mass, distance) to U2(that.time, that.electricCurrent))
 
@@ -118,11 +118,11 @@ open class AreaAmount<D2 : Unit<Distance>>(
     // region -> Force
 
     @JvmName("timesEnergyDensity")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> times(that: EnergyDensityAmount<M, D, T>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> times(that: EnergyDensityAmount<D, M, T>) =
         ForceAmount(amount = amount * that.amount / convert(that.distance to distance),
                     unit = U2(that.mass, distance) to that.time)
 
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<M, D2, T>) =
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<D, M, T>) =
         ForceAmount(amount = amount * that.amount,
                     unit = U2(that.mass, distance) to that.time)
 
@@ -131,12 +131,12 @@ open class AreaAmount<D2 : Unit<Distance>>(
     // region -> LuminousFlux
 
     @JvmName("timesIlluminance")
-    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>, D : Unit<Distance>> times(that: IlluminanceAmount<LI, A, D>) =
+    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>, D : Unit<Distance>> times(that: IlluminanceAmount<A, D, LI>) =
         LuminousFluxAmount(amount = amount * that.amount * convert(that.distance to distance,
                                                                    that.distance to distance),
                            unit = U2(that.luminousIntensity, that.angle))
 
-    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>> times(that: IlluminanceAmount<LI, A, D2>) =
+    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>> times(that: IlluminanceAmount<A, D, LI>) =
         LuminousFluxAmount(amount = amount * that.amount,
                            unit = U2(that.luminousIntensity, that.angle))
 
@@ -145,12 +145,12 @@ open class AreaAmount<D2 : Unit<Distance>>(
     // region -> LuminousIntensity
 
     @JvmName("timesLuminance")
-    operator fun <LI : Unit<LuminousIntensity>, D : Unit<Distance>> times(that: LuminanceAmount<LI, D>) =
+    operator fun <LI : Unit<LuminousIntensity>, D : Unit<Distance>> times(that: LuminanceAmount<D, LI>) =
         LuminousIntensityAmount(amount = amount * that.amount * convert(that.distance to distance,
                                                                         that.distance to distance),
                                 unit = that.luminousIntensity)
 
-    operator fun <LI : Unit<LuminousIntensity>> times(that: LuminanceAmount<LI, D2>) =
+    operator fun <LI : Unit<LuminousIntensity>> times(that: LuminanceAmount<D, LI>) =
         LuminousIntensityAmount(amount = amount * that.amount,
                                 unit = that.luminousIntensity)
 

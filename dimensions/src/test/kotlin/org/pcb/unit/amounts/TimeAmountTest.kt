@@ -181,7 +181,7 @@ class TimeAmountTest
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
                      PowerAmount(amount = 2,
-                                 unit = U2(MASS1, DISTANCE1) to TIME1))
+                                 unit = U2(DISTANCE1, MASS1) to TIME1))
     }
 
     @Test
@@ -193,7 +193,7 @@ class TimeAmountTest
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
                      PowerAmount(amount = 2000,
-                                 unit = U2(MASS1, DISTANCE1) to TIME2))
+                                 unit = U2(DISTANCE1, MASS1) to TIME2))
     }
 
     @Test

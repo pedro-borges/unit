@@ -232,7 +232,7 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = PowerAmount(amount = 2 * 2,
-                                   unit = U2(MASS1, DISTANCE1) to TIME1),
+                                   unit = U2(DISTANCE1, MASS1) to TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = DISTANCE1 to TIME1) *
                      ForceAmount(amount = 2,
@@ -244,7 +244,7 @@ class SpeedAmountTest
     {
         assertEquals(
             expected = PowerAmount(amount = 2 * 2,
-                                   unit = U2(MASS2, DISTANCE2) to TIME1),
+                                   unit = U2(DISTANCE2, MASS2) to TIME1),
             actual = SpeedAmount(amount = 2,
                                  unit = DISTANCE2 to TIME1) *
                      ForceAmount(amount = 2000,

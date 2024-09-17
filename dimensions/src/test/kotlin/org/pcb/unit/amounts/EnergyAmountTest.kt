@@ -167,7 +167,7 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   unit = U2(MASS1, DISTANCE1) to TIME1) /
                      PowerAmount(amount = 2,
-                                 unit = U2(MASS1, DISTANCE1) to TIME1))
+                                 unit = U2(DISTANCE1, MASS1) to TIME1))
     }
 
     @Test
@@ -179,7 +179,7 @@ class EnergyAmountTest
             actual = EnergyAmount(amount = 2,
                                   unit = U2(MASS2, DISTANCE2) to TIME1) /
                      PowerAmount(amount = 2000000,
-                                 unit = U2(MASS1, DISTANCE1) to TIME2))
+                                 unit = U2(DISTANCE1, MASS1) to TIME2))
     }
 
     @Test
@@ -187,7 +187,7 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = PowerAmount(amount = 1,
-                                   unit = U2(MASS1, DISTANCE1) to TIME1),
+                                   unit = U2(DISTANCE1, MASS1) to TIME1),
             actual = EnergyAmount(amount = 2,
                                   unit = U2(MASS1, DISTANCE1) to TIME1) /
                      TimeAmount(amount = 2,
@@ -199,7 +199,7 @@ class EnergyAmountTest
     {
         assertEquals(
             expected = PowerAmount(amount = 1,
-                                   unit = U2(MASS1, DISTANCE1) to TIME2),
+                                   unit = U2(DISTANCE1, MASS1) to TIME2),
             actual = EnergyAmount(amount = 2,
                                   unit = U2(MASS1, DISTANCE1) to TIME2) /
                      TimeAmount(amount = 20,

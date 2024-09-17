@@ -18,7 +18,7 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class LuminanceAmount<LI : Unit<LuminousIntensity>, D : Unit<Distance>>(
+open class LuminanceAmount<D : Unit<Distance>, LI : Unit<LuminousIntensity>>(
         amount: Number,
         unit: Pair<LI, D>)
     : Amount<Luminance>(amount = amount.toBigDecimal(),
@@ -48,26 +48,26 @@ open class LuminanceAmount<LI : Unit<LuminousIntensity>, D : Unit<Distance>>(
                         unit = luminousIntensity to distance)
 
     @JvmName("plusLuminance")
-    operator fun <LI : Unit<LuminousIntensity>, D : Unit<Distance>> plus(that: LuminanceAmount<LI, D>) =
+    operator fun <LI : Unit<LuminousIntensity>, D : Unit<Distance>> plus(that: LuminanceAmount<D, LI>) =
         LuminanceAmount(amount = amount + that.amount
                                  * convert(that.luminousIntensity to luminousIntensity)
                                  / convert(that.distance to distance,
                                            that.distance to distance),
                         unit = luminousIntensity to distance)
 
-    operator fun plus(that: LuminanceAmount<LI, D>) =
+    operator fun plus(that: LuminanceAmount<D, LI>) =
         LuminanceAmount(amount = amount + that.amount,
                         unit = luminousIntensity to distance)
 
     @JvmName("minusLuminance")
-    operator fun <LI : Unit<LuminousIntensity>, D : Unit<Distance>> minus(that: LuminanceAmount<LI, D>) =
+    operator fun <LI : Unit<LuminousIntensity>, D : Unit<Distance>> minus(that: LuminanceAmount<D, LI>) =
         LuminanceAmount(amount = amount - that.amount
                                  * convert(that.luminousIntensity to luminousIntensity)
                                  / convert(that.distance to distance,
                                            that.distance to distance),
                         unit = luminousIntensity to distance)
 
-    operator fun minus(that: LuminanceAmount<LI, D>) =
+    operator fun minus(that: LuminanceAmount<D, LI>) =
         LuminanceAmount(amount = amount - that.amount,
                         unit = luminousIntensity to distance)
 
@@ -76,13 +76,13 @@ open class LuminanceAmount<LI : Unit<LuminousIntensity>, D : Unit<Distance>>(
     // region -> Numeric
 
     @JvmName("divLuminance")
-    operator fun <LI : Unit<LuminousIntensity>, D : Unit<Distance>> div(that: LuminanceAmount<LI, D>) =
+    operator fun <LI : Unit<LuminousIntensity>, D : Unit<Distance>> div(that: LuminanceAmount<D, LI>) =
         Numeric(amount = amount / that.amount
                          / convert(that.luminousIntensity to luminousIntensity)
                          * convert(that.distance to distance,
                                    that.distance to distance))
 
-    operator fun div(that: LuminanceAmount<LI, D>) =
+    operator fun div(that: LuminanceAmount<D, LI>) =
         Numeric(amount = amount / that.amount)
 
     // endregion

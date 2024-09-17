@@ -17,7 +17,7 @@ import org.pcb.unit.toBigDecimal
 
 class Pascal(amount: Number,
              magnitude: Magnitude = UNI)
-    : EnergyDensityAmount<Unit<Mass>, Unit<Distance>, Unit<Time>>(
+    : EnergyDensityAmount<Unit<Distance>, Unit<Mass>, Unit<Time>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
     unit = kilo(GRAM) to U2(METER, SECOND))
 {

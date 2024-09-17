@@ -17,9 +17,9 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class VolumeAmount<D3 : Unit<Distance>>(
+open class VolumeAmount<D : Unit<Distance>>(
         amount: Number,
-        unit: D3)
+        unit: D)
     : Amount<Volume>(amount = amount.toBigDecimal(),
                      unit = CompositeUnit(
                          domain = Volume::class,
@@ -51,7 +51,7 @@ open class VolumeAmount<D3 : Unit<Distance>>(
                                                              that.distance to distance),
                      unit = distance)
 
-    operator fun plus(that: VolumeAmount<D3>) =
+    operator fun plus(that: VolumeAmount<D>) =
         VolumeAmount(amount = amount + that.amount,
                      unit = distance)
 
@@ -62,7 +62,7 @@ open class VolumeAmount<D3 : Unit<Distance>>(
                                                              that.distance to distance),
                      unit = distance)
 
-    operator fun minus(that: VolumeAmount<D3>) =
+    operator fun minus(that: VolumeAmount<D>) =
         VolumeAmount(amount = amount - that.amount,
                      unit = distance)
 
@@ -76,7 +76,7 @@ open class VolumeAmount<D3 : Unit<Distance>>(
                                                         that.distance to distance,
                                                         that.distance to distance))
 
-    operator fun div(that: VolumeAmount<D3>) =
+    operator fun div(that: VolumeAmount<D>) =
         Numeric(amount = amount / that.amount)
 
     // endregion
@@ -88,7 +88,7 @@ open class VolumeAmount<D3 : Unit<Distance>>(
         AreaAmount(amount = amount / that.amount / convert(that.distance to distance),
                    unit = distance)
 
-    operator fun div(that: DistanceAmount<D3>) =
+    operator fun div(that: DistanceAmount<D>) =
         AreaAmount(amount = amount / that.amount,
                    unit = distance)
 
@@ -102,7 +102,7 @@ open class VolumeAmount<D3 : Unit<Distance>>(
                                                                that.distance to distance),
                        unit = distance)
 
-    operator fun div(that: AreaAmount<D3>) =
+    operator fun div(that: AreaAmount<D>) =
         DistanceAmount(amount = amount / that.amount,
                        unit = distance)
 
@@ -111,11 +111,11 @@ open class VolumeAmount<D3 : Unit<Distance>>(
     // region -> Energy
 
     @JvmName("timesEnergyDensity")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> times(that: EnergyDensityAmount<M, D, T>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> times(that: EnergyDensityAmount<D, M, T>) =
         EnergyAmount(amount = amount * that.amount / convert(that.distance to distance),
                      unit = U2(that.mass, distance) to that.time)
 
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<M, D3, T>) =
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<D, M, T>) =
         EnergyAmount(amount = amount * that.amount,
                      unit = U2(that.mass, distance) to that.time)
 

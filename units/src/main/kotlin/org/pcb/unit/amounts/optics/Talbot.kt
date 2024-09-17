@@ -16,7 +16,7 @@ import org.pcb.unit.toBigDecimal
 
 class Talbot(amount: Number,
              magnitude: Magnitude = UNI)
-    : LuminousEnergyAmount<Unit<LuminousIntensity>, Unit<Angle>, Unit<Time>>(
+    : LuminousEnergyAmount<Unit<Angle>, Unit<LuminousIntensity>, Unit<Time>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
     unit = U3(CANDELA, RADIAN, SECOND))
 {

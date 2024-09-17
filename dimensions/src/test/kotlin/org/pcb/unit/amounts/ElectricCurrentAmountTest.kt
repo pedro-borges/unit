@@ -197,7 +197,7 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = PowerAmount(amount = 2 * 2,
-                                   unit = U2(MASS2, DISTANCE2) to TIME2),
+                                   unit = U2(DISTANCE2, MASS2) to TIME2),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) *
                      ElectricTensionAmount(amount = 2,
@@ -209,7 +209,7 @@ class ElectricCurrentAmountTest
     {
         assertEquals(
             expected = PowerAmount(amount = 2 * 2,
-                                   unit = U2(MASS2, DISTANCE2) to TIME2),
+                                   unit = U2(DISTANCE2, MASS2) to TIME2),
             actual = ElectricCurrentAmount(amount = 2,
                                            unit = ELECTRICCURRENT1) *
                      ElectricTensionAmount(amount = 20,

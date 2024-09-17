@@ -104,11 +104,11 @@ open class DistanceAmount<D : Unit<Distance>>(
     // region -> Energy
 
     @JvmName("timesForce")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> times(that: ForceAmount<M, D, T>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> times(that: ForceAmount<D, M, T>) =
         EnergyAmount(amount = amount * that.amount * convert(that.distance to distance),
                      unit = U2(that.mass, distance) to that.time)
 
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<M, D, T>) =
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<D, M, T>) =
         EnergyAmount(amount = amount * that.amount,
                      unit = U2(that.mass, distance) to that.time)
 

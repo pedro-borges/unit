@@ -18,7 +18,7 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class MomentumAmount<M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>>(
+open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
         unit: Pair<U2<M, D>, T>)
     : Amount<Momentum>(amount = amount.toBigDecimal(),
@@ -43,26 +43,26 @@ open class MomentumAmount<M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>>(
                        unit = U2(mass, distance) to time)
 
     @JvmName("plusMomentum")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> plus(that: MomentumAmount<M, D, T>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> plus(that: MomentumAmount<D, M, T>) =
         MomentumAmount(amount = amount + that.amount
                                 * convert(that.mass to mass,
                                           that.distance to distance)
                                 / convert(that.time to time),
                        unit = U2(mass, distance) to time)
 
-    operator fun plus(that: MomentumAmount<M, D, T>) =
+    operator fun plus(that: MomentumAmount<D, M, T>) =
         MomentumAmount(amount = amount + that.amount,
                        unit = U2(mass, distance) to time)
 
     @JvmName("minusMomentum")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> minus(that: MomentumAmount<M, D, T>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> minus(that: MomentumAmount<D, M, T>) =
         MomentumAmount(amount = amount - that.amount
                                 * convert(that.mass to mass,
                                           that.distance to distance)
                                 / convert(that.time to time),
                        unit = U2(mass, distance) to time)
 
-    operator fun minus(that: MomentumAmount<M, D, T>) =
+    operator fun minus(that: MomentumAmount<D, M, T>) =
         MomentumAmount(amount = amount - that.amount,
                        unit = U2(mass, distance) to time)
 
@@ -71,13 +71,13 @@ open class MomentumAmount<M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>>(
     // region -> Numeric
 
     @JvmName("divMomentum")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: MomentumAmount<M, D, T>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: MomentumAmount<D, M, T>) =
         Numeric(amount = amount / that.amount
                          / convert(that.mass to mass,
                                    that.distance to distance)
                          * convert(that.time to time))
 
-    operator fun div(that: MomentumAmount<M, D, T>) =
+    operator fun div(that: MomentumAmount<D, M, T>) =
         Numeric(amount = amount / that.amount)
 
     // endregion

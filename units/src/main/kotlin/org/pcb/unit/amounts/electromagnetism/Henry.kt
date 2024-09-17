@@ -19,7 +19,7 @@ import org.pcb.unit.toBigDecimal
 
 class Henry(amount: Number,
             magnitude: Magnitude = UNI)
-    : InductanceAmount<Unit<Mass>, Unit<Distance>, Unit<Time>, Unit<ElectricCurrent>>(
+    : InductanceAmount<Unit<Distance>, Unit<ElectricCurrent>, Unit<Mass>, Unit<Time>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
     unit = U2(kilo(GRAM), METER) to U2(SECOND, AMPERE))
 {

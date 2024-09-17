@@ -22,9 +22,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class EnergyDensityAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Time>>(
+open class EnergyDensityAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<M, U2<D, T2>>)
+        unit: Pair<M, U2<D, T>>)
     : Amount<EnergyDensity>(amount = amount.toBigDecimal(),
                             unit = CompositeUnit(
                                 domain = EnergyDensity::class,
@@ -54,7 +54,7 @@ open class EnergyDensityAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Tim
                             unit = mass to U2(distance, time))
 
     @JvmName("plusEnergyDensity")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> plus(that: EnergyDensityAmount<M, D, T>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> plus(that: EnergyDensityAmount<D, M, T>) =
         EnergyDensityAmount(amount = amount + that.amount
                                      * convert(that.mass to mass)
                                      / convert(that.distance to distance,
@@ -62,12 +62,12 @@ open class EnergyDensityAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Tim
                                                that.time to time),
                             unit = mass to U2(distance, time))
 
-    operator fun plus(that: EnergyDensityAmount<M, D, T2>) =
+    operator fun plus(that: EnergyDensityAmount<D, M, T>) =
         EnergyDensityAmount(amount = amount + that.amount,
                             unit = mass to U2(distance, time))
 
     @JvmName("minusEnergyDensity")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> minus(that: EnergyDensityAmount<M, D, T>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> minus(that: EnergyDensityAmount<D, M, T>) =
         EnergyDensityAmount(amount = amount - that.amount
                                      * convert(that.mass to mass)
                                      / convert(that.distance to distance,
@@ -75,7 +75,7 @@ open class EnergyDensityAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Tim
                                                that.time to time),
                             unit = mass to U2(distance, time))
 
-    operator fun minus(that: EnergyDensityAmount<M, D, T2>) =
+    operator fun minus(that: EnergyDensityAmount<D, M, T>) =
         EnergyDensityAmount(amount = amount - that.amount,
                             unit = mass to U2(distance, time))
 
@@ -84,14 +84,14 @@ open class EnergyDensityAmount<M : Unit<Mass>, D : Unit<Distance>, T2 : Unit<Tim
     // region -> Numeric
 
     @JvmName("divEnergyDensity")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: EnergyDensityAmount<M, D, T>) =
+    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> div(that: EnergyDensityAmount<D, M, T>) =
         Numeric(amount = amount / that.amount
                          / convert(that.mass to mass)
                          * convert(that.distance to distance,
                                    that.time to time,
                                    that.time to time))
 
-    operator fun div(that: EnergyDensityAmount<M, D, T2>) =
+    operator fun div(that: EnergyDensityAmount<D, M, T>) =
         Numeric(amount = amount / that.amount)
 
     // endregion

@@ -13,7 +13,7 @@ import org.pcb.unit.toBigDecimal
 
 class Nit(amount: Number,
           magnitude: Magnitude = UNI)
-    : LuminanceAmount<Unit<LuminousIntensity>, Unit<Distance>>(
+    : LuminanceAmount<Unit<Distance>, Unit<LuminousIntensity>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
     unit = CANDELA to METER)
 {

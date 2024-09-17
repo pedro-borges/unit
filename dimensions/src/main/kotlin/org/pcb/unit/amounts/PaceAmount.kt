@@ -16,7 +16,7 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class PaceAmount<T : Unit<Time>, D : Unit<Distance>>(
+open class PaceAmount<D : Unit<Distance>, T : Unit<Time>>(
         amount: Number,
         unit: Pair<T, D>)
     : Amount<Pace>(amount = amount.toBigDecimal(),
@@ -39,24 +39,24 @@ open class PaceAmount<T : Unit<Time>, D : Unit<Distance>>(
                    unit = time to distance)
 
     @JvmName("plusPace")
-    operator fun <T : Unit<Time>, D : Unit<Distance>> plus(that: PaceAmount<T, D>) =
+    operator fun <T : Unit<Time>, D : Unit<Distance>> plus(that: PaceAmount<D, T>) =
         PaceAmount(amount = amount + that.amount
                             * convert(that.time to time)
                             / convert(that.distance to distance),
                    unit = time to distance)
 
-    operator fun plus(that: PaceAmount<T, D>) =
+    operator fun plus(that: PaceAmount<D, T>) =
         PaceAmount(amount = amount + that.amount,
                    unit = time to distance)
 
     @JvmName("minusPace")
-    operator fun <T : Unit<Time>, D : Unit<Distance>> minus(that: PaceAmount<T, D>) =
+    operator fun <T : Unit<Time>, D : Unit<Distance>> minus(that: PaceAmount<D, T>) =
         PaceAmount(amount = amount - that.amount
                             * convert(that.time to time)
                             / convert(that.distance to distance),
                    unit = time to distance)
 
-    operator fun minus(that: PaceAmount<T, D>) =
+    operator fun minus(that: PaceAmount<D, T>) =
         PaceAmount(amount = amount - that.amount,
                    unit = time to distance)
 
@@ -65,12 +65,12 @@ open class PaceAmount<T : Unit<Time>, D : Unit<Distance>>(
     // region -> Numeric
 
     @JvmName("divPace")
-    operator fun <T : Unit<Time>, D : Unit<Distance>> div(that: PaceAmount<T, D>) =
+    operator fun <T : Unit<Time>, D : Unit<Distance>> div(that: PaceAmount<D, T>) =
         Numeric(amount = amount / that.amount
                          / convert(that.time to time)
                          * convert(that.distance to distance))
 
-    operator fun div(that: PaceAmount<T, D>) =
+    operator fun div(that: PaceAmount<D, T>) =
         Numeric(amount = amount / that.amount)
 
     @JvmName("timesSpeed")

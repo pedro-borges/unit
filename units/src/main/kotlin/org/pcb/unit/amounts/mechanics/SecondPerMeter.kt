@@ -13,7 +13,7 @@ import org.pcb.unit.toBigDecimal
 
 class SecondPerMeter(amount: Number,
                      magnitude: Magnitude = UNI)
-    : PaceAmount<Unit<Time>, Unit<Distance>>(
+    : PaceAmount<Unit<Distance>, Unit<Time>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
     unit = SECOND to METER)
 {

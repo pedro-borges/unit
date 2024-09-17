@@ -18,9 +18,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class AccelerationAmount<D : Unit<Distance>, T2 : Unit<Time>>(
+open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<D, T2>)
+        unit: Pair<D, T>)
     : Amount<Acceleration>(amount = amount.toBigDecimal(),
                            unit = CompositeUnit(
                                domain = Acceleration::class,
@@ -48,7 +48,7 @@ open class AccelerationAmount<D : Unit<Distance>, T2 : Unit<Time>>(
                                                that.time to time)),
                            unit = distance to time)
 
-    operator fun plus(that: AccelerationAmount<D, T2>) =
+    operator fun plus(that: AccelerationAmount<D, T>) =
         AccelerationAmount(amount = amount + that.amount,
                            unit = distance to time)
 
@@ -60,7 +60,7 @@ open class AccelerationAmount<D : Unit<Distance>, T2 : Unit<Time>>(
                                               that.time to time),
                            unit = distance to time)
 
-    operator fun minus(that: AccelerationAmount<D, T2>) =
+    operator fun minus(that: AccelerationAmount<D, T>) =
         AccelerationAmount(amount = amount - that.amount,
                            unit = distance to time)
 
@@ -74,7 +74,7 @@ open class AccelerationAmount<D : Unit<Distance>, T2 : Unit<Time>>(
                          / convert(that.distance to distance)
                          * convert(that.time to time, that.time to time))
 
-    operator fun div(that: AccelerationAmount<D, T2>) =
+    operator fun div(that: AccelerationAmount<D, T>) =
         Numeric(amount = amount / that.amount)
 
     // endregion
@@ -86,7 +86,7 @@ open class AccelerationAmount<D : Unit<Distance>, T2 : Unit<Time>>(
         SpeedAmount(amount = amount * that.amount * convert(that.time to time),
                     unit = distance to time)
 
-    operator fun times(that: TimeAmount<T2>) =
+    operator fun times(that: TimeAmount<T>) =
         SpeedAmount(amount = amount * that.amount,
                     unit = distance to time)
 
@@ -101,7 +101,7 @@ open class AccelerationAmount<D : Unit<Distance>, T2 : Unit<Time>>(
                                  * convert(that.time to time),
                         unit = NUMERIC to time)
 
-    operator fun div(that: SpeedAmount<D, T2>) =
+    operator fun div(that: SpeedAmount<D, T>) =
         FrequencyAmount(amount = amount / that.amount,
                         unit = NUMERIC to time)
 

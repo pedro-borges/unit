@@ -16,7 +16,7 @@ import org.pcb.unit.toBigDecimal
 
 class Lux(amount: Number,
           magnitude: Magnitude = UNI)
-    : IlluminanceAmount<Unit<LuminousIntensity>, Unit<Angle>, Unit<Distance>>(
+    : IlluminanceAmount<Unit<Angle>, Unit<Distance>, Unit<LuminousIntensity>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
     unit = U2(CANDELA, RADIAN) to METER)
 {

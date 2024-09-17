@@ -17,7 +17,7 @@ import org.pcb.unit.toBigDecimal
 
 class Newton(amount: Number,
              magnitude: Magnitude = UNI)
-    : ForceAmount<Unit<Mass>, Unit<Distance>, Unit<Time>>(
+    : ForceAmount<Unit<Distance>, Unit<Mass>, Unit<Time>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
     unit = U2(kilo(GRAM), METER) to SECOND)
 {

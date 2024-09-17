@@ -20,7 +20,7 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class LuminousFluxAmount<LI : Unit<LuminousIntensity>, A : Unit<Angle>>(
+open class LuminousFluxAmount<A : Unit<Angle>, LI : Unit<LuminousIntensity>>(
         amount: Number,
         unit: U2<LI, A>)
     : Amount<LuminousIntensity>(amount = amount.toBigDecimal(),
@@ -50,24 +50,24 @@ open class LuminousFluxAmount<LI : Unit<LuminousIntensity>, A : Unit<Angle>>(
                            unit = U2(luminousIntensity, angle))
 
     @JvmName("plusLuminousFlux")
-    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>> plus(that: LuminousFluxAmount<LI, A>) =
+    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>> plus(that: LuminousFluxAmount<A, LI>) =
         LuminousFluxAmount(amount = amount + that.amount * convert(that.luminousIntensity to luminousIntensity,
                                                                    that.angle to angle,
                                                                    that.angle to angle),
                            unit = U2(luminousIntensity, angle))
 
-    operator fun plus(that: LuminousFluxAmount<LI, A>) =
+    operator fun plus(that: LuminousFluxAmount<A, LI>) =
         LuminousFluxAmount(amount = amount + that.amount,
                            unit = U2(luminousIntensity, angle))
 
     @JvmName("minusLuminousFlux")
-    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>> minus(that: LuminousFluxAmount<LI, A>) =
+    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>> minus(that: LuminousFluxAmount<A, LI>) =
         LuminousFluxAmount(amount = amount - that.amount * convert(that.luminousIntensity to luminousIntensity,
                                                                    that.angle to angle,
                                                                    that.angle to angle),
                            unit = U2(luminousIntensity, angle))
 
-    operator fun minus(that: LuminousFluxAmount<LI, A>) =
+    operator fun minus(that: LuminousFluxAmount<A, LI>) =
         LuminousFluxAmount(amount = amount - that.amount,
                            unit = U2(luminousIntensity, angle))
 
@@ -76,12 +76,12 @@ open class LuminousFluxAmount<LI : Unit<LuminousIntensity>, A : Unit<Angle>>(
     // region -> Numeric
 
     @JvmName("divLuminousFlux")
-    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>> div(that: LuminousFluxAmount<LI, A>) =
+    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>> div(that: LuminousFluxAmount<A, LI>) =
         Numeric(amount = amount / that.amount / convert(that.luminousIntensity to luminousIntensity,
                                                         that.angle to angle,
                                                         that.angle to angle))
 
-    operator fun div(that: LuminousFluxAmount<LI, A>) =
+    operator fun div(that: LuminousFluxAmount<A, LI>) =
         Numeric(amount = amount / that.amount)
 
     // endregion
@@ -124,13 +124,13 @@ open class LuminousFluxAmount<LI : Unit<LuminousIntensity>, A : Unit<Angle>>(
     // region -> Area
 
     @JvmName("divIlluminance")
-    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>, D : Unit<Distance>> div(that: IlluminanceAmount<LI, A, D>) =
+    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>, D : Unit<Distance>> div(that: IlluminanceAmount<A, D, LI>) =
         AreaAmount(amount = amount / that.amount / convert(that.luminousIntensity to luminousIntensity,
                                                            that.angle to angle,
                                                            that.angle to angle),
                    unit = that.distance)
 
-    operator fun <D : Unit<Distance>> div(that: IlluminanceAmount<LI, A, D>) =
+    operator fun <D : Unit<Distance>> div(that: IlluminanceAmount<A, D, LI>) =
         AreaAmount(amount = amount / that.amount,
                    unit = that.distance)
 

@@ -14,7 +14,7 @@ import org.pcb.unit.toBigDecimal
 
 class Lumen(amount: Number,
             magnitude: Magnitude = UNI)
-    : LuminousFluxAmount<Unit<LuminousIntensity>, Unit<Angle>>(
+    : LuminousFluxAmount<Unit<Angle>, Unit<LuminousIntensity>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
     unit = U2(CANDELA, RADIAN))
 {

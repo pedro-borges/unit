@@ -17,7 +17,7 @@ import org.pcb.unit.toBigDecimal
 
 class Joule(amount: Number,
             magnitude: Magnitude = UNI)
-    : EnergyAmount<Unit<Mass>, Unit<Distance>, Unit<Time>>(
+    : EnergyAmount<Unit<Distance>, Unit<Mass>, Unit<Time>>(
     amount = amount.toBigDecimal().movePointRight(magnitude.power),
     unit = U2(kilo(GRAM), METER) to SECOND)
 {

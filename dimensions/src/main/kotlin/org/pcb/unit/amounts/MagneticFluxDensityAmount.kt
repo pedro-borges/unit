@@ -23,9 +23,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class MagneticFluxDensityAmount<M : Unit<Mass>, T2 : Unit<Time>, EC : Unit<ElectricCurrent>>(
+open class MagneticFluxDensityAmount<EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<M, U2<T2, EC>>)
+        unit: Pair<M, U2<T, EC>>)
     : Amount<MagneticFluxDensity>(amount = amount.toBigDecimal(),
                                   unit = CompositeUnit(
                                       domain = MagneticFluxDensity::class,
@@ -55,7 +55,7 @@ open class MagneticFluxDensityAmount<M : Unit<Mass>, T2 : Unit<Time>, EC : Unit<
                                   unit = mass to U2(time, electricCurrent))
 
     @JvmName("plusMagneticFluxDensity")
-    operator fun <M : Unit<Mass>, T : Unit<Time>, EC : Unit<ElectricCurrent>> plus(that: MagneticFluxDensityAmount<M, T, EC>) =
+    operator fun <M : Unit<Mass>, T : Unit<Time>, EC : Unit<ElectricCurrent>> plus(that: MagneticFluxDensityAmount<EC, M, T>) =
         MagneticFluxDensityAmount(amount = amount + that.amount
                                            * convert(that.mass to mass)
                                            / convert(that.time to time,
@@ -63,12 +63,12 @@ open class MagneticFluxDensityAmount<M : Unit<Mass>, T2 : Unit<Time>, EC : Unit<
                                                      that.electricCurrent to electricCurrent),
                                   unit = mass to U2(time, electricCurrent))
 
-    operator fun plus(that: MagneticFluxDensityAmount<M, T2, EC>) =
+    operator fun plus(that: MagneticFluxDensityAmount<EC, M, T>) =
         MagneticFluxDensityAmount(amount = amount + that.amount,
                                   unit = mass to U2(time, electricCurrent))
 
     @JvmName("minusMagneticFluxDensity")
-    operator fun <M : Unit<Mass>, T : Unit<Time>, EC : Unit<ElectricCurrent>> minus(that: MagneticFluxDensityAmount<M, T, EC>) =
+    operator fun <M : Unit<Mass>, T : Unit<Time>, EC : Unit<ElectricCurrent>> minus(that: MagneticFluxDensityAmount<EC, M, T>) =
         MagneticFluxDensityAmount(amount = amount - that.amount
                                            * convert(that.mass to mass)
                                            / convert(that.time to time,
@@ -76,7 +76,7 @@ open class MagneticFluxDensityAmount<M : Unit<Mass>, T2 : Unit<Time>, EC : Unit<
                                                      that.electricCurrent to electricCurrent),
                                   unit = mass to U2(time, electricCurrent))
 
-    operator fun minus(that: MagneticFluxDensityAmount<M, T2, EC>) =
+    operator fun minus(that: MagneticFluxDensityAmount<EC, M, T>) =
         MagneticFluxDensityAmount(amount = amount - that.amount,
                                   unit = mass to U2(time, electricCurrent))
 
@@ -85,14 +85,14 @@ open class MagneticFluxDensityAmount<M : Unit<Mass>, T2 : Unit<Time>, EC : Unit<
     // region -> Numeric
 
     @JvmName("divMagneticFluxDensity")
-    operator fun <M : Unit<Mass>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: MagneticFluxDensityAmount<M, T, EC>) =
+    operator fun <M : Unit<Mass>, T : Unit<Time>, EC : Unit<ElectricCurrent>> div(that: MagneticFluxDensityAmount<EC, M, T>) =
         Numeric(amount = amount / that.amount
                          / convert(that.mass to mass)
                          * convert(that.time to time,
                                    that.time to time,
                                    that.electricCurrent to electricCurrent))
 
-    operator fun div(that: MagneticFluxDensityAmount<M, T2, EC>) =
+    operator fun div(that: MagneticFluxDensityAmount<EC, M, T>) =
         Numeric(amount = amount / that.amount)
 
     // endregion

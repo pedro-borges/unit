@@ -25,7 +25,7 @@ class WattTest
     fun unit()
     {
         Watt(1) equivalent Gram(2, KILO) * (Meter(2) / Second(2)) * (Meter(2) / Second(2)) / Second(2)
-        Watt(2) equivalent PowerAmount(2, U2(kilo(GRAM), METER) to SECOND)
+        Watt(2) equivalent PowerAmount(2, U2(METER, kilo(GRAM)) to SECOND)
         Watt(2) equivalent PowerAmount(2, WATT)
     }
 
