@@ -3,8 +3,8 @@ package org.pcb.unit.dimensions
 import org.pcb.unit.Composite
 
 @Suppress("UNUSED_PARAMETER")
-@Composite(luminousIntensity = 1,
-           angle = 2,
+@Composite(angle = 2,
+           luminousIntensity = 1,
            distance = -2)
 object Illuminance : Dimension
 {

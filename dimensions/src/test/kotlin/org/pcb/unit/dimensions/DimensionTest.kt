@@ -108,12 +108,12 @@ class DimensionTest
         val stub = this.javaClass.classLoader.getResource("package")!!
 
         val contents = regions.keys
-                         .asSequence()
-                         .sorted()
-                         .sortedBy { it != Scalar::class.simpleName }
+            .asSequence()
+            .sorted()
+            .sortedBy { it != Scalar::class.simpleName }
             .sortedBy { it != name }
-                         .map { regions[it] }
-                         .joinToString(separator = "\n")
+            .map { regions[it] }
+            .joinToString(separator = "\n")
             .let {
                 "package org.pcb.unit.dimensions\n\n" +
                 "import org.pcb.unit.Composite\n\n" +
@@ -127,7 +127,7 @@ class DimensionTest
 
         val source = File(stub.path.replace("target/test-classes/package", "src/main/kotlin/org/pcb/unit/dimensions/") + "$name.kt")
 
-//        source.writeText(contents)
+        source.writeText(contents)
 
         println(contents)
     }
@@ -136,15 +136,50 @@ class DimensionTest
     {
         val result = ArrayList<String>()
 
-        if (angle != 0) result += "angle = $angle"
-        if (currency != 0) result += "currency = $currency"
-        if (distance != 0) result += "distance = $distance"
-        if (electricCurrent != 0) result += "electricCurrent = $electricCurrent"
-        if (luminousIntensity != 0) result += "luminousIntensity = $luminousIntensity"
-        if (mass != 0) result += "mass = $mass"
-        if (temperature != 0) result += "temperature = $temperature"
-        if (time != 0) result += "time = $time"
+        for (i in max() downTo min())
+        {
+            if (i == 0) continue
+
+            if (angle == i) result += "angle = $angle"
+            if (currency == i) result += "currency = $currency"
+            if (distance == i) result += "distance = $distance"
+            if (electricCurrent == i) result += "electricCurrent = $electricCurrent"
+            if (luminousIntensity == i) result += "luminousIntensity = $luminousIntensity"
+            if (mass == i) result += "mass = $mass"
+            if (temperature == i) result += "temperature = $temperature"
+            if (time == i) result += "time = $time"
+        }
 
         return "@Composite(" + result.joinToString(",\n") + ")"
+    }
+
+    private fun Composite.max() =
+        max(angle, currency, distance, electricCurrent, luminousIntensity, mass, temperature, time)
+
+    private fun Composite.min() =
+        min(angle, currency, distance, electricCurrent, luminousIntensity, mass, temperature, time)
+
+    private fun min(value: Int, vararg values: Int): Int
+    {
+        var result = value
+
+        for (v in values)
+        {
+            result = kotlin.math.min(result, v)
+        }
+
+        return result
+    }
+
+    private fun max(value: Int, vararg values: Int): Int
+    {
+        var result = value
+
+        for (v in values)
+        {
+            result = kotlin.math.max(result, v)
+        }
+
+        return result
     }
 }
