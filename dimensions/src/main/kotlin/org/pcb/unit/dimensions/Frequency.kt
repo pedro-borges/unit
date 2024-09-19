@@ -15,6 +15,8 @@ object Frequency : Dimension
     operator fun div(that: Pace) = Acceleration
     operator fun times(that: Speed) = Acceleration
 
+    operator fun times(that: Angle) = AngularVelocity
+
     operator fun times(that: Debt) = Currency
 
     operator fun times(that: Capacitance) = ElectricConductance

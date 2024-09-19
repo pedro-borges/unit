@@ -36,21 +36,35 @@ open class CurrencyAmount<C : Unit<Currency>>(
 
     @JvmName("plusCurrency")
     operator fun <C : Unit<Currency>> plus(that: CurrencyAmount<C>) =
-        CurrencyAmount(amount = this.amount + that.amount * convert(that.currency to currency),
+        CurrencyAmount(amount = amount + that.amount
+                                * convert(that.currency to currency),
                        unit = currency)
 
     operator fun plus(that: CurrencyAmount<C>) =
-        CurrencyAmount(amount = this.amount + that.amount,
+        CurrencyAmount(amount = amount + that.amount,
                        unit = currency)
 
     @JvmName("minusCurrency")
     operator fun <C : Unit<Currency>> minus(that: CurrencyAmount<C>) =
-        CurrencyAmount(amount = this.amount - that.amount * convert(that.currency to currency),
+        CurrencyAmount(amount = amount - that.amount
+                                * convert(that.currency to currency),
                        unit = currency)
 
     operator fun minus(that: CurrencyAmount<C>) =
-        CurrencyAmount(amount = this.amount - that.amount,
+        CurrencyAmount(amount = amount - that.amount,
                        unit = currency)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divCurrency")
+    operator fun <C : Unit<Currency>> div(that: CurrencyAmount<C>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.currency to currency))
+
+    operator fun div(that: CurrencyAmount<C>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -92,18 +106,6 @@ open class CurrencyAmount<C : Unit<Currency>>(
 
     // endregion
 
-    // region -> Scalar
-
-    @JvmName("divCurrency")
-    operator fun <C : Unit<Currency>> div(that: CurrencyAmount<C>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.currency to currency))
-
-    operator fun div(that: CurrencyAmount<C>) =
-        Numeric(amount = amount / that.amount)
-
-    // endregion
-
     // region -> Time
 
     @JvmName("divRent")
@@ -117,5 +119,4 @@ open class CurrencyAmount<C : Unit<Currency>>(
                    unit = that.time)
 
     // endregion
-
 }

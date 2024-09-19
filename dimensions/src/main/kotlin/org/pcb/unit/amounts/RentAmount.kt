@@ -42,7 +42,7 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
     operator fun <C : Unit<Currency>, T : Unit<Time>> plus(that: RentAmount<C, T>) =
         RentAmount(amount = amount + that.amount
                             * convert(that.currency to currency)
-                            / (convert(that.time to time)),
+                            / convert(that.time to time),
                    unit = currency to time)
 
     operator fun plus(that: RentAmount<C, T>) =
@@ -53,12 +53,25 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
     operator fun <C : Unit<Currency>, T : Unit<Time>> minus(that: RentAmount<C, T>) =
         RentAmount(amount = amount - that.amount
                             * convert(that.currency to currency)
-                            / (convert(that.time to time)),
+                            / convert(that.time to time),
                    unit = currency to time)
 
     operator fun minus(that: RentAmount<C, T>) =
         RentAmount(amount = amount - that.amount,
                    unit = currency to time)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divRent")
+    operator fun <C : Unit<Currency>, T : Unit<Time>> div(that: RentAmount<C, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.currency to currency)
+                         * convert(that.time to time))
+
+    operator fun div(that: RentAmount<C, T>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -97,19 +110,6 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
     operator fun div(that: CurrencyAmount<C>) =
         FrequencyAmount(amount = amount / that.amount,
                         unit = NUMERIC to time)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divRent")
-    operator fun <C : Unit<Currency>, T : Unit<Time>> div(that: RentAmount<C, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.currency to currency)
-                         * convert(that.time to time))
-
-    operator fun div(that: RentAmount<C, T>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 }

@@ -12,6 +12,8 @@ object Time : Dimension
     operator fun div(that: Time) = Scalar
     operator fun times(that: Frequency) = Scalar
 
+    operator fun times(that: AngularVelocity) = Angle
+
     operator fun div(that: ElectricResistance) = Capacitance
     operator fun times(that: ElectricConductance) = Capacitance
 

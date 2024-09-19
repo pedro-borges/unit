@@ -8,6 +8,7 @@ import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
@@ -34,7 +35,8 @@ open class AngleAmount<A : Unit<Angle>>(
 
     @JvmName("plusAngle")
     operator fun <A : Unit<Angle>> plus(that: AngleAmount<A>) =
-        AngleAmount(amount = amount + that.amount * convert(that.angle to angle),
+        AngleAmount(amount = amount + that.amount
+                             * convert(that.angle to angle),
                     unit = angle)
 
     operator fun plus(that: AngleAmount<A>) =
@@ -43,7 +45,8 @@ open class AngleAmount<A : Unit<Angle>>(
 
     @JvmName("minusAngle")
     operator fun <A : Unit<Angle>> minus(that: AngleAmount<A>) =
-        AngleAmount(amount = amount - that.amount * convert(that.angle to angle),
+        AngleAmount(amount = amount - that.amount
+                             * convert(that.angle to angle),
                     unit = angle)
 
     operator fun minus(that: AngleAmount<A>) =
@@ -64,6 +67,18 @@ open class AngleAmount<A : Unit<Angle>>(
 
     // endregion
 
+    // region -> AngularVelocity
+
+    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
+        AngularVelocityAmount(amount = amount * that.amount,
+                              unit = angle to that.time)
+
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        AngularVelocityAmount(amount = amount / that.amount,
+                              unit = angle to that.time)
+
+    // endregion
+
     // region -> SolidAngle
 
     @JvmName("timesAngle")
@@ -75,6 +90,20 @@ open class AngleAmount<A : Unit<Angle>>(
     operator fun times(that: AngleAmount<A>) =
         SolidAngleAmount(amount = amount * that.amount,
                          unit = angle)
+
+    // endregion
+
+    // region -> Time
+
+    @JvmName("divAngularVelocity")
+    operator fun <A : Unit<Angle>, T : Unit<Time>> div(that: AngularVelocityAmount<A, T>) =
+        TimeAmount(amount = amount / that.amount
+                            / convert(that.angle to angle),
+                   unit = that.time)
+
+    operator fun <T : Unit<Time>> div(that: AngularVelocityAmount<A, T>) =
+        TimeAmount(amount = amount / that.amount,
+                   unit = that.time)
 
     // endregion
 }

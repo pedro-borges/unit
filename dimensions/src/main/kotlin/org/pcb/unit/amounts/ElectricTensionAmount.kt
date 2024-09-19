@@ -58,15 +58,15 @@ open class ElectricTensionAmount<D : Unit<Distance>, EC : Unit<ElectricCurrent>,
                               unit = U2(distance, mass) to U2(electricCurrent, time))
 
     @JvmName("plusElectricTension")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> plus(that: ElectricTensionAmount<D, EC, M, T>) =
+    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> plus(that: ElectricTensionAmount<D, EC, M, T>) =
         ElectricTensionAmount(amount = amount + that.amount
-                                       * convert(that.mass to mass,
+                                       * convert(that.distance to distance,
                                                  that.distance to distance,
-                                                 that.distance to distance)
-                                       / convert(that.time to time,
+                                                 that.mass to mass)
+                                       / convert(that.electricCurrent to electricCurrent,
                                                  that.time to time,
                                                  that.time to time,
-                                                 that.electricCurrent to electricCurrent),
+                                                 that.time to time),
                               unit = U2(distance, mass) to U2(electricCurrent, time))
 
     operator fun plus(that: ElectricTensionAmount<D, EC, M, T>) =
@@ -74,20 +74,38 @@ open class ElectricTensionAmount<D : Unit<Distance>, EC : Unit<ElectricCurrent>,
                               unit = U2(distance, mass) to U2(electricCurrent, time))
 
     @JvmName("minusElectricTension")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> minus(that: ElectricTensionAmount<D, EC, M, T>) =
+    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> minus(that: ElectricTensionAmount<D, EC, M, T>) =
         ElectricTensionAmount(amount = amount - that.amount
-                                       * convert(that.mass to mass,
+                                       * convert(that.distance to distance,
                                                  that.distance to distance,
-                                                 that.distance to distance)
-                                       / convert(that.time to time,
+                                                 that.mass to mass)
+                                       / convert(that.electricCurrent to electricCurrent,
                                                  that.time to time,
                                                  that.time to time,
-                                                 that.electricCurrent to electricCurrent),
+                                                 that.time to time),
                               unit = U2(distance, mass) to U2(electricCurrent, time))
 
     operator fun minus(that: ElectricTensionAmount<D, EC, M, T>) =
         ElectricTensionAmount(amount = amount - that.amount,
                               unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divElectricTension")
+    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricTensionAmount<D, EC, M, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.distance to distance,
+                                   that.distance to distance,
+                                   that.mass to mass)
+                         * convert(that.electricCurrent to electricCurrent,
+                                   that.time to time,
+                                   that.time to time,
+                                   that.time to time))
+
+    operator fun div(that: ElectricTensionAmount<D, EC, M, T>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -234,24 +252,6 @@ open class ElectricTensionAmount<D : Unit<Distance>, EC : Unit<ElectricCurrent>,
     operator fun times(that: ElectricCurrentAmount<EC>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, mass) to time)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divElectricTension")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricTensionAmount<D, EC, M, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance,
-                                   that.distance to distance,
-                                   that.mass to mass)
-                         * convert(that.electricCurrent to electricCurrent,
-                                   that.time to time,
-                                   that.time to time,
-                                   that.time to time))
-
-    operator fun div(that: ElectricTensionAmount<D, EC, M, T>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 }

@@ -50,8 +50,9 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
 
     @JvmName("plusElectricCharge")
     operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> plus(that: ElectricChargeAmount<EC, T>) =
-        ElectricChargeAmount(amount = amount + that.amount * convert(that.electricCurrent to electricCurrent,
-                                                                     that.time to time),
+        ElectricChargeAmount(amount = amount + that.amount
+                                      * convert(that.electricCurrent to electricCurrent,
+                                                that.time to time),
                              unit = U2(electricCurrent, time))
 
     operator fun plus(that: ElectricChargeAmount<EC, T>) =
@@ -60,13 +61,27 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
 
     @JvmName("minusElectricCharge")
     operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> minus(that: ElectricChargeAmount<EC, T>) =
-        ElectricChargeAmount(amount = amount - that.amount * convert(that.electricCurrent to electricCurrent,
-                                                                     that.time to time),
+        ElectricChargeAmount(amount = amount - that.amount
+                                      * convert(that.electricCurrent to electricCurrent,
+                                                that.time to time),
                              unit = U2(electricCurrent, time))
 
     operator fun minus(that: ElectricChargeAmount<EC, T>) =
         ElectricChargeAmount(amount = amount - that.amount,
                              unit = U2(electricCurrent, time))
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divElectricCharge")
+    operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricChargeAmount<EC, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.electricCurrent to electricCurrent,
+                                   that.time to time))
+
+    operator fun div(that: ElectricChargeAmount<EC, T>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -211,19 +226,6 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> Scalar
-
-    @JvmName("divElectricCharge")
-    operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricChargeAmount<EC, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.electricCurrent to electricCurrent,
-                                   that.time to time))
-
-    operator fun div(that: ElectricChargeAmount<EC, T>) =
-        Numeric(amount = amount / that.amount)
-
-    // endregion
-
     // region -> Time
 
     @JvmName("divElectricCurrent")
@@ -238,3 +240,4 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
 
     // endregion
 }
+

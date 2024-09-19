@@ -10,5 +10,10 @@ object Angle : Dimension
     operator fun times(that: Scalar) = Angle
     operator fun div(that: Angle) = Scalar
 
+    operator fun div(that: Time) = AngularVelocity
+    operator fun times(that: Frequency) = AngularVelocity
+
     operator fun times(that: Angle) = SolidAngle
+
+    operator fun div(that: AngularVelocity) = Time
 }

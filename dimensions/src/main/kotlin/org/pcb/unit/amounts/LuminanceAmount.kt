@@ -50,7 +50,7 @@ open class LuminanceAmount<D : Unit<Distance>, LI : Unit<LuminousIntensity>>(
                         unit = luminousIntensity to distance)
 
     @JvmName("plusLuminance")
-    operator fun <LI : Unit<LuminousIntensity>, D : Unit<Distance>> plus(that: LuminanceAmount<D, LI>) =
+    operator fun <D : Unit<Distance>, LI : Unit<LuminousIntensity>> plus(that: LuminanceAmount<D, LI>) =
         LuminanceAmount(amount = amount + that.amount
                                  * convert(that.luminousIntensity to luminousIntensity)
                                  / convert(that.distance to distance,
@@ -62,7 +62,7 @@ open class LuminanceAmount<D : Unit<Distance>, LI : Unit<LuminousIntensity>>(
                         unit = luminousIntensity to distance)
 
     @JvmName("minusLuminance")
-    operator fun <LI : Unit<LuminousIntensity>, D : Unit<Distance>> minus(that: LuminanceAmount<D, LI>) =
+    operator fun <D : Unit<Distance>, LI : Unit<LuminousIntensity>> minus(that: LuminanceAmount<D, LI>) =
         LuminanceAmount(amount = amount - that.amount
                                  * convert(that.luminousIntensity to luminousIntensity)
                                  / convert(that.distance to distance,
@@ -75,23 +75,25 @@ open class LuminanceAmount<D : Unit<Distance>, LI : Unit<LuminousIntensity>>(
 
     // endregion
 
+    // region -> Scalar
+
+    @JvmName("divLuminance")
+    operator fun <D : Unit<Distance>, LI : Unit<LuminousIntensity>> div(that: LuminanceAmount<D, LI>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.luminousIntensity to luminousIntensity)
+                         * convert(that.distance to distance,
+                                   that.distance to distance))
+
+    operator fun div(that: LuminanceAmount<D, LI>) =
+        Numeric(amount = amount / that.amount)
+
+    // endregion
+
     // region -> Illuminance
 
     operator fun <A : Unit<Angle>> times(that: SolidAngleAmount<A>) =
         IlluminanceAmount(amount = amount * that.amount,
                           unit = U2(that.angle, luminousIntensity) to distance)
-
-    // endregion
-
-    // region -> Luminance
-
-    operator fun div(that: Numeric) =
-        LuminanceAmount(amount = amount / that.amount,
-                        unit = luminousIntensity to distance)
-
-    operator fun times(that: Numeric) =
-        LuminanceAmount(amount = amount * that.amount,
-                        unit = luminousIntensity to distance)
 
     // endregion
 
@@ -107,20 +109,6 @@ open class LuminanceAmount<D : Unit<Distance>, LI : Unit<LuminousIntensity>>(
     operator fun times(that: AreaAmount<D>) =
         LuminousIntensityAmount(amount = amount * that.amount,
                                 unit = luminousIntensity)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divLuminance")
-    operator fun <D : Unit<Distance>, LI : Unit<LuminousIntensity>> div(that: LuminanceAmount<D, LI>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.luminousIntensity to luminousIntensity)
-                         * convert(that.distance to distance,
-                                   that.distance to distance))
-
-    operator fun div(that: LuminanceAmount<D, LI>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 }

@@ -55,11 +55,11 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                     unit = U2(distance, mass) to time)
 
     @JvmName("plusPower")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> plus(that: PowerAmount<D, M, T>) =
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> plus(that: PowerAmount<D, M, T>) =
         PowerAmount(amount = amount + that.amount
-                             * convert(that.mass to mass,
+                             * convert(that.distance to distance,
                                        that.distance to distance,
-                                       that.distance to distance)
+                                       that.mass to mass)
                              / convert(that.time to time,
                                        that.time to time,
                                        that.time to time),
@@ -70,11 +70,11 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                     unit = U2(distance, mass) to time)
 
     @JvmName("minusPower")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> minus(that: PowerAmount<D, M, T>) =
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> minus(that: PowerAmount<D, M, T>) =
         PowerAmount(amount = amount - that.amount
-                             * convert(that.mass to mass,
+                             * convert(that.distance to distance,
                                        that.distance to distance,
-                                       that.distance to distance)
+                                       that.mass to mass)
                              / convert(that.time to time,
                                        that.time to time,
                                        that.time to time),
@@ -83,6 +83,23 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun minus(that: PowerAmount<D, M, T>) =
         PowerAmount(amount = amount - that.amount,
                     unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divPower")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: PowerAmount<D, M, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.distance to distance,
+                                   that.distance to distance,
+                                   that.mass to mass)
+                         * convert(that.time to time,
+                                   that.time to time,
+                                   that.time to time))
+
+    operator fun div(that: PowerAmount<D, M, T>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -210,23 +227,6 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: AccelerationAmount<D, T>) =
         MomentumAmount(amount = amount / that.amount,
                        unit = U2(distance, mass) to time)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divPower")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: PowerAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance,
-                                   that.distance to distance,
-                                   that.mass to mass)
-                         * convert(that.time to time,
-                                   that.time to time,
-                                   that.time to time))
-
-    operator fun div(that: PowerAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 

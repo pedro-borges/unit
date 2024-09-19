@@ -55,11 +55,11 @@ open class EnergyAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                      unit = U2(distance, mass) to time)
 
     @JvmName("plusEnergy")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> plus(that: EnergyAmount<D, M, T>) =
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> plus(that: EnergyAmount<D, M, T>) =
         EnergyAmount(amount = amount + that.amount
-                              * convert(that.mass to mass,
+                              * convert(that.distance to distance,
                                         that.distance to distance,
-                                        that.distance to distance)
+                                        that.mass to mass)
                               / convert(that.time to time,
                                         that.time to time),
                      unit = U2(distance, mass) to time)
@@ -69,11 +69,11 @@ open class EnergyAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                      unit = U2(distance, mass) to time)
 
     @JvmName("minusEnergy")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> minus(that: EnergyAmount<D, M, T>) =
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> minus(that: EnergyAmount<D, M, T>) =
         EnergyAmount(amount = amount - that.amount
-                              * convert(that.mass to mass,
+                              * convert(that.distance to distance,
                                         that.distance to distance,
-                                        that.distance to distance)
+                                        that.mass to mass)
                               / convert(that.time to time,
                                         that.time to time),
                      unit = U2(distance, mass) to time)
@@ -81,6 +81,22 @@ open class EnergyAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun minus(that: EnergyAmount<D, M, T>) =
         EnergyAmount(amount = amount - that.amount,
                      unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divEnergy")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyAmount<D, M, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.distance to distance,
+                                   that.distance to distance,
+                                   that.mass to mass)
+                         * convert(that.time to time,
+                                   that.time to time))
+
+    operator fun div(that: EnergyAmount<D, M, T>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -237,22 +253,6 @@ open class EnergyAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: TimeAmount<T>) =
         PowerAmount(amount = amount / that.amount,
                     unit = U2(distance, mass) to time)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divEnergy")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance,
-                                   that.distance to distance,
-                                   that.mass to mass)
-                         * convert(that.time to time,
-                                   that.time to time))
-
-    operator fun div(that: EnergyAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 

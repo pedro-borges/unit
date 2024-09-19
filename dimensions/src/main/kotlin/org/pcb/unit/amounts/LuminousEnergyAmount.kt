@@ -52,11 +52,12 @@ open class LuminousEnergyAmount<A : Unit<Angle>, LI : Unit<LuminousIntensity>, T
                              unit = U3(angle, luminousIntensity, time))
 
     @JvmName("plusLuminousEnergy")
-    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>, T : Unit<Time>> plus(that: LuminousEnergyAmount<A, LI, T>) =
-        LuminousEnergyAmount(amount = amount + that.amount * convert(that.luminousIntensity to luminousIntensity,
-                                                                     that.angle to angle,
-                                                                     that.angle to angle,
-                                                                     that.time to time),
+    operator fun <A : Unit<Angle>, LI : Unit<LuminousIntensity>, T : Unit<Time>> plus(that: LuminousEnergyAmount<A, LI, T>) =
+        LuminousEnergyAmount(amount = amount + that.amount
+                                      * convert(that.angle to angle,
+                                                that.angle to angle,
+                                                that.luminousIntensity to luminousIntensity,
+                                                that.time to time),
                              unit = U3(angle, luminousIntensity, time))
 
     operator fun plus(that: LuminousEnergyAmount<A, LI, T>) =
@@ -64,16 +65,32 @@ open class LuminousEnergyAmount<A : Unit<Angle>, LI : Unit<LuminousIntensity>, T
                              unit = U3(angle, luminousIntensity, time))
 
     @JvmName("minusLuminousEnergy")
-    operator fun <LI : Unit<LuminousIntensity>, A : Unit<Angle>, T : Unit<Time>> minus(that: LuminousEnergyAmount<A, LI, T>) =
-        LuminousEnergyAmount(amount = amount - that.amount * convert(that.luminousIntensity to luminousIntensity,
-                                                                     that.angle to angle,
-                                                                     that.angle to angle,
-                                                                     that.time to time),
+    operator fun <A : Unit<Angle>, LI : Unit<LuminousIntensity>, T : Unit<Time>> minus(that: LuminousEnergyAmount<A, LI, T>) =
+        LuminousEnergyAmount(amount = amount - that.amount
+                                      * convert(that.angle to angle,
+                                                that.angle to angle,
+                                                that.luminousIntensity to luminousIntensity,
+                                                that.time to time),
                              unit = U3(angle, luminousIntensity, time))
 
     operator fun minus(that: LuminousEnergyAmount<A, LI, T>) =
         LuminousEnergyAmount(amount = amount - that.amount,
                              unit = U3(angle, luminousIntensity, time))
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divLuminousEnergy")
+    operator fun <A : Unit<Angle>, LI : Unit<LuminousIntensity>, T : Unit<Time>> div(that: LuminousEnergyAmount<A, LI, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.angle to angle,
+                                   that.angle to angle,
+                                   that.luminousIntensity to luminousIntensity,
+                                   that.time to time))
+
+    operator fun div(that: LuminousEnergyAmount<A, LI, T>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -98,21 +115,6 @@ open class LuminousEnergyAmount<A : Unit<Angle>, LI : Unit<LuminousIntensity>, T
     operator fun div(that: TimeAmount<T>) =
         LuminousFluxAmount(amount = amount / that.amount,
                            unit = U2(angle, luminousIntensity))
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divLuminousEnergy")
-    operator fun <A : Unit<Angle>, LI : Unit<LuminousIntensity>, T : Unit<Time>> div(that: LuminousEnergyAmount<A, LI, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.angle to angle,
-                                   that.angle to angle,
-                                   that.luminousIntensity to luminousIntensity,
-                                   that.time to time))
-
-    operator fun div(that: LuminousEnergyAmount<A, LI, T>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 

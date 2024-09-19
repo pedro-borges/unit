@@ -58,16 +58,16 @@ open class ElectricResistanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurren
                                  unit = U2(distance, mass) to U2(electricCurrent, time))
 
     @JvmName("plusElectricResistance")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> plus(that: ElectricResistanceAmount<D, EC, M, T>) =
+    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> plus(that: ElectricResistanceAmount<D, EC, M, T>) =
         ElectricResistanceAmount(amount = amount + that.amount
-                                          * convert(that.mass to mass,
+                                          * convert(that.distance to distance,
                                                     that.distance to distance,
-                                                    that.distance to distance)
-                                          / convert(that.time to time,
-                                                    that.time to time,
-                                                    that.time to time,
+                                                    that.mass to mass)
+                                          / convert(that.electricCurrent to electricCurrent,
                                                     that.electricCurrent to electricCurrent,
-                                                    that.electricCurrent to electricCurrent),
+                                                    that.time to time,
+                                                    that.time to time,
+                                                    that.time to time),
                                  unit = U2(distance, mass) to U2(electricCurrent, time))
 
     operator fun plus(that: ElectricResistanceAmount<D, EC, M, T>) =
@@ -75,16 +75,16 @@ open class ElectricResistanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurren
                                  unit = U2(distance, mass) to U2(electricCurrent, time))
 
     @JvmName("minusElectricResistance")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>, EC : Unit<ElectricCurrent>> minus(that: ElectricResistanceAmount<D, EC, M, T>) =
+    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> minus(that: ElectricResistanceAmount<D, EC, M, T>) =
         ElectricResistanceAmount(amount = amount - that.amount
-                                          * convert(that.mass to mass,
+                                          * convert(that.distance to distance,
                                                     that.distance to distance,
-                                                    that.distance to distance)
-                                          / convert(that.time to time,
-                                                    that.time to time,
-                                                    that.time to time,
+                                                    that.mass to mass)
+                                          / convert(that.electricCurrent to electricCurrent,
                                                     that.electricCurrent to electricCurrent,
-                                                    that.electricCurrent to electricCurrent),
+                                                    that.time to time,
+                                                    that.time to time,
+                                                    that.time to time),
                                  unit = U2(distance, mass) to U2(electricCurrent, time))
 
     operator fun minus(that: ElectricResistanceAmount<D, EC, M, T>) =
@@ -93,15 +93,37 @@ open class ElectricResistanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurren
 
     // endregion
 
-    // region -> ElectricResistance
+    // region -> Scalar
 
-    operator fun div(that: Numeric) =
-        ElectricResistanceAmount(amount = amount / that.amount,
-                                 unit = U2(distance, mass) to U2(electricCurrent, time))
+    @JvmName("timesElectricConductance")
+    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricConductanceAmount<D, EC, M, T>) =
+        Numeric(amount = amount * that.amount
+                         * convert(that.electricCurrent to electricCurrent,
+                                   that.electricCurrent to electricCurrent,
+                                   that.time to time,
+                                   that.time to time,
+                                   that.time to time)
+                         / convert(that.distance to distance,
+                                   that.distance to distance,
+                                   that.mass to mass))
 
-    operator fun times(that: Numeric) =
-        ElectricResistanceAmount(amount = amount * that.amount,
-                                 unit = U2(distance, mass) to U2(electricCurrent, time))
+    operator fun times(that: ElectricConductanceAmount<D, EC, M, T>) =
+        Numeric(amount = amount * that.amount)
+
+    @JvmName("divElectricResistance")
+    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricResistanceAmount<D, EC, M, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.distance to distance,
+                                   that.distance to distance,
+                                   that.mass to mass)
+                         * convert(that.electricCurrent to electricCurrent,
+                                   that.electricCurrent to electricCurrent,
+                                   that.time to time,
+                                   that.time to time,
+                                   that.time to time))
+
+    operator fun div(that: ElectricResistanceAmount<D, EC, M, T>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -175,44 +197,6 @@ open class ElectricResistanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurren
     operator fun times(that: ElectricChargeAmount<EC, T>) =
         MagneticFluxAmount(amount = amount * that.amount,
                            unit = U2(distance, mass) to U2(electricCurrent, time))
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("timesElectricConductance")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricConductanceAmount<D, EC, M, T>) =
-        Numeric(amount = amount * that.amount
-                         * convert(that.electricCurrent to electricCurrent,
-                                   that.electricCurrent to electricCurrent,
-                                   that.time to time,
-                                   that.time to time,
-                                   that.time to time)
-                         / convert(that.distance to distance,
-                                   that.distance to distance,
-                                   that.mass to mass))
-
-    operator fun times(that: ElectricConductanceAmount<D, EC, M, T>) =
-        Numeric(amount = amount * that.amount)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divElectricResistance")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricResistanceAmount<D, EC, M, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance,
-                                   that.distance to distance,
-                                   that.mass to mass)
-                         * convert(that.electricCurrent to electricCurrent,
-                                   that.electricCurrent to electricCurrent,
-                                   that.time to time,
-                                   that.time to time,
-                                   that.time to time))
-
-    operator fun div(that: ElectricResistanceAmount<D, EC, M, T>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 

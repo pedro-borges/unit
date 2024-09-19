@@ -54,7 +54,7 @@ open class EnergyDensityAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
                             unit = mass to U2(distance, time))
 
     @JvmName("plusEnergyDensity")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> plus(that: EnergyDensityAmount<D, M, T>) =
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> plus(that: EnergyDensityAmount<D, M, T>) =
         EnergyDensityAmount(amount = amount + that.amount
                                      * convert(that.mass to mass)
                                      / convert(that.distance to distance,
@@ -67,7 +67,7 @@ open class EnergyDensityAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
                             unit = mass to U2(distance, time))
 
     @JvmName("minusEnergyDensity")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> minus(that: EnergyDensityAmount<D, M, T>) =
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> minus(that: EnergyDensityAmount<D, M, T>) =
         EnergyDensityAmount(amount = amount - that.amount
                                      * convert(that.mass to mass)
                                      / convert(that.distance to distance,
@@ -78,6 +78,21 @@ open class EnergyDensityAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
     operator fun minus(that: EnergyDensityAmount<D, M, T>) =
         EnergyDensityAmount(amount = amount - that.amount,
                             unit = mass to U2(distance, time))
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divEnergyDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyDensityAmount<D, M, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.mass to mass)
+                         * convert(that.distance to distance,
+                                   that.time to time,
+                                   that.time to time))
+
+    operator fun div(that: EnergyDensityAmount<D, M, T>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -109,21 +124,6 @@ open class EnergyDensityAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
     operator fun times(that: AreaAmount<D>) =
         ForceAmount(amount = amount * that.amount,
                     unit = U2(distance, mass) to time)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divEnergyDensity")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyDensityAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.mass to mass)
-                         * convert(that.distance to distance,
-                                   that.time to time,
-                                   that.time to time))
-
-    operator fun div(that: EnergyDensityAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 }

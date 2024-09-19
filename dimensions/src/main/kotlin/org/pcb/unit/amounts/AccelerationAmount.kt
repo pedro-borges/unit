@@ -32,11 +32,11 @@ open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // region -> Acceleration
 
-    override operator fun <U : Unit<Scalar>> times(that: ScalarAmount<U>) =
+    override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         AccelerationAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                            unit = distance to time)
 
-    override operator fun <U : Unit<Scalar>> div(that: ScalarAmount<U>) =
+    override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         AccelerationAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                            unit = distance to time)
 
@@ -44,8 +44,8 @@ open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
     operator fun <D : Unit<Distance>, T : Unit<Time>> plus(that: AccelerationAmount<D, T>) =
         AccelerationAmount(amount = amount + that.amount
                                     * convert(that.distance to distance)
-                                    / (convert(that.time to time,
-                                               that.time to time)),
+                                    / convert(that.time to time,
+                                              that.time to time),
                            unit = distance to time)
 
     operator fun plus(that: AccelerationAmount<D, T>) =
@@ -63,6 +63,20 @@ open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
     operator fun minus(that: AccelerationAmount<D, T>) =
         AccelerationAmount(amount = amount - that.amount,
                            unit = distance to time)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divAcceleration")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: AccelerationAmount<D, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.distance to distance)
+                         * convert(that.time to time,
+                                   that.time to time))
+
+    operator fun div(that: AccelerationAmount<D, T>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -112,20 +126,6 @@ open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
     operator fun <M : Unit<Mass>> times(that: MomentumAmount<D, M, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, that.mass) to time)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divAcceleration")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: AccelerationAmount<D, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance)
-                         * convert(that.time to time,
-                                   that.time to time))
-
-    operator fun div(that: AccelerationAmount<D, T>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 

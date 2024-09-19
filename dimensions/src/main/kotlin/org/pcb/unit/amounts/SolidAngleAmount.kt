@@ -46,8 +46,9 @@ open class SolidAngleAmount<A : Unit<Angle>>(
 
     @JvmName("plusSolidAngle")
     operator fun <A : Unit<Angle>> plus(that: SolidAngleAmount<A>) =
-        SolidAngleAmount(amount = amount + that.amount * convert(that.angle to angle,
-                                                                 that.angle to angle),
+        SolidAngleAmount(amount = amount + that.amount
+                                  * convert(that.angle to angle,
+                                            that.angle to angle),
                          unit = angle)
 
     operator fun plus(that: SolidAngleAmount<A>) =
@@ -56,13 +57,27 @@ open class SolidAngleAmount<A : Unit<Angle>>(
 
     @JvmName("minusSolidAngle")
     operator fun <A : Unit<Angle>> minus(that: SolidAngleAmount<A>) =
-        SolidAngleAmount(amount = amount - that.amount * convert(that.angle to angle,
-                                                                 that.angle to angle),
+        SolidAngleAmount(amount = amount - that.amount
+                                  * convert(that.angle to angle,
+                                            that.angle to angle),
                          unit = angle)
 
     operator fun minus(that: SolidAngleAmount<A>) =
         SolidAngleAmount(amount = amount - that.amount,
                          unit = angle)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divSolidAngle")
+    operator fun <A : Unit<Angle>> div(that: SolidAngleAmount<A>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.angle to angle,
+                                   that.angle to angle))
+
+    operator fun div(that: SolidAngleAmount<A>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -93,19 +108,6 @@ open class SolidAngleAmount<A : Unit<Angle>>(
     operator fun <LI : Unit<LuminousIntensity>> times(that: LuminousIntensityAmount<LI>) =
         LuminousFluxAmount(amount = amount * that.amount,
                            unit = U2(angle, that.luminousIntensity))
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divSolidAngle")
-    operator fun <A : Unit<Angle>> div(that: SolidAngleAmount<A>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.angle to angle,
-                                   that.angle to angle))
-
-    operator fun div(that: SolidAngleAmount<A>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 }

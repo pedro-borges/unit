@@ -43,10 +43,10 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                        unit = U2(distance, mass) to time)
 
     @JvmName("plusMomentum")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> plus(that: MomentumAmount<D, M, T>) =
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> plus(that: MomentumAmount<D, M, T>) =
         MomentumAmount(amount = amount + that.amount
-                                * convert(that.mass to mass,
-                                          that.distance to distance)
+                                * convert(that.distance to distance,
+                                          that.mass to mass)
                                 / convert(that.time to time),
                        unit = U2(distance, mass) to time)
 
@@ -55,16 +55,30 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                        unit = U2(distance, mass) to time)
 
     @JvmName("minusMomentum")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> minus(that: MomentumAmount<D, M, T>) =
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> minus(that: MomentumAmount<D, M, T>) =
         MomentumAmount(amount = amount - that.amount
-                                * convert(that.mass to mass,
-                                          that.distance to distance)
+                                * convert(that.distance to distance,
+                                          that.mass to mass)
                                 / convert(that.time to time),
                        unit = U2(distance, mass) to time)
 
     operator fun minus(that: MomentumAmount<D, M, T>) =
         MomentumAmount(amount = amount - that.amount,
                        unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divMomentum")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MomentumAmount<D, M, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.distance to distance,
+                                   that.mass to mass)
+                         * convert(that.time to time))
+
+    operator fun div(that: MomentumAmount<D, M, T>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -204,20 +218,6 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun times(that: AccelerationAmount<D, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, mass) to time)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divMomentum")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MomentumAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance,
-                                   that.mass to mass)
-                         * convert(that.time to time))
-
-    operator fun div(that: MomentumAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 

@@ -51,7 +51,8 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     @JvmName("plusFrequency")
     operator fun <T : Unit<Time>> plus(that: FrequencyAmount<T>) =
-        FrequencyAmount(amount = amount + that.amount / convert(that.time to time),
+        FrequencyAmount(amount = amount + that.amount
+                                 / convert(that.time to time),
                         unit = NUMERIC to time)
 
     operator fun plus(that: FrequencyAmount<T>) =
@@ -60,12 +61,33 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     @JvmName("minusFrequency")
     operator fun <T : Unit<Time>> minus(that: FrequencyAmount<T>) =
-        FrequencyAmount(amount = amount - that.amount / convert(that.time to time),
+        FrequencyAmount(amount = amount - that.amount
+                                 / convert(that.time to time),
                         unit = NUMERIC to time)
 
     operator fun minus(that: FrequencyAmount<T>) =
         FrequencyAmount(amount = amount - that.amount,
                         unit = NUMERIC to time)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divFrequency")
+    operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
+        Numeric(amount = amount / that.amount
+                         * convert(that.time to time))
+
+    operator fun div(that: FrequencyAmount<T>) =
+        Numeric(amount = amount / that.amount)
+
+    @JvmName("timesTime")
+    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
+        Numeric(amount = amount * that.amount
+                         * convert(that.time to time))
+
+    operator fun times(that: TimeAmount<T>) =
+        Numeric(amount = amount * that.amount)
 
     // endregion
 
@@ -90,6 +112,14 @@ open class FrequencyAmount<T : Unit<Time>>(
     operator fun <D : Unit<Distance>> times(that: SpeedAmount<D, T>) =
         AccelerationAmount(amount = amount * that.amount,
                            unit = that.distance to time)
+
+    // endregion
+
+    // region -> AngularVelocity
+
+    operator fun <A : Unit<Angle>> times(that: AngleAmount<A>) =
+        AngularVelocityAmount(amount = amount * that.amount,
+                              unit = that.angle to time)
 
     // endregion
 
@@ -239,26 +269,6 @@ open class FrequencyAmount<T : Unit<Time>>(
     operator fun <C : Unit<Currency>> times(that: CurrencyAmount<C>) =
         RentAmount(amount = amount * that.amount,
                    unit = that.currency to time)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divFrequency")
-    operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
-        Numeric(amount = amount / that.amount
-                         * convert(that.time to time))
-
-    operator fun div(that: FrequencyAmount<T>) =
-        Numeric(amount = amount / that.amount)
-
-    @JvmName("timesTime")
-    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
-        Numeric(amount = amount * that.amount
-                         * convert(that.time to time))
-
-    operator fun times(that: TimeAmount<T>) =
-        Numeric(amount = amount * that.amount)
 
     // endregion
 

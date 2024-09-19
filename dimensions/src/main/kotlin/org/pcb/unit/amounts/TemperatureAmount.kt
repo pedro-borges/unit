@@ -12,9 +12,9 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class TemperatureAmount<T : Unit<Temperature>>(
+open class TemperatureAmount<K : Unit<Temperature>>(
         amount: Number,
-        unit: T)
+        unit: K)
     : Amount<Temperature>(amount = amount.toBigDecimal(),
                           unit = CompositeUnit(
                               domain = Temperature::class,
@@ -33,32 +33,35 @@ open class TemperatureAmount<T : Unit<Temperature>>(
                           unit = temperature)
 
     @JvmName("plusTemperature")
-    operator fun <T : Unit<Temperature>> plus(that: TemperatureAmount<T>) =
-        TemperatureAmount(amount = amount + that.amount * convert(that.temperature to temperature),
+    operator fun <K : Unit<Temperature>> plus(that: TemperatureAmount<K>) =
+        TemperatureAmount(amount = amount + that.amount
+                                   * convert(that.temperature to temperature),
                           unit = temperature)
 
-    operator fun plus(that: TemperatureAmount<T>) =
+    operator fun plus(that: TemperatureAmount<K>) =
         TemperatureAmount(amount = amount + that.amount,
                           unit = temperature)
 
     @JvmName("minusTemperature")
-    operator fun <T : Unit<Temperature>> minus(that: TemperatureAmount<T>) =
-        TemperatureAmount(amount = amount - that.amount * convert(that.temperature to temperature),
+    operator fun <K : Unit<Temperature>> minus(that: TemperatureAmount<K>) =
+        TemperatureAmount(amount = amount - that.amount
+                                   * convert(that.temperature to temperature),
                           unit = temperature)
 
-    operator fun minus(that: TemperatureAmount<T>) =
+    operator fun minus(that: TemperatureAmount<K>) =
         TemperatureAmount(amount = amount - that.amount,
                           unit = temperature)
 
     // endregion
 
-    // region -> Numeric
+    // region -> Scalar
 
     @JvmName("divTemperature")
-    operator fun <T : Unit<Temperature>> div(that: TemperatureAmount<T>) =
-        Numeric(amount = amount / that.amount / convert(that.temperature to temperature))
+    operator fun <K : Unit<Temperature>> div(that: TemperatureAmount<K>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.temperature to temperature))
 
-    operator fun div(that: TemperatureAmount<T>) =
+    operator fun div(that: TemperatureAmount<K>) =
         Numeric(amount = amount / that.amount)
 
     // endregion

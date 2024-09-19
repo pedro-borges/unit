@@ -37,7 +37,8 @@ open class DistanceAmount<D : Unit<Distance>>(
 
     @JvmName("plusDistance")
     operator fun <D : Unit<Distance>> plus(that: DistanceAmount<D>) =
-        DistanceAmount(amount = amount + that.amount * convert(that.distance to distance),
+        DistanceAmount(amount = amount + that.amount
+                                * convert(that.distance to distance),
                        unit = distance)
 
     operator fun plus(that: DistanceAmount<D>) =
@@ -46,12 +47,25 @@ open class DistanceAmount<D : Unit<Distance>>(
 
     @JvmName("minusDistance")
     operator fun <D : Unit<Distance>> minus(that: DistanceAmount<D>) =
-        DistanceAmount(amount = amount - that.amount * convert(that.distance to distance),
+        DistanceAmount(amount = amount - that.amount
+                                * convert(that.distance to distance),
                        unit = distance)
 
     operator fun minus(that: DistanceAmount<D>) =
         DistanceAmount(amount = amount - that.amount,
                        unit = distance)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divDistance")
+    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.distance to distance))
+
+    operator fun div(that: DistanceAmount<D>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -88,18 +102,6 @@ open class DistanceAmount<D : Unit<Distance>>(
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: MassFlowRateAmount<M, T>) =
         MomentumAmount(amount = amount * that.amount,
                        unit = U2(distance, that.mass) to that.time)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divDistance")
-    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance))
-
-    operator fun div(that: DistanceAmount<D>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 

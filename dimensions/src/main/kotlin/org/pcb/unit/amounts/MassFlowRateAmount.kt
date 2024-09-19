@@ -75,6 +75,19 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Scalar
+
+    @JvmName("divMassFlowRate")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFlowRateAmount<M, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.mass to mass)
+                         * convert(that.time to time))
+
+    operator fun div(that: MassFlowRateAmount<M, T>) =
+        Numeric(amount = amount / that.amount)
+
+    // endregion
+
     // region -> ElectricCharge
 
     @JvmName("divMagneticFluxDensity")
@@ -188,19 +201,6 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
     operator fun <D : Unit<Distance>> div(that: ForceAmount<D, M, T>) =
         PaceAmount(amount = amount / that.amount,
                    unit = time to that.distance)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divMassFlowRate")
-    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFlowRateAmount<M, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.mass to mass)
-                         * convert(that.time to time))
-
-    operator fun div(that: MassFlowRateAmount<M, T>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 }

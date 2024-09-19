@@ -73,6 +73,28 @@ open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Scalar
+
+    @JvmName("timesPace")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<D, T>) =
+        Numeric(amount = amount * that.amount
+                         * convert(that.time to time)
+                         / convert(that.distance to distance))
+
+    operator fun times(that: PaceAmount<D, T>) =
+        Numeric(amount = amount * that.amount)
+
+    @JvmName("divSpeed")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.distance to distance)
+                         * convert(that.time to time))
+
+    operator fun div(that: SpeedAmount<D, T>) =
+        Numeric(amount = amount / that.amount)
+
+    // endregion
+
     // region -> Acceleration
 
     @JvmName("timesFrequency")
@@ -185,28 +207,6 @@ open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
     operator fun <M : Unit<Mass>> times(that: ForceAmount<D, M, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, that.mass) to time)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("timesPace")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<D, T>) =
-        Numeric(amount = amount * that.amount
-                         * convert(that.time to time)
-                         / convert(that.distance to distance))
-
-    operator fun times(that: PaceAmount<D, T>) =
-        Numeric(amount = amount * that.amount)
-
-    @JvmName("divSpeed")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance)
-                         * convert(that.time to time))
-
-    operator fun div(that: SpeedAmount<D, T>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 

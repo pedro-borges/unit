@@ -37,7 +37,8 @@ open class LuminousIntensityAmount<LI : Unit<LuminousIntensity>>(
 
     @JvmName("plusLuminousIntensity")
     operator fun <LI : Unit<LuminousIntensity>> plus(that: LuminousIntensityAmount<LI>) =
-        LuminousIntensityAmount(amount = amount + that.amount * convert(that.luminousIntensity to luminousIntensity),
+        LuminousIntensityAmount(amount = amount + that.amount
+                                         * convert(that.luminousIntensity to luminousIntensity),
                                 unit = luminousIntensity)
 
     operator fun plus(that: LuminousIntensityAmount<LI>) =
@@ -46,12 +47,25 @@ open class LuminousIntensityAmount<LI : Unit<LuminousIntensity>>(
 
     @JvmName("minusLuminousIntensity")
     operator fun <LI : Unit<LuminousIntensity>> minus(that: LuminousIntensityAmount<LI>) =
-        LuminousIntensityAmount(amount = amount - that.amount * convert(that.luminousIntensity to luminousIntensity),
+        LuminousIntensityAmount(amount = amount - that.amount
+                                         * convert(that.luminousIntensity to luminousIntensity),
                                 unit = luminousIntensity)
 
     operator fun minus(that: LuminousIntensityAmount<LI>) =
         LuminousIntensityAmount(amount = amount - that.amount,
                                 unit = luminousIntensity)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divLuminousIntensity")
+    operator fun <LI : Unit<LuminousIntensity>> div(that: LuminousIntensityAmount<LI>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.luminousIntensity to luminousIntensity))
+
+    operator fun div(that: LuminousIntensityAmount<LI>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -82,18 +96,6 @@ open class LuminousIntensityAmount<LI : Unit<LuminousIntensity>>(
     operator fun <A : Unit<Angle>> times(that: SolidAngleAmount<A>) =
         LuminousFluxAmount(amount = amount * that.amount,
                            unit = U2(that.angle, luminousIntensity))
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divLuminousIntensity")
-    operator fun <LI : Unit<LuminousIntensity>> div(that: LuminousIntensityAmount<LI>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.luminousIntensity to luminousIntensity))
-
-    operator fun div(that: LuminousIntensityAmount<LI>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 }

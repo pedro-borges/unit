@@ -39,8 +39,9 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     @JvmName("plusDebt")
     operator fun <C : Unit<Currency>, T : Unit<Time>> plus(that: DebtAmount<C, T>) =
-        DebtAmount(amount = amount + that.amount * convert(that.currency to currency,
-                                                           that.time to time),
+        DebtAmount(amount = amount + that.amount
+                            * convert(that.currency to currency,
+                                      that.time to time),
                    unit = U2(currency, time))
 
     operator fun plus(that: DebtAmount<C, T>) =
@@ -49,13 +50,27 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     @JvmName("minusDebt")
     operator fun <C : Unit<Currency>, T : Unit<Time>> minus(that: DebtAmount<C, T>) =
-        DebtAmount(amount = amount - that.amount * convert(that.currency to currency,
-                                                           that.time to time),
+        DebtAmount(amount = amount - that.amount
+                            * convert(that.currency to currency,
+                                      that.time to time),
                    unit = U2(currency, time))
 
     operator fun minus(that: DebtAmount<C, T>) =
         DebtAmount(amount = amount - that.amount,
                    unit = U2(currency, time))
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divDebt")
+    operator fun <C : Unit<Currency>, T : Unit<Time>> div(that: DebtAmount<C, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.currency to currency,
+                                   that.time to time))
+
+    operator fun div(that: DebtAmount<C, T>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -80,19 +95,6 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
     operator fun div(that: TimeAmount<T>) =
         CurrencyAmount(amount = amount / that.amount,
                        unit = currency)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divDebt")
-    operator fun <C : Unit<Currency>, T : Unit<Time>> div(that: DebtAmount<C, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.currency to currency,
-                                   that.time to time))
-
-    operator fun div(that: DebtAmount<C, T>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 

@@ -49,8 +49,9 @@ open class AreaAmount<D : Unit<Distance>>(
 
     @JvmName("plusArea")
     operator fun <D : Unit<Distance>> plus(that: AreaAmount<D>) =
-        AreaAmount(amount = amount + that.amount * convert(that.distance to distance,
-                                                           that.distance to distance),
+        AreaAmount(amount = amount + that.amount
+                            * convert(that.distance to distance,
+                                      that.distance to distance),
                    unit = distance)
 
     operator fun plus(that: AreaAmount<D>) =
@@ -59,13 +60,27 @@ open class AreaAmount<D : Unit<Distance>>(
 
     @JvmName("minusArea")
     operator fun <D : Unit<Distance>> minus(that: AreaAmount<D>) =
-        AreaAmount(amount = amount - that.amount * convert(that.distance to distance,
-                                                           that.distance to distance),
+        AreaAmount(amount = amount - that.amount
+                            * convert(that.distance to distance,
+                                      that.distance to distance),
                    unit = distance)
 
     operator fun minus(that: AreaAmount<D>) =
         AreaAmount(amount = amount - that.amount,
                    unit = distance)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divArea")
+    operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.distance to distance,
+                                   that.distance to distance))
+
+    operator fun div(that: AreaAmount<D>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -132,19 +147,6 @@ open class AreaAmount<D : Unit<Distance>>(
     operator fun <EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: MagneticFluxDensityAmount<EC, M, T>) =
         MagneticFluxAmount(amount = amount * that.amount,
                            unit = U2(distance, that.mass) to U2(that.electricCurrent, that.time))
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divArea")
-    operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance,
-                                   that.distance to distance))
-
-    operator fun div(that: AreaAmount<D>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 

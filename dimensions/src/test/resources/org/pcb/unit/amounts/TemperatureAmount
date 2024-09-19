@@ -12,9 +12,9 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class TemperatureAmount<T : Unit<Temperature>>(
+open class TemperatureAmount<K : Unit<Temperature>>(
         amount: Number,
-        unit: T)
+        unit: K)
     : Amount<Temperature>(amount = amount.toBigDecimal(),
                           unit = CompositeUnit(
                               domain = Temperature::class,
@@ -22,44 +22,5 @@ open class TemperatureAmount<T : Unit<Temperature>>(
 {
     val temperature = unit
 
-    // region -> Temperature
-
-    override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        TemperatureAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
-                          unit = temperature)
-
-    override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        TemperatureAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
-                          unit = temperature)
-
-    @JvmName("plusTemperature")
-    operator fun <T : Unit<Temperature>> plus(that: TemperatureAmount<T>) =
-        TemperatureAmount(amount = amount + that.amount * convert(that.temperature to temperature),
-                          unit = temperature)
-
-    operator fun plus(that: TemperatureAmount<T>) =
-        TemperatureAmount(amount = amount + that.amount,
-                          unit = temperature)
-
-    @JvmName("minusTemperature")
-    operator fun <T : Unit<Temperature>> minus(that: TemperatureAmount<T>) =
-        TemperatureAmount(amount = amount - that.amount * convert(that.temperature to temperature),
-                          unit = temperature)
-
-    operator fun minus(that: TemperatureAmount<T>) =
-        TemperatureAmount(amount = amount - that.amount,
-                          unit = temperature)
-
-    // endregion
-
-    // region -> Numeric
-
-    @JvmName("divTemperature")
-    operator fun <T : Unit<Temperature>> div(that: TemperatureAmount<T>) =
-        Numeric(amount = amount / that.amount / convert(that.temperature to temperature))
-
-    operator fun div(that: TemperatureAmount<T>) =
-        Numeric(amount = amount / that.amount)
-
-    // endregion
+$operators
 }

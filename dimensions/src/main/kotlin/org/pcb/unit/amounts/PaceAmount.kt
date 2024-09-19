@@ -41,7 +41,7 @@ open class PaceAmount<D : Unit<Distance>, T : Unit<Time>>(
                    unit = time to distance)
 
     @JvmName("plusPace")
-    operator fun <T : Unit<Time>, D : Unit<Distance>> plus(that: PaceAmount<D, T>) =
+    operator fun <D : Unit<Distance>, T : Unit<Time>> plus(that: PaceAmount<D, T>) =
         PaceAmount(amount = amount + that.amount
                             * convert(that.time to time)
                             / convert(that.distance to distance),
@@ -52,7 +52,7 @@ open class PaceAmount<D : Unit<Distance>, T : Unit<Time>>(
                    unit = time to distance)
 
     @JvmName("minusPace")
-    operator fun <T : Unit<Time>, D : Unit<Distance>> minus(that: PaceAmount<D, T>) =
+    operator fun <D : Unit<Distance>, T : Unit<Time>> minus(that: PaceAmount<D, T>) =
         PaceAmount(amount = amount - that.amount
                             * convert(that.time to time)
                             / convert(that.distance to distance),
@@ -61,6 +61,28 @@ open class PaceAmount<D : Unit<Distance>, T : Unit<Time>>(
     operator fun minus(that: PaceAmount<D, T>) =
         PaceAmount(amount = amount - that.amount,
                    unit = time to distance)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divPace")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<D, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.time to time)
+                         * convert(that.distance to distance))
+
+    operator fun div(that: PaceAmount<D, T>) =
+        Numeric(amount = amount / that.amount)
+
+    @JvmName("timesSpeed")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
+        Numeric(amount = amount * that.amount
+                         * convert(that.distance to distance)
+                         / convert(that.time to time))
+
+    operator fun times(that: SpeedAmount<D, T>) =
+        Numeric(amount = amount * that.amount)
 
     // endregion
 
@@ -143,28 +165,6 @@ open class PaceAmount<D : Unit<Distance>, T : Unit<Time>>(
     operator fun <M : Unit<Mass>> times(that: EnergyAmount<D, M, T>) =
         MomentumAmount(amount = amount * that.amount,
                        unit = U2(distance, that.mass) to time)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divPace")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<D, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.time to time)
-                         * convert(that.distance to distance))
-
-    operator fun div(that: PaceAmount<D, T>) =
-        Numeric(amount = amount / that.amount)
-
-    @JvmName("timesSpeed")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
-        Numeric(amount = amount * that.amount
-                         * convert(that.distance to distance)
-                         / convert(that.time to time))
-
-    operator fun times(that: SpeedAmount<D, T>) =
-        Numeric(amount = amount * that.amount)
 
     // endregion
 

@@ -46,9 +46,10 @@ open class VolumeAmount<D : Unit<Distance>>(
 
     @JvmName("plusVolume")
     operator fun <D : Unit<Distance>> plus(that: VolumeAmount<D>) =
-        VolumeAmount(amount = amount + that.amount * convert(that.distance to distance,
-                                                             that.distance to distance,
-                                                             that.distance to distance),
+        VolumeAmount(amount = amount + that.amount
+                              * convert(that.distance to distance,
+                                        that.distance to distance,
+                                        that.distance to distance),
                      unit = distance)
 
     operator fun plus(that: VolumeAmount<D>) =
@@ -57,14 +58,29 @@ open class VolumeAmount<D : Unit<Distance>>(
 
     @JvmName("minusVolume")
     operator fun <D : Unit<Distance>> minus(that: VolumeAmount<D>) =
-        VolumeAmount(amount = amount - that.amount * convert(that.distance to distance,
-                                                             that.distance to distance,
-                                                             that.distance to distance),
+        VolumeAmount(amount = amount - that.amount
+                              * convert(that.distance to distance,
+                                        that.distance to distance,
+                                        that.distance to distance),
                      unit = distance)
 
     operator fun minus(that: VolumeAmount<D>) =
         VolumeAmount(amount = amount - that.amount,
                      unit = distance)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divVolume")
+    operator fun <D : Unit<Distance>> div(that: VolumeAmount<D>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.distance to distance,
+                                   that.distance to distance,
+                                   that.distance to distance))
+
+    operator fun div(that: VolumeAmount<D>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -108,20 +124,6 @@ open class VolumeAmount<D : Unit<Distance>>(
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<D, M, T>) =
         EnergyAmount(amount = amount * that.amount,
                      unit = U2(distance, that.mass) to that.time)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divVolume")
-    operator fun <D : Unit<Distance>> div(that: VolumeAmount<D>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance,
-                                   that.distance to distance,
-                                   that.distance to distance))
-
-    operator fun div(that: VolumeAmount<D>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 }

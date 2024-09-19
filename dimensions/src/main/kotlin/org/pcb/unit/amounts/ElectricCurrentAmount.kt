@@ -38,7 +38,8 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
 
     @JvmName("plusElectricCurrent")
     operator fun <EC : Unit<ElectricCurrent>> plus(that: ElectricCurrentAmount<EC>) =
-        ElectricCurrentAmount(amount = amount + that.amount * convert(that.electricCurrent to electricCurrent),
+        ElectricCurrentAmount(amount = amount + that.amount
+                                       * convert(that.electricCurrent to electricCurrent),
                               unit = electricCurrent)
 
     operator fun plus(that: ElectricCurrentAmount<EC>) =
@@ -47,12 +48,25 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
 
     @JvmName("minusElectricCurrent")
     operator fun <EC : Unit<ElectricCurrent>> minus(that: ElectricCurrentAmount<EC>) =
-        ElectricCurrentAmount(amount = amount - that.amount * convert(that.electricCurrent to electricCurrent),
+        ElectricCurrentAmount(amount = amount - that.amount
+                                       * convert(that.electricCurrent to electricCurrent),
                               unit = electricCurrent)
 
     operator fun minus(that: ElectricCurrentAmount<EC>) =
         ElectricCurrentAmount(amount = amount - that.amount,
                               unit = electricCurrent)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divElectricCurrent")
+    operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.electricCurrent to electricCurrent))
+
+    operator fun div(that: ElectricCurrentAmount<EC>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -162,18 +176,6 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
     operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricTensionAmount<D, EC, M, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(that.distance, that.mass) to that.time)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divElectricCurrent")
-    operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.electricCurrent to electricCurrent))
-
-    operator fun div(that: ElectricCurrentAmount<EC>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 }

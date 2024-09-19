@@ -54,10 +54,10 @@ open class ForceAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                     unit = U2(distance, mass) to time)
 
     @JvmName("plusForce")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> plus(that: ForceAmount<D, M, T>) =
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> plus(that: ForceAmount<D, M, T>) =
         ForceAmount(amount = amount + that.amount
-                             * convert(that.mass to mass,
-                                       that.distance to distance)
+                             * convert(that.distance to distance,
+                                       that.mass to mass)
                              / convert(that.time to time,
                                        that.time to time),
                     unit = U2(distance, mass) to time)
@@ -67,10 +67,10 @@ open class ForceAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                     unit = U2(distance, mass) to time)
 
     @JvmName("minusForce")
-    operator fun <M : Unit<Mass>, D : Unit<Distance>, T : Unit<Time>> minus(that: ForceAmount<D, M, T>) =
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> minus(that: ForceAmount<D, M, T>) =
         ForceAmount(amount = amount - that.amount
-                             * convert(that.mass to mass,
-                                       that.distance to distance)
+                             * convert(that.distance to distance,
+                                       that.mass to mass)
                              / convert(that.time to time,
                                        that.time to time),
                     unit = U2(distance, mass) to time)
@@ -78,6 +78,21 @@ open class ForceAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun minus(that: ForceAmount<D, M, T>) =
         ForceAmount(amount = amount - that.amount,
                     unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divForce")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ForceAmount<D, M, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.distance to distance,
+                                   that.mass to mass)
+                         * convert(that.time to time,
+                                   that.time to time))
+
+    operator fun div(that: ForceAmount<D, M, T>) =
+        Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -265,21 +280,6 @@ open class ForceAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun times(that: SpeedAmount<D, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, mass) to time)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divForce")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ForceAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance,
-                                   that.mass to mass)
-                         * convert(that.time to time,
-                                   that.time to time))
-
-    operator fun div(that: ForceAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 

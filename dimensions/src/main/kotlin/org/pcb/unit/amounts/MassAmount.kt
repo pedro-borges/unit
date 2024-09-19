@@ -37,7 +37,8 @@ open class MassAmount<M : Unit<Mass>>(
 
     @JvmName("plusMass")
     operator fun <M : Unit<Mass>> plus(that: MassAmount<M>) =
-        MassAmount(amount = amount + that.amount * convert(that.mass to mass),
+		MassAmount(amount = amount + that.amount
+							* convert(that.mass to mass),
                    unit = mass)
 
     operator fun plus(that: MassAmount<M>) =
@@ -46,12 +47,25 @@ open class MassAmount<M : Unit<Mass>>(
 
     @JvmName("minusMass")
     operator fun <M : Unit<Mass>> minus(that: MassAmount<M>) =
-        MassAmount(amount = amount - that.amount * convert(that.mass to mass),
+		MassAmount(amount = amount - that.amount
+							* convert(that.mass to mass),
                    unit = mass)
 
     operator fun minus(that: MassAmount<M>) =
         MassAmount(amount = amount - that.amount,
                    unit = mass)
+
+	// endregion
+
+	// region -> Scalar
+
+	@JvmName("divMass")
+	operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
+		Numeric(amount = amount / that.amount
+						 / convert(that.mass to mass))
+
+	operator fun div(that: MassAmount<M>) =
+		Numeric(amount = amount / that.amount)
 
     // endregion
 
@@ -98,18 +112,6 @@ open class MassAmount<M : Unit<Mass>>(
     operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: MomentumAmount<D, M, T>) =
         PaceAmount(amount = amount / that.amount,
                    unit = that.time to that.distance)
-
-    // endregion
-
-    // region -> Scalar
-
-    @JvmName("divMass")
-    operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.mass to mass))
-
-    operator fun div(that: MassAmount<M>) =
-        Numeric(amount = amount / that.amount)
 
     // endregion
 
