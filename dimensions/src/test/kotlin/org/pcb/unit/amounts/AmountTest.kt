@@ -46,12 +46,12 @@ class AmountTest
         val major = dimensionComposite.positives()
         val minor = dimensionComposite.negatives()
 
-        code += "\toverride operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =\n"
-        code += "\t\t${amount.simpleName}(amount = amount * that.amount * convert(that.scalar to NUMERIC),"
-        code += "\n\t\t\tunit = ${dimensionComposite.buildUnit(dimensionComposite)})\n\n"
-
         code += "\toverride operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =\n"
         code += "\t\t${amount.simpleName}(amount = amount / that.amount / convert(that.scalar to NUMERIC),"
+        code += "\n\t\t\tunit = ${dimensionComposite.buildUnit(dimensionComposite)})\n\n"
+
+        code += "\toverride operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =\n"
+        code += "\t\t${amount.simpleName}(amount = amount * that.amount * convert(that.scalar to NUMERIC),"
         code += "\n\t\t\tunit = ${dimensionComposite.buildUnit(dimensionComposite)})\n\n"
 
         code += "\t@JvmName(\"plus${dimension.simpleName}\")\n"
@@ -149,9 +149,7 @@ class AmountTest
                     }
             }
 
-        val stub = this.javaClass.classLoader.getResource("org/pcb/unit/amounts/" + amounts[dimension]!!.simpleName + ".kt")
-
-        println(stub)
+        val stub = this.javaClass.classLoader.getResource("org/pcb/unit/amounts/" + amounts[dimension]!!.simpleName)!!
 
         val contents = stub.readText()
             .replace(oldValue = "\$operators",
@@ -165,9 +163,9 @@ class AmountTest
                          }
                          .joinToString())
 
-        val source = File(stub.path.replace("target/test-classes/", "src/main/kotlin/"))
+        val source = File(stub.path.replace("target/test-classes/", "src/main/kotlin/") + ".kt")
 
-//        source.writeText(contents)
+        source.writeText(contents)
     }
 
     private fun Composite.buildGenericDeclaration(): String
