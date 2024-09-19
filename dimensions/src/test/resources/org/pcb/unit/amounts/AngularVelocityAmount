@@ -7,6 +7,7 @@ import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
+import org.pcb.unit.dimensions.AngularVelocity
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
@@ -18,9 +19,9 @@ import org.pcb.unit.toBigDecimal
 open class AngularVelocityAmount<A : Unit<Angle>, T : Unit<Time>>(
         amount: Number,
         unit: Pair<A, T>)
-    : Amount<Angle>(amount = amount.toBigDecimal(),
+    : Amount<AngularVelocity>(amount = amount.toBigDecimal(),
                     unit = CompositeUnit(
-                        domain = Angle::class,
+                        domain = AngularVelocity::class,
                         units = mapOf(unit.major to 1,
                                       unit.minor to -1)))
 {

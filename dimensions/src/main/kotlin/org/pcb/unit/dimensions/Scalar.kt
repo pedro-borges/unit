@@ -13,6 +13,8 @@ object Scalar : Dimension
 
     operator fun times(that: Angle) = Angle
 
+    operator fun times(that: AngularAcceleration) = AngularAcceleration
+
     operator fun times(that: AngularVelocity) = AngularVelocity
 
     operator fun times(that: Area) = Area

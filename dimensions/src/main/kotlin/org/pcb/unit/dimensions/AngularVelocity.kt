@@ -14,5 +14,10 @@ object AngularVelocity : Dimension
     operator fun div(that: Frequency) = Angle
     operator fun times(that: Time) = Angle
 
+    operator fun div(that: Time) = AngularAcceleration
+    operator fun times(that: Frequency) = AngularAcceleration
+
     operator fun div(that: Angle) = Frequency
+
+    operator fun div(that: AngularAcceleration) = Time
 }

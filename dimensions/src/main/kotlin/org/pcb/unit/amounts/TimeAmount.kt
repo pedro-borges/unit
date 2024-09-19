@@ -96,6 +96,21 @@ open class TimeAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> AngularVelocity
+
+    @JvmName("timesAngularAcceleration")
+    operator fun <A : Unit<Angle>, T : Unit<Time>> times(that: AngularAccelerationAmount<A, T>) =
+        AngularVelocityAmount(amount = amount * that.amount
+                                       / convert(that.time to time,
+                                                 that.time to time),
+                              unit = that.angle to time)
+
+    operator fun <A : Unit<Angle>> times(that: AngularAccelerationAmount<A, T>) =
+        AngularVelocityAmount(amount = amount * that.amount,
+                              unit = that.angle to time)
+
+    // endregion
+
     // region -> Capacitance
 
     @JvmName("timesElectricConductance")

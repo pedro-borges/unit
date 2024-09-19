@@ -14,6 +14,8 @@ object Time : Dimension
 
     operator fun times(that: AngularVelocity) = Angle
 
+    operator fun times(that: AngularAcceleration) = AngularVelocity
+
     operator fun div(that: ElectricResistance) = Capacitance
     operator fun times(that: ElectricConductance) = Capacitance
 

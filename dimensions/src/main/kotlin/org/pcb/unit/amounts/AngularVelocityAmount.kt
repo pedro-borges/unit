@@ -7,6 +7,7 @@ import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
+import org.pcb.unit.dimensions.AngularVelocity
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
@@ -18,11 +19,11 @@ import org.pcb.unit.toBigDecimal
 open class AngularVelocityAmount<A : Unit<Angle>, T : Unit<Time>>(
         amount: Number,
         unit: Pair<A, T>)
-    : Amount<Angle>(amount = amount.toBigDecimal(),
-                    unit = CompositeUnit(
-                        domain = Angle::class,
-                        units = mapOf(unit.major to 1,
-                                      unit.minor to -1)))
+    : Amount<AngularVelocity>(amount = amount.toBigDecimal(),
+                              unit = CompositeUnit(
+                                  domain = AngularVelocity::class,
+                                  units = mapOf(unit.major to 1,
+                                                unit.minor to -1)))
 {
     val angle = unit.major
     val time = unit.second
@@ -98,6 +99,30 @@ open class AngularVelocityAmount<A : Unit<Angle>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> AngularAcceleration
+
+    @JvmName("timesFrequency")
+    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
+        AngularAccelerationAmount(amount = amount * that.amount
+                                           / convert(that.time to time),
+                                  unit = angle to time)
+
+    operator fun times(that: FrequencyAmount<T>) =
+        AngularAccelerationAmount(amount = amount * that.amount,
+                                  unit = angle to time)
+
+    @JvmName("divTime")
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        AngularAccelerationAmount(amount = amount / that.amount
+                                           / convert(that.time to time),
+                                  unit = angle to time)
+
+    operator fun div(that: TimeAmount<T>) =
+        AngularAccelerationAmount(amount = amount / that.amount,
+                                  unit = angle to time)
+
+    // endregion
+
     // region -> Frequency
 
     @JvmName("divAngle")
@@ -109,6 +134,22 @@ open class AngularVelocityAmount<A : Unit<Angle>, T : Unit<Time>>(
     operator fun div(that: AngleAmount<A>) =
         FrequencyAmount(amount = amount / that.amount,
                         unit = NUMERIC to time)
+
+    // endregion
+
+    // region -> Time
+
+    @JvmName("divAngularAcceleration")
+    operator fun <A : Unit<Angle>, T : Unit<Time>> div(that: AngularAccelerationAmount<A, T>) =
+        TimeAmount(amount = amount / that.amount
+                            / convert(that.angle to angle)
+                            * convert(that.time to time,
+                                      that.time to time),
+                   unit = time)
+
+    operator fun div(that: AngularAccelerationAmount<A, T>) =
+        TimeAmount(amount = amount / that.amount,
+                   unit = time)
 
     // endregion
 }

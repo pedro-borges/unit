@@ -115,6 +115,20 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> AngularAcceleration
+
+    @JvmName("timesAngularVelocity")
+    operator fun <A : Unit<Angle>, T : Unit<Time>> times(that: AngularVelocityAmount<A, T>) =
+        AngularAccelerationAmount(amount = amount * that.amount
+                                           / convert(that.time to time),
+                                  unit = that.angle to time)
+
+    operator fun <A : Unit<Angle>> times(that: AngularVelocityAmount<A, T>) =
+        AngularAccelerationAmount(amount = amount * that.amount,
+                                  unit = that.angle to time)
+
+    // endregion
+
     // region -> AngularVelocity
 
     operator fun <A : Unit<Angle>> times(that: AngleAmount<A>) =

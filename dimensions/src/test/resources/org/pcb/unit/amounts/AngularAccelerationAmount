@@ -1,0 +1,31 @@
+package org.pcb.unit.amounts
+
+import org.pcb.unit.Amount
+import org.pcb.unit.CompositeUnit
+import org.pcb.unit.Unit
+import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
+import org.pcb.unit.convert
+import org.pcb.unit.dimensions.Angle
+import org.pcb.unit.dimensions.AngularAcceleration
+import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Time
+import org.pcb.unit.div
+import org.pcb.unit.major
+import org.pcb.unit.minor
+import org.pcb.unit.times
+import org.pcb.unit.toBigDecimal
+
+open class AngularAccelerationAmount<A : Unit<Angle>, T : Unit<Time>>(
+        amount: Number,
+        unit: Pair<A, T>)
+    : Amount<AngularAcceleration>(amount = amount.toBigDecimal(),
+                    unit = CompositeUnit(
+                        domain = AngularAcceleration::class,
+                        units = mapOf(unit.major to 1,
+                                      unit.minor to -2)))
+{
+    val angle = unit.major
+    val time = unit.second
+$operators
+}
