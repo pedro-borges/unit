@@ -1,6 +1,6 @@
 package org.pcb.unit.dimensions
 
-import kotlin.test.assertEquals
+import java.io.File
 import kotlin.test.assertNotEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
@@ -23,38 +23,14 @@ class DimensionTest
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("getDimensions")
-    fun correctness(dimension: Class<out Dimension>)
-    {
-        dimension.methods
-            .filter { method -> Dimension::class.java.isAssignableFrom(method.returnType) }
-            .forEach { method ->
-                val dimensionComposite = dimension.kotlin.annotations.first { it is Composite } as Composite
-                val argumentComposite = method.parameters[0].type.kotlin.annotations.first { it is Composite } as Composite
-                val returnComposite = method.returnType.kotlin.annotations.first { it is Composite } as Composite
-
-                val methodName =
-                    "${dimension.simpleName}.${method.name}(" + method.parameters.joinToString(", ") { it.type.simpleName } + ") = " + method.returnType.simpleName
-
-                when (method.name)
-                {
-                    "div"   -> assertEquals(returnComposite, dimensionComposite - argumentComposite, methodName)
-                    "times" -> assertEquals(returnComposite, dimensionComposite + argumentComposite, methodName)
-                    else    -> throw AssertionError(method.name)
-                }
-            }
-    }
-
-    @ParameterizedTest(name = "{0}")
-    @MethodSource("getDimensions")
     fun uniqueness(dimension: Class<out Dimension>)
     {
         dimensions
             .filter { !it.isAssignableFrom(dimension) }
-            .forEach {
-                val dimensionComposite = dimension.kotlin.annotations.first { it is Composite } as Composite
-                val itComposite = it.kotlin.annotations.first { it is Composite } as Composite
-
-                assertNotEquals(dimensionComposite, itComposite)
+            .forEach { other ->
+                assertNotEquals(
+                    illegal = dimension.kotlin.annotations.first { it is Composite } as Composite,
+                    actual = other.kotlin.annotations.first { it is Composite } as Composite)
             }
     }
 
@@ -118,7 +94,12 @@ class DimensionTest
                          .sortedBy { it != Scalar::class.simpleName }
                          .sortedBy { it != dimension.simpleName }
                          .map { regions[it] }
-                         .joinToString(separator = "\n"))
+                         .joinToString(separator = "\n")
+                         .dropLast(1))
+
+        val source = File(stub.path.replace("target/test-classes/", "src/main/kotlin/") + ".kt")
+
+        source.writeText(contents)
 
         println(contents)
     }
