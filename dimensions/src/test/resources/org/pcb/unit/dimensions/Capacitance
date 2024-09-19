@@ -1,0 +1,13 @@
+package org.pcb.unit.dimensions
+
+import org.pcb.unit.Composite
+
+@Suppress("UNUSED_PARAMETER")
+@Composite(time = 4,
+           electricCurrent = 2,
+           mass = -1,
+           distance = -2)
+object Capacitance : Dimension
+{
+$operators
+}

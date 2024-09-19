@@ -1,0 +1,13 @@
+package org.pcb.unit.dimensions
+
+import org.pcb.unit.Composite
+
+@Suppress("UNUSED_PARAMETER")
+@Composite(distance = 2,
+           mass = 1,
+           electricCurrent = -2,
+           time = -3)
+object ElectricResistance : Dimension
+{
+$operators
+}
