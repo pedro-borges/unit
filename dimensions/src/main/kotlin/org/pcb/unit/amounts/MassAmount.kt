@@ -25,35 +25,35 @@ open class MassAmount<M : Unit<Mass>>(
 {
     val mass = unit
 
-    // region -> Mass
+	// region -> Mass
 
-    override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        MassAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
-                   unit = mass)
+	override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
+		MassAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
+				   unit = mass)
 
-    override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        MassAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
-                   unit = mass)
+	override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
+		MassAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
+				   unit = mass)
 
-    @JvmName("plusMass")
-    operator fun <M : Unit<Mass>> plus(that: MassAmount<M>) =
+	@JvmName("plusMass")
+	operator fun <M : Unit<Mass>> plus(that: MassAmount<M>) =
 		MassAmount(amount = amount + that.amount
 							* convert(that.mass to mass),
-                   unit = mass)
+				   unit = mass)
 
-    operator fun plus(that: MassAmount<M>) =
-        MassAmount(amount = amount + that.amount,
-                   unit = mass)
+	operator fun plus(that: MassAmount<M>) =
+		MassAmount(amount = amount + that.amount,
+				   unit = mass)
 
-    @JvmName("minusMass")
-    operator fun <M : Unit<Mass>> minus(that: MassAmount<M>) =
+	@JvmName("minusMass")
+	operator fun <M : Unit<Mass>> minus(that: MassAmount<M>) =
 		MassAmount(amount = amount - that.amount
 							* convert(that.mass to mass),
-                   unit = mass)
+				   unit = mass)
 
-    operator fun minus(that: MassAmount<M>) =
-        MassAmount(amount = amount - that.amount,
-                   unit = mass)
+	operator fun minus(that: MassAmount<M>) =
+		MassAmount(amount = amount - that.amount,
+				   unit = mass)
 
 	// endregion
 
@@ -67,65 +67,79 @@ open class MassAmount<M : Unit<Mass>>(
 	operator fun div(that: MassAmount<M>) =
 		Numeric(amount = amount / that.amount)
 
-    // endregion
+	// endregion
 
-    // region -> Force
+	// region -> AngularMomentum
 
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: AccelerationAmount<D, T>) =
-        ForceAmount(amount = amount * that.amount,
-                    unit = U2(that.distance, mass) to that.time)
+	@JvmName("timesMomentum")
+	operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: MomentumAmount<D, M, T>) =
+		AngularMomentumAmount(amount = amount * that.amount
+									   * convert(that.mass to mass),
+							  unit = U2(mass, that.distance) to that.time)
 
-    // endregion
+	operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: MomentumAmount<D, M, T>) =
+		AngularMomentumAmount(amount = amount * that.amount,
+							  unit = U2(mass, that.distance) to that.time)
 
-    // region -> MassFlowRate
+	// endregion
 
-    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
-        MassFlowRateAmount(amount = amount * that.amount,
-                           unit = mass to that.time)
+	// region -> Force
 
-    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
-        MassFlowRateAmount(amount = amount / that.amount,
-                           unit = mass to that.time)
+	operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: AccelerationAmount<D, T>) =
+		ForceAmount(amount = amount * that.amount,
+					unit = U2(that.distance, mass) to that.time)
 
-    // endregion
+	// endregion
 
-    // region -> Momentum
+	// region -> MassFlowRate
 
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<D, T>) =
-        MomentumAmount(amount = amount / that.amount,
-                       unit = U2(that.distance, mass) to that.time)
+	operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
+		MassFlowRateAmount(amount = amount * that.amount,
+						   unit = mass to that.time)
 
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
-        MomentumAmount(amount = amount * that.amount,
-                       unit = U2(that.distance, mass) to that.time)
+	operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+		MassFlowRateAmount(amount = amount / that.amount,
+						   unit = mass to that.time)
 
-    // endregion
+	// endregion
 
-    // region -> Pace
+	// region -> Momentum
 
-    @JvmName("divMomentum")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MomentumAmount<D, M, T>) =
-        PaceAmount(amount = amount / that.amount
-                            / convert(that.mass to mass),
-                   unit = that.time to that.distance)
+	operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<D, T>) =
+		MomentumAmount(amount = amount / that.amount,
+					   unit = U2(that.distance, mass) to that.time)
 
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: MomentumAmount<D, M, T>) =
-        PaceAmount(amount = amount / that.amount,
-                   unit = that.time to that.distance)
+	operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
+		MomentumAmount(amount = amount * that.amount,
+					   unit = U2(that.distance, mass) to that.time)
 
-    // endregion
+	// endregion
 
-    // region -> Time
+	// region -> Pace
 
-    @JvmName("divMassFlowRate")
-    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFlowRateAmount<M, T>) =
-        TimeAmount(amount = amount / that.amount
-                            / convert(that.mass to mass),
-                   unit = that.time)
+	@JvmName("divMomentum")
+	operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MomentumAmount<D, M, T>) =
+		PaceAmount(amount = amount / that.amount
+							/ convert(that.mass to mass),
+				   unit = that.time to that.distance)
 
-    operator fun <T : Unit<Time>> div(that: MassFlowRateAmount<M, T>) =
-        TimeAmount(amount = amount / that.amount,
-                   unit = that.time)
+	operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: MomentumAmount<D, M, T>) =
+		PaceAmount(amount = amount / that.amount,
+				   unit = that.time to that.distance)
 
-    // endregion
+	// endregion
+
+	// region -> Time
+
+	@JvmName("divMassFlowRate")
+	operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFlowRateAmount<M, T>) =
+		TimeAmount(amount = amount / that.amount
+							/ convert(that.mass to mass),
+				   unit = that.time)
+
+	operator fun <T : Unit<Time>> div(that: MassFlowRateAmount<M, T>) =
+		TimeAmount(amount = amount / that.amount,
+				   unit = that.time)
+
+	// endregion
 }

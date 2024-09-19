@@ -82,6 +82,20 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> AngularMomentum
+
+    @JvmName("timesMass")
+    operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
+        AngularMomentumAmount(amount = amount * that.amount
+                                       * convert(that.mass to mass),
+                              unit = U2(mass, distance) to time)
+
+    operator fun times(that: MassAmount<M>) =
+        AngularMomentumAmount(amount = amount * that.amount,
+                              unit = U2(mass, distance) to time)
+
+    // endregion
+
     // region -> Distance
 
     @JvmName("divMassFlowRate")

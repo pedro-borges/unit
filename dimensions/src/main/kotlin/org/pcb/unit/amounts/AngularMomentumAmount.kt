@@ -1,0 +1,128 @@
+package org.pcb.unit.amounts
+
+import org.pcb.unit.Amount
+import org.pcb.unit.CompositeUnit
+import org.pcb.unit.U2
+import org.pcb.unit.Unit
+import org.pcb.unit.amounts.base.Gram.GRAM
+import org.pcb.unit.amounts.base.Meter.METER
+import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
+import org.pcb.unit.amounts.base.Second.SECOND
+import org.pcb.unit.convert
+import org.pcb.unit.dimensions.AngularMomentum
+import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.Mass
+import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Time
+import org.pcb.unit.div
+import org.pcb.unit.kilo
+import org.pcb.unit.major
+import org.pcb.unit.minor
+import org.pcb.unit.times
+import org.pcb.unit.toBigDecimal
+
+open class AngularMomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
+        amount: Number,
+        unit: Pair<U2<M, D>, T>)
+    : Amount<AngularMomentum>(amount = amount.toBigDecimal(),
+                              unit = CompositeUnit(
+                                  domain = AngularMomentum::class,
+                                  units = mapOf(unit.major.first to 2,
+                                                unit.major.second to 1,
+                                                unit.minor to -1)))
+{
+    val mass = unit.major.first
+    val distance = unit.major.second
+    val time = unit.minor
+
+    companion object
+    {
+        operator fun invoke(amount: Number, unit: Unit<AngularMomentum>) =
+            AngularMomentumAmount(amount = amount * unit.scale,
+                                  unit = U2(kilo(GRAM), METER) to SECOND)
+    }
+
+    // region -> AngularMomentum
+
+    override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
+        AngularMomentumAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
+                              unit = U2(mass, distance) to time)
+
+    override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
+        AngularMomentumAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
+                              unit = U2(mass, distance) to time)
+
+    @JvmName("plusAngularMomentum")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> plus(that: AngularMomentumAmount<D, M, T>) =
+        AngularMomentumAmount(amount = amount + that.amount
+                                       * convert(that.distance to distance,
+                                                 that.mass to mass,
+                                                 that.mass to mass)
+                                       / convert(that.time to time),
+                              unit = U2(mass, distance) to time)
+
+    operator fun plus(that: AngularMomentumAmount<D, M, T>) =
+        AngularMomentumAmount(amount = amount + that.amount,
+                              unit = U2(mass, distance) to time)
+
+    @JvmName("minusAngularMomentum")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> minus(that: AngularMomentumAmount<D, M, T>) =
+        AngularMomentumAmount(amount = amount - that.amount
+                                       * convert(that.distance to distance,
+                                                 that.mass to mass,
+                                                 that.mass to mass)
+                                       / convert(that.time to time),
+                              unit = U2(mass, distance) to time)
+
+    operator fun minus(that: AngularMomentumAmount<D, M, T>) =
+        AngularMomentumAmount(amount = amount - that.amount,
+                              unit = U2(mass, distance) to time)
+
+    // endregion
+
+    // region -> Scalar
+
+    @JvmName("divAngularMomentum")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: AngularMomentumAmount<D, M, T>) =
+        Numeric(amount = amount / that.amount
+                         / convert(that.distance to distance,
+                                   that.mass to mass,
+                                   that.mass to mass)
+                         * convert(that.time to time))
+
+    operator fun div(that: AngularMomentumAmount<D, M, T>) =
+        Numeric(amount = amount / that.amount)
+
+    // endregion
+
+    // region -> Mass
+
+    @JvmName("divMomentum")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MomentumAmount<D, M, T>) =
+        MassAmount(amount = amount / that.amount
+                            / convert(that.distance to distance,
+                                      that.mass to mass)
+                            * convert(that.time to time),
+                   unit = mass)
+
+    operator fun div(that: MomentumAmount<D, M, T>) =
+        MassAmount(amount = amount / that.amount,
+                   unit = mass)
+
+    // endregion
+
+    // region -> Momentum
+
+    @JvmName("divMass")
+    operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
+        MomentumAmount(amount = amount / that.amount
+                                / convert(that.mass to mass),
+                       unit = U2(distance, mass) to time)
+
+    operator fun div(that: MassAmount<M>) =
+        MomentumAmount(amount = amount / that.amount,
+                       unit = U2(distance, mass) to time)
+
+    // endregion
+}

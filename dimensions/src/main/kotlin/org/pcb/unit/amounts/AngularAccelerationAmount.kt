@@ -27,6 +27,7 @@ open class AngularAccelerationAmount<A : Unit<Angle>, T : Unit<Time>>(
 {
     val angle = unit.major
     val time = unit.second
+
     // region -> AngularAcceleration
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =

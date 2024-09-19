@@ -11,6 +11,8 @@ object Mass : Dimension
 
     operator fun div(that: Mass) = Scalar
 
+    operator fun times(that: Momentum) = AngularMomentum
+
     operator fun times(that: Acceleration) = Force
 
     operator fun div(that: Time) = MassFlowRate

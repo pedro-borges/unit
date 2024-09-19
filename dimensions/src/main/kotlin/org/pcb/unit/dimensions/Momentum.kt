@@ -13,6 +13,8 @@ object Momentum : Dimension
 
     operator fun div(that: Momentum) = Scalar
 
+    operator fun times(that: Mass) = AngularMomentum
+
     operator fun div(that: MassFlowRate) = Distance
 
     operator fun div(that: Pace) = Energy
