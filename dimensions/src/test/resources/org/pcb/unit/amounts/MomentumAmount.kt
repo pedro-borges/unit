@@ -1,0 +1,30 @@
+package org.pcb.unit.amounts
+
+import org.pcb.unit.Amount
+import org.pcb.unit.CompositeUnit
+import org.pcb.unit.U2
+import org.pcb.unit.Unit
+import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.Mass
+import org.pcb.unit.dimensions.Momentum
+import org.pcb.unit.dimensions.Time
+import org.pcb.unit.major
+import org.pcb.unit.minor
+import org.pcb.unit.toBigDecimal
+
+open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
+        amount: Number,
+        unit: Pair<U2<D, M>, T>)
+    : Amount<Momentum>(amount = amount.toBigDecimal(),
+                       unit = CompositeUnit(
+                           domain = Momentum::class,
+                           units = mapOf(unit.major.first to 1,
+                                         unit.major.second to 1,
+                                         unit.minor to -1)))
+{
+    val distance = unit.major.first
+    val mass = unit.major.second
+    val time = unit.minor
+
+    $operators
+}

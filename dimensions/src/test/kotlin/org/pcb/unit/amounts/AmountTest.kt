@@ -1,5 +1,6 @@
 package org.pcb.unit.amounts
 
+import java.io.File
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.pcb.unit.Composite
@@ -29,114 +30,147 @@ class AmountTest
 
         val dimensions = reflections.getSubTypesOf(Dimension::class.java)
 
-        val amounts = dimensions.associateWith {
+        val amounts = dimensions.associateWith { Class.forName("org.pcb.unit.amounts.${it.simpleName}Amount") }
+
+        val returnAmounts = dimensions.associateWith {
             if (!it.isAssignableFrom(Scalar::class.java)) Class.forName("org.pcb.unit.amounts.${it.simpleName}Amount")
             else Class.forName("org.pcb.unit.amounts.base.Numeric")
         }
 
         val dimensionComposite = dimension.kotlin.annotations.first { it is Composite } as Composite
+        val amount = returnAmounts[dimension]!!
+
+        val regions = HashMap<String, String>()
+        var code = regions[dimension.simpleName] ?: ""
+
+        val major = dimensionComposite.positives()
+        val minor = dimensionComposite.negatives()
+
+        code += "\toverride operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =\n"
+        code += "\t\t${amount.simpleName}(amount = amount * that.amount * convert(that.scalar to NUMERIC),"
+        code += "\n\t\t\tunit = ${dimensionComposite.buildUnit(dimensionComposite)})\n\n"
+
+        code += "\toverride operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =\n"
+        code += "\t\t${amount.simpleName}(amount = amount / that.amount / convert(that.scalar to NUMERIC),"
+        code += "\n\t\t\tunit = ${dimensionComposite.buildUnit(dimensionComposite)})\n\n"
+
+        code += "\t@JvmName(\"plus${dimension.simpleName}\")\n"
+        code += "\toperator fun ${dimensionComposite.buildGenericDeclaration()} plus(that: ${amount.simpleName}${dimensionComposite.buildGenericReceiver()}) =\n"
+        code += "\t\t${amount.simpleName}(amount = (amount + that.amount)"
+        if (major.count() > 0) code += "\n\t\t* convert(${major.buildConvert()})"
+        if (minor.count() > 0) code += "\n\t\t/ convert(${minor.buildConvert()})"
+        code += ",\n\t\t\tunit = ${dimensionComposite.buildUnit(dimensionComposite)})\n\n"
+
+        code += "\toperator fun plus(that: ${amount.simpleName}${dimensionComposite.buildGenericReceiver()}) =\n"
+        code += "\t\t${amount.simpleName}(amount = (amount + that.amount)"
+        code += ",\n\t\t\tunit = ${dimensionComposite.buildUnit(dimensionComposite)})\n\n"
+
+        code += "\t@JvmName(\"minus${dimension.simpleName}\")\n"
+        code += "\toperator fun ${dimensionComposite.buildGenericDeclaration()} minus(that: ${amount.simpleName}${dimensionComposite.buildGenericReceiver()}) =\n"
+        code += "\t\t${amount.simpleName}(amount = (amount - that.amount)"
+        if (major.count() > 0) code += "\n\t\t* convert(${major.buildConvert()})"
+        if (minor.count() > 0) code += "\n\t\t/ convert(${minor.buildConvert()})"
+        code += ",\n\t\t\tunit = ${dimensionComposite.buildUnit(dimensionComposite)})\n\n"
+
+        code += "\toperator fun  minus(that: ${amount.simpleName}${dimensionComposite.buildGenericReceiver()}) =\n"
+        code += "\t\t${amount.simpleName}(amount = (amount - that.amount)"
+        code += ",\n\t\t\tunit = ${dimensionComposite.buildUnit(dimensionComposite)})\n\n"
+
+        regions[dimension.simpleName] = code
 
         dimensions
             .sortedBy { it.simpleName }
-            .forEach { resultDimension ->
-                val resultDimensionComposite = resultDimension.kotlin.annotations.first { it is Composite } as Composite
-                val resultAmount = amounts[resultDimension]!!
+            .forEach { returnDimension ->
+                val returnDimensionComposite = returnDimension.kotlin.annotations.first { it is Composite } as Composite
+                val returnAmount = returnAmounts[returnDimension]!!
 
                 dimensions
+                    .filter { it != Scalar::class.java }
                     .sortedBy { it.simpleName }
-                    .forEach { operatorDimension ->
-                        val operatorDimensionComposite = operatorDimension.kotlin.annotations.first { it is Composite } as Composite
-                        val operatorAmount = amounts[operatorDimension]!!
+                    .forEach { parameterDimension ->
+                        val parameterDimensionComposite = parameterDimension.kotlin.annotations.first { it is Composite } as Composite
 
-                        if (dimensionComposite - operatorDimensionComposite == resultDimensionComposite ||
-                            dimensionComposite + operatorDimensionComposite == resultDimensionComposite)
-                        {
-                            println("\n\t// region -> ${resultDimension.simpleName}\n")
-                        }
+                        code = regions[returnDimension.simpleName] ?: ""
 
-                        if (dimensionComposite - operatorDimensionComposite == resultDimensionComposite)
+                        if (dimensionComposite - parameterDimensionComposite == returnDimensionComposite)
                         {
-                            val keep = operatorDimensionComposite.keep(dimensionComposite)
+                            val keep = parameterDimensionComposite.keep(dimensionComposite)
                             if (keep.count() > 0)
                             {
-                                println("@JvmName(\"div${operatorDimension.simpleName}\")")
-                                println("operator fun ${operatorDimensionComposite.buildGenericDeclaration()} div(that: ${operatorAmount.simpleName}${operatorDimensionComposite.buildGenericReceiver()}) =")
-                                print("\t${resultAmount.simpleName}(amount = amount / that.amount")
-                                if (keep.positives().count() > 0) print("\n\t\t/ convert(${keep.positives().buildConvert()})")
-                                if (keep.negatives().count() > 0) print("\n\t\t* convert(${keep.negatives().buildConvert()})")
-                                val unit = dimensionComposite.buildUnit(resultDimensionComposite)
-                                if (unit == null) println(")")
-                                else println(",\n\t\tunit = $unit)")
-                                println()
+                                code += "\t@JvmName(\"div${parameterDimension.simpleName}\")\n"
+                                code += "\toperator fun ${parameterDimensionComposite.buildGenericDeclaration()} div(that: ${amount.simpleName}${parameterDimensionComposite.buildGenericReceiver()}) =\n"
+                                code += "\t\t${returnAmount.simpleName}(amount = amount / that.amount"
+                                if (keep.positives().count() > 0) code += "\n\t\t/ convert(${keep.positives().buildConvert()})"
+                                if (keep.negatives().count() > 0) code += "\n\t\t* convert(${keep.negatives().buildConvert()})"
+                                val unit = dimensionComposite.buildUnit(returnDimensionComposite)
+                                code +=
+                                    if (unit == null) ")\n\n"
+                                    else ",\n\t\t\tunit = $unit)\n\n"
                             }
 
-                            val drop = operatorDimensionComposite.drop(dimensionComposite)
-                            print("operator fun ")
-                            if (drop.count() > 0) print(drop.buildGenericDeclaration())
-                            println(" div(that: ${operatorAmount.simpleName}${operatorDimensionComposite.buildGenericReceiver()}) =")
-                            print("\t${resultAmount.simpleName}(amount = amount / that.amount")
-                            val unit = dimensionComposite.buildUnit(resultDimensionComposite)
-                            if (unit == null) println(")")
-                            else println(",\n\t\tunit = $unit)")
-                            println()
-
-//                                    assertTrue("${operatorDimension.simpleName} / ${resultDimension.simpleName}) = ${operatorDimension.simpleName}") {
-//                                        operatorDimension.methods
-//                                            .filter { method -> Dimension::class.java.isAssignableFrom(method.returnType) }
-//                                            .any { method ->
-//                                                method.name == "div" &&
-//                                                method.parameters[0].type.isAssignableFrom(resultDimension) &&
-//                                                method.returnType.isAssignableFrom(operatorDimension)
-//                                            }
-//                                    }
+                            val drop = parameterDimensionComposite.drop(dimensionComposite)
+                            code += "\toperator fun "
+                            if (drop.count() > 0) code += drop.buildGenericDeclaration()
+                            code += " div(that: ${amount.simpleName}${parameterDimensionComposite.buildGenericReceiver()}) =\n"
+                            code += "\t\t${returnAmount.simpleName}(amount = amount / that.amount"
+                            val unit = dimensionComposite.buildUnit(returnDimensionComposite)
+                            code +=
+                                if (unit == null) ")\n\n"
+                                else ",\n\t\t\tunit = $unit)\n\n"
                         }
-                        if (dimensionComposite + operatorDimensionComposite == resultDimensionComposite)
+                        if (dimensionComposite + parameterDimensionComposite == returnDimensionComposite)
                         {
-                            val keep = operatorDimensionComposite.keep(dimensionComposite)
+                            val keep = parameterDimensionComposite.keep(dimensionComposite)
                             if (keep.count() > 0)
                             {
-                                println("@JvmName(\"times${operatorDimension.simpleName}\")")
-                                println("operator fun ${operatorDimensionComposite.buildGenericDeclaration()} times(that: ${operatorAmount.simpleName}${operatorDimensionComposite.buildGenericReceiver()}) =")
-                                print("\t${resultAmount.simpleName}(amount = amount * that.amount")
-                                if (keep.positives().count() > 0) print("\n\t\t* convert(${keep.positives().buildConvert()})")
-                                if (keep.negatives().count() > 0) print("\n\t\t/ convert(${keep.negatives().buildConvert()})")
-                                val unit = dimensionComposite.buildUnit(resultDimensionComposite)
-                                if (unit == null) println(")")
-                                else println(",\n\t\tunit = $unit)")
-                                println()
+                                code += "\t@JvmName(\"times${parameterDimension.simpleName}\")\n"
+                                code += "\toperator fun ${parameterDimensionComposite.buildGenericDeclaration()} times(that: ${amount.simpleName}${parameterDimensionComposite.buildGenericReceiver()}) =\n"
+                                code += "\t\t${returnAmount.simpleName}(amount = amount * that.amount"
+                                if (keep.positives().count() > 0) code += "\n\t\t* convert(${keep.positives().buildConvert()})"
+                                if (keep.negatives().count() > 0) code += "\n\t\t/ convert(${keep.negatives().buildConvert()})"
+                                val unit = dimensionComposite.buildUnit(returnDimensionComposite)
+                                code +=
+                                    if (unit == null) ")\n\n"
+                                    else ",\n\t\t\tunit = $unit)\n\n"
                             }
 
-                            val drop = operatorDimensionComposite.drop(dimensionComposite)
-                            print("operator fun ")
-                            if (drop.count() > 0) print(drop.buildGenericDeclaration())
-                            println(" times(that: ${operatorAmount.simpleName}${operatorDimensionComposite.buildGenericReceiver()}) =")
-                            print("\t${resultAmount.simpleName}(amount = amount * that.amount")
-                            val unit = dimensionComposite.buildUnit(resultDimensionComposite)
-                            if (unit == null) println(")")
-                            else println(",\n\t\tunit = $unit)")
-                            println()
-
-//                                    assertTrue("Missing ${operatorDimension.simpleName} * ${resultDimension.simpleName}) = ${operatorDimension.simpleName}") {
-//                                        operatorDimension.methods
-//                                            .filter { method -> Dimension::class.java.isAssignableFrom(method.returnType) }
-//                                            .any { method ->
-//                                                method.name == "times" &&
-//                                                method.parameters[0].type.isAssignableFrom(resultDimension) &&
-//                                                method.returnType.isAssignableFrom(operatorDimension)
-//                                            }
-//                                    }
+                            val drop = parameterDimensionComposite.drop(dimensionComposite)
+                            code += "\toperator fun "
+                            if (drop.count() > 0) code += drop.buildGenericDeclaration()
+                            code += " times(that: ${amount.simpleName}${parameterDimensionComposite.buildGenericReceiver()}) =\n"
+                            code += "\t\t${returnAmount.simpleName}(amount = amount * that.amount"
+                            val unit = dimensionComposite.buildUnit(returnDimensionComposite)
+                            code +=
+                                if (unit == null) (")\n\n")
+                                else ",\n\t\t\tunit = $unit)\n\n"
                         }
 
-                        if (dimensionComposite - operatorDimensionComposite == resultDimensionComposite ||
-                            dimensionComposite + operatorDimensionComposite == resultDimensionComposite)
-                        {
-                            println("\t// endregion")
-                        }
+                        if (code != "") regions[returnDimension.simpleName] = code
                     }
             }
+
+        val stub = this.javaClass.classLoader.getResource("org/pcb/unit/amounts/" + amounts[dimension]!!.simpleName + ".kt")
+
+        println(stub)
+
+        val contents = stub.readText()
+            .replace(oldValue = "\$operators",
+                     newValue = regions.keys
+                         .asSequence()
+                         .sorted()
+                         .sortedBy { it != Scalar::class.simpleName }
+                         .sortedBy { it != dimension.simpleName }
+                         .map {
+                             "\n\t// region -> ${it}\n\n" + regions[it] + "\t// endregion\n"
+                         }
+                         .joinToString())
+
+        val source = File(stub.path.replace("target/test-classes/", "src/main/kotlin/"))
+
+//        source.writeText(contents)
     }
 
-    fun Composite.buildGenericDeclaration(): String
+    private fun Composite.buildGenericDeclaration(): String
     {
         val result = ArrayList<String>()
 
@@ -152,7 +186,7 @@ class AmountTest
         return if (result.isEmpty()) "" else "<" + result.joinToString(", ") + ">"
     }
 
-    fun Composite.buildGenericReceiver(): String
+    private fun Composite.buildGenericReceiver(): String
     {
         val result = ArrayList<String>()
 
@@ -168,7 +202,7 @@ class AmountTest
         return if (result.isEmpty()) "" else "<" + result.joinToString(", ") + ">"
     }
 
-    fun Composite.keep(that: Composite) =
+    private fun Composite.keep(that: Composite) =
         Composite(angle = if (that.angle != 0) angle else 0,
                   currency = if (that.currency != 0) currency else 0,
                   distance = if (that.distance != 0) distance else 0,
@@ -178,7 +212,7 @@ class AmountTest
                   temperature = if (that.temperature != 0) temperature else 0,
                   time = if (that.time != 0) time else 0)
 
-    fun Composite.drop(that: Composite) =
+    private fun Composite.drop(that: Composite) =
         Composite(angle = if (that.angle != 0) 0 else angle,
                   currency = if (that.currency != 0) 0 else currency,
                   distance = if (that.distance != 0) 0 else distance,
@@ -188,9 +222,9 @@ class AmountTest
                   temperature = if (that.temperature != 0) 0 else temperature,
                   time = if (that.time != 0) 0 else time)
 
-    fun Composite.buildConvert(): String
+    private fun Composite.buildConvert(): String
     {
-        var result = ArrayList<String>()
+        val result = ArrayList<String>()
 
         for (a in 1..angle) result += "that.angle to angle"
         for (a in 1..currency) result += "that.currency to currency"
@@ -201,13 +235,11 @@ class AmountTest
         for (a in 1..temperature) result += "that.temperature to temperature"
         for (a in 1..time) result += "that.time to time"
 
-        return result.joinToString(",\n\t\t\t\t");
+        return result.joinToString(",\n\t\t\t\t")
     }
 
-    fun Composite.buildUnit(that: Composite): String?
+    private fun Composite.buildUnit(that: Composite): String?
     {
-        val positives = positives()
-        val negatives = negatives()
         val thatPositives = that.positives()
         val thatNegatives = that.negatives()
 
@@ -244,7 +276,7 @@ class AmountTest
         }
     }
 
-    fun Composite.positives() =
+    private fun Composite.positives() =
         Composite(angle = if (angle > 0) angle else 0,
                   currency = if (currency > 0) currency else 0,
                   distance = if (distance > 0) distance else 0,
@@ -254,7 +286,7 @@ class AmountTest
                   temperature = if (temperature > 0) temperature else 0,
                   time = if (time > 0) time else 0)
 
-    fun Composite.negatives() =
+    private fun Composite.negatives() =
         Composite(angle = if (angle < 0) -angle else 0,
                   currency = if (currency < 0) -currency else 0,
                   distance = if (distance < 0) -distance else 0,
@@ -264,7 +296,7 @@ class AmountTest
                   temperature = if (temperature < 0) -temperature else 0,
                   time = if (time < 0) -time else 0)
 
-    fun Composite.count() =
+    private fun Composite.count() =
         (if (angle != 0) 1 else 0) +
         (if (currency != 0) 1 else 0) +
         (if (distance != 0) 1 else 0) +

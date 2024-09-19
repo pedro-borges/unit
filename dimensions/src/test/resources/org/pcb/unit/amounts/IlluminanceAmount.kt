@@ -1,0 +1,41 @@
+package org.pcb.unit.amounts
+
+import org.pcb.unit.Amount
+import org.pcb.unit.CompositeUnit
+import org.pcb.unit.U2
+import org.pcb.unit.Unit
+import org.pcb.unit.amounts.base.Candela.CANDELA
+import org.pcb.unit.amounts.base.Meter.METER
+import org.pcb.unit.amounts.base.Radian.RADIAN
+import org.pcb.unit.dimensions.Angle
+import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.Illuminance
+import org.pcb.unit.dimensions.LuminousIntensity
+import org.pcb.unit.major
+import org.pcb.unit.minor
+import org.pcb.unit.times
+import org.pcb.unit.toBigDecimal
+
+open class IlluminanceAmount<A : Unit<Angle>, D : Unit<Distance>, LI : Unit<LuminousIntensity>>(
+        amount: Number,
+        unit: Pair<U2<A, LI>, D>)
+    : Amount<LuminousIntensity>(amount = amount.toBigDecimal(),
+                                unit = CompositeUnit(
+                                    domain = LuminousIntensity::class,
+                                    units = mapOf(unit.major.first to 2,
+                                                  unit.major.second to 1,
+                                                  unit.minor to -2)))
+{
+    val angle = unit.major.first
+    val luminousIntensity = unit.major.second
+    val distance = unit.minor
+
+    companion object
+    {
+        operator fun invoke(amount: Number, unit: Unit<Illuminance>) =
+            IlluminanceAmount(amount = amount * unit.scale,
+                              unit = U2(RADIAN, CANDELA) to METER)
+    }
+
+    $operators
+}

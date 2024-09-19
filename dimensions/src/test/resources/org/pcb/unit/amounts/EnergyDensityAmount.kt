@@ -1,0 +1,42 @@
+package org.pcb.unit.amounts
+
+import org.pcb.unit.Amount
+import org.pcb.unit.CompositeUnit
+import org.pcb.unit.U2
+import org.pcb.unit.Unit
+import org.pcb.unit.amounts.base.Gram.GRAM
+import org.pcb.unit.amounts.base.Meter.METER
+import org.pcb.unit.amounts.base.Second.SECOND
+import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.EnergyDensity
+import org.pcb.unit.dimensions.Mass
+import org.pcb.unit.dimensions.Time
+import org.pcb.unit.kilo
+import org.pcb.unit.major
+import org.pcb.unit.minor
+import org.pcb.unit.times
+import org.pcb.unit.toBigDecimal
+
+open class EnergyDensityAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
+        amount: Number,
+        unit: Pair<M, U2<D, T>>)
+    : Amount<EnergyDensity>(amount = amount.toBigDecimal(),
+                            unit = CompositeUnit(
+                                domain = EnergyDensity::class,
+                                units = mapOf(unit.major to 1,
+                                              unit.minor.first to -1,
+                                              unit.minor.second to -2)))
+{
+    val mass = unit.major
+    val distance = unit.minor.first
+    val time = unit.minor.second
+
+    companion object
+    {
+        operator fun invoke(amount: Number, unit: Unit<EnergyDensity>) =
+            EnergyDensityAmount(amount = amount * unit.scale,
+                                unit = kilo(GRAM) to U2(METER, SECOND))
+    }
+
+    $operators
+}
