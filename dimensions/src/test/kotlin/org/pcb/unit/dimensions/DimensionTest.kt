@@ -35,6 +35,7 @@ class DimensionTest
                    "Frequency" to Composite(time = -1),
                    "Illuminance" to Composite(luminousIntensity = 1, angle = 2, distance = -2),
                    "Inductance" to Composite(distance = 2, mass = 1, electricCurrent = -2, time = -2),
+                   "Jerk" to Composite(distance = 1, time = -3),
                    "Luminance" to Composite(luminousIntensity = 1, distance = -2),
                    "LuminousEnergy" to Composite(angle = 2, luminousIntensity = 1, time = 1),
                    "LuminousFlux" to Composite(angle = 2, luminousIntensity = 1),
@@ -62,7 +63,7 @@ class DimensionTest
     fun uniqueness(dimension: Pair<String, Composite>)
     {
         dimensions
-            .filter { dimension.second != it.second }
+            .filter { dimension.first != it.first }
             .forEach { other ->
                 assertNotEquals(
                     illegal = dimension.second,

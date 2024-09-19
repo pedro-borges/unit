@@ -229,6 +229,21 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> Jerk
+
+    @JvmName("timesAcceleration")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: AccelerationAmount<D, T>) =
+        JerkAmount(amount = amount * that.amount
+                            / convert(that.time to time,
+                                      that.time to time),
+                   unit = that.distance to time)
+
+    operator fun <D : Unit<Distance>> times(that: AccelerationAmount<D, T>) =
+        JerkAmount(amount = amount * that.amount,
+                   unit = that.distance to time)
+
+    // endregion
+
     // region -> LuminousFlux
 
     @JvmName("timesLuminousEnergy")

@@ -31,6 +31,8 @@ object Frequency : Dimension
 
     operator fun times(that: Momentum) = Force
 
+    operator fun times(that: Acceleration) = Jerk
+
     operator fun times(that: LuminousEnergy) = LuminousFlux
 
     operator fun times(that: Mass) = MassFlowRate

@@ -17,8 +17,13 @@ object Acceleration : Dimension
     operator fun div(that: Speed) = Frequency
     operator fun times(that: Pace) = Frequency
 
+    operator fun div(that: Time) = Jerk
+    operator fun times(that: Frequency) = Jerk
+
     operator fun times(that: Momentum) = Power
 
     operator fun div(that: Frequency) = Speed
     operator fun times(that: Time) = Speed
+
+    operator fun div(that: Jerk) = Time
 }

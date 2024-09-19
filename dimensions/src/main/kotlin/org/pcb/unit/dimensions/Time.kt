@@ -12,6 +12,8 @@ object Time : Dimension
     operator fun div(that: Time) = Scalar
     operator fun times(that: Frequency) = Scalar
 
+    operator fun times(that: Jerk) = Acceleration
+
     operator fun times(that: AngularVelocity) = Angle
 
     operator fun times(that: AngularAcceleration) = AngularVelocity

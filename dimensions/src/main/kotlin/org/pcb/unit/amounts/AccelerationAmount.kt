@@ -115,6 +115,30 @@ open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Jerk
+
+    @JvmName("timesFrequency")
+    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
+        JerkAmount(amount = amount * that.amount
+                            / convert(that.time to time),
+                   unit = distance to time)
+
+    operator fun times(that: FrequencyAmount<T>) =
+        JerkAmount(amount = amount * that.amount,
+                   unit = distance to time)
+
+    @JvmName("divTime")
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        JerkAmount(amount = amount / that.amount
+                            / convert(that.time to time),
+                   unit = distance to time)
+
+    operator fun div(that: TimeAmount<T>) =
+        JerkAmount(amount = amount / that.amount,
+                   unit = distance to time)
+
+    // endregion
+
     // region -> Power
 
     @JvmName("timesMomentum")
@@ -151,6 +175,23 @@ open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
     operator fun times(that: TimeAmount<T>) =
         SpeedAmount(amount = amount * that.amount,
                     unit = distance to time)
+
+    // endregion
+
+    // region -> Time
+
+    @JvmName("divJerk")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: JerkAmount<D, T>) =
+        TimeAmount(amount = amount / that.amount
+                            / convert(that.distance to distance)
+                            * convert(that.time to time,
+                                      that.time to time,
+                                      that.time to time),
+                   unit = time)
+
+    operator fun div(that: JerkAmount<D, T>) =
+        TimeAmount(amount = amount / that.amount,
+                   unit = time)
 
     // endregion
 }

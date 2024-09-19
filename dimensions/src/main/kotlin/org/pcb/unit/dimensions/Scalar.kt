@@ -54,6 +54,8 @@ object Scalar : Dimension
 
     operator fun times(that: Inductance) = Inductance
 
+    operator fun times(that: Jerk) = Jerk
+
     operator fun times(that: Luminance) = Luminance
 
     operator fun times(that: LuminousEnergy) = LuminousEnergy

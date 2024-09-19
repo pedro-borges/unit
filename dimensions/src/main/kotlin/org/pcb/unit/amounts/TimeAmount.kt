@@ -85,6 +85,22 @@ open class TimeAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> Acceleration
+
+    @JvmName("timesJerk")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: JerkAmount<D, T>) =
+        AccelerationAmount(amount = amount * that.amount
+                                    / convert(that.time to time,
+                                              that.time to time,
+                                              that.time to time),
+                           unit = that.distance to time)
+
+    operator fun <D : Unit<Distance>> times(that: JerkAmount<D, T>) =
+        AccelerationAmount(amount = amount * that.amount,
+                           unit = that.distance to time)
+
+    // endregion
+
     // region -> Angle
 
     @JvmName("timesAngularVelocity")
