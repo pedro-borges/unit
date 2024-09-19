@@ -9,6 +9,7 @@ object Acceleration : Dimension
 {
     operator fun div(that: Scalar) = Acceleration
     operator fun times(that: Scalar) = Acceleration
+
     operator fun div(that: Acceleration) = Scalar
 
     operator fun times(that: Mass) = Force

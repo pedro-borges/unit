@@ -15,12 +15,12 @@ object Power : Dimension
 
     operator fun div(that: Momentum) = Acceleration
 
-    operator fun div(that: Frequency) = Energy
-    operator fun times(that: Time) = Energy
-
     operator fun div(that: ElectricTension) = ElectricCurrent
 
     operator fun div(that: ElectricCurrent) = ElectricTension
+
+    operator fun div(that: Frequency) = Energy
+    operator fun times(that: Time) = Energy
 
     operator fun div(that: Speed) = Force
     operator fun times(that: Pace) = Force

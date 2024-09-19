@@ -9,6 +9,7 @@ object AngularVelocity : Dimension
 {
     operator fun div(that: Scalar) = AngularVelocity
     operator fun times(that: Scalar) = AngularVelocity
+
     operator fun div(that: AngularVelocity) = Scalar
 
     operator fun div(that: Frequency) = Angle

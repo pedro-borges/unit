@@ -16,4 +16,8 @@ object Volume : Dimension
     operator fun div(that: Area) = Distance
 
     operator fun times(that: EnergyDensity) = Energy
+
+    operator fun div(that: SpecificVolume) = Mass
+
+    operator fun div(that: Mass) = SpecificVolume
 }

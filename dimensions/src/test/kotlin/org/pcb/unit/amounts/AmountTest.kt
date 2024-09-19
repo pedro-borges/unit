@@ -77,9 +77,9 @@ class AmountTest
 
         dimensions
             .sortedBy { it.simpleName }
-            .forEach { returnDimension ->
-                val returnDimensionComposite = returnDimension.kotlin.annotations.first { it is Composite } as Composite
-                val returnAmount = amounts[returnDimension]!!
+            .forEach { resultDimension ->
+                val resultDimensionComposite = resultDimension.kotlin.annotations.first { it is Composite } as Composite
+                val resultAmount = amounts[resultDimension]!!
 
                 dimensions
                     .filter { it != Scalar::class.java }
@@ -88,19 +88,19 @@ class AmountTest
                         val parameterDimensionComposite = parameterDimension.kotlin.annotations.first { it is Composite } as Composite
                         val parameterAmount = amounts[parameterDimension]!!
 
-                        code = regions[returnDimension.simpleName] ?: ""
+                        code = regions[resultDimension.simpleName] ?: ""
 
-                        if (dimensionComposite - parameterDimensionComposite == returnDimensionComposite)
+                        if (dimensionComposite - parameterDimensionComposite == resultDimensionComposite)
                         {
                             val keep = parameterDimensionComposite.keep(dimensionComposite)
                             if (keep.count() > 0)
                             {
                                 code += "\t@JvmName(\"div${parameterDimension.simpleName}\")\n"
                                 code += "\toperator fun ${parameterDimensionComposite.buildGenericDeclaration()} div(that: ${parameterAmount.simpleName}${parameterDimensionComposite.buildGenericReceiver()}) =\n"
-                                code += "\t\t${returnAmount.simpleName}(amount = amount / that.amount"
+                                code += "\t\t${resultAmount.simpleName}(amount = amount / that.amount"
                                 if (keep.positives().count() > 0) code += "\n\t\t/ convert(${keep.positives().buildConvert()})"
                                 if (keep.negatives().count() > 0) code += "\n\t\t* convert(${keep.negatives().buildConvert()})"
-                                val unit = dimensionComposite.buildUnit(returnDimensionComposite)
+                                val unit = dimensionComposite.buildUnit(resultDimensionComposite)
                                 code +=
                                     if (unit == null) ")\n\n"
                                     else ",\n\t\t\tunit = $unit)\n\n"
@@ -110,23 +110,23 @@ class AmountTest
                             code += "\toperator fun "
                             if (drop.count() > 0) code += drop.buildGenericDeclaration()
                             code += " div(that: ${parameterAmount.simpleName}${parameterDimensionComposite.buildGenericReceiver()}) =\n"
-                            code += "\t\t${returnAmount.simpleName}(amount = amount / that.amount"
-                            val unit = dimensionComposite.buildUnit(returnDimensionComposite)
+                            code += "\t\t${resultAmount.simpleName}(amount = amount / that.amount"
+                            val unit = dimensionComposite.buildUnit(resultDimensionComposite)
                             code +=
                                 if (unit == null) ")\n\n"
                                 else ",\n\t\t\tunit = $unit)\n\n"
                         }
-                        if (dimensionComposite + parameterDimensionComposite == returnDimensionComposite)
+                        if (dimensionComposite + parameterDimensionComposite == resultDimensionComposite)
                         {
                             val keep = parameterDimensionComposite.keep(dimensionComposite)
                             if (keep.count() > 0)
                             {
                                 code += "\t@JvmName(\"times${parameterDimension.simpleName}\")\n"
                                 code += "\toperator fun ${parameterDimensionComposite.buildGenericDeclaration()} times(that: ${parameterAmount.simpleName}${parameterDimensionComposite.buildGenericReceiver()}) =\n"
-                                code += "\t\t${returnAmount.simpleName}(amount = amount * that.amount"
+                                code += "\t\t${resultAmount.simpleName}(amount = amount * that.amount"
                                 if (keep.positives().count() > 0) code += "\n\t\t* convert(${keep.positives().buildConvert()})"
                                 if (keep.negatives().count() > 0) code += "\n\t\t/ convert(${keep.negatives().buildConvert()})"
-                                val unit = dimensionComposite.buildUnit(returnDimensionComposite)
+                                val unit = dimensionComposite.buildUnit(resultDimensionComposite)
                                 code +=
                                     if (unit == null) ")\n\n"
                                     else ",\n\t\t\tunit = $unit)\n\n"
@@ -136,14 +136,14 @@ class AmountTest
                             code += "\toperator fun "
                             if (drop.count() > 0) code += drop.buildGenericDeclaration()
                             code += " times(that: ${parameterAmount.simpleName}${parameterDimensionComposite.buildGenericReceiver()}) =\n"
-                            code += "\t\t${returnAmount.simpleName}(amount = amount * that.amount"
-                            val unit = dimensionComposite.buildUnit(returnDimensionComposite)
+                            code += "\t\t${resultAmount.simpleName}(amount = amount * that.amount"
+                            val unit = dimensionComposite.buildUnit(resultDimensionComposite)
                             code +=
                                 if (unit == null) (")\n\n")
                                 else ",\n\t\t\tunit = $unit)\n\n"
                         }
 
-                        if (code != "") regions[returnDimension.simpleName] = code
+                        if (code != "") regions[resultDimension.simpleName] = code
                     }
             }
 

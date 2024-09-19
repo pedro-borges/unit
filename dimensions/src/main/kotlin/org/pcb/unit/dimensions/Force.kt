@@ -17,8 +17,6 @@ object Force : Dimension
 
     operator fun div(that: EnergyDensity) = Area
 
-    operator fun div(that: Speed) = MassFlowRate
-
     operator fun times(that: Distance) = Energy
 
     operator fun div(that: Area) = EnergyDensity
@@ -27,6 +25,7 @@ object Force : Dimension
 
     operator fun div(that: Acceleration) = Mass
 
+    operator fun div(that: Speed) = MassFlowRate
     operator fun times(that: Pace) = MassFlowRate
 
     operator fun div(that: Frequency) = Momentum

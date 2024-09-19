@@ -24,4 +24,6 @@ object Mass : Dimension
     operator fun div(that: Momentum) = Pace
 
     operator fun div(that: MassFlowRate) = Time
+
+	operator fun times(that: SpecificVolume) = Volume
 }

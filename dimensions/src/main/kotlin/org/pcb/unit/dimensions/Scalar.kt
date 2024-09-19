@@ -66,11 +66,11 @@ object Scalar : Dimension
 
     operator fun times(that: MagneticFluxDensity) = MagneticFluxDensity
 
+	operator fun times(that: Mass) = Mass
+
     operator fun times(that: MassFlowRate) = MassFlowRate
 
     operator fun times(that: Momentum) = Momentum
-
-    operator fun times(that: Mass) = Mass
 
     operator fun div(that: Speed) = Pace
     operator fun times(that: Pace) = Pace
@@ -80,6 +80,8 @@ object Scalar : Dimension
     operator fun times(that: Rent) = Rent
 
     operator fun times(that: SolidAngle) = SolidAngle
+
+	operator fun times(that: SpecificVolume) = SpecificVolume
 
     operator fun div(that: Pace) = Speed
     operator fun times(that: Speed) = Speed

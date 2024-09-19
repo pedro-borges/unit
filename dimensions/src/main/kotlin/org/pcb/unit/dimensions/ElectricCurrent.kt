@@ -11,8 +11,8 @@ object ElectricCurrent : Dimension
 
     operator fun div(that: ElectricCurrent) = Scalar
 
-    operator fun times(that: Time) = ElectricCharge
     operator fun div(that: Frequency) = ElectricCharge
+    operator fun times(that: Time) = ElectricCharge
 
     operator fun div(that: ElectricTension) = ElectricConductance
 
@@ -24,5 +24,6 @@ object ElectricCurrent : Dimension
     operator fun div(that: ElectricCharge) = Frequency
 
     operator fun times(that: Inductance) = MagneticFlux
+
     operator fun times(that: ElectricTension) = Power
 }

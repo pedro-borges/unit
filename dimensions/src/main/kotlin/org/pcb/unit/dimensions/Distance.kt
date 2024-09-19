@@ -8,6 +8,7 @@ object Distance : Dimension
 {
     operator fun div(that: Scalar) = Distance
     operator fun times(that: Scalar) = Distance
+
     operator fun div(that: Distance) = Scalar
 
     operator fun times(that: Distance) = Area

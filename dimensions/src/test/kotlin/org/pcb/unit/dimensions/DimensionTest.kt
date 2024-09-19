@@ -42,47 +42,29 @@ class DimensionTest
 
         val regions = HashMap<String, String>()
 
-        dimensions.forEach { operatorDimension ->
-            val operatorDimensionComposite = operatorDimension.kotlin.annotations.first { it is Composite } as Composite
+        dimensions
+            .sortedBy { it.simpleName }
+            .forEach { resultDimension ->
+                val resultDimensionComposite = resultDimension.kotlin.annotations.first { it is Composite } as Composite
 
-            dimensions
-                .sortedBy { it.simpleName }
-                .forEach { resultDimension ->
-                    val resultDimensionComposite = resultDimension.kotlin.annotations.first { it is Composite } as Composite
-                    var code = regions[resultDimension.simpleName] ?: ""
+                dimensions
+                    .forEach { parameterDimension ->
+                        val parameterDimensionComposite = parameterDimension.kotlin.annotations.first { it is Composite } as Composite
+                        var code = regions[parameterDimension.simpleName] ?: ""
 
-                    if (dimensionComposite - operatorDimensionComposite == resultDimensionComposite)
-                    {
+                        if (dimensionComposite - resultDimensionComposite == parameterDimensionComposite)
+                        {
+                            code = "\toperator fun div(that: ${resultDimension.simpleName}) = ${parameterDimension.simpleName}\n" + code
+                        }
+                        if (dimensionComposite + resultDimensionComposite == parameterDimensionComposite)
+                        {
+                            code += "\toperator fun times(that: ${resultDimension.simpleName}) = ${parameterDimension.simpleName}\n"
+                        }
 
-                        code += "\toperator fun div(that: ${operatorDimension.simpleName}) = ${resultDimension.simpleName}\n"
-//                        assertTrue("${dimension.simpleName} / ${operatorDimension.simpleName}) = ${resultDimension.simpleName}") {
-//                            dimension.methods
-//                                .filter { method -> Dimension::class.java.isAssignableFrom(method.returnType) }
-//                                .any { method ->
-//                                    method.name == "div" &&
-//                                    method.parameters[0].type.isAssignableFrom(operatorDimension) &&
-//                                    method.returnType.isAssignableFrom(resultDimension)
-//                                }
-//                        }
-                    }
-                    if (dimensionComposite + operatorDimensionComposite == resultDimensionComposite)
-                    {
-                        code += "\toperator fun times(that: ${operatorDimension.simpleName}) = ${resultDimension.simpleName}\n"
-//                        assertTrue("Missing ${dimension.simpleName} * ${operatorDimension.simpleName}) = ${resultDimension.simpleName}") {
-//                            dimension.methods
-//                                .filter { method -> Dimension::class.java.isAssignableFrom(method.returnType) }
-//                                .any { method ->
-//                                    method.name == "times" &&
-//                                    method.parameters[0].type.isAssignableFrom(operatorDimension) &&
-//                                    method.returnType.isAssignableFrom(resultDimension)
-//                                }
-//                        }
+                        if (code != "") regions[parameterDimension.simpleName] = code
                     }
 
-                    if (code != "") regions[resultDimension.simpleName] = code
-                }
-
-        }
+            }
 
         val stub = this.javaClass.classLoader.getResource("org/pcb/unit/dimensions/" + dimension.simpleName)!!
 

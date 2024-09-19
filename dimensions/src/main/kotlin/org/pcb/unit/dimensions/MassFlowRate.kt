@@ -19,10 +19,10 @@ object MassFlowRate : Dimension
 
     operator fun div(that: Mass) = Frequency
 
+    operator fun div(that: ElectricCharge) = MagneticFluxDensity
+
     operator fun div(that: Frequency) = Mass
     operator fun times(that: Time) = Mass
-
-    operator fun div(that: ElectricCharge) = MagneticFluxDensity
 
     operator fun times(that: Distance) = Momentum
 

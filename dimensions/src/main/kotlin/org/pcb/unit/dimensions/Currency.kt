@@ -8,6 +8,7 @@ object Currency : Dimension
 {
     operator fun div(that: Scalar) = Currency
     operator fun times(that: Scalar) = Currency
+
     operator fun div(that: Currency) = Scalar
 
     operator fun div(that: Frequency) = Debt

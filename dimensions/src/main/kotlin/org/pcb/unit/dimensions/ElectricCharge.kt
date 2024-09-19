@@ -9,6 +9,7 @@ object ElectricCharge : Dimension
 {
     operator fun div(that: Scalar) = ElectricCharge
     operator fun times(that: Scalar) = ElectricCharge
+
     operator fun div(that: ElectricCharge) = Scalar
 
     operator fun div(that: ElectricTension) = Capacitance
