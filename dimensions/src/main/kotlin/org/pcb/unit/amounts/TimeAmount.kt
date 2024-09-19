@@ -5,7 +5,6 @@ import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.U3
 import org.pcb.unit.Unit
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
@@ -66,19 +65,23 @@ open class TimeAmount<T : Unit<Time>>(
 
     @JvmName("timesFrequency")
     operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
-        Numeric(amount = amount * that.amount
-                         / convert(that.time to time))
+        ScalarAmount(amount = amount * that.amount
+                              / convert(that.time to time),
+                     unit = NUMERIC)
 
     operator fun times(that: FrequencyAmount<T>) =
-        Numeric(amount = amount * that.amount)
+        ScalarAmount(amount = amount * that.amount,
+                     unit = NUMERIC)
 
     @JvmName("divTime")
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.time to time))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.time to time),
+                     unit = NUMERIC)
 
     operator fun div(that: TimeAmount<T>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

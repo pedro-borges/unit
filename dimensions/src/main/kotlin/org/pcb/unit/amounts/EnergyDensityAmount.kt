@@ -6,7 +6,6 @@ import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Gram.GRAM
 import org.pcb.unit.amounts.base.Meter.METER
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
@@ -85,14 +84,16 @@ open class EnergyDensityAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
 
     @JvmName("divEnergyDensity")
     operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyDensityAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.mass to mass)
-                         * convert(that.distance to distance,
-                                   that.time to time,
-                                   that.time to time))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.mass to mass)
+                              * convert(that.distance to distance,
+                                        that.time to time,
+                                        that.time to time),
+                     unit = NUMERIC)
 
     operator fun div(that: EnergyDensityAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

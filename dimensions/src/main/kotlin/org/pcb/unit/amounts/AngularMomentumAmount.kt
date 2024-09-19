@@ -6,7 +6,6 @@ import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Gram.GRAM
 import org.pcb.unit.amounts.base.Meter.METER
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
@@ -85,14 +84,16 @@ open class AngularMomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Ti
 
     @JvmName("divAngularMomentum")
     operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: AngularMomentumAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance,
-                                   that.mass to mass,
-                                   that.mass to mass)
-                         * convert(that.time to time))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.distance to distance,
+                                        that.mass to mass,
+                                        that.mass to mass)
+                              * convert(that.time to time),
+                     unit = NUMERIC)
 
     operator fun div(that: AngularMomentumAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

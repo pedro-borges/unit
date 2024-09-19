@@ -4,7 +4,6 @@ import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Radian.RADIAN
 import org.pcb.unit.convert
@@ -72,12 +71,14 @@ open class SolidAngleAmount<A : Unit<Angle>>(
 
     @JvmName("divSolidAngle")
     operator fun <A : Unit<Angle>> div(that: SolidAngleAmount<A>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.angle to angle,
-                                   that.angle to angle))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.angle to angle,
+                                        that.angle to angle),
+                     unit = NUMERIC)
 
     operator fun div(that: SolidAngleAmount<A>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

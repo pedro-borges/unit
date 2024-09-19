@@ -5,7 +5,6 @@ import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Gram.GRAM
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
@@ -79,12 +78,14 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     @JvmName("divMassFlowRate")
     operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFlowRateAmount<M, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.mass to mass)
-                         * convert(that.time to time))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.mass to mass)
+                              * convert(that.time to time),
+                     unit = NUMERIC)
 
     operator fun div(that: MassFlowRateAmount<M, T>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

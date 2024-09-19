@@ -3,7 +3,6 @@ package org.pcb.unit.amounts
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Unit
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
@@ -68,13 +67,15 @@ open class AngularAccelerationAmount<A : Unit<Angle>, T : Unit<Time>>(
 
     @JvmName("divAngularAcceleration")
     operator fun <A : Unit<Angle>, T : Unit<Time>> div(that: AngularAccelerationAmount<A, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.angle to angle)
-                         * convert(that.time to time,
-                                   that.time to time))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.angle to angle)
+                              * convert(that.time to time,
+                                        that.time to time),
+                     unit = NUMERIC)
 
     operator fun div(that: AngularAccelerationAmount<A, T>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

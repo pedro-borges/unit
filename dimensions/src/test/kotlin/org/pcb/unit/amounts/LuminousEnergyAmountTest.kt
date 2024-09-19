@@ -4,7 +4,7 @@ import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.pcb.unit.U2
 import org.pcb.unit.U3
-import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.ANGLE1
 import org.pcb.unit.units.test.ANGLE2
 import org.pcb.unit.units.test.LUMINOUSINTENSITY1
@@ -91,7 +91,8 @@ class LuminousEnergyAmountTest
     fun divSameLuminousEnergy()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = LuminousEnergyAmount(amount = 2,
                                           unit = U3(ANGLE1, LUMINOUSINTENSITY1, TIME1)) /
                      LuminousEnergyAmount(amount = 2,
@@ -102,7 +103,8 @@ class LuminousEnergyAmountTest
     fun divOtherLuminousEnergy()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = LuminousEnergyAmount(amount = 2,
                                           unit = U3(ANGLE2, LUMINOUSINTENSITY2, TIME2)) /
                      LuminousEnergyAmount(amount = 20000,

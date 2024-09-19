@@ -4,7 +4,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
 import org.pcb.unit.U3
-import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.ANGLE1
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
@@ -96,7 +96,8 @@ class TimeAmountTest
     fun divSameTime()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) /
                      TimeAmount(amount = 2,
@@ -107,7 +108,8 @@ class TimeAmountTest
     fun divOtherTime()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = TimeAmount(amount = 1,
                                 unit = TIME2) /
                      TimeAmount(amount = 10,
@@ -118,7 +120,8 @@ class TimeAmountTest
     fun timesSameFrequency()
     {
         assertEquals(
-            expected = Numeric(amount = 2 * 2),
+            expected = ScalarAmount(amount = 2 * 2,
+                                    unit = NUMERIC),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
                      FrequencyAmount(amount = 2,
@@ -129,7 +132,8 @@ class TimeAmountTest
     fun timesOtherFrequency()
     {
         assertEquals(
-            expected = Numeric(amount = 2 * 2),
+            expected = ScalarAmount(amount = 2 * 2,
+                                    unit = NUMERIC),
             actual = TimeAmount(amount = 2,
                                 unit = TIME1) *
                      FrequencyAmount(amount = 20,

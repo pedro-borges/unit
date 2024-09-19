@@ -3,7 +3,7 @@ package org.pcb.unit.amounts
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
 import org.pcb.unit.units.test.ELECTRICCURRENT1
@@ -92,7 +92,8 @@ class EnergyAmountTest
     fun divSameEnergy()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = EnergyAmount(amount = 2,
                                   unit = U2(DISTANCE1, MASS1) to TIME1) /
                      EnergyAmount(amount = 2,
@@ -103,7 +104,8 @@ class EnergyAmountTest
     fun divOtherEnergy()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = EnergyAmount(amount = 2,
                                   unit = U2(DISTANCE2, MASS2) to TIME1) /
                      EnergyAmount(amount = 200000,

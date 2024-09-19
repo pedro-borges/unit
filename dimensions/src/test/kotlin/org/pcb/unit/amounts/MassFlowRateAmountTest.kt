@@ -3,7 +3,7 @@ package org.pcb.unit.amounts
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.MASS1
 import org.pcb.unit.units.test.MASS2
@@ -89,7 +89,8 @@ class MassFlowRateAmountTest
     fun divSameMassFlowRate()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = MassFlowRateAmount(amount = 2,
                                         unit = MASS1 to TIME1) /
                      MassFlowRateAmount(amount = 2,
@@ -100,7 +101,8 @@ class MassFlowRateAmountTest
     fun divOtherMassFlowRate()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = MassFlowRateAmount(amount = 2,
                                         unit = MASS2 to TIME1) /
                      MassFlowRateAmount(amount = 200,

@@ -6,7 +6,6 @@ import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Candela.CANDELA
 import org.pcb.unit.amounts.base.Meter.METER
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
@@ -79,13 +78,15 @@ open class LuminanceAmount<D : Unit<Distance>, LI : Unit<LuminousIntensity>>(
 
     @JvmName("divLuminance")
     operator fun <D : Unit<Distance>, LI : Unit<LuminousIntensity>> div(that: LuminanceAmount<D, LI>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.luminousIntensity to luminousIntensity)
-                         * convert(that.distance to distance,
-                                   that.distance to distance))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.luminousIntensity to luminousIntensity)
+                              * convert(that.distance to distance,
+                                        that.distance to distance),
+                     unit = NUMERIC)
 
     operator fun div(that: LuminanceAmount<D, LI>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

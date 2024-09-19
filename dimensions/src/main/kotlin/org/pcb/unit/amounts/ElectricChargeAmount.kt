@@ -5,7 +5,6 @@ import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Ampere.AMPERE
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
@@ -76,12 +75,14 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
 
     @JvmName("divElectricCharge")
     operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricChargeAmount<EC, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.electricCurrent to electricCurrent,
-                                   that.time to time))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.electricCurrent to electricCurrent,
+                                        that.time to time),
+                     unit = NUMERIC)
 
     operator fun div(that: ElectricChargeAmount<EC, T>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

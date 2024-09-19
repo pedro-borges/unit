@@ -3,7 +3,7 @@ package org.pcb.unit.amounts
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.pcb.unit.U2
-import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
 import org.pcb.unit.units.test.MASS1
@@ -89,7 +89,8 @@ class DistanceAmountTest
     fun divSameDistance()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = DistanceAmount(amount = 2,
                                     unit = DISTANCE1) /
                      DistanceAmount(amount = 2,
@@ -100,7 +101,8 @@ class DistanceAmountTest
     fun divOtherDistance()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = DistanceAmount(amount = 2,
                                     unit = DISTANCE2) /
                      DistanceAmount(amount = 20,

@@ -6,7 +6,6 @@ import org.pcb.unit.U2
 import org.pcb.unit.U3
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Candela.CANDELA
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Radian.RADIAN
 import org.pcb.unit.amounts.base.Second.SECOND
@@ -83,14 +82,16 @@ open class LuminousEnergyAmount<A : Unit<Angle>, LI : Unit<LuminousIntensity>, T
 
     @JvmName("divLuminousEnergy")
     operator fun <A : Unit<Angle>, LI : Unit<LuminousIntensity>, T : Unit<Time>> div(that: LuminousEnergyAmount<A, LI, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.angle to angle,
-                                   that.angle to angle,
-                                   that.luminousIntensity to luminousIntensity,
-                                   that.time to time))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.angle to angle,
+                                        that.angle to angle,
+                                        that.luminousIntensity to luminousIntensity,
+                                        that.time to time),
+                     unit = NUMERIC)
 
     operator fun div(that: LuminousEnergyAmount<A, LI, T>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

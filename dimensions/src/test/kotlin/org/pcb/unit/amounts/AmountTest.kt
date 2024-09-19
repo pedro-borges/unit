@@ -34,13 +34,8 @@ class AmountTest
 
         val amounts = dimensions.associateWith { Class.forName("org.pcb.unit.amounts.${it.simpleName}Amount") }
 
-        val returnAmounts = dimensions.associateWith {
-            if (!it.isAssignableFrom(Scalar::class.java)) Class.forName("org.pcb.unit.amounts.${it.simpleName}Amount")
-            else Class.forName("org.pcb.unit.amounts.base.Numeric")
-        }
-
         val dimensionComposite = dimension.kotlin.annotations.first { it is Composite } as Composite
-        val amount = returnAmounts[dimension]!!
+        val amount = amounts[dimension]!!
 
         val regions = HashMap<String, String>()
         var code = regions[dimension.simpleName] ?: ""
@@ -84,7 +79,7 @@ class AmountTest
             .sortedBy { it.simpleName }
             .forEach { returnDimension ->
                 val returnDimensionComposite = returnDimension.kotlin.annotations.first { it is Composite } as Composite
-                val returnAmount = returnAmounts[returnDimension]!!
+                val returnAmount = amounts[returnDimension]!!
 
                 dimensions
                     .filter { it != Scalar::class.java }
@@ -272,7 +267,7 @@ class AmountTest
 
         return when
         {
-            major == null && minor == null -> null
+            major == null && minor == null -> "NUMERIC"
             major != null && minor == null -> major
             major == null && minor != null -> "NUMERIC to " + minor
             else                           -> "$major to $minor"

@@ -28,7 +28,7 @@ class NumericTest
     fun hertzTimesSecond()
     {
         assertEquals(
-            expected = Numeric(2 * 3),
+            expected = ScalarAmount(2 * 3, NUMERIC),
             actual = Hertz(2) * Second(3))
     }
 
@@ -36,35 +36,35 @@ class NumericTest
     fun meterPerSecondTimesSecondPerMeter()
     {
         assertEquals(
-            expected = Numeric(2 * 3),
+            expected = ScalarAmount(2 * 3, NUMERIC),
             actual = MeterPerSecond(2) * SecondPerMeter(3))
     }
 
     @Test
     fun ohmTimesSiemens() =
         assertEquals(
-            expected = Numeric(2 * 3),
+            expected = ScalarAmount(2 * 3, NUMERIC),
             actual = Ohm(2) * Siemens(3))
 
     @Test
     fun secondTimesHertz()
     {
         assertEquals(
-            expected = Numeric(2 * 3),
+            expected = ScalarAmount(2 * 3, NUMERIC),
             actual = Second(2) * Hertz(3))
     }
 
     @Test
     fun secondPerMeterTimesMeterPerSecond() =
         assertEquals(
-            expected = Numeric(2 * 3),
+            expected = ScalarAmount(2 * 3, NUMERIC),
             actual = SecondPerMeter(2) * MeterPerSecond(3))
 
     @Test
     fun siemensTimesOhm()
     {
         assertEquals(
-            expected = Numeric(2 * 3),
+            expected = ScalarAmount(2 * 3, NUMERIC),
             actual = Siemens(2) * Ohm(3))
     }
 }

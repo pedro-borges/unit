@@ -3,7 +3,7 @@ package org.pcb.unit.amounts
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.pcb.unit.U2
-import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.ANGLE1
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.LUMINOUSINTENSITY1
@@ -88,7 +88,8 @@ class LuminousIntensityAmountTest
     fun divSameLuminousIntensity()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = LuminousIntensityAmount(amount = 2,
                                              unit = LUMINOUSINTENSITY1) /
                      LuminousIntensityAmount(amount = 2,
@@ -99,7 +100,8 @@ class LuminousIntensityAmountTest
     fun divOtherLuminousIntensity()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = LuminousIntensityAmount(amount = 2,
                                              unit = LUMINOUSINTENSITY2) /
                      LuminousIntensityAmount(amount = 20,

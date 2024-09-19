@@ -3,7 +3,7 @@ package org.pcb.unit.amounts
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.CURRENCY1
 import org.pcb.unit.units.test.CURRENCY2
 import org.pcb.unit.units.test.NUMBER2
@@ -87,7 +87,8 @@ class CurrencyAmountTest
     fun divSameCurrency()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = CurrencyAmount(amount = 2,
                                     unit = CURRENCY1) /
                      CurrencyAmount(amount = 2,
@@ -98,7 +99,8 @@ class CurrencyAmountTest
     fun divOtherCurrency()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = CurrencyAmount(amount = 2,
                                     unit = CURRENCY2) /
                      CurrencyAmount(amount = 20,

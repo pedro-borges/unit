@@ -6,7 +6,6 @@ import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Ampere.AMPERE
 import org.pcb.unit.amounts.base.Gram.GRAM
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
@@ -86,14 +85,16 @@ open class MagneticFluxDensityAmount<EC : Unit<ElectricCurrent>, M : Unit<Mass>,
 
     @JvmName("divMagneticFluxDensity")
     operator fun <EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: MagneticFluxDensityAmount<EC, M, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.mass to mass)
-                         * convert(that.electricCurrent to electricCurrent,
-                                   that.time to time,
-                                   that.time to time))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.mass to mass)
+                              * convert(that.electricCurrent to electricCurrent,
+                                        that.time to time,
+                                        that.time to time),
+                     unit = NUMERIC)
 
     operator fun div(that: MagneticFluxDensityAmount<EC, M, T>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

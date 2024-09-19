@@ -3,7 +3,6 @@ package org.pcb.unit.amounts
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Unit
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
@@ -59,11 +58,13 @@ open class AngleAmount<A : Unit<Angle>>(
 
     @JvmName("divAngle")
     operator fun <A : Unit<Angle>> div(that: AngleAmount<A>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.angle to angle))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.angle to angle),
+                     unit = NUMERIC)
 
     operator fun div(that: AngleAmount<A>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

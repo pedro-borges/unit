@@ -3,7 +3,7 @@ package org.pcb.unit.amounts
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.pcb.unit.U2
-import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.ANGLE1
 import org.pcb.unit.units.test.ANGLE2
 import org.pcb.unit.units.test.LUMINOUSINTENSITY1
@@ -87,7 +87,8 @@ class SolidAngleAmountTest
     fun divSameSolidAngle()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = SolidAngleAmount(amount = 2,
                                       unit = ANGLE1) /
                      SolidAngleAmount(amount = 2,
@@ -98,7 +99,8 @@ class SolidAngleAmountTest
     fun divOtherSolidAngle()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = SolidAngleAmount(amount = 2,
                                       unit = ANGLE2) /
                      SolidAngleAmount(amount = 200,

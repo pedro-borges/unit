@@ -5,7 +5,6 @@ import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Meter.METER
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
@@ -77,21 +76,25 @@ open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     @JvmName("timesPace")
     operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<D, T>) =
-        Numeric(amount = amount * that.amount
-                         * convert(that.time to time)
-                         / convert(that.distance to distance))
+        ScalarAmount(amount = amount * that.amount
+                              * convert(that.time to time)
+                              / convert(that.distance to distance),
+                     unit = NUMERIC)
 
     operator fun times(that: PaceAmount<D, T>) =
-        Numeric(amount = amount * that.amount)
+        ScalarAmount(amount = amount * that.amount,
+                     unit = NUMERIC)
 
     @JvmName("divSpeed")
     operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance)
-                         * convert(that.time to time))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.distance to distance)
+                              * convert(that.time to time),
+                     unit = NUMERIC)
 
     operator fun div(that: SpeedAmount<D, T>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

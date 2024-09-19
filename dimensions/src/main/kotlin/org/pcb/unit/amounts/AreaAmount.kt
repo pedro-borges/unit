@@ -5,7 +5,6 @@ import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Meter.METER
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
@@ -75,12 +74,14 @@ open class AreaAmount<D : Unit<Distance>>(
 
     @JvmName("divArea")
     operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance,
-                                   that.distance to distance))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.distance to distance,
+                                        that.distance to distance),
+                     unit = NUMERIC)
 
     operator fun div(that: AreaAmount<D>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

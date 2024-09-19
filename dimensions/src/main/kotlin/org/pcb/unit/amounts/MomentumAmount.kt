@@ -4,7 +4,6 @@ import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
@@ -72,13 +71,15 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     @JvmName("divMomentum")
     operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MomentumAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance,
-                                   that.mass to mass)
-                         * convert(that.time to time))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.distance to distance,
+                                        that.mass to mass)
+                              * convert(that.time to time),
+                     unit = NUMERIC)
 
     operator fun div(that: MomentumAmount<D, M, T>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

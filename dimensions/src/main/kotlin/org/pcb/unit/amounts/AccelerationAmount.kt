@@ -4,7 +4,6 @@ import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Acceleration
@@ -70,13 +69,15 @@ open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     @JvmName("divAcceleration")
     operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: AccelerationAmount<D, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance)
-                         * convert(that.time to time,
-                                   that.time to time))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.distance to distance)
+                              * convert(that.time to time,
+                                        that.time to time),
+                     unit = NUMERIC)
 
     operator fun div(that: AccelerationAmount<D, T>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

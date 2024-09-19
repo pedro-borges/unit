@@ -4,7 +4,6 @@ import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
@@ -62,11 +61,13 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
 
     @JvmName("divElectricCurrent")
     operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.electricCurrent to electricCurrent))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.electricCurrent to electricCurrent),
+                     unit = NUMERIC)
 
     operator fun div(that: ElectricCurrentAmount<EC>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

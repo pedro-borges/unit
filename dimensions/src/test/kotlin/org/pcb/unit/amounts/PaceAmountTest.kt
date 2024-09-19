@@ -2,7 +2,7 @@ package org.pcb.unit.amounts
 
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
 import org.pcb.unit.units.test.NUMBER2
@@ -87,7 +87,8 @@ class PaceAmountTest
     fun divSamePace()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 to DISTANCE1) /
                      PaceAmount(amount = 2,
@@ -98,7 +99,8 @@ class PaceAmountTest
     fun divOtherPace()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = PaceAmount(amount = 2,
                                 unit = TIME2 to DISTANCE1) /
                      PaceAmount(amount = 200,
@@ -109,7 +111,8 @@ class PaceAmountTest
     fun timesSameSpeed()
     {
         assertEquals(
-            expected = Numeric(amount = 2 * 2),
+            expected = ScalarAmount(amount = 2 * 2,
+                                    unit = NUMERIC),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 to DISTANCE1) *
                      SpeedAmount(amount = 2,
@@ -120,7 +123,8 @@ class PaceAmountTest
     fun timesOtherSpeed()
     {
         assertEquals(
-            expected = Numeric(amount = 2 * 2),
+            expected = ScalarAmount(amount = 2 * 2,
+                                    unit = NUMERIC),
             actual = PaceAmount(amount = 2,
                                 unit = TIME1 to DISTANCE2) *
                      SpeedAmount(amount = 200,

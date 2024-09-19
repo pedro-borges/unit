@@ -3,7 +3,7 @@ package org.pcb.unit.amounts
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
 import org.pcb.unit.units.test.MASS1
@@ -90,7 +90,8 @@ class AccelerationAmountTest
     fun divSameAcceleration()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = AccelerationAmount(amount = 2,
                                         unit = DISTANCE1 to TIME1) /
                      AccelerationAmount(amount = 2,
@@ -101,7 +102,8 @@ class AccelerationAmountTest
     fun divOtherAcceleration()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = AccelerationAmount(amount = 2,
                                         unit = DISTANCE1 to TIME1) /
                      AccelerationAmount(amount = 20,

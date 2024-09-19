@@ -3,7 +3,6 @@ package org.pcb.unit.amounts
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Unit
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Currency
@@ -66,12 +65,14 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     @JvmName("divRent")
     operator fun <C : Unit<Currency>, T : Unit<Time>> div(that: RentAmount<C, T>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.currency to currency)
-                         * convert(that.time to time))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.currency to currency)
+                              * convert(that.time to time),
+                     unit = NUMERIC)
 
     operator fun div(that: RentAmount<C, T>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

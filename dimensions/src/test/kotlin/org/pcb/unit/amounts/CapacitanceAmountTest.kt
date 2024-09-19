@@ -3,7 +3,7 @@ package org.pcb.unit.amounts
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
 import org.pcb.unit.units.test.ELECTRICCURRENT1
@@ -93,7 +93,8 @@ class CapacitanceAmountTest
     fun divSameCapacitance()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = CapacitanceAmount(amount = 2,
                                        unit = U2(TIME1, ELECTRICCURRENT1) to U2(MASS1, DISTANCE1)) /
                      CapacitanceAmount(amount = 2,
@@ -104,7 +105,8 @@ class CapacitanceAmountTest
     fun divOtherCapacitance()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = CapacitanceAmount(amount = 2,
                                        unit = U2(TIME2, ELECTRICCURRENT2) to U2(MASS1, DISTANCE1)) /
                      CapacitanceAmount(amount = 2000000000,

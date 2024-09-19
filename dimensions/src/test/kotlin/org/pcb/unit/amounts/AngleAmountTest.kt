@@ -2,7 +2,7 @@ package org.pcb.unit.amounts
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
-import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.ANGLE1
 import org.pcb.unit.units.test.ANGLE2
 import org.pcb.unit.units.test.NUMBER2
@@ -85,7 +85,8 @@ class AngleAmountTest
     fun divSameAngle()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = AngleAmount(amount = 2,
                                  unit = ANGLE1) /
                      AngleAmount(amount = 2,
@@ -96,7 +97,8 @@ class AngleAmountTest
     fun divOtherAngle()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = AngleAmount(amount = 2,
                                  unit = ANGLE2) /
                      AngleAmount(amount = 20,

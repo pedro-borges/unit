@@ -3,7 +3,7 @@ package org.pcb.unit.amounts
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
 import org.pcb.unit.units.test.MASS1
@@ -90,7 +90,8 @@ class EnergyDensityAmountTest
     fun divSameEnergyDensity()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = EnergyDensityAmount(amount = 2,
                                          unit = MASS1 to U2(DISTANCE1, TIME1)) /
                      EnergyDensityAmount(amount = 2,
@@ -101,7 +102,8 @@ class EnergyDensityAmountTest
     fun divOtherEnergyDensity()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = EnergyDensityAmount(amount = 2,
                                          unit = MASS2 to U2(DISTANCE1, TIME1)) /
                      EnergyDensityAmount(amount = 20000,

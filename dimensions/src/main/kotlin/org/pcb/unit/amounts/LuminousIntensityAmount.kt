@@ -4,7 +4,6 @@ import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
@@ -61,11 +60,13 @@ open class LuminousIntensityAmount<LI : Unit<LuminousIntensity>>(
 
     @JvmName("divLuminousIntensity")
     operator fun <LI : Unit<LuminousIntensity>> div(that: LuminousIntensityAmount<LI>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.luminousIntensity to luminousIntensity))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.luminousIntensity to luminousIntensity),
+                     unit = NUMERIC)
 
     operator fun div(that: LuminousIntensityAmount<LI>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

@@ -2,7 +2,7 @@ package org.pcb.unit.amounts
 
 import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
-import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.NUMBER2
 import org.pcb.unit.units.test.TEMPERATURE1
 import org.pcb.unit.units.test.TEMPERATURE2
@@ -85,7 +85,8 @@ class TemperatureAmountTest
     fun divSameTemperature()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = TemperatureAmount(amount = 2,
                                        unit = TEMPERATURE1) /
                      TemperatureAmount(amount = 2,
@@ -96,7 +97,8 @@ class TemperatureAmountTest
     fun divOtherTemperature()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = TemperatureAmount(amount = 2,
                                        unit = TEMPERATURE2) /
                      TemperatureAmount(amount = 20,

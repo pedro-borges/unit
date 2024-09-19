@@ -3,7 +3,6 @@ package org.pcb.unit.amounts
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Unit
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Scalar
@@ -58,11 +57,13 @@ open class TemperatureAmount<K : Unit<Temperature>>(
 
     @JvmName("divTemperature")
     operator fun <K : Unit<Temperature>> div(that: TemperatureAmount<K>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.temperature to temperature))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.temperature to temperature),
+                     unit = NUMERIC)
 
     operator fun div(that: TemperatureAmount<K>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 }

@@ -4,7 +4,6 @@ import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Currency
@@ -60,11 +59,13 @@ open class CurrencyAmount<C : Unit<Currency>>(
 
     @JvmName("divCurrency")
     operator fun <C : Unit<Currency>> div(that: CurrencyAmount<C>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.currency to currency))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.currency to currency),
+                     unit = NUMERIC)
 
     operator fun div(that: CurrencyAmount<C>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

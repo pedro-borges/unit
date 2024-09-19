@@ -3,7 +3,7 @@ package org.pcb.unit.amounts
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
-import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.DISTANCE2
 import org.pcb.unit.units.test.ELECTRICCURRENT1
@@ -92,7 +92,8 @@ class InductanceAmountTest
     fun divSameInductance()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = InductanceAmount(amount = 2,
                                       unit = U2(DISTANCE1, MASS1) to U2(ELECTRICCURRENT1, TIME1)) /
                      InductanceAmount(amount = 2,
@@ -103,7 +104,8 @@ class InductanceAmountTest
     fun divOtherInductance()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = InductanceAmount(amount = 2,
                                       unit = U2(DISTANCE2, MASS2) to U2(ELECTRICCURRENT1, TIME1)) /
                      InductanceAmount(amount = 20000000,

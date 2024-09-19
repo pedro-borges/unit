@@ -4,7 +4,6 @@ import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
-import org.pcb.unit.amounts.base.Numeric
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
@@ -61,11 +60,13 @@ open class DistanceAmount<D : Unit<Distance>>(
 
     @JvmName("divDistance")
     operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
-        Numeric(amount = amount / that.amount
-                         / convert(that.distance to distance))
+        ScalarAmount(amount = amount / that.amount
+                              / convert(that.distance to distance),
+                     unit = NUMERIC)
 
     operator fun div(that: DistanceAmount<D>) =
-        Numeric(amount = amount / that.amount)
+        ScalarAmount(amount = amount / that.amount,
+                     unit = NUMERIC)
 
     // endregion
 

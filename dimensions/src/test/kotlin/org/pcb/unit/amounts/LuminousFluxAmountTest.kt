@@ -4,7 +4,7 @@ import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.pcb.unit.U2
 import org.pcb.unit.U3
-import org.pcb.unit.amounts.base.Numeric
+import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.ANGLE1
 import org.pcb.unit.units.test.ANGLE2
 import org.pcb.unit.units.test.DISTANCE1
@@ -91,7 +91,8 @@ class LuminousFluxAmountTest
     fun divSameLuminousFlux()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = LuminousFluxAmount(amount = 2,
                                         unit = U2(ANGLE1, LUMINOUSINTENSITY1)) /
                      LuminousFluxAmount(amount = 2,
@@ -102,7 +103,8 @@ class LuminousFluxAmountTest
     fun divOtherLuminousFlux()
     {
         assertEquals(
-            expected = Numeric(amount = 1),
+            expected = ScalarAmount(amount = 1,
+                                    unit = NUMERIC),
             actual = LuminousFluxAmount(amount = 2,
                                         unit = U2(ANGLE2, LUMINOUSINTENSITY2)) /
                      LuminousFluxAmount(amount = 2000,
