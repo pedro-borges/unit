@@ -130,4 +130,46 @@ open class JerkAmount<D : Unit<Distance>, T : Unit<Time>>(
                         unit = NUMERIC to time)
 
     // endregion
+
+    // region -> Snap
+
+    @JvmName("timesFrequency")
+    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
+        SnapAmount(amount = amount * that.amount
+                            / convert(that.time to time),
+                   unit = distance to time)
+
+    operator fun times(that: FrequencyAmount<T>) =
+        SnapAmount(amount = amount * that.amount,
+                   unit = distance to time)
+
+    @JvmName("divTime")
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        SnapAmount(amount = amount / that.amount
+                            / convert(that.time to time),
+                   unit = distance to time)
+
+    operator fun div(that: TimeAmount<T>) =
+        SnapAmount(amount = amount / that.amount,
+                   unit = distance to time)
+
+    // endregion
+
+    // region -> Time
+
+    @JvmName("divSnap")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SnapAmount<D, T>) =
+        TimeAmount(amount = amount / that.amount
+                            / convert(that.distance to distance)
+                            * convert(that.time to time,
+                                      that.time to time,
+                                      that.time to time,
+                                      that.time to time),
+                   unit = time)
+
+    operator fun div(that: SnapAmount<D, T>) =
+        TimeAmount(amount = amount / that.amount,
+                   unit = time)
+
+    // endregion
 }

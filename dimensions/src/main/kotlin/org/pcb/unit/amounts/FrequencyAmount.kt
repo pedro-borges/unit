@@ -304,6 +304,22 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> Snap
+
+    @JvmName("timesJerk")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: JerkAmount<D, T>) =
+        SnapAmount(amount = amount * that.amount
+                            / convert(that.time to time,
+                                      that.time to time,
+                                      that.time to time),
+                   unit = that.distance to time)
+
+    operator fun <D : Unit<Distance>> times(that: JerkAmount<D, T>) =
+        SnapAmount(amount = amount * that.amount,
+                   unit = that.distance to time)
+
+    // endregion
+
     // region -> Speed
 
     operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =

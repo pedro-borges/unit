@@ -39,6 +39,7 @@ object Dimensions
                             "Power" to Composite(distance = 2, mass = 1, time = -3),
                             "Rent" to Composite(currency = 1, time = -1),
                             "Scalar" to Composite(),
+                            "Snap" to Composite(distance = 1, time = -4),
                             "SolidAngle" to Composite(angle = 2),
                             "SpecificVolume" to Composite(distance = 3, mass = -1),
                             "Speed" to Composite(distance = 1, time = -1),

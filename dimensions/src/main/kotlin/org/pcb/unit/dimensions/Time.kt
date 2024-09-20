@@ -39,6 +39,8 @@ object Time : Dimension
     operator fun div(that: ElectricConductance) = Inductance
     operator fun times(that: ElectricResistance) = Inductance
 
+    operator fun times(that: Snap) = Jerk
+
     operator fun times(that: LuminousFlux) = LuminousEnergy
 
     operator fun times(that: ElectricTension) = MagneticFlux

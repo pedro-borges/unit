@@ -43,5 +43,7 @@ object Frequency : Dimension
 
     operator fun times(that: Currency) = Rent
 
+    operator fun times(that: Jerk) = Snap
+
     operator fun times(that: Distance) = Speed
 }

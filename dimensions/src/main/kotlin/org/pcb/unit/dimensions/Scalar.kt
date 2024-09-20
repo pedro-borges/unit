@@ -81,6 +81,8 @@ object Scalar : Dimension
 
     operator fun times(that: Rent) = Rent
 
+    operator fun times(that: Snap) = Snap
+
     operator fun times(that: SolidAngle) = SolidAngle
 
     operator fun times(that: SpecificVolume) = SpecificVolume

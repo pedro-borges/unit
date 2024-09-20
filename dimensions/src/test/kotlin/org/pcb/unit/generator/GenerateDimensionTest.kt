@@ -74,6 +74,7 @@ class GenerateDimensionTest
                 it +
                 "}\n"
             }
+            .replace("\t", "    ")
 
         val source = File(stub.path.replace("target/test-classes/package", "src/main/kotlin/org/pcb/unit/dimensions/") + "$name.kt")
 

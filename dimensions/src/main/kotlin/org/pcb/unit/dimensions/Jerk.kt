@@ -16,4 +16,9 @@ object Jerk : Dimension
     operator fun times(that: Time) = Acceleration
 
     operator fun div(that: Acceleration) = Frequency
+
+    operator fun div(that: Time) = Snap
+    operator fun times(that: Frequency) = Snap
+
+    operator fun div(that: Snap) = Time
 }
