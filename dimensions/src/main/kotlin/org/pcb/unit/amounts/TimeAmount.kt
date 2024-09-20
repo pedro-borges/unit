@@ -101,6 +101,21 @@ open class TimeAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> Action
+
+    @JvmName("timesEnergy")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyAmount<D, M, T>) =
+        ActionAmount(amount = amount * that.amount
+                              / convert(that.time to time,
+                                        that.time to time),
+                     unit = U2(that.distance, that.mass) to time)
+
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: EnergyAmount<D, M, T>) =
+        ActionAmount(amount = amount * that.amount,
+                     unit = U2(that.distance, that.mass) to time)
+
+    // endregion
+
     // region -> Angle
 
     @JvmName("timesAngularVelocity")

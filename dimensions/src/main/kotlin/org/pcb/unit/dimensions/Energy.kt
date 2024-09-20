@@ -13,6 +13,9 @@ object Energy : Dimension
 
     operator fun div(that: Energy) = Scalar
 
+    operator fun div(that: Frequency) = Action
+    operator fun times(that: Time) = Action
+
     operator fun div(that: Force) = Distance
 
     operator fun div(that: ElectricTension) = ElectricCharge
@@ -25,13 +28,19 @@ object Energy : Dimension
 
     operator fun div(that: Distance) = Force
 
+    operator fun div(that: Action) = Frequency
+
     operator fun div(that: ElectricCurrent) = MagneticFlux
+
+    operator fun div(that: SpecificEnergy) = Mass
 
     operator fun div(that: Speed) = Momentum
     operator fun times(that: Pace) = Momentum
 
     operator fun div(that: Time) = Power
     operator fun times(that: Frequency) = Power
+
+    operator fun div(that: Mass) = SpecificEnergy
 
     operator fun div(that: Momentum) = Speed
 

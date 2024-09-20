@@ -178,6 +178,20 @@ open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> SpecificEnergy
+
+    @JvmName("timesDistance")
+    operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =
+        SpecificEnergyAmount(amount = amount * that.amount
+                                      * convert(that.distance to distance),
+                             unit = distance to time)
+
+    operator fun times(that: DistanceAmount<D>) =
+        SpecificEnergyAmount(amount = amount * that.amount,
+                             unit = distance to time)
+
+    // endregion
+
     // region -> Speed
 
     @JvmName("divFrequency")

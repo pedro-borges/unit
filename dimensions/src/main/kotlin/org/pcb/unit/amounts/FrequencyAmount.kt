@@ -215,6 +215,20 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> Energy
+
+    @JvmName("timesAction")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ActionAmount<D, M, T>) =
+        EnergyAmount(amount = amount * that.amount
+                              / convert(that.time to time),
+                     unit = U2(that.distance, that.mass) to time)
+
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: ActionAmount<D, M, T>) =
+        EnergyAmount(amount = amount * that.amount,
+                     unit = U2(that.distance, that.mass) to time)
+
+    // endregion
+
     // region -> Force
 
     @JvmName("timesMomentum")

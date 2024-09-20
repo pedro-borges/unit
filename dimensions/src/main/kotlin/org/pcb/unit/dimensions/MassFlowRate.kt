@@ -12,6 +12,8 @@ object MassFlowRate : Dimension
 
     operator fun div(that: MassFlowRate) = Scalar
 
+    operator fun times(that: Area) = Action
+
     operator fun div(that: MagneticFluxDensity) = ElectricCharge
 
     operator fun div(that: Pace) = Force
@@ -27,6 +29,8 @@ object MassFlowRate : Dimension
     operator fun times(that: Distance) = Momentum
 
     operator fun div(that: Force) = Pace
+
+    operator fun times(that: SpecificEnergy) = Power
 
     operator fun times(that: SpecificVolume) = VolumetricFlow
 

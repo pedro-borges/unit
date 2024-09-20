@@ -176,4 +176,21 @@ open class EnergyDensityAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
                     unit = U2(distance, mass) to time)
 
     // endregion
+
+    // region -> SpecificEnergy
+
+    @JvmName("timesSpecificVolume")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: SpecificVolumeAmount<D, M>) =
+        SpecificEnergyAmount(amount = amount * that.amount
+                                      * convert(that.distance to distance,
+                                                that.distance to distance,
+                                                that.distance to distance)
+                                      / convert(that.mass to mass),
+                             unit = distance to time)
+
+    operator fun times(that: SpecificVolumeAmount<D, M>) =
+        SpecificEnergyAmount(amount = amount * that.amount,
+                             unit = distance to time)
+
+    // endregion
 }

@@ -27,7 +27,12 @@ object Speed : Dimension
 
     operator fun times(that: Mass) = Momentum
 
+    operator fun div(that: SpecificEnergy) = Pace
+
     operator fun times(that: Force) = Power
+
+    operator fun div(that: Pace) = SpecificEnergy
+    operator fun times(that: Speed) = SpecificEnergy
 
     operator fun div(that: Acceleration) = Time
 

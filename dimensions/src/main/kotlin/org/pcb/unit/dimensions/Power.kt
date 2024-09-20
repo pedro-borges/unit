@@ -31,7 +31,11 @@ object Power : Dimension
 
     operator fun div(that: Energy) = Frequency
 
+    operator fun div(that: SpecificEnergy) = MassFlowRate
+
     operator fun div(that: Acceleration) = Momentum
+
+    operator fun div(that: MassFlowRate) = SpecificEnergy
 
     operator fun div(that: Force) = Speed
 

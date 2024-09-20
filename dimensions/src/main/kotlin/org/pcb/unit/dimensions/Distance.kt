@@ -11,6 +11,8 @@ object Distance : Dimension
 
     operator fun div(that: Distance) = Scalar
 
+    operator fun times(that: Momentum) = Action
+
     operator fun times(that: Distance) = Area
 
     operator fun div(that: SpecificVolume) = AreaDensity
@@ -20,6 +22,8 @@ object Distance : Dimension
     operator fun times(that: MassFlowRate) = Momentum
 
     operator fun times(that: Yank) = Power
+
+    operator fun times(that: Acceleration) = SpecificEnergy
 
     operator fun div(that: AreaDensity) = SpecificVolume
 

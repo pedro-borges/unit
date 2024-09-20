@@ -14,6 +14,8 @@ object Time : Dimension
 
     operator fun times(that: Jerk) = Acceleration
 
+    operator fun times(that: Energy) = Action
+
     operator fun times(that: AngularVelocity) = Angle
 
     operator fun times(that: AngularAcceleration) = AngularVelocity

@@ -24,6 +24,8 @@ object Acceleration : Dimension
 
     operator fun times(that: Momentum) = Power
 
+    operator fun times(that: Distance) = SpecificEnergy
+
     operator fun div(that: Frequency) = Speed
     operator fun times(that: Time) = Speed
 

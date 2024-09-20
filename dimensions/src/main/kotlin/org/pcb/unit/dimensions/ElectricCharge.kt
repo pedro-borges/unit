@@ -12,6 +12,8 @@ object ElectricCharge : Dimension
 
     operator fun div(that: ElectricCharge) = Scalar
 
+    operator fun times(that: MagneticFlux) = Action
+
     operator fun div(that: ElectricTension) = Capacitance
 
     operator fun div(that: MagneticFlux) = ElectricConductance

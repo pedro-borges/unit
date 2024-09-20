@@ -11,6 +11,8 @@ object Scalar : Dimension
 
     operator fun times(that: Acceleration) = Acceleration
 
+    operator fun times(that: Action) = Action
+
     operator fun times(that: Angle) = Angle
 
     operator fun times(that: AngularAcceleration) = AngularAcceleration
@@ -86,6 +88,8 @@ object Scalar : Dimension
     operator fun times(that: Snap) = Snap
 
     operator fun times(that: SolidAngle) = SolidAngle
+
+    operator fun times(that: SpecificEnergy) = SpecificEnergy
 
     operator fun times(that: SpecificVolume) = SpecificVolume
 

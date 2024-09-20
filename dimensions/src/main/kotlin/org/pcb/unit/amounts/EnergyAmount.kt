@@ -101,7 +101,31 @@ open class EnergyAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> Distance
+	// region -> Action
+
+	@JvmName("divFrequency")
+	operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
+		ActionAmount(amount = amount / that.amount
+							  * convert(that.time to time),
+					 unit = U2(distance, mass) to time)
+
+	operator fun div(that: FrequencyAmount<T>) =
+		ActionAmount(amount = amount / that.amount,
+					 unit = U2(distance, mass) to time)
+
+	@JvmName("timesTime")
+	operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
+		ActionAmount(amount = amount * that.amount
+							  * convert(that.time to time),
+					 unit = U2(distance, mass) to time)
+
+	operator fun times(that: TimeAmount<T>) =
+		ActionAmount(amount = amount * that.amount,
+					 unit = U2(distance, mass) to time)
+
+	// endregion
+
+	// region -> Distance
 
     @JvmName("divForce")
     operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ForceAmount<D, M, T>) =
@@ -197,7 +221,24 @@ open class EnergyAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
         ForceAmount(amount = amount / that.amount,
 					unit = U2(distance, mass) to time)
 
-    // endregion
+	// endregion
+
+	// region -> Frequency
+
+	@JvmName("divAction")
+	operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ActionAmount<D, M, T>) =
+		FrequencyAmount(amount = amount / that.amount
+								 / convert(that.distance to distance,
+										   that.distance to distance,
+										   that.mass to mass)
+								 * convert(that.time to time),
+						unit = NUMERIC to time)
+
+	operator fun div(that: ActionAmount<D, M, T>) =
+		FrequencyAmount(amount = amount / that.amount,
+						unit = NUMERIC to time)
+
+	// endregion
 
     // region -> MagneticFlux
 
@@ -205,7 +246,24 @@ open class EnergyAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
         MagneticFluxAmount(amount = amount / that.amount,
 						   unit = U2(distance, mass) to U2(that.electricCurrent, time))
 
-    // endregion
+	// endregion
+
+	// region -> Mass
+
+	@JvmName("divSpecificEnergy")
+	operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpecificEnergyAmount<D, T>) =
+		MassAmount(amount = amount / that.amount
+							/ convert(that.distance to distance,
+									  that.distance to distance)
+							* convert(that.time to time,
+									  that.time to time),
+				   unit = mass)
+
+	operator fun div(that: SpecificEnergyAmount<D, T>) =
+		MassAmount(amount = amount / that.amount,
+				   unit = mass)
+
+	// endregion
 
     // region -> Momentum
 
@@ -255,7 +313,21 @@ open class EnergyAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
         PowerAmount(amount = amount / that.amount,
 					unit = U2(distance, mass) to time)
 
-    // endregion
+	// endregion
+
+	// region -> SpecificEnergy
+
+	@JvmName("divMass")
+	operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
+		SpecificEnergyAmount(amount = amount / that.amount
+									  / convert(that.mass to mass),
+							 unit = distance to time)
+
+	operator fun div(that: MassAmount<M>) =
+		SpecificEnergyAmount(amount = amount / that.amount,
+							 unit = distance to time)
+
+	// endregion
 
     // region -> Speed
 

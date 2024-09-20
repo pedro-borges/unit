@@ -29,6 +29,8 @@ object Frequency : Dimension
 
     operator fun times(that: MagneticFlux) = ElectricTension
 
+    operator fun times(that: Action) = Energy
+
     operator fun times(that: Momentum) = Force
 
     operator fun times(that: Acceleration) = Jerk

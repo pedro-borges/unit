@@ -25,5 +25,7 @@ object Pace : Dimension
 
     operator fun times(that: Energy) = Momentum
 
+    operator fun times(that: SpecificEnergy) = Speed
+
     operator fun times(that: Distance) = Time
 }

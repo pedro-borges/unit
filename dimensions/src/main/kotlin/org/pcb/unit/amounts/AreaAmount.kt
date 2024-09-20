@@ -85,6 +85,14 @@ open class AreaAmount<D : Unit<Distance>>(
 
     // endregion
 
+    // region -> Action
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: MassFlowRateAmount<M, T>) =
+        ActionAmount(amount = amount * that.amount,
+                     unit = U2(distance, that.mass) to that.time)
+
+    // endregion
+
     // region -> Distance
 
     @JvmName("divDistance")

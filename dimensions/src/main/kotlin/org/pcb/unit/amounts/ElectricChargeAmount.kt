@@ -86,6 +86,22 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Action
+
+    @JvmName("timesMagneticFlux")
+    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: MagneticFluxAmount<D, EC, M, T>) =
+        ActionAmount(amount = amount * that.amount
+                              / convert(that.electricCurrent to electricCurrent,
+                                        that.time to time,
+                                        that.time to time),
+                     unit = U2(that.distance, that.mass) to time)
+
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: MagneticFluxAmount<D, EC, M, T>) =
+        ActionAmount(amount = amount * that.amount,
+                     unit = U2(that.distance, that.mass) to time)
+
+    // endregion
+
     // region -> Capacitance
 
     @JvmName("divElectricTension")

@@ -5,6 +5,7 @@ import org.pcb.unit.Composite
 object Dimensions
 {
     val DIMENSIONS = listOf("Acceleration" to Composite(distance = 1, time = -2),
+                            "Action" to Composite(distance = 2, mass = 1, time = -1),
                             "Angle" to Composite(angle = 1),
                             "AngularAcceleration" to Composite(angle = 1, time = -2),
                             "AngularMomentum" to Composite(mass = 2, distance = 1, time = -1),
@@ -42,6 +43,7 @@ object Dimensions
                             "Scalar" to Composite(),
                             "Snap" to Composite(distance = 1, time = -4),
                             "SolidAngle" to Composite(angle = 2),
+                            "SpecificEnergy" to Composite(distance = 2, time = -2),
                             "SpecificVolume" to Composite(distance = 3, mass = -1),
                             "Speed" to Composite(distance = 1, time = -1),
                             "Temperature" to Composite(temperature = 1),

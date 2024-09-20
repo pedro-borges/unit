@@ -70,6 +70,20 @@ open class DistanceAmount<D : Unit<Distance>>(
 
     // endregion
 
+    // region -> Action
+
+    @JvmName("timesMomentum")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: MomentumAmount<D, M, T>) =
+        ActionAmount(amount = amount * that.amount
+                              * convert(that.distance to distance),
+                     unit = U2(distance, that.mass) to that.time)
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: MomentumAmount<D, M, T>) =
+        ActionAmount(amount = amount * that.amount,
+                     unit = U2(distance, that.mass) to that.time)
+
+    // endregion
+
     // region -> Area
 
     @JvmName("timesDistance")
@@ -133,6 +147,20 @@ open class DistanceAmount<D : Unit<Distance>>(
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: YankAmount<D, M, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, that.mass) to that.time)
+
+    // endregion
+
+    // region -> SpecificEnergy
+
+    @JvmName("timesAcceleration")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: AccelerationAmount<D, T>) =
+        SpecificEnergyAmount(amount = amount * that.amount
+                                      * convert(that.distance to distance),
+                             unit = distance to that.time)
+
+    operator fun <T : Unit<Time>> times(that: AccelerationAmount<D, T>) =
+        SpecificEnergyAmount(amount = amount * that.amount,
+                             unit = distance to that.time)
 
     // endregion
 

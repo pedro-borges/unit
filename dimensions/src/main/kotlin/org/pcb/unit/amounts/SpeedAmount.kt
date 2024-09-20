@@ -197,6 +197,23 @@ open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Pace
+
+    @JvmName("divSpecificEnergy")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpecificEnergyAmount<D, T>) =
+        PaceAmount(amount = amount / that.amount
+                            / convert(that.distance to distance,
+                                      that.distance to distance)
+                            * convert(that.time to time,
+                                      that.time to time),
+                   unit = time to distance)
+
+    operator fun div(that: SpecificEnergyAmount<D, T>) =
+        PaceAmount(amount = amount / that.amount,
+                   unit = time to distance)
+
+    // endregion
+
     // region -> Power
 
     @JvmName("timesForce")
@@ -210,6 +227,32 @@ open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
     operator fun <M : Unit<Mass>> times(that: ForceAmount<D, M, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, that.mass) to time)
+
+    // endregion
+
+    // region -> SpecificEnergy
+
+    @JvmName("divPace")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<D, T>) =
+        SpecificEnergyAmount(amount = amount / that.amount
+                                      / convert(that.time to time)
+                                      * convert(that.distance to distance),
+                             unit = distance to time)
+
+    operator fun div(that: PaceAmount<D, T>) =
+        SpecificEnergyAmount(amount = amount / that.amount,
+                             unit = distance to time)
+
+    @JvmName("timesSpeed")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
+        SpecificEnergyAmount(amount = amount * that.amount
+                                      * convert(that.distance to distance)
+                                      / convert(that.time to time),
+                             unit = distance to time)
+
+    operator fun times(that: SpeedAmount<D, T>) =
+        SpecificEnergyAmount(amount = amount * that.amount,
+                             unit = distance to time)
 
     // endregion
 

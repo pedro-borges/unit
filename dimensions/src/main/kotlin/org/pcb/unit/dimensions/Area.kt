@@ -11,6 +11,8 @@ object Area : Dimension
 
     operator fun div(that: Area) = Scalar
 
+    operator fun times(that: MassFlowRate) = Action
+
     operator fun div(that: Distance) = Distance
 
     operator fun times(that: EnergyDensity) = Force

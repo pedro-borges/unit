@@ -13,6 +13,8 @@ object Momentum : Dimension
 
     operator fun div(that: Momentum) = Scalar
 
+    operator fun times(that: Distance) = Action
+
     operator fun times(that: Mass) = AngularMomentum
 
     operator fun div(that: VolumetricFlow) = AreaDensity

@@ -94,6 +94,20 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Action
+
+    @JvmName("timesDistance")
+    operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =
+        ActionAmount(amount = amount * that.amount
+                              * convert(that.distance to distance),
+                     unit = U2(distance, mass) to time)
+
+    operator fun times(that: DistanceAmount<D>) =
+        ActionAmount(amount = amount * that.amount,
+                     unit = U2(distance, mass) to time)
+
+    // endregion
+
     // region -> AngularMomentum
 
     @JvmName("timesMass")

@@ -106,6 +106,14 @@ open class MassAmount<M : Unit<Mass>>(
 
     // endregion
 
+    // region -> Energy
+
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpecificEnergyAmount<D, T>) =
+        EnergyAmount(amount = amount * that.amount,
+                     unit = U2(that.distance, mass) to that.time)
+
+    // endregion
+
     // region -> Force
 
     operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: AccelerationAmount<D, T>) =

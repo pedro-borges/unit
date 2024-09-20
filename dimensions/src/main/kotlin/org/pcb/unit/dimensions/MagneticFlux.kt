@@ -14,6 +14,8 @@ object MagneticFlux : Dimension
 
     operator fun div(that: MagneticFlux) = Scalar
 
+    operator fun times(that: ElectricCharge) = Action
+
     operator fun div(that: MagneticFluxDensity) = Area
 
     operator fun div(that: ElectricResistance) = ElectricCharge

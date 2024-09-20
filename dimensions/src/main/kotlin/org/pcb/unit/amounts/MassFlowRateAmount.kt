@@ -89,6 +89,14 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Action
+
+    operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =
+        ActionAmount(amount = amount * that.amount,
+                     unit = U2(that.distance, mass) to time)
+
+    // endregion
+
     // region -> ElectricCharge
 
     @JvmName("divMagneticFluxDensity")
@@ -202,6 +210,21 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
     operator fun <D : Unit<Distance>> div(that: ForceAmount<D, M, T>) =
         PaceAmount(amount = amount / that.amount,
                    unit = time to that.distance)
+
+    // endregion
+
+    // region -> Power
+
+    @JvmName("timesSpecificEnergy")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpecificEnergyAmount<D, T>) =
+        PowerAmount(amount = amount * that.amount
+                             / convert(that.time to time,
+                                       that.time to time),
+                    unit = U2(that.distance, mass) to time)
+
+    operator fun <D : Unit<Distance>> times(that: SpecificEnergyAmount<D, T>) =
+        PowerAmount(amount = amount * that.amount,
+                    unit = U2(that.distance, mass) to time)
 
     // endregion
 

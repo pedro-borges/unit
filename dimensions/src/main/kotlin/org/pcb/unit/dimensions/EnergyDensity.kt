@@ -22,4 +22,6 @@ object EnergyDensity : Dimension
     operator fun times(that: Area) = Force
 
     operator fun times(that: VolumetricFlow) = Power
+
+    operator fun times(that: SpecificVolume) = SpecificEnergy
 }

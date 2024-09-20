@@ -14,6 +14,8 @@ object SpecificVolume : Dimension
 
     operator fun times(that: AreaDensity) = Distance
 
+    operator fun times(that: EnergyDensity) = SpecificEnergy
+
     operator fun times(that: Mass) = Volume
 
     operator fun times(that: MassFlowRate) = VolumetricFlow

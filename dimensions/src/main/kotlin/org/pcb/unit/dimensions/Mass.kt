@@ -17,6 +17,8 @@ object Mass : Dimension
 
     operator fun div(that: Area) = AreaDensity
 
+    operator fun times(that: SpecificEnergy) = Energy
+
     operator fun times(that: Acceleration) = Force
 
     operator fun div(that: Time) = MassFlowRate

@@ -250,6 +250,23 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> MassFlowRate
+
+    @JvmName("divSpecificEnergy")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpecificEnergyAmount<D, T>) =
+        MassFlowRateAmount(amount = amount / that.amount
+                                    / convert(that.distance to distance,
+                                              that.distance to distance)
+                                    * convert(that.time to time,
+                                              that.time to time),
+                           unit = mass to time)
+
+    operator fun div(that: SpecificEnergyAmount<D, T>) =
+        MassFlowRateAmount(amount = amount / that.amount,
+                           unit = mass to time)
+
+    // endregion
+
     // region -> Momentum
 
     @JvmName("divAcceleration")
@@ -263,6 +280,21 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: AccelerationAmount<D, T>) =
         MomentumAmount(amount = amount / that.amount,
                        unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> SpecificEnergy
+
+    @JvmName("divMassFlowRate")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: MassFlowRateAmount<M, T>) =
+        SpecificEnergyAmount(amount = amount / that.amount
+                                      / convert(that.mass to mass)
+                                      * convert(that.time to time),
+                             unit = distance to time)
+
+    operator fun div(that: MassFlowRateAmount<M, T>) =
+        SpecificEnergyAmount(amount = amount / that.amount,
+                             unit = distance to time)
 
     // endregion
 
