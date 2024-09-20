@@ -143,8 +143,6 @@ class GenerateAmountsTest
                     }
             }
 
-        val stub = this.javaClass.classLoader.getResource("package")!!
-
         val operatorCode = regions.keys
             .asSequence()
             .sorted()
@@ -155,11 +153,7 @@ class GenerateAmountsTest
             }
             .joinToString(separator = "\n\n")
 
-        val contents = stub.readText()
-            .replace(oldValue = "\$operators",
-                     newValue = operatorCode)
-
-        val contents2 =
+        val contents =
             "package org.pcb.unit.amounts\n" +
             "\n" +
             "import org.pcb.unit.Amount\n" +
@@ -198,9 +192,11 @@ class GenerateAmountsTest
             "$operatorCode\n" +
             "}\n"
 
+        val stub = this.javaClass.classLoader.getResource("package")!!
+
         val source = File(stub.path.replace("target/test-classes/package", "src/main/kotlin/org/pcb/unit/amounts/") + "$amountName.kt")
 
-        source.writeText(contents2)
+        source.writeText(contents.replace("\t", "    "))
     }
 
     private fun Composite.buildGenericDeclaration(): String
