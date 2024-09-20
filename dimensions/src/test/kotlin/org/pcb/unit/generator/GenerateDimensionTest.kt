@@ -6,6 +6,8 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.pcb.unit.Composite
 import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.generator.Dimensions.max
+import org.pcb.unit.generator.Dimensions.min
 import org.pcb.unit.minus
 import org.pcb.unit.plus
 
@@ -111,35 +113,5 @@ class GenerateDimensionTest
         }
 
         return "@Composite(" + result.joinToString(",\n") + ")"
-    }
-
-    private fun Composite.max() =
-        max(angle, currency, distance, electricCurrent, luminousIntensity, mass, temperature, time)
-
-    private fun Composite.min() =
-        min(angle, currency, distance, electricCurrent, luminousIntensity, mass, temperature, time)
-
-    private fun min(value: Int, vararg values: Int): Int
-    {
-        var result = value
-
-        for (v in values)
-        {
-            result = kotlin.math.min(result, v)
-        }
-
-        return result
-    }
-
-    private fun max(value: Int, vararg values: Int): Int
-    {
-        var result = value
-
-        for (v in values)
-        {
-            result = kotlin.math.max(result, v)
-        }
-
-        return result
     }
 }

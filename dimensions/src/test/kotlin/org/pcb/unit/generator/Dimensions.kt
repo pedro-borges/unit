@@ -45,4 +45,34 @@ object Dimensions
                             "Temperature" to Composite(temperature = 1),
                             "Time" to Composite(time = 1),
                             "Volume" to Composite(distance = 3))
+
+    fun Composite.max() =
+        max(angle, currency, distance, electricCurrent, luminousIntensity, mass, temperature, time)
+
+    fun Composite.min() =
+        min(angle, currency, distance, electricCurrent, luminousIntensity, mass, temperature, time)
+
+    fun min(value: Int, vararg values: Int): Int
+    {
+        var result = value
+
+        for (v in values)
+        {
+            result = kotlin.math.min(result, v)
+        }
+
+        return result
+    }
+
+    fun max(value: Int, vararg values: Int): Int
+    {
+        var result = value
+
+        for (v in values)
+        {
+            result = kotlin.math.max(result, v)
+        }
+
+        return result
+    }
 }

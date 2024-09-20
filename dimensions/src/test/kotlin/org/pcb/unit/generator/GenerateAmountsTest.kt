@@ -5,6 +5,8 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.pcb.unit.Composite
 import org.pcb.unit.generator.Dimensions.DIMENSIONS
+import org.pcb.unit.generator.Dimensions.max
+import org.pcb.unit.generator.Dimensions.min
 import org.pcb.unit.minus
 import org.pcb.unit.plus
 
@@ -140,23 +142,54 @@ class GenerateAmountsTest
 
         val stub = this.javaClass.classLoader.getResource("org/pcb/unit/amounts/$amountName")!!
 
+        val operatorCode = regions.keys
+            .asSequence()
+            .sorted()
+            .sortedBy { it != "Scalar" }
+            .sortedBy { it != dimensionName }
+            .map {
+                "\t// region -> ${it}\n\n" + regions[it] + "\t// endregion"
+            }
+            .joinToString(separator = "\n\n")
+
         val contents = stub.readText()
             .replace(oldValue = "\$operators",
-                     newValue = regions.keys
-                         .asSequence()
-                         .sorted()
-                         .sortedBy { it != "Scalar" }
-                         .sortedBy { it != dimensionName }
-                         .map {
-                             "\t// region -> ${it}\n\n" + regions[it] + "\t// endregion"
-                         }
-                         .joinToString(separator = "\n\n"))
+                     newValue = operatorCode)
+
+        val contents2 =
+            "package org.pcb.unit.amounts\n" +
+            "\n" +
+            "import org.pcb.unit.Amount\n" +
+            "import org.pcb.unit.CompositeUnit\n" +
+            "import org.pcb.unit.U2\n" +
+            "import org.pcb.unit.U3\n" +
+            "import org.pcb.unit.Unit\n" +
+            "import org.pcb.unit.amounts.base.Numeric.NUMERIC\n" +
+            "import org.pcb.unit.convert\n" +
+            DIMENSIONS.joinToString("\n") { "import org.pcb.unit.dimensions.${it.first}" } +
+            "import org.pcb.unit.div\n" +
+            "import org.pcb.unit.major\n" +
+            "import org.pcb.unit.minor\n" +
+            "import org.pcb.unit.times\n" +
+            "import org.pcb.unit.toBigDecimal\n" +
+            "\n" +
+            "open class $amountName${dimensionComposite.buildGenericDeclaration()}(\n" +
+            "\t\tamount: Number,\n" +
+            "\t\tunit: ${dimensionComposite.buildType()})\n" +
+            "\t: Amount<$dimensionName>(amount = amount.toBigDecimal(),\n" +
+            "                           unit = CompositeUnit(\n" +
+            "                               domain = $dimensionName::class,\n" +
+            "                               units = mapOf(${dimensionComposite.buildMap()})))\n" +
+            "{\n" +
+            dimensionComposite.buildVariables() +
+            dimensionComposite.buildConstructor(dimensionName) +
+            "\n" +
+            "$operatorCode\n" +
+            "}\n"
 
         val source = File(stub.path.replace("target/test-classes/", "src/main/kotlin/") + ".kt")
 
         source.writeText(contents)
-
-        println(contents)
     }
 
     private fun Composite.buildGenericDeclaration(): String
@@ -227,7 +260,7 @@ class GenerateAmountsTest
         return result.joinToString(",\n\t\t\t\t")
     }
 
-    private fun Composite.buildUnit(that: Composite): String?
+    private fun Composite.buildUnit(that: Composite): String
     {
         val thatPositives = that.positives()
         val thatNegatives = that.negatives()
@@ -263,6 +296,200 @@ class GenerateAmountsTest
             major == null && minor != null -> "NUMERIC to " + minor
             else                           -> "$major to $minor"
         }
+    }
+
+    private fun Composite.buildCanonical(): String
+    {
+        val positives = positives()
+        val negatives = negatives()
+
+        val canons = mapOf("A" to "RADIAN",
+                           "C" to "EUR",
+                           "D" to "METER",
+                           "EC" to "AMPERE",
+                           "LI" to "CANDELA",
+                           "M" to "kilo(GRAM)",
+                           "T" to "SECOND",
+                           "K" to "KELVIN")
+
+        val major = when (positives.count())
+        {
+            0    -> null
+            1    -> positives.unitGenerics().sortedByDescending { it.second }.joinToString(", ") { canons[it.first]!! }
+            2    -> "U2(${positives.unitGenerics().sortedByDescending { it.second }.joinToString(", ") { canons[it.first]!! }})"
+            3    -> "U3(${positives.unitGenerics().sortedByDescending { it.second }.joinToString(", ") { canons[it.first]!! }})"
+            4    -> "U4(${positives.unitGenerics().sortedByDescending { it.second }.joinToString(", ") { canons[it.first]!! }})"
+            5    -> "U5(${positives.unitGenerics().sortedByDescending { it.second }.joinToString(", ") { canons[it.first]!! }})"
+            6    -> "U6(${positives.unitGenerics().sortedByDescending { it.second }.joinToString(", ") { canons[it.first]!! }})"
+            else -> throw IllegalArgumentException()
+        }
+
+        val minor = when (negatives.count())
+        {
+            0    -> null
+            1    -> negatives.unitGenerics().sortedBy { it.second }.joinToString(", ") { canons[it.first]!! }
+            2    -> "U2(${negatives.unitGenerics().sortedBy { it.second }.joinToString(", ") { canons[it.first]!! }})"
+            3    -> "U3(${negatives.unitGenerics().sortedBy { it.second }.joinToString(", ") { canons[it.first]!! }})"
+            4    -> "U4(${negatives.unitGenerics().sortedBy { it.second }.joinToString(", ") { canons[it.first]!! }})"
+            5    -> "U5(${negatives.unitGenerics().sortedBy { it.second }.joinToString(", ") { canons[it.first]!! }})"
+            6    -> "U6(${negatives.unitGenerics().sortedBy { it.second }.joinToString(", ") { canons[it.first]!! }})"
+            else -> throw IllegalArgumentException()
+        }
+
+        return when
+        {
+            major == null && minor == null -> "NUMERIC"
+            major != null && minor == null -> major
+            major == null && minor != null -> "NUMERIC to " + minor
+            else                           -> "$major to $minor"
+        }
+    }
+
+    private fun Composite.buildType(): String
+    {
+        val positives = positives()
+        val negatives = negatives()
+
+        val major = when (positives.count())
+        {
+            0    -> null
+            1    -> positives.unitGenerics().sortedByDescending { it.second }.joinToString(", ") { it.first }
+            2    -> "U2<${positives.unitGenerics().sortedByDescending { it.second }.joinToString(", ") { it.first }}>"
+            3    -> "U3<${positives.unitGenerics().sortedByDescending { it.second }.joinToString(", ") { it.first }}>"
+            4    -> "U4<${positives.unitGenerics().sortedByDescending { it.second }.joinToString(", ") { it.first }}>"
+            5    -> "U5<${positives.unitGenerics().sortedByDescending { it.second }.joinToString(", ") { it.first }}>"
+            6    -> "U6<${positives.unitGenerics().sortedByDescending { it.second }.joinToString(", ") { it.first }}>"
+            else -> throw IllegalArgumentException()
+        }
+
+        val minor = when (negatives.count())
+        {
+            0    -> null
+            1    -> negatives.unitGenerics().sortedBy { it.second }.joinToString(", ") { it.first }
+            2    -> "U2<${negatives.unitGenerics().sortedBy { it.second }.joinToString(", ") { it.first }}>"
+            3    -> "U3<${negatives.unitGenerics().sortedBy { it.second }.joinToString(", ") { it.first }}>"
+            4    -> "U4<${negatives.unitGenerics().sortedBy { it.second }.joinToString(", ") { it.first }}>"
+            5    -> "U5<${negatives.unitGenerics().sortedBy { it.second }.joinToString(", ") { it.first }}>"
+            6    -> "U6<${negatives.unitGenerics().sortedBy { it.second }.joinToString(", ") { it.first }}>"
+            else -> throw IllegalArgumentException()
+        }
+
+        return when
+        {
+            major == null && minor == null -> "Unit<Scalar>"
+            major != null && minor == null -> major
+            major == null && minor != null -> "Pair<Unit<Scalar>, $minor>"
+            else                           -> "Pair<$major, $minor>"
+        }
+    }
+
+    private fun Composite.buildMap(): String
+    {
+        val positives = positives().map()
+        val negatives = negatives().map()
+
+        val positiveKeys = positives.keys.sortedByDescending { positives[it] }
+        val negativeKeys = negatives.keys.sortedBy { positives[it] }
+
+        val minor = when (negatives.count())
+        {
+            0    -> null
+            1    -> negativeKeys.map { negatives[it] }.mapIndexed { index, power -> "unit.minor${index.pair()} to ${-power!!}" }.joinToString(",\n")
+            else -> negativeKeys.map { negatives[it] }.mapIndexed { index, power -> "unit.minor${(index + 1).pair()} to ${-power!!}" }.joinToString(",\n")
+        }
+
+        val unit =
+            if (minor == null) "unit"
+            else "unit.major"
+
+        val major = when (positives.count())
+        {
+            0    -> null
+            1    -> positiveKeys.map { positives[it] }.mapIndexed { index, power -> "$unit${index.pair()} to $power" }.joinToString(",\n")
+            else -> positiveKeys.map { positives[it] }.mapIndexed { index, power -> "$unit${(index + 1).pair()} to $power" }.joinToString(",\n")
+        }
+
+        return sequenceOf(major, minor).filterNotNull().joinToString(",\n")
+    }
+
+    private fun Composite.buildConstructor(domainName: String): String
+    {
+        return if (count() > 1)
+        {
+            "\n" +
+            "\tcompanion object\n" +
+            "\t{\n" +
+            "\t\toperator fun invoke(amount: Number, unit: Unit<$domainName>) =\n" +
+            "\t\t\t\t${domainName}Amount(amount = amount * unit.scale,\n" +
+            "\t\t\t\t\t\tunit = ${buildCanonical()})\n" +
+            "\t}\n"
+        } else
+        {
+            ""
+        }
+    }
+
+    private fun Composite.buildVariables(): String
+    {
+        val positives = positives().map()
+        val negatives = negatives().map()
+
+        val positiveKeys = positives.keys.sortedByDescending { positives[it] }
+        val negativeKeys = negatives.keys.sortedBy { positives[it] }
+
+        val minor = when (negatives.count())
+        {
+            0    -> null
+            1    -> negativeKeys.mapIndexed { index, unit -> "\tval $unit = unit.minor${index.pair()}\n" }.joinToString("")
+            else -> negativeKeys.mapIndexed { index, unit -> "\tval $unit = unit.minor${(index + 1).pair()}\n" }.joinToString("")
+        }
+
+        val unitType =
+            if (minor == null) "unit"
+            else "unit.major"
+
+        val major = when (positives.count())
+        {
+            0    -> null
+            1    -> positiveKeys.mapIndexed { index, unit -> "\tval $unit = $unitType${index.pair()}\n" }.joinToString("")
+            else -> positiveKeys.mapIndexed { index, unit -> "\tval $unit = $unitType${(index + 1).pair()}\n" }.joinToString("")
+        }
+
+        return major + minor
+    }
+
+    private fun Int.pair() =
+        when (this)
+        {
+            0    -> ""
+            1    -> ".first"
+            2    -> ".second"
+            3    -> ".third"
+            4    -> ".fourth"
+            5    -> ".fifth"
+            6    -> ".sixth"
+            else -> throw IllegalArgumentException()
+        }
+
+    private fun Composite.map(): Map<String, Int>
+    {
+        val result = HashMap<String, Int>()
+
+        for (i in max() downTo min())
+        {
+            if (i == 0) continue
+
+            if (angle == i) result["angle"] = angle
+            if (currency == i) result["currency"] = currency
+            if (distance == i) result["distance"] = distance
+            if (electricCurrent == i) result["electricCurrent"] = electricCurrent
+            if (luminousIntensity == i) result["luminousIntensity"] = luminousIntensity
+            if (mass == i) result["mass"] = mass
+            if (temperature == i) result["temperature"] = temperature
+            if (time == i) result["time"] = time
+        }
+
+        return result
     }
 
     private fun Composite.positives() =
@@ -307,6 +534,22 @@ class GenerateAmountsTest
         if (mass != 0 && that.mass != 0) result += "mass" to that.mass else if (that.mass != 0) result += "that.mass" to that.mass
         if (temperature != 0 && that.temperature != 0) result += "temperature" to that.temperature else if (that.temperature != 0) result += "that.temperature" to that.temperature
         if (time != 0 && that.time != 0) result += "time" to that.time else if (that.time != 0) result += "that.time" to that.time
+
+        return result
+    }
+
+    fun Composite.unitGenerics(): ArrayList<Pair<String, Int>>
+    {
+        val result = ArrayList<Pair<String, Int>>()
+
+        if (angle != 0) result += "A" to angle
+        if (currency != 0) result += "C" to currency
+        if (distance != 0) result += "D" to distance
+        if (electricCurrent != 0) result += "EC" to electricCurrent
+        if (luminousIntensity != 0) result += "LI" to luminousIntensity
+        if (mass != 0) result += "M" to mass
+        if (temperature != 0) result += "K" to temperature
+        if (time != 0) result += "T" to time
 
         return result
     }
