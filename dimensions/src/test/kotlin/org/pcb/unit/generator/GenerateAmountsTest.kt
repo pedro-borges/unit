@@ -1,4 +1,4 @@
-package org.pcb.unit.amounts
+package org.pcb.unit.generator
 
 import java.io.File
 import org.junit.jupiter.params.ParameterizedTest
@@ -10,7 +10,7 @@ import org.pcb.unit.minus
 import org.pcb.unit.plus
 import org.reflections.Reflections
 
-class AmountTest
+class GenerateAmountsTest
 {
     companion object
     {
