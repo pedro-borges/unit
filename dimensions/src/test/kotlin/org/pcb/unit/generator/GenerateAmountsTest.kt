@@ -1,6 +1,7 @@
 package org.pcb.unit.generator
 
 import java.io.File
+import kotlin.math.absoluteValue
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.pcb.unit.Composite
@@ -164,10 +165,18 @@ class GenerateAmountsTest
             "import org.pcb.unit.U2\n" +
             "import org.pcb.unit.U3\n" +
             "import org.pcb.unit.Unit\n" +
-            "import org.pcb.unit.amounts.base.Numeric.NUMERIC\n" +
             "import org.pcb.unit.convert\n" +
-            DIMENSIONS.joinToString("\n") { "import org.pcb.unit.dimensions.${it.first}" } +
+            DIMENSIONS.joinToString("") { "import org.pcb.unit.dimensions.${it.first}\n" } +
+            "import org.pcb.unit.amounts.base.Radian.RADIAN\n" +
+            "import org.pcb.unit.amounts.base.Ampere.AMPERE\n" +
+            "import org.pcb.unit.amounts.base.Candela.CANDELA\n" +
+            "import org.pcb.unit.amounts.base.Gram.GRAM\n" +
+            "import org.pcb.unit.amounts.base.Meter.METER\n" +
+            "import org.pcb.unit.amounts.base.Numeric.NUMERIC\n" +
+            "import org.pcb.unit.amounts.base.Second.SECOND\n" +
+            "import org.pcb.unit.amounts.base.Kelvin.KELVIN\n" +
             "import org.pcb.unit.div\n" +
+            "import org.pcb.unit.kilo\n" +
             "import org.pcb.unit.major\n" +
             "import org.pcb.unit.minor\n" +
             "import org.pcb.unit.times\n" +
@@ -189,7 +198,7 @@ class GenerateAmountsTest
 
         val source = File(stub.path.replace("target/test-classes/package", "src/main/kotlin/org/pcb/unit/amounts/") + "$amountName.kt")
 
-        source.writeText(contents)
+        source.writeText(contents2)
     }
 
     private fun Composite.buildGenericDeclaration(): String
@@ -389,7 +398,7 @@ class GenerateAmountsTest
         val negatives = negatives().map()
 
         val positiveKeys = positives.keys.sortedByDescending { positives[it] }
-        val negativeKeys = negatives.keys.sortedBy { positives[it] }
+        val negativeKeys = negatives.keys.sortedBy { negatives[it] }
 
         val minor = when (negatives.count())
         {
@@ -414,7 +423,7 @@ class GenerateAmountsTest
 
     private fun Composite.buildConstructor(domainName: String): String
     {
-        return if (count() > 1)
+        return if (domainName !in setOf("Debt", "Rent") && isComposite())
         {
             "\n" +
             "\tcompanion object\n" +
@@ -435,7 +444,7 @@ class GenerateAmountsTest
         val negatives = negatives().map()
 
         val positiveKeys = positives.keys.sortedByDescending { positives[it] }
-        val negativeKeys = negatives.keys.sortedBy { positives[it] }
+        val negativeKeys = negatives.keys.sortedBy { negatives[it] }
 
         val minor = when (negatives.count())
         {
@@ -455,7 +464,7 @@ class GenerateAmountsTest
             else -> positiveKeys.mapIndexed { index, unit -> "\tval $unit = $unitType${(index + 1).pair()}\n" }.joinToString("")
         }
 
-        return major + minor
+        return (major ?: "") + (minor ?: "")
     }
 
     private fun Int.pair() =
@@ -521,6 +530,11 @@ class GenerateAmountsTest
         (if (mass != 0) 1 else 0) +
         (if (temperature != 0) 1 else 0) +
         (if (time != 0) 1 else 0)
+
+    private fun Composite.isComposite() =
+        (angle.absoluteValue + currency.absoluteValue + distance.absoluteValue + electricCurrent.absoluteValue +
+         luminousIntensity.absoluteValue + mass.absoluteValue + temperature.absoluteValue + time.absoluteValue) > 1 ||
+        negatives().count() > 0
 
     fun Composite.units(that: Composite): ArrayList<Pair<String, Int>>
     {

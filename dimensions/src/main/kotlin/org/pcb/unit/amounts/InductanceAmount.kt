@@ -186,4 +186,3 @@ open class InductanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : 
 
     // endregion
 }
-

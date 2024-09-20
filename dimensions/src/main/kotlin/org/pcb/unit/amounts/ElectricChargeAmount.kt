@@ -241,4 +241,3 @@ open class ElectricChargeAmount<EC : Unit<ElectricCurrent>, T : Unit<Time>>(
 
     // endregion
 }
-

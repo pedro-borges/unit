@@ -4,7 +4,9 @@ import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
+import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
+import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Acceleration
 import org.pcb.unit.dimensions.Distance
@@ -28,6 +30,13 @@ open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
 {
     val distance = unit.major
     val time = unit.minor
+
+    companion object
+    {
+        operator fun invoke(amount: Number, unit: Unit<Acceleration>) =
+            AccelerationAmount(amount = amount * unit.scale,
+                               unit = METER to SECOND)
+    }
 
     // region -> Acceleration
 

@@ -3,7 +3,9 @@ package org.pcb.unit.amounts
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Unit
+import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
+import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Jerk
@@ -26,6 +28,13 @@ open class JerkAmount<D : Unit<Distance>, T : Unit<Time>>(
 {
     val distance = unit.major
     val time = unit.minor
+
+    companion object
+    {
+        operator fun invoke(amount: Number, unit: Unit<Jerk>) =
+            JerkAmount(amount = amount * unit.scale,
+                       unit = METER to SECOND)
+    }
 
     // region -> Jerk
 

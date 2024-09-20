@@ -23,12 +23,12 @@ import org.pcb.unit.toBigDecimal
 open class IlluminanceAmount<A : Unit<Angle>, D : Unit<Distance>, LI : Unit<LuminousIntensity>>(
         amount: Number,
         unit: Pair<U2<A, LI>, D>)
-    : Amount<LuminousIntensity>(amount = amount.toBigDecimal(),
-                                unit = CompositeUnit(
-                                    domain = LuminousIntensity::class,
-                                    units = mapOf(unit.major.first to 2,
-                                                  unit.major.second to 1,
-                                                  unit.minor to -2)))
+    : Amount<Illuminance>(amount = amount.toBigDecimal(),
+                          unit = CompositeUnit(
+                              domain = Illuminance::class,
+                              units = mapOf(unit.major.first to 2,
+                                            unit.major.second to 1,
+                                            unit.minor to -2)))
 {
     val angle = unit.major.first
     val luminousIntensity = unit.major.second

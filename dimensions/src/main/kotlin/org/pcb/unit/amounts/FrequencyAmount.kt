@@ -34,7 +34,7 @@ open class FrequencyAmount<T : Unit<Time>>(
     companion object
     {
         operator fun invoke(amount: Number, unit: Unit<Frequency>) =
-            FrequencyAmount(amount = amount / unit.scale,
+            FrequencyAmount(amount = amount * unit.scale,
                             unit = NUMERIC to SECOND)
     }
 

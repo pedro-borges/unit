@@ -4,6 +4,8 @@ import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
+import org.pcb.unit.amounts.base.Radian.RADIAN
+import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.AngularAcceleration
@@ -25,7 +27,14 @@ open class AngularAccelerationAmount<A : Unit<Angle>, T : Unit<Time>>(
                                                     unit.minor to -2)))
 {
     val angle = unit.major
-    val time = unit.second
+    val time = unit.minor
+
+    companion object
+    {
+        operator fun invoke(amount: Number, unit: Unit<AngularAcceleration>) =
+            AngularAccelerationAmount(amount = amount * unit.scale,
+                                      unit = RADIAN to SECOND)
+    }
 
     // region -> AngularAcceleration
 

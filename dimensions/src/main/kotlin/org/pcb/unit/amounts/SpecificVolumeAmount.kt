@@ -11,7 +11,6 @@ import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.SpecificVolume
-import org.pcb.unit.dimensions.Volume
 import org.pcb.unit.div
 import org.pcb.unit.kilo
 import org.pcb.unit.major
@@ -33,7 +32,7 @@ open class SpecificVolumeAmount<D : Unit<Distance>, M : Unit<Mass>>(
 
     companion object
     {
-        operator fun invoke(amount: Number, unit: Unit<Volume>) =
+        operator fun invoke(amount: Number, unit: Unit<SpecificVolume>) =
             SpecificVolumeAmount(amount = amount * unit.scale,
                                  unit = METER to kilo(GRAM))
     }

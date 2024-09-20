@@ -4,7 +4,10 @@ import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
+import org.pcb.unit.amounts.base.Gram.GRAM
+import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
+import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
@@ -12,6 +15,7 @@ import org.pcb.unit.dimensions.Momentum
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
+import org.pcb.unit.kilo
 import org.pcb.unit.major
 import org.pcb.unit.minor
 import org.pcb.unit.times
@@ -30,6 +34,13 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     val distance = unit.major.first
     val mass = unit.major.second
     val time = unit.minor
+
+    companion object
+    {
+        operator fun invoke(amount: Number, unit: Unit<Momentum>) =
+            MomentumAmount(amount = amount * unit.scale,
+                           unit = U2(METER, kilo(GRAM)) to SECOND)
+    }
 
     // region -> Momentum
 
