@@ -6,7 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.pcb.unit.Composite
 import org.pcb.unit.dimensions.Scalar
-import org.pcb.unit.generator.Units.units
 import org.pcb.unit.minus
 import org.pcb.unit.plus
 
@@ -15,7 +14,7 @@ class GenerateDimensionTest
     companion object
     {
         @JvmStatic
-        val dimensions = units
+        val dimensions = Dimensions.DIMENSIONS
     }
 
     @ParameterizedTest(name = "{0}")
