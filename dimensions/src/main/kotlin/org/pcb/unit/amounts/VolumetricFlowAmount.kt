@@ -151,6 +151,21 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Momentum
+
+    @JvmName("timesAreaDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: AreaDensityAmount<D, M>) =
+        MomentumAmount(amount = amount * that.amount
+                                / convert(that.distance to distance,
+                                          that.distance to distance),
+                       unit = U2(distance, that.mass) to time)
+
+    operator fun <M : Unit<Mass>> times(that: AreaDensityAmount<D, M>) =
+        MomentumAmount(amount = amount * that.amount,
+                       unit = U2(distance, that.mass) to time)
+
+    // endregion
+
     // region -> Power
 
     @JvmName("timesEnergyDensity")

@@ -10,6 +10,7 @@ object Dimensions
                             "AngularMomentum" to Composite(mass = 2, distance = 1, time = -1),
                             "AngularVelocity" to Composite(angle = 1, time = -1),
                             "Area" to Composite(distance = 2),
+                            "AreaDensity" to Composite(mass = 1, distance = -2),
                             "Capacitance" to Composite(time = 4, electricCurrent = 2, mass = -1, distance = -2),
                             "Currency" to Composite(currency = 1),
                             "Debt" to Composite(currency = 1, time = 1),

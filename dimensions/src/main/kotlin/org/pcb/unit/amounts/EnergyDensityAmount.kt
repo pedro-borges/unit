@@ -97,6 +97,38 @@ open class EnergyDensityAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
 
     // endregion
 
+    // region -> Acceleration
+
+    @JvmName("divAreaDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: AreaDensityAmount<D, M>) =
+        AccelerationAmount(amount = amount / that.amount
+                                    / convert(that.mass to mass)
+                                    * convert(that.distance to distance,
+                                              that.distance to distance),
+                           unit = distance to time)
+
+    operator fun div(that: AreaDensityAmount<D, M>) =
+        AccelerationAmount(amount = amount / that.amount,
+                           unit = distance to time)
+
+    // endregion
+
+    // region -> AreaDensity
+
+    @JvmName("divAcceleration")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: AccelerationAmount<D, T>) =
+        AreaDensityAmount(amount = amount / that.amount
+                                   / convert(that.distance to distance)
+                                   * convert(that.time to time,
+                                             that.time to time),
+                          unit = mass to distance)
+
+    operator fun div(that: AccelerationAmount<D, T>) =
+        AreaDensityAmount(amount = amount / that.amount,
+                          unit = mass to distance)
+
+    // endregion
+
     // region -> Energy
 
     @JvmName("timesVolume")

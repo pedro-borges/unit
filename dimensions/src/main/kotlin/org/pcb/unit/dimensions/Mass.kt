@@ -13,6 +13,10 @@ object Mass : Dimension
 
     operator fun times(that: Momentum) = AngularMomentum
 
+    operator fun div(that: AreaDensity) = Area
+
+    operator fun div(that: Area) = AreaDensity
+
     operator fun times(that: Acceleration) = Force
 
     operator fun div(that: Time) = MassFlowRate

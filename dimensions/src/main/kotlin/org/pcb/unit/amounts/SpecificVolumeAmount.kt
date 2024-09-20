@@ -93,6 +93,22 @@ open class SpecificVolumeAmount<D : Unit<Distance>, M : Unit<Mass>>(
 
     // endregion
 
+    // region -> Distance
+
+    @JvmName("timesAreaDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: AreaDensityAmount<D, M>) =
+        DistanceAmount(amount = amount * that.amount
+                                * convert(that.mass to mass)
+                                / convert(that.distance to distance,
+                                          that.distance to distance),
+                       unit = distance)
+
+    operator fun times(that: AreaDensityAmount<D, M>) =
+        DistanceAmount(amount = amount * that.amount,
+                       unit = distance)
+
+    // endregion
+
     // region -> Volume
 
     @JvmName("timesMass")

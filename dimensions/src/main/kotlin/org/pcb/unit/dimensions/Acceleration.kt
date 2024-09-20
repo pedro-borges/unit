@@ -12,6 +12,8 @@ object Acceleration : Dimension
 
     operator fun div(that: Acceleration) = Scalar
 
+    operator fun times(that: AreaDensity) = EnergyDensity
+
     operator fun times(that: Mass) = Force
 
     operator fun div(that: Speed) = Frequency

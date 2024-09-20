@@ -84,6 +84,28 @@ open class MassAmount<M : Unit<Mass>>(
 
     // endregion
 
+    // region -> Area
+
+    @JvmName("divAreaDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: AreaDensityAmount<D, M>) =
+        AreaAmount(amount = amount / that.amount
+                            / convert(that.mass to mass),
+                   unit = that.distance)
+
+    operator fun <D : Unit<Distance>> div(that: AreaDensityAmount<D, M>) =
+        AreaAmount(amount = amount / that.amount,
+                   unit = that.distance)
+
+    // endregion
+
+    // region -> AreaDensity
+
+    operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
+        AreaDensityAmount(amount = amount / that.amount,
+                          unit = mass to that.distance)
+
+    // endregion
+
     // region -> Force
 
     operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: AccelerationAmount<D, T>) =

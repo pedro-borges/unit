@@ -13,6 +13,10 @@ object EnergyDensity : Dimension
 
     operator fun div(that: EnergyDensity) = Scalar
 
+    operator fun div(that: AreaDensity) = Acceleration
+
+    operator fun div(that: Acceleration) = AreaDensity
+
     operator fun times(that: Volume) = Energy
 
     operator fun times(that: Area) = Force

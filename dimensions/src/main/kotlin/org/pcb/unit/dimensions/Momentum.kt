@@ -15,6 +15,8 @@ object Momentum : Dimension
 
     operator fun times(that: Mass) = AngularMomentum
 
+    operator fun div(that: VolumetricFlow) = AreaDensity
+
     operator fun div(that: MassFlowRate) = Distance
 
     operator fun div(that: Pace) = Energy
@@ -35,4 +37,6 @@ object Momentum : Dimension
     operator fun div(that: Mass) = Speed
 
     operator fun div(that: Force) = Time
+
+    operator fun div(that: AreaDensity) = VolumetricFlow
 }

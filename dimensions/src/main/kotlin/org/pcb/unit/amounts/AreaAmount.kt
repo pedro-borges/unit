@@ -151,6 +151,21 @@ open class AreaAmount<D : Unit<Distance>>(
 
     // endregion
 
+    // region -> Mass
+
+    @JvmName("timesAreaDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: AreaDensityAmount<D, M>) =
+        MassAmount(amount = amount * that.amount
+                            / convert(that.distance to distance,
+                                      that.distance to distance),
+                   unit = that.mass)
+
+    operator fun <M : Unit<Mass>> times(that: AreaDensityAmount<D, M>) =
+        MassAmount(amount = amount * that.amount,
+                   unit = that.mass)
+
+    // endregion
+
     // region -> Pace
 
     @JvmName("divVolumetricFlow")

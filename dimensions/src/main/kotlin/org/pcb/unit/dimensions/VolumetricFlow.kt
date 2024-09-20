@@ -19,6 +19,8 @@ object VolumetricFlow : Dimension
 
     operator fun div(that: SpecificVolume) = MassFlowRate
 
+    operator fun times(that: AreaDensity) = Momentum
+
     operator fun times(that: EnergyDensity) = Power
 
     operator fun div(that: MassFlowRate) = SpecificVolume

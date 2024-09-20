@@ -21,6 +21,8 @@ object Scalar : Dimension
 
     operator fun times(that: Area) = Area
 
+    operator fun times(that: AreaDensity) = AreaDensity
+
     operator fun times(that: Capacitance) = Capacitance
 
     operator fun times(that: Currency) = Currency

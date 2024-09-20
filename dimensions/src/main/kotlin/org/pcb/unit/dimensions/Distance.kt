@@ -13,11 +13,15 @@ object Distance : Dimension
 
     operator fun times(that: Distance) = Area
 
+    operator fun div(that: SpecificVolume) = AreaDensity
+
     operator fun times(that: Force) = Energy
 
     operator fun times(that: MassFlowRate) = Momentum
 
     operator fun times(that: Yank) = Power
+
+    operator fun div(that: AreaDensity) = SpecificVolume
 
     operator fun div(that: Time) = Speed
     operator fun times(that: Frequency) = Speed

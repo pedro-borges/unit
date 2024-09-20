@@ -90,6 +90,21 @@ open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> EnergyDensity
+
+    @JvmName("timesAreaDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: AreaDensityAmount<D, M>) =
+        EnergyDensityAmount(amount = amount * that.amount
+                                     / convert(that.distance to distance,
+                                               that.distance to distance),
+                            unit = that.mass to U2(distance, time))
+
+    operator fun <M : Unit<Mass>> times(that: AreaDensityAmount<D, M>) =
+        EnergyDensityAmount(amount = amount * that.amount,
+                            unit = that.mass to U2(distance, time))
+
+    // endregion
+
     // region -> Force
 
     operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =

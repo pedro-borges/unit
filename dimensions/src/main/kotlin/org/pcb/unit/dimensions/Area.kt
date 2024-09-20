@@ -21,6 +21,8 @@ object Area : Dimension
 
     operator fun times(that: MagneticFluxDensity) = MagneticFlux
 
+    operator fun times(that: AreaDensity) = Mass
+
     operator fun div(that: VolumetricFlow) = Pace
 
     operator fun times(that: Distance) = Volume

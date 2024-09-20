@@ -84,6 +84,22 @@ open class DistanceAmount<D : Unit<Distance>>(
 
     // endregion
 
+    // region -> AreaDensity
+
+    @JvmName("divSpecificVolume")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: SpecificVolumeAmount<D, M>) =
+        AreaDensityAmount(amount = amount / that.amount
+                                   / convert(that.distance to distance,
+                                             that.distance to distance,
+                                             that.distance to distance),
+                          unit = that.mass to distance)
+
+    operator fun <M : Unit<Mass>> div(that: SpecificVolumeAmount<D, M>) =
+        AreaDensityAmount(amount = amount / that.amount,
+                          unit = that.mass to distance)
+
+    // endregion
+
     // region -> Energy
 
     @JvmName("timesForce")
@@ -117,6 +133,21 @@ open class DistanceAmount<D : Unit<Distance>>(
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: YankAmount<D, M, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, that.mass) to that.time)
+
+    // endregion
+
+    // region -> SpecificVolume
+
+    @JvmName("divAreaDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: AreaDensityAmount<D, M>) =
+        SpecificVolumeAmount(amount = amount / that.amount
+                                      * convert(that.distance to distance,
+                                                that.distance to distance),
+                             unit = distance to that.mass)
+
+    operator fun <M : Unit<Mass>> div(that: AreaDensityAmount<D, M>) =
+        SpecificVolumeAmount(amount = amount / that.amount,
+                             unit = distance to that.mass)
 
     // endregion
 

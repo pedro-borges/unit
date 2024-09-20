@@ -108,6 +108,23 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> AreaDensity
+
+    @JvmName("divVolumetricFlow")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: VolumetricFlowAmount<D, T>) =
+        AreaDensityAmount(amount = amount / that.amount
+                                   / convert(that.distance to distance,
+                                             that.distance to distance,
+                                             that.distance to distance)
+                                   * convert(that.time to time),
+                          unit = mass to distance)
+
+    operator fun div(that: VolumetricFlowAmount<D, T>) =
+        AreaDensityAmount(amount = amount / that.amount,
+                          unit = mass to distance)
+
+    // endregion
+
     // region -> Distance
 
     @JvmName("divMassFlowRate")
@@ -275,6 +292,22 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: ForceAmount<D, M, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = time)
+
+    // endregion
+
+    // region -> VolumetricFlow
+
+    @JvmName("divAreaDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: AreaDensityAmount<D, M>) =
+        VolumetricFlowAmount(amount = amount / that.amount
+                                      / convert(that.mass to mass)
+                                      * convert(that.distance to distance,
+                                                that.distance to distance),
+                             unit = distance to time)
+
+    operator fun div(that: AreaDensityAmount<D, M>) =
+        VolumetricFlowAmount(amount = amount / that.amount,
+                             unit = distance to time)
 
     // endregion
 }
