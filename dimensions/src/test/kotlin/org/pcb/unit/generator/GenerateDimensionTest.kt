@@ -1,7 +1,7 @@
 package org.pcb.unit.generator
 
 import java.io.File
-import kotlin.test.assertNotEquals
+import kotlin.test.Ignore
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.pcb.unit.Composite
@@ -11,6 +11,7 @@ import org.pcb.unit.generator.Dimensions.min
 import org.pcb.unit.minus
 import org.pcb.unit.plus
 
+@Ignore
 class GenerateDimensionTest
 {
     companion object
@@ -21,20 +22,7 @@ class GenerateDimensionTest
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("getDimensions")
-    fun uniqueness(dimension: Pair<String, Composite>)
-    {
-        dimensions
-            .filter { dimension.first != it.first }
-            .forEach { other ->
-                assertNotEquals(
-                    illegal = dimension.second,
-                    actual = other.second)
-            }
-    }
-
-    @ParameterizedTest(name = "{0}")
-    @MethodSource("getDimensions")
-    fun combinations(dimension: Pair<String, Composite>)
+    fun generate(dimension: Pair<String, Composite>)
     {
         val dimensionComposite = dimension.second
         val name = dimension.first

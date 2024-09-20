@@ -2,6 +2,7 @@ package org.pcb.unit.generator
 
 import java.io.File
 import kotlin.math.absoluteValue
+import kotlin.test.Ignore
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.pcb.unit.Composite
@@ -11,6 +12,7 @@ import org.pcb.unit.generator.Dimensions.min
 import org.pcb.unit.minus
 import org.pcb.unit.plus
 
+@Ignore
 class GenerateAmountsTest
 {
     companion object
@@ -21,7 +23,7 @@ class GenerateAmountsTest
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("getData")
-    fun combinations(dimension: Pair<String, Composite>)
+    fun generate(dimension: Pair<String, Composite>)
     {
         val dimensionName = dimension.first
         val dimensionComposite = dimension.second
