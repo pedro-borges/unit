@@ -140,7 +140,7 @@ class GenerateAmountsTest
                     }
             }
 
-        val stub = this.javaClass.classLoader.getResource("org/pcb/unit/amounts/$amountName")!!
+        val stub = this.javaClass.classLoader.getResource("package")!!
 
         val operatorCode = regions.keys
             .asSequence()
@@ -187,7 +187,7 @@ class GenerateAmountsTest
             "$operatorCode\n" +
             "}\n"
 
-        val source = File(stub.path.replace("target/test-classes/", "src/main/kotlin/") + ".kt")
+        val source = File(stub.path.replace("target/test-classes/package", "src/main/kotlin/org/pcb/unit/amounts/") + "$amountName.kt")
 
         source.writeText(contents)
     }
