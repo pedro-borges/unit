@@ -27,4 +27,6 @@ object MassFlowRate : Dimension
     operator fun times(that: Distance) = Momentum
 
     operator fun div(that: Force) = Pace
+
+    operator fun times(that: SpecificVolume) = VolumetricFlow
 }

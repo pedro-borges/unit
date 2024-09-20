@@ -11,6 +11,7 @@ import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.SpecificVolume
+import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
 import org.pcb.unit.kilo
 import org.pcb.unit.major
@@ -103,6 +104,20 @@ open class SpecificVolumeAmount<D : Unit<Distance>, M : Unit<Mass>>(
     operator fun times(that: MassAmount<M>) =
         VolumeAmount(amount = amount * that.amount,
                      unit = distance)
+
+    // endregion
+
+    // region -> VolumetricFlow
+
+    @JvmName("timesMassFlowRate")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: MassFlowRateAmount<M, T>) =
+        VolumetricFlowAmount(amount = amount * that.amount
+                                      * convert(that.mass to mass),
+                             unit = distance to that.time)
+
+    operator fun <T : Unit<Time>> times(that: MassFlowRateAmount<M, T>) =
+        VolumetricFlowAmount(amount = amount * that.amount,
+                             unit = distance to that.time)
 
     // endregion
 }

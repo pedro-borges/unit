@@ -380,4 +380,18 @@ open class TimeAmount<T : Unit<Time>>(
                     unit = that.distance to time)
 
     // endregion
+
+    // region -> Volume
+
+    @JvmName("timesVolumetricFlow")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: VolumetricFlowAmount<D, T>) =
+        VolumeAmount(amount = amount * that.amount
+                              / convert(that.time to time),
+                     unit = that.distance)
+
+    operator fun <D : Unit<Distance>> times(that: VolumetricFlowAmount<D, T>) =
+        VolumeAmount(amount = amount * that.amount,
+                     unit = that.distance)
+
+    // endregion
 }

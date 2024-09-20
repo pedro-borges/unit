@@ -151,4 +151,32 @@ open class VolumeAmount<D : Unit<Distance>>(
                              unit = distance to that.mass)
 
     // endregion
+
+    // region -> Time
+
+    @JvmName("divVolumetricFlow")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: VolumetricFlowAmount<D, T>) =
+        TimeAmount(amount = amount / that.amount
+                            / convert(that.distance to distance,
+                                      that.distance to distance,
+                                      that.distance to distance),
+                   unit = that.time)
+
+    operator fun <T : Unit<Time>> div(that: VolumetricFlowAmount<D, T>) =
+        TimeAmount(amount = amount / that.amount,
+                   unit = that.time)
+
+    // endregion
+
+    // region -> VolumetricFlow
+
+    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
+        VolumetricFlowAmount(amount = amount * that.amount,
+                             unit = distance to that.time)
+
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        VolumetricFlowAmount(amount = amount / that.amount,
+                             unit = distance to that.time)
+
+    // endregion
 }

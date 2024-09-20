@@ -204,4 +204,18 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
                    unit = time to that.distance)
 
     // endregion
+
+    // region -> VolumetricFlow
+
+    @JvmName("timesSpecificVolume")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: SpecificVolumeAmount<D, M>) =
+        VolumetricFlowAmount(amount = amount * that.amount
+                                      / convert(that.mass to mass),
+                             unit = that.distance to time)
+
+    operator fun <D : Unit<Distance>> times(that: SpecificVolumeAmount<D, M>) =
+        VolumetricFlowAmount(amount = amount * that.amount,
+                             unit = that.distance to time)
+
+    // endregion
 }

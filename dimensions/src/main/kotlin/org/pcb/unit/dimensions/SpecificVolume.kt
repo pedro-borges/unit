@@ -13,4 +13,6 @@ object SpecificVolume : Dimension
     operator fun div(that: SpecificVolume) = Scalar
 
     operator fun times(that: Mass) = Volume
+
+    operator fun times(that: MassFlowRate) = VolumetricFlow
 }

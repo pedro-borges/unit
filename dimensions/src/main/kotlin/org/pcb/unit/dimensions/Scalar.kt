@@ -96,4 +96,6 @@ object Scalar : Dimension
     operator fun times(that: Time) = Time
 
     operator fun times(that: Volume) = Volume
+
+    operator fun times(that: VolumetricFlow) = VolumetricFlow
 }

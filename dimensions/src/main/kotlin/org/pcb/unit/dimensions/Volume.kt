@@ -20,4 +20,9 @@ object Volume : Dimension
     operator fun div(that: SpecificVolume) = Mass
 
     operator fun div(that: Mass) = SpecificVolume
+
+    operator fun div(that: VolumetricFlow) = Time
+
+    operator fun div(that: Time) = VolumetricFlow
+    operator fun times(that: Frequency) = VolumetricFlow
 }

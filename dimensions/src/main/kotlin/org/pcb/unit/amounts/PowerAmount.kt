@@ -171,6 +171,23 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> EnergyDensity
+
+    @JvmName("divVolumetricFlow")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: VolumetricFlowAmount<D, T>) =
+        EnergyDensityAmount(amount = amount / that.amount
+                                     / convert(that.distance to distance,
+                                               that.distance to distance,
+                                               that.distance to distance)
+                                     * convert(that.time to time),
+                            unit = mass to U2(distance, time))
+
+    operator fun div(that: VolumetricFlowAmount<D, T>) =
+        EnergyDensityAmount(amount = amount / that.amount,
+                            unit = mass to U2(distance, time))
+
+    // endregion
+
     // region -> Force
 
     @JvmName("timesPace")
@@ -245,6 +262,23 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: ForceAmount<D, M, T>) =
         SpeedAmount(amount = amount / that.amount,
                     unit = distance to time)
+
+    // endregion
+
+    // region -> VolumetricFlow
+
+    @JvmName("divEnergyDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyDensityAmount<D, M, T>) =
+        VolumetricFlowAmount(amount = amount / that.amount
+                                      / convert(that.mass to mass)
+                                      * convert(that.distance to distance,
+                                                that.time to time,
+                                                that.time to time),
+                             unit = distance to time)
+
+    operator fun div(that: EnergyDensityAmount<D, M, T>) =
+        VolumetricFlowAmount(amount = amount / that.amount,
+                             unit = distance to time)
 
     // endregion
 }

@@ -228,4 +228,19 @@ open class SpeedAmount<D : Unit<Distance>, T : Unit<Time>>(
                    unit = time)
 
     // endregion
+
+    // region -> VolumetricFlow
+
+    @JvmName("timesArea")
+    operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =
+        VolumetricFlowAmount(amount = amount * that.amount
+                                      * convert(that.distance to distance,
+                                                that.distance to distance),
+                             unit = distance to time)
+
+    operator fun times(that: AreaAmount<D>) =
+        VolumetricFlowAmount(amount = amount * that.amount,
+                             unit = distance to time)
+
+    // endregion
 }

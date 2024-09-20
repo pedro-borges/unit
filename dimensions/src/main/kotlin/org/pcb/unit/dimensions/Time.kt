@@ -52,4 +52,6 @@ object Time : Dimension
     operator fun div(that: Distance) = Pace
 
     operator fun times(that: Acceleration) = Speed
+
+    operator fun times(that: VolumetricFlow) = Volume
 }

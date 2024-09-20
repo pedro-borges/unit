@@ -30,4 +30,6 @@ object Speed : Dimension
     operator fun times(that: Force) = Power
 
     operator fun div(that: Acceleration) = Time
+
+    operator fun times(that: Area) = VolumetricFlow
 }

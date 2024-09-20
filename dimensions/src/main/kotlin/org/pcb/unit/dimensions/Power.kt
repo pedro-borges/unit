@@ -22,6 +22,8 @@ object Power : Dimension
     operator fun div(that: Frequency) = Energy
     operator fun times(that: Time) = Energy
 
+    operator fun div(that: VolumetricFlow) = EnergyDensity
+
     operator fun div(that: Speed) = Force
     operator fun times(that: Pace) = Force
 
@@ -30,4 +32,6 @@ object Power : Dimension
     operator fun div(that: Acceleration) = Momentum
 
     operator fun div(that: Force) = Speed
+
+    operator fun div(that: EnergyDensity) = VolumetricFlow
 }

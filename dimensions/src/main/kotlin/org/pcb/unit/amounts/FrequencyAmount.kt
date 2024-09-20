@@ -327,4 +327,12 @@ open class FrequencyAmount<T : Unit<Time>>(
                     unit = that.distance to time)
 
     // endregion
+
+    // region -> VolumetricFlow
+
+    operator fun <D : Unit<Distance>> times(that: VolumeAmount<D>) =
+        VolumetricFlowAmount(amount = amount * that.amount,
+                             unit = that.distance to time)
+
+    // endregion
 }

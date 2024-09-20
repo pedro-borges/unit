@@ -151,6 +151,22 @@ open class AreaAmount<D : Unit<Distance>>(
 
     // endregion
 
+    // region -> Pace
+
+    @JvmName("divVolumetricFlow")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: VolumetricFlowAmount<D, T>) =
+        PaceAmount(amount = amount / that.amount
+                            / convert(that.distance to distance,
+                                      that.distance to distance,
+                                      that.distance to distance),
+                   unit = that.time to distance)
+
+    operator fun <T : Unit<Time>> div(that: VolumetricFlowAmount<D, T>) =
+        PaceAmount(amount = amount / that.amount,
+                   unit = that.time to distance)
+
+    // endregion
+
     // region -> Volume
 
     @JvmName("timesDistance")
@@ -162,6 +178,30 @@ open class AreaAmount<D : Unit<Distance>>(
     operator fun times(that: DistanceAmount<D>) =
         VolumeAmount(amount = amount * that.amount,
                      unit = distance)
+
+    // endregion
+
+    // region -> VolumetricFlow
+
+    @JvmName("divPace")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<D, T>) =
+        VolumetricFlowAmount(amount = amount / that.amount
+                                      * convert(that.distance to distance),
+                             unit = distance to that.time)
+
+    operator fun <T : Unit<Time>> div(that: PaceAmount<D, T>) =
+        VolumetricFlowAmount(amount = amount / that.amount,
+                             unit = distance to that.time)
+
+    @JvmName("timesSpeed")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
+        VolumetricFlowAmount(amount = amount * that.amount
+                                      * convert(that.distance to distance),
+                             unit = distance to that.time)
+
+    operator fun <T : Unit<Time>> times(that: SpeedAmount<D, T>) =
+        VolumetricFlowAmount(amount = amount * that.amount,
+                             unit = distance to that.time)
 
     // endregion
 }

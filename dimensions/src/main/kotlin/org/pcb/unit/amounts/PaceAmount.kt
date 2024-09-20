@@ -98,6 +98,23 @@ open class PaceAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Area
+
+    @JvmName("timesVolumetricFlow")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: VolumetricFlowAmount<D, T>) =
+        AreaAmount(amount = amount * that.amount
+                            * convert(that.distance to distance,
+                                      that.distance to distance,
+                                      that.distance to distance)
+                            / convert(that.time to time),
+                   unit = distance)
+
+    operator fun times(that: VolumetricFlowAmount<D, T>) =
+        AreaAmount(amount = amount * that.amount,
+                   unit = distance)
+
+    // endregion
+
     // region -> Force
 
     @JvmName("timesPower")
