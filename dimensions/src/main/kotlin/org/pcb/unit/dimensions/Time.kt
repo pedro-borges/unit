@@ -36,6 +36,8 @@ object Time : Dimension
 
     operator fun times(that: Power) = Energy
 
+    operator fun times(that: Yank) = Force
+
     operator fun div(that: ElectricConductance) = Inductance
     operator fun times(that: ElectricResistance) = Inductance
 

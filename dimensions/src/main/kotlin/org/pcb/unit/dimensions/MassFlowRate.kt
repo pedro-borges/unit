@@ -29,4 +29,6 @@ object MassFlowRate : Dimension
     operator fun div(that: Force) = Pace
 
     operator fun times(that: SpecificVolume) = VolumetricFlow
+
+    operator fun times(that: Acceleration) = Yank
 }

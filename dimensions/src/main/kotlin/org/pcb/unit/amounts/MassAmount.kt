@@ -157,4 +157,12 @@ open class MassAmount<M : Unit<Mass>>(
                      unit = that.distance)
 
     // endregion
+
+    // region -> Yank
+
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: JerkAmount<D, T>) =
+        YankAmount(amount = amount * that.amount,
+                   unit = U2(that.distance, mass) to that.time)
+
+    // endregion
 }

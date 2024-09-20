@@ -203,4 +203,18 @@ open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
                    unit = time)
 
     // endregion
+
+    // region -> Yank
+
+    @JvmName("timesMassFlowRate")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: MassFlowRateAmount<M, T>) =
+        YankAmount(amount = amount * that.amount
+                            / convert(that.time to time),
+                   unit = U2(distance, that.mass) to time)
+
+    operator fun <M : Unit<Mass>> times(that: MassFlowRateAmount<M, T>) =
+        YankAmount(amount = amount * that.amount,
+                   unit = U2(distance, that.mass) to time)
+
+    // endregion
 }

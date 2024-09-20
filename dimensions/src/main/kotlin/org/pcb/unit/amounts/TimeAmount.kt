@@ -260,6 +260,22 @@ open class TimeAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> Force
+
+    @JvmName("timesYank")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: YankAmount<D, M, T>) =
+        ForceAmount(amount = amount * that.amount
+                             / convert(that.time to time,
+                                       that.time to time,
+                                       that.time to time),
+                    unit = U2(that.distance, that.mass) to time)
+
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: YankAmount<D, M, T>) =
+        ForceAmount(amount = amount * that.amount,
+                    unit = U2(that.distance, that.mass) to time)
+
+    // endregion
+
     // region -> Inductance
 
     @JvmName("divElectricConductance")

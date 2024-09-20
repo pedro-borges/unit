@@ -120,6 +120,24 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Distance
+
+    @JvmName("divYank")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: YankAmount<D, M, T>) =
+        DistanceAmount(amount = amount / that.amount
+                                / convert(that.distance to distance,
+                                          that.mass to mass)
+                                * convert(that.time to time,
+                                          that.time to time,
+                                          that.time to time),
+                       unit = distance)
+
+    operator fun div(that: YankAmount<D, M, T>) =
+        DistanceAmount(amount = amount / that.amount,
+                       unit = distance)
+
+    // endregion
+
     // region -> ElectricCurrent
 
     @JvmName("divElectricTension")
@@ -279,6 +297,20 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: EnergyDensityAmount<D, M, T>) =
         VolumetricFlowAmount(amount = amount / that.amount,
                              unit = distance to time)
+
+    // endregion
+
+    // region -> Yank
+
+    @JvmName("divDistance")
+    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
+        YankAmount(amount = amount / that.amount
+                            / convert(that.distance to distance),
+                   unit = U2(distance, mass) to time)
+
+    operator fun div(that: DistanceAmount<D>) =
+        YankAmount(amount = amount / that.amount,
+                   unit = U2(distance, mass) to time)
 
     // endregion
 }

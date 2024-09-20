@@ -335,4 +335,19 @@ open class FrequencyAmount<T : Unit<Time>>(
                              unit = that.distance to time)
 
     // endregion
+
+    // region -> Yank
+
+    @JvmName("timesForce")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<D, M, T>) =
+        YankAmount(amount = amount * that.amount
+                            / convert(that.time to time,
+                                      that.time to time),
+                   unit = U2(that.distance, that.mass) to time)
+
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: ForceAmount<D, M, T>) =
+        YankAmount(amount = amount * that.amount,
+                   unit = U2(that.distance, that.mass) to time)
+
+    // endregion
 }

@@ -2,6 +2,7 @@ package org.pcb.unit.amounts
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
@@ -9,6 +10,7 @@ import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Jerk
+import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
@@ -170,6 +172,14 @@ open class JerkAmount<D : Unit<Distance>, T : Unit<Time>>(
     operator fun div(that: SnapAmount<D, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = time)
+
+    // endregion
+
+    // region -> Yank
+
+    operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
+        YankAmount(amount = amount * that.amount,
+                   unit = U2(distance, that.mass) to time)
 
     // endregion
 }

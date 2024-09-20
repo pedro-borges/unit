@@ -298,4 +298,46 @@ open class ForceAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                     unit = distance to time)
 
     // endregion
+
+    // region -> Time
+
+    @JvmName("divYank")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: YankAmount<D, M, T>) =
+        TimeAmount(amount = amount / that.amount
+                            / convert(that.distance to distance,
+                                      that.mass to mass)
+                            * convert(that.time to time,
+                                      that.time to time,
+                                      that.time to time),
+                   unit = time)
+
+    operator fun div(that: YankAmount<D, M, T>) =
+        TimeAmount(amount = amount / that.amount,
+                   unit = time)
+
+    // endregion
+
+    // region -> Yank
+
+    @JvmName("timesFrequency")
+    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
+        YankAmount(amount = amount * that.amount
+                            / convert(that.time to time),
+                   unit = U2(distance, mass) to time)
+
+    operator fun times(that: FrequencyAmount<T>) =
+        YankAmount(amount = amount * that.amount,
+                   unit = U2(distance, mass) to time)
+
+    @JvmName("divTime")
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        YankAmount(amount = amount / that.amount
+                            / convert(that.time to time),
+                   unit = U2(distance, mass) to time)
+
+    operator fun div(that: TimeAmount<T>) =
+        YankAmount(amount = amount / that.amount,
+                   unit = U2(distance, mass) to time)
+
+    // endregion
 }

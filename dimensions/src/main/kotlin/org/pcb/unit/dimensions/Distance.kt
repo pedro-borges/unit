@@ -17,6 +17,8 @@ object Distance : Dimension
 
     operator fun times(that: MassFlowRate) = Momentum
 
+    operator fun times(that: Yank) = Power
+
     operator fun div(that: Time) = Speed
     operator fun times(that: Frequency) = Speed
 

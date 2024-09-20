@@ -15,6 +15,8 @@ object Power : Dimension
 
     operator fun div(that: Momentum) = Acceleration
 
+    operator fun div(that: Yank) = Distance
+
     operator fun div(that: ElectricTension) = ElectricCurrent
 
     operator fun div(that: ElectricCurrent) = ElectricTension
@@ -34,4 +36,6 @@ object Power : Dimension
     operator fun div(that: Force) = Speed
 
     operator fun div(that: EnergyDensity) = VolumetricFlow
+
+    operator fun div(that: Distance) = Yank
 }

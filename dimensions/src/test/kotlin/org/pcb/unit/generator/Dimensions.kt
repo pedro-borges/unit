@@ -46,7 +46,8 @@ object Dimensions
                             "Temperature" to Composite(temperature = 1),
                             "Time" to Composite(time = 1),
                             "Volume" to Composite(distance = 3),
-                            "VolumetricFlow" to Composite(distance = 3, time = -1))
+                            "VolumetricFlow" to Composite(distance = 3, time = -1),
+                            "Yank" to Composite(distance = 1, mass = 1, time = -3))
 
     fun Composite.max() =
         max(angle, currency, distance, electricCurrent, luminousIntensity, mass, temperature, time)

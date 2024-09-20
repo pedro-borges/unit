@@ -48,4 +48,6 @@ object Frequency : Dimension
     operator fun times(that: Distance) = Speed
 
     operator fun times(that: Volume) = VolumetricFlow
+
+    operator fun times(that: Force) = Yank
 }

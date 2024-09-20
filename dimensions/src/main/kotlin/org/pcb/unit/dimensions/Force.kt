@@ -37,4 +37,9 @@ object Force : Dimension
     operator fun times(that: Speed) = Power
 
     operator fun div(that: MassFlowRate) = Speed
+
+    operator fun div(that: Yank) = Time
+
+    operator fun div(that: Time) = Yank
+    operator fun times(that: Frequency) = Yank
 }

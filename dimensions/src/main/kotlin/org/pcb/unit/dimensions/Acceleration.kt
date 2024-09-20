@@ -26,4 +26,6 @@ object Acceleration : Dimension
     operator fun times(that: Time) = Speed
 
     operator fun div(that: Jerk) = Time
+
+    operator fun times(that: MassFlowRate) = Yank
 }

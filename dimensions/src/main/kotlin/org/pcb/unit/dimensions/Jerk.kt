@@ -21,4 +21,6 @@ object Jerk : Dimension
     operator fun times(that: Frequency) = Snap
 
     operator fun div(that: Snap) = Time
+
+    operator fun times(that: Mass) = Yank
 }

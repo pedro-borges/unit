@@ -106,6 +106,20 @@ open class DistanceAmount<D : Unit<Distance>>(
 
     // endregion
 
+    // region -> Power
+
+    @JvmName("timesYank")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: YankAmount<D, M, T>) =
+        PowerAmount(amount = amount * that.amount
+                             * convert(that.distance to distance),
+                    unit = U2(distance, that.mass) to that.time)
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: YankAmount<D, M, T>) =
+        PowerAmount(amount = amount * that.amount,
+                    unit = U2(distance, that.mass) to that.time)
+
+    // endregion
+
     // region -> Speed
 
     operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
