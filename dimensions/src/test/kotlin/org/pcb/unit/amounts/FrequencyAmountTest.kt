@@ -7,6 +7,8 @@ import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.CURRENCY1
 import org.pcb.unit.units.test.DISTANCE1
 import org.pcb.unit.units.test.ELECTRICCURRENT1
+import org.pcb.unit.units.test.FREQUENCY1
+import org.pcb.unit.units.test.FREQUENCY2
 import org.pcb.unit.units.test.MASS1
 import org.pcb.unit.units.test.NUMBER1
 import org.pcb.unit.units.test.NUMBER2
@@ -15,6 +17,26 @@ import org.pcb.unit.units.test.TIME2
 
 class FrequencyAmountTest
 {
+    @Test
+    fun constructSame()
+    {
+        assertEquals(
+            expected = FrequencyAmount(amount = 2,
+                                       unit = FREQUENCY1),
+            actual = FrequencyAmount(amount = 2,
+                                     unit = FREQUENCY1))
+    }
+
+    @Test
+    fun constructOther()
+    {
+        assertEquals(
+            expected = FrequencyAmount(amount = 20,
+                                       unit = FREQUENCY2),
+            actual = FrequencyAmount(amount = 2,
+                                     unit = FREQUENCY1))
+    }
+
     @Test
     fun timesScalar()
     {

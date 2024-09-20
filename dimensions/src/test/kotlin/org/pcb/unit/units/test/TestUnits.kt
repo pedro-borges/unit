@@ -10,6 +10,7 @@ import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Currency
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.ElectricCurrent
+import org.pcb.unit.dimensions.Frequency
 import org.pcb.unit.dimensions.LuminousIntensity
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
@@ -32,6 +33,10 @@ object DISTANCE2 : DISTANCE(DECA)
 open class ELECTRICCURRENT(magnitude: Magnitude) : Unit<ElectricCurrent>(ElectricCurrent::class, magnitude.symbol + "EC", TEN.power(magnitude.power), UNI)
 object ELECTRICCURRENT1 : ELECTRICCURRENT(UNI)
 object ELECTRICCURRENT2 : ELECTRICCURRENT(DECA)
+
+open class FREQUENCY(magnitude: Magnitude) : Unit<Frequency>(Frequency::class, magnitude.symbol + "F", TEN.power(magnitude.power), UNI)
+object FREQUENCY1 : FREQUENCY(UNI)
+object FREQUENCY2 : FREQUENCY(DECI)
 
 open class LUMINOUSINTENSITY(magnitude: Magnitude) : Unit<LuminousIntensity>(LuminousIntensity::class, magnitude.symbol + "EC", TEN.power(magnitude.power), UNI)
 object LUMINOUSINTENSITY1 : LUMINOUSINTENSITY(UNI)
