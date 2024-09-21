@@ -21,6 +21,7 @@ object Scalar : Dimension
 
     operator fun times(that: AngularVelocity) = AngularVelocity
 
+    operator fun div(that: FuelEfficiency) = Area
     operator fun times(that: Area) = Area
 
     operator fun times(that: AreaDensity) = AreaDensity
@@ -31,6 +32,7 @@ object Scalar : Dimension
 
     operator fun times(that: Debt) = Debt
 
+    operator fun div(that: SpacialFrequency) = Distance
     operator fun times(that: Distance) = Distance
 
     operator fun times(that: ElectricCharge) = ElectricCharge
@@ -49,10 +51,15 @@ object Scalar : Dimension
 
     operator fun times(that: EnergyDensity) = EnergyDensity
 
+    operator fun times(that: EnergyFluxDensity) = EnergyFluxDensity
+
     operator fun times(that: Force) = Force
 
     operator fun div(that: Time) = Frequency
     operator fun times(that: Frequency) = Frequency
+
+    operator fun div(that: Area) = FuelEfficiency
+    operator fun times(that: FuelEfficiency) = FuelEfficiency
 
     operator fun times(that: Illuminance) = Illuminance
 
@@ -72,9 +79,14 @@ object Scalar : Dimension
 
     operator fun times(that: MagneticFluxDensity) = MagneticFluxDensity
 
+    operator fun div(that: SpecificVolume) = Mass
     operator fun times(that: Mass) = Mass
 
+    operator fun times(that: MassDensity) = MassDensity
+
     operator fun times(that: MassFlowRate) = MassFlowRate
+
+    operator fun times(that: MomentOfInertia) = MomentOfInertia
 
     operator fun times(that: Momentum) = Momentum
 
@@ -83,15 +95,27 @@ object Scalar : Dimension
 
     operator fun times(that: Power) = Power
 
+    operator fun times(that: PowerDensity) = PowerDensity
+
+    operator fun times(that: RadiantExposure) = RadiantExposure
+
+    operator fun times(that: RadiantIntensity) = RadiantIntensity
+
     operator fun times(that: Rent) = Rent
 
     operator fun times(that: Snap) = Snap
 
     operator fun times(that: SolidAngle) = SolidAngle
 
+    operator fun div(that: Distance) = SpacialFrequency
+    operator fun times(that: SpacialFrequency) = SpacialFrequency
+
     operator fun times(that: SpecificEnergy) = SpecificEnergy
 
+    operator fun div(that: Mass) = SpecificVolume
     operator fun times(that: SpecificVolume) = SpecificVolume
+
+    operator fun times(that: SpectralIntensity) = SpectralIntensity
 
     operator fun div(that: Pace) = Speed
     operator fun times(that: Speed) = Speed

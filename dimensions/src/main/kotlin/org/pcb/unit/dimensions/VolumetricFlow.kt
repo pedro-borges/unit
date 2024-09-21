@@ -18,6 +18,7 @@ object VolumetricFlow : Dimension
     operator fun div(that: Volume) = Frequency
 
     operator fun div(that: SpecificVolume) = MassFlowRate
+    operator fun times(that: Mass) = MassFlowRate
 
     operator fun times(that: AreaDensity) = Momentum
 
@@ -26,6 +27,7 @@ object VolumetricFlow : Dimension
     operator fun div(that: MassFlowRate) = SpecificVolume
 
     operator fun div(that: Area) = Speed
+    operator fun times(that: FuelEfficiency) = Speed
 
     operator fun div(that: Frequency) = Volume
     operator fun times(that: Time) = Volume

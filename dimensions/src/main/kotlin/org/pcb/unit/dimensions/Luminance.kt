@@ -12,7 +12,10 @@ object Luminance : Dimension
 
     operator fun div(that: Luminance) = Scalar
 
+    operator fun div(that: LuminousIntensity) = FuelEfficiency
+
     operator fun times(that: SolidAngle) = Illuminance
 
+    operator fun div(that: FuelEfficiency) = LuminousIntensity
     operator fun times(that: Area) = LuminousIntensity
 }

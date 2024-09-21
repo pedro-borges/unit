@@ -13,17 +13,21 @@ object Force : Dimension
 
     operator fun div(that: Force) = Scalar
 
-    operator fun div(that: Mass) = Acceleration
+    operator fun div(that: MassDensity) = Acceleration
 
     operator fun div(that: EnergyDensity) = Area
 
+    operator fun div(that: RadiantExposure) = Distance
+
+    operator fun div(that: SpacialFrequency) = Energy
     operator fun times(that: Distance) = Energy
 
     operator fun div(that: Area) = EnergyDensity
+    operator fun times(that: FuelEfficiency) = EnergyDensity
 
     operator fun div(that: Momentum) = Frequency
 
-    operator fun div(that: Acceleration) = Mass
+    operator fun div(that: Acceleration) = MassDensity
 
     operator fun div(that: Speed) = MassFlowRate
     operator fun times(that: Pace) = MassFlowRate
@@ -35,6 +39,11 @@ object Force : Dimension
 
     operator fun div(that: Pace) = Power
     operator fun times(that: Speed) = Power
+
+    operator fun div(that: Distance) = RadiantExposure
+    operator fun times(that: SpacialFrequency) = RadiantExposure
+
+    operator fun div(that: Energy) = SpacialFrequency
 
     operator fun div(that: MassFlowRate) = Speed
 

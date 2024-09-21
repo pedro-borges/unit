@@ -17,6 +17,7 @@ object LuminousFlux : Dimension
     operator fun div(that: LuminousEnergy) = Frequency
 
     operator fun div(that: Area) = Illuminance
+    operator fun times(that: FuelEfficiency) = Illuminance
 
     operator fun div(that: Frequency) = LuminousEnergy
     operator fun times(that: Time) = LuminousEnergy

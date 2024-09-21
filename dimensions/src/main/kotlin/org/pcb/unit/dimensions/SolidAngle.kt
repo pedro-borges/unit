@@ -16,4 +16,8 @@ object SolidAngle : Dimension
     operator fun times(that: Luminance) = Illuminance
 
     operator fun times(that: LuminousIntensity) = LuminousFlux
+
+    operator fun times(that: RadiantIntensity) = Power
+
+    operator fun times(that: SpectralIntensity) = Yank
 }

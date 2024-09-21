@@ -19,9 +19,30 @@ object EnergyDensity : Dimension
 
     operator fun times(that: Volume) = Energy
 
+    operator fun div(that: Pace) = EnergyFluxDensity
+    operator fun times(that: Speed) = EnergyFluxDensity
+
+    operator fun div(that: FuelEfficiency) = Force
     operator fun times(that: Area) = Force
+
+    operator fun div(that: Force) = FuelEfficiency
+
+    operator fun div(that: SpecificEnergy) = Mass
+
+    operator fun div(that: EnergyFluxDensity) = Pace
 
     operator fun times(that: VolumetricFlow) = Power
 
+    operator fun div(that: Time) = PowerDensity
+    operator fun times(that: Frequency) = PowerDensity
+
+    operator fun div(that: SpacialFrequency) = RadiantExposure
+    operator fun times(that: Distance) = RadiantExposure
+
+    operator fun div(that: RadiantExposure) = SpacialFrequency
+
+    operator fun div(that: Mass) = SpecificEnergy
     operator fun times(that: SpecificVolume) = SpecificEnergy
+
+    operator fun div(that: PowerDensity) = Time
 }

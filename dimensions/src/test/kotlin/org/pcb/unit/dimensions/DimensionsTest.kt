@@ -23,7 +23,8 @@ class DimensionsTest
             .forEach { other ->
                 assertNotEquals(
                     illegal = dimension.second,
-                    actual = other.second)
+                    actual = other.second,
+                    message = "${dimension.first} == ${other.first}")
             }
     }
 }

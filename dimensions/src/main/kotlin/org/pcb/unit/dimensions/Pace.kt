@@ -15,17 +15,25 @@ object Pace : Dimension
 
     operator fun times(that: VolumetricFlow) = Area
 
+    operator fun times(that: EnergyFluxDensity) = EnergyDensity
+
     operator fun times(that: Power) = Force
 
     operator fun times(that: Acceleration) = Frequency
 
-    operator fun times(that: Momentum) = Mass
+    operator fun times(that: Momentum) = MassDensity
 
     operator fun times(that: Force) = MassFlowRate
 
     operator fun times(that: Energy) = Momentum
 
+    operator fun times(that: Yank) = RadiantExposure
+
+    operator fun div(that: Time) = SpacialFrequency
+    operator fun times(that: Frequency) = SpacialFrequency
+
     operator fun times(that: SpecificEnergy) = Speed
 
+    operator fun div(that: SpacialFrequency) = Time
     operator fun times(that: Distance) = Time
 }

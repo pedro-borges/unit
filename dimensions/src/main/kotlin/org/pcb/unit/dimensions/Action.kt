@@ -22,11 +22,18 @@ object Action : Dimension
     operator fun div(that: Time) = Energy
     operator fun times(that: Frequency) = Energy
 
+    operator fun div(that: MomentOfInertia) = Frequency
+
     operator fun div(that: ElectricCharge) = MagneticFlux
 
     operator fun div(that: Area) = MassFlowRate
+    operator fun times(that: FuelEfficiency) = MassFlowRate
+
+    operator fun div(that: Frequency) = MomentOfInertia
+    operator fun times(that: Time) = MomentOfInertia
 
     operator fun div(that: Distance) = Momentum
+    operator fun times(that: SpacialFrequency) = Momentum
 
     operator fun div(that: Energy) = Time
 }

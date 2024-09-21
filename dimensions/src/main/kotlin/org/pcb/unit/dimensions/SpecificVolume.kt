@@ -11,12 +11,13 @@ object SpecificVolume : Dimension
     operator fun times(that: Scalar) = SpecificVolume
 
     operator fun div(that: SpecificVolume) = Scalar
+    operator fun times(that: Mass) = Scalar
 
     operator fun times(that: AreaDensity) = Distance
 
     operator fun times(that: EnergyDensity) = SpecificEnergy
 
-    operator fun times(that: Mass) = Volume
+    operator fun times(that: MassDensity) = Volume
 
     operator fun times(that: MassFlowRate) = VolumetricFlow
 }

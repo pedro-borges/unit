@@ -38,6 +38,8 @@ object Time : Dimension
 
     operator fun times(that: Power) = Energy
 
+    operator fun times(that: PowerDensity) = EnergyDensity
+
     operator fun times(that: Yank) = Force
 
     operator fun div(that: ElectricConductance) = Inductance
@@ -49,11 +51,18 @@ object Time : Dimension
 
     operator fun times(that: ElectricTension) = MagneticFlux
 
-    operator fun times(that: MassFlowRate) = Mass
+    operator fun times(that: MassFlowRate) = MassDensity
+
+    operator fun times(that: RadiantExposure) = MassFlowRate
+
+    operator fun times(that: Action) = MomentOfInertia
 
     operator fun times(that: Force) = Momentum
 
     operator fun div(that: Distance) = Pace
+    operator fun times(that: SpacialFrequency) = Pace
+
+    operator fun times(that: EnergyFluxDensity) = RadiantExposure
 
     operator fun times(that: Acceleration) = Speed
 

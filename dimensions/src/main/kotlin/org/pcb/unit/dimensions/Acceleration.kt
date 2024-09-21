@@ -14,7 +14,7 @@ object Acceleration : Dimension
 
     operator fun times(that: AreaDensity) = EnergyDensity
 
-    operator fun times(that: Mass) = Force
+    operator fun times(that: MassDensity) = Force
 
     operator fun div(that: Speed) = Frequency
     operator fun times(that: Pace) = Frequency
@@ -24,6 +24,9 @@ object Acceleration : Dimension
 
     operator fun times(that: Momentum) = Power
 
+    operator fun div(that: SpecificEnergy) = SpacialFrequency
+
+    operator fun div(that: SpacialFrequency) = SpecificEnergy
     operator fun times(that: Distance) = SpecificEnergy
 
     operator fun div(that: Frequency) = Speed

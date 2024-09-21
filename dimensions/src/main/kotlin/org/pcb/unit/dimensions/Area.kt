@@ -10,10 +10,14 @@ object Area : Dimension
     operator fun times(that: Scalar) = Area
 
     operator fun div(that: Area) = Scalar
+    operator fun times(that: FuelEfficiency) = Scalar
 
     operator fun times(that: MassFlowRate) = Action
 
     operator fun div(that: Distance) = Distance
+    operator fun times(that: SpacialFrequency) = Distance
+
+    operator fun times(that: RadiantExposure) = Energy
 
     operator fun times(that: EnergyDensity) = Force
 
@@ -23,12 +27,21 @@ object Area : Dimension
 
     operator fun times(that: MagneticFluxDensity) = MagneticFlux
 
-    operator fun times(that: AreaDensity) = Mass
+    operator fun times(that: AreaDensity) = MassDensity
+
+    operator fun times(that: MassDensity) = MomentOfInertia
 
     operator fun div(that: VolumetricFlow) = Pace
 
+    operator fun times(that: EnergyFluxDensity) = Power
+
+    operator fun div(that: Volume) = SpacialFrequency
+
+    operator fun div(that: SpacialFrequency) = Volume
     operator fun times(that: Distance) = Volume
 
     operator fun div(that: Pace) = VolumetricFlow
     operator fun times(that: Speed) = VolumetricFlow
+
+    operator fun times(that: PowerDensity) = Yank
 }

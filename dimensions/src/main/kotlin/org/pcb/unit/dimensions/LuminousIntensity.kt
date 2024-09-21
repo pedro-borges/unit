@@ -14,6 +14,7 @@ object LuminousIntensity : Dimension
     operator fun div(that: Luminance) = Area
 
     operator fun div(that: Area) = Luminance
+    operator fun times(that: FuelEfficiency) = Luminance
 
     operator fun times(that: SolidAngle) = LuminousFlux
 }

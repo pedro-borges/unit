@@ -12,14 +12,19 @@ object Volume : Dimension
     operator fun div(that: Volume) = Scalar
 
     operator fun div(that: Distance) = Area
+    operator fun times(that: SpacialFrequency) = Area
 
     operator fun div(that: Area) = Distance
+    operator fun times(that: FuelEfficiency) = Distance
 
     operator fun times(that: EnergyDensity) = Energy
 
-    operator fun div(that: SpecificVolume) = Mass
+    operator fun div(that: SpecificVolume) = MassDensity
+    operator fun times(that: Mass) = MassDensity
 
-    operator fun div(that: Mass) = SpecificVolume
+    operator fun times(that: PowerDensity) = Power
+
+    operator fun div(that: MassDensity) = SpecificVolume
 
     operator fun div(that: VolumetricFlow) = Time
 

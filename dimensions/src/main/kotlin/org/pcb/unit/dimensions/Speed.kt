@@ -21,11 +21,16 @@ object Speed : Dimension
 
     operator fun times(that: Momentum) = Energy
 
+    operator fun times(that: EnergyDensity) = EnergyFluxDensity
+
     operator fun times(that: MassFlowRate) = Force
 
     operator fun div(that: Distance) = Frequency
+    operator fun times(that: SpacialFrequency) = Frequency
 
-    operator fun times(that: Mass) = Momentum
+    operator fun div(that: VolumetricFlow) = FuelEfficiency
+
+    operator fun times(that: MassDensity) = Momentum
 
     operator fun div(that: SpecificEnergy) = Pace
 
@@ -36,5 +41,8 @@ object Speed : Dimension
 
     operator fun div(that: Acceleration) = Time
 
+    operator fun div(that: FuelEfficiency) = VolumetricFlow
     operator fun times(that: Area) = VolumetricFlow
+
+    operator fun times(that: RadiantExposure) = Yank
 }

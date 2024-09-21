@@ -26,4 +26,6 @@ object ElectricCurrent : Dimension
     operator fun times(that: Inductance) = MagneticFlux
 
     operator fun times(that: ElectricTension) = Power
+
+    operator fun times(that: MagneticFluxDensity) = RadiantExposure
 }
