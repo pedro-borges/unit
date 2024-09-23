@@ -20,13 +20,21 @@ open class Amount<D : Dimension>(val amount: BigDecimal,
         Amount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                unit = unit)
 
+    operator fun times(that: Amount<*>) =
+        Amount(amount = amount * that.amount * convert(that.unit to unit),
+               unit = unit * that.unit)
+
+    operator fun div(that: Amount<*>) =
+        Amount(amount = amount / that.amount / convert(that.unit to unit),
+               unit = unit / that.unit)
+
     override
     fun equals(other: Any?) =
         when
         {
             this === other     -> true
             other is Amount<*> -> normalizedAmount() == other.normalizedAmount() &&
-                                  unit.domain == other.unit.domain
+                                  unit.dimension == other.unit.dimension
             else               -> false
         }
 

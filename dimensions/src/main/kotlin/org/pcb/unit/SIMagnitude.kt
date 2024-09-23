@@ -87,29 +87,29 @@ enum class SIScale(override val symbol: String,
 }
 
 // @formatter:off
-fun <D : Dimension> quetta(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, QUETTA * unit.magnitude) {}
-fun <D : Dimension> ronna(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, RONNA * unit.magnitude) {}
-fun <D : Dimension> yotta(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, YOTTA * unit.magnitude) {}
-fun <D : Dimension> zetta(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, ZETTA * unit.magnitude) {}
-fun <D : Dimension> exa(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, EXA * unit.magnitude) {}
-fun <D : Dimension> peta(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, PETA * unit.magnitude) {}
-fun <D : Dimension> tera(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, TERA * unit.magnitude) {}
-fun <D : Dimension> giga(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, GIGA * unit.magnitude) {}
-fun <D : Dimension> mega(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, MEGA * unit.magnitude) {}
-fun <D : Dimension> kilo(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, KILO * unit.magnitude) {}
-fun <D : Dimension> hecto(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, HECTO * unit.magnitude) {}
-fun <D : Dimension> deca(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, DECA * unit.magnitude) {}
-fun <D : Dimension> deci(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, DECI * unit.magnitude) {}
-fun <D : Dimension> centi(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, CENTI * unit.magnitude) {}
-fun <D : Dimension> milli(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, MILLI * unit.magnitude) {}
-fun <D : Dimension> micro(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, MICRO * unit.magnitude) {}
-fun <D : Dimension> nano(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, NANO * unit.magnitude) {}
-fun <D : Dimension> pico(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, PICO * unit.magnitude) {}
-fun <D : Dimension> femto(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, FEMTO * unit.magnitude) {}
-fun <D : Dimension> atto(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, ATTO * unit.magnitude) {}
-fun <D : Dimension> zepto(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, ZEPTO * unit.magnitude) {}
-fun <D : Dimension> yocto(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, YOCTO * unit.magnitude) {}
-fun <D : Dimension> ronto(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, RONTO * unit.magnitude) {}
-fun <D : Dimension> quecto(unit: Unit<D>) = object : Unit<D>(unit.domain, unit.symbol, unit.scale, QUECTO * unit.magnitude) {}
+fun <D : Dimension> quetta(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, QUETTA * unit.magnitude) {}
+fun <D : Dimension> ronna(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, RONNA * unit.magnitude) {}
+fun <D : Dimension> yotta(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, YOTTA * unit.magnitude) {}
+fun <D : Dimension> zetta(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, ZETTA * unit.magnitude) {}
+fun <D : Dimension> exa(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, EXA * unit.magnitude) {}
+fun <D : Dimension> peta(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, PETA * unit.magnitude) {}
+fun <D : Dimension> tera(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, TERA * unit.magnitude) {}
+fun <D : Dimension> giga(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, GIGA * unit.magnitude) {}
+fun <D : Dimension> mega(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, MEGA * unit.magnitude) {}
+fun <D : Dimension> kilo(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, KILO * unit.magnitude) {}
+fun <D : Dimension> hecto(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, HECTO * unit.magnitude) {}
+fun <D : Dimension> deca(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, DECA * unit.magnitude) {}
+fun <D : Dimension> deci(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, DECI * unit.magnitude) {}
+fun <D : Dimension> centi(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, CENTI * unit.magnitude) {}
+fun <D : Dimension> milli(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, MILLI * unit.magnitude) {}
+fun <D : Dimension> micro(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, MICRO * unit.magnitude) {}
+fun <D : Dimension> nano(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, NANO * unit.magnitude) {}
+fun <D : Dimension> pico(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, PICO * unit.magnitude) {}
+fun <D : Dimension> femto(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, FEMTO * unit.magnitude) {}
+fun <D : Dimension> atto(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, ATTO * unit.magnitude) {}
+fun <D : Dimension> zepto(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, ZEPTO * unit.magnitude) {}
+fun <D : Dimension> yocto(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, YOCTO * unit.magnitude) {}
+fun <D : Dimension> ronto(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, RONTO * unit.magnitude) {}
+fun <D : Dimension> quecto(unit: Unit<D>) = object : Unit<D>(unit.dimension, unit.symbol, unit.scale, QUECTO * unit.magnitude) {}
 // @formatter:on
 

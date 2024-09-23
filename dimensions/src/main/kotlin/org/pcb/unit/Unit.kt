@@ -7,7 +7,7 @@ import org.pcb.unit.config.Configuration
 import org.pcb.unit.dimensions.Dimension
 
 abstract class Unit<D : Dimension>(
-        val domain: KClass<D>,
+        val dimension: KClass<D>,
         val symbol: String,
         val scale: BigDecimal,
         val magnitude: Magnitude)

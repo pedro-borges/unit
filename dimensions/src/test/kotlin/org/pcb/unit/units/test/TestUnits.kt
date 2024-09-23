@@ -54,6 +54,6 @@ open class TIME(magnitude: Magnitude) : Unit<Time>(Time::class, magnitude.symbol
 object TIME1 : TIME(UNI)
 object TIME2 : TIME(DECA)
 
-open class TEMPERATURE(magnitude: Magnitude) : Unit<Temperature>(Temperature::class, magnitude.symbol + "P", TEN.power(magnitude.power), UNI)
+open class TEMPERATURE(magnitude: Magnitude) : Unit<Temperature>(Temperature::class, magnitude.symbol + "K", TEN.power(magnitude.power), UNI)
 object TEMPERATURE1 : TEMPERATURE(UNI)
 object TEMPERATURE2 : TEMPERATURE(DECA)

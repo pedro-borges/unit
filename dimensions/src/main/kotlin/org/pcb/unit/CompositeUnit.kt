@@ -27,8 +27,9 @@ open class CompositeUnit<D : Dimension>(domain: KClass<D>,
                       units.toMutableMap()
                           .also {
                               composite.units.forEach { that ->
-                                  it.putOrRemove(that.key,
-                                                 (it[that.key] ?: 0) + that.value)
+                                  val unit = get(that.key.dimension) ?: that.key
+
+                                  it.putOrRemove(unit, (it[unit] ?: 0) + that.value)
                               }
                           })
 
@@ -37,9 +38,14 @@ open class CompositeUnit<D : Dimension>(domain: KClass<D>,
                       units.toMutableMap()
                           .also {
                               composite.units.forEach { that ->
-                                  it.putOrRemove(that.key, (it[that.key] ?: 0) - that.value)
+                                  val unit = get(that.key.dimension) ?: that.key
+
+                                  it.putOrRemove(unit, (it[unit] ?: 0) - that.value)
                               }
                           })
+
+    infix operator fun get(dimension: KClass<out Dimension>) =
+        units.keys.firstOrNull { it.dimension == dimension }
 
     override fun equals(other: Any?): Boolean
     {

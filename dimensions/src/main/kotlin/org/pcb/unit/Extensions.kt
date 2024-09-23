@@ -2,6 +2,7 @@ package org.pcb.unit
 
 import java.math.BigDecimal
 import java.math.MathContext
+import kotlin.math.sign
 import org.pcb.unit.config.Configuration.calculationMathContext
 
 fun Number.toBigDecimal(): BigDecimal =
@@ -51,6 +52,51 @@ fun convert(vararg units: Pair<Unit<*>, Unit<*>>): BigDecimal =
             .divide(unit.second.scale, calculationMathContext)
             .stripTrailingZeros()
     }
+
+fun convert(units: Pair<CompositeUnit<*>, CompositeUnit<*>>): BigDecimal
+{
+    var result = 1.toBigDecimal()
+
+    val main = units.first
+    val that = units.second
+
+    that.units.keys.sortedByDescending { that.units[it]!! }
+        .forEach { unit ->
+            val first = main[unit.dimension]?.let { it to main.units[it]!! }
+            val second = unit to that.units[unit]!!
+
+            if (first == null)
+            {
+
+            } else if (first.second.sign == 1 && second.second.sign == 1)
+            {
+                for (i in 1..second.second)
+                {
+                    result /= convert(second.first to first.first)
+                }
+            } else if (first.second.sign == 1 && second.second.sign == -1)
+            {
+                for (i in 1 downTo second.second)
+                {
+                    result *= convert(second.first to first.first)
+                }
+            } else if (first.second.sign == -1 && second.second.sign == 1)
+            {
+                for (i in -1..second.second)
+                {
+                    result /= convert(second.first to first.first)
+                }
+            } else if (first.second.sign == -1 && second.second.sign == -1)
+            {
+                for (i in -1 downTo second.second)
+                {
+                    result *= convert(second.first to first.first)
+                }
+            }
+        }
+
+    return result
+}
 
 operator fun Number.times(other: BigDecimal): BigDecimal = toBigDecimal().multiply(other, calculationMathContext).stripTrailingZeros()
 operator fun Number.div(other: BigDecimal): BigDecimal = toBigDecimal().divide(other, calculationMathContext).stripTrailingZeros()
