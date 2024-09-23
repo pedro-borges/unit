@@ -30,11 +30,11 @@ open class Amount<D : Dimension>(val amount: BigDecimal,
 
     operator fun times(that: Amount<*>) =
         Amount(amount = amount * that.amount * convert(that.unit to unit),
-               unit = unit + that.unit)
+               unit = unit * that.unit)
 
     operator fun div(that: Amount<*>) =
         Amount(amount = amount / that.amount / convert(that.unit to unit),
-               unit = unit - that.unit)
+               unit = unit / that.unit)
 
     override
     fun equals(other: Any?) =

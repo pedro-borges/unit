@@ -27,31 +27,13 @@ open class CompositeUnit<D : Dimension>(domain: KClass<D>,
                       units.toMutableMap()
                           .also {
                               composite.units.forEach { that ->
-                                  it.putOrRemove(that.key, (it[that.key] ?: 0) + that.value)
-                              }
-                          })
-
-    operator fun div(composite: CompositeUnit<*>) =
-        CompositeUnit(Dimension::class,
-                      units.toMutableMap()
-                          .also {
-                              composite.units.forEach { that ->
-                                  it.putOrRemove(that.key, (it[that.key] ?: 0) - that.value)
-                              }
-                          })
-
-    operator fun plus(composite: CompositeUnit<*>) =
-        CompositeUnit(Dimension::class,
-                      units.toMutableMap()
-                          .also {
-                              composite.units.forEach { that ->
                                   val unit = get(that.key.dimension) ?: that.key
 
                                   it.putOrRemove(unit, (it[unit] ?: 0) + that.value)
                               }
                           })
 
-    operator fun minus(composite: CompositeUnit<*>) =
+    operator fun div(composite: CompositeUnit<*>) =
         CompositeUnit(Dimension::class,
                       units.toMutableMap()
                           .also {
