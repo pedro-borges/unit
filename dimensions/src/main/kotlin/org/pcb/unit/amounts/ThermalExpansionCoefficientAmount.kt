@@ -8,10 +8,10 @@ import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Kelvin.KELVIN
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
-import org.pcb.unit.dimensions.AmountOfSubstance
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Substance
 import org.pcb.unit.dimensions.Temperature
 import org.pcb.unit.dimensions.ThermalExpansionCoefficient
 import org.pcb.unit.dimensions.Time
@@ -103,7 +103,7 @@ open class ThermalExpansionCoefficientAmount<K : Unit<Temperature>>(
 
     // region -> MolarHeatCapacity
 
-    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: MolarEnergyAmount<N, D, M, T>) =
+    operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: MolarEnergyAmount<N, D, M, T>) =
         MolarHeatCapacityAmount(amount = amount * that.amount,
                                 unit = U2(that.distance, that.mass) to U3(that.amountOfSubstance, temperature, that.time))
 

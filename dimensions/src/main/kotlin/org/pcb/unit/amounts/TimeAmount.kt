@@ -7,7 +7,6 @@ import org.pcb.unit.U3
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
-import org.pcb.unit.dimensions.AmountOfSubstance
 import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Currency
 import org.pcb.unit.dimensions.Distance
@@ -15,6 +14,7 @@ import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.LuminousIntensity
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Substance
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
@@ -409,12 +409,12 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> MolarVolume
 
     @JvmName("timesCatalyticEfficiency")
-    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>, T : Unit<Time>> times(that: CatalyticEfficiencyAmount<N, D, T>) =
+    operator fun <N : Unit<Substance>, D : Unit<Distance>, T : Unit<Time>> times(that: CatalyticEfficiencyAmount<N, D, T>) =
         MolarVolumeAmount(amount = amount * that.amount
                                    / convert(that.time to time),
                           unit = that.distance to that.amountOfSubstance)
 
-    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>> times(that: CatalyticEfficiencyAmount<N, D, T>) =
+    operator fun <N : Unit<Substance>, D : Unit<Distance>> times(that: CatalyticEfficiencyAmount<N, D, T>) =
         MolarVolumeAmount(amount = amount * that.amount,
                           unit = that.distance to that.amountOfSubstance)
 

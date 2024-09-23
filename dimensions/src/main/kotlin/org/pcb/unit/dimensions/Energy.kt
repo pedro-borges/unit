@@ -16,7 +16,7 @@ object Energy : Dimension
     operator fun div(that: Frequency) = Action
     operator fun times(that: Time) = Action
 
-    operator fun div(that: MolarEnergy) = AmountOfSubstance
+    operator fun div(that: MolarEnergy) = Substance
 
     operator fun div(that: RadiantExposure) = Area
 
@@ -42,7 +42,7 @@ object Energy : Dimension
 
     operator fun div(that: SpecificEnergy) = Mass
 
-    operator fun div(that: AmountOfSubstance) = MolarEnergy
+    operator fun div(that: Substance) = MolarEnergy
 
     operator fun div(that: Speed) = Momentum
     operator fun times(that: Pace) = Momentum

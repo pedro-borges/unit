@@ -6,7 +6,6 @@ object Dimensions
 {
     val DIMENSIONS = listOf("Acceleration" to Composite(distance = 1, time = -2),
                             "Action" to Composite(distance = 2, mass = 1, time = -1),
-                            "AmountOfSubstance" to Composite(amountOfSubstance = 1),
                             "Angle" to Composite(angle = 1),
                             "AngularAcceleration" to Composite(angle = 1, time = -2),
                             "AngularMomentum" to Composite(mass = 2, distance = 1, time = -1),
@@ -14,7 +13,7 @@ object Dimensions
                             "Area" to Composite(distance = 2),
                             "AreaDensity" to Composite(mass = 1, distance = -2),
                             "Capacitance" to Composite(time = 4, electricCurrent = 2, mass = -1, distance = -2),
-                            "CatalyticEfficiency" to Composite(distance = 3, amountOfSubstance = -1, time = -1),
+                            "CatalyticEfficiency" to Composite(distance = 3, substance = -1, time = -1),
                             "Currency" to Composite(currency = 1),
                             "Debt" to Composite(currency = 1, time = 1),
                             "Distance" to Composite(distance = 1),
@@ -42,13 +41,13 @@ object Dimensions
                             "Mass" to Composite(mass = 1),
                             "MassDensity" to Composite(mass = 1, distance = -3),
                             "MassFlowRate" to Composite(mass = 1, time = -1),
-                            "Molality" to Composite(amountOfSubstance = 1, mass = -1),
-                            "Molarity" to Composite(amountOfSubstance = 1, distance = -3),
-                            "MolarMass" to Composite(mass = 1, amountOfSubstance = -1),
-                            "MolarConductivity" to Composite(time = 3, electricCurrent = 2, amountOfSubstance = -1, mass = -1),
-                            "MolarEnergy" to Composite(distance = 2, mass = 1, amountOfSubstance = -1, time = -2),
-                            "MolarHeatCapacity" to Composite(distance = 2, mass = 1, amountOfSubstance = -1, temperature = -1, time = -2),
-                            "MolarVolume" to Composite(distance = 3, amountOfSubstance = -1),
+                            "Molality" to Composite(substance = 1, mass = -1),
+                            "Molarity" to Composite(substance = 1, distance = -3),
+                            "MolarMass" to Composite(mass = 1, substance = -1),
+                            "MolarConductivity" to Composite(time = 3, electricCurrent = 2, substance = -1, mass = -1),
+                            "MolarEnergy" to Composite(distance = 2, mass = 1, substance = -1, time = -2),
+                            "MolarHeatCapacity" to Composite(distance = 2, mass = 1, substance = -1, temperature = -1, time = -2),
+                            "MolarVolume" to Composite(distance = 3, substance = -1),
                             "Momentum" to Composite(mass = 1, distance = 1, time = -1),
                             "MomentOfInertia" to Composite(distance = 2, mass = 1),
                             "Pace" to Composite(time = 1, distance = -1),
@@ -65,6 +64,7 @@ object Dimensions
                             "SpecificHeatCapacity" to Composite(distance = 2, temperature = -1, time = -2),
                             "SpecificVolume" to Composite(distance = 3, mass = -1),
                             "SpectralIntensity" to Composite(distance = 1, mass = 1, angle = -2, time = -3),
+                            "Substance" to Composite(substance = 1),
                             "Speed" to Composite(distance = 1, time = -1),
                             "Temperature" to Composite(temperature = 1),
                             "TemperatureGradient" to Composite(temperature = 1, distance = -1),
@@ -77,10 +77,10 @@ object Dimensions
                             "Yank" to Composite(distance = 1, mass = 1, time = -3))
 
     fun Composite.max() =
-        max(amountOfSubstance, angle, currency, distance, electricCurrent, luminousIntensity, mass, temperature, time)
+        max(substance, angle, currency, distance, electricCurrent, luminousIntensity, mass, temperature, time)
 
     fun Composite.min() =
-        min(amountOfSubstance, angle, currency, distance, electricCurrent, luminousIntensity, mass, temperature, time)
+        min(substance, angle, currency, distance, electricCurrent, luminousIntensity, mass, temperature, time)
 
     fun min(value: Int, vararg values: Int): Int
     {

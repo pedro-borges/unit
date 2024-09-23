@@ -91,7 +91,7 @@ class GenerateDimensionTest
         {
             if (i == 0) continue
 
-            if (amountOfSubstance == i) result += "amountOfSubstance = $amountOfSubstance"
+            if (substance == i) result += "amountOfSubstance = $substance"
             if (angle == i) result += "angle = $angle"
             if (currency == i) result += "currency = $currency"
             if (distance == i) result += "distance = $distance"

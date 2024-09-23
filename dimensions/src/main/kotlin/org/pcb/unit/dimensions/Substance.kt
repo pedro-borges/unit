@@ -3,13 +3,13 @@ package org.pcb.unit.dimensions
 import org.pcb.unit.Composite
 
 @Suppress("UNUSED_PARAMETER")
-@Composite(amountOfSubstance = 1)
-object AmountOfSubstance : Dimension
+@Composite(substance = 1)
+object Substance : Dimension
 {
-    operator fun div(that: Scalar) = AmountOfSubstance
-    operator fun times(that: Scalar) = AmountOfSubstance
+    operator fun div(that: Scalar) = Substance
+    operator fun times(that: Scalar) = Substance
 
-    operator fun div(that: AmountOfSubstance) = Scalar
+    operator fun div(that: Substance) = Scalar
 
     operator fun times(that: MolarEnergy) = Energy
 

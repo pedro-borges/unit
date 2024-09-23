@@ -7,7 +7,6 @@ import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
-import org.pcb.unit.dimensions.AmountOfSubstance
 import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Currency
 import org.pcb.unit.dimensions.Distance
@@ -16,6 +15,7 @@ import org.pcb.unit.dimensions.Frequency
 import org.pcb.unit.dimensions.LuminousIntensity
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Substance
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
 import org.pcb.unit.minor
@@ -151,11 +151,11 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // region -> CatalyticEfficiency
 
-    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>> times(that: MolarVolumeAmount<N, D>) =
+    operator fun <N : Unit<Substance>, D : Unit<Distance>> times(that: MolarVolumeAmount<N, D>) =
         CatalyticEfficiencyAmount(amount = amount * that.amount,
                                   unit = that.distance to U2(that.amountOfSubstance, time))
 
-    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>> div(that: MolarityAmount<N, D>) =
+    operator fun <N : Unit<Substance>, D : Unit<Distance>> div(that: MolarityAmount<N, D>) =
         CatalyticEfficiencyAmount(amount = amount / that.amount,
                                   unit = that.distance to U2(that.amountOfSubstance, time))
 
@@ -319,12 +319,12 @@ open class FrequencyAmount<T : Unit<Time>>(
     // region -> Molarity
 
     @JvmName("divCatalyticEfficiency")
-    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>, T : Unit<Time>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
+    operator fun <N : Unit<Substance>, D : Unit<Distance>, T : Unit<Time>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
         MolarityAmount(amount = amount / that.amount
                                 * convert(that.time to time),
                        unit = that.amountOfSubstance to that.distance)
 
-    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
+    operator fun <N : Unit<Substance>, D : Unit<Distance>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
         MolarityAmount(amount = amount / that.amount,
                        unit = that.amountOfSubstance to that.distance)
 

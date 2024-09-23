@@ -11,8 +11,8 @@ object Mass : Dimension
 
     operator fun div(that: Mass) = Scalar
 
-    operator fun div(that: MolarMass) = AmountOfSubstance
-    operator fun times(that: Molality) = AmountOfSubstance
+    operator fun div(that: MolarMass) = Substance
+    operator fun times(that: Molality) = Substance
 
     operator fun times(that: Momentum) = AngularMomentum
 
@@ -34,7 +34,7 @@ object Mass : Dimension
     operator fun div(that: Time) = MassFlowRate
     operator fun times(that: Frequency) = MassFlowRate
 
-    operator fun div(that: AmountOfSubstance) = MolarMass
+    operator fun div(that: Substance) = MolarMass
 
     operator fun div(that: FuelEfficiency) = MomentOfInertia
     operator fun times(that: Area) = MomentOfInertia

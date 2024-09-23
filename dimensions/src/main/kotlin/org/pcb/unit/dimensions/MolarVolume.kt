@@ -4,7 +4,7 @@ import org.pcb.unit.Composite
 
 @Suppress("UNUSED_PARAMETER")
 @Composite(distance = 3,
-           amountOfSubstance = -1)
+           substance = -1)
 object MolarVolume : Dimension
 {
     operator fun div(that: Scalar) = MolarVolume
@@ -26,5 +26,5 @@ object MolarVolume : Dimension
 
     operator fun div(that: CatalyticEfficiency) = Time
 
-    operator fun times(that: AmountOfSubstance) = Volume
+    operator fun times(that: Substance) = Volume
 }

@@ -10,11 +10,11 @@ import org.pcb.unit.amounts.base.Mole.MOLE
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
-import org.pcb.unit.dimensions.AmountOfSubstance
 import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.MolarConductivity
 import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Substance
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
 import org.pcb.unit.kilo
@@ -23,7 +23,7 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class MolarConductivityAmount<N : Unit<AmountOfSubstance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>>(
+open class MolarConductivityAmount<N : Unit<Substance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
         unit: Pair<U2<T, EC>, U2<N, M>>)
     : Amount<MolarConductivity>(amount = amount.toBigDecimal(),
@@ -57,7 +57,7 @@ open class MolarConductivityAmount<N : Unit<AmountOfSubstance>, EC : Unit<Electr
                                 unit = U2(time, electricCurrent) to U2(amountOfSubstance, mass))
 
     @JvmName("plusMolarConductivity")
-    operator fun <N : Unit<AmountOfSubstance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> plus(that: MolarConductivityAmount<N, EC, M, T>) =
+    operator fun <N : Unit<Substance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> plus(that: MolarConductivityAmount<N, EC, M, T>) =
         MolarConductivityAmount(amount = amount + that.amount
                                          * convert(that.electricCurrent to electricCurrent,
                                                    that.electricCurrent to electricCurrent,
@@ -73,7 +73,7 @@ open class MolarConductivityAmount<N : Unit<AmountOfSubstance>, EC : Unit<Electr
                                 unit = U2(time, electricCurrent) to U2(amountOfSubstance, mass))
 
     @JvmName("minusMolarConductivity")
-    operator fun <N : Unit<AmountOfSubstance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> minus(that: MolarConductivityAmount<N, EC, M, T>) =
+    operator fun <N : Unit<Substance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> minus(that: MolarConductivityAmount<N, EC, M, T>) =
         MolarConductivityAmount(amount = amount - that.amount
                                          * convert(that.electricCurrent to electricCurrent,
                                                    that.electricCurrent to electricCurrent,
@@ -93,7 +93,7 @@ open class MolarConductivityAmount<N : Unit<AmountOfSubstance>, EC : Unit<Electr
     // region -> Scalar
 
     @JvmName("divMolarConductivity")
-    operator fun <N : Unit<AmountOfSubstance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: MolarConductivityAmount<N, EC, M, T>) =
+    operator fun <N : Unit<Substance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: MolarConductivityAmount<N, EC, M, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.electricCurrent to electricCurrent,
                                         that.electricCurrent to electricCurrent,

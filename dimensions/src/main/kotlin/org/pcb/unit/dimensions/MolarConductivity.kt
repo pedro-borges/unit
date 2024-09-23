@@ -5,7 +5,7 @@ import org.pcb.unit.Composite
 @Suppress("UNUSED_PARAMETER")
 @Composite(time = 3,
            electricCurrent = 2,
-           amountOfSubstance = -1,
+           substance = -1,
            mass = -1)
 object MolarConductivity : Dimension
 {

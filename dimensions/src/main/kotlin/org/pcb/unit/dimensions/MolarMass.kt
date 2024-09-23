@@ -4,7 +4,7 @@ import org.pcb.unit.Composite
 
 @Suppress("UNUSED_PARAMETER")
 @Composite(mass = 1,
-           amountOfSubstance = -1)
+           substance = -1)
 object MolarMass : Dimension
 {
     operator fun div(that: Scalar) = MolarMass
@@ -13,7 +13,7 @@ object MolarMass : Dimension
     operator fun div(that: MolarMass) = Scalar
     operator fun times(that: Molality) = Scalar
 
-    operator fun times(that: AmountOfSubstance) = Mass
+    operator fun times(that: Substance) = Mass
 
     operator fun div(that: MolarVolume) = MassDensity
     operator fun times(that: Molarity) = MassDensity

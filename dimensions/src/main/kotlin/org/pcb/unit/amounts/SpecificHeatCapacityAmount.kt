@@ -10,11 +10,11 @@ import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
-import org.pcb.unit.dimensions.AmountOfSubstance
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.SpecificHeatCapacity
+import org.pcb.unit.dimensions.Substance
 import org.pcb.unit.dimensions.Temperature
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
@@ -128,7 +128,7 @@ open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>,
     // region -> Molality
 
     @JvmName("divMolarHeatCapacity")
-    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
+    operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
         MolalityAmount(amount = amount / that.amount
                                 / convert(that.distance to distance,
                                           that.distance to distance)
@@ -137,7 +137,7 @@ open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>,
                                           that.time to time),
                        unit = that.amountOfSubstance to that.mass)
 
-    operator fun <N : Unit<AmountOfSubstance>, M : Unit<Mass>> div(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
+    operator fun <N : Unit<Substance>, M : Unit<Mass>> div(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
         MolalityAmount(amount = amount / that.amount,
                        unit = that.amountOfSubstance to that.mass)
 
@@ -145,11 +145,11 @@ open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>,
 
     // region -> MolarHeatCapacity
 
-    operator fun <N : Unit<AmountOfSubstance>, M : Unit<Mass>> div(that: MolalityAmount<N, M>) =
+    operator fun <N : Unit<Substance>, M : Unit<Mass>> div(that: MolalityAmount<N, M>) =
         MolarHeatCapacityAmount(amount = amount / that.amount,
                                 unit = U2(distance, that.mass) to U3(that.amountOfSubstance, temperature, time))
 
-    operator fun <N : Unit<AmountOfSubstance>, M : Unit<Mass>> times(that: MolarMassAmount<N, M>) =
+    operator fun <N : Unit<Substance>, M : Unit<Mass>> times(that: MolarMassAmount<N, M>) =
         MolarHeatCapacityAmount(amount = amount * that.amount,
                                 unit = U2(distance, that.mass) to U3(that.amountOfSubstance, temperature, time))
 

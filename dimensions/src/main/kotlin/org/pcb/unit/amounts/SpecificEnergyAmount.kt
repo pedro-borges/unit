@@ -8,11 +8,11 @@ import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
-import org.pcb.unit.dimensions.AmountOfSubstance
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.SpecificEnergy
+import org.pcb.unit.dimensions.Substance
 import org.pcb.unit.dimensions.Temperature
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
@@ -174,7 +174,7 @@ open class SpecificEnergyAmount<D : Unit<Distance>, T : Unit<Time>>(
     // region -> Molality
 
     @JvmName("divMolarEnergy")
-    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MolarEnergyAmount<N, D, M, T>) =
+    operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MolarEnergyAmount<N, D, M, T>) =
         MolalityAmount(amount = amount / that.amount
                                 / convert(that.distance to distance,
                                           that.distance to distance)
@@ -182,7 +182,7 @@ open class SpecificEnergyAmount<D : Unit<Distance>, T : Unit<Time>>(
                                           that.time to time),
                        unit = that.amountOfSubstance to that.mass)
 
-    operator fun <N : Unit<AmountOfSubstance>, M : Unit<Mass>> div(that: MolarEnergyAmount<N, D, M, T>) =
+    operator fun <N : Unit<Substance>, M : Unit<Mass>> div(that: MolarEnergyAmount<N, D, M, T>) =
         MolalityAmount(amount = amount / that.amount,
                        unit = that.amountOfSubstance to that.mass)
 
@@ -190,11 +190,11 @@ open class SpecificEnergyAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // region -> MolarEnergy
 
-    operator fun <N : Unit<AmountOfSubstance>, M : Unit<Mass>> div(that: MolalityAmount<N, M>) =
+    operator fun <N : Unit<Substance>, M : Unit<Mass>> div(that: MolalityAmount<N, M>) =
         MolarEnergyAmount(amount = amount / that.amount,
                           unit = U2(distance, that.mass) to U2(that.amountOfSubstance, time))
 
-    operator fun <N : Unit<AmountOfSubstance>, M : Unit<Mass>> times(that: MolarMassAmount<N, M>) =
+    operator fun <N : Unit<Substance>, M : Unit<Mass>> times(that: MolarMassAmount<N, M>) =
         MolarEnergyAmount(amount = amount * that.amount,
                           unit = U2(distance, that.mass) to U2(that.amountOfSubstance, time))
 
