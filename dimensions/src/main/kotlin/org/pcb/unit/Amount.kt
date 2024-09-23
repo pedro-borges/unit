@@ -20,6 +20,14 @@ open class Amount<D : Dimension>(val amount: BigDecimal,
         Amount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
                unit = unit)
 
+    operator fun plus(that: Amount<D>) =
+        Amount(amount = amount + that.amount * convert(that.unit to unit),
+               unit = unit)
+
+    operator fun minus(that: Amount<D>) =
+        Amount(amount = amount - that.amount * convert(that.unit to unit),
+               unit = unit)
+
     operator fun times(that: Amount<*>) =
         Amount(amount = amount * that.amount * convert(that.unit to unit),
                unit = unit * that.unit)
