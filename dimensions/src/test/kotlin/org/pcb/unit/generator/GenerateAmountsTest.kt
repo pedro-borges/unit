@@ -164,6 +164,7 @@ class GenerateAmountsTest
             "import org.pcb.unit.convert\n" +
             DIMENSIONS.joinToString("") { "import org.pcb.unit.dimensions.${it.first}\n" } +
             "import org.pcb.unit.amounts.base.Radian.RADIAN\n" +
+            "import org.pcb.unit.amounts.base.Mole.MOLE\n" +
             "import org.pcb.unit.amounts.base.Ampere.AMPERE\n" +
             "import org.pcb.unit.amounts.base.Candela.CANDELA\n" +
             "import org.pcb.unit.amounts.base.Gram.GRAM\n" +
@@ -203,6 +204,7 @@ class GenerateAmountsTest
     {
         val result = ArrayList<String>()
 
+        if (amountOfSubstance != 0) result += "N : Unit<AmountOfSubstance>"
         if (angle != 0) result += "A : Unit<Angle>"
         if (currency != 0) result += "C : Unit<Currency>"
         if (distance != 0) result += "D : Unit<Distance>"
@@ -219,6 +221,7 @@ class GenerateAmountsTest
     {
         val result = ArrayList<String>()
 
+        if (amountOfSubstance != 0) result += "N"
         if (angle != 0) result += "A"
         if (currency != 0) result += "C"
         if (distance != 0) result += "D"
@@ -232,7 +235,8 @@ class GenerateAmountsTest
     }
 
     private fun Composite.keep(that: Composite) =
-        Composite(angle = if (that.angle != 0) angle else 0,
+        Composite(amountOfSubstance = if (that.amountOfSubstance != 0) amountOfSubstance else 0,
+                  angle = if (that.angle != 0) angle else 0,
                   currency = if (that.currency != 0) currency else 0,
                   distance = if (that.distance != 0) distance else 0,
                   electricCurrent = if (that.electricCurrent != 0) electricCurrent else 0,
@@ -242,7 +246,8 @@ class GenerateAmountsTest
                   time = if (that.time != 0) time else 0)
 
     private fun Composite.drop(that: Composite) =
-        Composite(angle = if (that.angle != 0) 0 else angle,
+        Composite(amountOfSubstance = if (that.amountOfSubstance != 0) 0 else amountOfSubstance,
+                  angle = if (that.angle != 0) 0 else angle,
                   currency = if (that.currency != 0) 0 else currency,
                   distance = if (that.distance != 0) 0 else distance,
                   electricCurrent = if (that.electricCurrent != 0) 0 else electricCurrent,
@@ -255,6 +260,7 @@ class GenerateAmountsTest
     {
         val result = ArrayList<String>()
 
+        for (a in 1..amountOfSubstance) result += "that.amountOfSubstance to amountOfSubstance"
         for (a in 1..angle) result += "that.angle to angle"
         for (a in 1..currency) result += "that.currency to currency"
         for (a in 1..distance) result += "that.distance to distance"
@@ -310,7 +316,8 @@ class GenerateAmountsTest
         val positives = positives()
         val negatives = negatives()
 
-        val canons = mapOf("A" to "RADIAN",
+        val canons = mapOf("N" to "MOLE",
+                           "A" to "RADIAN",
                            "C" to "EUR",
                            "D" to "METER",
                            "EC" to "AMPERE",
@@ -486,6 +493,7 @@ class GenerateAmountsTest
         {
             if (i == 0) continue
 
+            if (amountOfSubstance == i) result["amountOfSubstance"] = amountOfSubstance
             if (angle == i) result["angle"] = angle
             if (currency == i) result["currency"] = currency
             if (distance == i) result["distance"] = distance
@@ -500,7 +508,8 @@ class GenerateAmountsTest
     }
 
     private fun Composite.positives() =
-        Composite(angle = if (angle > 0) angle else 0,
+        Composite(amountOfSubstance = if (amountOfSubstance > 0) amountOfSubstance else 0,
+                  angle = if (angle > 0) angle else 0,
                   currency = if (currency > 0) currency else 0,
                   distance = if (distance > 0) distance else 0,
                   electricCurrent = if (electricCurrent > 0) electricCurrent else 0,
@@ -510,7 +519,8 @@ class GenerateAmountsTest
                   time = if (time > 0) time else 0)
 
     private fun Composite.negatives() =
-        Composite(angle = if (angle < 0) -angle else 0,
+        Composite(amountOfSubstance = if (amountOfSubstance < 0) -amountOfSubstance else 0,
+                  angle = if (angle < 0) -angle else 0,
                   currency = if (currency < 0) -currency else 0,
                   distance = if (distance < 0) -distance else 0,
                   electricCurrent = if (electricCurrent < 0) -electricCurrent else 0,
@@ -520,6 +530,7 @@ class GenerateAmountsTest
                   time = if (time < 0) -time else 0)
 
     private fun Composite.count() =
+        (if (amountOfSubstance != 0) 1 else 0) +
         (if (angle != 0) 1 else 0) +
         (if (currency != 0) 1 else 0) +
         (if (distance != 0) 1 else 0) +
@@ -530,7 +541,7 @@ class GenerateAmountsTest
         (if (time != 0) 1 else 0)
 
     private fun Composite.isComposite() =
-        (angle.absoluteValue + currency.absoluteValue + distance.absoluteValue + electricCurrent.absoluteValue +
+        (amountOfSubstance.absoluteValue + angle.absoluteValue + currency.absoluteValue + distance.absoluteValue + electricCurrent.absoluteValue +
          luminousIntensity.absoluteValue + mass.absoluteValue + temperature.absoluteValue + time.absoluteValue) > 1 ||
         negatives().count() > 0
 
@@ -538,6 +549,7 @@ class GenerateAmountsTest
     {
         val result = ArrayList<Pair<String, Int>>()
 
+        if (amountOfSubstance != 0 && that.amountOfSubstance != 0) result += "amountOfSubstance" to that.amountOfSubstance else if (that.amountOfSubstance != 0) result += "that.amountOfSubstance" to that.amountOfSubstance
         if (angle != 0 && that.angle != 0) result += "angle" to that.angle else if (that.angle != 0) result += "that.angle" to that.angle
         if (currency != 0 && that.currency != 0) result += "currency" to that.currency else if (that.currency != 0) result += "that.currency" to that.currency
         if (distance != 0 && that.distance != 0) result += "distance" to that.distance else if (that.distance != 0) result += "that.distance" to that.distance
@@ -554,6 +566,7 @@ class GenerateAmountsTest
     {
         val result = ArrayList<Pair<String, Int>>()
 
+        if (amountOfSubstance != 0) result += "N" to amountOfSubstance
         if (angle != 0) result += "A" to angle
         if (currency != 0) result += "C" to currency
         if (distance != 0) result += "D" to distance

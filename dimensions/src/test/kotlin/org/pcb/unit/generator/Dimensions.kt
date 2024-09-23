@@ -6,6 +6,7 @@ object Dimensions
 {
     val DIMENSIONS = listOf("Acceleration" to Composite(distance = 1, time = -2),
                             "Action" to Composite(distance = 2, mass = 1, time = -1),
+                            "AmountOfSubstance" to Composite(amountOfSubstance = 1),
                             "Angle" to Composite(angle = 1),
                             "AngularAcceleration" to Composite(angle = 1, time = -2),
                             "AngularMomentum" to Composite(mass = 2, distance = 1, time = -1),
@@ -68,10 +69,10 @@ object Dimensions
                             "Yank" to Composite(distance = 1, mass = 1, time = -3))
 
     fun Composite.max() =
-        max(angle, currency, distance, electricCurrent, luminousIntensity, mass, temperature, time)
+        max(amountOfSubstance, angle, currency, distance, electricCurrent, luminousIntensity, mass, temperature, time)
 
     fun Composite.min() =
-        min(angle, currency, distance, electricCurrent, luminousIntensity, mass, temperature, time)
+        min(amountOfSubstance, angle, currency, distance, electricCurrent, luminousIntensity, mass, temperature, time)
 
     fun min(value: Int, vararg values: Int): Int
     {

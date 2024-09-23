@@ -13,6 +13,8 @@ object Scalar : Dimension
 
     operator fun times(that: Action) = Action
 
+    operator fun times(that: AmountOfSubstance) = AmountOfSubstance
+
     operator fun times(that: Angle) = Angle
 
     operator fun times(that: AngularAcceleration) = AngularAcceleration

@@ -1,6 +1,7 @@
 package org.pcb.unit
 
 annotation class Composite(
+        val amountOfSubstance: Int = 0,
         val angle: Int = 0,
         val currency: Int = 0,
         val distance: Int = 0,
@@ -11,7 +12,8 @@ annotation class Composite(
         val time: Int = 0)
 
 operator fun Composite.plus(that: Composite) =
-    Composite(angle = angle + that.angle,
+    Composite(amountOfSubstance = amountOfSubstance + that.amountOfSubstance,
+              angle = angle + that.angle,
               currency = currency + that.currency,
               distance = distance + that.distance,
               electricCurrent = electricCurrent + that.electricCurrent,
@@ -21,7 +23,8 @@ operator fun Composite.plus(that: Composite) =
               time = time + that.time)
 
 operator fun Composite.minus(that: Composite) =
-    Composite(angle = angle - that.angle,
+    Composite(amountOfSubstance = amountOfSubstance - that.amountOfSubstance,
+              angle = angle - that.angle,
               currency = currency - that.currency,
               distance = distance - that.distance,
               electricCurrent = electricCurrent - that.electricCurrent,
