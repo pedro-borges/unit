@@ -1,0 +1,30 @@
+package org.pcb.unit.dimensions
+
+import org.pcb.unit.Composite
+
+@Suppress("UNUSED_PARAMETER")
+@Composite(distance = 3,
+           amountOfSubstance = -1)
+object MolarVolume : Dimension
+{
+    operator fun div(that: Scalar) = MolarVolume
+    operator fun times(that: Scalar) = MolarVolume
+
+    operator fun div(that: MolarVolume) = Scalar
+    operator fun times(that: Molarity) = Scalar
+
+    operator fun div(that: Time) = CatalyticEfficiency
+    operator fun times(that: Frequency) = CatalyticEfficiency
+
+    operator fun times(that: EnergyDensity) = MolarEnergy
+
+    operator fun div(that: SpecificVolume) = MolarMass
+    operator fun times(that: MassDensity) = MolarMass
+
+    operator fun div(that: MolarMass) = SpecificVolume
+    operator fun times(that: Molality) = SpecificVolume
+
+    operator fun div(that: CatalyticEfficiency) = Time
+
+    operator fun times(that: AmountOfSubstance) = Volume
+}

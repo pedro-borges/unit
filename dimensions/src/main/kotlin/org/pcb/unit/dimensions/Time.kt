@@ -55,6 +55,8 @@ object Time : Dimension
 
     operator fun times(that: RadiantExposure) = MassFlowRate
 
+    operator fun times(that: CatalyticEfficiency) = MolarVolume
+
     operator fun times(that: Action) = MomentOfInertia
 
     operator fun times(that: Force) = Momentum

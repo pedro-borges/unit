@@ -14,12 +14,16 @@ object HeatCapacity : Dimension
 
     operator fun div(that: HeatCapacity) = Scalar
 
+    operator fun div(that: MolarHeatCapacity) = AmountOfSubstance
+
     operator fun div(that: ThermalExpansionCoefficient) = Energy
     operator fun times(that: Temperature) = Energy
 
     operator fun times(that: TemperatureGradient) = Force
 
     operator fun div(that: SpecificHeatCapacity) = Mass
+
+    operator fun div(that: AmountOfSubstance) = MolarHeatCapacity
 
     operator fun div(that: Mass) = SpecificHeatCapacity
 

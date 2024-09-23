@@ -21,6 +21,9 @@ object Frequency : Dimension
 
     operator fun times(that: Angle) = AngularVelocity
 
+    operator fun div(that: Molarity) = CatalyticEfficiency
+    operator fun times(that: MolarVolume) = CatalyticEfficiency
+
     operator fun times(that: Debt) = Currency
 
     operator fun times(that: Capacitance) = ElectricConductance
@@ -42,6 +45,8 @@ object Frequency : Dimension
     operator fun times(that: LuminousEnergy) = LuminousFlux
 
     operator fun times(that: Mass) = MassFlowRate
+
+    operator fun div(that: CatalyticEfficiency) = Molarity
 
     operator fun div(that: Acceleration) = Pace
 

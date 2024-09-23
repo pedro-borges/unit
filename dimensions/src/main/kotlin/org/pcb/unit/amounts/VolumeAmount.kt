@@ -8,6 +8,7 @@ import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
+import org.pcb.unit.dimensions.AmountOfSubstance
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
@@ -84,6 +85,34 @@ open class VolumeAmount<D : Unit<Distance>>(
     operator fun div(that: VolumeAmount<D>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
+
+    // endregion
+
+    // region -> AmountOfSubstance
+
+    @JvmName("divMolarVolume")
+    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>> div(that: MolarVolumeAmount<N, D>) =
+        AmountOfSubstanceAmount(amount = amount / that.amount
+                                         / convert(that.distance to distance,
+                                                   that.distance to distance,
+                                                   that.distance to distance),
+                                unit = that.amountOfSubstance)
+
+    operator fun <N : Unit<AmountOfSubstance>> div(that: MolarVolumeAmount<N, D>) =
+        AmountOfSubstanceAmount(amount = amount / that.amount,
+                                unit = that.amountOfSubstance)
+
+    @JvmName("timesMolarity")
+    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>> times(that: MolarityAmount<N, D>) =
+        AmountOfSubstanceAmount(amount = amount * that.amount
+                                         / convert(that.distance to distance,
+                                                   that.distance to distance,
+                                                   that.distance to distance),
+                                unit = that.amountOfSubstance)
+
+    operator fun <N : Unit<AmountOfSubstance>> times(that: MolarityAmount<N, D>) =
+        AmountOfSubstanceAmount(amount = amount * that.amount,
+                                unit = that.amountOfSubstance)
 
     // endregion
 
@@ -176,6 +205,14 @@ open class VolumeAmount<D : Unit<Distance>>(
     operator fun <M : Unit<Mass>> div(that: SpecificVolumeAmount<D, M>) =
         MassAmount(amount = amount / that.amount,
                    unit = that.mass)
+
+    // endregion
+
+    // region -> MolarVolume
+
+    operator fun <N : Unit<AmountOfSubstance>> div(that: AmountOfSubstanceAmount<N>) =
+        MolarVolumeAmount(amount = amount / that.amount,
+                          unit = distance to that.amountOfSubstance)
 
     // endregion
 

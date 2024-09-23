@@ -22,5 +22,11 @@ object MassDensity : Dimension
 
     operator fun times(that: VolumetricFlow) = MassFlowRate
 
+    operator fun div(that: Molarity) = MolarMass
+    operator fun times(that: MolarVolume) = MolarMass
+
+    operator fun div(that: MolarMass) = Molarity
+    operator fun times(that: Molality) = Molarity
+
     operator fun div(that: AreaDensity) = SpacialFrequency
 }

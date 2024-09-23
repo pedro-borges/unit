@@ -30,6 +30,8 @@ object Scalar : Dimension
 
     operator fun times(that: Capacitance) = Capacitance
 
+    operator fun times(that: CatalyticEfficiency) = CatalyticEfficiency
+
     operator fun times(that: Currency) = Currency
 
     operator fun times(that: Debt) = Debt
@@ -89,6 +91,24 @@ object Scalar : Dimension
     operator fun times(that: MassDensity) = MassDensity
 
     operator fun times(that: MassFlowRate) = MassFlowRate
+
+    operator fun div(that: MolarMass) = Molality
+    operator fun times(that: Molality) = Molality
+
+    operator fun times(that: MolarConductivity) = MolarConductivity
+
+    operator fun times(that: MolarEnergy) = MolarEnergy
+
+    operator fun times(that: MolarHeatCapacity) = MolarHeatCapacity
+
+    operator fun div(that: Molality) = MolarMass
+    operator fun times(that: MolarMass) = MolarMass
+
+    operator fun div(that: Molarity) = MolarVolume
+    operator fun times(that: MolarVolume) = MolarVolume
+
+    operator fun div(that: MolarVolume) = Molarity
+    operator fun times(that: Molarity) = Molarity
 
     operator fun times(that: MomentOfInertia) = MomentOfInertia
 

@@ -6,6 +6,7 @@ import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
+import org.pcb.unit.dimensions.AmountOfSubstance
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
@@ -68,6 +69,30 @@ open class MassAmount<M : Unit<Mass>>(
     operator fun div(that: MassAmount<M>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
+
+    // endregion
+
+    // region -> AmountOfSubstance
+
+    @JvmName("timesMolality")
+    operator fun <N : Unit<AmountOfSubstance>, M : Unit<Mass>> times(that: MolalityAmount<N, M>) =
+        AmountOfSubstanceAmount(amount = amount * that.amount
+                                         / convert(that.mass to mass),
+                                unit = that.amountOfSubstance)
+
+    operator fun <N : Unit<AmountOfSubstance>> times(that: MolalityAmount<N, M>) =
+        AmountOfSubstanceAmount(amount = amount * that.amount,
+                                unit = that.amountOfSubstance)
+
+    @JvmName("divMolarMass")
+    operator fun <N : Unit<AmountOfSubstance>, M : Unit<Mass>> div(that: MolarMassAmount<N, M>) =
+        AmountOfSubstanceAmount(amount = amount / that.amount
+                                         / convert(that.mass to mass),
+                                unit = that.amountOfSubstance)
+
+    operator fun <N : Unit<AmountOfSubstance>> div(that: MolarMassAmount<N, M>) =
+        AmountOfSubstanceAmount(amount = amount / that.amount,
+                                unit = that.amountOfSubstance)
 
     // endregion
 
@@ -166,6 +191,14 @@ open class MassAmount<M : Unit<Mass>>(
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         MassFlowRateAmount(amount = amount / that.amount,
                            unit = mass to that.time)
+
+    // endregion
+
+    // region -> MolarMass
+
+    operator fun <N : Unit<AmountOfSubstance>> div(that: AmountOfSubstanceAmount<N>) =
+        MolarMassAmount(amount = amount / that.amount,
+                        unit = mass to that.amountOfSubstance)
 
     // endregion
 

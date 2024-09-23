@@ -11,6 +11,9 @@ object Volume : Dimension
 
     operator fun div(that: Volume) = Scalar
 
+    operator fun div(that: MolarVolume) = AmountOfSubstance
+    operator fun times(that: Molarity) = AmountOfSubstance
+
     operator fun div(that: Distance) = Area
     operator fun times(that: SpacialFrequency) = Area
 
@@ -21,6 +24,8 @@ object Volume : Dimension
 
     operator fun div(that: SpecificVolume) = Mass
     operator fun times(that: MassDensity) = Mass
+
+    operator fun div(that: AmountOfSubstance) = MolarVolume
 
     operator fun times(that: PowerDensity) = Power
 

@@ -16,6 +16,8 @@ object Temperature : Dimension
 
     operator fun times(that: HeatCapacity) = Energy
 
+    operator fun times(that: MolarHeatCapacity) = MolarEnergy
+
     operator fun times(that: SpecificHeatCapacity) = SpecificEnergy
 
     operator fun div(that: Distance) = TemperatureGradient

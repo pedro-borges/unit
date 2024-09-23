@@ -7,6 +7,7 @@ import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
+import org.pcb.unit.dimensions.AmountOfSubstance
 import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Currency
 import org.pcb.unit.dimensions.Distance
@@ -145,6 +146,18 @@ open class FrequencyAmount<T : Unit<Time>>(
     operator fun <A : Unit<Angle>> times(that: AngleAmount<A>) =
         AngularVelocityAmount(amount = amount * that.amount,
                               unit = that.angle to time)
+
+    // endregion
+
+    // region -> CatalyticEfficiency
+
+    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>> times(that: MolarVolumeAmount<N, D>) =
+        CatalyticEfficiencyAmount(amount = amount * that.amount,
+                                  unit = that.distance to U2(that.amountOfSubstance, time))
+
+    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>> div(that: MolarityAmount<N, D>) =
+        CatalyticEfficiencyAmount(amount = amount / that.amount,
+                                  unit = that.distance to U2(that.amountOfSubstance, time))
 
     // endregion
 
@@ -300,6 +313,20 @@ open class FrequencyAmount<T : Unit<Time>>(
     operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
         MassFlowRateAmount(amount = amount * that.amount,
                            unit = that.mass to time)
+
+    // endregion
+
+    // region -> Molarity
+
+    @JvmName("divCatalyticEfficiency")
+    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>, T : Unit<Time>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
+        MolarityAmount(amount = amount / that.amount
+                                * convert(that.time to time),
+                       unit = that.amountOfSubstance to that.distance)
+
+    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
+        MolarityAmount(amount = amount / that.amount,
+                       unit = that.amountOfSubstance to that.distance)
 
     // endregion
 

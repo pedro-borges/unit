@@ -22,6 +22,11 @@ object SpecificEnergy : Dimension
     operator fun div(that: SpecificVolume) = EnergyDensity
     operator fun times(that: MassDensity) = EnergyDensity
 
+    operator fun div(that: MolarEnergy) = Molality
+
+    operator fun div(that: Molality) = MolarEnergy
+    operator fun times(that: MolarMass) = MolarEnergy
+
     operator fun times(that: MassFlowRate) = Power
 
     operator fun times(that: AreaDensity) = RadiantExposure

@@ -15,6 +15,12 @@ object SpecificVolume : Dimension
 
     operator fun times(that: AreaDensity) = Distance
 
+    operator fun div(that: MolarVolume) = Molality
+    operator fun times(that: Molarity) = Molality
+
+    operator fun div(that: Molality) = MolarVolume
+    operator fun times(that: MolarMass) = MolarVolume
+
     operator fun times(that: EnergyDensity) = SpecificEnergy
 
     operator fun times(that: Mass) = Volume

@@ -9,6 +9,7 @@ import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
+import org.pcb.unit.dimensions.AmountOfSubstance
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.Energy
@@ -123,6 +124,24 @@ open class EnergyAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun times(that: TimeAmount<T>) =
         ActionAmount(amount = amount * that.amount,
                      unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> AmountOfSubstance
+
+    @JvmName("divMolarEnergy")
+    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MolarEnergyAmount<N, D, M, T>) =
+        AmountOfSubstanceAmount(amount = amount / that.amount
+                                         / convert(that.distance to distance,
+                                                   that.distance to distance,
+                                                   that.mass to mass)
+                                         * convert(that.time to time,
+                                                   that.time to time),
+                                unit = that.amountOfSubstance)
+
+    operator fun <N : Unit<AmountOfSubstance>> div(that: MolarEnergyAmount<N, D, M, T>) =
+        AmountOfSubstanceAmount(amount = amount / that.amount,
+                                unit = that.amountOfSubstance)
 
     // endregion
 
@@ -301,6 +320,14 @@ open class EnergyAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: SpecificEnergyAmount<D, T>) =
         MassAmount(amount = amount / that.amount,
                    unit = mass)
+
+    // endregion
+
+    // region -> MolarEnergy
+
+    operator fun <N : Unit<AmountOfSubstance>> div(that: AmountOfSubstanceAmount<N>) =
+        MolarEnergyAmount(amount = amount / that.amount,
+                          unit = U2(distance, mass) to U2(that.amountOfSubstance, time))
 
     // endregion
 

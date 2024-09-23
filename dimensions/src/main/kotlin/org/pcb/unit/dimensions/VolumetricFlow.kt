@@ -12,8 +12,12 @@ object VolumetricFlow : Dimension
 
     operator fun div(that: VolumetricFlow) = Scalar
 
+    operator fun div(that: CatalyticEfficiency) = AmountOfSubstance
+
     operator fun div(that: Speed) = Area
     operator fun times(that: Pace) = Area
+
+    operator fun div(that: AmountOfSubstance) = CatalyticEfficiency
 
     operator fun div(that: Volume) = Frequency
 

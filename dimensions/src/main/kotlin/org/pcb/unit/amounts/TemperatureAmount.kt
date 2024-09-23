@@ -6,6 +6,7 @@ import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
+import org.pcb.unit.dimensions.AmountOfSubstance
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
@@ -106,6 +107,20 @@ open class TemperatureAmount<K : Unit<Temperature>>(
     operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: HeatCapacityAmount<D, M, K, T>) =
         EnergyAmount(amount = amount * that.amount,
                      unit = U2(that.distance, that.mass) to that.time)
+
+    // endregion
+
+    // region -> MolarEnergy
+
+    @JvmName("timesMolarHeatCapacity")
+    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> times(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
+        MolarEnergyAmount(amount = amount * that.amount
+                                   / convert(that.temperature to temperature),
+                          unit = U2(that.distance, that.mass) to U2(that.amountOfSubstance, that.time))
+
+    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
+        MolarEnergyAmount(amount = amount * that.amount,
+                          unit = U2(that.distance, that.mass) to U2(that.amountOfSubstance, that.time))
 
     // endregion
 

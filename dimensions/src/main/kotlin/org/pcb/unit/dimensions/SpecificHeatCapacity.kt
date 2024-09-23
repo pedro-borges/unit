@@ -17,6 +17,11 @@ object SpecificHeatCapacity : Dimension
 
     operator fun times(that: Mass) = HeatCapacity
 
+    operator fun div(that: MolarHeatCapacity) = Molality
+
+    operator fun div(that: Molality) = MolarHeatCapacity
+    operator fun times(that: MolarMass) = MolarHeatCapacity
+
     operator fun div(that: ThermalExpansionCoefficient) = SpecificEnergy
     operator fun times(that: Temperature) = SpecificEnergy
 

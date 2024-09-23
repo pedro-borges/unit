@@ -8,6 +8,7 @@ import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
+import org.pcb.unit.dimensions.AmountOfSubstance
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
@@ -93,6 +94,23 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> AmountOfSubstance
+
+    @JvmName("divCatalyticEfficiency")
+    operator fun <N : Unit<AmountOfSubstance>, D : Unit<Distance>, T : Unit<Time>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
+        AmountOfSubstanceAmount(amount = amount / that.amount
+                                         / convert(that.distance to distance,
+                                                   that.distance to distance,
+                                                   that.distance to distance)
+                                         * convert(that.time to time),
+                                unit = that.amountOfSubstance)
+
+    operator fun <N : Unit<AmountOfSubstance>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
+        AmountOfSubstanceAmount(amount = amount / that.amount,
+                                unit = that.amountOfSubstance)
+
+    // endregion
+
     // region -> Area
 
     @JvmName("timesPace")
@@ -116,6 +134,14 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
     operator fun div(that: SpeedAmount<D, T>) =
         AreaAmount(amount = amount / that.amount,
                    unit = distance)
+
+    // endregion
+
+    // region -> CatalyticEfficiency
+
+    operator fun <N : Unit<AmountOfSubstance>> div(that: AmountOfSubstanceAmount<N>) =
+        CatalyticEfficiencyAmount(amount = amount / that.amount,
+                                  unit = distance to U2(that.amountOfSubstance, time))
 
     // endregion
 
