@@ -18,9 +18,9 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class SolidAngleAmount<A : Unit<Angle>>(
+open class SolidAngleAmount<BAC : Unit<Angle>>(
         amount: Number,
-        unit: A)
+        unit: BAC)
     : Amount<SolidAngle>(amount = amount.toBigDecimal(),
                          unit = CompositeUnit(
                              domain = SolidAngle::class,
@@ -46,24 +46,24 @@ open class SolidAngleAmount<A : Unit<Angle>>(
                          unit = angle)
 
     @JvmName("plusSolidAngle")
-    operator fun <A : Unit<Angle>> plus(that: SolidAngleAmount<A>) =
+    operator fun <BAC : Unit<Angle>> plus(that: SolidAngleAmount<BAC>) =
         SolidAngleAmount(amount = amount + that.amount
                                   * convert(that.angle to angle,
                                             that.angle to angle),
                          unit = angle)
 
-    operator fun plus(that: SolidAngleAmount<A>) =
+    operator fun plus(that: SolidAngleAmount<BAC>) =
         SolidAngleAmount(amount = amount + that.amount,
                          unit = angle)
 
     @JvmName("minusSolidAngle")
-    operator fun <A : Unit<Angle>> minus(that: SolidAngleAmount<A>) =
+    operator fun <BAC : Unit<Angle>> minus(that: SolidAngleAmount<BAC>) =
         SolidAngleAmount(amount = amount - that.amount
                                   * convert(that.angle to angle,
                                             that.angle to angle),
                          unit = angle)
 
-    operator fun minus(that: SolidAngleAmount<A>) =
+    operator fun minus(that: SolidAngleAmount<BAC>) =
         SolidAngleAmount(amount = amount - that.amount,
                          unit = angle)
 
@@ -72,13 +72,13 @@ open class SolidAngleAmount<A : Unit<Angle>>(
     // region -> Scalar
 
     @JvmName("divSolidAngle")
-    operator fun <A : Unit<Angle>> div(that: SolidAngleAmount<A>) =
+    operator fun <BAC : Unit<Angle>> div(that: SolidAngleAmount<BAC>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.angle to angle,
                                         that.angle to angle),
                      unit = NUMERIC)
 
-    operator fun div(that: SolidAngleAmount<A>) =
+    operator fun div(that: SolidAngleAmount<BAC>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -87,12 +87,12 @@ open class SolidAngleAmount<A : Unit<Angle>>(
     // region -> Angle
 
     @JvmName("divAngle")
-    operator fun <A : Unit<Angle>> div(that: AngleAmount<A>) =
+    operator fun <BAC : Unit<Angle>> div(that: AngleAmount<BAC>) =
         AngleAmount(amount = amount / that.amount
                              / convert(that.angle to angle),
                     unit = angle)
 
-    operator fun div(that: AngleAmount<A>) =
+    operator fun div(that: AngleAmount<BAC>) =
         AngleAmount(amount = amount / that.amount,
                     unit = angle)
 
@@ -100,7 +100,7 @@ open class SolidAngleAmount<A : Unit<Angle>>(
 
     // region -> Illuminance
 
-    operator fun <D : Unit<Distance>, LI : Unit<LuminousIntensity>> times(that: LuminanceAmount<D, LI>) =
+    operator fun <L : Unit<Distance>, J : Unit<LuminousIntensity>> times(that: LuminanceAmount<L, J>) =
         IlluminanceAmount(amount = amount * that.amount,
                           unit = U2(angle, that.luminousIntensity) to that.distance)
 
@@ -108,7 +108,7 @@ open class SolidAngleAmount<A : Unit<Angle>>(
 
     // region -> LuminousFlux
 
-    operator fun <LI : Unit<LuminousIntensity>> times(that: LuminousIntensityAmount<LI>) =
+    operator fun <J : Unit<LuminousIntensity>> times(that: LuminousIntensityAmount<J>) =
         LuminousFluxAmount(amount = amount * that.amount,
                            unit = U2(angle, that.luminousIntensity))
 
@@ -117,13 +117,13 @@ open class SolidAngleAmount<A : Unit<Angle>>(
     // region -> Power
 
     @JvmName("timesRadiantIntensity")
-    operator fun <A : Unit<Angle>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: RadiantIntensityAmount<A, D, M, T>) =
+    operator fun <BAC : Unit<Angle>, L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: RadiantIntensityAmount<BAC, L, M, T>) =
         PowerAmount(amount = amount * that.amount
                              / convert(that.angle to angle,
                                        that.angle to angle),
                     unit = U2(that.distance, that.mass) to that.time)
 
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: RadiantIntensityAmount<A, D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: RadiantIntensityAmount<BAC, L, M, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(that.distance, that.mass) to that.time)
 
@@ -132,13 +132,13 @@ open class SolidAngleAmount<A : Unit<Angle>>(
     // region -> Yank
 
     @JvmName("timesSpectralIntensity")
-    operator fun <A : Unit<Angle>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: SpectralIntensityAmount<A, D, M, T>) =
+    operator fun <BAC : Unit<Angle>, L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: SpectralIntensityAmount<BAC, L, M, T>) =
         YankAmount(amount = amount * that.amount
                             / convert(that.angle to angle,
                                       that.angle to angle),
                    unit = U2(that.distance, that.mass) to that.time)
 
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: SpectralIntensityAmount<A, D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: SpectralIntensityAmount<BAC, L, M, T>) =
         YankAmount(amount = amount * that.amount,
                    unit = U2(that.distance, that.mass) to that.time)
 

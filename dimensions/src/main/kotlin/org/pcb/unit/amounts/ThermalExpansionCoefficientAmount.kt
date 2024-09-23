@@ -95,7 +95,7 @@ open class ThermalExpansionCoefficientAmount<K : Unit<Temperature>>(
 
     // region -> HeatCapacity
 
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyAmount<L, M, T>) =
         HeatCapacityAmount(amount = amount * that.amount,
                            unit = U2(that.distance, that.mass) to U2(temperature, that.time))
 
@@ -103,7 +103,7 @@ open class ThermalExpansionCoefficientAmount<K : Unit<Temperature>>(
 
     // region -> MolarHeatCapacity
 
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: MolarEnergyAmount<N, D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substance>, T : Unit<Time>> times(that: MolarEnergyAmount<L, M, N, T>) =
         MolarHeatCapacityAmount(amount = amount * that.amount,
                                 unit = U2(that.distance, that.mass) to U3(that.substance, temperature, that.time))
 
@@ -112,12 +112,12 @@ open class ThermalExpansionCoefficientAmount<K : Unit<Temperature>>(
     // region -> SpacialFrequency
 
     @JvmName("timesTemperatureGradient")
-    operator fun <D : Unit<Distance>, K : Unit<Temperature>> times(that: TemperatureGradientAmount<D, K>) =
+    operator fun <L : Unit<Distance>, K : Unit<Temperature>> times(that: TemperatureGradientAmount<L, K>) =
         SpacialFrequencyAmount(amount = amount * that.amount
                                         * convert(that.temperature to temperature),
                                unit = NUMERIC to that.distance)
 
-    operator fun <D : Unit<Distance>> times(that: TemperatureGradientAmount<D, K>) =
+    operator fun <L : Unit<Distance>> times(that: TemperatureGradientAmount<L, K>) =
         SpacialFrequencyAmount(amount = amount * that.amount,
                                unit = NUMERIC to that.distance)
 
@@ -125,7 +125,7 @@ open class ThermalExpansionCoefficientAmount<K : Unit<Temperature>>(
 
     // region -> SpecificHeatCapacity
 
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpecificEnergyAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: SpecificEnergyAmount<L, T>) =
         SpecificHeatCapacityAmount(amount = amount * that.amount,
                                    unit = that.distance to U2(temperature, that.time))
 
@@ -133,7 +133,7 @@ open class ThermalExpansionCoefficientAmount<K : Unit<Temperature>>(
 
     // region -> ThermalConductivity
 
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: YankAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: YankAmount<L, M, T>) =
         ThermalConductivityAmount(amount = amount * that.amount,
                                   unit = U2(that.distance, that.mass) to U2(temperature, that.time))
 

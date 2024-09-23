@@ -75,12 +75,12 @@ open class SubstanceAmount<N : Unit<Substance>>(
     // region -> Energy
 
     @JvmName("timesMolarEnergy")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: MolarEnergyAmount<N, D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substance>, T : Unit<Time>> times(that: MolarEnergyAmount<L, M, N, T>) =
         EnergyAmount(amount = amount * that.amount
                               / convert(that.substance to substance),
                      unit = U2(that.distance, that.mass) to that.time)
 
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: MolarEnergyAmount<N, D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: MolarEnergyAmount<L, M, N, T>) =
         EnergyAmount(amount = amount * that.amount,
                      unit = U2(that.distance, that.mass) to that.time)
 
@@ -89,12 +89,12 @@ open class SubstanceAmount<N : Unit<Substance>>(
     // region -> HeatCapacity
 
     @JvmName("timesMolarHeatCapacity")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> times(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substance>, K : Unit<Temperature>, T : Unit<Time>> times(that: MolarHeatCapacityAmount<L, M, N, K, T>) =
         HeatCapacityAmount(amount = amount * that.amount
                                     / convert(that.substance to substance),
                            unit = U2(that.distance, that.mass) to U2(that.temperature, that.time))
 
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> times(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> times(that: MolarHeatCapacityAmount<L, M, N, K, T>) =
         HeatCapacityAmount(amount = amount * that.amount,
                            unit = U2(that.distance, that.mass) to U2(that.temperature, that.time))
 
@@ -103,22 +103,22 @@ open class SubstanceAmount<N : Unit<Substance>>(
     // region -> Mass
 
     @JvmName("divMolality")
-    operator fun <N : Unit<Substance>, M : Unit<Mass>> div(that: MolalityAmount<N, M>) =
+    operator fun <M : Unit<Mass>, N : Unit<Substance>> div(that: MolalityAmount<M, N>) =
         MassAmount(amount = amount / that.amount
                             / convert(that.substance to substance),
                    unit = that.mass)
 
-    operator fun <M : Unit<Mass>> div(that: MolalityAmount<N, M>) =
+    operator fun <M : Unit<Mass>> div(that: MolalityAmount<M, N>) =
         MassAmount(amount = amount / that.amount,
                    unit = that.mass)
 
     @JvmName("timesMolarMass")
-    operator fun <N : Unit<Substance>, M : Unit<Mass>> times(that: MolarMassAmount<N, M>) =
+    operator fun <M : Unit<Mass>, N : Unit<Substance>> times(that: MolarMassAmount<M, N>) =
         MassAmount(amount = amount * that.amount
                             / convert(that.substance to substance),
                    unit = that.mass)
 
-    operator fun <M : Unit<Mass>> times(that: MolarMassAmount<N, M>) =
+    operator fun <M : Unit<Mass>> times(that: MolarMassAmount<M, N>) =
         MassAmount(amount = amount * that.amount,
                    unit = that.mass)
 
@@ -134,7 +134,7 @@ open class SubstanceAmount<N : Unit<Substance>>(
 
     // region -> Molarity
 
-    operator fun <D : Unit<Distance>> div(that: VolumeAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: VolumeAmount<L>) =
         MolarityAmount(amount = amount / that.amount,
                        unit = substance to that.distance)
 
@@ -143,22 +143,22 @@ open class SubstanceAmount<N : Unit<Substance>>(
     // region -> Volume
 
     @JvmName("timesMolarVolume")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>> times(that: MolarVolumeAmount<N, D>) =
+    operator fun <L : Unit<Distance>, N : Unit<Substance>> times(that: MolarVolumeAmount<L, N>) =
         VolumeAmount(amount = amount * that.amount
                               / convert(that.substance to substance),
                      unit = that.distance)
 
-    operator fun <D : Unit<Distance>> times(that: MolarVolumeAmount<N, D>) =
+    operator fun <L : Unit<Distance>> times(that: MolarVolumeAmount<L, N>) =
         VolumeAmount(amount = amount * that.amount,
                      unit = that.distance)
 
     @JvmName("divMolarity")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>> div(that: MolarityAmount<N, D>) =
+    operator fun <L : Unit<Distance>, N : Unit<Substance>> div(that: MolarityAmount<L, N>) =
         VolumeAmount(amount = amount / that.amount
                               / convert(that.substance to substance),
                      unit = that.distance)
 
-    operator fun <D : Unit<Distance>> div(that: MolarityAmount<N, D>) =
+    operator fun <L : Unit<Distance>> div(that: MolarityAmount<L, N>) =
         VolumeAmount(amount = amount / that.amount,
                      unit = that.distance)
 
@@ -167,12 +167,12 @@ open class SubstanceAmount<N : Unit<Substance>>(
     // region -> VolumetricFlow
 
     @JvmName("timesCatalyticEfficiency")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, T : Unit<Time>> times(that: CatalyticEfficiencyAmount<N, D, T>) =
+    operator fun <L : Unit<Distance>, N : Unit<Substance>, T : Unit<Time>> times(that: CatalyticEfficiencyAmount<L, N, T>) =
         VolumetricFlowAmount(amount = amount * that.amount
                                       / convert(that.substance to substance),
                              unit = that.distance to that.time)
 
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: CatalyticEfficiencyAmount<N, D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: CatalyticEfficiencyAmount<L, N, T>) =
         VolumetricFlowAmount(amount = amount * that.amount,
                              unit = that.distance to that.time)
 

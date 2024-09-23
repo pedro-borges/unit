@@ -21,9 +21,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class AngularMomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
+open class AngularMomentumAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<U2<M, D>, T>)
+        unit: Pair<U2<M, L>, T>)
     : Amount<AngularMomentum>(amount = amount.toBigDecimal(),
                               unit = CompositeUnit(
                                   domain = AngularMomentum::class,
@@ -53,7 +53,7 @@ open class AngularMomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Ti
                               unit = U2(mass, distance) to time)
 
     @JvmName("plusAngularMomentum")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> plus(that: AngularMomentumAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> plus(that: AngularMomentumAmount<L, M, T>) =
         AngularMomentumAmount(amount = amount + that.amount
                                        * convert(that.distance to distance,
                                                  that.mass to mass,
@@ -61,12 +61,12 @@ open class AngularMomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Ti
                                        / convert(that.time to time),
                               unit = U2(mass, distance) to time)
 
-    operator fun plus(that: AngularMomentumAmount<D, M, T>) =
+    operator fun plus(that: AngularMomentumAmount<L, M, T>) =
         AngularMomentumAmount(amount = amount + that.amount,
                               unit = U2(mass, distance) to time)
 
     @JvmName("minusAngularMomentum")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> minus(that: AngularMomentumAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> minus(that: AngularMomentumAmount<L, M, T>) =
         AngularMomentumAmount(amount = amount - that.amount
                                        * convert(that.distance to distance,
                                                  that.mass to mass,
@@ -74,7 +74,7 @@ open class AngularMomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Ti
                                        / convert(that.time to time),
                               unit = U2(mass, distance) to time)
 
-    operator fun minus(that: AngularMomentumAmount<D, M, T>) =
+    operator fun minus(that: AngularMomentumAmount<L, M, T>) =
         AngularMomentumAmount(amount = amount - that.amount,
                               unit = U2(mass, distance) to time)
 
@@ -83,7 +83,7 @@ open class AngularMomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Ti
     // region -> Scalar
 
     @JvmName("divAngularMomentum")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: AngularMomentumAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: AngularMomentumAmount<L, M, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.distance to distance,
                                         that.mass to mass,
@@ -91,7 +91,7 @@ open class AngularMomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Ti
                               * convert(that.time to time),
                      unit = NUMERIC)
 
-    operator fun div(that: AngularMomentumAmount<D, M, T>) =
+    operator fun div(that: AngularMomentumAmount<L, M, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -100,14 +100,14 @@ open class AngularMomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Ti
     // region -> Mass
 
     @JvmName("divMomentum")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MomentumAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MomentumAmount<L, M, T>) =
         MassAmount(amount = amount / that.amount
                             / convert(that.distance to distance,
                                       that.mass to mass)
                             * convert(that.time to time),
                    unit = mass)
 
-    operator fun div(that: MomentumAmount<D, M, T>) =
+    operator fun div(that: MomentumAmount<L, M, T>) =
         MassAmount(amount = amount / that.amount,
                    unit = mass)
 

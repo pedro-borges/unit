@@ -98,7 +98,7 @@ open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
     // region -> Distance
 
     @JvmName("divPowerDensity")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: PowerDensityAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: PowerDensityAmount<L, M, T>) =
         DistanceAmount(amount = amount / that.amount
                                 / convert(that.mass to mass)
                                 * convert(that.time to time,
@@ -106,7 +106,7 @@ open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
                                           that.time to time),
                        unit = that.distance)
 
-    operator fun <D : Unit<Distance>> div(that: PowerDensityAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>> div(that: PowerDensityAmount<L, M, T>) =
         DistanceAmount(amount = amount / that.amount,
                        unit = that.distance)
 
@@ -115,22 +115,22 @@ open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
     // region -> EnergyDensity
 
     @JvmName("timesPace")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<L, T>) =
         EnergyDensityAmount(amount = amount * that.amount
                                      * convert(that.time to time),
                             unit = mass to U2(that.distance, time))
 
-    operator fun <D : Unit<Distance>> times(that: PaceAmount<D, T>) =
+    operator fun <L : Unit<Distance>> times(that: PaceAmount<L, T>) =
         EnergyDensityAmount(amount = amount * that.amount,
                             unit = mass to U2(that.distance, time))
 
     @JvmName("divSpeed")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
         EnergyDensityAmount(amount = amount / that.amount
                                      * convert(that.time to time),
                             unit = mass to U2(that.distance, time))
 
-    operator fun <D : Unit<Distance>> div(that: SpeedAmount<D, T>) =
+    operator fun <L : Unit<Distance>> div(that: SpeedAmount<L, T>) =
         EnergyDensityAmount(amount = amount / that.amount,
                             unit = mass to U2(that.distance, time))
 
@@ -155,7 +155,7 @@ open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
     // region -> FuelEfficiency
 
     @JvmName("divPower")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: PowerAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: PowerAmount<L, M, T>) =
         FuelEfficiencyAmount(amount = amount / that.amount
                                       / convert(that.mass to mass)
                                       * convert(that.time to time,
@@ -163,7 +163,7 @@ open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
                                                 that.time to time),
                              unit = NUMERIC to that.distance)
 
-    operator fun <D : Unit<Distance>> div(that: PowerAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>> div(that: PowerAmount<L, M, T>) =
         FuelEfficiencyAmount(amount = amount / that.amount,
                              unit = NUMERIC to that.distance)
 
@@ -171,11 +171,11 @@ open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> Power
 
-    operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: AreaAmount<L>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(that.distance, mass) to time)
 
-    operator fun <D : Unit<Distance>> div(that: FuelEfficiencyAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: FuelEfficiencyAmount<L>) =
         PowerAmount(amount = amount / that.amount,
                     unit = U2(that.distance, mass) to time)
 
@@ -183,11 +183,11 @@ open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> PowerDensity
 
-    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: DistanceAmount<L>) =
         PowerDensityAmount(amount = amount / that.amount,
                            unit = mass to U2(that.distance, time))
 
-    operator fun <D : Unit<Distance>> times(that: SpacialFrequencyAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: SpacialFrequencyAmount<L>) =
         PowerDensityAmount(amount = amount * that.amount,
                            unit = mass to U2(that.distance, time))
 
@@ -220,7 +220,7 @@ open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
     // region -> SpacialFrequency
 
     @JvmName("divYank")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: YankAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: YankAmount<L, M, T>) =
         SpacialFrequencyAmount(amount = amount / that.amount
                                         / convert(that.mass to mass)
                                         * convert(that.time to time,
@@ -228,7 +228,7 @@ open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
                                                   that.time to time),
                                unit = NUMERIC to that.distance)
 
-    operator fun <D : Unit<Distance>> div(that: YankAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>> div(that: YankAmount<L, M, T>) =
         SpacialFrequencyAmount(amount = amount / that.amount,
                                unit = NUMERIC to that.distance)
 
@@ -237,14 +237,14 @@ open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
     // region -> Speed
 
     @JvmName("divEnergyDensity")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyDensityAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyDensityAmount<L, M, T>) =
         SpeedAmount(amount = amount / that.amount
                              / convert(that.mass to mass)
                              * convert(that.time to time,
                                        that.time to time),
                     unit = that.distance to time)
 
-    operator fun <D : Unit<Distance>> div(that: EnergyDensityAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>> div(that: EnergyDensityAmount<L, M, T>) =
         SpeedAmount(amount = amount / that.amount,
                     unit = that.distance to time)
 
@@ -253,7 +253,7 @@ open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
     // region -> TemperatureGradient
 
     @JvmName("divThermalConductivity")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: ThermalConductivityAmount<D, M, K, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: ThermalConductivityAmount<L, M, K, T>) =
         TemperatureGradientAmount(amount = amount / that.amount
                                            / convert(that.mass to mass)
                                            * convert(that.time to time,
@@ -261,7 +261,7 @@ open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
                                                      that.time to time),
                                   unit = that.temperature to that.distance)
 
-    operator fun <D : Unit<Distance>, K : Unit<Temperature>> div(that: ThermalConductivityAmount<D, M, K, T>) =
+    operator fun <L : Unit<Distance>, K : Unit<Temperature>> div(that: ThermalConductivityAmount<L, M, K, T>) =
         TemperatureGradientAmount(amount = amount / that.amount,
                                   unit = that.temperature to that.distance)
 
@@ -269,7 +269,7 @@ open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> ThermalConductivity
 
-    operator fun <D : Unit<Distance>, K : Unit<Temperature>> div(that: TemperatureGradientAmount<D, K>) =
+    operator fun <L : Unit<Distance>, K : Unit<Temperature>> div(that: TemperatureGradientAmount<L, K>) =
         ThermalConductivityAmount(amount = amount / that.amount,
                                   unit = U2(that.distance, mass) to U2(that.temperature, time))
 
@@ -277,11 +277,11 @@ open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> Yank
 
-    operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: DistanceAmount<L>) =
         YankAmount(amount = amount * that.amount,
                    unit = U2(that.distance, mass) to time)
 
-    operator fun <D : Unit<Distance>> div(that: SpacialFrequencyAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: SpacialFrequencyAmount<L>) =
         YankAmount(amount = amount / that.amount,
                    unit = U2(that.distance, mass) to time)
 

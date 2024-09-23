@@ -23,9 +23,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class ElectricConductanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>>(
+open class ElectricConductanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<U2<T, EC>, U2<M, D>>)
+        unit: Pair<U2<T, I>, U2<M, L>>)
     : Amount<ElectricConductance>(amount = amount.toBigDecimal(),
                                   unit = CompositeUnit(
                                       domain = ElectricConductance::class,
@@ -57,7 +57,7 @@ open class ElectricConductanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurre
                                   unit = U2(time, electricCurrent) to U2(mass, distance))
 
     @JvmName("plusElectricConductance")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> plus(that: ElectricConductanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> plus(that: ElectricConductanceAmount<L, I, M, T>) =
         ElectricConductanceAmount(amount = amount + that.amount
                                            * convert(that.electricCurrent to electricCurrent,
                                                      that.electricCurrent to electricCurrent,
@@ -69,12 +69,12 @@ open class ElectricConductanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurre
                                                      that.mass to mass),
                                   unit = U2(time, electricCurrent) to U2(mass, distance))
 
-    operator fun plus(that: ElectricConductanceAmount<D, EC, M, T>) =
+    operator fun plus(that: ElectricConductanceAmount<L, I, M, T>) =
         ElectricConductanceAmount(amount = amount + that.amount,
                                   unit = U2(time, electricCurrent) to U2(mass, distance))
 
     @JvmName("minusElectricConductance")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> minus(that: ElectricConductanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> minus(that: ElectricConductanceAmount<L, I, M, T>) =
         ElectricConductanceAmount(amount = amount - that.amount
                                            * convert(that.electricCurrent to electricCurrent,
                                                      that.electricCurrent to electricCurrent,
@@ -86,7 +86,7 @@ open class ElectricConductanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurre
                                                      that.mass to mass),
                                   unit = U2(time, electricCurrent) to U2(mass, distance))
 
-    operator fun minus(that: ElectricConductanceAmount<D, EC, M, T>) =
+    operator fun minus(that: ElectricConductanceAmount<L, I, M, T>) =
         ElectricConductanceAmount(amount = amount - that.amount,
                                   unit = U2(time, electricCurrent) to U2(mass, distance))
 
@@ -95,7 +95,7 @@ open class ElectricConductanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurre
     // region -> Scalar
 
     @JvmName("divElectricConductance")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricConductanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricConductanceAmount<L, I, M, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.electricCurrent to electricCurrent,
                                         that.electricCurrent to electricCurrent,
@@ -107,12 +107,12 @@ open class ElectricConductanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurre
                                         that.mass to mass),
                      unit = NUMERIC)
 
-    operator fun div(that: ElectricConductanceAmount<D, EC, M, T>) =
+    operator fun div(that: ElectricConductanceAmount<L, I, M, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
     @JvmName("timesElectricResistance")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricResistanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricResistanceAmount<L, I, M, T>) =
         ScalarAmount(amount = amount * that.amount
                               * convert(that.distance to distance,
                                         that.distance to distance,
@@ -124,7 +124,7 @@ open class ElectricConductanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurre
                                         that.time to time),
                      unit = NUMERIC)
 
-    operator fun times(that: ElectricResistanceAmount<D, EC, M, T>) =
+    operator fun times(that: ElectricResistanceAmount<L, I, M, T>) =
         ScalarAmount(amount = amount * that.amount,
                      unit = NUMERIC)
 
@@ -157,7 +157,7 @@ open class ElectricConductanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurre
     // region -> ElectricCharge
 
     @JvmName("timesMagneticFlux")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: MagneticFluxAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: MagneticFluxAmount<L, I, M, T>) =
         ElectricChargeAmount(amount = amount * that.amount
                                       * convert(that.distance to distance,
                                                 that.distance to distance,
@@ -167,7 +167,7 @@ open class ElectricConductanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurre
                                                 that.time to time),
                              unit = U2(electricCurrent, time))
 
-    operator fun times(that: MagneticFluxAmount<D, EC, M, T>) =
+    operator fun times(that: MagneticFluxAmount<L, I, M, T>) =
         ElectricChargeAmount(amount = amount * that.amount,
                              unit = U2(electricCurrent, time))
 
@@ -176,7 +176,7 @@ open class ElectricConductanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurre
     // region -> ElectricCurrent
 
     @JvmName("timesElectricTension")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricTensionAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricTensionAmount<L, I, M, T>) =
         ElectricCurrentAmount(amount = amount * that.amount
                                        * convert(that.distance to distance,
                                                  that.distance to distance,
@@ -187,7 +187,7 @@ open class ElectricConductanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurre
                                                  that.time to time),
                               unit = electricCurrent)
 
-    operator fun times(that: ElectricTensionAmount<D, EC, M, T>) =
+    operator fun times(that: ElectricTensionAmount<L, I, M, T>) =
         ElectricCurrentAmount(amount = amount * that.amount,
                               unit = electricCurrent)
 
@@ -196,7 +196,7 @@ open class ElectricConductanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurre
     // region -> Frequency
 
     @JvmName("divCapacitance")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: CapacitanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: CapacitanceAmount<L, I, M, T>) =
         FrequencyAmount(amount = amount / that.amount
                                  / convert(that.electricCurrent to electricCurrent,
                                            that.electricCurrent to electricCurrent,
@@ -209,7 +209,7 @@ open class ElectricConductanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurre
                                            that.mass to mass),
                         unit = NUMERIC to time)
 
-    operator fun div(that: CapacitanceAmount<D, EC, M, T>) =
+    operator fun div(that: CapacitanceAmount<L, I, M, T>) =
         FrequencyAmount(amount = amount / that.amount,
                         unit = NUMERIC to time)
 
@@ -218,7 +218,7 @@ open class ElectricConductanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurre
     // region -> Time
 
     @JvmName("timesInductance")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: InductanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: InductanceAmount<L, I, M, T>) =
         TimeAmount(amount = amount * that.amount
                             * convert(that.distance to distance,
                                       that.distance to distance,
@@ -229,7 +229,7 @@ open class ElectricConductanceAmount<D : Unit<Distance>, EC : Unit<ElectricCurre
                                       that.time to time),
                    unit = time)
 
-    operator fun times(that: InductanceAmount<D, EC, M, T>) =
+    operator fun times(that: InductanceAmount<L, I, M, T>) =
         TimeAmount(amount = amount * that.amount,
                    unit = time)
 

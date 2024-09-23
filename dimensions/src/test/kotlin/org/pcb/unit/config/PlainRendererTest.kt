@@ -19,7 +19,7 @@ class PlainRendererTest
     fun renderAmount()
     {
         assertEquals(
-            expected = "10 D²M¹EC⁻²T⁻³",
+            expected = "10 L²M¹I⁻²T⁻³",
             actual = sut.render(ElectricResistanceAmount(amount = 10,
                                                          unit = U2(DISTANCE1, MASS1) to
                                                                  U2(ELECTRICCURRENT1, TIME1))))
@@ -29,7 +29,7 @@ class PlainRendererTest
     fun renderUnitPowers()
     {
         assertEquals(
-            expected = "D²M¹EC⁻²T⁻³",
+            expected = "L²M¹I⁻²T⁻³",
             actual = sut.render(mapOf(MASS1 to 1,
                                       DISTANCE1 to 2,
                                       TIME1 to -3,
@@ -40,7 +40,7 @@ class PlainRendererTest
     fun renderUnit()
     {
         assertEquals(
-            expected = "kEC",
+            expected = "kI",
             actual = sut.render(ELECTRICCURRENT(KILO)))
     }
 }

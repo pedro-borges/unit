@@ -20,9 +20,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class CatalyticEfficiencyAmount<N : Unit<Substance>, D : Unit<Distance>, T : Unit<Time>>(
+open class CatalyticEfficiencyAmount<L : Unit<Distance>, N : Unit<Substance>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<D, U2<N, T>>)
+        unit: Pair<L, U2<N, T>>)
     : Amount<CatalyticEfficiency>(amount = amount.toBigDecimal(),
                                   unit = CompositeUnit(
                                       domain = CatalyticEfficiency::class,
@@ -52,7 +52,7 @@ open class CatalyticEfficiencyAmount<N : Unit<Substance>, D : Unit<Distance>, T 
                                   unit = distance to U2(substance, time))
 
     @JvmName("plusCatalyticEfficiency")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, T : Unit<Time>> plus(that: CatalyticEfficiencyAmount<N, D, T>) =
+    operator fun <L : Unit<Distance>, N : Unit<Substance>, T : Unit<Time>> plus(that: CatalyticEfficiencyAmount<L, N, T>) =
         CatalyticEfficiencyAmount(amount = amount + that.amount
                                            * convert(that.distance to distance,
                                                      that.distance to distance,
@@ -61,12 +61,12 @@ open class CatalyticEfficiencyAmount<N : Unit<Substance>, D : Unit<Distance>, T 
                                                      that.time to time),
                                   unit = distance to U2(substance, time))
 
-    operator fun plus(that: CatalyticEfficiencyAmount<N, D, T>) =
+    operator fun plus(that: CatalyticEfficiencyAmount<L, N, T>) =
         CatalyticEfficiencyAmount(amount = amount + that.amount,
                                   unit = distance to U2(substance, time))
 
     @JvmName("minusCatalyticEfficiency")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, T : Unit<Time>> minus(that: CatalyticEfficiencyAmount<N, D, T>) =
+    operator fun <L : Unit<Distance>, N : Unit<Substance>, T : Unit<Time>> minus(that: CatalyticEfficiencyAmount<L, N, T>) =
         CatalyticEfficiencyAmount(amount = amount - that.amount
                                            * convert(that.distance to distance,
                                                      that.distance to distance,
@@ -75,7 +75,7 @@ open class CatalyticEfficiencyAmount<N : Unit<Substance>, D : Unit<Distance>, T 
                                                      that.time to time),
                                   unit = distance to U2(substance, time))
 
-    operator fun minus(that: CatalyticEfficiencyAmount<N, D, T>) =
+    operator fun minus(that: CatalyticEfficiencyAmount<L, N, T>) =
         CatalyticEfficiencyAmount(amount = amount - that.amount,
                                   unit = distance to U2(substance, time))
 
@@ -84,7 +84,7 @@ open class CatalyticEfficiencyAmount<N : Unit<Substance>, D : Unit<Distance>, T 
     // region -> Scalar
 
     @JvmName("divCatalyticEfficiency")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, T : Unit<Time>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
+    operator fun <L : Unit<Distance>, N : Unit<Substance>, T : Unit<Time>> div(that: CatalyticEfficiencyAmount<L, N, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.distance to distance,
                                         that.distance to distance,
@@ -93,7 +93,7 @@ open class CatalyticEfficiencyAmount<N : Unit<Substance>, D : Unit<Distance>, T 
                                         that.time to time),
                      unit = NUMERIC)
 
-    operator fun div(that: CatalyticEfficiencyAmount<N, D, T>) =
+    operator fun div(that: CatalyticEfficiencyAmount<L, N, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -102,7 +102,7 @@ open class CatalyticEfficiencyAmount<N : Unit<Substance>, D : Unit<Distance>, T 
     // region -> Frequency
 
     @JvmName("divMolarVolume")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>> div(that: MolarVolumeAmount<N, D>) =
+    operator fun <L : Unit<Distance>, N : Unit<Substance>> div(that: MolarVolumeAmount<L, N>) =
         FrequencyAmount(amount = amount / that.amount
                                  / convert(that.distance to distance,
                                            that.distance to distance,
@@ -110,12 +110,12 @@ open class CatalyticEfficiencyAmount<N : Unit<Substance>, D : Unit<Distance>, T 
                                  * convert(that.substance to substance),
                         unit = NUMERIC to time)
 
-    operator fun div(that: MolarVolumeAmount<N, D>) =
+    operator fun div(that: MolarVolumeAmount<L, N>) =
         FrequencyAmount(amount = amount / that.amount,
                         unit = NUMERIC to time)
 
     @JvmName("timesMolarity")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>> times(that: MolarityAmount<N, D>) =
+    operator fun <L : Unit<Distance>, N : Unit<Substance>> times(that: MolarityAmount<L, N>) =
         FrequencyAmount(amount = amount * that.amount
                                  * convert(that.substance to substance)
                                  / convert(that.distance to distance,
@@ -123,7 +123,7 @@ open class CatalyticEfficiencyAmount<N : Unit<Substance>, D : Unit<Distance>, T 
                                            that.distance to distance),
                         unit = NUMERIC to time)
 
-    operator fun times(that: MolarityAmount<N, D>) =
+    operator fun times(that: MolarityAmount<L, N>) =
         FrequencyAmount(amount = amount * that.amount,
                         unit = NUMERIC to time)
 

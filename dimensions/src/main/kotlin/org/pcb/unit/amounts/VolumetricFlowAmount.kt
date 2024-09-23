@@ -20,9 +20,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
+open class VolumetricFlowAmount<L : Unit<Distance>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<D, T>)
+        unit: Pair<L, T>)
     : Amount<VolumetricFlow>(amount = amount.toBigDecimal(),
                              unit = CompositeUnit(
                                  domain = VolumetricFlow::class,
@@ -50,7 +50,7 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
                              unit = distance to time)
 
     @JvmName("plusVolumetricFlow")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> plus(that: VolumetricFlowAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> plus(that: VolumetricFlowAmount<L, T>) =
         VolumetricFlowAmount(amount = amount + that.amount
                                       * convert(that.distance to distance,
                                                 that.distance to distance,
@@ -58,12 +58,12 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
                                       / convert(that.time to time),
                              unit = distance to time)
 
-    operator fun plus(that: VolumetricFlowAmount<D, T>) =
+    operator fun plus(that: VolumetricFlowAmount<L, T>) =
         VolumetricFlowAmount(amount = amount + that.amount,
                              unit = distance to time)
 
     @JvmName("minusVolumetricFlow")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> minus(that: VolumetricFlowAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> minus(that: VolumetricFlowAmount<L, T>) =
         VolumetricFlowAmount(amount = amount - that.amount
                                       * convert(that.distance to distance,
                                                 that.distance to distance,
@@ -71,7 +71,7 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
                                       / convert(that.time to time),
                              unit = distance to time)
 
-    operator fun minus(that: VolumetricFlowAmount<D, T>) =
+    operator fun minus(that: VolumetricFlowAmount<L, T>) =
         VolumetricFlowAmount(amount = amount - that.amount,
                              unit = distance to time)
 
@@ -80,7 +80,7 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
     // region -> Scalar
 
     @JvmName("divVolumetricFlow")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: VolumetricFlowAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: VolumetricFlowAmount<L, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.distance to distance,
                                         that.distance to distance,
@@ -88,7 +88,7 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
                               * convert(that.time to time),
                      unit = NUMERIC)
 
-    operator fun div(that: VolumetricFlowAmount<D, T>) =
+    operator fun div(that: VolumetricFlowAmount<L, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -97,24 +97,24 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
     // region -> Area
 
     @JvmName("timesPace")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<L, T>) =
         AreaAmount(amount = amount * that.amount
                             * convert(that.time to time)
                             / convert(that.distance to distance),
                    unit = distance)
 
-    operator fun times(that: PaceAmount<D, T>) =
+    operator fun times(that: PaceAmount<L, T>) =
         AreaAmount(amount = amount * that.amount,
                    unit = distance)
 
     @JvmName("divSpeed")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
         AreaAmount(amount = amount / that.amount
                             / convert(that.distance to distance)
                             * convert(that.time to time),
                    unit = distance)
 
-    operator fun div(that: SpeedAmount<D, T>) =
+    operator fun div(that: SpeedAmount<L, T>) =
         AreaAmount(amount = amount / that.amount,
                    unit = distance)
 
@@ -131,14 +131,14 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
     // region -> Frequency
 
     @JvmName("divVolume")
-    operator fun <D : Unit<Distance>> div(that: VolumeAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: VolumeAmount<L>) =
         FrequencyAmount(amount = amount / that.amount
                                  / convert(that.distance to distance,
                                            that.distance to distance,
                                            that.distance to distance),
                         unit = NUMERIC to time)
 
-    operator fun div(that: VolumeAmount<D>) =
+    operator fun div(that: VolumeAmount<L>) =
         FrequencyAmount(amount = amount / that.amount,
                         unit = NUMERIC to time)
 
@@ -147,26 +147,26 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
     // region -> MassFlowRate
 
     @JvmName("timesMassDensity")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: MassDensityAmount<D, M>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: MassDensityAmount<L, M>) =
         MassFlowRateAmount(amount = amount * that.amount
                                     / convert(that.distance to distance,
                                               that.distance to distance,
                                               that.distance to distance),
                            unit = that.mass to time)
 
-    operator fun <M : Unit<Mass>> times(that: MassDensityAmount<D, M>) =
+    operator fun <M : Unit<Mass>> times(that: MassDensityAmount<L, M>) =
         MassFlowRateAmount(amount = amount * that.amount,
                            unit = that.mass to time)
 
     @JvmName("divSpecificVolume")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: SpecificVolumeAmount<D, M>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: SpecificVolumeAmount<L, M>) =
         MassFlowRateAmount(amount = amount / that.amount
                                     / convert(that.distance to distance,
                                               that.distance to distance,
                                               that.distance to distance),
                            unit = that.mass to time)
 
-    operator fun <M : Unit<Mass>> div(that: SpecificVolumeAmount<D, M>) =
+    operator fun <M : Unit<Mass>> div(that: SpecificVolumeAmount<L, M>) =
         MassFlowRateAmount(amount = amount / that.amount,
                            unit = that.mass to time)
 
@@ -175,13 +175,13 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
     // region -> Momentum
 
     @JvmName("timesAreaDensity")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: AreaDensityAmount<D, M>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: AreaDensityAmount<L, M>) =
         MomentumAmount(amount = amount * that.amount
                                 / convert(that.distance to distance,
                                           that.distance to distance),
                        unit = U2(distance, that.mass) to time)
 
-    operator fun <M : Unit<Mass>> times(that: AreaDensityAmount<D, M>) =
+    operator fun <M : Unit<Mass>> times(that: AreaDensityAmount<L, M>) =
         MomentumAmount(amount = amount * that.amount,
                        unit = U2(distance, that.mass) to time)
 
@@ -190,14 +190,14 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
     // region -> Power
 
     @JvmName("timesEnergyDensity")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<L, M, T>) =
         PowerAmount(amount = amount * that.amount
                              / convert(that.distance to distance,
                                        that.time to time,
                                        that.time to time),
                     unit = U2(distance, that.mass) to time)
 
-    operator fun <M : Unit<Mass>> times(that: EnergyDensityAmount<D, M, T>) =
+    operator fun <M : Unit<Mass>> times(that: EnergyDensityAmount<L, M, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, that.mass) to time)
 
@@ -220,24 +220,24 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
     // region -> Speed
 
     @JvmName("divArea")
-    operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: AreaAmount<L>) =
         SpeedAmount(amount = amount / that.amount
                              / convert(that.distance to distance,
                                        that.distance to distance),
                     unit = distance to time)
 
-    operator fun div(that: AreaAmount<D>) =
+    operator fun div(that: AreaAmount<L>) =
         SpeedAmount(amount = amount / that.amount,
                     unit = distance to time)
 
     @JvmName("timesFuelEfficiency")
-    operator fun <D : Unit<Distance>> times(that: FuelEfficiencyAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: FuelEfficiencyAmount<L>) =
         SpeedAmount(amount = amount * that.amount
                              / convert(that.distance to distance,
                                        that.distance to distance),
                     unit = distance to time)
 
-    operator fun times(that: FuelEfficiencyAmount<D>) =
+    operator fun times(that: FuelEfficiencyAmount<L>) =
         SpeedAmount(amount = amount * that.amount,
                     unit = distance to time)
 
@@ -246,7 +246,7 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
     // region -> Substance
 
     @JvmName("divCatalyticEfficiency")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, T : Unit<Time>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
+    operator fun <L : Unit<Distance>, N : Unit<Substance>, T : Unit<Time>> div(that: CatalyticEfficiencyAmount<L, N, T>) =
         SubstanceAmount(amount = amount / that.amount
                                  / convert(that.distance to distance,
                                            that.distance to distance,
@@ -254,7 +254,7 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
                                  * convert(that.time to time),
                         unit = that.substance)
 
-    operator fun <N : Unit<Substance>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
+    operator fun <N : Unit<Substance>> div(that: CatalyticEfficiencyAmount<L, N, T>) =
         SubstanceAmount(amount = amount / that.amount,
                         unit = that.substance)
 

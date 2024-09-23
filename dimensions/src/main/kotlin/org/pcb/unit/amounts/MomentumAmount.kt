@@ -21,9 +21,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
+open class MomentumAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<U2<D, M>, T>)
+        unit: Pair<U2<L, M>, T>)
     : Amount<Momentum>(amount = amount.toBigDecimal(),
                        unit = CompositeUnit(
                            domain = Momentum::class,
@@ -53,26 +53,26 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                        unit = U2(distance, mass) to time)
 
     @JvmName("plusMomentum")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> plus(that: MomentumAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> plus(that: MomentumAmount<L, M, T>) =
         MomentumAmount(amount = amount + that.amount
                                 * convert(that.distance to distance,
                                           that.mass to mass)
                                 / convert(that.time to time),
                        unit = U2(distance, mass) to time)
 
-    operator fun plus(that: MomentumAmount<D, M, T>) =
+    operator fun plus(that: MomentumAmount<L, M, T>) =
         MomentumAmount(amount = amount + that.amount,
                        unit = U2(distance, mass) to time)
 
     @JvmName("minusMomentum")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> minus(that: MomentumAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> minus(that: MomentumAmount<L, M, T>) =
         MomentumAmount(amount = amount - that.amount
                                 * convert(that.distance to distance,
                                           that.mass to mass)
                                 / convert(that.time to time),
                        unit = U2(distance, mass) to time)
 
-    operator fun minus(that: MomentumAmount<D, M, T>) =
+    operator fun minus(that: MomentumAmount<L, M, T>) =
         MomentumAmount(amount = amount - that.amount,
                        unit = U2(distance, mass) to time)
 
@@ -81,14 +81,14 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> Scalar
 
     @JvmName("divMomentum")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MomentumAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MomentumAmount<L, M, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.distance to distance,
                                         that.mass to mass)
                               * convert(that.time to time),
                      unit = NUMERIC)
 
-    operator fun div(that: MomentumAmount<D, M, T>) =
+    operator fun div(that: MomentumAmount<L, M, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -97,22 +97,22 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> Action
 
     @JvmName("timesDistance")
-    operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: DistanceAmount<L>) =
         ActionAmount(amount = amount * that.amount
                               * convert(that.distance to distance),
                      unit = U2(distance, mass) to time)
 
-    operator fun times(that: DistanceAmount<D>) =
+    operator fun times(that: DistanceAmount<L>) =
         ActionAmount(amount = amount * that.amount,
                      unit = U2(distance, mass) to time)
 
     @JvmName("divSpacialFrequency")
-    operator fun <D : Unit<Distance>> div(that: SpacialFrequencyAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: SpacialFrequencyAmount<L>) =
         ActionAmount(amount = amount / that.amount
                               * convert(that.distance to distance),
                      unit = U2(distance, mass) to time)
 
-    operator fun div(that: SpacialFrequencyAmount<D>) =
+    operator fun div(that: SpacialFrequencyAmount<L>) =
         ActionAmount(amount = amount / that.amount,
                      unit = U2(distance, mass) to time)
 
@@ -135,7 +135,7 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> AreaDensity
 
     @JvmName("divVolumetricFlow")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: VolumetricFlowAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: VolumetricFlowAmount<L, T>) =
         AreaDensityAmount(amount = amount / that.amount
                                    / convert(that.distance to distance,
                                              that.distance to distance,
@@ -143,7 +143,7 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                                    * convert(that.time to time),
                           unit = mass to distance)
 
-    operator fun div(that: VolumetricFlowAmount<D, T>) =
+    operator fun div(that: VolumetricFlowAmount<L, T>) =
         AreaDensityAmount(amount = amount / that.amount,
                           unit = mass to distance)
 
@@ -167,24 +167,24 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> Energy
 
     @JvmName("divPace")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<L, T>) =
         EnergyAmount(amount = amount / that.amount
                               / convert(that.time to time)
                               * convert(that.distance to distance),
                      unit = U2(distance, mass) to time)
 
-    operator fun div(that: PaceAmount<D, T>) =
+    operator fun div(that: PaceAmount<L, T>) =
         EnergyAmount(amount = amount / that.amount,
                      unit = U2(distance, mass) to time)
 
     @JvmName("timesSpeed")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
         EnergyAmount(amount = amount * that.amount
                               * convert(that.distance to distance)
                               / convert(that.time to time),
                      unit = U2(distance, mass) to time)
 
-    operator fun times(that: SpeedAmount<D, T>) =
+    operator fun times(that: SpeedAmount<L, T>) =
         EnergyAmount(amount = amount * that.amount,
                      unit = U2(distance, mass) to time)
 
@@ -217,24 +217,24 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> Mass
 
     @JvmName("timesPace")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<L, T>) =
         MassAmount(amount = amount * that.amount
                             * convert(that.time to time)
                             / convert(that.distance to distance),
                    unit = mass)
 
-    operator fun times(that: PaceAmount<D, T>) =
+    operator fun times(that: PaceAmount<L, T>) =
         MassAmount(amount = amount * that.amount,
                    unit = mass)
 
     @JvmName("divSpeed")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
         MassAmount(amount = amount / that.amount
                             / convert(that.distance to distance)
                             * convert(that.time to time),
                    unit = mass)
 
-    operator fun div(that: SpeedAmount<D, T>) =
+    operator fun div(that: SpeedAmount<L, T>) =
         MassAmount(amount = amount / that.amount,
                    unit = mass)
 
@@ -243,22 +243,22 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> MassFlowRate
 
     @JvmName("divDistance")
-    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: DistanceAmount<L>) =
         MassFlowRateAmount(amount = amount / that.amount
                                     / convert(that.distance to distance),
                            unit = mass to time)
 
-    operator fun div(that: DistanceAmount<D>) =
+    operator fun div(that: DistanceAmount<L>) =
         MassFlowRateAmount(amount = amount / that.amount,
                            unit = mass to time)
 
     @JvmName("timesSpacialFrequency")
-    operator fun <D : Unit<Distance>> times(that: SpacialFrequencyAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: SpacialFrequencyAmount<L>) =
         MassFlowRateAmount(amount = amount * that.amount
                                     / convert(that.distance to distance),
                            unit = mass to time)
 
-    operator fun times(that: SpacialFrequencyAmount<D>) =
+    operator fun times(that: SpacialFrequencyAmount<L>) =
         MassFlowRateAmount(amount = amount * that.amount,
                            unit = mass to time)
 
@@ -267,7 +267,7 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> Pace
 
     @JvmName("divEnergy")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyAmount<L, M, T>) =
         PaceAmount(amount = amount / that.amount
                             / convert(that.distance to distance,
                                       that.distance to distance,
@@ -276,7 +276,7 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                                       that.time to time),
                    unit = time to distance)
 
-    operator fun div(that: EnergyAmount<D, M, T>) =
+    operator fun div(that: EnergyAmount<L, M, T>) =
         PaceAmount(amount = amount / that.amount,
                    unit = time to distance)
 
@@ -285,14 +285,14 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> Power
 
     @JvmName("timesAcceleration")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: AccelerationAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AccelerationAmount<L, T>) =
         PowerAmount(amount = amount * that.amount
                              * convert(that.distance to distance)
                              / convert(that.time to time,
                                        that.time to time),
                     unit = U2(distance, mass) to time)
 
-    operator fun times(that: AccelerationAmount<D, T>) =
+    operator fun times(that: AccelerationAmount<L, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, mass) to time)
 
@@ -301,7 +301,7 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> SpacialFrequency
 
     @JvmName("divAction")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ActionAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ActionAmount<L, M, T>) =
         SpacialFrequencyAmount(amount = amount / that.amount
                                         / convert(that.distance to distance,
                                                   that.distance to distance,
@@ -309,7 +309,7 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                                         * convert(that.time to time),
                                unit = NUMERIC to distance)
 
-    operator fun div(that: ActionAmount<D, M, T>) =
+    operator fun div(that: ActionAmount<L, M, T>) =
         SpacialFrequencyAmount(amount = amount / that.amount,
                                unit = NUMERIC to distance)
 
@@ -332,7 +332,7 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> Time
 
     @JvmName("divForce")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ForceAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ForceAmount<L, M, T>) =
         TimeAmount(amount = amount / that.amount
                             / convert(that.distance to distance,
                                       that.mass to mass)
@@ -340,7 +340,7 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                                       that.time to time),
                    unit = time)
 
-    operator fun div(that: ForceAmount<D, M, T>) =
+    operator fun div(that: ForceAmount<L, M, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = time)
 
@@ -349,14 +349,14 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> VolumetricFlow
 
     @JvmName("divAreaDensity")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: AreaDensityAmount<D, M>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: AreaDensityAmount<L, M>) =
         VolumetricFlowAmount(amount = amount / that.amount
                                       / convert(that.mass to mass)
                                       * convert(that.distance to distance,
                                                 that.distance to distance),
                              unit = distance to time)
 
-    operator fun div(that: AreaDensityAmount<D, M>) =
+    operator fun div(that: AreaDensityAmount<L, M>) =
         VolumetricFlowAmount(amount = amount / that.amount,
                              unit = distance to time)
 

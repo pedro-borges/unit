@@ -18,9 +18,9 @@ import org.pcb.unit.kilo
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class MomentOfInertiaAmount<D : Unit<Distance>, M : Unit<Mass>>(
+open class MomentOfInertiaAmount<L : Unit<Distance>, M : Unit<Mass>>(
         amount: Number,
-        unit: U2<D, M>)
+        unit: U2<L, M>)
     : Amount<MomentOfInertia>(amount = amount.toBigDecimal(),
                               unit = CompositeUnit(
                                   domain = MomentOfInertia::class,
@@ -48,26 +48,26 @@ open class MomentOfInertiaAmount<D : Unit<Distance>, M : Unit<Mass>>(
                               unit = U2(distance, mass))
 
     @JvmName("plusMomentOfInertia")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> plus(that: MomentOfInertiaAmount<D, M>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> plus(that: MomentOfInertiaAmount<L, M>) =
         MomentOfInertiaAmount(amount = amount + that.amount
                                        * convert(that.distance to distance,
                                                  that.distance to distance,
                                                  that.mass to mass),
                               unit = U2(distance, mass))
 
-    operator fun plus(that: MomentOfInertiaAmount<D, M>) =
+    operator fun plus(that: MomentOfInertiaAmount<L, M>) =
         MomentOfInertiaAmount(amount = amount + that.amount,
                               unit = U2(distance, mass))
 
     @JvmName("minusMomentOfInertia")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> minus(that: MomentOfInertiaAmount<D, M>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> minus(that: MomentOfInertiaAmount<L, M>) =
         MomentOfInertiaAmount(amount = amount - that.amount
                                        * convert(that.distance to distance,
                                                  that.distance to distance,
                                                  that.mass to mass),
                               unit = U2(distance, mass))
 
-    operator fun minus(that: MomentOfInertiaAmount<D, M>) =
+    operator fun minus(that: MomentOfInertiaAmount<L, M>) =
         MomentOfInertiaAmount(amount = amount - that.amount,
                               unit = U2(distance, mass))
 
@@ -76,14 +76,14 @@ open class MomentOfInertiaAmount<D : Unit<Distance>, M : Unit<Mass>>(
     // region -> Scalar
 
     @JvmName("divMomentOfInertia")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: MomentOfInertiaAmount<D, M>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: MomentOfInertiaAmount<L, M>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.distance to distance,
                                         that.distance to distance,
                                         that.mass to mass),
                      unit = NUMERIC)
 
-    operator fun div(that: MomentOfInertiaAmount<D, M>) =
+    operator fun div(that: MomentOfInertiaAmount<L, M>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -118,24 +118,24 @@ open class MomentOfInertiaAmount<D : Unit<Distance>, M : Unit<Mass>>(
     // region -> Mass
 
     @JvmName("divArea")
-    operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: AreaAmount<L>) =
         MassAmount(amount = amount / that.amount
                             / convert(that.distance to distance,
                                       that.distance to distance),
                    unit = mass)
 
-    operator fun div(that: AreaAmount<D>) =
+    operator fun div(that: AreaAmount<L>) =
         MassAmount(amount = amount / that.amount,
                    unit = mass)
 
     @JvmName("timesFuelEfficiency")
-    operator fun <D : Unit<Distance>> times(that: FuelEfficiencyAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: FuelEfficiencyAmount<L>) =
         MassAmount(amount = amount * that.amount
                             / convert(that.distance to distance,
                                       that.distance to distance),
                    unit = mass)
 
-    operator fun times(that: FuelEfficiencyAmount<D>) =
+    operator fun times(that: FuelEfficiencyAmount<L>) =
         MassAmount(amount = amount * that.amount,
                    unit = mass)
 
@@ -144,14 +144,14 @@ open class MomentOfInertiaAmount<D : Unit<Distance>, M : Unit<Mass>>(
     // region -> Time
 
     @JvmName("divAction")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ActionAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ActionAmount<L, M, T>) =
         TimeAmount(amount = amount / that.amount
                             / convert(that.distance to distance,
                                       that.distance to distance,
                                       that.mass to mass),
                    unit = that.time)
 
-    operator fun <T : Unit<Time>> div(that: ActionAmount<D, M, T>) =
+    operator fun <T : Unit<Time>> div(that: ActionAmount<L, M, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = that.time)
 

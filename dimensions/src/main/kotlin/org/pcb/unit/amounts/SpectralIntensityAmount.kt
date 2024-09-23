@@ -23,9 +23,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class SpectralIntensityAmount<A : Unit<Angle>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
+open class SpectralIntensityAmount<BAC : Unit<Angle>, L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<U2<D, M>, U2<A, T>>)
+        unit: Pair<U2<L, M>, U2<BAC, T>>)
     : Amount<SpectralIntensity>(amount = amount.toBigDecimal(),
                                 unit = CompositeUnit(
                                     domain = SpectralIntensity::class,
@@ -57,7 +57,7 @@ open class SpectralIntensityAmount<A : Unit<Angle>, D : Unit<Distance>, M : Unit
                                 unit = U2(distance, mass) to U2(angle, time))
 
     @JvmName("plusSpectralIntensity")
-    operator fun <A : Unit<Angle>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> plus(that: SpectralIntensityAmount<A, D, M, T>) =
+    operator fun <BAC : Unit<Angle>, L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> plus(that: SpectralIntensityAmount<BAC, L, M, T>) =
         SpectralIntensityAmount(amount = amount + that.amount
                                          * convert(that.distance to distance,
                                                    that.mass to mass)
@@ -68,12 +68,12 @@ open class SpectralIntensityAmount<A : Unit<Angle>, D : Unit<Distance>, M : Unit
                                                    that.time to time),
                                 unit = U2(distance, mass) to U2(angle, time))
 
-    operator fun plus(that: SpectralIntensityAmount<A, D, M, T>) =
+    operator fun plus(that: SpectralIntensityAmount<BAC, L, M, T>) =
         SpectralIntensityAmount(amount = amount + that.amount,
                                 unit = U2(distance, mass) to U2(angle, time))
 
     @JvmName("minusSpectralIntensity")
-    operator fun <A : Unit<Angle>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> minus(that: SpectralIntensityAmount<A, D, M, T>) =
+    operator fun <BAC : Unit<Angle>, L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> minus(that: SpectralIntensityAmount<BAC, L, M, T>) =
         SpectralIntensityAmount(amount = amount - that.amount
                                          * convert(that.distance to distance,
                                                    that.mass to mass)
@@ -84,7 +84,7 @@ open class SpectralIntensityAmount<A : Unit<Angle>, D : Unit<Distance>, M : Unit
                                                    that.time to time),
                                 unit = U2(distance, mass) to U2(angle, time))
 
-    operator fun minus(that: SpectralIntensityAmount<A, D, M, T>) =
+    operator fun minus(that: SpectralIntensityAmount<BAC, L, M, T>) =
         SpectralIntensityAmount(amount = amount - that.amount,
                                 unit = U2(distance, mass) to U2(angle, time))
 
@@ -93,7 +93,7 @@ open class SpectralIntensityAmount<A : Unit<Angle>, D : Unit<Distance>, M : Unit
     // region -> Scalar
 
     @JvmName("divSpectralIntensity")
-    operator fun <A : Unit<Angle>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: SpectralIntensityAmount<A, D, M, T>) =
+    operator fun <BAC : Unit<Angle>, L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: SpectralIntensityAmount<BAC, L, M, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.distance to distance,
                                         that.mass to mass)
@@ -104,7 +104,7 @@ open class SpectralIntensityAmount<A : Unit<Angle>, D : Unit<Distance>, M : Unit
                                         that.time to time),
                      unit = NUMERIC)
 
-    operator fun div(that: SpectralIntensityAmount<A, D, M, T>) =
+    operator fun div(that: SpectralIntensityAmount<BAC, L, M, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -113,22 +113,22 @@ open class SpectralIntensityAmount<A : Unit<Angle>, D : Unit<Distance>, M : Unit
     // region -> RadiantIntensity
 
     @JvmName("timesDistance")
-    operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: DistanceAmount<L>) =
         RadiantIntensityAmount(amount = amount * that.amount
                                         * convert(that.distance to distance),
                                unit = U2(distance, mass) to U2(angle, time))
 
-    operator fun times(that: DistanceAmount<D>) =
+    operator fun times(that: DistanceAmount<L>) =
         RadiantIntensityAmount(amount = amount * that.amount,
                                unit = U2(distance, mass) to U2(angle, time))
 
     @JvmName("divSpacialFrequency")
-    operator fun <D : Unit<Distance>> div(that: SpacialFrequencyAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: SpacialFrequencyAmount<L>) =
         RadiantIntensityAmount(amount = amount / that.amount
                                         * convert(that.distance to distance),
                                unit = U2(distance, mass) to U2(angle, time))
 
-    operator fun div(that: SpacialFrequencyAmount<D>) =
+    operator fun div(that: SpacialFrequencyAmount<L>) =
         RadiantIntensityAmount(amount = amount / that.amount,
                                unit = U2(distance, mass) to U2(angle, time))
 
@@ -137,7 +137,7 @@ open class SpectralIntensityAmount<A : Unit<Angle>, D : Unit<Distance>, M : Unit
     // region -> SpacialFrequency
 
     @JvmName("divRadiantIntensity")
-    operator fun <A : Unit<Angle>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: RadiantIntensityAmount<A, D, M, T>) =
+    operator fun <BAC : Unit<Angle>, L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: RadiantIntensityAmount<BAC, L, M, T>) =
         SpacialFrequencyAmount(amount = amount / that.amount
                                         / convert(that.distance to distance,
                                                   that.distance to distance,
@@ -149,7 +149,7 @@ open class SpectralIntensityAmount<A : Unit<Angle>, D : Unit<Distance>, M : Unit
                                                   that.time to time),
                                unit = NUMERIC to distance)
 
-    operator fun div(that: RadiantIntensityAmount<A, D, M, T>) =
+    operator fun div(that: RadiantIntensityAmount<BAC, L, M, T>) =
         SpacialFrequencyAmount(amount = amount / that.amount,
                                unit = NUMERIC to distance)
 
@@ -158,13 +158,13 @@ open class SpectralIntensityAmount<A : Unit<Angle>, D : Unit<Distance>, M : Unit
     // region -> Yank
 
     @JvmName("timesSolidAngle")
-    operator fun <A : Unit<Angle>> times(that: SolidAngleAmount<A>) =
+    operator fun <BAC : Unit<Angle>> times(that: SolidAngleAmount<BAC>) =
         YankAmount(amount = amount * that.amount
                             * convert(that.angle to angle,
                                       that.angle to angle),
                    unit = U2(distance, mass) to time)
 
-    operator fun times(that: SolidAngleAmount<A>) =
+    operator fun times(that: SolidAngleAmount<BAC>) =
         YankAmount(amount = amount * that.amount,
                    unit = U2(distance, mass) to time)
 

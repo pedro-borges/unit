@@ -89,14 +89,14 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> Acceleration
 
     @JvmName("timesJerk")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: JerkAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: JerkAmount<L, T>) =
         AccelerationAmount(amount = amount * that.amount
                                     / convert(that.time to time,
                                               that.time to time,
                                               that.time to time),
                            unit = that.distance to time)
 
-    operator fun <D : Unit<Distance>> times(that: JerkAmount<D, T>) =
+    operator fun <L : Unit<Distance>> times(that: JerkAmount<L, T>) =
         AccelerationAmount(amount = amount * that.amount,
                            unit = that.distance to time)
 
@@ -105,13 +105,13 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> Action
 
     @JvmName("timesEnergy")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyAmount<L, M, T>) =
         ActionAmount(amount = amount * that.amount
                               / convert(that.time to time,
                                         that.time to time),
                      unit = U2(that.distance, that.mass) to time)
 
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: EnergyAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: EnergyAmount<L, M, T>) =
         ActionAmount(amount = amount * that.amount,
                      unit = U2(that.distance, that.mass) to time)
 
@@ -120,12 +120,12 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> Angle
 
     @JvmName("timesAngularVelocity")
-    operator fun <A : Unit<Angle>, T : Unit<Time>> times(that: AngularVelocityAmount<A, T>) =
+    operator fun <BAC : Unit<Angle>, T : Unit<Time>> times(that: AngularVelocityAmount<BAC, T>) =
         AngleAmount(amount = amount * that.amount
                              / convert(that.time to time),
                     unit = that.angle)
 
-    operator fun <A : Unit<Angle>> times(that: AngularVelocityAmount<A, T>) =
+    operator fun <BAC : Unit<Angle>> times(that: AngularVelocityAmount<BAC, T>) =
         AngleAmount(amount = amount * that.amount,
                     unit = that.angle)
 
@@ -134,13 +134,13 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> AngularVelocity
 
     @JvmName("timesAngularAcceleration")
-    operator fun <A : Unit<Angle>, T : Unit<Time>> times(that: AngularAccelerationAmount<A, T>) =
+    operator fun <BAC : Unit<Angle>, T : Unit<Time>> times(that: AngularAccelerationAmount<BAC, T>) =
         AngularVelocityAmount(amount = amount * that.amount
                                        / convert(that.time to time,
                                                  that.time to time),
                               unit = that.angle to time)
 
-    operator fun <A : Unit<Angle>> times(that: AngularAccelerationAmount<A, T>) =
+    operator fun <BAC : Unit<Angle>> times(that: AngularAccelerationAmount<BAC, T>) =
         AngularVelocityAmount(amount = amount * that.amount,
                               unit = that.angle to time)
 
@@ -149,26 +149,26 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> Capacitance
 
     @JvmName("timesElectricConductance")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricConductanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricConductanceAmount<L, I, M, T>) =
         CapacitanceAmount(amount = amount * that.amount
                                    * convert(that.time to time,
                                              that.time to time,
                                              that.time to time),
                           unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
 
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>> times(that: ElectricConductanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>> times(that: ElectricConductanceAmount<L, I, M, T>) =
         CapacitanceAmount(amount = amount * that.amount,
                           unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
 
     @JvmName("divElectricResistance")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricResistanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricResistanceAmount<L, I, M, T>) =
         CapacitanceAmount(amount = amount / that.amount
                                    * convert(that.time to time,
                                              that.time to time,
                                              that.time to time),
                           unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
 
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>> div(that: ElectricResistanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>> div(that: ElectricResistanceAmount<L, I, M, T>) =
         CapacitanceAmount(amount = amount / that.amount,
                           unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
 
@@ -199,22 +199,22 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> Distance
 
     @JvmName("divPace")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<L, T>) =
         DistanceAmount(amount = amount / that.amount
                                 / convert(that.time to time),
                        unit = that.distance)
 
-    operator fun <D : Unit<Distance>> div(that: PaceAmount<D, T>) =
+    operator fun <L : Unit<Distance>> div(that: PaceAmount<L, T>) =
         DistanceAmount(amount = amount / that.amount,
                        unit = that.distance)
 
     @JvmName("timesSpeed")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
         DistanceAmount(amount = amount * that.amount
                                 / convert(that.time to time),
                        unit = that.distance)
 
-    operator fun <D : Unit<Distance>> times(that: SpeedAmount<D, T>) =
+    operator fun <L : Unit<Distance>> times(that: SpeedAmount<L, T>) =
         DistanceAmount(amount = amount * that.amount,
                        unit = that.distance)
 
@@ -222,7 +222,7 @@ open class TimeAmount<T : Unit<Time>>(
 
     // region -> ElectricCharge
 
-    operator fun <EC : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<EC>) =
+    operator fun <I : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<I>) =
         ElectricChargeAmount(amount = amount * that.amount,
                              unit = U2(that.electricCurrent, time))
 
@@ -231,13 +231,13 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> ElectricConductance
 
     @JvmName("divInductance")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: InductanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: InductanceAmount<L, I, M, T>) =
         ElectricConductanceAmount(amount = amount / that.amount
                                            * convert(that.time to time,
                                                      that.time to time),
                                   unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
 
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>> div(that: InductanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>> div(that: InductanceAmount<L, I, M, T>) =
         ElectricConductanceAmount(amount = amount / that.amount,
                                   unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
 
@@ -246,7 +246,7 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> ElectricResistance
 
     @JvmName("divCapacitance")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: CapacitanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: CapacitanceAmount<L, I, M, T>) =
         ElectricResistanceAmount(amount = amount / that.amount
                                           / convert(that.time to time,
                                                     that.time to time,
@@ -254,7 +254,7 @@ open class TimeAmount<T : Unit<Time>>(
                                                     that.time to time),
                                  unit = U2(that.distance, that.mass) to U2(that.electricCurrent, time))
 
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>> div(that: CapacitanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>> div(that: CapacitanceAmount<L, I, M, T>) =
         ElectricResistanceAmount(amount = amount / that.amount,
                                  unit = U2(that.distance, that.mass) to U2(that.electricCurrent, time))
 
@@ -263,14 +263,14 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> Energy
 
     @JvmName("timesPower")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: PowerAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: PowerAmount<L, M, T>) =
         EnergyAmount(amount = amount * that.amount
                               / convert(that.time to time,
                                         that.time to time,
                                         that.time to time),
                      unit = U2(that.distance, that.mass) to time)
 
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: PowerAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: PowerAmount<L, M, T>) =
         EnergyAmount(amount = amount * that.amount,
                      unit = U2(that.distance, that.mass) to time)
 
@@ -279,14 +279,14 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> EnergyDensity
 
     @JvmName("timesPowerDensity")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: PowerDensityAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: PowerDensityAmount<L, M, T>) =
         EnergyDensityAmount(amount = amount * that.amount
                                      / convert(that.time to time,
                                                that.time to time,
                                                that.time to time),
                             unit = that.mass to U2(that.distance, time))
 
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: PowerDensityAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: PowerDensityAmount<L, M, T>) =
         EnergyDensityAmount(amount = amount * that.amount,
                             unit = that.mass to U2(that.distance, time))
 
@@ -295,14 +295,14 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> Force
 
     @JvmName("timesYank")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: YankAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: YankAmount<L, M, T>) =
         ForceAmount(amount = amount * that.amount
                              / convert(that.time to time,
                                        that.time to time,
                                        that.time to time),
                     unit = U2(that.distance, that.mass) to time)
 
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: YankAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: YankAmount<L, M, T>) =
         ForceAmount(amount = amount * that.amount,
                     unit = U2(that.distance, that.mass) to time)
 
@@ -311,26 +311,26 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> Inductance
 
     @JvmName("divElectricConductance")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricConductanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricConductanceAmount<L, I, M, T>) =
         InductanceAmount(amount = amount / that.amount
                                   / convert(that.time to time,
                                             that.time to time,
                                             that.time to time),
                          unit = U2(that.distance, that.mass) to U2(that.electricCurrent, time))
 
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>> div(that: ElectricConductanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>> div(that: ElectricConductanceAmount<L, I, M, T>) =
         InductanceAmount(amount = amount / that.amount,
                          unit = U2(that.distance, that.mass) to U2(that.electricCurrent, time))
 
     @JvmName("timesElectricResistance")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricResistanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricResistanceAmount<L, I, M, T>) =
         InductanceAmount(amount = amount * that.amount
                                   / convert(that.time to time,
                                             that.time to time,
                                             that.time to time),
                          unit = U2(that.distance, that.mass) to U2(that.electricCurrent, time))
 
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>> times(that: ElectricResistanceAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>> times(that: ElectricResistanceAmount<L, I, M, T>) =
         InductanceAmount(amount = amount * that.amount,
                          unit = U2(that.distance, that.mass) to U2(that.electricCurrent, time))
 
@@ -339,7 +339,7 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> Jerk
 
     @JvmName("timesSnap")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SnapAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: SnapAmount<L, T>) =
         JerkAmount(amount = amount * that.amount
                             / convert(that.time to time,
                                       that.time to time,
@@ -347,7 +347,7 @@ open class TimeAmount<T : Unit<Time>>(
                                       that.time to time),
                    unit = that.distance to time)
 
-    operator fun <D : Unit<Distance>> times(that: SnapAmount<D, T>) =
+    operator fun <L : Unit<Distance>> times(that: SnapAmount<L, T>) =
         JerkAmount(amount = amount * that.amount,
                    unit = that.distance to time)
 
@@ -355,7 +355,7 @@ open class TimeAmount<T : Unit<Time>>(
 
     // region -> LuminousEnergy
 
-    operator fun <A : Unit<Angle>, LI : Unit<LuminousIntensity>> times(that: LuminousFluxAmount<A, LI>) =
+    operator fun <BAC : Unit<Angle>, J : Unit<LuminousIntensity>> times(that: LuminousFluxAmount<BAC, J>) =
         LuminousEnergyAmount(amount = amount * that.amount,
                              unit = U3(that.angle, that.luminousIntensity, time))
 
@@ -364,14 +364,14 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> MagneticFlux
 
     @JvmName("timesElectricTension")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricTensionAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricTensionAmount<L, I, M, T>) =
         MagneticFluxAmount(amount = amount * that.amount
                                     / convert(that.time to time,
                                               that.time to time,
                                               that.time to time),
                            unit = U2(that.distance, that.mass) to U2(that.electricCurrent, time))
 
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>> times(that: ElectricTensionAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>> times(that: ElectricTensionAmount<L, I, M, T>) =
         MagneticFluxAmount(amount = amount * that.amount,
                            unit = U2(that.distance, that.mass) to U2(that.electricCurrent, time))
 
@@ -409,12 +409,12 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> MolarVolume
 
     @JvmName("timesCatalyticEfficiency")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, T : Unit<Time>> times(that: CatalyticEfficiencyAmount<N, D, T>) =
+    operator fun <L : Unit<Distance>, N : Unit<Substance>, T : Unit<Time>> times(that: CatalyticEfficiencyAmount<L, N, T>) =
         MolarVolumeAmount(amount = amount * that.amount
                                    / convert(that.time to time),
                           unit = that.distance to that.substance)
 
-    operator fun <N : Unit<Substance>, D : Unit<Distance>> times(that: CatalyticEfficiencyAmount<N, D, T>) =
+    operator fun <L : Unit<Distance>, N : Unit<Substance>> times(that: CatalyticEfficiencyAmount<L, N, T>) =
         MolarVolumeAmount(amount = amount * that.amount,
                           unit = that.distance to that.substance)
 
@@ -423,12 +423,12 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> MomentOfInertia
 
     @JvmName("timesAction")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ActionAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ActionAmount<L, M, T>) =
         MomentOfInertiaAmount(amount = amount * that.amount
                                        / convert(that.time to time),
                               unit = U2(that.distance, that.mass))
 
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: ActionAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: ActionAmount<L, M, T>) =
         MomentOfInertiaAmount(amount = amount * that.amount,
                               unit = U2(that.distance, that.mass))
 
@@ -437,13 +437,13 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> Momentum
 
     @JvmName("timesForce")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<L, M, T>) =
         MomentumAmount(amount = amount * that.amount
                                 / convert(that.time to time,
                                           that.time to time),
                        unit = U2(that.distance, that.mass) to time)
 
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: ForceAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: ForceAmount<L, M, T>) =
         MomentumAmount(amount = amount * that.amount,
                        unit = U2(that.distance, that.mass) to time)
 
@@ -451,11 +451,11 @@ open class TimeAmount<T : Unit<Time>>(
 
     // region -> Pace
 
-    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: DistanceAmount<L>) =
         PaceAmount(amount = amount / that.amount,
                    unit = time to that.distance)
 
-    operator fun <D : Unit<Distance>> times(that: SpacialFrequencyAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: SpacialFrequencyAmount<L>) =
         PaceAmount(amount = amount * that.amount,
                    unit = time to that.distance)
 
@@ -480,13 +480,13 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> Speed
 
     @JvmName("timesAcceleration")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: AccelerationAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AccelerationAmount<L, T>) =
         SpeedAmount(amount = amount * that.amount
                              / convert(that.time to time,
                                        that.time to time),
                     unit = that.distance to time)
 
-    operator fun <D : Unit<Distance>> times(that: AccelerationAmount<D, T>) =
+    operator fun <L : Unit<Distance>> times(that: AccelerationAmount<L, T>) =
         SpeedAmount(amount = amount * that.amount,
                     unit = that.distance to time)
 
@@ -495,12 +495,12 @@ open class TimeAmount<T : Unit<Time>>(
     // region -> Volume
 
     @JvmName("timesVolumetricFlow")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: VolumetricFlowAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: VolumetricFlowAmount<L, T>) =
         VolumeAmount(amount = amount * that.amount
                               / convert(that.time to time),
                      unit = that.distance)
 
-    operator fun <D : Unit<Distance>> times(that: VolumetricFlowAmount<D, T>) =
+    operator fun <L : Unit<Distance>> times(that: VolumetricFlowAmount<L, T>) =
         VolumeAmount(amount = amount * that.amount,
                      unit = that.distance)
 

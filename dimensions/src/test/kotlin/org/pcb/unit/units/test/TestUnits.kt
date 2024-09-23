@@ -26,11 +26,11 @@ open class CURRENCY(magnitude: Magnitude) : Unit<Currency>(Currency::class, magn
 object CURRENCY1 : CURRENCY(UNI)
 object CURRENCY2 : CURRENCY(DECA)
 
-open class DISTANCE(magnitude: Magnitude) : Unit<Distance>(Distance::class, magnitude.symbol + "D", TEN.power(magnitude.power), UNI)
+open class DISTANCE(magnitude: Magnitude) : Unit<Distance>(Distance::class, magnitude.symbol + "L", TEN.power(magnitude.power), UNI)
 object DISTANCE1 : DISTANCE(UNI)
 object DISTANCE2 : DISTANCE(DECA)
 
-open class ELECTRICCURRENT(magnitude: Magnitude) : Unit<ElectricCurrent>(ElectricCurrent::class, magnitude.symbol + "EC", TEN.power(magnitude.power), UNI)
+open class ELECTRICCURRENT(magnitude: Magnitude) : Unit<ElectricCurrent>(ElectricCurrent::class, magnitude.symbol + "I", TEN.power(magnitude.power), UNI)
 object ELECTRICCURRENT1 : ELECTRICCURRENT(UNI)
 object ELECTRICCURRENT2 : ELECTRICCURRENT(DECA)
 

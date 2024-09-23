@@ -23,9 +23,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>, T : Unit<Time>>(
+open class SpecificHeatCapacityAmount<L : Unit<Distance>, K : Unit<Temperature>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<D, U2<K, T>>)
+        unit: Pair<L, U2<K, T>>)
     : Amount<SpecificHeatCapacity>(amount = amount.toBigDecimal(),
                                    unit = CompositeUnit(
                                        domain = SpecificHeatCapacity::class,
@@ -55,7 +55,7 @@ open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>,
                                    unit = distance to U2(temperature, time))
 
     @JvmName("plusSpecificHeatCapacity")
-    operator fun <D : Unit<Distance>, K : Unit<Temperature>, T : Unit<Time>> plus(that: SpecificHeatCapacityAmount<D, K, T>) =
+    operator fun <L : Unit<Distance>, K : Unit<Temperature>, T : Unit<Time>> plus(that: SpecificHeatCapacityAmount<L, K, T>) =
         SpecificHeatCapacityAmount(amount = amount + that.amount
                                             * convert(that.distance to distance,
                                                       that.distance to distance)
@@ -64,12 +64,12 @@ open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>,
                                                       that.time to time),
                                    unit = distance to U2(temperature, time))
 
-    operator fun plus(that: SpecificHeatCapacityAmount<D, K, T>) =
+    operator fun plus(that: SpecificHeatCapacityAmount<L, K, T>) =
         SpecificHeatCapacityAmount(amount = amount + that.amount,
                                    unit = distance to U2(temperature, time))
 
     @JvmName("minusSpecificHeatCapacity")
-    operator fun <D : Unit<Distance>, K : Unit<Temperature>, T : Unit<Time>> minus(that: SpecificHeatCapacityAmount<D, K, T>) =
+    operator fun <L : Unit<Distance>, K : Unit<Temperature>, T : Unit<Time>> minus(that: SpecificHeatCapacityAmount<L, K, T>) =
         SpecificHeatCapacityAmount(amount = amount - that.amount
                                             * convert(that.distance to distance,
                                                       that.distance to distance)
@@ -78,7 +78,7 @@ open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>,
                                                       that.time to time),
                                    unit = distance to U2(temperature, time))
 
-    operator fun minus(that: SpecificHeatCapacityAmount<D, K, T>) =
+    operator fun minus(that: SpecificHeatCapacityAmount<L, K, T>) =
         SpecificHeatCapacityAmount(amount = amount - that.amount,
                                    unit = distance to U2(temperature, time))
 
@@ -87,7 +87,7 @@ open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>,
     // region -> Scalar
 
     @JvmName("divSpecificHeatCapacity")
-    operator fun <D : Unit<Distance>, K : Unit<Temperature>, T : Unit<Time>> div(that: SpecificHeatCapacityAmount<D, K, T>) =
+    operator fun <L : Unit<Distance>, K : Unit<Temperature>, T : Unit<Time>> div(that: SpecificHeatCapacityAmount<L, K, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.distance to distance,
                                         that.distance to distance)
@@ -96,7 +96,7 @@ open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>,
                                         that.time to time),
                      unit = NUMERIC)
 
-    operator fun div(that: SpecificHeatCapacityAmount<D, K, T>) =
+    operator fun div(that: SpecificHeatCapacityAmount<L, K, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -105,13 +105,13 @@ open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>,
     // region -> Acceleration
 
     @JvmName("timesTemperatureGradient")
-    operator fun <D : Unit<Distance>, K : Unit<Temperature>> times(that: TemperatureGradientAmount<D, K>) =
+    operator fun <L : Unit<Distance>, K : Unit<Temperature>> times(that: TemperatureGradientAmount<L, K>) =
         AccelerationAmount(amount = amount * that.amount
                                     * convert(that.temperature to temperature)
                                     / convert(that.distance to distance),
                            unit = distance to time)
 
-    operator fun times(that: TemperatureGradientAmount<D, K>) =
+    operator fun times(that: TemperatureGradientAmount<L, K>) =
         AccelerationAmount(amount = amount * that.amount,
                            unit = distance to time)
 
@@ -128,7 +128,7 @@ open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>,
     // region -> Molality
 
     @JvmName("divMolarHeatCapacity")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substance>, K : Unit<Temperature>, T : Unit<Time>> div(that: MolarHeatCapacityAmount<L, M, N, K, T>) =
         MolalityAmount(amount = amount / that.amount
                                 / convert(that.distance to distance,
                                           that.distance to distance)
@@ -137,7 +137,7 @@ open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>,
                                           that.time to time),
                        unit = that.substance to that.mass)
 
-    operator fun <N : Unit<Substance>, M : Unit<Mass>> div(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
+    operator fun <M : Unit<Mass>, N : Unit<Substance>> div(that: MolarHeatCapacityAmount<L, M, N, K, T>) =
         MolalityAmount(amount = amount / that.amount,
                        unit = that.substance to that.mass)
 
@@ -145,11 +145,11 @@ open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>,
 
     // region -> MolarHeatCapacity
 
-    operator fun <N : Unit<Substance>, M : Unit<Mass>> div(that: MolalityAmount<N, M>) =
+    operator fun <M : Unit<Mass>, N : Unit<Substance>> div(that: MolalityAmount<M, N>) =
         MolarHeatCapacityAmount(amount = amount / that.amount,
                                 unit = U2(distance, that.mass) to U3(that.substance, temperature, time))
 
-    operator fun <N : Unit<Substance>, M : Unit<Mass>> times(that: MolarMassAmount<N, M>) =
+    operator fun <M : Unit<Mass>, N : Unit<Substance>> times(that: MolarMassAmount<M, N>) =
         MolarHeatCapacityAmount(amount = amount * that.amount,
                                 unit = U2(distance, that.mass) to U3(that.substance, temperature, time))
 
@@ -182,7 +182,7 @@ open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>,
     // region -> ThermalExpansionCoefficient
 
     @JvmName("divSpecificEnergy")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpecificEnergyAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: SpecificEnergyAmount<L, T>) =
         ThermalExpansionCoefficientAmount(amount = amount / that.amount
                                                    / convert(that.distance to distance,
                                                              that.distance to distance)
@@ -190,7 +190,7 @@ open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>,
                                                              that.time to time),
                                           unit = NUMERIC to temperature)
 
-    operator fun div(that: SpecificEnergyAmount<D, T>) =
+    operator fun div(that: SpecificEnergyAmount<L, T>) =
         ThermalExpansionCoefficientAmount(amount = amount / that.amount,
                                           unit = NUMERIC to temperature)
 

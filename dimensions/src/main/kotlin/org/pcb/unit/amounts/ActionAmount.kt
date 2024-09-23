@@ -22,9 +22,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
+open class ActionAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<U2<D, M>, T>)
+        unit: Pair<U2<L, M>, T>)
     : Amount<Action>(amount = amount.toBigDecimal(),
                      unit = CompositeUnit(
                          domain = Action::class,
@@ -54,7 +54,7 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                      unit = U2(distance, mass) to time)
 
     @JvmName("plusAction")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> plus(that: ActionAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> plus(that: ActionAmount<L, M, T>) =
         ActionAmount(amount = amount + that.amount
                               * convert(that.distance to distance,
                                         that.distance to distance,
@@ -62,12 +62,12 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                               / convert(that.time to time),
                      unit = U2(distance, mass) to time)
 
-    operator fun plus(that: ActionAmount<D, M, T>) =
+    operator fun plus(that: ActionAmount<L, M, T>) =
         ActionAmount(amount = amount + that.amount,
                      unit = U2(distance, mass) to time)
 
     @JvmName("minusAction")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> minus(that: ActionAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> minus(that: ActionAmount<L, M, T>) =
         ActionAmount(amount = amount - that.amount
                               * convert(that.distance to distance,
                                         that.distance to distance,
@@ -75,7 +75,7 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                               / convert(that.time to time),
                      unit = U2(distance, mass) to time)
 
-    operator fun minus(that: ActionAmount<D, M, T>) =
+    operator fun minus(that: ActionAmount<L, M, T>) =
         ActionAmount(amount = amount - that.amount,
                      unit = U2(distance, mass) to time)
 
@@ -84,7 +84,7 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> Scalar
 
     @JvmName("divAction")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ActionAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ActionAmount<L, M, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.distance to distance,
                                         that.distance to distance,
@@ -92,7 +92,7 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                               * convert(that.time to time),
                      unit = NUMERIC)
 
-    operator fun div(that: ActionAmount<D, M, T>) =
+    operator fun div(that: ActionAmount<L, M, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -116,14 +116,14 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> Distance
 
     @JvmName("divMomentum")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MomentumAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MomentumAmount<L, M, T>) =
         DistanceAmount(amount = amount / that.amount
                                 / convert(that.distance to distance,
                                           that.mass to mass)
                                 * convert(that.time to time),
                        unit = distance)
 
-    operator fun div(that: MomentumAmount<D, M, T>) =
+    operator fun div(that: MomentumAmount<L, M, T>) =
         DistanceAmount(amount = amount / that.amount,
                        unit = distance)
 
@@ -132,7 +132,7 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> ElectricCharge
 
     @JvmName("divMagneticFlux")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: MagneticFluxAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: MagneticFluxAmount<L, I, M, T>) =
         ElectricChargeAmount(amount = amount / that.amount
                                       / convert(that.distance to distance,
                                                 that.distance to distance,
@@ -141,7 +141,7 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                                                 that.time to time),
                              unit = U2(that.electricCurrent, time))
 
-    operator fun <EC : Unit<ElectricCurrent>> div(that: MagneticFluxAmount<D, EC, M, T>) =
+    operator fun <I : Unit<ElectricCurrent>> div(that: MagneticFluxAmount<L, I, M, T>) =
         ElectricChargeAmount(amount = amount / that.amount,
                              unit = U2(that.electricCurrent, time))
 
@@ -174,14 +174,14 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> Frequency
 
     @JvmName("divMomentOfInertia")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: MomentOfInertiaAmount<D, M>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: MomentOfInertiaAmount<L, M>) =
         FrequencyAmount(amount = amount / that.amount
                                  / convert(that.distance to distance,
                                            that.distance to distance,
                                            that.mass to mass),
                         unit = NUMERIC to time)
 
-    operator fun div(that: MomentOfInertiaAmount<D, M>) =
+    operator fun div(that: MomentOfInertiaAmount<L, M>) =
         FrequencyAmount(amount = amount / that.amount,
                         unit = NUMERIC to time)
 
@@ -190,12 +190,12 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> MagneticFlux
 
     @JvmName("divElectricCharge")
-    operator fun <EC : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricChargeAmount<EC, T>) =
+    operator fun <I : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricChargeAmount<I, T>) =
         MagneticFluxAmount(amount = amount / that.amount
                                     / convert(that.time to time),
                            unit = U2(distance, mass) to U2(that.electricCurrent, time))
 
-    operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricChargeAmount<EC, T>) =
+    operator fun <I : Unit<ElectricCurrent>> div(that: ElectricChargeAmount<I, T>) =
         MagneticFluxAmount(amount = amount / that.amount,
                            unit = U2(distance, mass) to U2(that.electricCurrent, time))
 
@@ -204,24 +204,24 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> MassFlowRate
 
     @JvmName("divArea")
-    operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: AreaAmount<L>) =
         MassFlowRateAmount(amount = amount / that.amount
                                     / convert(that.distance to distance,
                                               that.distance to distance),
                            unit = mass to time)
 
-    operator fun div(that: AreaAmount<D>) =
+    operator fun div(that: AreaAmount<L>) =
         MassFlowRateAmount(amount = amount / that.amount,
                            unit = mass to time)
 
     @JvmName("timesFuelEfficiency")
-    operator fun <D : Unit<Distance>> times(that: FuelEfficiencyAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: FuelEfficiencyAmount<L>) =
         MassFlowRateAmount(amount = amount * that.amount
                                     / convert(that.distance to distance,
                                               that.distance to distance),
                            unit = mass to time)
 
-    operator fun times(that: FuelEfficiencyAmount<D>) =
+    operator fun times(that: FuelEfficiencyAmount<L>) =
         MassFlowRateAmount(amount = amount * that.amount,
                            unit = mass to time)
 
@@ -254,22 +254,22 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> Momentum
 
     @JvmName("divDistance")
-    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: DistanceAmount<L>) =
         MomentumAmount(amount = amount / that.amount
                                 / convert(that.distance to distance),
                        unit = U2(distance, mass) to time)
 
-    operator fun div(that: DistanceAmount<D>) =
+    operator fun div(that: DistanceAmount<L>) =
         MomentumAmount(amount = amount / that.amount,
                        unit = U2(distance, mass) to time)
 
     @JvmName("timesSpacialFrequency")
-    operator fun <D : Unit<Distance>> times(that: SpacialFrequencyAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: SpacialFrequencyAmount<L>) =
         MomentumAmount(amount = amount * that.amount
                                 / convert(that.distance to distance),
                        unit = U2(distance, mass) to time)
 
-    operator fun times(that: SpacialFrequencyAmount<D>) =
+    operator fun times(that: SpacialFrequencyAmount<L>) =
         MomentumAmount(amount = amount * that.amount,
                        unit = U2(distance, mass) to time)
 
@@ -278,7 +278,7 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     // region -> Time
 
     @JvmName("divEnergy")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyAmount<L, M, T>) =
         TimeAmount(amount = amount / that.amount
                             / convert(that.distance to distance,
                                       that.distance to distance,
@@ -287,7 +287,7 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                                       that.time to time),
                    unit = time)
 
-    operator fun div(that: EnergyAmount<D, M, T>) =
+    operator fun div(that: EnergyAmount<L, M, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = time)
 

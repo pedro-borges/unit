@@ -29,8 +29,8 @@ class GenerateAmountsTest
         if (dimension.name == "Scalar") return
 
         val regions = HashMap<String, String>()
-        var code = regions[dimension.name] ?: ""
 
+        var code = regions[dimension.name] ?: ""
         val major = dimension.composite.positives()
         val minor = dimension.composite.negatives()
 
@@ -181,13 +181,13 @@ class GenerateAmountsTest
     {
         val result = ArrayList<String>()
 
-        if (substance != 0) result += "N : Unit<Substance>"
-        if (angle != 0) result += "A : Unit<Angle>"
+        if (angle != 0) result += "BAC : Unit<Angle>"
         if (currency != 0) result += "C : Unit<Currency>"
-        if (distance != 0) result += "D : Unit<Distance>"
-        if (electricCurrent != 0) result += "EC : Unit<ElectricCurrent>"
-        if (luminousIntensity != 0) result += "LI : Unit<LuminousIntensity>"
+        if (distance != 0) result += "L : Unit<Distance>"
+        if (electricCurrent != 0) result += "I : Unit<ElectricCurrent>"
+        if (luminousIntensity != 0) result += "J : Unit<LuminousIntensity>"
         if (mass != 0) result += "M : Unit<Mass>"
+        if (substance != 0) result += "N : Unit<Substance>"
         if (temperature != 0) result += "K : Unit<Temperature>"
         if (time != 0) result += "T : Unit<Time>"
 
@@ -198,13 +198,13 @@ class GenerateAmountsTest
     {
         val result = ArrayList<String>()
 
-        if (substance != 0) result += "N"
-        if (angle != 0) result += "A"
+        if (angle != 0) result += "BAC"
         if (currency != 0) result += "C"
-        if (distance != 0) result += "D"
-        if (electricCurrent != 0) result += "EC"
-        if (luminousIntensity != 0) result += "LI"
+        if (distance != 0) result += "L"
+        if (electricCurrent != 0) result += "I"
+        if (luminousIntensity != 0) result += "J"
         if (mass != 0) result += "M"
+        if (substance != 0) result += "N"
         if (temperature != 0) result += "K"
         if (time != 0) result += "T"
 
@@ -212,24 +212,24 @@ class GenerateAmountsTest
     }
 
     private fun Composite.keep(that: Composite) =
-        Composite(substance = if (that.substance != 0) substance else 0,
-                  angle = if (that.angle != 0) angle else 0,
+        Composite(angle = if (that.angle != 0) angle else 0,
                   currency = if (that.currency != 0) currency else 0,
                   distance = if (that.distance != 0) distance else 0,
                   electricCurrent = if (that.electricCurrent != 0) electricCurrent else 0,
                   luminousIntensity = if (that.luminousIntensity != 0) luminousIntensity else 0,
                   mass = if (that.mass != 0) mass else 0,
+                  substance = if (that.substance != 0) substance else 0,
                   temperature = if (that.temperature != 0) temperature else 0,
                   time = if (that.time != 0) time else 0)
 
     private fun Composite.drop(that: Composite) =
-        Composite(substance = if (that.substance != 0) 0 else substance,
-                  angle = if (that.angle != 0) 0 else angle,
+        Composite(angle = if (that.angle != 0) 0 else angle,
                   currency = if (that.currency != 0) 0 else currency,
                   distance = if (that.distance != 0) 0 else distance,
                   electricCurrent = if (that.electricCurrent != 0) 0 else electricCurrent,
                   luminousIntensity = if (that.luminousIntensity != 0) 0 else luminousIntensity,
                   mass = if (that.mass != 0) 0 else mass,
+                  substance = if (that.substance != 0) 0 else substance,
                   temperature = if (that.temperature != 0) 0 else temperature,
                   time = if (that.time != 0) 0 else time)
 
@@ -237,13 +237,13 @@ class GenerateAmountsTest
     {
         val result = ArrayList<String>()
 
-        for (a in 1..substance) result += "that.substance to substance"
         for (a in 1..angle) result += "that.angle to angle"
         for (a in 1..currency) result += "that.currency to currency"
         for (a in 1..distance) result += "that.distance to distance"
         for (a in 1..electricCurrent) result += "that.electricCurrent to electricCurrent"
         for (a in 1..luminousIntensity) result += "that.luminousIntensity to luminousIntensity"
         for (a in 1..mass) result += "that.mass to mass"
+        for (a in 1..substance) result += "that.substance to substance"
         for (a in 1..temperature) result += "that.temperature to temperature"
         for (a in 1..time) result += "that.time to time"
 
@@ -293,15 +293,15 @@ class GenerateAmountsTest
         val positives = positives()
         val negatives = negatives()
 
-        val canons = mapOf("N" to "MOLE",
-                           "A" to "RADIAN",
+        val canons = mapOf("BAC" to "RADIAN",
                            "C" to "EUR",
-                           "D" to "METER",
-                           "EC" to "AMPERE",
-                           "LI" to "CANDELA",
+                           "L" to "METER",
+                           "I" to "AMPERE",
+                           "J" to "CANDELA",
+                           "K" to "KELVIN",
                            "M" to "kilo(GRAM)",
-                           "T" to "SECOND",
-                           "K" to "KELVIN")
+                           "N" to "MOLE",
+                           "T" to "SECOND")
 
         val major = when (positives.count())
         {
@@ -543,11 +543,11 @@ class GenerateAmountsTest
     {
         val result = ArrayList<Pair<String, Int>>()
 
-        if (angle != 0) result += "A" to angle
+        if (angle != 0) result += "BAC" to angle
         if (currency != 0) result += "C" to currency
-        if (distance != 0) result += "D" to distance
-        if (electricCurrent != 0) result += "EC" to electricCurrent
-        if (luminousIntensity != 0) result += "LI" to luminousIntensity
+        if (distance != 0) result += "L" to distance
+        if (electricCurrent != 0) result += "I" to electricCurrent
+        if (luminousIntensity != 0) result += "J" to luminousIntensity
         if (mass != 0) result += "M" to mass
         if (substance != 0) result += "N" to substance
         if (temperature != 0) result += "K" to temperature

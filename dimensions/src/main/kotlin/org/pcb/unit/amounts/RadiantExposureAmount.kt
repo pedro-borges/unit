@@ -95,13 +95,13 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
     // region -> AreaDensity
 
     @JvmName("divSpecificEnergy")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpecificEnergyAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: SpecificEnergyAmount<L, T>) =
         AreaDensityAmount(amount = amount / that.amount
                                    * convert(that.time to time,
                                              that.time to time),
                           unit = mass to that.distance)
 
-    operator fun <D : Unit<Distance>> div(that: SpecificEnergyAmount<D, T>) =
+    operator fun <L : Unit<Distance>> div(that: SpecificEnergyAmount<L, T>) =
         AreaDensityAmount(amount = amount / that.amount,
                           unit = mass to that.distance)
 
@@ -110,14 +110,14 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
     // region -> Distance
 
     @JvmName("divEnergyDensity")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyDensityAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyDensityAmount<L, M, T>) =
         DistanceAmount(amount = amount / that.amount
                                 / convert(that.mass to mass)
                                 * convert(that.time to time,
                                           that.time to time),
                        unit = that.distance)
 
-    operator fun <D : Unit<Distance>> div(that: EnergyDensityAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>> div(that: EnergyDensityAmount<L, M, T>) =
         DistanceAmount(amount = amount / that.amount,
                        unit = that.distance)
 
@@ -126,14 +126,14 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
     // region -> ElectricCurrent
 
     @JvmName("divMagneticFluxDensity")
-    operator fun <EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: MagneticFluxDensityAmount<EC, M, T>) =
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: MagneticFluxDensityAmount<I, M, T>) =
         ElectricCurrentAmount(amount = amount / that.amount
                                        / convert(that.mass to mass)
                                        * convert(that.time to time,
                                                  that.time to time),
                               unit = that.electricCurrent)
 
-    operator fun <EC : Unit<ElectricCurrent>> div(that: MagneticFluxDensityAmount<EC, M, T>) =
+    operator fun <I : Unit<ElectricCurrent>> div(that: MagneticFluxDensityAmount<I, M, T>) =
         ElectricCurrentAmount(amount = amount / that.amount,
                               unit = that.electricCurrent)
 
@@ -141,11 +141,11 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> Energy
 
-    operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: AreaAmount<L>) =
         EnergyAmount(amount = amount * that.amount,
                      unit = U2(that.distance, mass) to time)
 
-    operator fun <D : Unit<Distance>> div(that: FuelEfficiencyAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: FuelEfficiencyAmount<L>) =
         EnergyAmount(amount = amount / that.amount,
                      unit = U2(that.distance, mass) to time)
 
@@ -153,11 +153,11 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> EnergyDensity
 
-    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: DistanceAmount<L>) =
         EnergyDensityAmount(amount = amount / that.amount,
                             unit = mass to U2(that.distance, time))
 
-    operator fun <D : Unit<Distance>> times(that: SpacialFrequencyAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: SpacialFrequencyAmount<L>) =
         EnergyDensityAmount(amount = amount * that.amount,
                             unit = mass to U2(that.distance, time))
 
@@ -189,11 +189,11 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> Force
 
-    operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: DistanceAmount<L>) =
         ForceAmount(amount = amount * that.amount,
                     unit = U2(that.distance, mass) to time)
 
-    operator fun <D : Unit<Distance>> div(that: SpacialFrequencyAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: SpacialFrequencyAmount<L>) =
         ForceAmount(amount = amount / that.amount,
                     unit = U2(that.distance, mass) to time)
 
@@ -217,14 +217,14 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
     // region -> FuelEfficiency
 
     @JvmName("divEnergy")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyAmount<L, M, T>) =
         FuelEfficiencyAmount(amount = amount / that.amount
                                       / convert(that.mass to mass)
                                       * convert(that.time to time,
                                                 that.time to time),
                              unit = NUMERIC to that.distance)
 
-    operator fun <D : Unit<Distance>> div(that: EnergyAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>> div(that: EnergyAmount<L, M, T>) =
         FuelEfficiencyAmount(amount = amount / that.amount,
                              unit = NUMERIC to that.distance)
 
@@ -232,7 +232,7 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> MagneticFluxDensity
 
-    operator fun <EC : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<EC>) =
+    operator fun <I : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<I>) =
         MagneticFluxDensityAmount(amount = amount / that.amount,
                                   unit = mass to U2(that.electricCurrent, time))
 
@@ -265,7 +265,7 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
     // region -> Pace
 
     @JvmName("divYank")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: YankAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: YankAmount<L, M, T>) =
         PaceAmount(amount = amount / that.amount
                             / convert(that.mass to mass)
                             * convert(that.time to time,
@@ -273,7 +273,7 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
                                       that.time to time),
                    unit = time to that.distance)
 
-    operator fun <D : Unit<Distance>> div(that: YankAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>> div(that: YankAmount<L, M, T>) =
         PaceAmount(amount = amount / that.amount,
                    unit = time to that.distance)
 
@@ -282,14 +282,14 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
     // region -> SpacialFrequency
 
     @JvmName("divForce")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ForceAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ForceAmount<L, M, T>) =
         SpacialFrequencyAmount(amount = amount / that.amount
                                         / convert(that.mass to mass)
                                         * convert(that.time to time,
                                                   that.time to time),
                                unit = NUMERIC to that.distance)
 
-    operator fun <D : Unit<Distance>> div(that: ForceAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>> div(that: ForceAmount<L, M, T>) =
         SpacialFrequencyAmount(amount = amount / that.amount,
                                unit = NUMERIC to that.distance)
 
@@ -298,12 +298,12 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
     // region -> SpecificEnergy
 
     @JvmName("divAreaDensity")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: AreaDensityAmount<D, M>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: AreaDensityAmount<L, M>) =
         SpecificEnergyAmount(amount = amount / that.amount
                                       / convert(that.mass to mass),
                              unit = that.distance to time)
 
-    operator fun <D : Unit<Distance>> div(that: AreaDensityAmount<D, M>) =
+    operator fun <L : Unit<Distance>> div(that: AreaDensityAmount<L, M>) =
         SpecificEnergyAmount(amount = amount / that.amount,
                              unit = that.distance to time)
 
@@ -329,22 +329,22 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
     // region -> Yank
 
     @JvmName("divPace")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<L, T>) =
         YankAmount(amount = amount / that.amount
                             / convert(that.time to time),
                    unit = U2(that.distance, mass) to time)
 
-    operator fun <D : Unit<Distance>> div(that: PaceAmount<D, T>) =
+    operator fun <L : Unit<Distance>> div(that: PaceAmount<L, T>) =
         YankAmount(amount = amount / that.amount,
                    unit = U2(that.distance, mass) to time)
 
     @JvmName("timesSpeed")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
         YankAmount(amount = amount * that.amount
                             / convert(that.time to time),
                    unit = U2(that.distance, mass) to time)
 
-    operator fun <D : Unit<Distance>> times(that: SpeedAmount<D, T>) =
+    operator fun <L : Unit<Distance>> times(that: SpeedAmount<L, T>) =
         YankAmount(amount = amount * that.amount,
                    unit = U2(that.distance, mass) to time)
 

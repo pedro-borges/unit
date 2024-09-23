@@ -20,9 +20,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class FuelEfficiencyAmount<D : Unit<Distance>>(
+open class FuelEfficiencyAmount<L : Unit<Distance>>(
         amount: Number,
-        unit: Pair<Unit<Scalar>, D>)
+        unit: Pair<Unit<Scalar>, L>)
     : Amount<FuelEfficiency>(amount = amount.toBigDecimal(),
                              unit = CompositeUnit(
                                  domain = FuelEfficiency::class,
@@ -48,24 +48,24 @@ open class FuelEfficiencyAmount<D : Unit<Distance>>(
                              unit = NUMERIC to distance)
 
     @JvmName("plusFuelEfficiency")
-    operator fun <D : Unit<Distance>> plus(that: FuelEfficiencyAmount<D>) =
+    operator fun <L : Unit<Distance>> plus(that: FuelEfficiencyAmount<L>) =
         FuelEfficiencyAmount(amount = amount + that.amount
                                       / convert(that.distance to distance,
                                                 that.distance to distance),
                              unit = NUMERIC to distance)
 
-    operator fun plus(that: FuelEfficiencyAmount<D>) =
+    operator fun plus(that: FuelEfficiencyAmount<L>) =
         FuelEfficiencyAmount(amount = amount + that.amount,
                              unit = NUMERIC to distance)
 
     @JvmName("minusFuelEfficiency")
-    operator fun <D : Unit<Distance>> minus(that: FuelEfficiencyAmount<D>) =
+    operator fun <L : Unit<Distance>> minus(that: FuelEfficiencyAmount<L>) =
         FuelEfficiencyAmount(amount = amount - that.amount
                                       / convert(that.distance to distance,
                                                 that.distance to distance),
                              unit = NUMERIC to distance)
 
-    operator fun minus(that: FuelEfficiencyAmount<D>) =
+    operator fun minus(that: FuelEfficiencyAmount<L>) =
         FuelEfficiencyAmount(amount = amount - that.amount,
                              unit = NUMERIC to distance)
 
@@ -74,24 +74,24 @@ open class FuelEfficiencyAmount<D : Unit<Distance>>(
     // region -> Scalar
 
     @JvmName("timesArea")
-    operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: AreaAmount<L>) =
         ScalarAmount(amount = amount * that.amount
                               * convert(that.distance to distance,
                                         that.distance to distance),
                      unit = NUMERIC)
 
-    operator fun times(that: AreaAmount<D>) =
+    operator fun times(that: AreaAmount<L>) =
         ScalarAmount(amount = amount * that.amount,
                      unit = NUMERIC)
 
     @JvmName("divFuelEfficiency")
-    operator fun <D : Unit<Distance>> div(that: FuelEfficiencyAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: FuelEfficiencyAmount<L>) =
         ScalarAmount(amount = amount / that.amount
                               * convert(that.distance to distance,
                                         that.distance to distance),
                      unit = NUMERIC)
 
-    operator fun div(that: FuelEfficiencyAmount<D>) =
+    operator fun div(that: FuelEfficiencyAmount<L>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -108,14 +108,14 @@ open class FuelEfficiencyAmount<D : Unit<Distance>>(
     // region -> Distance
 
     @JvmName("timesVolume")
-    operator fun <D : Unit<Distance>> times(that: VolumeAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: VolumeAmount<L>) =
         DistanceAmount(amount = amount * that.amount
                                 * convert(that.distance to distance,
                                           that.distance to distance,
                                           that.distance to distance),
                        unit = distance)
 
-    operator fun times(that: VolumeAmount<D>) =
+    operator fun times(that: VolumeAmount<L>) =
         DistanceAmount(amount = amount * that.amount,
                        unit = distance)
 
@@ -124,12 +124,12 @@ open class FuelEfficiencyAmount<D : Unit<Distance>>(
     // region -> EnergyDensity
 
     @JvmName("timesForce")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<L, M, T>) =
         EnergyDensityAmount(amount = amount * that.amount
                                      * convert(that.distance to distance),
                             unit = that.mass to U2(distance, that.time))
 
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<D, M, T>) =
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<L, M, T>) =
         EnergyDensityAmount(amount = amount * that.amount,
                             unit = that.mass to U2(distance, that.time))
 
@@ -138,13 +138,13 @@ open class FuelEfficiencyAmount<D : Unit<Distance>>(
     // region -> EnergyFluxDensity
 
     @JvmName("timesPower")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: PowerAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: PowerAmount<L, M, T>) =
         EnergyFluxDensityAmount(amount = amount * that.amount
                                          * convert(that.distance to distance,
                                                    that.distance to distance),
                                 unit = that.mass to that.time)
 
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: PowerAmount<D, M, T>) =
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: PowerAmount<L, M, T>) =
         EnergyFluxDensityAmount(amount = amount * that.amount,
                                 unit = that.mass to that.time)
 
@@ -152,7 +152,7 @@ open class FuelEfficiencyAmount<D : Unit<Distance>>(
 
     // region -> Illuminance
 
-    operator fun <A : Unit<Angle>, LI : Unit<LuminousIntensity>> times(that: LuminousFluxAmount<A, LI>) =
+    operator fun <BAC : Unit<Angle>, J : Unit<LuminousIntensity>> times(that: LuminousFluxAmount<BAC, J>) =
         IlluminanceAmount(amount = amount * that.amount,
                           unit = U2(that.angle, that.luminousIntensity) to distance)
 
@@ -160,7 +160,7 @@ open class FuelEfficiencyAmount<D : Unit<Distance>>(
 
     // region -> Luminance
 
-    operator fun <LI : Unit<LuminousIntensity>> times(that: LuminousIntensityAmount<LI>) =
+    operator fun <J : Unit<LuminousIntensity>> times(that: LuminousIntensityAmount<J>) =
         LuminanceAmount(amount = amount * that.amount,
                         unit = that.luminousIntensity to distance)
 
@@ -169,13 +169,13 @@ open class FuelEfficiencyAmount<D : Unit<Distance>>(
     // region -> MagneticFluxDensity
 
     @JvmName("timesMagneticFlux")
-    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: MagneticFluxAmount<D, EC, M, T>) =
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: MagneticFluxAmount<L, I, M, T>) =
         MagneticFluxDensityAmount(amount = amount * that.amount
                                            * convert(that.distance to distance,
                                                      that.distance to distance),
                                   unit = that.mass to U2(that.electricCurrent, that.time))
 
-    operator fun <EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: MagneticFluxAmount<D, EC, M, T>) =
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: MagneticFluxAmount<L, I, M, T>) =
         MagneticFluxDensityAmount(amount = amount * that.amount,
                                   unit = that.mass to U2(that.electricCurrent, that.time))
 
@@ -184,13 +184,13 @@ open class FuelEfficiencyAmount<D : Unit<Distance>>(
     // region -> Mass
 
     @JvmName("timesMomentOfInertia")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: MomentOfInertiaAmount<D, M>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: MomentOfInertiaAmount<L, M>) =
         MassAmount(amount = amount * that.amount
                             * convert(that.distance to distance,
                                       that.distance to distance),
                    unit = that.mass)
 
-    operator fun <M : Unit<Mass>> times(that: MomentOfInertiaAmount<D, M>) =
+    operator fun <M : Unit<Mass>> times(that: MomentOfInertiaAmount<L, M>) =
         MassAmount(amount = amount * that.amount,
                    unit = that.mass)
 
@@ -199,13 +199,13 @@ open class FuelEfficiencyAmount<D : Unit<Distance>>(
     // region -> MassFlowRate
 
     @JvmName("timesAction")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ActionAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ActionAmount<L, M, T>) =
         MassFlowRateAmount(amount = amount * that.amount
                                     * convert(that.distance to distance,
                                               that.distance to distance),
                            unit = that.mass to that.time)
 
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ActionAmount<D, M, T>) =
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ActionAmount<L, M, T>) =
         MassFlowRateAmount(amount = amount * that.amount,
                            unit = that.mass to that.time)
 
@@ -214,12 +214,12 @@ open class FuelEfficiencyAmount<D : Unit<Distance>>(
     // region -> PowerDensity
 
     @JvmName("timesYank")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: YankAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: YankAmount<L, M, T>) =
         PowerDensityAmount(amount = amount * that.amount
                                     * convert(that.distance to distance),
                            unit = that.mass to U2(distance, that.time))
 
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: YankAmount<D, M, T>) =
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: YankAmount<L, M, T>) =
         PowerDensityAmount(amount = amount * that.amount,
                            unit = that.mass to U2(distance, that.time))
 
@@ -228,13 +228,13 @@ open class FuelEfficiencyAmount<D : Unit<Distance>>(
     // region -> RadiantExposure
 
     @JvmName("timesEnergy")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyAmount<D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyAmount<L, M, T>) =
         RadiantExposureAmount(amount = amount * that.amount
                                        * convert(that.distance to distance,
                                                  that.distance to distance),
                               unit = that.mass to that.time)
 
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyAmount<D, M, T>) =
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyAmount<L, M, T>) =
         RadiantExposureAmount(amount = amount * that.amount,
                               unit = that.mass to that.time)
 
@@ -243,22 +243,22 @@ open class FuelEfficiencyAmount<D : Unit<Distance>>(
     // region -> SpacialFrequency
 
     @JvmName("timesDistance")
-    operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: DistanceAmount<L>) =
         SpacialFrequencyAmount(amount = amount * that.amount
                                         * convert(that.distance to distance),
                                unit = NUMERIC to distance)
 
-    operator fun times(that: DistanceAmount<D>) =
+    operator fun times(that: DistanceAmount<L>) =
         SpacialFrequencyAmount(amount = amount * that.amount,
                                unit = NUMERIC to distance)
 
     @JvmName("divSpacialFrequency")
-    operator fun <D : Unit<Distance>> div(that: SpacialFrequencyAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: SpacialFrequencyAmount<L>) =
         SpacialFrequencyAmount(amount = amount / that.amount
                                         * convert(that.distance to distance),
                                unit = NUMERIC to distance)
 
-    operator fun div(that: SpacialFrequencyAmount<D>) =
+    operator fun div(that: SpacialFrequencyAmount<L>) =
         SpacialFrequencyAmount(amount = amount / that.amount,
                                unit = NUMERIC to distance)
 
@@ -267,14 +267,14 @@ open class FuelEfficiencyAmount<D : Unit<Distance>>(
     // region -> Speed
 
     @JvmName("timesVolumetricFlow")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: VolumetricFlowAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: VolumetricFlowAmount<L, T>) =
         SpeedAmount(amount = amount * that.amount
                              * convert(that.distance to distance,
                                        that.distance to distance,
                                        that.distance to distance),
                     unit = distance to that.time)
 
-    operator fun <T : Unit<Time>> times(that: VolumetricFlowAmount<D, T>) =
+    operator fun <T : Unit<Time>> times(that: VolumetricFlowAmount<L, T>) =
         SpeedAmount(amount = amount * that.amount,
                     unit = distance to that.time)
 

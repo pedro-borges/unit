@@ -20,9 +20,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class IlluminanceAmount<A : Unit<Angle>, D : Unit<Distance>, LI : Unit<LuminousIntensity>>(
+open class IlluminanceAmount<BAC : Unit<Angle>, L : Unit<Distance>, J : Unit<LuminousIntensity>>(
         amount: Number,
-        unit: Pair<U2<A, LI>, D>)
+        unit: Pair<U2<BAC, J>, L>)
     : Amount<Illuminance>(amount = amount.toBigDecimal(),
                           unit = CompositeUnit(
                               domain = Illuminance::class,
@@ -52,7 +52,7 @@ open class IlluminanceAmount<A : Unit<Angle>, D : Unit<Distance>, LI : Unit<Lumi
                           unit = U2(angle, luminousIntensity) to distance)
 
     @JvmName("plusIlluminance")
-    operator fun <A : Unit<Angle>, D : Unit<Distance>, LI : Unit<LuminousIntensity>> plus(that: IlluminanceAmount<A, D, LI>) =
+    operator fun <BAC : Unit<Angle>, L : Unit<Distance>, J : Unit<LuminousIntensity>> plus(that: IlluminanceAmount<BAC, L, J>) =
         IlluminanceAmount(amount = amount + that.amount
                                    * convert(that.angle to angle,
                                              that.angle to angle,
@@ -61,12 +61,12 @@ open class IlluminanceAmount<A : Unit<Angle>, D : Unit<Distance>, LI : Unit<Lumi
                                              that.distance to distance),
                           unit = U2(angle, luminousIntensity) to distance)
 
-    operator fun plus(that: IlluminanceAmount<A, D, LI>) =
+    operator fun plus(that: IlluminanceAmount<BAC, L, J>) =
         IlluminanceAmount(amount = amount + that.amount,
                           unit = U2(angle, luminousIntensity) to distance)
 
     @JvmName("minusIlluminance")
-    operator fun <A : Unit<Angle>, D : Unit<Distance>, LI : Unit<LuminousIntensity>> minus(that: IlluminanceAmount<A, D, LI>) =
+    operator fun <BAC : Unit<Angle>, L : Unit<Distance>, J : Unit<LuminousIntensity>> minus(that: IlluminanceAmount<BAC, L, J>) =
         IlluminanceAmount(amount = amount - that.amount
                                    * convert(that.angle to angle,
                                              that.angle to angle,
@@ -75,7 +75,7 @@ open class IlluminanceAmount<A : Unit<Angle>, D : Unit<Distance>, LI : Unit<Lumi
                                              that.distance to distance),
                           unit = U2(angle, luminousIntensity) to distance)
 
-    operator fun minus(that: IlluminanceAmount<A, D, LI>) =
+    operator fun minus(that: IlluminanceAmount<BAC, L, J>) =
         IlluminanceAmount(amount = amount - that.amount,
                           unit = U2(angle, luminousIntensity) to distance)
 
@@ -84,7 +84,7 @@ open class IlluminanceAmount<A : Unit<Angle>, D : Unit<Distance>, LI : Unit<Lumi
     // region -> Scalar
 
     @JvmName("divIlluminance")
-    operator fun <A : Unit<Angle>, D : Unit<Distance>, LI : Unit<LuminousIntensity>> div(that: IlluminanceAmount<A, D, LI>) =
+    operator fun <BAC : Unit<Angle>, L : Unit<Distance>, J : Unit<LuminousIntensity>> div(that: IlluminanceAmount<BAC, L, J>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.angle to angle,
                                         that.angle to angle,
@@ -93,7 +93,7 @@ open class IlluminanceAmount<A : Unit<Angle>, D : Unit<Distance>, LI : Unit<Lumi
                                         that.distance to distance),
                      unit = NUMERIC)
 
-    operator fun div(that: IlluminanceAmount<A, D, LI>) =
+    operator fun div(that: IlluminanceAmount<BAC, L, J>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -102,14 +102,14 @@ open class IlluminanceAmount<A : Unit<Angle>, D : Unit<Distance>, LI : Unit<Lumi
     // region -> FuelEfficiency
 
     @JvmName("divLuminousFlux")
-    operator fun <A : Unit<Angle>, LI : Unit<LuminousIntensity>> div(that: LuminousFluxAmount<A, LI>) =
+    operator fun <BAC : Unit<Angle>, J : Unit<LuminousIntensity>> div(that: LuminousFluxAmount<BAC, J>) =
         FuelEfficiencyAmount(amount = amount / that.amount
                                       / convert(that.angle to angle,
                                                 that.angle to angle,
                                                 that.luminousIntensity to luminousIntensity),
                              unit = NUMERIC to distance)
 
-    operator fun div(that: LuminousFluxAmount<A, LI>) =
+    operator fun div(that: LuminousFluxAmount<BAC, J>) =
         FuelEfficiencyAmount(amount = amount / that.amount,
                              unit = NUMERIC to distance)
 
@@ -118,13 +118,13 @@ open class IlluminanceAmount<A : Unit<Angle>, D : Unit<Distance>, LI : Unit<Lumi
     // region -> Luminance
 
     @JvmName("divSolidAngle")
-    operator fun <A : Unit<Angle>> div(that: SolidAngleAmount<A>) =
+    operator fun <BAC : Unit<Angle>> div(that: SolidAngleAmount<BAC>) =
         LuminanceAmount(amount = amount / that.amount
                                  / convert(that.angle to angle,
                                            that.angle to angle),
                         unit = luminousIntensity to distance)
 
-    operator fun div(that: SolidAngleAmount<A>) =
+    operator fun div(that: SolidAngleAmount<BAC>) =
         LuminanceAmount(amount = amount / that.amount,
                         unit = luminousIntensity to distance)
 
@@ -133,24 +133,24 @@ open class IlluminanceAmount<A : Unit<Angle>, D : Unit<Distance>, LI : Unit<Lumi
     // region -> LuminousFlux
 
     @JvmName("timesArea")
-    operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =
+    operator fun <L : Unit<Distance>> times(that: AreaAmount<L>) =
         LuminousFluxAmount(amount = amount * that.amount
                                     * convert(that.distance to distance,
                                               that.distance to distance),
                            unit = U2(angle, luminousIntensity))
 
-    operator fun times(that: AreaAmount<D>) =
+    operator fun times(that: AreaAmount<L>) =
         LuminousFluxAmount(amount = amount * that.amount,
                            unit = U2(angle, luminousIntensity))
 
     @JvmName("divFuelEfficiency")
-    operator fun <D : Unit<Distance>> div(that: FuelEfficiencyAmount<D>) =
+    operator fun <L : Unit<Distance>> div(that: FuelEfficiencyAmount<L>) =
         LuminousFluxAmount(amount = amount / that.amount
                                     * convert(that.distance to distance,
                                               that.distance to distance),
                            unit = U2(angle, luminousIntensity))
 
-    operator fun div(that: FuelEfficiencyAmount<D>) =
+    operator fun div(that: FuelEfficiencyAmount<L>) =
         LuminousFluxAmount(amount = amount / that.amount,
                            unit = U2(angle, luminousIntensity))
 
@@ -159,14 +159,14 @@ open class IlluminanceAmount<A : Unit<Angle>, D : Unit<Distance>, LI : Unit<Lumi
     // region -> SolidAngle
 
     @JvmName("divLuminance")
-    operator fun <D : Unit<Distance>, LI : Unit<LuminousIntensity>> div(that: LuminanceAmount<D, LI>) =
+    operator fun <L : Unit<Distance>, J : Unit<LuminousIntensity>> div(that: LuminanceAmount<L, J>) =
         SolidAngleAmount(amount = amount / that.amount
                                   / convert(that.luminousIntensity to luminousIntensity)
                                   * convert(that.distance to distance,
                                             that.distance to distance),
                          unit = angle)
 
-    operator fun div(that: LuminanceAmount<D, LI>) =
+    operator fun div(that: LuminanceAmount<L, J>) =
         SolidAngleAmount(amount = amount / that.amount,
                          unit = angle)
 

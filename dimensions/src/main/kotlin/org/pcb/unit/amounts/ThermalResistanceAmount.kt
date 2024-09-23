@@ -23,9 +23,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class ThermalResistanceAmount<D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>>(
+open class ThermalResistanceAmount<L : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<U3<T, D, K>, M>)
+        unit: Pair<U3<T, L, K>, M>)
     : Amount<ThermalResistance>(amount = amount.toBigDecimal(),
                                 unit = CompositeUnit(
                                     domain = ThermalResistance::class,
@@ -57,7 +57,7 @@ open class ThermalResistanceAmount<D : Unit<Distance>, M : Unit<Mass>, K : Unit<
                                 unit = U3(time, distance, temperature) to mass)
 
     @JvmName("plusThermalResistance")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> plus(that: ThermalResistanceAmount<D, M, K, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> plus(that: ThermalResistanceAmount<L, M, K, T>) =
         ThermalResistanceAmount(amount = amount + that.amount
                                          * convert(that.distance to distance,
                                                    that.distance to distance,
@@ -68,12 +68,12 @@ open class ThermalResistanceAmount<D : Unit<Distance>, M : Unit<Mass>, K : Unit<
                                          / convert(that.mass to mass),
                                 unit = U3(time, distance, temperature) to mass)
 
-    operator fun plus(that: ThermalResistanceAmount<D, M, K, T>) =
+    operator fun plus(that: ThermalResistanceAmount<L, M, K, T>) =
         ThermalResistanceAmount(amount = amount + that.amount,
                                 unit = U3(time, distance, temperature) to mass)
 
     @JvmName("minusThermalResistance")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> minus(that: ThermalResistanceAmount<D, M, K, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> minus(that: ThermalResistanceAmount<L, M, K, T>) =
         ThermalResistanceAmount(amount = amount - that.amount
                                          * convert(that.distance to distance,
                                                    that.distance to distance,
@@ -84,7 +84,7 @@ open class ThermalResistanceAmount<D : Unit<Distance>, M : Unit<Mass>, K : Unit<
                                          / convert(that.mass to mass),
                                 unit = U3(time, distance, temperature) to mass)
 
-    operator fun minus(that: ThermalResistanceAmount<D, M, K, T>) =
+    operator fun minus(that: ThermalResistanceAmount<L, M, K, T>) =
         ThermalResistanceAmount(amount = amount - that.amount,
                                 unit = U3(time, distance, temperature) to mass)
 
@@ -93,7 +93,7 @@ open class ThermalResistanceAmount<D : Unit<Distance>, M : Unit<Mass>, K : Unit<
     // region -> Scalar
 
     @JvmName("divThermalResistance")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: ThermalResistanceAmount<D, M, K, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: ThermalResistanceAmount<L, M, K, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.distance to distance,
                                         that.distance to distance,
@@ -104,7 +104,7 @@ open class ThermalResistanceAmount<D : Unit<Distance>, M : Unit<Mass>, K : Unit<
                               * convert(that.mass to mass),
                      unit = NUMERIC)
 
-    operator fun div(that: ThermalResistanceAmount<D, M, K, T>) =
+    operator fun div(that: ThermalResistanceAmount<L, M, K, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -113,7 +113,7 @@ open class ThermalResistanceAmount<D : Unit<Distance>, M : Unit<Mass>, K : Unit<
     // region -> Volume
 
     @JvmName("timesThermalConductivity")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> times(that: ThermalConductivityAmount<D, M, K, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> times(that: ThermalConductivityAmount<L, M, K, T>) =
         VolumeAmount(amount = amount * that.amount
                               * convert(that.distance to distance,
                                         that.mass to mass)
@@ -123,7 +123,7 @@ open class ThermalResistanceAmount<D : Unit<Distance>, M : Unit<Mass>, K : Unit<
                                         that.time to time),
                      unit = distance)
 
-    operator fun times(that: ThermalConductivityAmount<D, M, K, T>) =
+    operator fun times(that: ThermalConductivityAmount<L, M, K, T>) =
         VolumeAmount(amount = amount * that.amount,
                      unit = distance)
 

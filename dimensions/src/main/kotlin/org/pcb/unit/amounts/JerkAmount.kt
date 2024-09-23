@@ -19,9 +19,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class JerkAmount<D : Unit<Distance>, T : Unit<Time>>(
+open class JerkAmount<L : Unit<Distance>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<D, T>)
+        unit: Pair<L, T>)
     : Amount<Jerk>(amount = amount.toBigDecimal(),
                    unit = CompositeUnit(
                        domain = Jerk::class,
@@ -49,7 +49,7 @@ open class JerkAmount<D : Unit<Distance>, T : Unit<Time>>(
                    unit = distance to time)
 
     @JvmName("plusJerk")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> plus(that: JerkAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> plus(that: JerkAmount<L, T>) =
         JerkAmount(amount = amount + that.amount
                             * convert(that.distance to distance)
                             / convert(that.time to time,
@@ -57,12 +57,12 @@ open class JerkAmount<D : Unit<Distance>, T : Unit<Time>>(
                                       that.time to time),
                    unit = distance to time)
 
-    operator fun plus(that: JerkAmount<D, T>) =
+    operator fun plus(that: JerkAmount<L, T>) =
         JerkAmount(amount = amount + that.amount,
                    unit = distance to time)
 
     @JvmName("minusJerk")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> minus(that: JerkAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> minus(that: JerkAmount<L, T>) =
         JerkAmount(amount = amount - that.amount
                             * convert(that.distance to distance)
                             / convert(that.time to time,
@@ -70,7 +70,7 @@ open class JerkAmount<D : Unit<Distance>, T : Unit<Time>>(
                                       that.time to time),
                    unit = distance to time)
 
-    operator fun minus(that: JerkAmount<D, T>) =
+    operator fun minus(that: JerkAmount<L, T>) =
         JerkAmount(amount = amount - that.amount,
                    unit = distance to time)
 
@@ -79,7 +79,7 @@ open class JerkAmount<D : Unit<Distance>, T : Unit<Time>>(
     // region -> Scalar
 
     @JvmName("divJerk")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: JerkAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: JerkAmount<L, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.distance to distance)
                               * convert(that.time to time,
@@ -87,7 +87,7 @@ open class JerkAmount<D : Unit<Distance>, T : Unit<Time>>(
                                         that.time to time),
                      unit = NUMERIC)
 
-    operator fun div(that: JerkAmount<D, T>) =
+    operator fun div(that: JerkAmount<L, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -120,14 +120,14 @@ open class JerkAmount<D : Unit<Distance>, T : Unit<Time>>(
     // region -> Frequency
 
     @JvmName("divAcceleration")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: AccelerationAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AccelerationAmount<L, T>) =
         FrequencyAmount(amount = amount / that.amount
                                  / convert(that.distance to distance)
                                  * convert(that.time to time,
                                            that.time to time),
                         unit = NUMERIC to time)
 
-    operator fun div(that: AccelerationAmount<D, T>) =
+    operator fun div(that: AccelerationAmount<L, T>) =
         FrequencyAmount(amount = amount / that.amount,
                         unit = NUMERIC to time)
 
@@ -136,13 +136,13 @@ open class JerkAmount<D : Unit<Distance>, T : Unit<Time>>(
     // region -> PowerDensity
 
     @JvmName("timesAreaDensity")
-    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: AreaDensityAmount<D, M>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: AreaDensityAmount<L, M>) =
         PowerDensityAmount(amount = amount * that.amount
                                     / convert(that.distance to distance,
                                               that.distance to distance),
                            unit = that.mass to U2(distance, time))
 
-    operator fun <M : Unit<Mass>> times(that: AreaDensityAmount<D, M>) =
+    operator fun <M : Unit<Mass>> times(that: AreaDensityAmount<L, M>) =
         PowerDensityAmount(amount = amount * that.amount,
                            unit = that.mass to U2(distance, time))
 
@@ -175,7 +175,7 @@ open class JerkAmount<D : Unit<Distance>, T : Unit<Time>>(
     // region -> Time
 
     @JvmName("divSnap")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SnapAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: SnapAmount<L, T>) =
         TimeAmount(amount = amount / that.amount
                             / convert(that.distance to distance)
                             * convert(that.time to time,
@@ -184,7 +184,7 @@ open class JerkAmount<D : Unit<Distance>, T : Unit<Time>>(
                                       that.time to time),
                    unit = time)
 
-    operator fun div(that: SnapAmount<D, T>) =
+    operator fun div(that: SnapAmount<L, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = time)
 

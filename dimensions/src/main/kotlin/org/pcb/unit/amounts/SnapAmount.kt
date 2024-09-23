@@ -17,9 +17,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class SnapAmount<D : Unit<Distance>, T : Unit<Time>>(
+open class SnapAmount<L : Unit<Distance>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<D, T>)
+        unit: Pair<L, T>)
     : Amount<Snap>(amount = amount.toBigDecimal(),
                    unit = CompositeUnit(
                        domain = Snap::class,
@@ -47,7 +47,7 @@ open class SnapAmount<D : Unit<Distance>, T : Unit<Time>>(
                    unit = distance to time)
 
     @JvmName("plusSnap")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> plus(that: SnapAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> plus(that: SnapAmount<L, T>) =
         SnapAmount(amount = amount + that.amount
                             * convert(that.distance to distance)
                             / convert(that.time to time,
@@ -56,12 +56,12 @@ open class SnapAmount<D : Unit<Distance>, T : Unit<Time>>(
                                       that.time to time),
                    unit = distance to time)
 
-    operator fun plus(that: SnapAmount<D, T>) =
+    operator fun plus(that: SnapAmount<L, T>) =
         SnapAmount(amount = amount + that.amount,
                    unit = distance to time)
 
     @JvmName("minusSnap")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> minus(that: SnapAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> minus(that: SnapAmount<L, T>) =
         SnapAmount(amount = amount - that.amount
                             * convert(that.distance to distance)
                             / convert(that.time to time,
@@ -70,7 +70,7 @@ open class SnapAmount<D : Unit<Distance>, T : Unit<Time>>(
                                       that.time to time),
                    unit = distance to time)
 
-    operator fun minus(that: SnapAmount<D, T>) =
+    operator fun minus(that: SnapAmount<L, T>) =
         SnapAmount(amount = amount - that.amount,
                    unit = distance to time)
 
@@ -79,7 +79,7 @@ open class SnapAmount<D : Unit<Distance>, T : Unit<Time>>(
     // region -> Scalar
 
     @JvmName("divSnap")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SnapAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: SnapAmount<L, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.distance to distance)
                               * convert(that.time to time,
@@ -88,7 +88,7 @@ open class SnapAmount<D : Unit<Distance>, T : Unit<Time>>(
                                         that.time to time),
                      unit = NUMERIC)
 
-    operator fun div(that: SnapAmount<D, T>) =
+    operator fun div(that: SnapAmount<L, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -97,7 +97,7 @@ open class SnapAmount<D : Unit<Distance>, T : Unit<Time>>(
     // region -> Frequency
 
     @JvmName("divJerk")
-    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: JerkAmount<D, T>) =
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: JerkAmount<L, T>) =
         FrequencyAmount(amount = amount / that.amount
                                  / convert(that.distance to distance)
                                  * convert(that.time to time,
@@ -105,7 +105,7 @@ open class SnapAmount<D : Unit<Distance>, T : Unit<Time>>(
                                            that.time to time),
                         unit = NUMERIC to time)
 
-    operator fun div(that: JerkAmount<D, T>) =
+    operator fun div(that: JerkAmount<L, T>) =
         FrequencyAmount(amount = amount / that.amount,
                         unit = NUMERIC to time)
 

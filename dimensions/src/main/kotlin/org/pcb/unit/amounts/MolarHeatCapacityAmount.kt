@@ -26,9 +26,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class MolarHeatCapacityAmount<N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>>(
+open class MolarHeatCapacityAmount<L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substance>, K : Unit<Temperature>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<U2<D, M>, U3<N, K, T>>)
+        unit: Pair<U2<L, M>, U3<N, K, T>>)
     : Amount<MolarHeatCapacity>(amount = amount.toBigDecimal(),
                                 unit = CompositeUnit(
                                     domain = MolarHeatCapacity::class,
@@ -62,7 +62,7 @@ open class MolarHeatCapacityAmount<N : Unit<Substance>, D : Unit<Distance>, M : 
                                 unit = U2(distance, mass) to U3(substance, temperature, time))
 
     @JvmName("plusMolarHeatCapacity")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> plus(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substance>, K : Unit<Temperature>, T : Unit<Time>> plus(that: MolarHeatCapacityAmount<L, M, N, K, T>) =
         MolarHeatCapacityAmount(amount = amount + that.amount
                                          * convert(that.distance to distance,
                                                    that.distance to distance,
@@ -73,12 +73,12 @@ open class MolarHeatCapacityAmount<N : Unit<Substance>, D : Unit<Distance>, M : 
                                                    that.time to time),
                                 unit = U2(distance, mass) to U3(substance, temperature, time))
 
-    operator fun plus(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
+    operator fun plus(that: MolarHeatCapacityAmount<L, M, N, K, T>) =
         MolarHeatCapacityAmount(amount = amount + that.amount,
                                 unit = U2(distance, mass) to U3(substance, temperature, time))
 
     @JvmName("minusMolarHeatCapacity")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> minus(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substance>, K : Unit<Temperature>, T : Unit<Time>> minus(that: MolarHeatCapacityAmount<L, M, N, K, T>) =
         MolarHeatCapacityAmount(amount = amount - that.amount
                                          * convert(that.distance to distance,
                                                    that.distance to distance,
@@ -89,7 +89,7 @@ open class MolarHeatCapacityAmount<N : Unit<Substance>, D : Unit<Distance>, M : 
                                                    that.time to time),
                                 unit = U2(distance, mass) to U3(substance, temperature, time))
 
-    operator fun minus(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
+    operator fun minus(that: MolarHeatCapacityAmount<L, M, N, K, T>) =
         MolarHeatCapacityAmount(amount = amount - that.amount,
                                 unit = U2(distance, mass) to U3(substance, temperature, time))
 
@@ -98,7 +98,7 @@ open class MolarHeatCapacityAmount<N : Unit<Substance>, D : Unit<Distance>, M : 
     // region -> Scalar
 
     @JvmName("divMolarHeatCapacity")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substance>, K : Unit<Temperature>, T : Unit<Time>> div(that: MolarHeatCapacityAmount<L, M, N, K, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.distance to distance,
                                         that.distance to distance,
@@ -109,7 +109,7 @@ open class MolarHeatCapacityAmount<N : Unit<Substance>, D : Unit<Distance>, M : 
                                         that.time to time),
                      unit = NUMERIC)
 
-    operator fun div(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
+    operator fun div(that: MolarHeatCapacityAmount<L, M, N, K, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -156,7 +156,7 @@ open class MolarHeatCapacityAmount<N : Unit<Substance>, D : Unit<Distance>, M : 
     // region -> MolarMass
 
     @JvmName("divSpecificHeatCapacity")
-    operator fun <D : Unit<Distance>, K : Unit<Temperature>, T : Unit<Time>> div(that: SpecificHeatCapacityAmount<D, K, T>) =
+    operator fun <L : Unit<Distance>, K : Unit<Temperature>, T : Unit<Time>> div(that: SpecificHeatCapacityAmount<L, K, T>) =
         MolarMassAmount(amount = amount / that.amount
                                  / convert(that.distance to distance,
                                            that.distance to distance)
@@ -165,7 +165,7 @@ open class MolarHeatCapacityAmount<N : Unit<Substance>, D : Unit<Distance>, M : 
                                            that.time to time),
                         unit = mass to substance)
 
-    operator fun div(that: SpecificHeatCapacityAmount<D, K, T>) =
+    operator fun div(that: SpecificHeatCapacityAmount<L, K, T>) =
         MolarMassAmount(amount = amount / that.amount,
                         unit = mass to substance)
 
@@ -174,24 +174,24 @@ open class MolarHeatCapacityAmount<N : Unit<Substance>, D : Unit<Distance>, M : 
     // region -> SpecificHeatCapacity
 
     @JvmName("timesMolality")
-    operator fun <N : Unit<Substance>, M : Unit<Mass>> times(that: MolalityAmount<N, M>) =
+    operator fun <M : Unit<Mass>, N : Unit<Substance>> times(that: MolalityAmount<M, N>) =
         SpecificHeatCapacityAmount(amount = amount * that.amount
                                             * convert(that.substance to substance)
                                             / convert(that.mass to mass),
                                    unit = distance to U2(temperature, time))
 
-    operator fun times(that: MolalityAmount<N, M>) =
+    operator fun times(that: MolalityAmount<M, N>) =
         SpecificHeatCapacityAmount(amount = amount * that.amount,
                                    unit = distance to U2(temperature, time))
 
     @JvmName("divMolarMass")
-    operator fun <N : Unit<Substance>, M : Unit<Mass>> div(that: MolarMassAmount<N, M>) =
+    operator fun <M : Unit<Mass>, N : Unit<Substance>> div(that: MolarMassAmount<M, N>) =
         SpecificHeatCapacityAmount(amount = amount / that.amount
                                             / convert(that.mass to mass)
                                             * convert(that.substance to substance),
                                    unit = distance to U2(temperature, time))
 
-    operator fun div(that: MolarMassAmount<N, M>) =
+    operator fun div(that: MolarMassAmount<M, N>) =
         SpecificHeatCapacityAmount(amount = amount / that.amount,
                                    unit = distance to U2(temperature, time))
 
@@ -200,7 +200,7 @@ open class MolarHeatCapacityAmount<N : Unit<Substance>, D : Unit<Distance>, M : 
     // region -> ThermalExpansionCoefficient
 
     @JvmName("divMolarEnergy")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MolarEnergyAmount<N, D, M, T>) =
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substance>, T : Unit<Time>> div(that: MolarEnergyAmount<L, M, N, T>) =
         ThermalExpansionCoefficientAmount(amount = amount / that.amount
                                                    / convert(that.distance to distance,
                                                              that.distance to distance,
@@ -210,7 +210,7 @@ open class MolarHeatCapacityAmount<N : Unit<Substance>, D : Unit<Distance>, M : 
                                                              that.time to time),
                                           unit = NUMERIC to temperature)
 
-    operator fun div(that: MolarEnergyAmount<N, D, M, T>) =
+    operator fun div(that: MolarEnergyAmount<L, M, N, T>) =
         ThermalExpansionCoefficientAmount(amount = amount / that.amount,
                                           unit = NUMERIC to temperature)
 

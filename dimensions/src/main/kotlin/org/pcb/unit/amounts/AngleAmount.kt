@@ -12,9 +12,9 @@ import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class AngleAmount<A : Unit<Angle>>(
+open class AngleAmount<BAC : Unit<Angle>>(
         amount: Number,
-        unit: A)
+        unit: BAC)
     : Amount<Angle>(amount = amount.toBigDecimal(),
                     unit = CompositeUnit(
                         domain = Angle::class,
@@ -33,22 +33,22 @@ open class AngleAmount<A : Unit<Angle>>(
                     unit = angle)
 
     @JvmName("plusAngle")
-    operator fun <A : Unit<Angle>> plus(that: AngleAmount<A>) =
+    operator fun <BAC : Unit<Angle>> plus(that: AngleAmount<BAC>) =
         AngleAmount(amount = amount + that.amount
                              * convert(that.angle to angle),
                     unit = angle)
 
-    operator fun plus(that: AngleAmount<A>) =
+    operator fun plus(that: AngleAmount<BAC>) =
         AngleAmount(amount = amount + that.amount,
                     unit = angle)
 
     @JvmName("minusAngle")
-    operator fun <A : Unit<Angle>> minus(that: AngleAmount<A>) =
+    operator fun <BAC : Unit<Angle>> minus(that: AngleAmount<BAC>) =
         AngleAmount(amount = amount - that.amount
                              * convert(that.angle to angle),
                     unit = angle)
 
-    operator fun minus(that: AngleAmount<A>) =
+    operator fun minus(that: AngleAmount<BAC>) =
         AngleAmount(amount = amount - that.amount,
                     unit = angle)
 
@@ -57,12 +57,12 @@ open class AngleAmount<A : Unit<Angle>>(
     // region -> Scalar
 
     @JvmName("divAngle")
-    operator fun <A : Unit<Angle>> div(that: AngleAmount<A>) =
+    operator fun <BAC : Unit<Angle>> div(that: AngleAmount<BAC>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.angle to angle),
                      unit = NUMERIC)
 
-    operator fun div(that: AngleAmount<A>) =
+    operator fun div(that: AngleAmount<BAC>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -83,12 +83,12 @@ open class AngleAmount<A : Unit<Angle>>(
     // region -> SolidAngle
 
     @JvmName("timesAngle")
-    operator fun <A : Unit<Angle>> times(that: AngleAmount<A>) =
+    operator fun <BAC : Unit<Angle>> times(that: AngleAmount<BAC>) =
         SolidAngleAmount(amount = amount * that.amount
                                   * convert(that.angle to angle),
                          unit = angle)
 
-    operator fun times(that: AngleAmount<A>) =
+    operator fun times(that: AngleAmount<BAC>) =
         SolidAngleAmount(amount = amount * that.amount,
                          unit = angle)
 
@@ -97,12 +97,12 @@ open class AngleAmount<A : Unit<Angle>>(
     // region -> Time
 
     @JvmName("divAngularVelocity")
-    operator fun <A : Unit<Angle>, T : Unit<Time>> div(that: AngularVelocityAmount<A, T>) =
+    operator fun <BAC : Unit<Angle>, T : Unit<Time>> div(that: AngularVelocityAmount<BAC, T>) =
         TimeAmount(amount = amount / that.amount
                             / convert(that.angle to angle),
                    unit = that.time)
 
-    operator fun <T : Unit<Time>> div(that: AngularVelocityAmount<A, T>) =
+    operator fun <T : Unit<Time>> div(that: AngularVelocityAmount<BAC, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = that.time)
 

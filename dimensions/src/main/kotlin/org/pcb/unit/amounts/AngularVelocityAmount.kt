@@ -17,9 +17,9 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class AngularVelocityAmount<A : Unit<Angle>, T : Unit<Time>>(
+open class AngularVelocityAmount<BAC : Unit<Angle>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<A, T>)
+        unit: Pair<BAC, T>)
     : Amount<AngularVelocity>(amount = amount.toBigDecimal(),
                               unit = CompositeUnit(
                                   domain = AngularVelocity::class,
@@ -47,24 +47,24 @@ open class AngularVelocityAmount<A : Unit<Angle>, T : Unit<Time>>(
                               unit = angle to time)
 
     @JvmName("plusAngularVelocity")
-    operator fun <A : Unit<Angle>, T : Unit<Time>> plus(that: AngularVelocityAmount<A, T>) =
+    operator fun <BAC : Unit<Angle>, T : Unit<Time>> plus(that: AngularVelocityAmount<BAC, T>) =
         AngularVelocityAmount(amount = amount + that.amount
                                        * convert(that.angle to angle)
                                        / convert(that.time to time),
                               unit = angle to time)
 
-    operator fun plus(that: AngularVelocityAmount<A, T>) =
+    operator fun plus(that: AngularVelocityAmount<BAC, T>) =
         AngularVelocityAmount(amount = amount + that.amount,
                               unit = angle to time)
 
     @JvmName("minusAngularVelocity")
-    operator fun <A : Unit<Angle>, T : Unit<Time>> minus(that: AngularVelocityAmount<A, T>) =
+    operator fun <BAC : Unit<Angle>, T : Unit<Time>> minus(that: AngularVelocityAmount<BAC, T>) =
         AngularVelocityAmount(amount = amount - that.amount
                                        * convert(that.angle to angle)
                                        / convert(that.time to time),
                               unit = angle to time)
 
-    operator fun minus(that: AngularVelocityAmount<A, T>) =
+    operator fun minus(that: AngularVelocityAmount<BAC, T>) =
         AngularVelocityAmount(amount = amount - that.amount,
                               unit = angle to time)
 
@@ -73,13 +73,13 @@ open class AngularVelocityAmount<A : Unit<Angle>, T : Unit<Time>>(
     // region -> Scalar
 
     @JvmName("divAngularVelocity")
-    operator fun <A : Unit<Angle>, T : Unit<Time>> div(that: AngularVelocityAmount<A, T>) =
+    operator fun <BAC : Unit<Angle>, T : Unit<Time>> div(that: AngularVelocityAmount<BAC, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.angle to angle)
                               * convert(that.time to time),
                      unit = NUMERIC)
 
-    operator fun div(that: AngularVelocityAmount<A, T>) =
+    operator fun div(that: AngularVelocityAmount<BAC, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -136,12 +136,12 @@ open class AngularVelocityAmount<A : Unit<Angle>, T : Unit<Time>>(
     // region -> Frequency
 
     @JvmName("divAngle")
-    operator fun <A : Unit<Angle>> div(that: AngleAmount<A>) =
+    operator fun <BAC : Unit<Angle>> div(that: AngleAmount<BAC>) =
         FrequencyAmount(amount = amount / that.amount
                                  / convert(that.angle to angle),
                         unit = NUMERIC to time)
 
-    operator fun div(that: AngleAmount<A>) =
+    operator fun div(that: AngleAmount<BAC>) =
         FrequencyAmount(amount = amount / that.amount,
                         unit = NUMERIC to time)
 
@@ -150,14 +150,14 @@ open class AngularVelocityAmount<A : Unit<Angle>, T : Unit<Time>>(
     // region -> Time
 
     @JvmName("divAngularAcceleration")
-    operator fun <A : Unit<Angle>, T : Unit<Time>> div(that: AngularAccelerationAmount<A, T>) =
+    operator fun <BAC : Unit<Angle>, T : Unit<Time>> div(that: AngularAccelerationAmount<BAC, T>) =
         TimeAmount(amount = amount / that.amount
                             / convert(that.angle to angle)
                             * convert(that.time to time,
                                       that.time to time),
                    unit = time)
 
-    operator fun div(that: AngularAccelerationAmount<A, T>) =
+    operator fun div(that: AngularAccelerationAmount<BAC, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = time)
 
