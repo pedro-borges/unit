@@ -94,23 +94,6 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> AmountOfSubstance
-
-    @JvmName("divCatalyticEfficiency")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, T : Unit<Time>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
-        SubstanceAmount(amount = amount / that.amount
-                                 / convert(that.distance to distance,
-                                                   that.distance to distance,
-                                                   that.distance to distance)
-                                 * convert(that.time to time),
-                        unit = that.amountOfSubstance)
-
-    operator fun <N : Unit<Substance>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
-        SubstanceAmount(amount = amount / that.amount,
-                        unit = that.amountOfSubstance)
-
-    // endregion
-
     // region -> Area
 
     @JvmName("timesPace")
@@ -141,7 +124,7 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     operator fun <N : Unit<Substance>> div(that: SubstanceAmount<N>) =
         CatalyticEfficiencyAmount(amount = amount / that.amount,
-                                  unit = distance to U2(that.amountOfSubstance, time))
+                                  unit = distance to U2(that.substance, time))
 
     // endregion
 
@@ -257,6 +240,23 @@ open class VolumetricFlowAmount<D : Unit<Distance>, T : Unit<Time>>(
     operator fun times(that: FuelEfficiencyAmount<D>) =
         SpeedAmount(amount = amount * that.amount,
                     unit = distance to time)
+
+    // endregion
+
+    // region -> Substance
+
+    @JvmName("divCatalyticEfficiency")
+    operator fun <N : Unit<Substance>, D : Unit<Distance>, T : Unit<Time>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
+        SubstanceAmount(amount = amount / that.amount
+                                 / convert(that.distance to distance,
+                                           that.distance to distance,
+                                           that.distance to distance)
+                                 * convert(that.time to time),
+                        unit = that.substance)
+
+    operator fun <N : Unit<Substance>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
+        SubstanceAmount(amount = amount / that.amount,
+                        unit = that.substance)
 
     // endregion
 

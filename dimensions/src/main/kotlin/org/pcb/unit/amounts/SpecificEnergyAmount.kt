@@ -180,11 +180,11 @@ open class SpecificEnergyAmount<D : Unit<Distance>, T : Unit<Time>>(
                                           that.distance to distance)
                                 * convert(that.time to time,
                                           that.time to time),
-                       unit = that.amountOfSubstance to that.mass)
+                       unit = that.substance to that.mass)
 
     operator fun <N : Unit<Substance>, M : Unit<Mass>> div(that: MolarEnergyAmount<N, D, M, T>) =
         MolalityAmount(amount = amount / that.amount,
-                       unit = that.amountOfSubstance to that.mass)
+                       unit = that.substance to that.mass)
 
     // endregion
 
@@ -192,11 +192,11 @@ open class SpecificEnergyAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     operator fun <N : Unit<Substance>, M : Unit<Mass>> div(that: MolalityAmount<N, M>) =
         MolarEnergyAmount(amount = amount / that.amount,
-                          unit = U2(distance, that.mass) to U2(that.amountOfSubstance, time))
+                          unit = U2(distance, that.mass) to U2(that.substance, time))
 
     operator fun <N : Unit<Substance>, M : Unit<Mass>> times(that: MolarMassAmount<N, M>) =
         MolarEnergyAmount(amount = amount * that.amount,
-                          unit = U2(distance, that.mass) to U2(that.amountOfSubstance, time))
+                          unit = U2(distance, that.mass) to U2(that.substance, time))
 
     // endregion
 

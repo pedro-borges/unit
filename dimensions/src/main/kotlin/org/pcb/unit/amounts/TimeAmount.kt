@@ -412,11 +412,11 @@ open class TimeAmount<T : Unit<Time>>(
     operator fun <N : Unit<Substance>, D : Unit<Distance>, T : Unit<Time>> times(that: CatalyticEfficiencyAmount<N, D, T>) =
         MolarVolumeAmount(amount = amount * that.amount
                                    / convert(that.time to time),
-                          unit = that.distance to that.amountOfSubstance)
+                          unit = that.distance to that.substance)
 
     operator fun <N : Unit<Substance>, D : Unit<Distance>> times(that: CatalyticEfficiencyAmount<N, D, T>) =
         MolarVolumeAmount(amount = amount * that.amount,
-                          unit = that.distance to that.amountOfSubstance)
+                          unit = that.distance to that.substance)
 
     // endregion
 

@@ -116,11 +116,11 @@ open class TemperatureAmount<K : Unit<Temperature>>(
     operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> times(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
         MolarEnergyAmount(amount = amount * that.amount
                                    / convert(that.temperature to temperature),
-                          unit = U2(that.distance, that.mass) to U2(that.amountOfSubstance, that.time))
+                          unit = U2(that.distance, that.mass) to U2(that.substance, that.time))
 
     operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
         MolarEnergyAmount(amount = amount * that.amount,
-                          unit = U2(that.distance, that.mass) to U2(that.amountOfSubstance, that.time))
+                          unit = U2(that.distance, that.mass) to U2(that.substance, that.time))
 
     // endregion
 

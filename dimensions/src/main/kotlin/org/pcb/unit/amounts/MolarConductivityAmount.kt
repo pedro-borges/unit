@@ -25,7 +25,7 @@ import org.pcb.unit.toBigDecimal
 
 open class MolarConductivityAmount<N : Unit<Substance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
-        unit: Pair<U2<T, EC>, U2<N, M>>)
+        unit: Pair<U2<T, EC>, U2<M, N>>)
     : Amount<MolarConductivity>(amount = amount.toBigDecimal(),
                                 unit = CompositeUnit(
                                     domain = MolarConductivity::class,
@@ -36,25 +36,25 @@ open class MolarConductivityAmount<N : Unit<Substance>, EC : Unit<ElectricCurren
 {
     val time = unit.major.first
     val electricCurrent = unit.major.second
-    val amountOfSubstance = unit.minor.first
-    val mass = unit.minor.second
+    val mass = unit.minor.first
+    val substance = unit.minor.second
 
     companion object
     {
         operator fun invoke(amount: Number, unit: Unit<MolarConductivity>) =
             MolarConductivityAmount(amount = amount * unit.scale,
-                                    unit = U2(SECOND, AMPERE) to U2(MOLE, kilo(GRAM)))
+                                    unit = U2(SECOND, AMPERE) to U2(kilo(GRAM), MOLE))
     }
 
     // region -> MolarConductivity
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MolarConductivityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
-                                unit = U2(time, electricCurrent) to U2(amountOfSubstance, mass))
+                                unit = U2(time, electricCurrent) to U2(mass, substance))
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         MolarConductivityAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
-                                unit = U2(time, electricCurrent) to U2(amountOfSubstance, mass))
+                                unit = U2(time, electricCurrent) to U2(mass, substance))
 
     @JvmName("plusMolarConductivity")
     operator fun <N : Unit<Substance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> plus(that: MolarConductivityAmount<N, EC, M, T>) =
@@ -64,13 +64,13 @@ open class MolarConductivityAmount<N : Unit<Substance>, EC : Unit<ElectricCurren
                                                    that.time to time,
                                                    that.time to time,
                                                    that.time to time)
-                                         / convert(that.amountOfSubstance to amountOfSubstance,
+                                         / convert(that.substance to substance,
                                                    that.mass to mass),
-                                unit = U2(time, electricCurrent) to U2(amountOfSubstance, mass))
+                                unit = U2(time, electricCurrent) to U2(mass, substance))
 
     operator fun plus(that: MolarConductivityAmount<N, EC, M, T>) =
         MolarConductivityAmount(amount = amount + that.amount,
-                                unit = U2(time, electricCurrent) to U2(amountOfSubstance, mass))
+                                unit = U2(time, electricCurrent) to U2(mass, substance))
 
     @JvmName("minusMolarConductivity")
     operator fun <N : Unit<Substance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> minus(that: MolarConductivityAmount<N, EC, M, T>) =
@@ -80,13 +80,13 @@ open class MolarConductivityAmount<N : Unit<Substance>, EC : Unit<ElectricCurren
                                                    that.time to time,
                                                    that.time to time,
                                                    that.time to time)
-                                         / convert(that.amountOfSubstance to amountOfSubstance,
+                                         / convert(that.substance to substance,
                                                    that.mass to mass),
-                                unit = U2(time, electricCurrent) to U2(amountOfSubstance, mass))
+                                unit = U2(time, electricCurrent) to U2(mass, substance))
 
     operator fun minus(that: MolarConductivityAmount<N, EC, M, T>) =
         MolarConductivityAmount(amount = amount - that.amount,
-                                unit = U2(time, electricCurrent) to U2(amountOfSubstance, mass))
+                                unit = U2(time, electricCurrent) to U2(mass, substance))
 
     // endregion
 
@@ -100,7 +100,7 @@ open class MolarConductivityAmount<N : Unit<Substance>, EC : Unit<ElectricCurren
                                         that.time to time,
                                         that.time to time,
                                         that.time to time)
-                              * convert(that.amountOfSubstance to amountOfSubstance,
+                              * convert(that.substance to substance,
                                         that.mass to mass),
                      unit = NUMERIC)
 

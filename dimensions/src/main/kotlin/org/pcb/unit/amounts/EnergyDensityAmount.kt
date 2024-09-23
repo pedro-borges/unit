@@ -240,11 +240,11 @@ open class EnergyDensityAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
                                    * convert(that.distance to distance,
                                              that.distance to distance,
                                              that.distance to distance),
-                          unit = U2(distance, mass) to U2(that.amountOfSubstance, time))
+                          unit = U2(distance, mass) to U2(that.substance, time))
 
     operator fun <N : Unit<Substance>> times(that: MolarVolumeAmount<N, D>) =
         MolarEnergyAmount(amount = amount * that.amount,
-                          unit = U2(distance, mass) to U2(that.amountOfSubstance, time))
+                          unit = U2(distance, mass) to U2(that.substance, time))
 
     @JvmName("divMolarity")
     operator fun <N : Unit<Substance>, D : Unit<Distance>> div(that: MolarityAmount<N, D>) =
@@ -252,11 +252,11 @@ open class EnergyDensityAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
                                    * convert(that.distance to distance,
                                              that.distance to distance,
                                              that.distance to distance),
-                          unit = U2(distance, mass) to U2(that.amountOfSubstance, time))
+                          unit = U2(distance, mass) to U2(that.substance, time))
 
     operator fun <N : Unit<Substance>> div(that: MolarityAmount<N, D>) =
         MolarEnergyAmount(amount = amount / that.amount,
-                          unit = U2(distance, mass) to U2(that.amountOfSubstance, time))
+                          unit = U2(distance, mass) to U2(that.substance, time))
 
     // endregion
 
@@ -270,11 +270,11 @@ open class EnergyDensityAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
                                           that.mass to mass)
                                 * convert(that.time to time,
                                           that.time to time),
-                       unit = that.amountOfSubstance to distance)
+                       unit = that.substance to distance)
 
     operator fun <N : Unit<Substance>> div(that: MolarEnergyAmount<N, D, M, T>) =
         MolarityAmount(amount = amount / that.amount,
-                       unit = that.amountOfSubstance to distance)
+                       unit = that.substance to distance)
 
     // endregion
 

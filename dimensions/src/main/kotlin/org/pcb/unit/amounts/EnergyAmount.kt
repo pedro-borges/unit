@@ -127,24 +127,6 @@ open class EnergyAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> AmountOfSubstance
-
-    @JvmName("divMolarEnergy")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MolarEnergyAmount<N, D, M, T>) =
-        SubstanceAmount(amount = amount / that.amount
-                                 / convert(that.distance to distance,
-                                                   that.distance to distance,
-                                                   that.mass to mass)
-                                 * convert(that.time to time,
-                                                   that.time to time),
-                        unit = that.amountOfSubstance)
-
-    operator fun <N : Unit<Substance>> div(that: MolarEnergyAmount<N, D, M, T>) =
-        SubstanceAmount(amount = amount / that.amount,
-                        unit = that.amountOfSubstance)
-
-    // endregion
-
     // region -> Area
 
     @JvmName("divRadiantExposure")
@@ -327,7 +309,7 @@ open class EnergyAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     operator fun <N : Unit<Substance>> div(that: SubstanceAmount<N>) =
         MolarEnergyAmount(amount = amount / that.amount,
-                          unit = U2(distance, mass) to U2(that.amountOfSubstance, time))
+                          unit = U2(distance, mass) to U2(that.substance, time))
 
     // endregion
 
@@ -434,6 +416,24 @@ open class EnergyAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: MomentumAmount<D, M, T>) =
         SpeedAmount(amount = amount / that.amount,
                     unit = distance to time)
+
+    // endregion
+
+    // region -> Substance
+
+    @JvmName("divMolarEnergy")
+    operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MolarEnergyAmount<N, D, M, T>) =
+        SubstanceAmount(amount = amount / that.amount
+                                 / convert(that.distance to distance,
+                                           that.distance to distance,
+                                           that.mass to mass)
+                                 * convert(that.time to time,
+                                           that.time to time),
+                        unit = that.substance)
+
+    operator fun <N : Unit<Substance>> div(that: MolarEnergyAmount<N, D, M, T>) =
+        SubstanceAmount(amount = amount / that.amount,
+                        unit = that.substance)
 
     // endregion
 

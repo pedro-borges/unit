@@ -3,8 +3,8 @@ package org.pcb.unit.dimensions
 import kotlin.test.assertNotEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import org.pcb.unit.Composite
 import org.pcb.unit.generator.Dimensions
+import org.pcb.unit.generator.Dimensions.Definition
 
 class DimensionsTest
 {
@@ -16,15 +16,15 @@ class DimensionsTest
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("getDimensions")
-    fun uniqueness(dimension: Pair<String, Composite>)
+    fun uniqueness(dimension: Definition)
     {
         dimensions
-            .filter { dimension.first != it.first }
+            .filter { dimension.name != it.name }
             .forEach { other ->
                 assertNotEquals(
-                    illegal = dimension.second,
-                    actual = other.second,
-                    message = "${dimension.first} == ${other.first}")
+                    illegal = dimension.composite,
+                    actual = other.composite,
+                    message = "${dimension.name} == ${other.name}")
             }
     }
 }

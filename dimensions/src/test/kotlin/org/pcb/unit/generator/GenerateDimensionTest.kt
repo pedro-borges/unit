@@ -6,6 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.pcb.unit.Composite
 import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.generator.Dimensions.Definition
 import org.pcb.unit.generator.Dimensions.max
 import org.pcb.unit.generator.Dimensions.min
 import org.pcb.unit.minus
@@ -22,37 +23,31 @@ class GenerateDimensionTest
 
     @ParameterizedTest(name = "{0}")
     @MethodSource("getDimensions")
-    fun generate(dimension: Pair<String, Composite>)
+    fun generate(dimension: Definition)
     {
-        val dimensionComposite = dimension.second
-        val name = dimension.first
-
         val regions = HashMap<String, String>()
 
         dimensions
-            .sortedBy { name }
+            .sortedBy { dimension.name }
             .forEach { resultDimension ->
-                val resultDimensionComposite = resultDimension.second
-
                 dimensions
                     .forEach { parameterDimension ->
-                        val parameterDimensionComposite = parameterDimension.second
-                        val parameterName = parameterDimension.first
+                        val parameterDimensionComposite = parameterDimension.composite
+                        val parameterName = parameterDimension.name
 
                         var code = regions[parameterName] ?: ""
 
-                        if (dimensionComposite - resultDimensionComposite == parameterDimensionComposite)
+                        if (dimension.composite - resultDimension.composite == parameterDimensionComposite)
                         {
-                            code = "\toperator fun div(that: ${resultDimension.first}) = $parameterName\n" + code
+                            code = "\toperator fun div(that: ${resultDimension.name}) = $parameterName\n" + code
                         }
-                        if (dimensionComposite + resultDimensionComposite == parameterDimensionComposite)
+                        if (dimension.composite + resultDimension.composite == parameterDimensionComposite)
                         {
-                            code += "\toperator fun times(that: ${resultDimension.first}) = $parameterName\n"
+                            code += "\toperator fun times(that: ${resultDimension.name}) = $parameterName\n"
                         }
 
                         if (code != "") regions[parameterName] = code
                     }
-
             }
 
         val stub = this.javaClass.classLoader.getResource("package")!!
@@ -61,22 +56,22 @@ class GenerateDimensionTest
             .asSequence()
             .sorted()
             .sortedBy { it != Scalar::class.simpleName }
-            .sortedBy { it != name }
+            .sortedBy { it != dimension.name }
             .map { regions[it] }
             .joinToString(separator = "\n")
             .let {
                 "package org.pcb.unit.dimensions\n\n" +
                 "import org.pcb.unit.Composite\n\n" +
                 "@Suppress(\"UNUSED_PARAMETER\")\n" +
-                "${dimensionComposite.print()}\n" +
-                "object $name : Dimension\n" +
+                "${dimension.composite.print()}\n" +
+                "object ${dimension.name} : Dimension\n" +
                 "{\n" +
                 it +
                 "}\n"
             }
             .replace("\t", "    ")
 
-        val source = File(stub.path.replace("target/test-classes/package", "src/main/kotlin/org/pcb/unit/dimensions/") + "$name.kt")
+        val source = File(stub.path.replace("target/test-classes/package", "src/main/kotlin/org/pcb/unit/dimensions/") + "${dimension.name}.kt")
 
         source.writeText(contents)
 
@@ -91,13 +86,13 @@ class GenerateDimensionTest
         {
             if (i == 0) continue
 
-            if (substance == i) result += "amountOfSubstance = $substance"
             if (angle == i) result += "angle = $angle"
             if (currency == i) result += "currency = $currency"
             if (distance == i) result += "distance = $distance"
             if (electricCurrent == i) result += "electricCurrent = $electricCurrent"
             if (luminousIntensity == i) result += "luminousIntensity = $luminousIntensity"
             if (mass == i) result += "mass = $mass"
+            if (substance == i) result += "substance = $substance"
             if (temperature == i) result += "temperature = $temperature"
             if (time == i) result += "time = $time"
         }

@@ -109,25 +109,6 @@ open class HeatCapacityAmount<D : Unit<Distance>, M : Unit<Mass>, K : Unit<Tempe
 
     // endregion
 
-    // region -> AmountOfSubstance
-
-    @JvmName("divMolarHeatCapacity")
-    operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
-        SubstanceAmount(amount = amount / that.amount
-                                 / convert(that.distance to distance,
-                                                   that.distance to distance,
-                                                   that.mass to mass)
-                                 * convert(that.temperature to temperature,
-                                                   that.time to time,
-                                                   that.time to time),
-                        unit = that.amountOfSubstance)
-
-    operator fun <N : Unit<Substance>> div(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
-        SubstanceAmount(amount = amount / that.amount,
-                        unit = that.amountOfSubstance)
-
-    // endregion
-
     // region -> Energy
 
     @JvmName("timesTemperature")
@@ -189,7 +170,7 @@ open class HeatCapacityAmount<D : Unit<Distance>, M : Unit<Mass>, K : Unit<Tempe
 
     operator fun <N : Unit<Substance>> div(that: SubstanceAmount<N>) =
         MolarHeatCapacityAmount(amount = amount / that.amount,
-                                unit = U2(distance, mass) to U3(that.amountOfSubstance, temperature, time))
+                                unit = U2(distance, mass) to U3(that.substance, temperature, time))
 
     // endregion
 
@@ -204,6 +185,25 @@ open class HeatCapacityAmount<D : Unit<Distance>, M : Unit<Mass>, K : Unit<Tempe
     operator fun div(that: MassAmount<M>) =
         SpecificHeatCapacityAmount(amount = amount / that.amount,
                                    unit = distance to U2(temperature, time))
+
+    // endregion
+
+    // region -> Substance
+
+    @JvmName("divMolarHeatCapacity")
+    operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
+        SubstanceAmount(amount = amount / that.amount
+                                 / convert(that.distance to distance,
+                                           that.distance to distance,
+                                           that.mass to mass)
+                                 * convert(that.temperature to temperature,
+                                           that.time to time,
+                                           that.time to time),
+                        unit = that.substance)
+
+    operator fun <N : Unit<Substance>> div(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
+        SubstanceAmount(amount = amount / that.amount,
+                        unit = that.substance)
 
     // endregion
 

@@ -105,7 +105,7 @@ open class ThermalExpansionCoefficientAmount<K : Unit<Temperature>>(
 
     operator fun <N : Unit<Substance>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: MolarEnergyAmount<N, D, M, T>) =
         MolarHeatCapacityAmount(amount = amount * that.amount,
-                                unit = U2(that.distance, that.mass) to U3(that.amountOfSubstance, temperature, that.time))
+                                unit = U2(that.distance, that.mass) to U3(that.substance, temperature, that.time))
 
     // endregion
 

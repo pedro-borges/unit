@@ -153,11 +153,11 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     operator fun <N : Unit<Substance>, D : Unit<Distance>> times(that: MolarVolumeAmount<N, D>) =
         CatalyticEfficiencyAmount(amount = amount * that.amount,
-                                  unit = that.distance to U2(that.amountOfSubstance, time))
+                                  unit = that.distance to U2(that.substance, time))
 
     operator fun <N : Unit<Substance>, D : Unit<Distance>> div(that: MolarityAmount<N, D>) =
         CatalyticEfficiencyAmount(amount = amount / that.amount,
-                                  unit = that.distance to U2(that.amountOfSubstance, time))
+                                  unit = that.distance to U2(that.substance, time))
 
     // endregion
 
@@ -322,11 +322,11 @@ open class FrequencyAmount<T : Unit<Time>>(
     operator fun <N : Unit<Substance>, D : Unit<Distance>, T : Unit<Time>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
         MolarityAmount(amount = amount / that.amount
                                 * convert(that.time to time),
-                       unit = that.amountOfSubstance to that.distance)
+                       unit = that.substance to that.distance)
 
     operator fun <N : Unit<Substance>, D : Unit<Distance>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
         MolarityAmount(amount = amount / that.amount,
-                       unit = that.amountOfSubstance to that.distance)
+                       unit = that.substance to that.distance)
 
     // endregion
 

@@ -13,8 +13,6 @@ object Molality : Dimension
     operator fun div(that: Molality) = Scalar
     operator fun times(that: MolarMass) = Scalar
 
-    operator fun times(that: Mass) = Substance
-
     operator fun div(that: SpecificVolume) = Molarity
     operator fun times(that: MassDensity) = Molarity
 
@@ -24,4 +22,6 @@ object Molality : Dimension
 
     operator fun div(that: Molarity) = SpecificVolume
     operator fun times(that: MolarVolume) = SpecificVolume
+
+    operator fun times(that: Mass) = Substance
 }

@@ -13,8 +13,6 @@ object Molarity : Dimension
     operator fun div(that: Molarity) = Scalar
     operator fun times(that: MolarVolume) = Scalar
 
-    operator fun times(that: Volume) = Substance
-
     operator fun times(that: MolarEnergy) = EnergyDensity
 
     operator fun times(that: CatalyticEfficiency) = Frequency
@@ -24,4 +22,6 @@ object Molarity : Dimension
 
     operator fun div(that: MassDensity) = Molality
     operator fun times(that: SpecificVolume) = Molality
+
+    operator fun times(that: Volume) = Substance
 }

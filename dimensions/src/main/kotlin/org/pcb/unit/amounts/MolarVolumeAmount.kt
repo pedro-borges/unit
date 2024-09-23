@@ -30,7 +30,7 @@ open class MolarVolumeAmount<N : Unit<Substance>, D : Unit<Distance>>(
                                             unit.minor to -1)))
 {
     val distance = unit.major
-    val amountOfSubstance = unit.minor
+    val substance = unit.minor
 
     companion object
     {
@@ -43,11 +43,11 @@ open class MolarVolumeAmount<N : Unit<Substance>, D : Unit<Distance>>(
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MolarVolumeAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
-                          unit = distance to amountOfSubstance)
+                          unit = distance to substance)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
         MolarVolumeAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
-                          unit = distance to amountOfSubstance)
+                          unit = distance to substance)
 
     @JvmName("plusMolarVolume")
     operator fun <N : Unit<Substance>, D : Unit<Distance>> plus(that: MolarVolumeAmount<N, D>) =
@@ -55,12 +55,12 @@ open class MolarVolumeAmount<N : Unit<Substance>, D : Unit<Distance>>(
                                    * convert(that.distance to distance,
                                              that.distance to distance,
                                              that.distance to distance)
-                                   / convert(that.amountOfSubstance to amountOfSubstance),
-                          unit = distance to amountOfSubstance)
+                                   / convert(that.substance to substance),
+                          unit = distance to substance)
 
     operator fun plus(that: MolarVolumeAmount<N, D>) =
         MolarVolumeAmount(amount = amount + that.amount,
-                          unit = distance to amountOfSubstance)
+                          unit = distance to substance)
 
     @JvmName("minusMolarVolume")
     operator fun <N : Unit<Substance>, D : Unit<Distance>> minus(that: MolarVolumeAmount<N, D>) =
@@ -68,12 +68,12 @@ open class MolarVolumeAmount<N : Unit<Substance>, D : Unit<Distance>>(
                                    * convert(that.distance to distance,
                                              that.distance to distance,
                                              that.distance to distance)
-                                   / convert(that.amountOfSubstance to amountOfSubstance),
-                          unit = distance to amountOfSubstance)
+                                   / convert(that.substance to substance),
+                          unit = distance to substance)
 
     operator fun minus(that: MolarVolumeAmount<N, D>) =
         MolarVolumeAmount(amount = amount - that.amount,
-                          unit = distance to amountOfSubstance)
+                          unit = distance to substance)
 
     // endregion
 
@@ -85,7 +85,7 @@ open class MolarVolumeAmount<N : Unit<Substance>, D : Unit<Distance>>(
                               / convert(that.distance to distance,
                                         that.distance to distance,
                                         that.distance to distance)
-                              * convert(that.amountOfSubstance to amountOfSubstance),
+                              * convert(that.substance to substance),
                      unit = NUMERIC)
 
     operator fun div(that: MolarVolumeAmount<N, D>) =
@@ -95,7 +95,7 @@ open class MolarVolumeAmount<N : Unit<Substance>, D : Unit<Distance>>(
     @JvmName("timesMolarity")
     operator fun <N : Unit<Substance>, D : Unit<Distance>> times(that: MolarityAmount<N, D>) =
         ScalarAmount(amount = amount * that.amount
-                              * convert(that.amountOfSubstance to amountOfSubstance)
+                              * convert(that.substance to substance)
                               / convert(that.distance to distance,
                                         that.distance to distance,
                                         that.distance to distance),
@@ -111,11 +111,11 @@ open class MolarVolumeAmount<N : Unit<Substance>, D : Unit<Distance>>(
 
     operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
         CatalyticEfficiencyAmount(amount = amount * that.amount,
-                                  unit = distance to U2(amountOfSubstance, that.time))
+                                  unit = distance to U2(substance, that.time))
 
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         CatalyticEfficiencyAmount(amount = amount / that.amount,
-                                  unit = distance to U2(amountOfSubstance, that.time))
+                                  unit = distance to U2(substance, that.time))
 
     // endregion
 
@@ -125,11 +125,11 @@ open class MolarVolumeAmount<N : Unit<Substance>, D : Unit<Distance>>(
     operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<D, M, T>) =
         MolarEnergyAmount(amount = amount * that.amount
                                    / convert(that.distance to distance),
-                          unit = U2(distance, that.mass) to U2(amountOfSubstance, that.time))
+                          unit = U2(distance, that.mass) to U2(substance, that.time))
 
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<D, M, T>) =
         MolarEnergyAmount(amount = amount * that.amount,
-                          unit = U2(distance, that.mass) to U2(amountOfSubstance, that.time))
+                          unit = U2(distance, that.mass) to U2(substance, that.time))
 
     // endregion
 
@@ -141,11 +141,11 @@ open class MolarVolumeAmount<N : Unit<Substance>, D : Unit<Distance>>(
                                  / convert(that.distance to distance,
                                            that.distance to distance,
                                            that.distance to distance),
-                        unit = that.mass to amountOfSubstance)
+                        unit = that.mass to substance)
 
     operator fun <M : Unit<Mass>> times(that: MassDensityAmount<D, M>) =
         MolarMassAmount(amount = amount * that.amount,
-                        unit = that.mass to amountOfSubstance)
+                        unit = that.mass to substance)
 
     @JvmName("divSpecificVolume")
     operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: SpecificVolumeAmount<D, M>) =
@@ -153,11 +153,11 @@ open class MolarVolumeAmount<N : Unit<Substance>, D : Unit<Distance>>(
                                  / convert(that.distance to distance,
                                            that.distance to distance,
                                            that.distance to distance),
-                        unit = that.mass to amountOfSubstance)
+                        unit = that.mass to substance)
 
     operator fun <M : Unit<Mass>> div(that: SpecificVolumeAmount<D, M>) =
         MolarMassAmount(amount = amount / that.amount,
-                        unit = that.mass to amountOfSubstance)
+                        unit = that.mass to substance)
 
     // endregion
 
@@ -166,7 +166,7 @@ open class MolarVolumeAmount<N : Unit<Substance>, D : Unit<Distance>>(
     @JvmName("timesMolality")
     operator fun <N : Unit<Substance>, M : Unit<Mass>> times(that: MolalityAmount<N, M>) =
         SpecificVolumeAmount(amount = amount * that.amount
-                                      * convert(that.amountOfSubstance to amountOfSubstance),
+                                      * convert(that.substance to substance),
                              unit = distance to that.mass)
 
     operator fun <M : Unit<Mass>> times(that: MolalityAmount<N, M>) =
@@ -176,7 +176,7 @@ open class MolarVolumeAmount<N : Unit<Substance>, D : Unit<Distance>>(
     @JvmName("divMolarMass")
     operator fun <N : Unit<Substance>, M : Unit<Mass>> div(that: MolarMassAmount<N, M>) =
         SpecificVolumeAmount(amount = amount / that.amount
-                                      * convert(that.amountOfSubstance to amountOfSubstance),
+                                      * convert(that.substance to substance),
                              unit = distance to that.mass)
 
     operator fun <M : Unit<Mass>> div(that: MolarMassAmount<N, M>) =
@@ -193,7 +193,7 @@ open class MolarVolumeAmount<N : Unit<Substance>, D : Unit<Distance>>(
                             / convert(that.distance to distance,
                                       that.distance to distance,
                                       that.distance to distance)
-                            * convert(that.amountOfSubstance to amountOfSubstance),
+                            * convert(that.substance to substance),
                    unit = that.time)
 
     operator fun <T : Unit<Time>> div(that: CatalyticEfficiencyAmount<N, D, T>) =
@@ -204,10 +204,10 @@ open class MolarVolumeAmount<N : Unit<Substance>, D : Unit<Distance>>(
 
     // region -> Volume
 
-    @JvmName("timesAmountOfSubstance")
+    @JvmName("timesSubstance")
     operator fun <N : Unit<Substance>> times(that: SubstanceAmount<N>) =
         VolumeAmount(amount = amount * that.amount
-                              * convert(that.amountOfSubstance to amountOfSubstance),
+                              * convert(that.substance to substance),
                      unit = distance)
 
     operator fun times(that: SubstanceAmount<N>) =

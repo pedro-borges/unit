@@ -135,11 +135,11 @@ open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>,
                                 * convert(that.temperature to temperature,
                                           that.time to time,
                                           that.time to time),
-                       unit = that.amountOfSubstance to that.mass)
+                       unit = that.substance to that.mass)
 
     operator fun <N : Unit<Substance>, M : Unit<Mass>> div(that: MolarHeatCapacityAmount<N, D, M, K, T>) =
         MolalityAmount(amount = amount / that.amount,
-                       unit = that.amountOfSubstance to that.mass)
+                       unit = that.substance to that.mass)
 
     // endregion
 
@@ -147,11 +147,11 @@ open class SpecificHeatCapacityAmount<D : Unit<Distance>, K : Unit<Temperature>,
 
     operator fun <N : Unit<Substance>, M : Unit<Mass>> div(that: MolalityAmount<N, M>) =
         MolarHeatCapacityAmount(amount = amount / that.amount,
-                                unit = U2(distance, that.mass) to U3(that.amountOfSubstance, temperature, time))
+                                unit = U2(distance, that.mass) to U3(that.substance, temperature, time))
 
     operator fun <N : Unit<Substance>, M : Unit<Mass>> times(that: MolarMassAmount<N, M>) =
         MolarHeatCapacityAmount(amount = amount * that.amount,
-                                unit = U2(distance, that.mass) to U3(that.amountOfSubstance, temperature, time))
+                                unit = U2(distance, that.mass) to U3(that.substance, temperature, time))
 
     // endregion
 
