@@ -13,7 +13,7 @@ object AngularMomentum : Dimension
 
     operator fun div(that: AngularMomentum) = Scalar
 
-    operator fun div(that: Momentum) = MassDensity
+    operator fun div(that: Momentum) = Mass
 
-    operator fun div(that: MassDensity) = Momentum
+    operator fun div(that: Mass) = Momentum
 }

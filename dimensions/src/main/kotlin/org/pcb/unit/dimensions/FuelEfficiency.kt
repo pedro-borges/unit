@@ -12,7 +12,7 @@ object FuelEfficiency : Dimension
     operator fun div(that: FuelEfficiency) = Scalar
     operator fun times(that: Area) = Scalar
 
-    operator fun times(that: MassDensity) = AreaDensity
+    operator fun times(that: Mass) = AreaDensity
 
     operator fun times(that: Volume) = Distance
 
@@ -26,7 +26,7 @@ object FuelEfficiency : Dimension
 
     operator fun times(that: MagneticFlux) = MagneticFluxDensity
 
-    operator fun times(that: MomentOfInertia) = MassDensity
+    operator fun times(that: MomentOfInertia) = Mass
 
     operator fun times(that: Action) = MassFlowRate
 

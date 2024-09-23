@@ -115,6 +115,22 @@ open class PaceAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> EnergyDensity
+
+    @JvmName("timesEnergyFluxDensity")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyFluxDensityAmount<M, T>) =
+        EnergyDensityAmount(amount = amount * that.amount
+                                     / convert(that.time to time,
+                                               that.time to time,
+                                               that.time to time),
+                            unit = that.mass to U2(distance, time))
+
+    operator fun <M : Unit<Mass>> times(that: EnergyFluxDensityAmount<M, T>) =
+        EnergyDensityAmount(amount = amount * that.amount,
+                            unit = that.mass to U2(distance, time))
+
+    // endregion
+
     // region -> Force
 
     @JvmName("timesPower")
@@ -197,6 +213,47 @@ open class PaceAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> RadiantExposure
+
+    @JvmName("timesYank")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: YankAmount<D, M, T>) =
+        RadiantExposureAmount(amount = amount * that.amount
+                                       * convert(that.distance to distance)
+                                       / convert(that.time to time,
+                                                 that.time to time,
+                                                 that.time to time),
+                              unit = that.mass to time)
+
+    operator fun <M : Unit<Mass>> times(that: YankAmount<D, M, T>) =
+        RadiantExposureAmount(amount = amount * that.amount,
+                              unit = that.mass to time)
+
+    // endregion
+
+    // region -> SpacialFrequency
+
+    @JvmName("timesFrequency")
+    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
+        SpacialFrequencyAmount(amount = amount * that.amount
+                                        / convert(that.time to time),
+                               unit = NUMERIC to distance)
+
+    operator fun times(that: FrequencyAmount<T>) =
+        SpacialFrequencyAmount(amount = amount * that.amount,
+                               unit = NUMERIC to distance)
+
+    @JvmName("divTime")
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        SpacialFrequencyAmount(amount = amount / that.amount
+                                        / convert(that.time to time),
+                               unit = NUMERIC to distance)
+
+    operator fun div(that: TimeAmount<T>) =
+        SpacialFrequencyAmount(amount = amount / that.amount,
+                               unit = NUMERIC to distance)
+
+    // endregion
+
     // region -> Speed
 
     @JvmName("timesSpecificEnergy")
@@ -224,6 +281,16 @@ open class PaceAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     operator fun times(that: DistanceAmount<D>) =
         TimeAmount(amount = amount * that.amount,
+                   unit = time)
+
+    @JvmName("divSpacialFrequency")
+    operator fun <D : Unit<Distance>> div(that: SpacialFrequencyAmount<D>) =
+        TimeAmount(amount = amount / that.amount
+                            * convert(that.distance to distance),
+                   unit = time)
+
+    operator fun div(that: SpacialFrequencyAmount<D>) =
+        TimeAmount(amount = amount / that.amount,
                    unit = time)
 
     // endregion

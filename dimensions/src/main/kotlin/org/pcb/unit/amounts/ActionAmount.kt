@@ -171,6 +171,22 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Frequency
+
+    @JvmName("divMomentOfInertia")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: MomentOfInertiaAmount<D, M>) =
+        FrequencyAmount(amount = amount / that.amount
+                                 / convert(that.distance to distance,
+                                           that.distance to distance,
+                                           that.mass to mass),
+                        unit = NUMERIC to time)
+
+    operator fun div(that: MomentOfInertiaAmount<D, M>) =
+        FrequencyAmount(amount = amount / that.amount,
+                        unit = NUMERIC to time)
+
+    // endregion
+
     // region -> MagneticFlux
 
     @JvmName("divElectricCharge")
@@ -198,6 +214,41 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
         MassFlowRateAmount(amount = amount / that.amount,
                            unit = mass to time)
 
+    @JvmName("timesFuelEfficiency")
+    operator fun <D : Unit<Distance>> times(that: FuelEfficiencyAmount<D>) =
+        MassFlowRateAmount(amount = amount * that.amount
+                                    / convert(that.distance to distance,
+                                              that.distance to distance),
+                           unit = mass to time)
+
+    operator fun times(that: FuelEfficiencyAmount<D>) =
+        MassFlowRateAmount(amount = amount * that.amount,
+                           unit = mass to time)
+
+    // endregion
+
+    // region -> MomentOfInertia
+
+    @JvmName("divFrequency")
+    operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
+        MomentOfInertiaAmount(amount = amount / that.amount
+                                       * convert(that.time to time),
+                              unit = U2(distance, mass))
+
+    operator fun div(that: FrequencyAmount<T>) =
+        MomentOfInertiaAmount(amount = amount / that.amount,
+                              unit = U2(distance, mass))
+
+    @JvmName("timesTime")
+    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
+        MomentOfInertiaAmount(amount = amount * that.amount
+                                       * convert(that.time to time),
+                              unit = U2(distance, mass))
+
+    operator fun times(that: TimeAmount<T>) =
+        MomentOfInertiaAmount(amount = amount * that.amount,
+                              unit = U2(distance, mass))
+
     // endregion
 
     // region -> Momentum
@@ -210,6 +261,16 @@ open class ActionAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     operator fun div(that: DistanceAmount<D>) =
         MomentumAmount(amount = amount / that.amount,
+                       unit = U2(distance, mass) to time)
+
+    @JvmName("timesSpacialFrequency")
+    operator fun <D : Unit<Distance>> times(that: SpacialFrequencyAmount<D>) =
+        MomentumAmount(amount = amount * that.amount
+                                / convert(that.distance to distance),
+                       unit = U2(distance, mass) to time)
+
+    operator fun times(that: SpacialFrequencyAmount<D>) =
+        MomentumAmount(amount = amount * that.amount,
                        unit = U2(distance, mass) to time)
 
     // endregion

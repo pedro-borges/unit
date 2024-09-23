@@ -41,7 +41,7 @@ object Frequency : Dimension
 
     operator fun times(that: LuminousEnergy) = LuminousFlux
 
-    operator fun times(that: MassDensity) = MassFlowRate
+    operator fun times(that: Mass) = MassFlowRate
 
     operator fun div(that: Acceleration) = Pace
 

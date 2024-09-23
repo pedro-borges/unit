@@ -21,7 +21,7 @@ object Pace : Dimension
 
     operator fun times(that: Acceleration) = Frequency
 
-    operator fun times(that: Momentum) = MassDensity
+    operator fun times(that: Momentum) = Mass
 
     operator fun times(that: Force) = MassFlowRate
 

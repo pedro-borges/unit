@@ -18,7 +18,7 @@ object Distance : Dimension
     operator fun times(that: Distance) = Area
 
     operator fun div(that: SpecificVolume) = AreaDensity
-    operator fun times(that: Mass) = AreaDensity
+    operator fun times(that: MassDensity) = AreaDensity
 
     operator fun times(that: Force) = Energy
 
@@ -45,6 +45,8 @@ object Distance : Dimension
 
     operator fun div(that: Time) = Speed
     operator fun times(that: Frequency) = Speed
+
+    operator fun times(that: TemperatureGradient) = Temperature
 
     operator fun div(that: Speed) = Time
     operator fun times(that: Pace) = Time

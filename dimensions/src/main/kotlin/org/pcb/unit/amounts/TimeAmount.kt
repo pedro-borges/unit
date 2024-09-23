@@ -275,6 +275,22 @@ open class TimeAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> EnergyDensity
+
+    @JvmName("timesPowerDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: PowerDensityAmount<D, M, T>) =
+        EnergyDensityAmount(amount = amount * that.amount
+                                     / convert(that.time to time,
+                                               that.time to time,
+                                               that.time to time),
+                            unit = that.mass to U2(that.distance, time))
+
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: PowerDensityAmount<D, M, T>) =
+        EnergyDensityAmount(amount = amount * that.amount,
+                            unit = that.mass to U2(that.distance, time))
+
+    // endregion
+
     // region -> Force
 
     @JvmName("timesYank")
@@ -374,6 +390,35 @@ open class TimeAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> MassFlowRate
+
+    @JvmName("timesRadiantExposure")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: RadiantExposureAmount<M, T>) =
+        MassFlowRateAmount(amount = amount * that.amount
+                                    / convert(that.time to time,
+                                              that.time to time),
+                           unit = that.mass to time)
+
+    operator fun <M : Unit<Mass>> times(that: RadiantExposureAmount<M, T>) =
+        MassFlowRateAmount(amount = amount * that.amount,
+                           unit = that.mass to time)
+
+    // endregion
+
+    // region -> MomentOfInertia
+
+    @JvmName("timesAction")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ActionAmount<D, M, T>) =
+        MomentOfInertiaAmount(amount = amount * that.amount
+                                       / convert(that.time to time),
+                              unit = U2(that.distance, that.mass))
+
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: ActionAmount<D, M, T>) =
+        MomentOfInertiaAmount(amount = amount * that.amount,
+                              unit = U2(that.distance, that.mass))
+
+    // endregion
+
     // region -> Momentum
 
     @JvmName("timesForce")
@@ -394,6 +439,26 @@ open class TimeAmount<T : Unit<Time>>(
     operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
         PaceAmount(amount = amount / that.amount,
                    unit = time to that.distance)
+
+    operator fun <D : Unit<Distance>> times(that: SpacialFrequencyAmount<D>) =
+        PaceAmount(amount = amount * that.amount,
+                   unit = time to that.distance)
+
+    // endregion
+
+    // region -> RadiantExposure
+
+    @JvmName("timesEnergyFluxDensity")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyFluxDensityAmount<M, T>) =
+        RadiantExposureAmount(amount = amount * that.amount
+                                       / convert(that.time to time,
+                                                 that.time to time,
+                                                 that.time to time),
+                              unit = that.mass to time)
+
+    operator fun <M : Unit<Mass>> times(that: EnergyFluxDensityAmount<M, T>) =
+        RadiantExposureAmount(amount = amount * that.amount,
+                              unit = that.mass to time)
 
     // endregion
 

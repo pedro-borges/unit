@@ -179,4 +179,18 @@ open class ElectricCurrentAmount<EC : Unit<ElectricCurrent>>(
                     unit = U2(that.distance, that.mass) to that.time)
 
     // endregion
+
+    // region -> RadiantExposure
+
+    @JvmName("timesMagneticFluxDensity")
+    operator fun <EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: MagneticFluxDensityAmount<EC, M, T>) =
+        RadiantExposureAmount(amount = amount * that.amount
+                                       / convert(that.electricCurrent to electricCurrent),
+                              unit = that.mass to that.time)
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: MagneticFluxDensityAmount<EC, M, T>) =
+        RadiantExposureAmount(amount = amount * that.amount,
+                              unit = that.mass to that.time)
+
+    // endregion
 }

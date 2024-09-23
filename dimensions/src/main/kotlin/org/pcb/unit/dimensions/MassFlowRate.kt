@@ -20,16 +20,16 @@ object MassFlowRate : Dimension
     operator fun div(that: Pace) = Force
     operator fun times(that: Speed) = Force
 
-    operator fun div(that: MassDensity) = Frequency
+    operator fun div(that: Mass) = Frequency
 
     operator fun div(that: Action) = FuelEfficiency
 
     operator fun div(that: ElectricCharge) = MagneticFluxDensity
 
-    operator fun div(that: VolumetricFlow) = Mass
+    operator fun div(that: Frequency) = Mass
+    operator fun times(that: Time) = Mass
 
-    operator fun div(that: Frequency) = MassDensity
-    operator fun times(that: Time) = MassDensity
+    operator fun div(that: VolumetricFlow) = MassDensity
 
     operator fun div(that: SpacialFrequency) = Momentum
     operator fun times(that: Distance) = Momentum
@@ -45,7 +45,7 @@ object MassFlowRate : Dimension
 
     operator fun div(that: RadiantExposure) = Time
 
-    operator fun div(that: Mass) = VolumetricFlow
+    operator fun div(that: MassDensity) = VolumetricFlow
     operator fun times(that: SpecificVolume) = VolumetricFlow
 
     operator fun times(that: Acceleration) = Yank

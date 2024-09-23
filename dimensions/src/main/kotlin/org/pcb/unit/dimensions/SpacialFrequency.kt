@@ -31,7 +31,7 @@ object SpacialFrequency : Dimension
     operator fun div(that: Distance) = FuelEfficiency
     operator fun times(that: SpacialFrequency) = FuelEfficiency
 
-    operator fun times(that: AreaDensity) = Mass
+    operator fun times(that: AreaDensity) = MassDensity
 
     operator fun times(that: Momentum) = MassFlowRate
 
@@ -45,6 +45,11 @@ object SpacialFrequency : Dimension
     operator fun times(that: Force) = RadiantExposure
 
     operator fun times(that: RadiantIntensity) = SpectralIntensity
+
+    operator fun div(that: ThermalExpansionCoefficient) = TemperatureGradient
+    operator fun times(that: Temperature) = TemperatureGradient
+
+    operator fun div(that: TemperatureGradient) = ThermalExpansionCoefficient
 
     operator fun times(that: Power) = Yank
 }

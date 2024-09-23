@@ -128,6 +128,10 @@ open class LuminousFluxAmount<A : Unit<Angle>, LI : Unit<LuminousIntensity>>(
         IlluminanceAmount(amount = amount / that.amount,
                           unit = U2(angle, luminousIntensity) to that.distance)
 
+    operator fun <D : Unit<Distance>> times(that: FuelEfficiencyAmount<D>) =
+        IlluminanceAmount(amount = amount * that.amount,
+                          unit = U2(angle, luminousIntensity) to that.distance)
+
     // endregion
 
     // region -> LuminousEnergy

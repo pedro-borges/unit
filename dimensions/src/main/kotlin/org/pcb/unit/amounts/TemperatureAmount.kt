@@ -2,11 +2,15 @@ package org.pcb.unit.amounts
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
+import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.Temperature
+import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
@@ -64,6 +68,84 @@ open class TemperatureAmount<K : Unit<Temperature>>(
     operator fun div(that: TemperatureAmount<K>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
+
+    @JvmName("timesThermalExpansionCoefficient")
+    operator fun <K : Unit<Temperature>> times(that: ThermalExpansionCoefficientAmount<K>) =
+        ScalarAmount(amount = amount * that.amount
+                              / convert(that.temperature to temperature),
+                     unit = NUMERIC)
+
+    operator fun times(that: ThermalExpansionCoefficientAmount<K>) =
+        ScalarAmount(amount = amount * that.amount,
+                     unit = NUMERIC)
+
+    // endregion
+
+    // region -> Distance
+
+    @JvmName("divTemperatureGradient")
+    operator fun <D : Unit<Distance>, K : Unit<Temperature>> div(that: TemperatureGradientAmount<D, K>) =
+        DistanceAmount(amount = amount / that.amount
+                                / convert(that.temperature to temperature),
+                       unit = that.distance)
+
+    operator fun <D : Unit<Distance>> div(that: TemperatureGradientAmount<D, K>) =
+        DistanceAmount(amount = amount / that.amount,
+                       unit = that.distance)
+
+    // endregion
+
+    // region -> Energy
+
+    @JvmName("timesHeatCapacity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> times(that: HeatCapacityAmount<D, M, K, T>) =
+        EnergyAmount(amount = amount * that.amount
+                              / convert(that.temperature to temperature),
+                     unit = U2(that.distance, that.mass) to that.time)
+
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: HeatCapacityAmount<D, M, K, T>) =
+        EnergyAmount(amount = amount * that.amount,
+                     unit = U2(that.distance, that.mass) to that.time)
+
+    // endregion
+
+    // region -> SpecificEnergy
+
+    @JvmName("timesSpecificHeatCapacity")
+    operator fun <D : Unit<Distance>, K : Unit<Temperature>, T : Unit<Time>> times(that: SpecificHeatCapacityAmount<D, K, T>) =
+        SpecificEnergyAmount(amount = amount * that.amount
+                                      / convert(that.temperature to temperature),
+                             unit = that.distance to that.time)
+
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpecificHeatCapacityAmount<D, K, T>) =
+        SpecificEnergyAmount(amount = amount * that.amount,
+                             unit = that.distance to that.time)
+
+    // endregion
+
+    // region -> TemperatureGradient
+
+    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
+        TemperatureGradientAmount(amount = amount / that.amount,
+                                  unit = temperature to that.distance)
+
+    operator fun <D : Unit<Distance>> times(that: SpacialFrequencyAmount<D>) =
+        TemperatureGradientAmount(amount = amount * that.amount,
+                                  unit = temperature to that.distance)
+
+    // endregion
+
+    // region -> Yank
+
+    @JvmName("timesThermalConductivity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> times(that: ThermalConductivityAmount<D, M, K, T>) =
+        YankAmount(amount = amount * that.amount
+                            / convert(that.temperature to temperature),
+                   unit = U2(that.distance, that.mass) to that.time)
+
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ThermalConductivityAmount<D, M, K, T>) =
+        YankAmount(amount = amount * that.amount,
+                   unit = U2(that.distance, that.mass) to that.time)
 
     // endregion
 }

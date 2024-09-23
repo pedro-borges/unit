@@ -98,10 +98,31 @@ open class MagneticFluxDensityAmount<EC : Unit<ElectricCurrent>, M : Unit<Mass>,
 
     // endregion
 
+    // region -> FuelEfficiency
+
+    @JvmName("divMagneticFlux")
+    operator fun <D : Unit<Distance>, EC : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: MagneticFluxAmount<D, EC, M, T>) =
+        FuelEfficiencyAmount(amount = amount / that.amount
+                                      / convert(that.mass to mass)
+                                      * convert(that.electricCurrent to electricCurrent,
+                                                that.time to time,
+                                                that.time to time),
+                             unit = NUMERIC to that.distance)
+
+    operator fun <D : Unit<Distance>> div(that: MagneticFluxAmount<D, EC, M, T>) =
+        FuelEfficiencyAmount(amount = amount / that.amount,
+                             unit = NUMERIC to that.distance)
+
+    // endregion
+
     // region -> MagneticFlux
 
     operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =
         MagneticFluxAmount(amount = amount * that.amount,
+                           unit = U2(that.distance, mass) to U2(electricCurrent, time))
+
+    operator fun <D : Unit<Distance>> div(that: FuelEfficiencyAmount<D>) =
+        MagneticFluxAmount(amount = amount / that.amount,
                            unit = U2(that.distance, mass) to U2(electricCurrent, time))
 
     // endregion
@@ -118,6 +139,20 @@ open class MagneticFluxDensityAmount<EC : Unit<ElectricCurrent>, M : Unit<Mass>,
     operator fun times(that: ElectricChargeAmount<EC, T>) =
         MassFlowRateAmount(amount = amount * that.amount,
                            unit = mass to time)
+
+    // endregion
+
+    // region -> RadiantExposure
+
+    @JvmName("timesElectricCurrent")
+    operator fun <EC : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<EC>) =
+        RadiantExposureAmount(amount = amount * that.amount
+                                       * convert(that.electricCurrent to electricCurrent),
+                              unit = mass to time)
+
+    operator fun times(that: ElectricCurrentAmount<EC>) =
+        RadiantExposureAmount(amount = amount * that.amount,
+                              unit = mass to time)
 
     // endregion
 }

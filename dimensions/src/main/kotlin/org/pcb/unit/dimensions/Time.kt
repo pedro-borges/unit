@@ -51,7 +51,7 @@ object Time : Dimension
 
     operator fun times(that: ElectricTension) = MagneticFlux
 
-    operator fun times(that: MassFlowRate) = MassDensity
+    operator fun times(that: MassFlowRate) = Mass
 
     operator fun times(that: RadiantExposure) = MassFlowRate
 

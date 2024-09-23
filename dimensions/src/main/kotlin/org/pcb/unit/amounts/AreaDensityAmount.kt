@@ -93,6 +93,19 @@ open class AreaDensityAmount<D : Unit<Distance>, M : Unit<Mass>>(
 
     // region -> Distance
 
+    @JvmName("divMassDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: MassDensityAmount<D, M>) =
+        DistanceAmount(amount = amount / that.amount
+                                / convert(that.mass to mass)
+                                * convert(that.distance to distance,
+                                          that.distance to distance,
+                                          that.distance to distance),
+                       unit = distance)
+
+    operator fun div(that: MassDensityAmount<D, M>) =
+        DistanceAmount(amount = amount / that.amount,
+                       unit = distance)
+
     @JvmName("timesSpecificVolume")
     operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: SpecificVolumeAmount<D, M>) =
         DistanceAmount(amount = amount * that.amount
@@ -122,6 +135,20 @@ open class AreaDensityAmount<D : Unit<Distance>, M : Unit<Mass>>(
 
     // endregion
 
+    // region -> FuelEfficiency
+
+    @JvmName("divMass")
+    operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
+        FuelEfficiencyAmount(amount = amount / that.amount
+                                      / convert(that.mass to mass),
+                             unit = NUMERIC to distance)
+
+    operator fun div(that: MassAmount<M>) =
+        FuelEfficiencyAmount(amount = amount / that.amount,
+                             unit = NUMERIC to distance)
+
+    // endregion
+
     // region -> Mass
 
     @JvmName("timesArea")
@@ -134,6 +161,41 @@ open class AreaDensityAmount<D : Unit<Distance>, M : Unit<Mass>>(
     operator fun times(that: AreaAmount<D>) =
         MassAmount(amount = amount * that.amount,
                    unit = mass)
+
+    @JvmName("divFuelEfficiency")
+    operator fun <D : Unit<Distance>> div(that: FuelEfficiencyAmount<D>) =
+        MassAmount(amount = amount / that.amount
+                            * convert(that.distance to distance,
+                                      that.distance to distance),
+                   unit = mass)
+
+    operator fun div(that: FuelEfficiencyAmount<D>) =
+        MassAmount(amount = amount / that.amount,
+                   unit = mass)
+
+    // endregion
+
+    // region -> MassDensity
+
+    @JvmName("divDistance")
+    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
+        MassDensityAmount(amount = amount / that.amount
+                                   / convert(that.distance to distance),
+                          unit = mass to distance)
+
+    operator fun div(that: DistanceAmount<D>) =
+        MassDensityAmount(amount = amount / that.amount,
+                          unit = mass to distance)
+
+    @JvmName("timesSpacialFrequency")
+    operator fun <D : Unit<Distance>> times(that: SpacialFrequencyAmount<D>) =
+        MassDensityAmount(amount = amount * that.amount
+                                   / convert(that.distance to distance),
+                          unit = mass to distance)
+
+    operator fun times(that: SpacialFrequencyAmount<D>) =
+        MassDensityAmount(amount = amount * that.amount,
+                          unit = mass to distance)
 
     // endregion
 
@@ -150,6 +212,35 @@ open class AreaDensityAmount<D : Unit<Distance>, M : Unit<Mass>>(
     operator fun <T : Unit<Time>> times(that: VolumetricFlowAmount<D, T>) =
         MomentumAmount(amount = amount * that.amount,
                        unit = U2(distance, mass) to that.time)
+
+    // endregion
+
+    // region -> PowerDensity
+
+    @JvmName("timesJerk")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: JerkAmount<D, T>) =
+        PowerDensityAmount(amount = amount * that.amount
+                                    * convert(that.distance to distance),
+                           unit = mass to U2(distance, that.time))
+
+    operator fun <T : Unit<Time>> times(that: JerkAmount<D, T>) =
+        PowerDensityAmount(amount = amount * that.amount,
+                           unit = mass to U2(distance, that.time))
+
+    // endregion
+
+    // region -> RadiantExposure
+
+    @JvmName("timesSpecificEnergy")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: SpecificEnergyAmount<D, T>) =
+        RadiantExposureAmount(amount = amount * that.amount
+                                       * convert(that.distance to distance,
+                                                 that.distance to distance),
+                              unit = mass to that.time)
+
+    operator fun <T : Unit<Time>> times(that: SpecificEnergyAmount<D, T>) =
+        RadiantExposureAmount(amount = amount * that.amount,
+                              unit = mass to that.time)
 
     // endregion
 }

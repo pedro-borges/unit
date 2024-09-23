@@ -9,6 +9,7 @@ import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Temperature
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
@@ -104,6 +105,10 @@ open class MassAmount<M : Unit<Mass>>(
         AreaDensityAmount(amount = amount / that.amount,
                           unit = mass to that.distance)
 
+    operator fun <D : Unit<Distance>> times(that: FuelEfficiencyAmount<D>) =
+        AreaDensityAmount(amount = amount * that.amount,
+                          unit = mass to that.distance)
+
     // endregion
 
     // region -> Energy
@@ -122,6 +127,36 @@ open class MassAmount<M : Unit<Mass>>(
 
     // endregion
 
+    // region -> FuelEfficiency
+
+    @JvmName("divMomentOfInertia")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: MomentOfInertiaAmount<D, M>) =
+        FuelEfficiencyAmount(amount = amount / that.amount
+                                      / convert(that.mass to mass),
+                             unit = NUMERIC to that.distance)
+
+    operator fun <D : Unit<Distance>> div(that: MomentOfInertiaAmount<D, M>) =
+        FuelEfficiencyAmount(amount = amount / that.amount,
+                             unit = NUMERIC to that.distance)
+
+    // endregion
+
+    // region -> HeatCapacity
+
+    operator fun <D : Unit<Distance>, K : Unit<Temperature>, T : Unit<Time>> times(that: SpecificHeatCapacityAmount<D, K, T>) =
+        HeatCapacityAmount(amount = amount * that.amount,
+                           unit = U2(that.distance, mass) to U2(that.temperature, that.time))
+
+    // endregion
+
+    // region -> MassDensity
+
+    operator fun <D : Unit<Distance>> div(that: VolumeAmount<D>) =
+        MassDensityAmount(amount = amount / that.amount,
+                          unit = mass to that.distance)
+
+    // endregion
+
     // region -> MassFlowRate
 
     operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
@@ -131,6 +166,18 @@ open class MassAmount<M : Unit<Mass>>(
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         MassFlowRateAmount(amount = amount / that.amount,
                            unit = mass to that.time)
+
+    // endregion
+
+    // region -> MomentOfInertia
+
+    operator fun <D : Unit<Distance>> times(that: AreaAmount<D>) =
+        MomentOfInertiaAmount(amount = amount * that.amount,
+                              unit = U2(that.distance, mass))
+
+    operator fun <D : Unit<Distance>> div(that: FuelEfficiencyAmount<D>) =
+        MomentOfInertiaAmount(amount = amount / that.amount,
+                              unit = U2(that.distance, mass))
 
     // endregion
 
@@ -175,6 +222,16 @@ open class MassAmount<M : Unit<Mass>>(
     // endregion
 
     // region -> Volume
+
+    @JvmName("divMassDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: MassDensityAmount<D, M>) =
+        VolumeAmount(amount = amount / that.amount
+                              / convert(that.mass to mass),
+                     unit = that.distance)
+
+    operator fun <D : Unit<Distance>> div(that: MassDensityAmount<D, M>) =
+        VolumeAmount(amount = amount / that.amount,
+                     unit = that.distance)
 
     @JvmName("timesSpecificVolume")
     operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: SpecificVolumeAmount<D, M>) =

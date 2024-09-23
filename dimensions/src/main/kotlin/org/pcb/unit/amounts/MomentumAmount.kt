@@ -106,6 +106,16 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
         ActionAmount(amount = amount * that.amount,
                      unit = U2(distance, mass) to time)
 
+    @JvmName("divSpacialFrequency")
+    operator fun <D : Unit<Distance>> div(that: SpacialFrequencyAmount<D>) =
+        ActionAmount(amount = amount / that.amount
+                              * convert(that.distance to distance),
+                     unit = U2(distance, mass) to time)
+
+    operator fun div(that: SpacialFrequencyAmount<D>) =
+        ActionAmount(amount = amount / that.amount,
+                     unit = U2(distance, mass) to time)
+
     // endregion
 
     // region -> AngularMomentum
@@ -242,6 +252,16 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
         MassFlowRateAmount(amount = amount / that.amount,
                            unit = mass to time)
 
+    @JvmName("timesSpacialFrequency")
+    operator fun <D : Unit<Distance>> times(that: SpacialFrequencyAmount<D>) =
+        MassFlowRateAmount(amount = amount * that.amount
+                                    / convert(that.distance to distance),
+                           unit = mass to time)
+
+    operator fun times(that: SpacialFrequencyAmount<D>) =
+        MassFlowRateAmount(amount = amount * that.amount,
+                           unit = mass to time)
+
     // endregion
 
     // region -> Pace
@@ -275,6 +295,23 @@ open class MomentumAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun times(that: AccelerationAmount<D, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> SpacialFrequency
+
+    @JvmName("divAction")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ActionAmount<D, M, T>) =
+        SpacialFrequencyAmount(amount = amount / that.amount
+                                        / convert(that.distance to distance,
+                                                  that.distance to distance,
+                                                  that.mass to mass)
+                                        * convert(that.time to time),
+                               unit = NUMERIC to distance)
+
+    operator fun div(that: ActionAmount<D, M, T>) =
+        SpacialFrequencyAmount(amount = amount / that.amount,
+                               unit = NUMERIC to distance)
 
     // endregion
 

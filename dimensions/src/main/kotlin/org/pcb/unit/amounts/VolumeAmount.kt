@@ -3,6 +3,7 @@ package org.pcb.unit.amounts
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
+import org.pcb.unit.U3
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
@@ -10,6 +11,7 @@ import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Temperature
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.dimensions.Volume
 import org.pcb.unit.div
@@ -97,6 +99,16 @@ open class VolumeAmount<D : Unit<Distance>>(
         AreaAmount(amount = amount / that.amount,
                    unit = distance)
 
+    @JvmName("timesSpacialFrequency")
+    operator fun <D : Unit<Distance>> times(that: SpacialFrequencyAmount<D>) =
+        AreaAmount(amount = amount * that.amount
+                            / convert(that.distance to distance),
+                   unit = distance)
+
+    operator fun times(that: SpacialFrequencyAmount<D>) =
+        AreaAmount(amount = amount * that.amount,
+                   unit = distance)
+
     // endregion
 
     // region -> Distance
@@ -110,6 +122,17 @@ open class VolumeAmount<D : Unit<Distance>>(
 
     operator fun div(that: AreaAmount<D>) =
         DistanceAmount(amount = amount / that.amount,
+                       unit = distance)
+
+    @JvmName("timesFuelEfficiency")
+    operator fun <D : Unit<Distance>> times(that: FuelEfficiencyAmount<D>) =
+        DistanceAmount(amount = amount * that.amount
+                                / convert(that.distance to distance,
+                                          that.distance to distance),
+                       unit = distance)
+
+    operator fun times(that: FuelEfficiencyAmount<D>) =
+        DistanceAmount(amount = amount * that.amount,
                        unit = distance)
 
     // endregion
@@ -130,6 +153,18 @@ open class VolumeAmount<D : Unit<Distance>>(
 
     // region -> Mass
 
+    @JvmName("timesMassDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: MassDensityAmount<D, M>) =
+        MassAmount(amount = amount * that.amount
+                            / convert(that.distance to distance,
+                                      that.distance to distance,
+                                      that.distance to distance),
+                   unit = that.mass)
+
+    operator fun <M : Unit<Mass>> times(that: MassDensityAmount<D, M>) =
+        MassAmount(amount = amount * that.amount,
+                   unit = that.mass)
+
     @JvmName("divSpecificVolume")
     operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: SpecificVolumeAmount<D, M>) =
         MassAmount(amount = amount / that.amount
@@ -144,11 +179,54 @@ open class VolumeAmount<D : Unit<Distance>>(
 
     // endregion
 
+    // region -> Power
+
+    @JvmName("timesPowerDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: PowerDensityAmount<D, M, T>) =
+        PowerAmount(amount = amount * that.amount
+                             / convert(that.distance to distance),
+                    unit = U2(distance, that.mass) to that.time)
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: PowerDensityAmount<D, M, T>) =
+        PowerAmount(amount = amount * that.amount,
+                    unit = U2(distance, that.mass) to that.time)
+
+    // endregion
+
     // region -> SpecificVolume
 
     operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
         SpecificVolumeAmount(amount = amount / that.amount,
                              unit = distance to that.mass)
+
+    // endregion
+
+    // region -> ThermalConductivity
+
+    @JvmName("divThermalResistance")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: ThermalResistanceAmount<D, M, K, T>) =
+        ThermalConductivityAmount(amount = amount / that.amount
+                                           / convert(that.distance to distance,
+                                                     that.distance to distance),
+                                  unit = U2(distance, that.mass) to U2(that.temperature, that.time))
+
+    operator fun <M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: ThermalResistanceAmount<D, M, K, T>) =
+        ThermalConductivityAmount(amount = amount / that.amount,
+                                  unit = U2(distance, that.mass) to U2(that.temperature, that.time))
+
+    // endregion
+
+    // region -> ThermalResistance
+
+    @JvmName("divThermalConductivity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: ThermalConductivityAmount<D, M, K, T>) =
+        ThermalResistanceAmount(amount = amount / that.amount
+                                         / convert(that.distance to distance),
+                                unit = U3(that.time, distance, that.temperature) to that.mass)
+
+    operator fun <M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: ThermalConductivityAmount<D, M, K, T>) =
+        ThermalResistanceAmount(amount = amount / that.amount,
+                                unit = U3(that.time, distance, that.temperature) to that.mass)
 
     // endregion
 

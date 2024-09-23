@@ -78,6 +78,19 @@ open class SpecificVolumeAmount<D : Unit<Distance>, M : Unit<Mass>>(
 
     // region -> Scalar
 
+    @JvmName("timesMassDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: MassDensityAmount<D, M>) =
+        ScalarAmount(amount = amount * that.amount
+                              * convert(that.mass to mass)
+                              / convert(that.distance to distance,
+                                        that.distance to distance,
+                                        that.distance to distance),
+                     unit = NUMERIC)
+
+    operator fun times(that: MassDensityAmount<D, M>) =
+        ScalarAmount(amount = amount * that.amount,
+                     unit = NUMERIC)
+
     @JvmName("divSpecificVolume")
     operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: SpecificVolumeAmount<D, M>) =
         ScalarAmount(amount = amount / that.amount

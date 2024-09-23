@@ -19,12 +19,16 @@ object Volume : Dimension
 
     operator fun times(that: EnergyDensity) = Energy
 
-    operator fun div(that: SpecificVolume) = MassDensity
-    operator fun times(that: Mass) = MassDensity
+    operator fun div(that: SpecificVolume) = Mass
+    operator fun times(that: MassDensity) = Mass
 
     operator fun times(that: PowerDensity) = Power
 
-    operator fun div(that: MassDensity) = SpecificVolume
+    operator fun div(that: Mass) = SpecificVolume
+
+    operator fun div(that: ThermalResistance) = ThermalConductivity
+
+    operator fun div(that: ThermalConductivity) = ThermalResistance
 
     operator fun div(that: VolumetricFlow) = Time
 

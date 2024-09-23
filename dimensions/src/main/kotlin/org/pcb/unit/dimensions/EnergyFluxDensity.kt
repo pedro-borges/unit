@@ -34,6 +34,10 @@ object EnergyFluxDensity : Dimension
 
     operator fun div(that: EnergyDensity) = Speed
 
+    operator fun div(that: ThermalConductivity) = TemperatureGradient
+
+    operator fun div(that: TemperatureGradient) = ThermalConductivity
+
     operator fun div(that: SpacialFrequency) = Yank
     operator fun times(that: Distance) = Yank
 }

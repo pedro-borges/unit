@@ -118,6 +118,14 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> Action
+
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: MomentOfInertiaAmount<D, M>) =
+        ActionAmount(amount = amount * that.amount,
+                     unit = U2(that.distance, that.mass) to time)
+
+    // endregion
+
     // region -> AngularAcceleration
 
     @JvmName("timesAngularVelocity")
@@ -229,6 +237,21 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> EnergyFluxDensity
+
+    @JvmName("timesRadiantExposure")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: RadiantExposureAmount<M, T>) =
+        EnergyFluxDensityAmount(amount = amount * that.amount
+                                         / convert(that.time to time,
+                                                   that.time to time),
+                                unit = that.mass to time)
+
+    operator fun <M : Unit<Mass>> times(that: RadiantExposureAmount<M, T>) =
+        EnergyFluxDensityAmount(amount = amount * that.amount,
+                                unit = that.mass to time)
+
+    // endregion
+
     // region -> Force
 
     @JvmName("timesMomentum")
@@ -310,6 +333,35 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> PowerDensity
+
+    @JvmName("timesEnergyDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<D, M, T>) =
+        PowerDensityAmount(amount = amount * that.amount
+                                    / convert(that.time to time,
+                                              that.time to time),
+                           unit = that.mass to U2(that.distance, time))
+
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: EnergyDensityAmount<D, M, T>) =
+        PowerDensityAmount(amount = amount * that.amount,
+                           unit = that.mass to U2(that.distance, time))
+
+    // endregion
+
+    // region -> RadiantExposure
+
+    @JvmName("timesMassFlowRate")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: MassFlowRateAmount<M, T>) =
+        RadiantExposureAmount(amount = amount * that.amount
+                                       / convert(that.time to time),
+                              unit = that.mass to time)
+
+    operator fun <M : Unit<Mass>> times(that: MassFlowRateAmount<M, T>) =
+        RadiantExposureAmount(amount = amount * that.amount,
+                              unit = that.mass to time)
+
+    // endregion
+
     // region -> Rent
 
     operator fun <C : Unit<Currency>> times(that: CurrencyAmount<C>) =
@@ -334,10 +386,38 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> SpacialFrequency
+
+    @JvmName("timesPace")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<D, T>) =
+        SpacialFrequencyAmount(amount = amount * that.amount
+                                        * convert(that.time to time),
+                               unit = NUMERIC to that.distance)
+
+    operator fun <D : Unit<Distance>> times(that: PaceAmount<D, T>) =
+        SpacialFrequencyAmount(amount = amount * that.amount,
+                               unit = NUMERIC to that.distance)
+
+    @JvmName("divSpeed")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
+        SpacialFrequencyAmount(amount = amount / that.amount
+                                        * convert(that.time to time),
+                               unit = NUMERIC to that.distance)
+
+    operator fun <D : Unit<Distance>> div(that: SpeedAmount<D, T>) =
+        SpacialFrequencyAmount(amount = amount / that.amount,
+                               unit = NUMERIC to that.distance)
+
+    // endregion
+
     // region -> Speed
 
     operator fun <D : Unit<Distance>> times(that: DistanceAmount<D>) =
         SpeedAmount(amount = amount * that.amount,
+                    unit = that.distance to time)
+
+    operator fun <D : Unit<Distance>> div(that: SpacialFrequencyAmount<D>) =
+        SpeedAmount(amount = amount / that.amount,
                     unit = that.distance to time)
 
     // endregion

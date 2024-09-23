@@ -12,6 +12,7 @@ import org.pcb.unit.dimensions.Acceleration
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Temperature
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
 import org.pcb.unit.major
@@ -178,6 +179,23 @@ open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> SpacialFrequency
+
+    @JvmName("divSpecificEnergy")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpecificEnergyAmount<D, T>) =
+        SpacialFrequencyAmount(amount = amount / that.amount
+                                        / convert(that.distance to distance,
+                                                  that.distance to distance)
+                                        * convert(that.time to time,
+                                                  that.time to time),
+                               unit = NUMERIC to distance)
+
+    operator fun div(that: SpecificEnergyAmount<D, T>) =
+        SpacialFrequencyAmount(amount = amount / that.amount,
+                               unit = NUMERIC to distance)
+
+    // endregion
+
     // region -> SpecificEnergy
 
     @JvmName("timesDistance")
@@ -189,6 +207,30 @@ open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
     operator fun times(that: DistanceAmount<D>) =
         SpecificEnergyAmount(amount = amount * that.amount,
                              unit = distance to time)
+
+    @JvmName("divSpacialFrequency")
+    operator fun <D : Unit<Distance>> div(that: SpacialFrequencyAmount<D>) =
+        SpecificEnergyAmount(amount = amount / that.amount
+                                      * convert(that.distance to distance),
+                             unit = distance to time)
+
+    operator fun div(that: SpacialFrequencyAmount<D>) =
+        SpecificEnergyAmount(amount = amount / that.amount,
+                             unit = distance to time)
+
+    // endregion
+
+    // region -> SpecificHeatCapacity
+
+    @JvmName("divTemperatureGradient")
+    operator fun <D : Unit<Distance>, K : Unit<Temperature>> div(that: TemperatureGradientAmount<D, K>) =
+        SpecificHeatCapacityAmount(amount = amount / that.amount
+                                            * convert(that.distance to distance),
+                                   unit = distance to U2(that.temperature, time))
+
+    operator fun <K : Unit<Temperature>> div(that: TemperatureGradientAmount<D, K>) =
+        SpecificHeatCapacityAmount(amount = amount / that.amount,
+                                   unit = distance to U2(that.temperature, time))
 
     // endregion
 
@@ -213,6 +255,23 @@ open class AccelerationAmount<D : Unit<Distance>, T : Unit<Time>>(
     operator fun times(that: TimeAmount<T>) =
         SpeedAmount(amount = amount * that.amount,
                     unit = distance to time)
+
+    // endregion
+
+    // region -> TemperatureGradient
+
+    @JvmName("divSpecificHeatCapacity")
+    operator fun <D : Unit<Distance>, K : Unit<Temperature>, T : Unit<Time>> div(that: SpecificHeatCapacityAmount<D, K, T>) =
+        TemperatureGradientAmount(amount = amount / that.amount
+                                           / convert(that.distance to distance,
+                                                     that.distance to distance)
+                                           * convert(that.time to time,
+                                                     that.time to time),
+                                  unit = that.temperature to distance)
+
+    operator fun <K : Unit<Temperature>> div(that: SpecificHeatCapacityAmount<D, K, T>) =
+        TemperatureGradientAmount(amount = amount / that.amount,
+                                  unit = that.temperature to distance)
 
     // endregion
 

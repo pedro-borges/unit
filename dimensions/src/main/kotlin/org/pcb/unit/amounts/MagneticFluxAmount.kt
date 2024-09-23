@@ -277,6 +277,17 @@ open class MagneticFluxAmount<D : Unit<Distance>, EC : Unit<ElectricCurrent>, M 
         MagneticFluxDensityAmount(amount = amount / that.amount,
                                   unit = mass to U2(electricCurrent, time))
 
+    @JvmName("timesFuelEfficiency")
+    operator fun <D : Unit<Distance>> times(that: FuelEfficiencyAmount<D>) =
+        MagneticFluxDensityAmount(amount = amount * that.amount
+                                           / convert(that.distance to distance,
+                                                     that.distance to distance),
+                                  unit = mass to U2(electricCurrent, time))
+
+    operator fun times(that: FuelEfficiencyAmount<D>) =
+        MagneticFluxDensityAmount(amount = amount * that.amount,
+                                  unit = mass to U2(electricCurrent, time))
+
     // endregion
 
     // region -> Time

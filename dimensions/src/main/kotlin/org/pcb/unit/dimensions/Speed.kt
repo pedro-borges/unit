@@ -30,7 +30,7 @@ object Speed : Dimension
 
     operator fun div(that: VolumetricFlow) = FuelEfficiency
 
-    operator fun times(that: MassDensity) = Momentum
+    operator fun times(that: Mass) = Momentum
 
     operator fun div(that: SpecificEnergy) = Pace
 

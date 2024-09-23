@@ -17,17 +17,22 @@ object SpecificEnergy : Dimension
 
     operator fun div(that: Acceleration) = Distance
 
-    operator fun times(that: MassDensity) = Energy
+    operator fun times(that: Mass) = Energy
 
     operator fun div(that: SpecificVolume) = EnergyDensity
-    operator fun times(that: Mass) = EnergyDensity
+    operator fun times(that: MassDensity) = EnergyDensity
 
     operator fun times(that: MassFlowRate) = Power
 
     operator fun times(that: AreaDensity) = RadiantExposure
 
+    operator fun div(that: Temperature) = SpecificHeatCapacity
+    operator fun times(that: ThermalExpansionCoefficient) = SpecificHeatCapacity
+
     operator fun div(that: EnergyDensity) = SpecificVolume
 
     operator fun div(that: Speed) = Speed
     operator fun times(that: Pace) = Speed
+
+    operator fun div(that: SpecificHeatCapacity) = Temperature
 }

@@ -18,7 +18,7 @@ object VolumetricFlow : Dimension
     operator fun div(that: Volume) = Frequency
 
     operator fun div(that: SpecificVolume) = MassFlowRate
-    operator fun times(that: Mass) = MassFlowRate
+    operator fun times(that: MassDensity) = MassFlowRate
 
     operator fun times(that: AreaDensity) = Momentum
 

@@ -13,7 +13,7 @@ object Force : Dimension
 
     operator fun div(that: Force) = Scalar
 
-    operator fun div(that: MassDensity) = Acceleration
+    operator fun div(that: Mass) = Acceleration
 
     operator fun div(that: EnergyDensity) = Area
 
@@ -27,7 +27,9 @@ object Force : Dimension
 
     operator fun div(that: Momentum) = Frequency
 
-    operator fun div(that: Acceleration) = MassDensity
+    operator fun div(that: TemperatureGradient) = HeatCapacity
+
+    operator fun div(that: Acceleration) = Mass
 
     operator fun div(that: Speed) = MassFlowRate
     operator fun times(that: Pace) = MassFlowRate
@@ -46,6 +48,8 @@ object Force : Dimension
     operator fun div(that: Energy) = SpacialFrequency
 
     operator fun div(that: MassFlowRate) = Speed
+
+    operator fun div(that: HeatCapacity) = TemperatureGradient
 
     operator fun div(that: Yank) = Time
 

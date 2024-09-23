@@ -83,6 +83,17 @@ open class AreaAmount<D : Unit<Distance>>(
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
+    @JvmName("timesFuelEfficiency")
+    operator fun <D : Unit<Distance>> times(that: FuelEfficiencyAmount<D>) =
+        ScalarAmount(amount = amount * that.amount
+                              / convert(that.distance to distance,
+                                        that.distance to distance),
+                     unit = NUMERIC)
+
+    operator fun times(that: FuelEfficiencyAmount<D>) =
+        ScalarAmount(amount = amount * that.amount,
+                     unit = NUMERIC)
+
     // endregion
 
     // region -> Action
@@ -104,6 +115,24 @@ open class AreaAmount<D : Unit<Distance>>(
     operator fun div(that: DistanceAmount<D>) =
         DistanceAmount(amount = amount / that.amount,
                        unit = distance)
+
+    @JvmName("timesSpacialFrequency")
+    operator fun <D : Unit<Distance>> times(that: SpacialFrequencyAmount<D>) =
+        DistanceAmount(amount = amount * that.amount
+                                / convert(that.distance to distance),
+                       unit = distance)
+
+    operator fun times(that: SpacialFrequencyAmount<D>) =
+        DistanceAmount(amount = amount * that.amount,
+                       unit = distance)
+
+    // endregion
+
+    // region -> Energy
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: RadiantExposureAmount<M, T>) =
+        EnergyAmount(amount = amount * that.amount,
+                     unit = U2(distance, that.mass) to that.time)
 
     // endregion
 
@@ -174,6 +203,14 @@ open class AreaAmount<D : Unit<Distance>>(
 
     // endregion
 
+    // region -> MomentOfInertia
+
+    operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
+        MomentOfInertiaAmount(amount = amount * that.amount,
+                              unit = U2(distance, that.mass))
+
+    // endregion
+
     // region -> Pace
 
     @JvmName("divVolumetricFlow")
@@ -190,6 +227,30 @@ open class AreaAmount<D : Unit<Distance>>(
 
     // endregion
 
+    // region -> Power
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyFluxDensityAmount<M, T>) =
+        PowerAmount(amount = amount * that.amount,
+                    unit = U2(distance, that.mass) to that.time)
+
+    // endregion
+
+    // region -> SpacialFrequency
+
+    @JvmName("divVolume")
+    operator fun <D : Unit<Distance>> div(that: VolumeAmount<D>) =
+        SpacialFrequencyAmount(amount = amount / that.amount
+                                        / convert(that.distance to distance,
+                                                  that.distance to distance,
+                                                  that.distance to distance),
+                               unit = NUMERIC to distance)
+
+    operator fun div(that: VolumeAmount<D>) =
+        SpacialFrequencyAmount(amount = amount / that.amount,
+                               unit = NUMERIC to distance)
+
+    // endregion
+
     // region -> Volume
 
     @JvmName("timesDistance")
@@ -200,6 +261,16 @@ open class AreaAmount<D : Unit<Distance>>(
 
     operator fun times(that: DistanceAmount<D>) =
         VolumeAmount(amount = amount * that.amount,
+                     unit = distance)
+
+    @JvmName("divSpacialFrequency")
+    operator fun <D : Unit<Distance>> div(that: SpacialFrequencyAmount<D>) =
+        VolumeAmount(amount = amount / that.amount
+                              * convert(that.distance to distance),
+                     unit = distance)
+
+    operator fun div(that: SpacialFrequencyAmount<D>) =
+        VolumeAmount(amount = amount / that.amount,
                      unit = distance)
 
     // endregion
@@ -225,6 +296,20 @@ open class AreaAmount<D : Unit<Distance>>(
     operator fun <T : Unit<Time>> times(that: SpeedAmount<D, T>) =
         VolumetricFlowAmount(amount = amount * that.amount,
                              unit = distance to that.time)
+
+    // endregion
+
+    // region -> Yank
+
+    @JvmName("timesPowerDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: PowerDensityAmount<D, M, T>) =
+        YankAmount(amount = amount * that.amount
+                            / convert(that.distance to distance),
+                   unit = U2(distance, that.mass) to that.time)
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: PowerDensityAmount<D, M, T>) =
+        YankAmount(amount = amount * that.amount,
+                   unit = U2(distance, that.mass) to that.time)
 
     // endregion
 }

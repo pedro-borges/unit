@@ -10,8 +10,10 @@ import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.LuminousIntensity
+import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.SolidAngle
+import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
@@ -109,6 +111,36 @@ open class SolidAngleAmount<A : Unit<Angle>>(
     operator fun <LI : Unit<LuminousIntensity>> times(that: LuminousIntensityAmount<LI>) =
         LuminousFluxAmount(amount = amount * that.amount,
                            unit = U2(angle, that.luminousIntensity))
+
+    // endregion
+
+    // region -> Power
+
+    @JvmName("timesRadiantIntensity")
+    operator fun <A : Unit<Angle>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: RadiantIntensityAmount<A, D, M, T>) =
+        PowerAmount(amount = amount * that.amount
+                             / convert(that.angle to angle,
+                                       that.angle to angle),
+                    unit = U2(that.distance, that.mass) to that.time)
+
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: RadiantIntensityAmount<A, D, M, T>) =
+        PowerAmount(amount = amount * that.amount,
+                    unit = U2(that.distance, that.mass) to that.time)
+
+    // endregion
+
+    // region -> Yank
+
+    @JvmName("timesSpectralIntensity")
+    operator fun <A : Unit<Angle>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: SpectralIntensityAmount<A, D, M, T>) =
+        YankAmount(amount = amount * that.amount
+                            / convert(that.angle to angle,
+                                      that.angle to angle),
+                   unit = U2(that.distance, that.mass) to that.time)
+
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: SpectralIntensityAmount<A, D, M, T>) =
+        YankAmount(amount = amount * that.amount,
+                   unit = U2(that.distance, that.mass) to that.time)
 
     // endregion
 }

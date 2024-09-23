@@ -61,6 +61,8 @@ object Scalar : Dimension
     operator fun div(that: Area) = FuelEfficiency
     operator fun times(that: FuelEfficiency) = FuelEfficiency
 
+    operator fun times(that: HeatCapacity) = HeatCapacity
+
     operator fun times(that: Illuminance) = Illuminance
 
     operator fun times(that: Inductance) = Inductance
@@ -79,9 +81,9 @@ object Scalar : Dimension
 
     operator fun times(that: MagneticFluxDensity) = MagneticFluxDensity
 
-    operator fun div(that: SpecificVolume) = Mass
     operator fun times(that: Mass) = Mass
 
+    operator fun div(that: SpecificVolume) = MassDensity
     operator fun times(that: MassDensity) = MassDensity
 
     operator fun times(that: MassFlowRate) = MassFlowRate
@@ -112,7 +114,9 @@ object Scalar : Dimension
 
     operator fun times(that: SpecificEnergy) = SpecificEnergy
 
-    operator fun div(that: Mass) = SpecificVolume
+    operator fun times(that: SpecificHeatCapacity) = SpecificHeatCapacity
+
+    operator fun div(that: MassDensity) = SpecificVolume
     operator fun times(that: SpecificVolume) = SpecificVolume
 
     operator fun times(that: SpectralIntensity) = SpectralIntensity
@@ -120,7 +124,17 @@ object Scalar : Dimension
     operator fun div(that: Pace) = Speed
     operator fun times(that: Speed) = Speed
 
+    operator fun div(that: ThermalExpansionCoefficient) = Temperature
     operator fun times(that: Temperature) = Temperature
+
+    operator fun times(that: TemperatureGradient) = TemperatureGradient
+
+    operator fun times(that: ThermalConductivity) = ThermalConductivity
+
+    operator fun div(that: Temperature) = ThermalExpansionCoefficient
+    operator fun times(that: ThermalExpansionCoefficient) = ThermalExpansionCoefficient
+
+    operator fun times(that: ThermalResistance) = ThermalResistance
 
     operator fun div(that: Frequency) = Time
     operator fun times(that: Time) = Time

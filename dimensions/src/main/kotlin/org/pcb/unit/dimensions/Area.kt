@@ -27,9 +27,9 @@ object Area : Dimension
 
     operator fun times(that: MagneticFluxDensity) = MagneticFlux
 
-    operator fun times(that: AreaDensity) = MassDensity
+    operator fun times(that: AreaDensity) = Mass
 
-    operator fun times(that: MassDensity) = MomentOfInertia
+    operator fun times(that: Mass) = MomentOfInertia
 
     operator fun div(that: VolumetricFlow) = Pace
 

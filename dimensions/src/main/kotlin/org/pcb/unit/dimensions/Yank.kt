@@ -27,9 +27,9 @@ object Yank : Dimension
 
     operator fun div(that: Force) = Frequency
 
-    operator fun div(that: MassDensity) = Jerk
+    operator fun div(that: Mass) = Jerk
 
-    operator fun div(that: Jerk) = MassDensity
+    operator fun div(that: Jerk) = Mass
 
     operator fun div(that: Acceleration) = MassFlowRate
 
@@ -49,4 +49,9 @@ object Yank : Dimension
     operator fun div(that: SolidAngle) = SpectralIntensity
 
     operator fun div(that: RadiantExposure) = Speed
+
+    operator fun div(that: ThermalConductivity) = Temperature
+
+    operator fun div(that: Temperature) = ThermalConductivity
+    operator fun times(that: ThermalExpansionCoefficient) = ThermalConductivity
 }

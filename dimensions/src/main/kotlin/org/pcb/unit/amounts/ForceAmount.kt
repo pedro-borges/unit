@@ -13,6 +13,7 @@ import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Force
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Temperature
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
 import org.pcb.unit.kilo
@@ -128,6 +129,22 @@ open class ForceAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Distance
+
+    @JvmName("divRadiantExposure")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: RadiantExposureAmount<M, T>) =
+        DistanceAmount(amount = amount / that.amount
+                                / convert(that.mass to mass)
+                                * convert(that.time to time,
+                                          that.time to time),
+                       unit = distance)
+
+    operator fun div(that: RadiantExposureAmount<M, T>) =
+        DistanceAmount(amount = amount / that.amount,
+                       unit = distance)
+
+    // endregion
+
     // region -> Energy
 
     @JvmName("timesDistance")
@@ -138,6 +155,16 @@ open class ForceAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     operator fun times(that: DistanceAmount<D>) =
         EnergyAmount(amount = amount * that.amount,
+                     unit = U2(distance, mass) to time)
+
+    @JvmName("divSpacialFrequency")
+    operator fun <D : Unit<Distance>> div(that: SpacialFrequencyAmount<D>) =
+        EnergyAmount(amount = amount / that.amount
+                              * convert(that.distance to distance),
+                     unit = U2(distance, mass) to time)
+
+    operator fun div(that: SpacialFrequencyAmount<D>) =
+        EnergyAmount(amount = amount / that.amount,
                      unit = U2(distance, mass) to time)
 
     // endregion
@@ -155,6 +182,17 @@ open class ForceAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
         EnergyDensityAmount(amount = amount / that.amount,
                             unit = mass to U2(distance, time))
 
+    @JvmName("timesFuelEfficiency")
+    operator fun <D : Unit<Distance>> times(that: FuelEfficiencyAmount<D>) =
+        EnergyDensityAmount(amount = amount * that.amount
+                                     / convert(that.distance to distance,
+                                               that.distance to distance),
+                            unit = mass to U2(distance, time))
+
+    operator fun times(that: FuelEfficiencyAmount<D>) =
+        EnergyDensityAmount(amount = amount * that.amount,
+                            unit = mass to U2(distance, time))
+
     // endregion
 
     // region -> Frequency
@@ -170,6 +208,20 @@ open class ForceAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: MomentumAmount<D, M, T>) =
         FrequencyAmount(amount = amount / that.amount,
                         unit = NUMERIC to time)
+
+    // endregion
+
+    // region -> HeatCapacity
+
+    @JvmName("divTemperatureGradient")
+    operator fun <D : Unit<Distance>, K : Unit<Temperature>> div(that: TemperatureGradientAmount<D, K>) =
+        HeatCapacityAmount(amount = amount / that.amount
+                                    * convert(that.distance to distance),
+                           unit = U2(distance, mass) to U2(that.temperature, time))
+
+    operator fun <K : Unit<Temperature>> div(that: TemperatureGradientAmount<D, K>) =
+        HeatCapacityAmount(amount = amount / that.amount,
+                           unit = U2(distance, mass) to U2(that.temperature, time))
 
     // endregion
 
@@ -284,6 +336,48 @@ open class ForceAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> RadiantExposure
+
+    @JvmName("divDistance")
+    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
+        RadiantExposureAmount(amount = amount / that.amount
+                                       / convert(that.distance to distance),
+                              unit = mass to time)
+
+    operator fun div(that: DistanceAmount<D>) =
+        RadiantExposureAmount(amount = amount / that.amount,
+                              unit = mass to time)
+
+    @JvmName("timesSpacialFrequency")
+    operator fun <D : Unit<Distance>> times(that: SpacialFrequencyAmount<D>) =
+        RadiantExposureAmount(amount = amount * that.amount
+                                       / convert(that.distance to distance),
+                              unit = mass to time)
+
+    operator fun times(that: SpacialFrequencyAmount<D>) =
+        RadiantExposureAmount(amount = amount * that.amount,
+                              unit = mass to time)
+
+    // endregion
+
+    // region -> SpacialFrequency
+
+    @JvmName("divEnergy")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyAmount<D, M, T>) =
+        SpacialFrequencyAmount(amount = amount / that.amount
+                                        / convert(that.distance to distance,
+                                                  that.distance to distance,
+                                                  that.mass to mass)
+                                        * convert(that.time to time,
+                                                  that.time to time),
+                               unit = NUMERIC to distance)
+
+    operator fun div(that: EnergyAmount<D, M, T>) =
+        SpacialFrequencyAmount(amount = amount / that.amount,
+                               unit = NUMERIC to distance)
+
+    // endregion
+
     // region -> Speed
 
     @JvmName("divMassFlowRate")
@@ -296,6 +390,24 @@ open class ForceAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: MassFlowRateAmount<M, T>) =
         SpeedAmount(amount = amount / that.amount,
                     unit = distance to time)
+
+    // endregion
+
+    // region -> TemperatureGradient
+
+    @JvmName("divHeatCapacity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: HeatCapacityAmount<D, M, K, T>) =
+        TemperatureGradientAmount(amount = amount / that.amount
+                                           / convert(that.distance to distance,
+                                                     that.distance to distance,
+                                                     that.mass to mass)
+                                           * convert(that.time to time,
+                                                     that.time to time),
+                                  unit = that.temperature to distance)
+
+    operator fun <K : Unit<Temperature>> div(that: HeatCapacityAmount<D, M, K, T>) =
+        TemperatureGradientAmount(amount = amount / that.amount,
+                                  unit = that.temperature to distance)
 
     // endregion
 

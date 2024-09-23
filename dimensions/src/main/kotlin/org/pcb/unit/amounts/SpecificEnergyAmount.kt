@@ -12,6 +12,7 @@ import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.SpecificEnergy
+import org.pcb.unit.dimensions.Temperature
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
 import org.pcb.unit.major
@@ -105,6 +106,16 @@ open class SpecificEnergyAmount<D : Unit<Distance>, T : Unit<Time>>(
         AccelerationAmount(amount = amount / that.amount,
                            unit = distance to time)
 
+    @JvmName("timesSpacialFrequency")
+    operator fun <D : Unit<Distance>> times(that: SpacialFrequencyAmount<D>) =
+        AccelerationAmount(amount = amount * that.amount
+                                    / convert(that.distance to distance),
+                           unit = distance to time)
+
+    operator fun times(that: SpacialFrequencyAmount<D>) =
+        AccelerationAmount(amount = amount * that.amount,
+                           unit = distance to time)
+
     // endregion
 
     // region -> Distance
@@ -133,6 +144,18 @@ open class SpecificEnergyAmount<D : Unit<Distance>, T : Unit<Time>>(
 
     // region -> EnergyDensity
 
+    @JvmName("timesMassDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: MassDensityAmount<D, M>) =
+        EnergyDensityAmount(amount = amount * that.amount
+                                     / convert(that.distance to distance,
+                                               that.distance to distance,
+                                               that.distance to distance),
+                            unit = that.mass to U2(distance, time))
+
+    operator fun <M : Unit<Mass>> times(that: MassDensityAmount<D, M>) =
+        EnergyDensityAmount(amount = amount * that.amount,
+                            unit = that.mass to U2(distance, time))
+
     @JvmName("divSpecificVolume")
     operator fun <D : Unit<Distance>, M : Unit<Mass>> div(that: SpecificVolumeAmount<D, M>) =
         EnergyDensityAmount(amount = amount / that.amount
@@ -158,6 +181,33 @@ open class SpecificEnergyAmount<D : Unit<Distance>, T : Unit<Time>>(
     operator fun <M : Unit<Mass>> times(that: MassFlowRateAmount<M, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, that.mass) to time)
+
+    // endregion
+
+    // region -> RadiantExposure
+
+    @JvmName("timesAreaDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>> times(that: AreaDensityAmount<D, M>) =
+        RadiantExposureAmount(amount = amount * that.amount
+                                       / convert(that.distance to distance,
+                                                 that.distance to distance),
+                              unit = that.mass to time)
+
+    operator fun <M : Unit<Mass>> times(that: AreaDensityAmount<D, M>) =
+        RadiantExposureAmount(amount = amount * that.amount,
+                              unit = that.mass to time)
+
+    // endregion
+
+    // region -> SpecificHeatCapacity
+
+    operator fun <K : Unit<Temperature>> div(that: TemperatureAmount<K>) =
+        SpecificHeatCapacityAmount(amount = amount / that.amount,
+                                   unit = distance to U2(that.temperature, time))
+
+    operator fun <K : Unit<Temperature>> times(that: ThermalExpansionCoefficientAmount<K>) =
+        SpecificHeatCapacityAmount(amount = amount * that.amount,
+                                   unit = distance to U2(that.temperature, time))
 
     // endregion
 
@@ -200,6 +250,23 @@ open class SpecificEnergyAmount<D : Unit<Distance>, T : Unit<Time>>(
     operator fun div(that: SpeedAmount<D, T>) =
         SpeedAmount(amount = amount / that.amount,
                     unit = distance to time)
+
+    // endregion
+
+    // region -> Temperature
+
+    @JvmName("divSpecificHeatCapacity")
+    operator fun <D : Unit<Distance>, K : Unit<Temperature>, T : Unit<Time>> div(that: SpecificHeatCapacityAmount<D, K, T>) =
+        TemperatureAmount(amount = amount / that.amount
+                                   / convert(that.distance to distance,
+                                             that.distance to distance)
+                                   * convert(that.time to time,
+                                             that.time to time),
+                          unit = that.temperature)
+
+    operator fun <K : Unit<Temperature>> div(that: SpecificHeatCapacityAmount<D, K, T>) =
+        TemperatureAmount(amount = amount / that.amount,
+                          unit = that.temperature)
 
     // endregion
 }

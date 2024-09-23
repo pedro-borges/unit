@@ -9,6 +9,7 @@ import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
+import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.Mass
@@ -120,6 +121,23 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Area
+
+    @JvmName("divEnergyFluxDensity")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: EnergyFluxDensityAmount<M, T>) =
+        AreaAmount(amount = amount / that.amount
+                            / convert(that.mass to mass)
+                            * convert(that.time to time,
+                                      that.time to time,
+                                      that.time to time),
+                   unit = distance)
+
+    operator fun div(that: EnergyFluxDensityAmount<M, T>) =
+        AreaAmount(amount = amount / that.amount,
+                   unit = distance)
+
+    // endregion
+
     // region -> Distance
 
     @JvmName("divYank")
@@ -206,6 +224,32 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> EnergyFluxDensity
+
+    @JvmName("divArea")
+    operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
+        EnergyFluxDensityAmount(amount = amount / that.amount
+                                         / convert(that.distance to distance,
+                                                   that.distance to distance),
+                                unit = mass to time)
+
+    operator fun div(that: AreaAmount<D>) =
+        EnergyFluxDensityAmount(amount = amount / that.amount,
+                                unit = mass to time)
+
+    @JvmName("timesFuelEfficiency")
+    operator fun <D : Unit<Distance>> times(that: FuelEfficiencyAmount<D>) =
+        EnergyFluxDensityAmount(amount = amount * that.amount
+                                         / convert(that.distance to distance,
+                                                   that.distance to distance),
+                                unit = mass to time)
+
+    operator fun times(that: FuelEfficiencyAmount<D>) =
+        EnergyFluxDensityAmount(amount = amount * that.amount,
+                                unit = mass to time)
+
+    // endregion
+
     // region -> Force
 
     @JvmName("timesPace")
@@ -283,6 +327,49 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> PowerDensity
+
+    @JvmName("divVolume")
+    operator fun <D : Unit<Distance>> div(that: VolumeAmount<D>) =
+        PowerDensityAmount(amount = amount / that.amount
+                                    / convert(that.distance to distance,
+                                              that.distance to distance,
+                                              that.distance to distance),
+                           unit = mass to U2(distance, time))
+
+    operator fun div(that: VolumeAmount<D>) =
+        PowerDensityAmount(amount = amount / that.amount,
+                           unit = mass to U2(distance, time))
+
+    // endregion
+
+    // region -> RadiantIntensity
+
+    operator fun <A : Unit<Angle>> div(that: SolidAngleAmount<A>) =
+        RadiantIntensityAmount(amount = amount / that.amount,
+                               unit = U2(distance, mass) to U2(that.angle, time))
+
+    // endregion
+
+    // region -> SolidAngle
+
+    @JvmName("divRadiantIntensity")
+    operator fun <A : Unit<Angle>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: RadiantIntensityAmount<A, D, M, T>) =
+        SolidAngleAmount(amount = amount / that.amount
+                                  / convert(that.distance to distance,
+                                            that.distance to distance,
+                                            that.mass to mass)
+                                  * convert(that.time to time,
+                                            that.time to time,
+                                            that.time to time),
+                         unit = that.angle)
+
+    operator fun <A : Unit<Angle>> div(that: RadiantIntensityAmount<A, D, M, T>) =
+        SolidAngleAmount(amount = amount / that.amount,
+                         unit = that.angle)
+
+    // endregion
+
     // region -> SpecificEnergy
 
     @JvmName("divMassFlowRate")
@@ -315,6 +402,24 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Volume
+
+    @JvmName("divPowerDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: PowerDensityAmount<D, M, T>) =
+        VolumeAmount(amount = amount / that.amount
+                              / convert(that.mass to mass)
+                              * convert(that.distance to distance,
+                                        that.time to time,
+                                        that.time to time,
+                                        that.time to time),
+                     unit = distance)
+
+    operator fun div(that: PowerDensityAmount<D, M, T>) =
+        VolumeAmount(amount = amount / that.amount,
+                     unit = distance)
+
+    // endregion
+
     // region -> VolumetricFlow
 
     @JvmName("divEnergyDensity")
@@ -342,6 +447,16 @@ open class PowerAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     operator fun div(that: DistanceAmount<D>) =
         YankAmount(amount = amount / that.amount,
+                   unit = U2(distance, mass) to time)
+
+    @JvmName("timesSpacialFrequency")
+    operator fun <D : Unit<Distance>> times(that: SpacialFrequencyAmount<D>) =
+        YankAmount(amount = amount * that.amount
+                            / convert(that.distance to distance),
+                   unit = U2(distance, mass) to time)
+
+    operator fun times(that: SpacialFrequencyAmount<D>) =
+        YankAmount(amount = amount * that.amount,
                    unit = U2(distance, mass) to time)
 
     // endregion

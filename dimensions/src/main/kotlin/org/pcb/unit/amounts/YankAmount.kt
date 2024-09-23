@@ -9,9 +9,11 @@ import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
+import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Temperature
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.dimensions.Yank
 import org.pcb.unit.div
@@ -115,6 +117,65 @@ open class YankAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Area
+
+    @JvmName("divPowerDensity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: PowerDensityAmount<D, M, T>) =
+        AreaAmount(amount = amount / that.amount
+                            / convert(that.mass to mass)
+                            * convert(that.distance to distance,
+                                      that.time to time,
+                                      that.time to time,
+                                      that.time to time),
+                   unit = distance)
+
+    operator fun div(that: PowerDensityAmount<D, M, T>) =
+        AreaAmount(amount = amount / that.amount,
+                   unit = distance)
+
+    // endregion
+
+    // region -> Distance
+
+    @JvmName("divEnergyFluxDensity")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: EnergyFluxDensityAmount<M, T>) =
+        DistanceAmount(amount = amount / that.amount
+                                / convert(that.mass to mass)
+                                * convert(that.time to time,
+                                          that.time to time,
+                                          that.time to time),
+                       unit = distance)
+
+    operator fun div(that: EnergyFluxDensityAmount<M, T>) =
+        DistanceAmount(amount = amount / that.amount,
+                       unit = distance)
+
+    // endregion
+
+    // region -> EnergyFluxDensity
+
+    @JvmName("divDistance")
+    operator fun <D : Unit<Distance>> div(that: DistanceAmount<D>) =
+        EnergyFluxDensityAmount(amount = amount / that.amount
+                                         / convert(that.distance to distance),
+                                unit = mass to time)
+
+    operator fun div(that: DistanceAmount<D>) =
+        EnergyFluxDensityAmount(amount = amount / that.amount,
+                                unit = mass to time)
+
+    @JvmName("timesSpacialFrequency")
+    operator fun <D : Unit<Distance>> times(that: SpacialFrequencyAmount<D>) =
+        EnergyFluxDensityAmount(amount = amount * that.amount
+                                         / convert(that.distance to distance),
+                                unit = mass to time)
+
+    operator fun times(that: SpacialFrequencyAmount<D>) =
+        EnergyFluxDensityAmount(amount = amount * that.amount,
+                                unit = mass to time)
+
+    // endregion
+
     // region -> Force
 
     @JvmName("divFrequency")
@@ -214,6 +275,159 @@ open class YankAmount<D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun times(that: DistanceAmount<D>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, mass) to time)
+
+    @JvmName("divSpacialFrequency")
+    operator fun <D : Unit<Distance>> div(that: SpacialFrequencyAmount<D>) =
+        PowerAmount(amount = amount / that.amount
+                             * convert(that.distance to distance),
+                    unit = U2(distance, mass) to time)
+
+    operator fun div(that: SpacialFrequencyAmount<D>) =
+        PowerAmount(amount = amount / that.amount,
+                    unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> PowerDensity
+
+    @JvmName("divArea")
+    operator fun <D : Unit<Distance>> div(that: AreaAmount<D>) =
+        PowerDensityAmount(amount = amount / that.amount
+                                    / convert(that.distance to distance,
+                                              that.distance to distance),
+                           unit = mass to U2(distance, time))
+
+    operator fun div(that: AreaAmount<D>) =
+        PowerDensityAmount(amount = amount / that.amount,
+                           unit = mass to U2(distance, time))
+
+    @JvmName("timesFuelEfficiency")
+    operator fun <D : Unit<Distance>> times(that: FuelEfficiencyAmount<D>) =
+        PowerDensityAmount(amount = amount * that.amount
+                                    / convert(that.distance to distance,
+                                              that.distance to distance),
+                           unit = mass to U2(distance, time))
+
+    operator fun times(that: FuelEfficiencyAmount<D>) =
+        PowerDensityAmount(amount = amount * that.amount,
+                           unit = mass to U2(distance, time))
+
+    // endregion
+
+    // region -> RadiantExposure
+
+    @JvmName("timesPace")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<D, T>) =
+        RadiantExposureAmount(amount = amount * that.amount
+                                       * convert(that.time to time)
+                                       / convert(that.distance to distance),
+                              unit = mass to time)
+
+    operator fun times(that: PaceAmount<D, T>) =
+        RadiantExposureAmount(amount = amount * that.amount,
+                              unit = mass to time)
+
+    @JvmName("divSpeed")
+    operator fun <D : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<D, T>) =
+        RadiantExposureAmount(amount = amount / that.amount
+                                       / convert(that.distance to distance)
+                                       * convert(that.time to time),
+                              unit = mass to time)
+
+    operator fun div(that: SpeedAmount<D, T>) =
+        RadiantExposureAmount(amount = amount / that.amount,
+                              unit = mass to time)
+
+    // endregion
+
+    // region -> SolidAngle
+
+    @JvmName("divSpectralIntensity")
+    operator fun <A : Unit<Angle>, D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: SpectralIntensityAmount<A, D, M, T>) =
+        SolidAngleAmount(amount = amount / that.amount
+                                  / convert(that.distance to distance,
+                                            that.mass to mass)
+                                  * convert(that.time to time,
+                                            that.time to time,
+                                            that.time to time),
+                         unit = that.angle)
+
+    operator fun <A : Unit<Angle>> div(that: SpectralIntensityAmount<A, D, M, T>) =
+        SolidAngleAmount(amount = amount / that.amount,
+                         unit = that.angle)
+
+    // endregion
+
+    // region -> SpacialFrequency
+
+    @JvmName("divPower")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: PowerAmount<D, M, T>) =
+        SpacialFrequencyAmount(amount = amount / that.amount
+                                        / convert(that.distance to distance,
+                                                  that.distance to distance,
+                                                  that.mass to mass)
+                                        * convert(that.time to time,
+                                                  that.time to time,
+                                                  that.time to time),
+                               unit = NUMERIC to distance)
+
+    operator fun div(that: PowerAmount<D, M, T>) =
+        SpacialFrequencyAmount(amount = amount / that.amount,
+                               unit = NUMERIC to distance)
+
+    // endregion
+
+    // region -> SpectralIntensity
+
+    operator fun <A : Unit<Angle>> div(that: SolidAngleAmount<A>) =
+        SpectralIntensityAmount(amount = amount / that.amount,
+                                unit = U2(distance, mass) to U2(that.angle, time))
+
+    // endregion
+
+    // region -> Speed
+
+    @JvmName("divRadiantExposure")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: RadiantExposureAmount<M, T>) =
+        SpeedAmount(amount = amount / that.amount
+                             / convert(that.mass to mass)
+                             * convert(that.time to time,
+                                       that.time to time),
+                    unit = distance to time)
+
+    operator fun div(that: RadiantExposureAmount<M, T>) =
+        SpeedAmount(amount = amount / that.amount,
+                    unit = distance to time)
+
+    // endregion
+
+    // region -> Temperature
+
+    @JvmName("divThermalConductivity")
+    operator fun <D : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: ThermalConductivityAmount<D, M, K, T>) =
+        TemperatureAmount(amount = amount / that.amount
+                                   / convert(that.distance to distance,
+                                             that.mass to mass)
+                                   * convert(that.time to time,
+                                             that.time to time,
+                                             that.time to time),
+                          unit = that.temperature)
+
+    operator fun <K : Unit<Temperature>> div(that: ThermalConductivityAmount<D, M, K, T>) =
+        TemperatureAmount(amount = amount / that.amount,
+                          unit = that.temperature)
+
+    // endregion
+
+    // region -> ThermalConductivity
+
+    operator fun <K : Unit<Temperature>> div(that: TemperatureAmount<K>) =
+        ThermalConductivityAmount(amount = amount / that.amount,
+                                  unit = U2(distance, mass) to U2(that.temperature, time))
+
+    operator fun <K : Unit<Temperature>> times(that: ThermalExpansionCoefficientAmount<K>) =
+        ThermalConductivityAmount(amount = amount * that.amount,
+                                  unit = U2(distance, mass) to U2(that.temperature, time))
 
     // endregion
 }

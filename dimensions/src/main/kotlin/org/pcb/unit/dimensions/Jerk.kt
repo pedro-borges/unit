@@ -24,5 +24,5 @@ object Jerk : Dimension
 
     operator fun div(that: Snap) = Time
 
-    operator fun times(that: MassDensity) = Yank
+    operator fun times(that: Mass) = Yank
 }
