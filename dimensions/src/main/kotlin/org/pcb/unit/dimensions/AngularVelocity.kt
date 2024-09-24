@@ -1,12 +1,11 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(angle = 1,
-           time = -1)
 object AngularVelocity : Dimension
 {
+    override val composite = mapOf(Angle to 1,
+                                   Time to -1)
+
     operator fun div(that: Scalar) = AngularVelocity
     operator fun times(that: Scalar) = AngularVelocity
 

@@ -1,14 +1,13 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(distance = 1,
-           mass = 1,
-           angle = -2,
-           time = -3)
 object SpectralIntensity : Dimension
 {
+    override val composite = mapOf(Distance to 1,
+                                   Mass to 1,
+                                   Angle to -2,
+                                   Time to -3)
+
     operator fun div(that: Scalar) = SpectralIntensity
     operator fun times(that: Scalar) = SpectralIntensity
 

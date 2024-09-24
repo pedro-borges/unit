@@ -1,13 +1,12 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(distance = 3,
-           substance = -1,
-           time = -1)
 object CatalyticEfficiency : Dimension
 {
+    override val composite = mapOf(Distance to 3,
+                                   Substance to -1,
+                                   Time to -1)
+
     operator fun div(that: Scalar) = CatalyticEfficiency
     operator fun times(that: Scalar) = CatalyticEfficiency
 

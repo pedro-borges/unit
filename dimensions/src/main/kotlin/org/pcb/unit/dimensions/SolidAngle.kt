@@ -1,11 +1,10 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(angle = 2)
 object SolidAngle : Dimension
 {
+    override val composite = mapOf(Angle to 2)
+
     operator fun div(that: Scalar) = SolidAngle
     operator fun times(that: Scalar) = SolidAngle
 

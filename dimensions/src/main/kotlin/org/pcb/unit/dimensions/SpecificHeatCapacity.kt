@@ -1,13 +1,12 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(distance = 2,
-           temperature = -1,
-           time = -2)
 object SpecificHeatCapacity : Dimension
 {
+    override val composite = mapOf(Distance to 2,
+                                   Temperature to -1,
+                                   Time to -2)
+
     operator fun div(that: Scalar) = SpecificHeatCapacity
     operator fun times(that: Scalar) = SpecificHeatCapacity
 

@@ -1,13 +1,12 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(mass = 1,
-           electricCurrent = -1,
-           time = -2)
 object MagneticFluxDensity : Dimension
 {
+    override val composite = mapOf(Mass to 1,
+                                   ElectricCurrent to -1,
+                                   Time to -2)
+
     operator fun div(that: Scalar) = MagneticFluxDensity
     operator fun times(that: Scalar) = MagneticFluxDensity
 

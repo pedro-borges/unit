@@ -1,12 +1,11 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(temperature = 1,
-           distance = -1)
 object TemperatureGradient : Dimension
 {
+    override val composite = mapOf(Temperature to 1,
+                                   Distance to -1)
+
     operator fun div(that: Scalar) = TemperatureGradient
     operator fun times(that: Scalar) = TemperatureGradient
 

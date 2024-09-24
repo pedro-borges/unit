@@ -1,13 +1,12 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(substance = 1,
-           time = -1,
-           distance = -3)
 object ReactionRate : Dimension
 {
+    override val composite = mapOf(Substance to 1,
+                                   Time to -1,
+                                   Distance to -3)
+
     operator fun div(that: Scalar) = ReactionRate
     operator fun times(that: Scalar) = ReactionRate
 

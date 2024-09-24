@@ -1,12 +1,11 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(substance = 1,
-           distance = -3)
 object Molarity : Dimension
 {
+    override val composite = mapOf(Substance to 1,
+                                   Distance to -3)
+
     operator fun div(that: Scalar) = Molarity
     operator fun times(that: Scalar) = Molarity
 

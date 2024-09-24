@@ -1,11 +1,10 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite()
 object Scalar : Dimension
 {
+    override val composite = mapOf<Dimension, Int>()
+
     operator fun div(that: Scalar) = Scalar
     operator fun times(that: Scalar) = Scalar
 

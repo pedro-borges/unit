@@ -1,14 +1,13 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(distance = 2,
-           mass = 1,
-           electricCurrent = -2,
-           time = -3)
 object ElectricResistance : Dimension
 {
+    override val composite = mapOf(Distance to 2,
+                                   Mass to 1,
+                                   ElectricCurrent to -2,
+                                   Time to -3)
+
     operator fun div(that: Scalar) = ElectricResistance
     operator fun times(that: Scalar) = ElectricResistance
 

@@ -1,12 +1,11 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(distance = 3,
-           substance = -1)
 object MolarVolume : Dimension
 {
+    override val composite = mapOf(Distance to 3,
+                                   Substance to -1)
+
     operator fun div(that: Scalar) = MolarVolume
     operator fun times(that: Scalar) = MolarVolume
 

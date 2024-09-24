@@ -1,13 +1,12 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(distance = 1,
-           mass = 1,
-           time = -3)
 object Yank : Dimension
 {
+    override val composite = mapOf(Distance to 1,
+                                   Mass to 1,
+                                   Time to -3)
+
     operator fun div(that: Scalar) = Yank
     operator fun times(that: Scalar) = Yank
 

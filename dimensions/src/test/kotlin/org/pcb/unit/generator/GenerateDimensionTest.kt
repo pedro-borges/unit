@@ -4,11 +4,8 @@ import java.io.File
 import kotlin.test.Ignore
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
-import org.pcb.unit.Composite
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.generator.Dimensions.Definition
-import org.pcb.unit.generator.Dimensions.max
-import org.pcb.unit.generator.Dimensions.min
 import org.pcb.unit.minus
 import org.pcb.unit.plus
 
@@ -60,12 +57,13 @@ class GenerateDimensionTest
             .map { regions[it] }
             .joinToString(separator = "\n")
             .let {
-                "package org.pcb.unit.dimensions\n\n" +
-                "import org.pcb.unit.Composite\n\n" +
+                "package org.pcb.unit.dimensions\n" +
+                "\n" +
                 "@Suppress(\"UNUSED_PARAMETER\")\n" +
-                "${dimension.composite.print()}\n" +
                 "object ${dimension.name} : Dimension\n" +
                 "{\n" +
+                "    override val composite = ${dimension.composite.buildCanonMap()}\n" +
+                "\n" +
                 it +
                 "}\n"
             }
@@ -76,27 +74,5 @@ class GenerateDimensionTest
         source.writeText(contents)
 
         println(contents)
-    }
-
-    private fun Composite.print(): String
-    {
-        val result = ArrayList<String>()
-
-        for (i in max() downTo min())
-        {
-            if (i == 0) continue
-
-            if (angle == i) result += "angle = $angle"
-            if (currency == i) result += "currency = $currency"
-            if (distance == i) result += "distance = $distance"
-            if (electricCurrent == i) result += "electricCurrent = $electricCurrent"
-            if (luminousIntensity == i) result += "luminousIntensity = $luminousIntensity"
-            if (mass == i) result += "mass = $mass"
-            if (substance == i) result += "substance = $substance"
-            if (temperature == i) result += "temperature = $temperature"
-            if (time == i) result += "time = $time"
-        }
-
-        return "@Composite(" + result.joinToString(",\n") + ")"
     }
 }

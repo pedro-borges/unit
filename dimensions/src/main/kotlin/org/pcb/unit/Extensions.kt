@@ -125,3 +125,17 @@ fun Int.toSuperscript() =
         .replace('7', '⁷')
         .replace('8', '⁸')
         .replace('9', '⁹')
+
+fun Int.toSubscript() =
+    toString()
+        .replace('-', '₋')
+        .replace('0', '₀')
+        .replace('1', '₁')
+        .replace('2', '₂')
+        .replace('3', '₃')
+        .replace('4', '₄')
+        .replace('5', '₅')
+        .replace('6', '₆')
+        .replace('7', '₇')
+        .replace('8', '₈')
+        .replace('9', '₉')

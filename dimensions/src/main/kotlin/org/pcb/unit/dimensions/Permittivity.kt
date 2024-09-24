@@ -1,14 +1,13 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(time = 4,
-           electricCurrent = 2,
-           mass = -1,
-           distance = -3)
 object Permittivity : Dimension
 {
+    override val composite = mapOf(Time to 4,
+                                   ElectricCurrent to 2,
+                                   Mass to -1,
+                                   Distance to -3)
+
     operator fun div(that: Scalar) = Permittivity
     operator fun times(that: Scalar) = Permittivity
 

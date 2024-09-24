@@ -1,12 +1,11 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(mass = 1,
-           time = -2)
 object RadiantExposure : Dimension
 {
+    override val composite = mapOf(Mass to 1,
+                                   Time to -2)
+
     operator fun div(that: Scalar) = RadiantExposure
     operator fun times(that: Scalar) = RadiantExposure
 

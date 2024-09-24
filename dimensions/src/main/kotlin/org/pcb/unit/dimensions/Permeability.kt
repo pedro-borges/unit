@@ -1,14 +1,13 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(distance = 1,
-           mass = 1,
-           electricCurrent = -2,
-           time = -2)
 object Permeability : Dimension
 {
+    override val composite = mapOf(Distance to 1,
+                                   Mass to 1,
+                                   ElectricCurrent to -2,
+                                   Time to -2)
+
     operator fun div(that: Scalar) = Permeability
     operator fun times(that: Scalar) = Permeability
 

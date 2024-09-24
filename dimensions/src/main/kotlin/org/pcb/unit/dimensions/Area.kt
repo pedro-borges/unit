@@ -1,11 +1,10 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(distance = 2)
 object Area : Dimension
 {
+    override val composite = mapOf(Distance to 2)
+
     operator fun div(that: Scalar) = Area
     operator fun times(that: Scalar) = Area
 

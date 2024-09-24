@@ -1,13 +1,12 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(angle = 2,
-           luminousIntensity = 1,
-           distance = -2)
 object Illuminance : Dimension
 {
+    override val composite = mapOf(Angle to 2,
+                                   LuminousIntensity to 1,
+                                   Distance to -2)
+
     operator fun div(that: Scalar) = Illuminance
     operator fun times(that: Scalar) = Illuminance
 

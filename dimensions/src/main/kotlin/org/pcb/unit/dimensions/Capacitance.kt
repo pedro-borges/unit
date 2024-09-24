@@ -1,14 +1,13 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(time = 4,
-           electricCurrent = 2,
-           mass = -1,
-           distance = -2)
 object Capacitance : Dimension
 {
+    override val composite = mapOf(Time to 4,
+                                   ElectricCurrent to 2,
+                                   Mass to -1,
+                                   Distance to -2)
+
     operator fun div(that: Scalar) = Capacitance
     operator fun times(that: Scalar) = Capacitance
 

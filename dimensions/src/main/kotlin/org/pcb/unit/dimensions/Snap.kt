@@ -1,12 +1,11 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(distance = 1,
-           time = -4)
 object Snap : Dimension
 {
+    override val composite = mapOf(Distance to 1,
+                                   Time to -4)
+
     operator fun div(that: Scalar) = Snap
     operator fun times(that: Scalar) = Snap
 

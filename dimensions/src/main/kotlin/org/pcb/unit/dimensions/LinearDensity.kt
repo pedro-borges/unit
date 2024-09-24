@@ -1,12 +1,11 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(mass = 1,
-           distance = -1)
 object LinearDensity : Dimension
 {
+    override val composite = mapOf(Mass to 1,
+                                   Distance to -1)
+
     operator fun div(that: Scalar) = LinearDensity
     operator fun times(that: Scalar) = LinearDensity
 

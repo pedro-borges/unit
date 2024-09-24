@@ -1,12 +1,11 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(distance = 2,
-           time = -2)
 object SpecificEnergy : Dimension
 {
+    override val composite = mapOf(Distance to 2,
+                                   Time to -2)
+
     operator fun div(that: Scalar) = SpecificEnergy
     operator fun times(that: Scalar) = SpecificEnergy
 

@@ -1,14 +1,13 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(time = 3,
-           electricCurrent = 2,
-           mass = -1,
-           substance = -1)
 object MolarConductivity : Dimension
 {
+    override val composite = mapOf(Time to 3,
+                                   ElectricCurrent to 2,
+                                   Mass to -1,
+                                   Substance to -1)
+
     operator fun div(that: Scalar) = MolarConductivity
     operator fun times(that: Scalar) = MolarConductivity
 

@@ -1,11 +1,10 @@
 package org.pcb.unit.dimensions
 
-import org.pcb.unit.Composite
-
 @Suppress("UNUSED_PARAMETER")
-@Composite(distance = -1)
 object SpacialFrequency : Dimension
 {
+    override val composite = mapOf(Distance to -1)
+
     operator fun div(that: Scalar) = SpacialFrequency
     operator fun times(that: Scalar) = SpacialFrequency
 
