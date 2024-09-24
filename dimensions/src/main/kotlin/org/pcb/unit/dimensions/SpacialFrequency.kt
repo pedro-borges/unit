@@ -20,6 +20,11 @@ object SpacialFrequency : Dimension
     operator fun div(that: FuelEfficiency) = Distance
     operator fun times(that: Area) = Distance
 
+    operator fun div(that: ElectricResistance) = ElectricConductivity
+    operator fun times(that: ElectricConductance) = ElectricConductivity
+
+    operator fun div(that: ElectricConductivity) = ElectricResistance
+
     operator fun times(that: RadiantExposure) = EnergyDensity
 
     operator fun times(that: Energy) = Force

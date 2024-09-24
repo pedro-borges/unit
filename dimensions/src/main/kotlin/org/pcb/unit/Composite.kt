@@ -1,6 +1,6 @@
 package org.pcb.unit
 
-class Composite(
+data class Composite(
         val substance: Int = 0,
         val angle: Int = 0,
         val currency: Int = 0,

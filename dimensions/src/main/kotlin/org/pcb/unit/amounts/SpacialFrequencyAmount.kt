@@ -164,6 +164,48 @@ open class SpacialFrequencyAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> ElectricConductivity
+
+    @JvmName("timesElectricConductance")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricConductanceAmount<L, I, M, T>) =
+        ElectricConductivityAmount(amount = amount * that.amount
+                                            / convert(that.distance to distance,
+                                                      that.distance to distance),
+                                   unit = U2(that.time, that.electricCurrent) to U2(that.mass, distance))
+
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricConductanceAmount<L, I, M, T>) =
+        ElectricConductivityAmount(amount = amount * that.amount,
+                                   unit = U2(that.time, that.electricCurrent) to U2(that.mass, distance))
+
+    @JvmName("divElectricResistance")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricResistanceAmount<L, I, M, T>) =
+        ElectricConductivityAmount(amount = amount / that.amount
+                                            / convert(that.distance to distance,
+                                                      that.distance to distance),
+                                   unit = U2(that.time, that.electricCurrent) to U2(that.mass, distance))
+
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricResistanceAmount<L, I, M, T>) =
+        ElectricConductivityAmount(amount = amount / that.amount,
+                                   unit = U2(that.time, that.electricCurrent) to U2(that.mass, distance))
+
+    // endregion
+
+    // region -> ElectricResistance
+
+    @JvmName("divElectricConductivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricConductivityAmount<L, I, M, T>) =
+        ElectricResistanceAmount(amount = amount / that.amount
+                                          * convert(that.distance to distance,
+                                                    that.distance to distance,
+                                                    that.distance to distance),
+                                 unit = U2(distance, that.mass) to U2(that.electricCurrent, that.time))
+
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricConductivityAmount<L, I, M, T>) =
+        ElectricResistanceAmount(amount = amount / that.amount,
+                                 unit = U2(distance, that.mass) to U2(that.electricCurrent, that.time))
+
+    // endregion
+
     // region -> EnergyDensity
 
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: RadiantExposureAmount<M, T>) =

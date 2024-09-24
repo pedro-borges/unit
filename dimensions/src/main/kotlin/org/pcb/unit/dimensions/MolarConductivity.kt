@@ -15,5 +15,10 @@ object MolarConductivity : Dimension
 
     operator fun div(that: Permittivity) = CatalyticEfficiency
 
+    operator fun div(that: MolarVolume) = ElectricConductivity
+    operator fun times(that: Molarity) = ElectricConductivity
+
+    operator fun div(that: ElectricConductivity) = MolarVolume
+
     operator fun div(that: CatalyticEfficiency) = Permittivity
 }

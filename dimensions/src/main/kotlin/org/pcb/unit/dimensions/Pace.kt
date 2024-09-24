@@ -16,6 +16,8 @@ object Pace : Dimension
 
     operator fun div(that: Permeability) = ElectricConductance
 
+    operator fun div(that: Inductance) = ElectricConductivity
+
     operator fun div(that: Permittivity) = ElectricResistance
 
     operator fun times(that: Intensity) = EnergyDensity
@@ -23,6 +25,8 @@ object Pace : Dimension
     operator fun times(that: Power) = Force
 
     operator fun times(that: Acceleration) = Frequency
+
+    operator fun div(that: ElectricConductivity) = Inductance
 
     operator fun times(that: MassFlowRate) = LinearDensity
 

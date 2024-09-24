@@ -165,6 +165,22 @@ open class DistanceAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> ElectricConductance
+
+    @JvmName("timesElectricConductivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricConductivityAmount<L, I, M, T>) =
+        ElectricConductanceAmount(amount = amount * that.amount
+                                           / convert(that.distance to distance,
+                                                     that.distance to distance,
+                                                     that.distance to distance),
+                                  unit = U2(that.time, that.electricCurrent) to U2(that.mass, distance))
+
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricConductivityAmount<L, I, M, T>) =
+        ElectricConductanceAmount(amount = amount * that.amount,
+                                  unit = U2(that.time, that.electricCurrent) to U2(that.mass, distance))
+
+    // endregion
+
     // region -> Energy
 
     @JvmName("timesForce")

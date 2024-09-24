@@ -28,6 +28,8 @@ object ElectricResistance : Dimension
     operator fun div(that: Speed) = Permeability
     operator fun times(that: Pace) = Permeability
 
+    operator fun times(that: ElectricConductivity) = SpacialFrequency
+
     operator fun div(that: Permeability) = Speed
 
     operator fun times(that: Capacitance) = Time

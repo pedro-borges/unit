@@ -170,6 +170,30 @@ open class PermittivityAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M :
 
     // endregion
 
+    // region -> ElectricConductivity
+
+    @JvmName("timesFrequency")
+    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
+        ElectricConductivityAmount(amount = amount * that.amount
+                                            / convert(that.time to time),
+                                   unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    operator fun times(that: FrequencyAmount<T>) =
+        ElectricConductivityAmount(amount = amount * that.amount,
+                                   unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    @JvmName("divTime")
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        ElectricConductivityAmount(amount = amount / that.amount
+                                            / convert(that.time to time),
+                                   unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    operator fun div(that: TimeAmount<T>) =
+        ElectricConductivityAmount(amount = amount / that.amount,
+                                   unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    // endregion
+
     // region -> MolarConductivity
 
     @JvmName("timesCatalyticEfficiency")
@@ -244,6 +268,28 @@ open class PermittivityAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M :
     operator fun div(that: CapacitanceAmount<L, I, M, T>) =
         SpacialFrequencyAmount(amount = amount / that.amount,
                                unit = NUMERIC to distance)
+
+    // endregion
+
+    // region -> Time
+
+    @JvmName("divElectricConductivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricConductivityAmount<L, I, M, T>) =
+        TimeAmount(amount = amount / that.amount
+                            / convert(that.electricCurrent to electricCurrent,
+                                      that.electricCurrent to electricCurrent,
+                                      that.time to time,
+                                      that.time to time,
+                                      that.time to time)
+                            * convert(that.distance to distance,
+                                      that.distance to distance,
+                                      that.distance to distance,
+                                      that.mass to mass),
+                   unit = time)
+
+    operator fun div(that: ElectricConductivityAmount<L, I, M, T>) =
+        TimeAmount(amount = amount / that.amount,
+                   unit = time)
 
     // endregion
 }

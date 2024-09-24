@@ -475,6 +475,22 @@ open class TimeAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> Permittivity
+
+    @JvmName("timesElectricConductivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricConductivityAmount<L, I, M, T>) =
+        PermittivityAmount(amount = amount * that.amount
+                                    * convert(that.time to time,
+                                              that.time to time,
+                                              that.time to time),
+                           unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
+
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>> times(that: ElectricConductivityAmount<L, I, M, T>) =
+        PermittivityAmount(amount = amount * that.amount,
+                           unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
+
+    // endregion
+
     // region -> RadiantExposure
 
     @JvmName("timesIntensity")

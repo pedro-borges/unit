@@ -167,6 +167,28 @@ open class InductanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M : U
 
     // endregion
 
+    // region -> Pace
+
+    @JvmName("timesElectricConductivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricConductivityAmount<L, I, M, T>) =
+        PaceAmount(amount = amount * that.amount
+                            * convert(that.electricCurrent to electricCurrent,
+                                      that.electricCurrent to electricCurrent,
+                                      that.time to time,
+                                      that.time to time,
+                                      that.time to time)
+                            / convert(that.distance to distance,
+                                      that.distance to distance,
+                                      that.distance to distance,
+                                      that.mass to mass),
+                   unit = time to distance)
+
+    operator fun times(that: ElectricConductivityAmount<L, I, M, T>) =
+        PaceAmount(amount = amount * that.amount,
+                   unit = time to distance)
+
+    // endregion
+
     // region -> Permeability
 
     @JvmName("divDistance")

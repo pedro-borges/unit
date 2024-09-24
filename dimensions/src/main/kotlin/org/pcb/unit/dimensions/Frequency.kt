@@ -27,6 +27,8 @@ object Frequency : Dimension
 
     operator fun times(that: Capacitance) = ElectricConductance
 
+    operator fun times(that: Permittivity) = ElectricConductivity
+
     operator fun times(that: ElectricCharge) = ElectricCurrent
 
     operator fun times(that: Inductance) = ElectricResistance

@@ -12,6 +12,8 @@ object Molarity : Dimension
     operator fun div(that: Molarity) = Scalar
     operator fun times(that: MolarVolume) = Scalar
 
+    operator fun times(that: MolarConductivity) = ElectricConductivity
+
     operator fun times(that: MolarEnergy) = EnergyDensity
 
     operator fun times(that: CatalyticEfficiency) = Frequency

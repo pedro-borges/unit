@@ -9,6 +9,7 @@ import org.pcb.unit.amounts.base.Mole.MOLE
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.MolarVolume
 import org.pcb.unit.dimensions.Scalar
@@ -133,6 +134,22 @@ open class MolarVolumeAmount<L : Unit<Distance>, N : Unit<Substance>>(
     operator fun <T : Unit<Time>> times(that: ReactionRateAmount<L, N, T>) =
         FrequencyAmount(amount = amount * that.amount,
                         unit = NUMERIC to that.time)
+
+    // endregion
+
+    // region -> MolarConductivity
+
+    @JvmName("timesElectricConductivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricConductivityAmount<L, I, M, T>) =
+        MolarConductivityAmount(amount = amount * that.amount
+                                         / convert(that.distance to distance,
+                                                   that.distance to distance,
+                                                   that.distance to distance),
+                                unit = U2(that.time, that.electricCurrent) to U2(that.mass, substance))
+
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricConductivityAmount<L, I, M, T>) =
+        MolarConductivityAmount(amount = amount * that.amount,
+                                unit = U2(that.time, that.electricCurrent) to U2(that.mass, substance))
 
     // endregion
 

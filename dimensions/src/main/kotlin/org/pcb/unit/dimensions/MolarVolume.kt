@@ -17,6 +17,8 @@ object MolarVolume : Dimension
 
     operator fun times(that: ReactionRate) = Frequency
 
+    operator fun times(that: ElectricConductivity) = MolarConductivity
+
     operator fun times(that: EnergyDensity) = MolarEnergy
 
     operator fun div(that: SpecificVolume) = MolarMass

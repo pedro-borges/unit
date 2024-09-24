@@ -23,6 +23,7 @@ object Dimensions
         Definition("Distance", Composite(distance = 1)),
         Definition("ElectricCharge", Composite(electricCurrent = 1, time = 1)),
         Definition("ElectricConductance", Composite(time = 3, electricCurrent = 2, mass = -1, distance = -2)),
+        Definition("ElectricConductivity", Composite(time = 3, electricCurrent = 2, mass = -1, distance = -3)),
         Definition("ElectricCurrent", Composite(electricCurrent = 1)),
         Definition("ElectricResistance", Composite(distance = 2, mass = 1, electricCurrent = -2, time = -3)),
         Definition("ElectricTension", Composite(distance = 2, mass = 1, electricCurrent = -1, time = -3)),

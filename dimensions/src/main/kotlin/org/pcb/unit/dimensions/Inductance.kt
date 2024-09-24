@@ -20,6 +20,8 @@ object Inductance : Dimension
 
     operator fun times(that: ElectricCurrent) = MagneticFlux
 
+    operator fun times(that: ElectricConductivity) = Pace
+
     operator fun div(that: Distance) = Permeability
     operator fun times(that: SpacialFrequency) = Permeability
 

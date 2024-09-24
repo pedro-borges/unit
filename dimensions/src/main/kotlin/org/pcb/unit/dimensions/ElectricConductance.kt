@@ -17,7 +17,12 @@ object ElectricConductance : Dimension
     operator fun div(that: Frequency) = Capacitance
     operator fun times(that: Time) = Capacitance
 
+    operator fun div(that: ElectricConductivity) = Distance
+
     operator fun times(that: MagneticFlux) = ElectricCharge
+
+    operator fun div(that: Distance) = ElectricConductivity
+    operator fun times(that: SpacialFrequency) = ElectricConductivity
 
     operator fun times(that: ElectricTension) = ElectricCurrent
 

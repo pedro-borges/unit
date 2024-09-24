@@ -131,6 +131,49 @@ open class MolarConductivityAmount<I : Unit<ElectricCurrent>, M : Unit<Mass>, N 
 
     // endregion
 
+    // region -> ElectricConductivity
+
+    @JvmName("divMolarVolume")
+    operator fun <L : Unit<Distance>, N : Unit<Substance>> div(that: MolarVolumeAmount<L, N>) =
+        ElectricConductivityAmount(amount = amount / that.amount
+                                            * convert(that.substance to substance),
+                                   unit = U2(time, electricCurrent) to U2(mass, that.distance))
+
+    operator fun <L : Unit<Distance>> div(that: MolarVolumeAmount<L, N>) =
+        ElectricConductivityAmount(amount = amount / that.amount,
+                                   unit = U2(time, electricCurrent) to U2(mass, that.distance))
+
+    @JvmName("timesMolarity")
+    operator fun <L : Unit<Distance>, N : Unit<Substance>> times(that: MolarityAmount<L, N>) =
+        ElectricConductivityAmount(amount = amount * that.amount
+                                            * convert(that.substance to substance),
+                                   unit = U2(time, electricCurrent) to U2(mass, that.distance))
+
+    operator fun <L : Unit<Distance>> times(that: MolarityAmount<L, N>) =
+        ElectricConductivityAmount(amount = amount * that.amount,
+                                   unit = U2(time, electricCurrent) to U2(mass, that.distance))
+
+    // endregion
+
+    // region -> MolarVolume
+
+    @JvmName("divElectricConductivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricConductivityAmount<L, I, M, T>) =
+        MolarVolumeAmount(amount = amount / that.amount
+                                   / convert(that.electricCurrent to electricCurrent,
+                                             that.electricCurrent to electricCurrent,
+                                             that.time to time,
+                                             that.time to time,
+                                             that.time to time)
+                                   * convert(that.mass to mass),
+                          unit = that.distance to substance)
+
+    operator fun <L : Unit<Distance>> div(that: ElectricConductivityAmount<L, I, M, T>) =
+        MolarVolumeAmount(amount = amount / that.amount,
+                          unit = that.distance to substance)
+
+    // endregion
+
     // region -> Permittivity
 
     @JvmName("divCatalyticEfficiency")

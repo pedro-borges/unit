@@ -65,6 +65,8 @@ object Time : Dimension
     operator fun div(that: Distance) = Pace
     operator fun times(that: SpacialFrequency) = Pace
 
+    operator fun times(that: ElectricConductivity) = Permittivity
+
     operator fun times(that: Intensity) = RadiantExposure
 
     operator fun times(that: Acceleration) = Speed

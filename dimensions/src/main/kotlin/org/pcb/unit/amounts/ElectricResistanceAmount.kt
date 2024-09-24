@@ -252,6 +252,28 @@ open class ElectricResistanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent
 
     // endregion
 
+    // region -> SpacialFrequency
+
+    @JvmName("timesElectricConductivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricConductivityAmount<L, I, M, T>) =
+        SpacialFrequencyAmount(amount = amount * that.amount
+                                        * convert(that.electricCurrent to electricCurrent,
+                                                  that.electricCurrent to electricCurrent,
+                                                  that.time to time,
+                                                  that.time to time,
+                                                  that.time to time)
+                                        / convert(that.distance to distance,
+                                                  that.distance to distance,
+                                                  that.distance to distance,
+                                                  that.mass to mass),
+                               unit = NUMERIC to distance)
+
+    operator fun times(that: ElectricConductivityAmount<L, I, M, T>) =
+        SpacialFrequencyAmount(amount = amount * that.amount,
+                               unit = NUMERIC to distance)
+
+    // endregion
+
     // region -> Speed
 
     @JvmName("divPermeability")

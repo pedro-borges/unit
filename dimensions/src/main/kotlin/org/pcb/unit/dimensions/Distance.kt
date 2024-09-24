@@ -21,6 +21,8 @@ object Distance : Dimension
 
     operator fun times(that: Permittivity) = Capacitance
 
+    operator fun times(that: ElectricConductivity) = ElectricConductance
+
     operator fun times(that: Force) = Energy
 
     operator fun times(that: RadiantExposure) = Force

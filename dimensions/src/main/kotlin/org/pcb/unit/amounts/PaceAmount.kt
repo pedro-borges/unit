@@ -132,6 +132,23 @@ open class PaceAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> ElectricConductivity
+
+    @JvmName("divInductance")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: InductanceAmount<L, I, M, T>) =
+        ElectricConductivityAmount(amount = amount / that.amount
+                                            / convert(that.distance to distance,
+                                                      that.distance to distance)
+                                            * convert(that.time to time,
+                                                      that.time to time),
+                                   unit = U2(time, that.electricCurrent) to U2(that.mass, distance))
+
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>> div(that: InductanceAmount<L, I, M, T>) =
+        ElectricConductivityAmount(amount = amount / that.amount,
+                                   unit = U2(time, that.electricCurrent) to U2(that.mass, distance))
+
+    // endregion
+
     // region -> ElectricResistance
 
     @JvmName("divPermittivity")
@@ -199,6 +216,25 @@ open class PaceAmount<L : Unit<Distance>, T : Unit<Time>>(
     operator fun times(that: AccelerationAmount<L, T>) =
         FrequencyAmount(amount = amount * that.amount,
                         unit = NUMERIC to time)
+
+    // endregion
+
+    // region -> Inductance
+
+    @JvmName("divElectricConductivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricConductivityAmount<L, I, M, T>) =
+        InductanceAmount(amount = amount / that.amount
+                                  / convert(that.time to time,
+                                            that.time to time,
+                                            that.time to time)
+                                  * convert(that.distance to distance,
+                                            that.distance to distance,
+                                            that.distance to distance),
+                         unit = U2(distance, that.mass) to U2(that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>> div(that: ElectricConductivityAmount<L, I, M, T>) =
+        InductanceAmount(amount = amount / that.amount,
+                         unit = U2(distance, that.mass) to U2(that.electricCurrent, time))
 
     // endregion
 

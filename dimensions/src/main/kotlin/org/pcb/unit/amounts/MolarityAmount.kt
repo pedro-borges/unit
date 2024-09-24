@@ -9,6 +9,7 @@ import org.pcb.unit.amounts.base.Mole.MOLE
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Molarity
 import org.pcb.unit.dimensions.Scalar
@@ -104,6 +105,20 @@ open class MolarityAmount<L : Unit<Distance>, N : Unit<Substance>>(
     operator fun div(that: MolarityAmount<L, N>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
+
+    // endregion
+
+    // region -> ElectricConductivity
+
+    @JvmName("timesMolarConductivity")
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>, N : Unit<Substance>, T : Unit<Time>> times(that: MolarConductivityAmount<I, M, N, T>) =
+        ElectricConductivityAmount(amount = amount * that.amount
+                                            / convert(that.substance to substance),
+                                   unit = U2(that.time, that.electricCurrent) to U2(that.mass, distance))
+
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: MolarConductivityAmount<I, M, N, T>) =
+        ElectricConductivityAmount(amount = amount * that.amount,
+                                   unit = U2(that.time, that.electricCurrent) to U2(that.mass, distance))
 
     // endregion
 

@@ -154,6 +154,28 @@ open class ElectricConductanceAmount<L : Unit<Distance>, I : Unit<ElectricCurren
 
     // endregion
 
+    // region -> Distance
+
+    @JvmName("divElectricConductivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricConductivityAmount<L, I, M, T>) =
+        DistanceAmount(amount = amount / that.amount
+                                / convert(that.electricCurrent to electricCurrent,
+                                          that.electricCurrent to electricCurrent,
+                                          that.time to time,
+                                          that.time to time,
+                                          that.time to time)
+                                * convert(that.distance to distance,
+                                          that.distance to distance,
+                                          that.distance to distance,
+                                          that.mass to mass),
+                       unit = distance)
+
+    operator fun div(that: ElectricConductivityAmount<L, I, M, T>) =
+        DistanceAmount(amount = amount / that.amount,
+                       unit = distance)
+
+    // endregion
+
     // region -> ElectricCharge
 
     @JvmName("timesMagneticFlux")
@@ -170,6 +192,30 @@ open class ElectricConductanceAmount<L : Unit<Distance>, I : Unit<ElectricCurren
     operator fun times(that: MagneticFluxAmount<L, I, M, T>) =
         ElectricChargeAmount(amount = amount * that.amount,
                              unit = U2(electricCurrent, time))
+
+    // endregion
+
+    // region -> ElectricConductivity
+
+    @JvmName("divDistance")
+    operator fun <L : Unit<Distance>> div(that: DistanceAmount<L>) =
+        ElectricConductivityAmount(amount = amount / that.amount
+                                            / convert(that.distance to distance),
+                                   unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    operator fun div(that: DistanceAmount<L>) =
+        ElectricConductivityAmount(amount = amount / that.amount,
+                                   unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    @JvmName("timesSpacialFrequency")
+    operator fun <L : Unit<Distance>> times(that: SpacialFrequencyAmount<L>) =
+        ElectricConductivityAmount(amount = amount * that.amount
+                                            / convert(that.distance to distance),
+                                   unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    operator fun times(that: SpacialFrequencyAmount<L>) =
+        ElectricConductivityAmount(amount = amount * that.amount,
+                                   unit = U2(time, electricCurrent) to U2(mass, distance))
 
     // endregion
 
