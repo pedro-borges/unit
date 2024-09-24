@@ -12,6 +12,8 @@ object VolumetricFlow : Dimension
 
     operator fun div(that: VolumetricFlow) = Scalar
 
+    operator fun times(that: LinearDensity) = Action
+
     operator fun div(that: Speed) = Area
     operator fun times(that: Pace) = Area
 

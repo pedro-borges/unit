@@ -20,13 +20,21 @@ object Distance : Dimension
     operator fun div(that: SpecificVolume) = AreaDensity
     operator fun times(that: MassDensity) = AreaDensity
 
-    operator fun times(that: Force) = Energy
+    operator fun times(that: Permittivity) = Capacitance
 
-    operator fun times(that: PowerDensity) = EnergyFluxDensity
+    operator fun times(that: Force) = Energy
 
     operator fun times(that: RadiantExposure) = Force
 
     operator fun div(that: Volume) = FuelEfficiency
+
+    operator fun times(that: Permeability) = Inductance
+
+    operator fun times(that: PowerDensity) = Intensity
+
+    operator fun times(that: AreaDensity) = LinearDensity
+
+    operator fun times(that: LinearDensity) = Mass
 
     operator fun times(that: MassFlowRate) = Momentum
 
@@ -54,5 +62,5 @@ object Distance : Dimension
     operator fun div(that: FuelEfficiency) = Volume
     operator fun times(that: Area) = Volume
 
-    operator fun times(that: EnergyFluxDensity) = Yank
+    operator fun times(that: Intensity) = Yank
 }

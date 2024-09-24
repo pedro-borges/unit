@@ -16,6 +16,8 @@ object MolarVolume : Dimension
     operator fun div(that: Time) = CatalyticEfficiency
     operator fun times(that: Frequency) = CatalyticEfficiency
 
+    operator fun times(that: ReactionRate) = Frequency
+
     operator fun times(that: EnergyDensity) = MolarEnergy
 
     operator fun div(that: SpecificVolume) = MolarMass

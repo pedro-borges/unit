@@ -146,32 +146,6 @@ open class EnergyDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
 
     // endregion
 
-    // region -> EnergyFluxDensity
-
-    @JvmName("divPace")
-    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<L, T>) =
-        EnergyFluxDensityAmount(amount = amount / that.amount
-                                         / convert(that.time to time)
-                                         * convert(that.distance to distance),
-                                unit = mass to time)
-
-    operator fun div(that: PaceAmount<L, T>) =
-        EnergyFluxDensityAmount(amount = amount / that.amount,
-                                unit = mass to time)
-
-    @JvmName("timesSpeed")
-    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount
-                                         * convert(that.distance to distance)
-                                         / convert(that.time to time),
-                                unit = mass to time)
-
-    operator fun times(that: SpeedAmount<L, T>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount,
-                                unit = mass to time)
-
-    // endregion
-
     // region -> Force
 
     @JvmName("timesArea")
@@ -212,6 +186,32 @@ open class EnergyDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
     operator fun div(that: ForceAmount<L, M, T>) =
         FuelEfficiencyAmount(amount = amount / that.amount,
                              unit = NUMERIC to distance)
+
+    // endregion
+
+    // region -> Intensity
+
+    @JvmName("divPace")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<L, T>) =
+        IntensityAmount(amount = amount / that.amount
+                                 / convert(that.time to time)
+                                 * convert(that.distance to distance),
+                        unit = mass to time)
+
+    operator fun div(that: PaceAmount<L, T>) =
+        IntensityAmount(amount = amount / that.amount,
+                        unit = mass to time)
+
+    @JvmName("timesSpeed")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
+        IntensityAmount(amount = amount * that.amount
+                                 * convert(that.distance to distance)
+                                 / convert(that.time to time),
+                        unit = mass to time)
+
+    operator fun times(that: SpeedAmount<L, T>) =
+        IntensityAmount(amount = amount * that.amount,
+                        unit = mass to time)
 
     // endregion
 
@@ -280,8 +280,8 @@ open class EnergyDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
 
     // region -> Pace
 
-    @JvmName("divEnergyFluxDensity")
-    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: EnergyFluxDensityAmount<M, T>) =
+    @JvmName("divIntensity")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: IntensityAmount<M, T>) =
         PaceAmount(amount = amount / that.amount
                             / convert(that.mass to mass)
                             * convert(that.time to time,
@@ -289,7 +289,7 @@ open class EnergyDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
                                       that.time to time),
                    unit = time to distance)
 
-    operator fun div(that: EnergyFluxDensityAmount<M, T>) =
+    operator fun div(that: IntensityAmount<M, T>) =
         PaceAmount(amount = amount / that.amount,
                    unit = time to distance)
 

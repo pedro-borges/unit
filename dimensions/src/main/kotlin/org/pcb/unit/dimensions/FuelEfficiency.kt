@@ -18,15 +18,17 @@ object FuelEfficiency : Dimension
 
     operator fun times(that: Force) = EnergyDensity
 
-    operator fun times(that: Power) = EnergyFluxDensity
-
     operator fun times(that: LuminousFlux) = Illuminance
+
+    operator fun times(that: Power) = Intensity
 
     operator fun times(that: LuminousIntensity) = Luminance
 
     operator fun times(that: MagneticFlux) = MagneticFluxDensity
 
     operator fun times(that: MomentOfInertia) = Mass
+
+    operator fun times(that: LinearDensity) = MassDensity
 
     operator fun times(that: Action) = MassFlowRate
 

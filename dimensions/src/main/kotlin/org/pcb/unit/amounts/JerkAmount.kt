@@ -133,6 +133,20 @@ open class JerkAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Intensity
+
+    @JvmName("timesLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
+        IntensityAmount(amount = amount * that.amount
+                                 / convert(that.distance to distance),
+                        unit = that.mass to time)
+
+    operator fun <M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
+        IntensityAmount(amount = amount * that.amount,
+                        unit = that.mass to time)
+
+    // endregion
+
     // region -> PowerDensity
 
     @JvmName("timesAreaDensity")

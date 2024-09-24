@@ -97,6 +97,38 @@ open class AngularMomentumAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Ti
 
     // endregion
 
+    // region -> Action
+
+    @JvmName("divLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: LinearDensityAmount<L, M>) =
+        ActionAmount(amount = amount / that.amount
+                              / convert(that.mass to mass)
+                              * convert(that.distance to distance),
+                     unit = U2(distance, mass) to time)
+
+    operator fun div(that: LinearDensityAmount<L, M>) =
+        ActionAmount(amount = amount / that.amount,
+                     unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> LinearDensity
+
+    @JvmName("divAction")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ActionAmount<L, M, T>) =
+        LinearDensityAmount(amount = amount / that.amount
+                                     / convert(that.distance to distance,
+                                               that.distance to distance,
+                                               that.mass to mass)
+                                     * convert(that.time to time),
+                            unit = mass to distance)
+
+    operator fun div(that: ActionAmount<L, M, T>) =
+        LinearDensityAmount(amount = amount / that.amount,
+                            unit = mass to distance)
+
+    // endregion
+
     // region -> Mass
 
     @JvmName("divMomentum")

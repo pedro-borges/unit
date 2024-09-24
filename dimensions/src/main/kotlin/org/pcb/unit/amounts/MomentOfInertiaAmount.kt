@@ -115,6 +115,22 @@ open class MomentOfInertiaAmount<L : Unit<Distance>, M : Unit<Mass>>(
 
     // endregion
 
+    // region -> LinearDensity
+
+    @JvmName("divVolume")
+    operator fun <L : Unit<Distance>> div(that: VolumeAmount<L>) =
+        LinearDensityAmount(amount = amount / that.amount
+                                     / convert(that.distance to distance,
+                                               that.distance to distance,
+                                               that.distance to distance),
+                            unit = mass to distance)
+
+    operator fun div(that: VolumeAmount<L>) =
+        LinearDensityAmount(amount = amount / that.amount,
+                            unit = mass to distance)
+
+    // endregion
+
     // region -> Mass
 
     @JvmName("divArea")
@@ -154,6 +170,21 @@ open class MomentOfInertiaAmount<L : Unit<Distance>, M : Unit<Mass>>(
     operator fun <T : Unit<Time>> div(that: ActionAmount<L, M, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = that.time)
+
+    // endregion
+
+    // region -> Volume
+
+    @JvmName("divLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: LinearDensityAmount<L, M>) =
+        VolumeAmount(amount = amount / that.amount
+                              / convert(that.mass to mass)
+                              * convert(that.distance to distance),
+                     unit = distance)
+
+    operator fun div(that: LinearDensityAmount<L, M>) =
+        VolumeAmount(amount = amount / that.amount,
+                     unit = distance)
 
     // endregion
 }

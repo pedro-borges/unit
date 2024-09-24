@@ -17,8 +17,12 @@ object MomentOfInertia : Dimension
 
     operator fun div(that: Mass) = Area
 
+    operator fun div(that: Volume) = LinearDensity
+
     operator fun div(that: Area) = Mass
     operator fun times(that: FuelEfficiency) = Mass
 
     operator fun div(that: Action) = Time
+
+    operator fun div(that: LinearDensity) = Volume
 }

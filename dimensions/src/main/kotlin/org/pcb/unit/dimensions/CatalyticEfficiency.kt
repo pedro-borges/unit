@@ -16,6 +16,8 @@ object CatalyticEfficiency : Dimension
     operator fun div(that: MolarVolume) = Frequency
     operator fun times(that: Molarity) = Frequency
 
+    operator fun times(that: Permittivity) = MolarConductivity
+
     operator fun div(that: Frequency) = MolarVolume
     operator fun times(that: Time) = MolarVolume
 

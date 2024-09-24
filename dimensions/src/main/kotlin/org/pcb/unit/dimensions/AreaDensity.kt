@@ -19,6 +19,9 @@ object AreaDensity : Dimension
 
     operator fun div(that: Mass) = FuelEfficiency
 
+    operator fun div(that: SpacialFrequency) = LinearDensity
+    operator fun times(that: Distance) = LinearDensity
+
     operator fun div(that: FuelEfficiency) = Mass
     operator fun times(that: Area) = Mass
 
@@ -30,4 +33,6 @@ object AreaDensity : Dimension
     operator fun times(that: Jerk) = PowerDensity
 
     operator fun times(that: SpecificEnergy) = RadiantExposure
+
+    operator fun div(that: LinearDensity) = SpacialFrequency
 }

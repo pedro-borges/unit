@@ -18,18 +18,22 @@ object PowerDensity : Dimension
     operator fun div(that: Frequency) = EnergyDensity
     operator fun times(that: Time) = EnergyDensity
 
-    operator fun div(that: SpacialFrequency) = EnergyFluxDensity
-    operator fun times(that: Distance) = EnergyFluxDensity
-
     operator fun div(that: EnergyDensity) = Frequency
 
     operator fun div(that: Yank) = FuelEfficiency
 
+    operator fun div(that: SpacialFrequency) = Intensity
+    operator fun times(that: Distance) = Intensity
+
     operator fun div(that: AreaDensity) = Jerk
+
+    operator fun div(that: ReactionRate) = MolarEnergy
 
     operator fun times(that: Volume) = Power
 
-    operator fun div(that: EnergyFluxDensity) = SpacialFrequency
+    operator fun div(that: MolarEnergy) = ReactionRate
+
+    operator fun div(that: Intensity) = SpacialFrequency
 
     operator fun div(that: FuelEfficiency) = Yank
     operator fun times(that: Area) = Yank

@@ -36,15 +36,17 @@ object Frequency : Dimension
 
     operator fun times(that: Action) = Energy
 
-    operator fun times(that: RadiantExposure) = EnergyFluxDensity
-
     operator fun times(that: Momentum) = Force
+
+    operator fun times(that: RadiantExposure) = Intensity
 
     operator fun times(that: Acceleration) = Jerk
 
     operator fun times(that: LuminousEnergy) = LuminousFlux
 
     operator fun times(that: Mass) = MassFlowRate
+
+    operator fun div(that: ReactionRate) = MolarVolume
 
     operator fun div(that: CatalyticEfficiency) = Molarity
 
@@ -55,6 +57,9 @@ object Frequency : Dimension
     operator fun times(that: EnergyDensity) = PowerDensity
 
     operator fun times(that: MassFlowRate) = RadiantExposure
+
+    operator fun div(that: MolarVolume) = ReactionRate
+    operator fun times(that: Molarity) = ReactionRate
 
     operator fun times(that: Currency) = Rent
 

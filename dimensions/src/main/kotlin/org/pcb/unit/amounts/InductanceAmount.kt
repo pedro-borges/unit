@@ -110,6 +110,25 @@ open class InductanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M : U
 
     // endregion
 
+    // region -> Distance
+
+    @JvmName("divPermeability")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: PermeabilityAmount<L, I, M, T>) =
+        DistanceAmount(amount = amount / that.amount
+                                / convert(that.distance to distance,
+                                          that.mass to mass)
+                                * convert(that.electricCurrent to electricCurrent,
+                                          that.electricCurrent to electricCurrent,
+                                          that.time to time,
+                                          that.time to time),
+                       unit = distance)
+
+    operator fun div(that: PermeabilityAmount<L, I, M, T>) =
+        DistanceAmount(amount = amount / that.amount,
+                       unit = distance)
+
+    // endregion
+
     // region -> ElectricResistance
 
     @JvmName("timesFrequency")
@@ -144,6 +163,30 @@ open class InductanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M : U
 
     operator fun times(that: ElectricCurrentAmount<I>) =
         MagneticFluxAmount(amount = amount * that.amount,
+                           unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    // endregion
+
+    // region -> Permeability
+
+    @JvmName("divDistance")
+    operator fun <L : Unit<Distance>> div(that: DistanceAmount<L>) =
+        PermeabilityAmount(amount = amount / that.amount
+                                    / convert(that.distance to distance),
+                           unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    operator fun div(that: DistanceAmount<L>) =
+        PermeabilityAmount(amount = amount / that.amount,
+                           unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    @JvmName("timesSpacialFrequency")
+    operator fun <L : Unit<Distance>> times(that: SpacialFrequencyAmount<L>) =
+        PermeabilityAmount(amount = amount * that.amount
+                                    / convert(that.distance to distance),
+                           unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    operator fun times(that: SpacialFrequencyAmount<L>) =
+        PermeabilityAmount(amount = amount * that.amount,
                            unit = U2(distance, mass) to U2(electricCurrent, time))
 
     // endregion

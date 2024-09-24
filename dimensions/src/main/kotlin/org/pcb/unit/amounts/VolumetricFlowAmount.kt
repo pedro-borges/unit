@@ -94,6 +94,20 @@ open class VolumetricFlowAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Action
+
+    @JvmName("timesLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
+        ActionAmount(amount = amount * that.amount
+                              / convert(that.distance to distance),
+                     unit = U2(distance, that.mass) to time)
+
+    operator fun <M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
+        ActionAmount(amount = amount * that.amount,
+                     unit = U2(distance, that.mass) to time)
+
+    // endregion
+
     // region -> Area
 
     @JvmName("timesPace")

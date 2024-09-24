@@ -92,6 +92,20 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Acceleration
+
+    @JvmName("divLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: LinearDensityAmount<L, M>) =
+        AccelerationAmount(amount = amount / that.amount
+                                    / convert(that.mass to mass),
+                           unit = that.distance to time)
+
+    operator fun <L : Unit<Distance>> div(that: LinearDensityAmount<L, M>) =
+        AccelerationAmount(amount = amount / that.amount,
+                           unit = that.distance to time)
+
+    // endregion
+
     // region -> AreaDensity
 
     @JvmName("divSpecificEnergy")
@@ -163,30 +177,6 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
-    // region -> EnergyFluxDensity
-
-    @JvmName("timesFrequency")
-    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount
-                                         / convert(that.time to time),
-                                unit = mass to time)
-
-    operator fun times(that: FrequencyAmount<T>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount,
-                                unit = mass to time)
-
-    @JvmName("divTime")
-    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
-        EnergyFluxDensityAmount(amount = amount / that.amount
-                                         / convert(that.time to time),
-                                unit = mass to time)
-
-    operator fun div(that: TimeAmount<T>) =
-        EnergyFluxDensityAmount(amount = amount / that.amount,
-                                unit = mass to time)
-
-    // endregion
-
     // region -> Force
 
     operator fun <L : Unit<Distance>> times(that: DistanceAmount<L>) =
@@ -227,6 +217,45 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
     operator fun <L : Unit<Distance>> div(that: EnergyAmount<L, M, T>) =
         FuelEfficiencyAmount(amount = amount / that.amount,
                              unit = NUMERIC to that.distance)
+
+    // endregion
+
+    // region -> Intensity
+
+    @JvmName("timesFrequency")
+    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
+        IntensityAmount(amount = amount * that.amount
+                                 / convert(that.time to time),
+                        unit = mass to time)
+
+    operator fun times(that: FrequencyAmount<T>) =
+        IntensityAmount(amount = amount * that.amount,
+                        unit = mass to time)
+
+    @JvmName("divTime")
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        IntensityAmount(amount = amount / that.amount
+                                 / convert(that.time to time),
+                        unit = mass to time)
+
+    operator fun div(that: TimeAmount<T>) =
+        IntensityAmount(amount = amount / that.amount,
+                        unit = mass to time)
+
+    // endregion
+
+    // region -> LinearDensity
+
+    @JvmName("divAcceleration")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AccelerationAmount<L, T>) =
+        LinearDensityAmount(amount = amount / that.amount
+                                     * convert(that.time to time,
+                                               that.time to time),
+                            unit = mass to that.distance)
+
+    operator fun <L : Unit<Distance>> div(that: AccelerationAmount<L, T>) =
+        LinearDensityAmount(amount = amount / that.amount,
+                            unit = mass to that.distance)
 
     // endregion
 
@@ -311,8 +340,8 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> Time
 
-    @JvmName("divEnergyFluxDensity")
-    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: EnergyFluxDensityAmount<M, T>) =
+    @JvmName("divIntensity")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: IntensityAmount<M, T>) =
         TimeAmount(amount = amount / that.amount
                             / convert(that.mass to mass)
                             * convert(that.time to time,
@@ -320,7 +349,7 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
                                       that.time to time),
                    unit = time)
 
-    operator fun div(that: EnergyFluxDensityAmount<M, T>) =
+    operator fun div(that: IntensityAmount<M, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = time)
 

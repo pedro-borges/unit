@@ -14,9 +14,9 @@ object TemperatureGradient : Dimension
 
     operator fun times(that: SpecificHeatCapacity) = Acceleration
 
-    operator fun times(that: ThermalConductivity) = EnergyFluxDensity
-
     operator fun times(that: HeatCapacity) = Force
+
+    operator fun times(that: ThermalConductivity) = Intensity
 
     operator fun div(that: Temperature) = SpacialFrequency
     operator fun times(that: ThermalExpansionCoefficient) = SpacialFrequency

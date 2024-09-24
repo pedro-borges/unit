@@ -13,4 +13,8 @@ object MolarConductivity : Dimension
     operator fun times(that: Scalar) = MolarConductivity
 
     operator fun div(that: MolarConductivity) = Scalar
+
+    operator fun div(that: Permittivity) = CatalyticEfficiency
+
+    operator fun div(that: CatalyticEfficiency) = Permittivity
 }

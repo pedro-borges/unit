@@ -112,6 +112,20 @@ open class MassAmount<M : Unit<Mass>>(
 
     // endregion
 
+    // region -> Distance
+
+    @JvmName("divLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: LinearDensityAmount<L, M>) =
+        DistanceAmount(amount = amount / that.amount
+                                / convert(that.mass to mass),
+                       unit = that.distance)
+
+    operator fun <L : Unit<Distance>> div(that: LinearDensityAmount<L, M>) =
+        DistanceAmount(amount = amount / that.amount,
+                       unit = that.distance)
+
+    // endregion
+
     // region -> Energy
 
     operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: SpecificEnergyAmount<L, T>) =
@@ -147,6 +161,18 @@ open class MassAmount<M : Unit<Mass>>(
     operator fun <L : Unit<Distance>, K : Unit<Temperature>, T : Unit<Time>> times(that: SpecificHeatCapacityAmount<L, K, T>) =
         HeatCapacityAmount(amount = amount * that.amount,
                            unit = U2(that.distance, mass) to U2(that.temperature, that.time))
+
+    // endregion
+
+    // region -> LinearDensity
+
+    operator fun <L : Unit<Distance>> div(that: DistanceAmount<L>) =
+        LinearDensityAmount(amount = amount / that.amount,
+                            unit = mass to that.distance)
+
+    operator fun <L : Unit<Distance>> times(that: SpacialFrequencyAmount<L>) =
+        LinearDensityAmount(amount = amount * that.amount,
+                            unit = mass to that.distance)
 
     // endregion
 

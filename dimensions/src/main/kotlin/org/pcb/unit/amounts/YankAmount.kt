@@ -137,8 +137,8 @@ open class YankAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> Distance
 
-    @JvmName("divEnergyFluxDensity")
-    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: EnergyFluxDensityAmount<M, T>) =
+    @JvmName("divIntensity")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: IntensityAmount<M, T>) =
         DistanceAmount(amount = amount / that.amount
                                 / convert(that.mass to mass)
                                 * convert(that.time to time,
@@ -146,33 +146,9 @@ open class YankAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                                           that.time to time),
                        unit = distance)
 
-    operator fun div(that: EnergyFluxDensityAmount<M, T>) =
+    operator fun div(that: IntensityAmount<M, T>) =
         DistanceAmount(amount = amount / that.amount,
                        unit = distance)
-
-    // endregion
-
-    // region -> EnergyFluxDensity
-
-    @JvmName("divDistance")
-    operator fun <L : Unit<Distance>> div(that: DistanceAmount<L>) =
-        EnergyFluxDensityAmount(amount = amount / that.amount
-                                         / convert(that.distance to distance),
-                                unit = mass to time)
-
-    operator fun div(that: DistanceAmount<L>) =
-        EnergyFluxDensityAmount(amount = amount / that.amount,
-                                unit = mass to time)
-
-    @JvmName("timesSpacialFrequency")
-    operator fun <L : Unit<Distance>> times(that: SpacialFrequencyAmount<L>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount
-                                         / convert(that.distance to distance),
-                                unit = mass to time)
-
-    operator fun times(that: SpacialFrequencyAmount<L>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount,
-                                unit = mass to time)
 
     // endregion
 
@@ -214,6 +190,30 @@ open class YankAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: ForceAmount<L, M, T>) =
         FrequencyAmount(amount = amount / that.amount,
                         unit = NUMERIC to time)
+
+    // endregion
+
+    // region -> Intensity
+
+    @JvmName("divDistance")
+    operator fun <L : Unit<Distance>> div(that: DistanceAmount<L>) =
+        IntensityAmount(amount = amount / that.amount
+                                 / convert(that.distance to distance),
+                        unit = mass to time)
+
+    operator fun div(that: DistanceAmount<L>) =
+        IntensityAmount(amount = amount / that.amount,
+                        unit = mass to time)
+
+    @JvmName("timesSpacialFrequency")
+    operator fun <L : Unit<Distance>> times(that: SpacialFrequencyAmount<L>) =
+        IntensityAmount(amount = amount * that.amount
+                                 / convert(that.distance to distance),
+                        unit = mass to time)
+
+    operator fun times(that: SpacialFrequencyAmount<L>) =
+        IntensityAmount(amount = amount * that.amount,
+                        unit = mass to time)
 
     // endregion
 

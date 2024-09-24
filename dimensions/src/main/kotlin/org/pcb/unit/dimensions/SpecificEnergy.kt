@@ -22,6 +22,8 @@ object SpecificEnergy : Dimension
     operator fun div(that: SpecificVolume) = EnergyDensity
     operator fun times(that: MassDensity) = EnergyDensity
 
+    operator fun times(that: LinearDensity) = Force
+
     operator fun div(that: MolarEnergy) = Molality
 
     operator fun div(that: Molality) = MolarEnergy

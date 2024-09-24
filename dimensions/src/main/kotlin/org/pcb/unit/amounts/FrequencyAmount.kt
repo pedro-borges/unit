@@ -250,21 +250,6 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // endregion
 
-    // region -> EnergyFluxDensity
-
-    @JvmName("timesRadiantExposure")
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: RadiantExposureAmount<M, T>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount
-                                         / convert(that.time to time,
-                                                   that.time to time),
-                                unit = that.mass to time)
-
-    operator fun <M : Unit<Mass>> times(that: RadiantExposureAmount<M, T>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount,
-                                unit = that.mass to time)
-
-    // endregion
-
     // region -> Force
 
     @JvmName("timesMomentum")
@@ -276,6 +261,21 @@ open class FrequencyAmount<T : Unit<Time>>(
     operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: MomentumAmount<L, M, T>) =
         ForceAmount(amount = amount * that.amount,
                     unit = U2(that.distance, that.mass) to time)
+
+    // endregion
+
+    // region -> Intensity
+
+    @JvmName("timesRadiantExposure")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: RadiantExposureAmount<M, T>) =
+        IntensityAmount(amount = amount * that.amount
+                                 / convert(that.time to time,
+                                           that.time to time),
+                        unit = that.mass to time)
+
+    operator fun <M : Unit<Mass>> times(that: RadiantExposureAmount<M, T>) =
+        IntensityAmount(amount = amount * that.amount,
+                        unit = that.mass to time)
 
     // endregion
 
@@ -313,6 +313,20 @@ open class FrequencyAmount<T : Unit<Time>>(
     operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
         MassFlowRateAmount(amount = amount * that.amount,
                            unit = that.mass to time)
+
+    // endregion
+
+    // region -> MolarVolume
+
+    @JvmName("divReactionRate")
+    operator fun <L : Unit<Distance>, N : Unit<Substance>, T : Unit<Time>> div(that: ReactionRateAmount<L, N, T>) =
+        MolarVolumeAmount(amount = amount / that.amount
+                                   * convert(that.time to time),
+                          unit = that.distance to that.substance)
+
+    operator fun <L : Unit<Distance>, N : Unit<Substance>> div(that: ReactionRateAmount<L, N, T>) =
+        MolarVolumeAmount(amount = amount / that.amount,
+                          unit = that.distance to that.substance)
 
     // endregion
 
@@ -386,6 +400,18 @@ open class FrequencyAmount<T : Unit<Time>>(
     operator fun <M : Unit<Mass>> times(that: MassFlowRateAmount<M, T>) =
         RadiantExposureAmount(amount = amount * that.amount,
                               unit = that.mass to time)
+
+    // endregion
+
+    // region -> ReactionRate
+
+    operator fun <L : Unit<Distance>, N : Unit<Substance>> div(that: MolarVolumeAmount<L, N>) =
+        ReactionRateAmount(amount = amount / that.amount,
+                           unit = that.substance to U2(time, that.distance))
+
+    operator fun <L : Unit<Distance>, N : Unit<Substance>> times(that: MolarityAmount<L, N>) =
+        ReactionRateAmount(amount = amount * that.amount,
+                           unit = that.substance to U2(time, that.distance))
 
     // endregion
 

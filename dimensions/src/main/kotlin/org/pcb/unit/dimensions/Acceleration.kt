@@ -24,6 +24,8 @@ object Acceleration : Dimension
 
     operator fun times(that: Momentum) = Power
 
+    operator fun times(that: LinearDensity) = RadiantExposure
+
     operator fun div(that: SpecificEnergy) = SpacialFrequency
 
     operator fun div(that: SpacialFrequency) = SpecificEnergy

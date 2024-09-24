@@ -18,6 +18,11 @@ object MassDensity : Dimension
 
     operator fun times(that: SpecificEnergy) = EnergyDensity
 
+    operator fun div(that: LinearDensity) = FuelEfficiency
+
+    operator fun div(that: FuelEfficiency) = LinearDensity
+    operator fun times(that: Area) = LinearDensity
+
     operator fun times(that: Volume) = Mass
 
     operator fun times(that: VolumetricFlow) = MassFlowRate

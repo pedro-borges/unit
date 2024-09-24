@@ -10,6 +10,7 @@ import org.pcb.unit.amounts.base.Mole.MOLE
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
+import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.MolarConductivity
@@ -107,6 +108,41 @@ open class MolarConductivityAmount<I : Unit<ElectricCurrent>, M : Unit<Mass>, N 
     operator fun div(that: MolarConductivityAmount<I, M, N, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
+
+    // endregion
+
+    // region -> CatalyticEfficiency
+
+    @JvmName("divPermittivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: PermittivityAmount<L, I, M, T>) =
+        CatalyticEfficiencyAmount(amount = amount / that.amount
+                                           / convert(that.electricCurrent to electricCurrent,
+                                                     that.electricCurrent to electricCurrent,
+                                                     that.time to time,
+                                                     that.time to time,
+                                                     that.time to time,
+                                                     that.time to time)
+                                           * convert(that.mass to mass),
+                                  unit = that.distance to U2(substance, time))
+
+    operator fun <L : Unit<Distance>> div(that: PermittivityAmount<L, I, M, T>) =
+        CatalyticEfficiencyAmount(amount = amount / that.amount,
+                                  unit = that.distance to U2(substance, time))
+
+    // endregion
+
+    // region -> Permittivity
+
+    @JvmName("divCatalyticEfficiency")
+    operator fun <L : Unit<Distance>, N : Unit<Substance>, T : Unit<Time>> div(that: CatalyticEfficiencyAmount<L, N, T>) =
+        PermittivityAmount(amount = amount / that.amount
+                                    * convert(that.substance to substance,
+                                              that.time to time),
+                           unit = U2(time, electricCurrent) to U2(mass, that.distance))
+
+    operator fun <L : Unit<Distance>> div(that: CatalyticEfficiencyAmount<L, N, T>) =
+        PermittivityAmount(amount = amount / that.amount,
+                           unit = U2(time, electricCurrent) to U2(mass, that.distance))
 
     // endregion
 }

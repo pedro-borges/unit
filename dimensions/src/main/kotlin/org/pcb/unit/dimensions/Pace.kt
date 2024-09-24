@@ -15,17 +15,29 @@ object Pace : Dimension
 
     operator fun times(that: VolumetricFlow) = Area
 
-    operator fun times(that: EnergyFluxDensity) = EnergyDensity
+    operator fun div(that: Permeability) = ElectricConductance
+
+    operator fun div(that: Permittivity) = ElectricResistance
+
+    operator fun times(that: Intensity) = EnergyDensity
 
     operator fun times(that: Power) = Force
 
     operator fun times(that: Acceleration) = Frequency
+
+    operator fun times(that: MassFlowRate) = LinearDensity
 
     operator fun times(that: Momentum) = Mass
 
     operator fun times(that: Force) = MassFlowRate
 
     operator fun times(that: Energy) = Momentum
+
+    operator fun div(that: ElectricConductance) = Permeability
+    operator fun times(that: ElectricResistance) = Permeability
+
+    operator fun div(that: ElectricResistance) = Permittivity
+    operator fun times(that: ElectricConductance) = Permittivity
 
     operator fun times(that: Yank) = RadiantExposure
 

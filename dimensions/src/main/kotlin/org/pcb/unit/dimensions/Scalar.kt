@@ -53,8 +53,6 @@ object Scalar : Dimension
 
     operator fun times(that: EnergyDensity) = EnergyDensity
 
-    operator fun times(that: EnergyFluxDensity) = EnergyFluxDensity
-
     operator fun times(that: Force) = Force
 
     operator fun div(that: Time) = Frequency
@@ -69,7 +67,11 @@ object Scalar : Dimension
 
     operator fun times(that: Inductance) = Inductance
 
+    operator fun times(that: Intensity) = Intensity
+
     operator fun times(that: Jerk) = Jerk
+
+    operator fun times(that: LinearDensity) = LinearDensity
 
     operator fun times(that: Luminance) = Luminance
 
@@ -115,6 +117,10 @@ object Scalar : Dimension
     operator fun div(that: Speed) = Pace
     operator fun times(that: Pace) = Pace
 
+    operator fun times(that: Permeability) = Permeability
+
+    operator fun times(that: Permittivity) = Permittivity
+
     operator fun times(that: Power) = Power
 
     operator fun times(that: PowerDensity) = PowerDensity
@@ -122,6 +128,8 @@ object Scalar : Dimension
     operator fun times(that: RadiantExposure) = RadiantExposure
 
     operator fun times(that: RadiantIntensity) = RadiantIntensity
+
+    operator fun times(that: ReactionRate) = ReactionRate
 
     operator fun times(that: Rent) = Rent
 

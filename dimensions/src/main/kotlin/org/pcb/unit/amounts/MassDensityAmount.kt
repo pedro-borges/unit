@@ -147,6 +147,47 @@ open class MassDensityAmount<L : Unit<Distance>, M : Unit<Mass>>(
 
     // endregion
 
+    // region -> FuelEfficiency
+
+    @JvmName("divLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: LinearDensityAmount<L, M>) =
+        FuelEfficiencyAmount(amount = amount / that.amount
+                                      / convert(that.mass to mass)
+                                      * convert(that.distance to distance),
+                             unit = NUMERIC to distance)
+
+    operator fun div(that: LinearDensityAmount<L, M>) =
+        FuelEfficiencyAmount(amount = amount / that.amount,
+                             unit = NUMERIC to distance)
+
+    // endregion
+
+    // region -> LinearDensity
+
+    @JvmName("timesArea")
+    operator fun <L : Unit<Distance>> times(that: AreaAmount<L>) =
+        LinearDensityAmount(amount = amount * that.amount
+                                     * convert(that.distance to distance,
+                                               that.distance to distance),
+                            unit = mass to distance)
+
+    operator fun times(that: AreaAmount<L>) =
+        LinearDensityAmount(amount = amount * that.amount,
+                            unit = mass to distance)
+
+    @JvmName("divFuelEfficiency")
+    operator fun <L : Unit<Distance>> div(that: FuelEfficiencyAmount<L>) =
+        LinearDensityAmount(amount = amount / that.amount
+                                     * convert(that.distance to distance,
+                                               that.distance to distance),
+                            unit = mass to distance)
+
+    operator fun div(that: FuelEfficiencyAmount<L>) =
+        LinearDensityAmount(amount = amount / that.amount,
+                            unit = mass to distance)
+
+    // endregion
+
     // region -> Mass
 
     @JvmName("timesVolume")

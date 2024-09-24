@@ -104,21 +104,6 @@ open class TemperatureGradientAmount<L : Unit<Distance>, K : Unit<Temperature>>(
 
     // endregion
 
-    // region -> EnergyFluxDensity
-
-    @JvmName("timesThermalConductivity")
-    operator fun <L : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> times(that: ThermalConductivityAmount<L, M, K, T>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount
-                                         * convert(that.distance to distance)
-                                         / convert(that.temperature to temperature),
-                                unit = that.mass to that.time)
-
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ThermalConductivityAmount<L, M, K, T>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount,
-                                unit = that.mass to that.time)
-
-    // endregion
-
     // region -> Force
 
     @JvmName("timesHeatCapacity")
@@ -132,6 +117,21 @@ open class TemperatureGradientAmount<L : Unit<Distance>, K : Unit<Temperature>>(
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: HeatCapacityAmount<L, M, K, T>) =
         ForceAmount(amount = amount * that.amount,
                     unit = U2(distance, that.mass) to that.time)
+
+    // endregion
+
+    // region -> Intensity
+
+    @JvmName("timesThermalConductivity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> times(that: ThermalConductivityAmount<L, M, K, T>) =
+        IntensityAmount(amount = amount * that.amount
+                                 * convert(that.distance to distance)
+                                 / convert(that.temperature to temperature),
+                        unit = that.mass to that.time)
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ThermalConductivityAmount<L, M, K, T>) =
+        IntensityAmount(amount = amount * that.amount,
+                        unit = that.mass to that.time)
 
     // endregion
 

@@ -24,5 +24,12 @@ object ElectricConductance : Dimension
 
     operator fun div(that: Capacitance) = Frequency
 
+    operator fun times(that: Permeability) = Pace
+
+    operator fun div(that: Speed) = Permittivity
+    operator fun times(that: Pace) = Permittivity
+
+    operator fun div(that: Permittivity) = Speed
+
     operator fun times(that: Inductance) = Time
 }

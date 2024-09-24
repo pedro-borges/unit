@@ -203,6 +203,74 @@ open class ElectricResistanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent
 
     // endregion
 
+    // region -> Pace
+
+    @JvmName("timesPermittivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: PermittivityAmount<L, I, M, T>) =
+        PaceAmount(amount = amount * that.amount
+                            * convert(that.electricCurrent to electricCurrent,
+                                      that.electricCurrent to electricCurrent,
+                                      that.time to time,
+                                      that.time to time,
+                                      that.time to time,
+                                      that.time to time)
+                            / convert(that.distance to distance,
+                                      that.distance to distance,
+                                      that.distance to distance,
+                                      that.mass to mass),
+                   unit = time to distance)
+
+    operator fun times(that: PermittivityAmount<L, I, M, T>) =
+        PaceAmount(amount = amount * that.amount,
+                   unit = time to distance)
+
+    // endregion
+
+    // region -> Permeability
+
+    @JvmName("timesPace")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<L, T>) =
+        PermeabilityAmount(amount = amount * that.amount
+                                    * convert(that.time to time)
+                                    / convert(that.distance to distance),
+                           unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    operator fun times(that: PaceAmount<L, T>) =
+        PermeabilityAmount(amount = amount * that.amount,
+                           unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    @JvmName("divSpeed")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
+        PermeabilityAmount(amount = amount / that.amount
+                                    / convert(that.distance to distance)
+                                    * convert(that.time to time),
+                           unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    operator fun div(that: SpeedAmount<L, T>) =
+        PermeabilityAmount(amount = amount / that.amount,
+                           unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    // endregion
+
+    // region -> Speed
+
+    @JvmName("divPermeability")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: PermeabilityAmount<L, I, M, T>) =
+        SpeedAmount(amount = amount / that.amount
+                             / convert(that.distance to distance,
+                                       that.mass to mass)
+                             * convert(that.electricCurrent to electricCurrent,
+                                       that.electricCurrent to electricCurrent,
+                                       that.time to time,
+                                       that.time to time),
+                    unit = distance to time)
+
+    operator fun div(that: PermeabilityAmount<L, I, M, T>) =
+        SpeedAmount(amount = amount / that.amount,
+                    unit = distance to time)
+
+    // endregion
+
     // region -> Time
 
     @JvmName("timesCapacitance")

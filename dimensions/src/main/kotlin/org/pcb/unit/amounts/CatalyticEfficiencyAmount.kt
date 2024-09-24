@@ -11,6 +11,8 @@ import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.CatalyticEfficiency
 import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.ElectricCurrent
+import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.Substance
 import org.pcb.unit.dimensions.Time
@@ -126,6 +128,26 @@ open class CatalyticEfficiencyAmount<L : Unit<Distance>, N : Unit<Substance>, T 
     operator fun times(that: MolarityAmount<L, N>) =
         FrequencyAmount(amount = amount * that.amount,
                         unit = NUMERIC to time)
+
+    // endregion
+
+    // region -> MolarConductivity
+
+    @JvmName("timesPermittivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: PermittivityAmount<L, I, M, T>) =
+        MolarConductivityAmount(amount = amount * that.amount
+                                         * convert(that.time to time,
+                                                   that.time to time,
+                                                   that.time to time,
+                                                   that.time to time)
+                                         / convert(that.distance to distance,
+                                                   that.distance to distance,
+                                                   that.distance to distance),
+                                unit = U2(time, that.electricCurrent) to U2(that.mass, substance))
+
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>> times(that: PermittivityAmount<L, I, M, T>) =
+        MolarConductivityAmount(amount = amount * that.amount,
+                                unit = U2(time, that.electricCurrent) to U2(that.mass, substance))
 
     // endregion
 

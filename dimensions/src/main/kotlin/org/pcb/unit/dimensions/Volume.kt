@@ -24,6 +24,8 @@ object Volume : Dimension
 
     operator fun div(that: Substance) = MolarVolume
 
+    operator fun times(that: LinearDensity) = MomentOfInertia
+
     operator fun times(that: PowerDensity) = Power
 
     operator fun div(that: Mass) = SpecificVolume

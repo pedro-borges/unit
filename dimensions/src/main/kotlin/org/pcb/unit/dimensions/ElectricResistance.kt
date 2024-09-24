@@ -24,5 +24,12 @@ object ElectricResistance : Dimension
 
     operator fun times(that: ElectricCharge) = MagneticFlux
 
+    operator fun times(that: Permittivity) = Pace
+
+    operator fun div(that: Speed) = Permeability
+    operator fun times(that: Pace) = Permeability
+
+    operator fun div(that: Permeability) = Speed
+
     operator fun times(that: Capacitance) = Time
 }

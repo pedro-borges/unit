@@ -225,6 +225,23 @@ open class ForceAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> LinearDensity
+
+    @JvmName("divSpecificEnergy")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: SpecificEnergyAmount<L, T>) =
+        LinearDensityAmount(amount = amount / that.amount
+                                     / convert(that.distance to distance,
+                                               that.distance to distance)
+                                     * convert(that.time to time,
+                                               that.time to time),
+                            unit = mass to distance)
+
+    operator fun div(that: SpecificEnergyAmount<L, T>) =
+        LinearDensityAmount(amount = amount / that.amount,
+                            unit = mass to distance)
+
+    // endregion
+
     // region -> Mass
 
     @JvmName("divAcceleration")
@@ -375,6 +392,21 @@ open class ForceAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: EnergyAmount<L, M, T>) =
         SpacialFrequencyAmount(amount = amount / that.amount,
                                unit = NUMERIC to distance)
+
+    // endregion
+
+    // region -> SpecificEnergy
+
+    @JvmName("divLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: LinearDensityAmount<L, M>) =
+        SpecificEnergyAmount(amount = amount / that.amount
+                                      / convert(that.mass to mass)
+                                      * convert(that.distance to distance),
+                             unit = distance to time)
+
+    operator fun div(that: LinearDensityAmount<L, M>) =
+        SpecificEnergyAmount(amount = amount / that.amount,
+                             unit = distance to time)
 
     // endregion
 

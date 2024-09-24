@@ -21,6 +21,9 @@ object Area : Dimension
 
     operator fun times(that: EnergyDensity) = Force
 
+    operator fun div(that: SpecificVolume) = LinearDensity
+    operator fun times(that: MassDensity) = LinearDensity
+
     operator fun times(that: Illuminance) = LuminousFlux
 
     operator fun times(that: Luminance) = LuminousIntensity
@@ -33,9 +36,11 @@ object Area : Dimension
 
     operator fun div(that: VolumetricFlow) = Pace
 
-    operator fun times(that: EnergyFluxDensity) = Power
+    operator fun times(that: Intensity) = Power
 
     operator fun div(that: Volume) = SpacialFrequency
+
+    operator fun div(that: LinearDensity) = SpecificVolume
 
     operator fun div(that: SpacialFrequency) = Volume
     operator fun times(that: Distance) = Volume

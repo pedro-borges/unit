@@ -420,6 +420,20 @@ open class TimeAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> Molarity
+
+    @JvmName("timesReactionRate")
+    operator fun <L : Unit<Distance>, N : Unit<Substance>, T : Unit<Time>> times(that: ReactionRateAmount<L, N, T>) =
+        MolarityAmount(amount = amount * that.amount
+                                / convert(that.time to time),
+                       unit = that.substance to that.distance)
+
+    operator fun <L : Unit<Distance>, N : Unit<Substance>> times(that: ReactionRateAmount<L, N, T>) =
+        MolarityAmount(amount = amount * that.amount,
+                       unit = that.substance to that.distance)
+
+    // endregion
+
     // region -> MomentOfInertia
 
     @JvmName("timesAction")
@@ -463,15 +477,15 @@ open class TimeAmount<T : Unit<Time>>(
 
     // region -> RadiantExposure
 
-    @JvmName("timesEnergyFluxDensity")
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyFluxDensityAmount<M, T>) =
+    @JvmName("timesIntensity")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: IntensityAmount<M, T>) =
         RadiantExposureAmount(amount = amount * that.amount
                                        / convert(that.time to time,
                                                  that.time to time,
                                                  that.time to time),
                               unit = that.mass to time)
 
-    operator fun <M : Unit<Mass>> times(that: EnergyFluxDensityAmount<M, T>) =
+    operator fun <M : Unit<Mass>> times(that: IntensityAmount<M, T>) =
         RadiantExposureAmount(amount = amount * that.amount,
                               unit = that.mass to time)
 

@@ -192,6 +192,18 @@ open class MolarityAmount<L : Unit<Distance>, N : Unit<Substance>>(
 
     // endregion
 
+    // region -> ReactionRate
+
+    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
+        ReactionRateAmount(amount = amount * that.amount,
+                           unit = substance to U2(that.time, distance))
+
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        ReactionRateAmount(amount = amount / that.amount,
+                           unit = substance to U2(that.time, distance))
+
+    // endregion
+
     // region -> Substance
 
     @JvmName("timesVolume")
@@ -205,6 +217,23 @@ open class MolarityAmount<L : Unit<Distance>, N : Unit<Substance>>(
     operator fun times(that: VolumeAmount<L>) =
         SubstanceAmount(amount = amount * that.amount,
                         unit = substance)
+
+    // endregion
+
+    // region -> Time
+
+    @JvmName("divReactionRate")
+    operator fun <L : Unit<Distance>, N : Unit<Substance>, T : Unit<Time>> div(that: ReactionRateAmount<L, N, T>) =
+        TimeAmount(amount = amount / that.amount
+                            / convert(that.substance to substance)
+                            * convert(that.distance to distance,
+                                      that.distance to distance,
+                                      that.distance to distance),
+                   unit = that.time)
+
+    operator fun <T : Unit<Time>> div(that: ReactionRateAmount<L, N, T>) =
+        TimeAmount(amount = amount / that.amount,
+                   unit = that.time)
 
     // endregion
 }

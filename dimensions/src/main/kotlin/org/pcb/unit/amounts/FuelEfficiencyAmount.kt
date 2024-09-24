@@ -135,26 +135,26 @@ open class FuelEfficiencyAmount<L : Unit<Distance>>(
 
     // endregion
 
-    // region -> EnergyFluxDensity
-
-    @JvmName("timesPower")
-    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: PowerAmount<L, M, T>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount
-                                         * convert(that.distance to distance,
-                                                   that.distance to distance),
-                                unit = that.mass to that.time)
-
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: PowerAmount<L, M, T>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount,
-                                unit = that.mass to that.time)
-
-    // endregion
-
     // region -> Illuminance
 
     operator fun <BAC : Unit<Angle>, J : Unit<LuminousIntensity>> times(that: LuminousFluxAmount<BAC, J>) =
         IlluminanceAmount(amount = amount * that.amount,
                           unit = U2(that.angle, that.luminousIntensity) to distance)
+
+    // endregion
+
+    // region -> Intensity
+
+    @JvmName("timesPower")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: PowerAmount<L, M, T>) =
+        IntensityAmount(amount = amount * that.amount
+                                 * convert(that.distance to distance,
+                                           that.distance to distance),
+                        unit = that.mass to that.time)
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: PowerAmount<L, M, T>) =
+        IntensityAmount(amount = amount * that.amount,
+                        unit = that.mass to that.time)
 
     // endregion
 
@@ -193,6 +193,20 @@ open class FuelEfficiencyAmount<L : Unit<Distance>>(
     operator fun <M : Unit<Mass>> times(that: MomentOfInertiaAmount<L, M>) =
         MassAmount(amount = amount * that.amount,
                    unit = that.mass)
+
+    // endregion
+
+    // region -> MassDensity
+
+    @JvmName("timesLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
+        MassDensityAmount(amount = amount * that.amount
+                                   / convert(that.distance to distance),
+                          unit = that.mass to distance)
+
+    operator fun <M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
+        MassDensityAmount(amount = amount * that.amount,
+                          unit = that.mass to distance)
 
     // endregion
 

@@ -17,6 +17,8 @@ object Jerk : Dimension
 
     operator fun div(that: Acceleration) = Frequency
 
+    operator fun times(that: LinearDensity) = Intensity
+
     operator fun times(that: AreaDensity) = PowerDensity
 
     operator fun div(that: Time) = Snap

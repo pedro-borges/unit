@@ -13,6 +13,8 @@ object SpecificVolume : Dimension
     operator fun div(that: SpecificVolume) = Scalar
     operator fun times(that: MassDensity) = Scalar
 
+    operator fun times(that: LinearDensity) = Area
+
     operator fun times(that: AreaDensity) = Distance
 
     operator fun div(that: MolarVolume) = Molality

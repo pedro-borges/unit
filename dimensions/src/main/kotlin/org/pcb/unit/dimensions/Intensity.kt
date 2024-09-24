@@ -5,12 +5,12 @@ import org.pcb.unit.Composite
 @Suppress("UNUSED_PARAMETER")
 @Composite(mass = 1,
            time = -3)
-object EnergyFluxDensity : Dimension
+object Intensity : Dimension
 {
-    operator fun div(that: Scalar) = EnergyFluxDensity
-    operator fun times(that: Scalar) = EnergyFluxDensity
+    operator fun div(that: Scalar) = Intensity
+    operator fun times(that: Scalar) = Intensity
 
-    operator fun div(that: EnergyFluxDensity) = Scalar
+    operator fun div(that: Intensity) = Scalar
 
     operator fun div(that: PowerDensity) = Distance
 
@@ -20,6 +20,10 @@ object EnergyFluxDensity : Dimension
     operator fun div(that: RadiantExposure) = Frequency
 
     operator fun div(that: Power) = FuelEfficiency
+
+    operator fun div(that: LinearDensity) = Jerk
+
+    operator fun div(that: Jerk) = LinearDensity
 
     operator fun div(that: FuelEfficiency) = Power
     operator fun times(that: Area) = Power

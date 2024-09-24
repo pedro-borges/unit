@@ -188,6 +188,20 @@ open class VolumeAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> MomentOfInertia
+
+    @JvmName("timesLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
+        MomentOfInertiaAmount(amount = amount * that.amount
+                                       / convert(that.distance to distance),
+                              unit = U2(distance, that.mass))
+
+    operator fun <M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
+        MomentOfInertiaAmount(amount = amount * that.amount,
+                              unit = U2(distance, that.mass))
+
+    // endregion
+
     // region -> Power
 
     @JvmName("timesPowerDensity")

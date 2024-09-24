@@ -149,6 +149,30 @@ open class AreaDensityAmount<L : Unit<Distance>, M : Unit<Mass>>(
 
     // endregion
 
+    // region -> LinearDensity
+
+    @JvmName("timesDistance")
+    operator fun <L : Unit<Distance>> times(that: DistanceAmount<L>) =
+        LinearDensityAmount(amount = amount * that.amount
+                                     * convert(that.distance to distance),
+                            unit = mass to distance)
+
+    operator fun times(that: DistanceAmount<L>) =
+        LinearDensityAmount(amount = amount * that.amount,
+                            unit = mass to distance)
+
+    @JvmName("divSpacialFrequency")
+    operator fun <L : Unit<Distance>> div(that: SpacialFrequencyAmount<L>) =
+        LinearDensityAmount(amount = amount / that.amount
+                                     * convert(that.distance to distance),
+                            unit = mass to distance)
+
+    operator fun div(that: SpacialFrequencyAmount<L>) =
+        LinearDensityAmount(amount = amount / that.amount,
+                            unit = mass to distance)
+
+    // endregion
+
     // region -> Mass
 
     @JvmName("timesArea")
@@ -241,6 +265,21 @@ open class AreaDensityAmount<L : Unit<Distance>, M : Unit<Mass>>(
     operator fun <T : Unit<Time>> times(that: SpecificEnergyAmount<L, T>) =
         RadiantExposureAmount(amount = amount * that.amount,
                               unit = mass to that.time)
+
+    // endregion
+
+    // region -> SpacialFrequency
+
+    @JvmName("divLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: LinearDensityAmount<L, M>) =
+        SpacialFrequencyAmount(amount = amount / that.amount
+                                        / convert(that.mass to mass)
+                                        * convert(that.distance to distance),
+                               unit = NUMERIC to distance)
+
+    operator fun div(that: LinearDensityAmount<L, M>) =
+        SpacialFrequencyAmount(amount = amount / that.amount,
+                               unit = NUMERIC to distance)
 
     // endregion
 }

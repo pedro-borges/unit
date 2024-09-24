@@ -179,6 +179,20 @@ open class AccelerationAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> RadiantExposure
+
+    @JvmName("timesLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
+        RadiantExposureAmount(amount = amount * that.amount
+                                       / convert(that.distance to distance),
+                              unit = that.mass to time)
+
+    operator fun <M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
+        RadiantExposureAmount(amount = amount * that.amount,
+                              unit = that.mass to time)
+
+    // endregion
+
     // region -> SpacialFrequency
 
     @JvmName("divSpecificEnergy")

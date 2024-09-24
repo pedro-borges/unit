@@ -57,6 +57,8 @@ object Time : Dimension
 
     operator fun times(that: CatalyticEfficiency) = MolarVolume
 
+    operator fun times(that: ReactionRate) = Molarity
+
     operator fun times(that: Action) = MomentOfInertia
 
     operator fun times(that: Force) = Momentum
@@ -64,7 +66,7 @@ object Time : Dimension
     operator fun div(that: Distance) = Pace
     operator fun times(that: SpacialFrequency) = Pace
 
-    operator fun times(that: EnergyFluxDensity) = RadiantExposure
+    operator fun times(that: Intensity) = RadiantExposure
 
     operator fun times(that: Acceleration) = Speed
 

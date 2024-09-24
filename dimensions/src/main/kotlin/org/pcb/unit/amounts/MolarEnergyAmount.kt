@@ -199,6 +199,24 @@ open class MolarEnergyAmount<L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substa
 
     // endregion
 
+    // region -> PowerDensity
+
+    @JvmName("timesReactionRate")
+    operator fun <L : Unit<Distance>, N : Unit<Substance>, T : Unit<Time>> times(that: ReactionRateAmount<L, N, T>) =
+        PowerDensityAmount(amount = amount * that.amount
+                                    * convert(that.substance to substance)
+                                    / convert(that.distance to distance,
+                                              that.distance to distance,
+                                              that.distance to distance,
+                                              that.time to time),
+                           unit = mass to U2(distance, time))
+
+    operator fun times(that: ReactionRateAmount<L, N, T>) =
+        PowerDensityAmount(amount = amount * that.amount,
+                           unit = mass to U2(distance, time))
+
+    // endregion
+
     // region -> SpecificEnergy
 
     @JvmName("timesMolality")

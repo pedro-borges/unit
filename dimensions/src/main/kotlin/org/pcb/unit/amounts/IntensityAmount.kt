@@ -9,7 +9,7 @@ import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
-import org.pcb.unit.dimensions.EnergyFluxDensity
+import org.pcb.unit.dimensions.Intensity
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.Temperature
@@ -21,67 +21,67 @@ import org.pcb.unit.minor
 import org.pcb.unit.times
 import org.pcb.unit.toBigDecimal
 
-open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
+open class IntensityAmount<M : Unit<Mass>, T : Unit<Time>>(
         amount: Number,
         unit: Pair<M, T>)
-    : Amount<EnergyFluxDensity>(amount = amount.toBigDecimal(),
-                                unit = CompositeUnit(
-                                    domain = EnergyFluxDensity::class,
-                                    units = mapOf(unit.major to 1,
-                                                  unit.minor to -3)))
+    : Amount<Intensity>(amount = amount.toBigDecimal(),
+                        unit = CompositeUnit(
+                            domain = Intensity::class,
+                            units = mapOf(unit.major to 1,
+                                          unit.minor to -3)))
 {
     val mass = unit.major
     val time = unit.minor
 
     companion object
     {
-        operator fun invoke(amount: Number, unit: Unit<EnergyFluxDensity>) =
-            EnergyFluxDensityAmount(amount = amount * unit.scale,
-                                    unit = kilo(GRAM) to SECOND)
+        operator fun invoke(amount: Number, unit: Unit<Intensity>) =
+            IntensityAmount(amount = amount * unit.scale,
+                            unit = kilo(GRAM) to SECOND)
     }
 
-    // region -> EnergyFluxDensity
+    // region -> Intensity
 
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
-                                unit = mass to time)
+        IntensityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
+                        unit = mass to time)
 
     override operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =
-        EnergyFluxDensityAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
-                                unit = mass to time)
+        IntensityAmount(amount = amount / that.amount / convert(that.scalar to NUMERIC),
+                        unit = mass to time)
 
-    @JvmName("plusEnergyFluxDensity")
-    operator fun <M : Unit<Mass>, T : Unit<Time>> plus(that: EnergyFluxDensityAmount<M, T>) =
-        EnergyFluxDensityAmount(amount = amount + that.amount
-                                         * convert(that.mass to mass)
-                                         / convert(that.time to time,
-                                                   that.time to time,
-                                                   that.time to time),
-                                unit = mass to time)
+    @JvmName("plusIntensity")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> plus(that: IntensityAmount<M, T>) =
+        IntensityAmount(amount = amount + that.amount
+                                 * convert(that.mass to mass)
+                                 / convert(that.time to time,
+                                           that.time to time,
+                                           that.time to time),
+                        unit = mass to time)
 
-    operator fun plus(that: EnergyFluxDensityAmount<M, T>) =
-        EnergyFluxDensityAmount(amount = amount + that.amount,
-                                unit = mass to time)
+    operator fun plus(that: IntensityAmount<M, T>) =
+        IntensityAmount(amount = amount + that.amount,
+                        unit = mass to time)
 
-    @JvmName("minusEnergyFluxDensity")
-    operator fun <M : Unit<Mass>, T : Unit<Time>> minus(that: EnergyFluxDensityAmount<M, T>) =
-        EnergyFluxDensityAmount(amount = amount - that.amount
-                                         * convert(that.mass to mass)
-                                         / convert(that.time to time,
-                                                   that.time to time,
-                                                   that.time to time),
-                                unit = mass to time)
+    @JvmName("minusIntensity")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> minus(that: IntensityAmount<M, T>) =
+        IntensityAmount(amount = amount - that.amount
+                                 * convert(that.mass to mass)
+                                 / convert(that.time to time,
+                                           that.time to time,
+                                           that.time to time),
+                        unit = mass to time)
 
-    operator fun minus(that: EnergyFluxDensityAmount<M, T>) =
-        EnergyFluxDensityAmount(amount = amount - that.amount,
-                                unit = mass to time)
+    operator fun minus(that: IntensityAmount<M, T>) =
+        IntensityAmount(amount = amount - that.amount,
+                        unit = mass to time)
 
     // endregion
 
     // region -> Scalar
 
-    @JvmName("divEnergyFluxDensity")
-    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: EnergyFluxDensityAmount<M, T>) =
+    @JvmName("divIntensity")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: IntensityAmount<M, T>) =
         ScalarAmount(amount = amount / that.amount
                               / convert(that.mass to mass)
                               * convert(that.time to time,
@@ -89,7 +89,7 @@ open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
                                         that.time to time),
                      unit = NUMERIC)
 
-    operator fun div(that: EnergyFluxDensityAmount<M, T>) =
+    operator fun div(that: IntensityAmount<M, T>) =
         ScalarAmount(amount = amount / that.amount,
                      unit = NUMERIC)
 
@@ -166,6 +166,36 @@ open class EnergyFluxDensityAmount<M : Unit<Mass>, T : Unit<Time>>(
     operator fun <L : Unit<Distance>> div(that: PowerAmount<L, M, T>) =
         FuelEfficiencyAmount(amount = amount / that.amount,
                              unit = NUMERIC to that.distance)
+
+    // endregion
+
+    // region -> Jerk
+
+    @JvmName("divLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: LinearDensityAmount<L, M>) =
+        JerkAmount(amount = amount / that.amount
+                            / convert(that.mass to mass),
+                   unit = that.distance to time)
+
+    operator fun <L : Unit<Distance>> div(that: LinearDensityAmount<L, M>) =
+        JerkAmount(amount = amount / that.amount,
+                   unit = that.distance to time)
+
+    // endregion
+
+    // region -> LinearDensity
+
+    @JvmName("divJerk")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: JerkAmount<L, T>) =
+        LinearDensityAmount(amount = amount / that.amount
+                                     * convert(that.time to time,
+                                               that.time to time,
+                                               that.time to time),
+                            unit = mass to that.distance)
+
+    operator fun <L : Unit<Distance>> div(that: JerkAmount<L, T>) =
+        LinearDensityAmount(amount = amount / that.amount,
+                            unit = mass to that.distance)
 
     // endregion
 

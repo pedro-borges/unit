@@ -16,12 +16,12 @@ object SpacialFrequency : Dimension
 
     operator fun times(that: Volume) = Area
 
+    operator fun times(that: LinearDensity) = AreaDensity
+
     operator fun div(that: FuelEfficiency) = Distance
     operator fun times(that: Area) = Distance
 
     operator fun times(that: RadiantExposure) = EnergyDensity
-
-    operator fun times(that: Yank) = EnergyFluxDensity
 
     operator fun times(that: Energy) = Force
 
@@ -30,6 +30,10 @@ object SpacialFrequency : Dimension
 
     operator fun div(that: Distance) = FuelEfficiency
     operator fun times(that: SpacialFrequency) = FuelEfficiency
+
+    operator fun times(that: Yank) = Intensity
+
+    operator fun times(that: Mass) = LinearDensity
 
     operator fun times(that: AreaDensity) = MassDensity
 
@@ -40,7 +44,11 @@ object SpacialFrequency : Dimension
     operator fun div(that: Frequency) = Pace
     operator fun times(that: Time) = Pace
 
-    operator fun times(that: EnergyFluxDensity) = PowerDensity
+    operator fun times(that: Inductance) = Permeability
+
+    operator fun times(that: Capacitance) = Permittivity
+
+    operator fun times(that: Intensity) = PowerDensity
 
     operator fun times(that: Force) = RadiantExposure
 

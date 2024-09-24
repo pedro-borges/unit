@@ -119,6 +119,23 @@ open class MolarVolumeAmount<L : Unit<Distance>, N : Unit<Substance>>(
 
     // endregion
 
+    // region -> Frequency
+
+    @JvmName("timesReactionRate")
+    operator fun <L : Unit<Distance>, N : Unit<Substance>, T : Unit<Time>> times(that: ReactionRateAmount<L, N, T>) =
+        FrequencyAmount(amount = amount * that.amount
+                                 * convert(that.substance to substance)
+                                 / convert(that.distance to distance,
+                                           that.distance to distance,
+                                           that.distance to distance),
+                        unit = NUMERIC to that.time)
+
+    operator fun <T : Unit<Time>> times(that: ReactionRateAmount<L, N, T>) =
+        FrequencyAmount(amount = amount * that.amount,
+                        unit = NUMERIC to that.time)
+
+    // endregion
+
     // region -> MolarEnergy
 
     @JvmName("timesEnergyDensity")

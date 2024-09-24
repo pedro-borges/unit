@@ -23,5 +23,10 @@ object Molarity : Dimension
     operator fun div(that: MassDensity) = Molality
     operator fun times(that: SpecificVolume) = Molality
 
+    operator fun div(that: Time) = ReactionRate
+    operator fun times(that: Frequency) = ReactionRate
+
     operator fun times(that: Volume) = Substance
+
+    operator fun div(that: ReactionRate) = Time
 }

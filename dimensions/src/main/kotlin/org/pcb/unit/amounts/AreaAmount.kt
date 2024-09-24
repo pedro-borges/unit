@@ -150,6 +150,34 @@ open class AreaAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> LinearDensity
+
+    @JvmName("timesMassDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: MassDensityAmount<L, M>) =
+        LinearDensityAmount(amount = amount * that.amount
+                                     / convert(that.distance to distance,
+                                               that.distance to distance,
+                                               that.distance to distance),
+                            unit = that.mass to distance)
+
+    operator fun <M : Unit<Mass>> times(that: MassDensityAmount<L, M>) =
+        LinearDensityAmount(amount = amount * that.amount,
+                            unit = that.mass to distance)
+
+    @JvmName("divSpecificVolume")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: SpecificVolumeAmount<L, M>) =
+        LinearDensityAmount(amount = amount / that.amount
+                                     / convert(that.distance to distance,
+                                               that.distance to distance,
+                                               that.distance to distance),
+                            unit = that.mass to distance)
+
+    operator fun <M : Unit<Mass>> div(that: SpecificVolumeAmount<L, M>) =
+        LinearDensityAmount(amount = amount / that.amount,
+                            unit = that.mass to distance)
+
+    // endregion
+
     // region -> LuminousFlux
 
     @JvmName("timesIlluminance")
@@ -229,7 +257,7 @@ open class AreaAmount<L : Unit<Distance>>(
 
     // region -> Power
 
-    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyFluxDensityAmount<M, T>) =
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: IntensityAmount<M, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, that.mass) to that.time)
 
@@ -248,6 +276,20 @@ open class AreaAmount<L : Unit<Distance>>(
     operator fun div(that: VolumeAmount<L>) =
         SpacialFrequencyAmount(amount = amount / that.amount,
                                unit = NUMERIC to distance)
+
+    // endregion
+
+    // region -> SpecificVolume
+
+    @JvmName("divLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: LinearDensityAmount<L, M>) =
+        SpecificVolumeAmount(amount = amount / that.amount
+                                      * convert(that.distance to distance),
+                             unit = distance to that.mass)
+
+    operator fun <M : Unit<Mass>> div(that: LinearDensityAmount<L, M>) =
+        SpecificVolumeAmount(amount = amount / that.amount,
+                             unit = distance to that.mass)
 
     // endregion
 

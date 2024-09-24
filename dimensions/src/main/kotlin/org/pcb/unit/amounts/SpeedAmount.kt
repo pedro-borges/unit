@@ -9,6 +9,7 @@ import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.Speed
@@ -146,6 +147,42 @@ open class SpeedAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> ElectricConductance
+
+    @JvmName("timesPermittivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: PermittivityAmount<L, I, M, T>) =
+        ElectricConductanceAmount(amount = amount * that.amount
+                                           * convert(that.time to time,
+                                                     that.time to time,
+                                                     that.time to time,
+                                                     that.time to time)
+                                           / convert(that.distance to distance,
+                                                     that.distance to distance,
+                                                     that.distance to distance),
+                                  unit = U2(time, that.electricCurrent) to U2(that.mass, distance))
+
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>> times(that: PermittivityAmount<L, I, M, T>) =
+        ElectricConductanceAmount(amount = amount * that.amount,
+                                  unit = U2(time, that.electricCurrent) to U2(that.mass, distance))
+
+    // endregion
+
+    // region -> ElectricResistance
+
+    @JvmName("timesPermeability")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: PermeabilityAmount<L, I, M, T>) =
+        ElectricResistanceAmount(amount = amount * that.amount
+                                          * convert(that.distance to distance)
+                                          / convert(that.time to time,
+                                                    that.time to time),
+                                 unit = U2(distance, that.mass) to U2(that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>> times(that: PermeabilityAmount<L, I, M, T>) =
+        ElectricResistanceAmount(amount = amount * that.amount,
+                                 unit = U2(distance, that.mass) to U2(that.electricCurrent, time))
+
+    // endregion
+
     // region -> Energy
 
     @JvmName("timesMomentum")
@@ -158,22 +195,6 @@ open class SpeedAmount<L : Unit<Distance>, T : Unit<Time>>(
     operator fun <M : Unit<Mass>> times(that: MomentumAmount<L, M, T>) =
         EnergyAmount(amount = amount * that.amount,
                      unit = U2(distance, that.mass) to time)
-
-    // endregion
-
-    // region -> EnergyFluxDensity
-
-    @JvmName("timesEnergyDensity")
-    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<L, M, T>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount
-                                         / convert(that.distance to distance,
-                                                   that.time to time,
-                                                   that.time to time),
-                                unit = that.mass to time)
-
-    operator fun <M : Unit<Mass>> times(that: EnergyDensityAmount<L, M, T>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount,
-                                unit = that.mass to time)
 
     // endregion
 
@@ -229,6 +250,36 @@ open class SpeedAmount<L : Unit<Distance>, T : Unit<Time>>(
     operator fun div(that: VolumetricFlowAmount<L, T>) =
         FuelEfficiencyAmount(amount = amount / that.amount,
                              unit = NUMERIC to distance)
+
+    // endregion
+
+    // region -> Intensity
+
+    @JvmName("timesEnergyDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<L, M, T>) =
+        IntensityAmount(amount = amount * that.amount
+                                 / convert(that.distance to distance,
+                                           that.time to time,
+                                           that.time to time),
+                        unit = that.mass to time)
+
+    operator fun <M : Unit<Mass>> times(that: EnergyDensityAmount<L, M, T>) =
+        IntensityAmount(amount = amount * that.amount,
+                        unit = that.mass to time)
+
+    // endregion
+
+    // region -> MassFlowRate
+
+    @JvmName("timesLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
+        MassFlowRateAmount(amount = amount * that.amount
+                                    / convert(that.distance to distance),
+                           unit = that.mass to time)
+
+    operator fun <M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
+        MassFlowRateAmount(amount = amount * that.amount,
+                           unit = that.mass to time)
 
     // endregion
 

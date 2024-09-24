@@ -17,15 +17,15 @@ object Yank : Dimension
 
     operator fun div(that: PowerDensity) = Area
 
-    operator fun div(that: EnergyFluxDensity) = Distance
-
-    operator fun div(that: Distance) = EnergyFluxDensity
-    operator fun times(that: SpacialFrequency) = EnergyFluxDensity
+    operator fun div(that: Intensity) = Distance
 
     operator fun div(that: Frequency) = Force
     operator fun times(that: Time) = Force
 
     operator fun div(that: Force) = Frequency
+
+    operator fun div(that: Distance) = Intensity
+    operator fun times(that: SpacialFrequency) = Intensity
 
     operator fun div(that: Mass) = Jerk
 

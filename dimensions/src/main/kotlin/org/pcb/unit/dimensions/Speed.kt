@@ -19,9 +19,11 @@ object Speed : Dimension
     operator fun div(that: Frequency) = Distance
     operator fun times(that: Time) = Distance
 
-    operator fun times(that: Momentum) = Energy
+    operator fun times(that: Permittivity) = ElectricConductance
 
-    operator fun times(that: EnergyDensity) = EnergyFluxDensity
+    operator fun times(that: Permeability) = ElectricResistance
+
+    operator fun times(that: Momentum) = Energy
 
     operator fun times(that: MassFlowRate) = Force
 
@@ -29,6 +31,10 @@ object Speed : Dimension
     operator fun times(that: SpacialFrequency) = Frequency
 
     operator fun div(that: VolumetricFlow) = FuelEfficiency
+
+    operator fun times(that: EnergyDensity) = Intensity
+
+    operator fun times(that: LinearDensity) = MassFlowRate
 
     operator fun times(that: Mass) = Momentum
 

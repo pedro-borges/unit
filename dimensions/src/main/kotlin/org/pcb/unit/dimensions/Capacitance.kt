@@ -14,10 +14,15 @@ object Capacitance : Dimension
 
     operator fun div(that: Capacitance) = Scalar
 
+    operator fun div(that: Permittivity) = Distance
+
     operator fun times(that: ElectricTension) = ElectricCharge
 
     operator fun div(that: Time) = ElectricConductance
     operator fun times(that: Frequency) = ElectricConductance
+
+    operator fun div(that: Distance) = Permittivity
+    operator fun times(that: SpacialFrequency) = Permittivity
 
     operator fun div(that: ElectricConductance) = Time
     operator fun times(that: ElectricResistance) = Time

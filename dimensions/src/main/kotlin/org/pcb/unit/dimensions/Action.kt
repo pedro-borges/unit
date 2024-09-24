@@ -13,6 +13,8 @@ object Action : Dimension
 
     operator fun div(that: Action) = Scalar
 
+    operator fun times(that: LinearDensity) = AngularMomentum
+
     operator fun div(that: MassFlowRate) = Area
 
     operator fun div(that: Momentum) = Distance
@@ -23,6 +25,8 @@ object Action : Dimension
     operator fun times(that: Frequency) = Energy
 
     operator fun div(that: MomentOfInertia) = Frequency
+
+    operator fun div(that: VolumetricFlow) = LinearDensity
 
     operator fun div(that: ElectricCharge) = MagneticFlux
 
@@ -36,4 +40,6 @@ object Action : Dimension
     operator fun times(that: SpacialFrequency) = Momentum
 
     operator fun div(that: Energy) = Time
+
+    operator fun div(that: LinearDensity) = VolumetricFlow
 }

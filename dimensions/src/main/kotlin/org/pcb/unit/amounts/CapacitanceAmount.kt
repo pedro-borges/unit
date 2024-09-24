@@ -116,6 +116,29 @@ open class CapacitanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M : 
 
     // endregion
 
+    // region -> Distance
+
+    @JvmName("divPermittivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: PermittivityAmount<L, I, M, T>) =
+        DistanceAmount(amount = amount / that.amount
+                                / convert(that.electricCurrent to electricCurrent,
+                                          that.electricCurrent to electricCurrent,
+                                          that.time to time,
+                                          that.time to time,
+                                          that.time to time,
+                                          that.time to time)
+                                * convert(that.distance to distance,
+                                          that.distance to distance,
+                                          that.distance to distance,
+                                          that.mass to mass),
+                       unit = distance)
+
+    operator fun div(that: PermittivityAmount<L, I, M, T>) =
+        DistanceAmount(amount = amount / that.amount,
+                       unit = distance)
+
+    // endregion
+
     // region -> ElectricCharge
 
     @JvmName("timesElectricTension")
@@ -157,6 +180,30 @@ open class CapacitanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M : 
     operator fun div(that: TimeAmount<T>) =
         ElectricConductanceAmount(amount = amount / that.amount,
                                   unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    // endregion
+
+    // region -> Permittivity
+
+    @JvmName("divDistance")
+    operator fun <L : Unit<Distance>> div(that: DistanceAmount<L>) =
+        PermittivityAmount(amount = amount / that.amount
+                                    / convert(that.distance to distance),
+                           unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    operator fun div(that: DistanceAmount<L>) =
+        PermittivityAmount(amount = amount / that.amount,
+                           unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    @JvmName("timesSpacialFrequency")
+    operator fun <L : Unit<Distance>> times(that: SpacialFrequencyAmount<L>) =
+        PermittivityAmount(amount = amount * that.amount
+                                    / convert(that.distance to distance),
+                           unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    operator fun times(that: SpacialFrequencyAmount<L>) =
+        PermittivityAmount(amount = amount * that.amount,
+                           unit = U2(time, electricCurrent) to U2(mass, distance))
 
     // endregion
 

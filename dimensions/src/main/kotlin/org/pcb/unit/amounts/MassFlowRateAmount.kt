@@ -170,6 +170,30 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> LinearDensity
+
+    @JvmName("timesPace")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<L, T>) =
+        LinearDensityAmount(amount = amount * that.amount
+                                     * convert(that.time to time),
+                            unit = mass to that.distance)
+
+    operator fun <L : Unit<Distance>> times(that: PaceAmount<L, T>) =
+        LinearDensityAmount(amount = amount * that.amount,
+                            unit = mass to that.distance)
+
+    @JvmName("divSpeed")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
+        LinearDensityAmount(amount = amount / that.amount
+                                     * convert(that.time to time),
+                            unit = mass to that.distance)
+
+    operator fun <L : Unit<Distance>> div(that: SpeedAmount<L, T>) =
+        LinearDensityAmount(amount = amount / that.amount,
+                            unit = mass to that.distance)
+
+    // endregion
+
     // region -> MagneticFluxDensity
 
     @JvmName("divElectricCharge")
@@ -301,6 +325,20 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
     operator fun <L : Unit<Distance>> div(that: MomentumAmount<L, M, T>) =
         SpacialFrequencyAmount(amount = amount / that.amount,
                                unit = NUMERIC to that.distance)
+
+    // endregion
+
+    // region -> Speed
+
+    @JvmName("divLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: LinearDensityAmount<L, M>) =
+        SpeedAmount(amount = amount / that.amount
+                             / convert(that.mass to mass),
+                    unit = that.distance to time)
+
+    operator fun <L : Unit<Distance>> div(that: LinearDensityAmount<L, M>) =
+        SpeedAmount(amount = amount / that.amount,
+                    unit = that.distance to time)
 
     // endregion
 

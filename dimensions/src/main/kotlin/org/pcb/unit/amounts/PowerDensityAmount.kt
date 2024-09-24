@@ -13,6 +13,7 @@ import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.PowerDensity
 import org.pcb.unit.dimensions.Scalar
+import org.pcb.unit.dimensions.Substance
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
 import org.pcb.unit.kilo
@@ -141,30 +142,6 @@ open class PowerDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>
 
     // endregion
 
-    // region -> EnergyFluxDensity
-
-    @JvmName("timesDistance")
-    operator fun <L : Unit<Distance>> times(that: DistanceAmount<L>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount
-                                         * convert(that.distance to distance),
-                                unit = mass to time)
-
-    operator fun times(that: DistanceAmount<L>) =
-        EnergyFluxDensityAmount(amount = amount * that.amount,
-                                unit = mass to time)
-
-    @JvmName("divSpacialFrequency")
-    operator fun <L : Unit<Distance>> div(that: SpacialFrequencyAmount<L>) =
-        EnergyFluxDensityAmount(amount = amount / that.amount
-                                         * convert(that.distance to distance),
-                                unit = mass to time)
-
-    operator fun div(that: SpacialFrequencyAmount<L>) =
-        EnergyFluxDensityAmount(amount = amount / that.amount,
-                                unit = mass to time)
-
-    // endregion
-
     // region -> Frequency
 
     @JvmName("divEnergyDensity")
@@ -200,6 +177,30 @@ open class PowerDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>
 
     // endregion
 
+    // region -> Intensity
+
+    @JvmName("timesDistance")
+    operator fun <L : Unit<Distance>> times(that: DistanceAmount<L>) =
+        IntensityAmount(amount = amount * that.amount
+                                 * convert(that.distance to distance),
+                        unit = mass to time)
+
+    operator fun times(that: DistanceAmount<L>) =
+        IntensityAmount(amount = amount * that.amount,
+                        unit = mass to time)
+
+    @JvmName("divSpacialFrequency")
+    operator fun <L : Unit<Distance>> div(that: SpacialFrequencyAmount<L>) =
+        IntensityAmount(amount = amount / that.amount
+                                 * convert(that.distance to distance),
+                        unit = mass to time)
+
+    operator fun div(that: SpacialFrequencyAmount<L>) =
+        IntensityAmount(amount = amount / that.amount,
+                        unit = mass to time)
+
+    // endregion
+
     // region -> Jerk
 
     @JvmName("divAreaDensity")
@@ -213,6 +214,23 @@ open class PowerDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>
     operator fun div(that: AreaDensityAmount<L, M>) =
         JerkAmount(amount = amount / that.amount,
                    unit = distance to time)
+
+    // endregion
+
+    // region -> MolarEnergy
+
+    @JvmName("divReactionRate")
+    operator fun <L : Unit<Distance>, N : Unit<Substance>, T : Unit<Time>> div(that: ReactionRateAmount<L, N, T>) =
+        MolarEnergyAmount(amount = amount / that.amount
+                                   * convert(that.distance to distance,
+                                             that.distance to distance,
+                                             that.distance to distance,
+                                             that.time to time),
+                          unit = U2(distance, mass) to U2(that.substance, time))
+
+    operator fun <N : Unit<Substance>> div(that: ReactionRateAmount<L, N, T>) =
+        MolarEnergyAmount(amount = amount / that.amount,
+                          unit = U2(distance, mass) to U2(that.substance, time))
 
     // endregion
 
@@ -232,10 +250,28 @@ open class PowerDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>
 
     // endregion
 
+    // region -> ReactionRate
+
+    @JvmName("divMolarEnergy")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substance>, T : Unit<Time>> div(that: MolarEnergyAmount<L, M, N, T>) =
+        ReactionRateAmount(amount = amount / that.amount
+                                    / convert(that.distance to distance,
+                                              that.distance to distance,
+                                              that.mass to mass)
+                                    * convert(that.time to time,
+                                              that.time to time),
+                           unit = that.substance to U2(time, distance))
+
+    operator fun <N : Unit<Substance>> div(that: MolarEnergyAmount<L, M, N, T>) =
+        ReactionRateAmount(amount = amount / that.amount,
+                           unit = that.substance to U2(time, distance))
+
+    // endregion
+
     // region -> SpacialFrequency
 
-    @JvmName("divEnergyFluxDensity")
-    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: EnergyFluxDensityAmount<M, T>) =
+    @JvmName("divIntensity")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: IntensityAmount<M, T>) =
         SpacialFrequencyAmount(amount = amount / that.amount
                                         / convert(that.mass to mass)
                                         * convert(that.time to time,
@@ -243,7 +279,7 @@ open class PowerDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>
                                                   that.time to time),
                                unit = NUMERIC to distance)
 
-    operator fun div(that: EnergyFluxDensityAmount<M, T>) =
+    operator fun div(that: IntensityAmount<M, T>) =
         SpacialFrequencyAmount(amount = amount / that.amount,
                                unit = NUMERIC to distance)
 

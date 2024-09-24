@@ -15,7 +15,7 @@ object Power : Dimension
 
     operator fun div(that: Momentum) = Acceleration
 
-    operator fun div(that: EnergyFluxDensity) = Area
+    operator fun div(that: Intensity) = Area
 
     operator fun div(that: Yank) = Distance
 
@@ -28,13 +28,13 @@ object Power : Dimension
 
     operator fun div(that: VolumetricFlow) = EnergyDensity
 
-    operator fun div(that: Area) = EnergyFluxDensity
-    operator fun times(that: FuelEfficiency) = EnergyFluxDensity
-
     operator fun div(that: Speed) = Force
     operator fun times(that: Pace) = Force
 
     operator fun div(that: Energy) = Frequency
+
+    operator fun div(that: Area) = Intensity
+    operator fun times(that: FuelEfficiency) = Intensity
 
     operator fun div(that: SpecificEnergy) = MassFlowRate
 

@@ -29,6 +29,8 @@ object Force : Dimension
 
     operator fun div(that: TemperatureGradient) = HeatCapacity
 
+    operator fun div(that: SpecificEnergy) = LinearDensity
+
     operator fun div(that: Acceleration) = Mass
 
     operator fun div(that: Speed) = MassFlowRate
@@ -46,6 +48,8 @@ object Force : Dimension
     operator fun times(that: SpacialFrequency) = RadiantExposure
 
     operator fun div(that: Energy) = SpacialFrequency
+
+    operator fun div(that: LinearDensity) = SpecificEnergy
 
     operator fun div(that: MassFlowRate) = Speed
 

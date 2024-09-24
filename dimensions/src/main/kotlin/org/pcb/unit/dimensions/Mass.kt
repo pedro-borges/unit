@@ -18,6 +18,8 @@ object Mass : Dimension
     operator fun div(that: Area) = AreaDensity
     operator fun times(that: FuelEfficiency) = AreaDensity
 
+    operator fun div(that: LinearDensity) = Distance
+
     operator fun times(that: SpecificEnergy) = Energy
 
     operator fun times(that: Acceleration) = Force
@@ -25,6 +27,9 @@ object Mass : Dimension
     operator fun div(that: MomentOfInertia) = FuelEfficiency
 
     operator fun times(that: SpecificHeatCapacity) = HeatCapacity
+
+    operator fun div(that: Distance) = LinearDensity
+    operator fun times(that: SpacialFrequency) = LinearDensity
 
     operator fun div(that: Volume) = MassDensity
 

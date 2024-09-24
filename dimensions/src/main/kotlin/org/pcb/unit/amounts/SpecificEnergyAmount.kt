@@ -171,6 +171,20 @@ open class SpecificEnergyAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Force
+
+    @JvmName("timesLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
+        ForceAmount(amount = amount * that.amount
+                             / convert(that.distance to distance),
+                    unit = U2(distance, that.mass) to time)
+
+    operator fun <M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
+        ForceAmount(amount = amount * that.amount,
+                    unit = U2(distance, that.mass) to time)
+
+    // endregion
+
     // region -> Molality
 
     @JvmName("divMolarEnergy")

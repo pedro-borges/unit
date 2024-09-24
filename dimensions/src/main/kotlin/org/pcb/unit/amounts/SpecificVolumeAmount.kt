@@ -107,6 +107,21 @@ open class SpecificVolumeAmount<L : Unit<Distance>, M : Unit<Mass>>(
 
     // endregion
 
+    // region -> Area
+
+    @JvmName("timesLinearDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
+        AreaAmount(amount = amount * that.amount
+                            * convert(that.mass to mass)
+                            / convert(that.distance to distance),
+                   unit = distance)
+
+    operator fun times(that: LinearDensityAmount<L, M>) =
+        AreaAmount(amount = amount * that.amount,
+                   unit = distance)
+
+    // endregion
+
     // region -> Distance
 
     @JvmName("timesAreaDensity")
