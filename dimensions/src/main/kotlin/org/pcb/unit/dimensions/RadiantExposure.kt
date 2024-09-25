@@ -21,6 +21,8 @@ object RadiantExposure : Dimension
 
     operator fun div(that: MagneticFluxDensity) = ElectricCurrent
 
+    operator fun div(that: MagneticFlux) = ElectricCurrentDensity
+
     operator fun div(that: FuelEfficiency) = Energy
     operator fun times(that: Area) = Energy
 
@@ -38,6 +40,8 @@ object RadiantExposure : Dimension
     operator fun times(that: Frequency) = Intensity
 
     operator fun div(that: Acceleration) = LinearDensity
+
+    operator fun div(that: ElectricCurrentDensity) = MagneticFlux
 
     operator fun div(that: ElectricCurrent) = MagneticFluxDensity
 

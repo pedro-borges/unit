@@ -12,7 +12,11 @@ object MagneticFluxDensity : Dimension
 
     operator fun div(that: MagneticFluxDensity) = Scalar
 
+    operator fun div(that: Inductance) = ElectricCurrentDensity
+
     operator fun div(that: MagneticFlux) = FuelEfficiency
+
+    operator fun div(that: ElectricCurrentDensity) = Inductance
 
     operator fun div(that: FuelEfficiency) = MagneticFlux
     operator fun times(that: Area) = MagneticFlux

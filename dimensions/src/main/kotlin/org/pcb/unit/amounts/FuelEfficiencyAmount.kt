@@ -121,6 +121,14 @@ open class FuelEfficiencyAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> ElectricCurrentDensity
+
+    operator fun <I : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<I>) =
+        ElectricCurrentDensityAmount(amount = amount * that.amount,
+                                     unit = that.electricCurrent to distance)
+
+    // endregion
+
     // region -> EnergyDensity
 
     @JvmName("timesForce")

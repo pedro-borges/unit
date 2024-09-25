@@ -71,6 +71,20 @@ open class ElectricCurrentAmount<I : Unit<ElectricCurrent>>(
 
     // endregion
 
+    // region -> Area
+
+    @JvmName("divElectricCurrentDensity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: ElectricCurrentDensityAmount<L, I>) =
+        AreaAmount(amount = amount / that.amount
+                            / convert(that.electricCurrent to electricCurrent),
+                   unit = that.distance)
+
+    operator fun <L : Unit<Distance>> div(that: ElectricCurrentDensityAmount<L, I>) =
+        AreaAmount(amount = amount / that.amount,
+                   unit = that.distance)
+
+    // endregion
+
     // region -> ElectricCharge
 
     operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
@@ -94,6 +108,18 @@ open class ElectricCurrentAmount<I : Unit<ElectricCurrent>>(
     operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricTensionAmount<L, I, M, T>) =
         ElectricConductanceAmount(amount = amount / that.amount,
                                   unit = U2(that.time, electricCurrent) to U2(that.mass, that.distance))
+
+    // endregion
+
+    // region -> ElectricCurrentDensity
+
+    operator fun <L : Unit<Distance>> div(that: AreaAmount<L>) =
+        ElectricCurrentDensityAmount(amount = amount / that.amount,
+                                     unit = electricCurrent to that.distance)
+
+    operator fun <L : Unit<Distance>> times(that: FuelEfficiencyAmount<L>) =
+        ElectricCurrentDensityAmount(amount = amount * that.amount,
+                                     unit = electricCurrent to that.distance)
 
     // endregion
 

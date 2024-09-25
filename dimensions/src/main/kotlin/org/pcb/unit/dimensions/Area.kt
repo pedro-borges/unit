@@ -19,6 +19,8 @@ object Area : Dimension
     operator fun div(that: Distance) = Distance
     operator fun times(that: SpacialFrequency) = Distance
 
+    operator fun times(that: ElectricCurrentDensity) = ElectricCurrent
+
     operator fun times(that: RadiantExposure) = Energy
 
     operator fun times(that: EnergyDensity) = Force

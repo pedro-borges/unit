@@ -24,6 +24,8 @@ object ElectricTension : Dimension
 
     operator fun div(that: MagneticFlux) = Frequency
 
+    operator fun times(that: ElectricCurrentDensity) = Intensity
+
     operator fun div(that: Frequency) = MagneticFlux
     operator fun times(that: Time) = MagneticFlux
 

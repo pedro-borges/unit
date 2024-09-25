@@ -167,6 +167,22 @@ open class InductanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M : U
 
     // endregion
 
+    // region -> MagneticFluxDensity
+
+    @JvmName("timesElectricCurrentDensity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> times(that: ElectricCurrentDensityAmount<L, I>) =
+        MagneticFluxDensityAmount(amount = amount * that.amount
+                                           * convert(that.electricCurrent to electricCurrent)
+                                           / convert(that.distance to distance,
+                                                     that.distance to distance),
+                                  unit = mass to U2(electricCurrent, time))
+
+    operator fun times(that: ElectricCurrentDensityAmount<L, I>) =
+        MagneticFluxDensityAmount(amount = amount * that.amount,
+                                  unit = mass to U2(electricCurrent, time))
+
+    // endregion
+
     // region -> Pace
 
     @JvmName("timesElectricConductivity")

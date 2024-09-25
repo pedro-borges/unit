@@ -13,6 +13,10 @@ object Intensity : Dimension
 
     operator fun div(that: PowerDensity) = Distance
 
+    operator fun div(that: ElectricTension) = ElectricCurrentDensity
+
+    operator fun div(that: ElectricCurrentDensity) = ElectricTension
+
     operator fun div(that: Speed) = EnergyDensity
     operator fun times(that: Pace) = EnergyDensity
 

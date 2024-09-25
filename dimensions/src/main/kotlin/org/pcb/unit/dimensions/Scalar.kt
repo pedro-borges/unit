@@ -47,6 +47,8 @@ object Scalar : Dimension
 
     operator fun times(that: ElectricCurrent) = ElectricCurrent
 
+    operator fun times(that: ElectricCurrentDensity) = ElectricCurrentDensity
+
     operator fun div(that: ElectricConductance) = ElectricResistance
     operator fun times(that: ElectricResistance) = ElectricResistance
 

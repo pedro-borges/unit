@@ -152,6 +152,21 @@ open class AreaAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> ElectricCurrent
+
+    @JvmName("timesElectricCurrentDensity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> times(that: ElectricCurrentDensityAmount<L, I>) =
+        ElectricCurrentAmount(amount = amount * that.amount
+                                       / convert(that.distance to distance,
+                                                 that.distance to distance),
+                              unit = that.electricCurrent)
+
+    operator fun <I : Unit<ElectricCurrent>> times(that: ElectricCurrentDensityAmount<L, I>) =
+        ElectricCurrentAmount(amount = amount * that.amount,
+                              unit = that.electricCurrent)
+
+    // endregion
+
     // region -> Energy
 
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: RadiantExposureAmount<M, T>) =

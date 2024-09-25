@@ -15,6 +15,8 @@ object FuelEfficiency : Dimension
 
     operator fun times(that: Volume) = Distance
 
+    operator fun times(that: ElectricCurrent) = ElectricCurrentDensity
+
     operator fun times(that: Force) = EnergyDensity
 
     operator fun times(that: LuminousFlux) = Illuminance

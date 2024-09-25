@@ -10,10 +10,15 @@ object ElectricCurrent : Dimension
 
     operator fun div(that: ElectricCurrent) = Scalar
 
+    operator fun div(that: ElectricCurrentDensity) = Area
+
     operator fun div(that: Frequency) = ElectricCharge
     operator fun times(that: Time) = ElectricCharge
 
     operator fun div(that: ElectricTension) = ElectricConductance
+
+    operator fun div(that: Area) = ElectricCurrentDensity
+    operator fun times(that: FuelEfficiency) = ElectricCurrentDensity
 
     operator fun div(that: ElectricConductance) = ElectricTension
     operator fun times(that: ElectricResistance) = ElectricTension

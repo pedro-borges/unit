@@ -34,5 +34,7 @@ object MagneticFlux : Dimension
     operator fun div(that: Area) = MagneticFluxDensity
     operator fun times(that: FuelEfficiency) = MagneticFluxDensity
 
+    operator fun times(that: ElectricCurrentDensity) = RadiantExposure
+
     operator fun div(that: ElectricTension) = Time
 }

@@ -98,6 +98,24 @@ open class MagneticFluxDensityAmount<I : Unit<ElectricCurrent>, M : Unit<Mass>, 
 
     // endregion
 
+    // region -> ElectricCurrentDensity
+
+    @JvmName("divInductance")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: InductanceAmount<L, I, M, T>) =
+        ElectricCurrentDensityAmount(amount = amount / that.amount
+                                              / convert(that.mass to mass)
+                                              * convert(that.electricCurrent to electricCurrent,
+                                                        that.electricCurrent to electricCurrent,
+                                                        that.time to time,
+                                                        that.time to time),
+                                     unit = electricCurrent to that.distance)
+
+    operator fun <L : Unit<Distance>> div(that: InductanceAmount<L, I, M, T>) =
+        ElectricCurrentDensityAmount(amount = amount / that.amount,
+                                     unit = electricCurrent to that.distance)
+
+    // endregion
+
     // region -> FuelEfficiency
 
     @JvmName("divMagneticFlux")
@@ -112,6 +130,20 @@ open class MagneticFluxDensityAmount<I : Unit<ElectricCurrent>, M : Unit<Mass>, 
     operator fun <L : Unit<Distance>> div(that: MagneticFluxAmount<L, I, M, T>) =
         FuelEfficiencyAmount(amount = amount / that.amount,
                              unit = NUMERIC to that.distance)
+
+    // endregion
+
+    // region -> Inductance
+
+    @JvmName("divElectricCurrentDensity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: ElectricCurrentDensityAmount<L, I>) =
+        InductanceAmount(amount = amount / that.amount
+                                  / convert(that.electricCurrent to electricCurrent),
+                         unit = U2(that.distance, mass) to U2(electricCurrent, time))
+
+    operator fun <L : Unit<Distance>> div(that: ElectricCurrentDensityAmount<L, I>) =
+        InductanceAmount(amount = amount / that.amount,
+                         unit = U2(that.distance, mass) to U2(electricCurrent, time))
 
     // endregion
 

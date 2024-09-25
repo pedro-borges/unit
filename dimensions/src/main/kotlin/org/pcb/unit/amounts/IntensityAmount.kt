@@ -9,6 +9,7 @@ import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.Intensity
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
@@ -109,6 +110,31 @@ open class IntensityAmount<M : Unit<Mass>, T : Unit<Time>>(
     operator fun <L : Unit<Distance>> div(that: PowerDensityAmount<L, M, T>) =
         DistanceAmount(amount = amount / that.amount,
                        unit = that.distance)
+
+    // endregion
+
+    // region -> ElectricCurrentDensity
+
+    @JvmName("divElectricTension")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricTensionAmount<L, I, M, T>) =
+        ElectricCurrentDensityAmount(amount = amount / that.amount
+                                              / convert(that.mass to mass)
+                                              * convert(that.time to time,
+                                                        that.time to time,
+                                                        that.time to time),
+                                     unit = that.electricCurrent to that.distance)
+
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: ElectricTensionAmount<L, I, M, T>) =
+        ElectricCurrentDensityAmount(amount = amount / that.amount,
+                                     unit = that.electricCurrent to that.distance)
+
+    // endregion
+
+    // region -> ElectricTension
+
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: ElectricCurrentDensityAmount<L, I>) =
+        ElectricTensionAmount(amount = amount / that.amount,
+                              unit = U2(that.distance, mass) to U2(that.electricCurrent, time))
 
     // endregion
 

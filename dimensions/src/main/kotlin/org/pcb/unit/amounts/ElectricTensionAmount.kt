@@ -218,6 +218,22 @@ open class ElectricTensionAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, 
 
     // endregion
 
+    // region -> Intensity
+
+    @JvmName("timesElectricCurrentDensity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> times(that: ElectricCurrentDensityAmount<L, I>) =
+        IntensityAmount(amount = amount * that.amount
+                                 * convert(that.electricCurrent to electricCurrent)
+                                 / convert(that.distance to distance,
+                                           that.distance to distance),
+                        unit = mass to time)
+
+    operator fun times(that: ElectricCurrentDensityAmount<L, I>) =
+        IntensityAmount(amount = amount * that.amount,
+                        unit = mass to time)
+
+    // endregion
+
     // region -> MagneticFlux
 
     @JvmName("divFrequency")
