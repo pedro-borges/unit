@@ -4,8 +4,8 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.SIScale.KILO
 import org.pcb.unit.amounts.MassAmount
-import org.pcb.unit.amounts.base.Gram
 import org.pcb.unit.amounts.mass.Drachm.DRACHM
+import org.pcb.unit.base.Gram
 
 class DrachmTest
 {

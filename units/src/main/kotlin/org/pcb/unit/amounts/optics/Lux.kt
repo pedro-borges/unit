@@ -5,9 +5,9 @@ import org.pcb.unit.Magnitude.Companion.UNI
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.IlluminanceAmount
-import org.pcb.unit.amounts.base.Candela.CANDELA
-import org.pcb.unit.amounts.base.Meter.METER
-import org.pcb.unit.amounts.base.Radian.RADIAN
+import org.pcb.unit.base.Candela.CANDELA
+import org.pcb.unit.base.Meter.METER
+import org.pcb.unit.base.Radian.RADIAN
 import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Illuminance

@@ -5,8 +5,8 @@ import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.U3
 import org.pcb.unit.Unit
-import org.pcb.unit.amounts.base.Kelvin.KELVIN
-import org.pcb.unit.amounts.base.Numeric.NUMERIC
+import org.pcb.unit.base.Kelvin.KELVIN
+import org.pcb.unit.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass

@@ -4,13 +4,13 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
 import org.pcb.unit.amounts.CapacitanceAmount
-import org.pcb.unit.amounts.base.Ampere.AMPERE
-import org.pcb.unit.amounts.base.Gram.GRAM
-import org.pcb.unit.amounts.base.Meter.METER
-import org.pcb.unit.amounts.base.Second
-import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.amounts.electromagnetism.Farad.FARAD
 import org.pcb.unit.amounts.frequency.Hertz
+import org.pcb.unit.base.Ampere.AMPERE
+import org.pcb.unit.base.Gram.GRAM
+import org.pcb.unit.base.Meter.METER
+import org.pcb.unit.base.Second
+import org.pcb.unit.base.Second.SECOND
 import org.pcb.unit.kilo
 
 class FaradTest

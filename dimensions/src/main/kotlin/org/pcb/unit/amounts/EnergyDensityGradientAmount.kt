@@ -4,10 +4,10 @@ import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
-import org.pcb.unit.amounts.base.Gram.GRAM
-import org.pcb.unit.amounts.base.Meter.METER
-import org.pcb.unit.amounts.base.Numeric.NUMERIC
-import org.pcb.unit.amounts.base.Second.SECOND
+import org.pcb.unit.base.Gram.GRAM
+import org.pcb.unit.base.Meter.METER
+import org.pcb.unit.base.Numeric.NUMERIC
+import org.pcb.unit.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.ElectricCurrent

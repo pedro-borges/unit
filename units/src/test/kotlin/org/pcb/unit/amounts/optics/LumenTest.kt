@@ -4,13 +4,13 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
 import org.pcb.unit.amounts.LuminousFluxAmount
-import org.pcb.unit.amounts.base.Candela
-import org.pcb.unit.amounts.base.Candela.CANDELA
-import org.pcb.unit.amounts.base.Radian.RADIAN
-import org.pcb.unit.amounts.base.Second
 import org.pcb.unit.amounts.optics.Lumen.LUMEN
 import org.pcb.unit.amounts.space.SquareMeter
 import org.pcb.unit.amounts.trigonometry.Steradian
+import org.pcb.unit.base.Candela
+import org.pcb.unit.base.Candela.CANDELA
+import org.pcb.unit.base.Radian.RADIAN
+import org.pcb.unit.base.Second
 
 class LumenTest
 {

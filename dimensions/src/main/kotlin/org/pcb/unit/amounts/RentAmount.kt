@@ -3,7 +3,7 @@ package org.pcb.unit.amounts
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.Unit
-import org.pcb.unit.amounts.base.Numeric.NUMERIC
+import org.pcb.unit.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Currency
 import org.pcb.unit.dimensions.Rent

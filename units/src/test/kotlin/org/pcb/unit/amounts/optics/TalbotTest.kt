@@ -4,11 +4,11 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U3
 import org.pcb.unit.amounts.LuminousEnergyAmount
-import org.pcb.unit.amounts.base.Candela.CANDELA
-import org.pcb.unit.amounts.base.Radian.RADIAN
-import org.pcb.unit.amounts.base.Second
-import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.amounts.optics.Talbot.TALBOT
+import org.pcb.unit.base.Candela.CANDELA
+import org.pcb.unit.base.Radian.RADIAN
+import org.pcb.unit.base.Second
+import org.pcb.unit.base.Second.SECOND
 
 class TalbotTest
 {

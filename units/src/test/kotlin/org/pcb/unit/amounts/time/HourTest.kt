@@ -3,8 +3,8 @@ package org.pcb.unit.amounts.time
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.amounts.TimeAmount
-import org.pcb.unit.amounts.base.Second
 import org.pcb.unit.amounts.time.Hour.HOUR
+import org.pcb.unit.base.Second
 
 class HourTest
 {

@@ -4,11 +4,11 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
 import org.pcb.unit.amounts.IlluminanceAmount
-import org.pcb.unit.amounts.base.Candela.CANDELA
-import org.pcb.unit.amounts.base.Meter.METER
-import org.pcb.unit.amounts.base.Radian.RADIAN
 import org.pcb.unit.amounts.optics.Lux.LUX
 import org.pcb.unit.amounts.space.SquareMeter
+import org.pcb.unit.base.Candela.CANDELA
+import org.pcb.unit.base.Meter.METER
+import org.pcb.unit.base.Radian.RADIAN
 
 class LuxTest
 {

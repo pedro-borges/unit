@@ -2,9 +2,9 @@ package org.pcb.unit
 
 import org.pcb.unit.amounts.EnergyDensityAmount
 import org.pcb.unit.amounts.SpeedAmount
-import org.pcb.unit.amounts.base.Gram.GRAM
-import org.pcb.unit.amounts.base.Meter.METER
-import org.pcb.unit.amounts.base.Second.SECOND
+import org.pcb.unit.base.Gram.GRAM
+import org.pcb.unit.base.Meter.METER
+import org.pcb.unit.base.Second.SECOND
 import org.pcb.unit.config.Configuration.calculationMathContext
 
 object Constants

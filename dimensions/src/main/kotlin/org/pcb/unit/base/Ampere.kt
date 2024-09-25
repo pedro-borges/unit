@@ -1,4 +1,4 @@
-package org.pcb.unit.amounts.base
+package org.pcb.unit.base
 
 import org.pcb.unit.Magnitude
 import org.pcb.unit.Magnitude.Companion.UNI

@@ -4,12 +4,12 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
 import org.pcb.unit.amounts.InductanceAmount
-import org.pcb.unit.amounts.base.Ampere
-import org.pcb.unit.amounts.base.Ampere.AMPERE
-import org.pcb.unit.amounts.base.Gram.GRAM
-import org.pcb.unit.amounts.base.Meter.METER
-import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.amounts.electromagnetism.Henry.HENRY
+import org.pcb.unit.base.Ampere
+import org.pcb.unit.base.Ampere.AMPERE
+import org.pcb.unit.base.Gram.GRAM
+import org.pcb.unit.base.Meter.METER
+import org.pcb.unit.base.Second.SECOND
 import org.pcb.unit.kilo
 
 class HenryTest

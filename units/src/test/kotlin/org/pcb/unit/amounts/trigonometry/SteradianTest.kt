@@ -5,11 +5,11 @@ import kotlin.test.assertEquals
 import org.pcb.unit.SIScale.DECI
 import org.pcb.unit.SIScale.HECTO
 import org.pcb.unit.amounts.SolidAngleAmount
-import org.pcb.unit.amounts.base.Candela
-import org.pcb.unit.amounts.base.Radian
-import org.pcb.unit.amounts.base.Radian.RADIAN
 import org.pcb.unit.amounts.optics.Lumen
 import org.pcb.unit.amounts.trigonometry.Steradian.STERADIAN
+import org.pcb.unit.base.Candela
+import org.pcb.unit.base.Radian
+import org.pcb.unit.base.Radian.RADIAN
 
 class SteradianTest
 {

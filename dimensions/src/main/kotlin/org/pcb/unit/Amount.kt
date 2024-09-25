@@ -3,7 +3,7 @@ package org.pcb.unit
 import java.math.BigDecimal
 import java.util.Objects
 import org.pcb.unit.amounts.ScalarAmount
-import org.pcb.unit.amounts.base.Numeric.NUMERIC
+import org.pcb.unit.base.Numeric.NUMERIC
 import org.pcb.unit.config.Configuration
 import org.pcb.unit.config.Configuration.displayMathContext
 import org.pcb.unit.dimensions.Dimension

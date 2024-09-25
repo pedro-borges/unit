@@ -6,9 +6,9 @@ import org.pcb.unit.SIScale.DECI
 import org.pcb.unit.SIScale.KILO
 import org.pcb.unit.SIScale.MEGA
 import org.pcb.unit.amounts.VolumeAmount
-import org.pcb.unit.amounts.base.Meter
-import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.space.Liter.LITER
+import org.pcb.unit.base.Meter
+import org.pcb.unit.base.Meter.METER
 import org.pcb.unit.deci
 
 class LiterTest

@@ -3,8 +3,8 @@ package org.pcb.unit.amounts.scalar
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.amounts.ScalarAmount
-import org.pcb.unit.amounts.base.Numeric
-import org.pcb.unit.amounts.base.Numeric.NUMERIC
+import org.pcb.unit.base.Numeric
+import org.pcb.unit.base.Numeric.NUMERIC
 
 class PercentTest
 {

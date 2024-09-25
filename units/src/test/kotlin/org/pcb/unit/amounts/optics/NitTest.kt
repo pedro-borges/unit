@@ -3,11 +3,11 @@ package org.pcb.unit.amounts.optics
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.amounts.LuminanceAmount
-import org.pcb.unit.amounts.base.Candela
-import org.pcb.unit.amounts.base.Candela.CANDELA
-import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.optics.Nit.NIT
 import org.pcb.unit.amounts.space.SquareMeter
+import org.pcb.unit.base.Candela
+import org.pcb.unit.base.Candela.CANDELA
+import org.pcb.unit.base.Meter.METER
 
 class NitTest
 {

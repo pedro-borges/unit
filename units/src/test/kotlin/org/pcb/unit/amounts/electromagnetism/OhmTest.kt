@@ -5,16 +5,16 @@ import kotlin.test.assertEquals
 import org.pcb.unit.SIScale.KILO
 import org.pcb.unit.U2
 import org.pcb.unit.amounts.ElectricResistanceAmount
-import org.pcb.unit.amounts.base.Ampere
-import org.pcb.unit.amounts.base.Ampere.AMPERE
-import org.pcb.unit.amounts.base.Gram
-import org.pcb.unit.amounts.base.Gram.GRAM
-import org.pcb.unit.amounts.base.Meter
-import org.pcb.unit.amounts.base.Meter.METER
-import org.pcb.unit.amounts.base.Numeric
-import org.pcb.unit.amounts.base.Second
-import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.amounts.electromagnetism.Ohm.OHM
+import org.pcb.unit.base.Ampere
+import org.pcb.unit.base.Ampere.AMPERE
+import org.pcb.unit.base.Gram
+import org.pcb.unit.base.Gram.GRAM
+import org.pcb.unit.base.Meter
+import org.pcb.unit.base.Meter.METER
+import org.pcb.unit.base.Numeric
+import org.pcb.unit.base.Second
+import org.pcb.unit.base.Second.SECOND
 import org.pcb.unit.kilo
 
 class OhmTest

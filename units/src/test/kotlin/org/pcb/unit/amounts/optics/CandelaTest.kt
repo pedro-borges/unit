@@ -3,10 +3,10 @@ package org.pcb.unit.amounts.optics
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.amounts.LuminousIntensityAmount
-import org.pcb.unit.amounts.base.Candela
-import org.pcb.unit.amounts.base.Candela.CANDELA
 import org.pcb.unit.amounts.space.SquareMeter
 import org.pcb.unit.amounts.trigonometry.Steradian
+import org.pcb.unit.base.Candela
+import org.pcb.unit.base.Candela.CANDELA
 
 class CandelaTest
 {

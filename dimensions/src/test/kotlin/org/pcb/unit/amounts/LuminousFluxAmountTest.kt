@@ -4,7 +4,7 @@ import kotlin.test.assertEquals
 import org.junit.jupiter.api.Test
 import org.pcb.unit.U2
 import org.pcb.unit.U3
-import org.pcb.unit.amounts.base.Numeric.NUMERIC
+import org.pcb.unit.base.Numeric.NUMERIC
 import org.pcb.unit.units.test.ANGLE1
 import org.pcb.unit.units.test.ANGLE2
 import org.pcb.unit.units.test.DISTANCE1

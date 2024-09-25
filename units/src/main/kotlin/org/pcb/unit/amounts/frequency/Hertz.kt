@@ -4,8 +4,8 @@ import org.pcb.unit.Magnitude
 import org.pcb.unit.Magnitude.Companion.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.FrequencyAmount
-import org.pcb.unit.amounts.base.Numeric.NUMERIC
-import org.pcb.unit.amounts.base.Second.SECOND
+import org.pcb.unit.base.Numeric.NUMERIC
+import org.pcb.unit.base.Second.SECOND
 import org.pcb.unit.dimensions.Frequency
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.toBigDecimal

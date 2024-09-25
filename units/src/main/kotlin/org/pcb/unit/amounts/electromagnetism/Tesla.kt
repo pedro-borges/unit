@@ -5,9 +5,9 @@ import org.pcb.unit.Magnitude.Companion.UNI
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.MagneticFluxDensityAmount
-import org.pcb.unit.amounts.base.Ampere.AMPERE
-import org.pcb.unit.amounts.base.Gram.GRAM
-import org.pcb.unit.amounts.base.Second.SECOND
+import org.pcb.unit.base.Ampere.AMPERE
+import org.pcb.unit.base.Gram.GRAM
+import org.pcb.unit.base.Second.SECOND
 import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.MagneticFluxDensity
 import org.pcb.unit.dimensions.Mass

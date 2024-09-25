@@ -4,9 +4,9 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.Constants
 import org.pcb.unit.amounts.AngleAmount
-import org.pcb.unit.amounts.base.Radian
-import org.pcb.unit.amounts.base.Radian.RADIAN
 import org.pcb.unit.amounts.trigonometry.Degree.DEGREE
+import org.pcb.unit.base.Radian
+import org.pcb.unit.base.Radian.RADIAN
 
 class RadianTest
 {

@@ -3,8 +3,8 @@ package org.pcb.unit.amounts.space
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.amounts.DistanceAmount
-import org.pcb.unit.amounts.base.Meter
 import org.pcb.unit.amounts.space.Inch.INCH
+import org.pcb.unit.base.Meter
 
 class InchTest
 {

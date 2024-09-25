@@ -4,14 +4,14 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 import org.pcb.unit.U2
 import org.pcb.unit.amounts.EnergyDensityAmount
-import org.pcb.unit.amounts.base.Gram.GRAM
-import org.pcb.unit.amounts.base.Meter.METER
-import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.amounts.mechanics.Joule
 import org.pcb.unit.amounts.mechanics.Newton
 import org.pcb.unit.amounts.space.SquareMeter
 import org.pcb.unit.amounts.space.Stere
 import org.pcb.unit.amounts.thermodynamics.Bar.BAR
+import org.pcb.unit.base.Gram.GRAM
+import org.pcb.unit.base.Meter.METER
+import org.pcb.unit.base.Second.SECOND
 import org.pcb.unit.kilo
 
 class BarTest
