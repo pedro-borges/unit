@@ -2,10 +2,13 @@ package org.pcb.unit.amounts
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.U3
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
+import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
@@ -77,6 +80,14 @@ open class AngleAmount<BAC : Unit<Angle>>(
     operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
         AngularVelocityAmount(amount = amount / that.amount,
                               unit = angle to that.time)
+
+    // endregion
+
+    // region -> CentrifugalForce
+
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<L, M, T>) =
+        CentrifugalForceAmount(amount = amount * that.amount,
+                               unit = U3(angle, that.distance, that.mass) to that.time)
 
     // endregion
 

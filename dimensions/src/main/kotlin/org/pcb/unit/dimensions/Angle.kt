@@ -13,6 +13,8 @@ object Angle : Dimension
     operator fun div(that: Time) = AngularVelocity
     operator fun times(that: Frequency) = AngularVelocity
 
+    operator fun times(that: Force) = CentrifugalForce
+
     operator fun times(that: Angle) = SolidAngle
 
     operator fun div(that: AngularVelocity) = Time

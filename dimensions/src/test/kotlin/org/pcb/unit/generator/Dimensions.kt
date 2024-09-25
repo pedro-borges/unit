@@ -19,6 +19,7 @@ object Dimensions
         Definition("AreaDensity", Composite(mass = 1, distance = -2)),
         Definition("Capacitance", Composite(time = 4, electricCurrent = 2, mass = -1, distance = -2)),
         Definition("CatalyticEfficiency", Composite(distance = 3, substance = -1, time = -1)),
+        Definition("CentrifugalForce", Composite(angle = 1, distance = 1, mass = 1, time = -2)),
         Definition("Currency", Composite(currency = 1)),
         Definition("Debt", Composite(currency = 1, time = 1)),
         Definition("Distance", Composite(distance = 1)),

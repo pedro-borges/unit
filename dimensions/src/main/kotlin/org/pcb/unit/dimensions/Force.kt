@@ -20,6 +20,8 @@ object Force : Dimension
 
     operator fun div(that: EnergyDensity) = Area
 
+    operator fun times(that: Angle) = CentrifugalForce
+
     operator fun div(that: RadiantExposure) = Distance
 
     operator fun div(that: SpacialFrequency) = Energy

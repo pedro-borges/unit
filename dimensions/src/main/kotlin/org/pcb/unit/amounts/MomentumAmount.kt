@@ -3,12 +3,14 @@ package org.pcb.unit.amounts
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
+import org.pcb.unit.U3
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Gram.GRAM
 import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
+import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Distance
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Momentum
@@ -162,6 +164,20 @@ open class MomentumAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: VolumetricFlowAmount<L, T>) =
         AreaDensityAmount(amount = amount / that.amount,
                           unit = mass to distance)
+
+    // endregion
+
+    // region -> CentrifugalForce
+
+    @JvmName("timesAngularVelocity")
+    operator fun <BAC : Unit<Angle>, T : Unit<Time>> times(that: AngularVelocityAmount<BAC, T>) =
+        CentrifugalForceAmount(amount = amount * that.amount
+                                        / convert(that.time to time),
+                               unit = U3(that.angle, distance, mass) to time)
+
+    operator fun <BAC : Unit<Angle>> times(that: AngularVelocityAmount<BAC, T>) =
+        CentrifugalForceAmount(amount = amount * that.amount,
+                               unit = U3(that.angle, distance, mass) to time)
 
     // endregion
 

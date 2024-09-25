@@ -31,6 +31,8 @@ object Scalar : Dimension
 
     operator fun times(that: CatalyticEfficiency) = CatalyticEfficiency
 
+    operator fun times(that: CentrifugalForce) = CentrifugalForce
+
     operator fun times(that: Currency) = Currency
 
     operator fun times(that: Debt) = Debt

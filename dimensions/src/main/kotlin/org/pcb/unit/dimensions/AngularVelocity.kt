@@ -17,6 +17,8 @@ object AngularVelocity : Dimension
     operator fun div(that: Time) = AngularAcceleration
     operator fun times(that: Frequency) = AngularAcceleration
 
+    operator fun times(that: Momentum) = CentrifugalForce
+
     operator fun div(that: Angle) = Frequency
 
     operator fun div(that: AngularAcceleration) = Time

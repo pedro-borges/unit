@@ -207,8 +207,8 @@ fun Composite.buildMap(): String
     val positives = positives().map()
     val negatives = negatives().map()
 
-    val positiveKeys = positives.keys.sortedByDescending { positives[it] }
-    val negativeKeys = negatives.keys.sortedBy { negatives[it] }
+    val positiveKeys = positives.keys.sorted().sortedByDescending { positives[it] }
+    val negativeKeys = negatives.keys.sorted().sortedBy { negatives[it] }
 
     val minor = when (negatives.count())
     {
@@ -271,8 +271,8 @@ fun Composite.buildVariables(): String
     val positives = positives().map()
     val negatives = negatives().map()
 
-    val positiveKeys = positives.keys.sortedByDescending { positives[it] }
-    val negativeKeys = negatives.keys.sortedBy { negatives[it] }
+    val positiveKeys = positives.keys.sorted().sortedByDescending { positives[it] }
+    val negativeKeys = negatives.keys.sorted().sortedBy { negatives[it] }
 
     val minor = when (negatives.count())
     {

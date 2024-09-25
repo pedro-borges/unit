@@ -2,6 +2,7 @@ package org.pcb.unit.amounts
 
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
+import org.pcb.unit.U3
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Radian.RADIAN
@@ -9,6 +10,8 @@ import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.AngularVelocity
+import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.Time
 import org.pcb.unit.div
@@ -130,6 +133,20 @@ open class AngularVelocityAmount<BAC : Unit<Angle>, T : Unit<Time>>(
     operator fun div(that: TimeAmount<T>) =
         AngularAccelerationAmount(amount = amount / that.amount,
                                   unit = angle to time)
+
+    // endregion
+
+    // region -> CentrifugalForce
+
+    @JvmName("timesMomentum")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: MomentumAmount<L, M, T>) =
+        CentrifugalForceAmount(amount = amount * that.amount
+                                        / convert(that.time to time),
+                               unit = U3(angle, that.distance, that.mass) to time)
+
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: MomentumAmount<L, M, T>) =
+        CentrifugalForceAmount(amount = amount * that.amount,
+                               unit = U3(angle, that.distance, that.mass) to time)
 
     // endregion
 
