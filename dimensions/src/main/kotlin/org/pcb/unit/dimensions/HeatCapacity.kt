@@ -23,6 +23,7 @@ object HeatCapacity : Dimension
     operator fun div(that: SpecificHeatCapacity) = Mass
 
     operator fun div(that: Substance) = MolarHeatCapacity
+    operator fun times(that: ReciprocalSubstance) = MolarHeatCapacity
 
     operator fun div(that: Mass) = SpecificHeatCapacity
 

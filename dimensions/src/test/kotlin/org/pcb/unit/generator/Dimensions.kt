@@ -76,6 +76,7 @@ object Dimensions
         Definition("RadiantExposure", Composite(mass = 1, time = -2)),
         Definition("RadiantIntensity", Composite(distance = 2, mass = 1, angle = -2, time = -3)),
         Definition("ReactionRate", Composite(substance = 1, time = -1, distance = -3)),
+        Definition("ReciprocalSubstance", Composite(substance = -1)),
         Definition("Scalar", Composite()),
         Definition("Snap", Composite(distance = 1, time = -4)),
         Definition("SolidAngle", Composite(angle = 2)),

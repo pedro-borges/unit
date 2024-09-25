@@ -22,5 +22,8 @@ object CatalyticEfficiency : Dimension
     operator fun div(that: Frequency) = MolarVolume
     operator fun times(that: Time) = MolarVolume
 
+    operator fun div(that: VolumetricFlow) = ReciprocalSubstance
+
+    operator fun div(that: ReciprocalSubstance) = VolumetricFlow
     operator fun times(that: Substance) = VolumetricFlow
 }

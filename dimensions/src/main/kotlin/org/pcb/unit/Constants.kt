@@ -1,9 +1,12 @@
 package org.pcb.unit
 
 import org.pcb.unit.amounts.EnergyDensityAmount
+import org.pcb.unit.amounts.ReciprocalSubstanceAmount
 import org.pcb.unit.amounts.SpeedAmount
 import org.pcb.unit.base.Gram.GRAM
 import org.pcb.unit.base.Meter.METER
+import org.pcb.unit.base.Mole.MOLE
+import org.pcb.unit.base.Numeric.NUMERIC
 import org.pcb.unit.base.Second.SECOND
 import org.pcb.unit.config.Configuration.calculationMathContext
 
@@ -22,7 +25,12 @@ object Constants
                         unit = METER to SECOND)
 
     /**
-     *
+     * Avogadro constant
+     */
+    val AVOGADRO_CONSTANT = ReciprocalSubstanceAmount(6.02214076.toBigDecimal().movePointRight(23), NUMERIC to MOLE)
+
+    /**
+     * PI rounded to Configuration.calculationMathContext
      */
     val PI =
         // PI with 1000 fraction digits

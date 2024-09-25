@@ -38,6 +38,7 @@ object Mass : Dimension
     operator fun times(that: Frequency) = MassFlowRate
 
     operator fun div(that: Substance) = MolarMass
+    operator fun times(that: ReciprocalSubstance) = MolarMass
 
     operator fun div(that: FuelEfficiency) = MomentOfInertia
     operator fun times(that: Area) = MomentOfInertia

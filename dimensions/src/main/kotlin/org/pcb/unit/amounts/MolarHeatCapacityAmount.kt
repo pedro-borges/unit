@@ -117,6 +117,16 @@ open class MolarHeatCapacityAmount<L : Unit<Distance>, M : Unit<Mass>, N : Unit<
 
     // region -> HeatCapacity
 
+    @JvmName("divReciprocalSubstance")
+    operator fun <N : Unit<Substance>> div(that: ReciprocalSubstanceAmount<N>) =
+        HeatCapacityAmount(amount = amount / that.amount
+                                    * convert(that.substance to substance),
+                           unit = U2(distance, mass) to U2(temperature, time))
+
+    operator fun div(that: ReciprocalSubstanceAmount<N>) =
+        HeatCapacityAmount(amount = amount / that.amount,
+                           unit = U2(distance, mass) to U2(temperature, time))
+
     @JvmName("timesSubstance")
     operator fun <N : Unit<Substance>> times(that: SubstanceAmount<N>) =
         HeatCapacityAmount(amount = amount * that.amount
@@ -168,6 +178,25 @@ open class MolarHeatCapacityAmount<L : Unit<Distance>, M : Unit<Mass>, N : Unit<
     operator fun div(that: SpecificHeatCapacityAmount<L, K, T>) =
         MolarMassAmount(amount = amount / that.amount,
                         unit = mass to substance)
+
+    // endregion
+
+    // region -> ReciprocalSubstance
+
+    @JvmName("divHeatCapacity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: HeatCapacityAmount<L, M, K, T>) =
+        ReciprocalSubstanceAmount(amount = amount / that.amount
+                                           / convert(that.distance to distance,
+                                                     that.distance to distance,
+                                                     that.mass to mass)
+                                           * convert(that.temperature to temperature,
+                                                     that.time to time,
+                                                     that.time to time),
+                                  unit = NUMERIC to substance)
+
+    operator fun div(that: HeatCapacityAmount<L, M, K, T>) =
+        ReciprocalSubstanceAmount(amount = amount / that.amount,
+                                  unit = NUMERIC to substance)
 
     // endregion
 

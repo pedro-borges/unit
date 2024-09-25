@@ -60,6 +60,16 @@ open class SubstanceAmount<N : Unit<Substance>>(
 
     // region -> Scalar
 
+    @JvmName("timesReciprocalSubstance")
+    operator fun <N : Unit<Substance>> times(that: ReciprocalSubstanceAmount<N>) =
+        ScalarAmount(amount = amount * that.amount
+                              / convert(that.substance to substance),
+                     unit = NUMERIC)
+
+    operator fun times(that: ReciprocalSubstanceAmount<N>) =
+        ScalarAmount(amount = amount * that.amount,
+                     unit = NUMERIC)
+
     @JvmName("divSubstance")
     operator fun <N : Unit<Substance>> div(that: SubstanceAmount<N>) =
         ScalarAmount(amount = amount / that.amount

@@ -50,6 +50,7 @@ object Energy : Dimension
     operator fun div(that: SpecificEnergy) = Mass
 
     operator fun div(that: Substance) = MolarEnergy
+    operator fun times(that: ReciprocalSubstance) = MolarEnergy
 
     operator fun div(that: Speed) = Momentum
     operator fun times(that: Pace) = Momentum

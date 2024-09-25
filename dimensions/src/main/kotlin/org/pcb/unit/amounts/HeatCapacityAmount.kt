@@ -187,6 +187,10 @@ open class HeatCapacityAmount<L : Unit<Distance>, M : Unit<Mass>, K : Unit<Tempe
 
     // region -> MolarHeatCapacity
 
+    operator fun <N : Unit<Substance>> times(that: ReciprocalSubstanceAmount<N>) =
+        MolarHeatCapacityAmount(amount = amount * that.amount,
+                                unit = U2(distance, mass) to U3(that.substance, temperature, time))
+
     operator fun <N : Unit<Substance>> div(that: SubstanceAmount<N>) =
         MolarHeatCapacityAmount(amount = amount / that.amount,
                                 unit = U2(distance, mass) to U3(that.substance, temperature, time))

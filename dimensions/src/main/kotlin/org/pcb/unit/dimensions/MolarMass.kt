@@ -12,6 +12,7 @@ object MolarMass : Dimension
     operator fun div(that: MolarMass) = Scalar
     operator fun times(that: Molality) = Scalar
 
+    operator fun div(that: ReciprocalSubstance) = Mass
     operator fun times(that: Substance) = Mass
 
     operator fun div(that: MolarVolume) = MassDensity
@@ -23,4 +24,6 @@ object MolarMass : Dimension
 
     operator fun div(that: MassDensity) = MolarVolume
     operator fun times(that: SpecificVolume) = MolarVolume
+
+    operator fun div(that: Mass) = ReciprocalSubstance
 }

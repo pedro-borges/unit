@@ -19,6 +19,7 @@ object VolumetricFlow : Dimension
     operator fun times(that: Pace) = Area
 
     operator fun div(that: Substance) = CatalyticEfficiency
+    operator fun times(that: ReciprocalSubstance) = CatalyticEfficiency
 
     operator fun times(that: Viscosity) = Energy
 

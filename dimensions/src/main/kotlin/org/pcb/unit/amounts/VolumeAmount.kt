@@ -241,6 +241,10 @@ open class VolumeAmount<L : Unit<Distance>>(
 
     // region -> MolarVolume
 
+    operator fun <N : Unit<Substance>> times(that: ReciprocalSubstanceAmount<N>) =
+        MolarVolumeAmount(amount = amount * that.amount,
+                          unit = distance to that.substance)
+
     operator fun <N : Unit<Substance>> div(that: SubstanceAmount<N>) =
         MolarVolumeAmount(amount = amount / that.amount,
                           unit = distance to that.substance)

@@ -153,6 +153,10 @@ open class VolumetricFlowAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // region -> CatalyticEfficiency
 
+    operator fun <N : Unit<Substance>> times(that: ReciprocalSubstanceAmount<N>) =
+        CatalyticEfficiencyAmount(amount = amount * that.amount,
+                                  unit = distance to U2(that.substance, time))
+
     operator fun <N : Unit<Substance>> div(that: SubstanceAmount<N>) =
         CatalyticEfficiencyAmount(amount = amount / that.amount,
                                   unit = distance to U2(that.substance, time))

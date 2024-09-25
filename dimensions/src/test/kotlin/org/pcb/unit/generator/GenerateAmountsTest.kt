@@ -136,15 +136,15 @@ class GenerateAmountsTest
             "import org.pcb.unit.Unit\n" +
             "import org.pcb.unit.convert\n" +
             DIMENSIONS.joinToString("") { "import org.pcb.unit.dimensions.${it.name}\n" } +
-            "import org.pcb.unit.amounts.base.Radian.RADIAN\n" +
-            "import org.pcb.unit.amounts.base.Mole.MOLE\n" +
-            "import org.pcb.unit.amounts.base.Ampere.AMPERE\n" +
-            "import org.pcb.unit.amounts.base.Candela.CANDELA\n" +
-            "import org.pcb.unit.amounts.base.Gram.GRAM\n" +
-            "import org.pcb.unit.amounts.base.Meter.METER\n" +
-            "import org.pcb.unit.amounts.base.Numeric.NUMERIC\n" +
-            "import org.pcb.unit.amounts.base.Second.SECOND\n" +
-            "import org.pcb.unit.amounts.base.Kelvin.KELVIN\n" +
+            "import org.pcb.unit.base.Radian.RADIAN\n" +
+            "import org.pcb.unit.base.Mole.MOLE\n" +
+            "import org.pcb.unit.base.Ampere.AMPERE\n" +
+            "import org.pcb.unit.base.Candela.CANDELA\n" +
+            "import org.pcb.unit.base.Gram.GRAM\n" +
+            "import org.pcb.unit.base.Meter.METER\n" +
+            "import org.pcb.unit.base.Numeric.NUMERIC\n" +
+            "import org.pcb.unit.base.Second.SECOND\n" +
+            "import org.pcb.unit.base.Kelvin.KELVIN\n" +
             "import org.pcb.unit.div\n" +
             "import org.pcb.unit.kilo\n" +
             "import org.pcb.unit.major\n" +

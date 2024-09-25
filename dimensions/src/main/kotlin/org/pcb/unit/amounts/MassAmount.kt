@@ -212,6 +212,10 @@ open class MassAmount<M : Unit<Mass>>(
 
     // region -> MolarMass
 
+    operator fun <N : Unit<Substance>> times(that: ReciprocalSubstanceAmount<N>) =
+        MolarMassAmount(amount = amount * that.amount,
+                        unit = mass to that.substance)
+
     operator fun <N : Unit<Substance>> div(that: SubstanceAmount<N>) =
         MolarMassAmount(amount = amount / that.amount,
                         unit = mass to that.substance)

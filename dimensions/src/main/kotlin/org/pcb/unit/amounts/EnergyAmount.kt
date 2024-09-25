@@ -390,6 +390,10 @@ open class EnergyAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> MolarEnergy
 
+    operator fun <N : Unit<Substance>> times(that: ReciprocalSubstanceAmount<N>) =
+        MolarEnergyAmount(amount = amount * that.amount,
+                          unit = U2(distance, mass) to U2(that.substance, time))
+
     operator fun <N : Unit<Substance>> div(that: SubstanceAmount<N>) =
         MolarEnergyAmount(amount = amount / that.amount,
                           unit = U2(distance, mass) to U2(that.substance, time))

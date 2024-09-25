@@ -154,6 +154,9 @@ object Scalar : Dimension
 
     operator fun times(that: ReactionRate) = ReactionRate
 
+    operator fun div(that: Substance) = ReciprocalSubstance
+    operator fun times(that: ReciprocalSubstance) = ReciprocalSubstance
+
     operator fun times(that: Rent) = Rent
 
     operator fun times(that: Snap) = Snap
@@ -175,6 +178,7 @@ object Scalar : Dimension
     operator fun div(that: Pace) = Speed
     operator fun times(that: Speed) = Speed
 
+    operator fun div(that: ReciprocalSubstance) = Substance
     operator fun times(that: Substance) = Substance
 
     operator fun div(that: ThermalExpansionCoefficient) = Temperature

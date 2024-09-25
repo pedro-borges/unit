@@ -9,6 +9,7 @@ object Substance : Dimension
     operator fun times(that: Scalar) = Substance
 
     operator fun div(that: Substance) = Scalar
+    operator fun times(that: ReciprocalSubstance) = Scalar
 
     operator fun times(that: MolarEnergy) = Energy
 

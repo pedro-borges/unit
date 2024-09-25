@@ -14,12 +14,15 @@ object MolarHeatCapacity : Dimension
 
     operator fun div(that: MolarHeatCapacity) = Scalar
 
+    operator fun div(that: ReciprocalSubstance) = HeatCapacity
     operator fun times(that: Substance) = HeatCapacity
 
     operator fun div(that: ThermalExpansionCoefficient) = MolarEnergy
     operator fun times(that: Temperature) = MolarEnergy
 
     operator fun div(that: SpecificHeatCapacity) = MolarMass
+
+    operator fun div(that: HeatCapacity) = ReciprocalSubstance
 
     operator fun div(that: MolarMass) = SpecificHeatCapacity
     operator fun times(that: Molality) = SpecificHeatCapacity

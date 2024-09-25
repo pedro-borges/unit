@@ -127,6 +127,16 @@ open class MolarEnergyAmount<L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substa
 
     // region -> Energy
 
+    @JvmName("divReciprocalSubstance")
+    operator fun <N : Unit<Substance>> div(that: ReciprocalSubstanceAmount<N>) =
+        EnergyAmount(amount = amount / that.amount
+                              * convert(that.substance to substance),
+                     unit = U2(distance, mass) to time)
+
+    operator fun div(that: ReciprocalSubstanceAmount<N>) =
+        EnergyAmount(amount = amount / that.amount,
+                     unit = U2(distance, mass) to time)
+
     @JvmName("timesSubstance")
     operator fun <N : Unit<Substance>> times(that: SubstanceAmount<N>) =
         EnergyAmount(amount = amount * that.amount
@@ -230,6 +240,24 @@ open class MolarEnergyAmount<L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substa
     operator fun times(that: ReactionRateAmount<L, N, T>) =
         PowerDensityAmount(amount = amount * that.amount,
                            unit = mass to U2(distance, time))
+
+    // endregion
+
+    // region -> ReciprocalSubstance
+
+    @JvmName("divEnergy")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyAmount<L, M, T>) =
+        ReciprocalSubstanceAmount(amount = amount / that.amount
+                                           / convert(that.distance to distance,
+                                                     that.distance to distance,
+                                                     that.mass to mass)
+                                           * convert(that.time to time,
+                                                     that.time to time),
+                                  unit = NUMERIC to substance)
+
+    operator fun div(that: EnergyAmount<L, M, T>) =
+        ReciprocalSubstanceAmount(amount = amount / that.amount,
+                                  unit = NUMERIC to substance)
 
     // endregion
 

@@ -190,7 +190,34 @@ open class CatalyticEfficiencyAmount<L : Unit<Distance>, N : Unit<Substance>, T 
 
     // endregion
 
+    // region -> ReciprocalSubstance
+
+    @JvmName("divVolumetricFlow")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: VolumetricFlowAmount<L, T>) =
+        ReciprocalSubstanceAmount(amount = amount / that.amount
+                                           / convert(that.distance to distance,
+                                                     that.distance to distance,
+                                                     that.distance to distance)
+                                           * convert(that.time to time),
+                                  unit = NUMERIC to substance)
+
+    operator fun div(that: VolumetricFlowAmount<L, T>) =
+        ReciprocalSubstanceAmount(amount = amount / that.amount,
+                                  unit = NUMERIC to substance)
+
+    // endregion
+
     // region -> VolumetricFlow
+
+    @JvmName("divReciprocalSubstance")
+    operator fun <N : Unit<Substance>> div(that: ReciprocalSubstanceAmount<N>) =
+        VolumetricFlowAmount(amount = amount / that.amount
+                                      * convert(that.substance to substance),
+                             unit = distance to time)
+
+    operator fun div(that: ReciprocalSubstanceAmount<N>) =
+        VolumetricFlowAmount(amount = amount / that.amount,
+                             unit = distance to time)
 
     @JvmName("timesSubstance")
     operator fun <N : Unit<Substance>> times(that: SubstanceAmount<N>) =

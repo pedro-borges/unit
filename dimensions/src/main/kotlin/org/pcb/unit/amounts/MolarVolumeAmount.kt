@@ -195,6 +195,22 @@ open class MolarVolumeAmount<L : Unit<Distance>, N : Unit<Substance>>(
 
     // endregion
 
+    // region -> ReciprocalSubstance
+
+    @JvmName("divVolume")
+    operator fun <L : Unit<Distance>> div(that: VolumeAmount<L>) =
+        ReciprocalSubstanceAmount(amount = amount / that.amount
+                                           / convert(that.distance to distance,
+                                                     that.distance to distance,
+                                                     that.distance to distance),
+                                  unit = NUMERIC to substance)
+
+    operator fun div(that: VolumeAmount<L>) =
+        ReciprocalSubstanceAmount(amount = amount / that.amount,
+                                  unit = NUMERIC to substance)
+
+    // endregion
+
     // region -> SpecificVolume
 
     @JvmName("timesMolality")
@@ -237,6 +253,16 @@ open class MolarVolumeAmount<L : Unit<Distance>, N : Unit<Substance>>(
     // endregion
 
     // region -> Volume
+
+    @JvmName("divReciprocalSubstance")
+    operator fun <N : Unit<Substance>> div(that: ReciprocalSubstanceAmount<N>) =
+        VolumeAmount(amount = amount / that.amount
+                              * convert(that.substance to substance),
+                     unit = distance)
+
+    operator fun div(that: ReciprocalSubstanceAmount<N>) =
+        VolumeAmount(amount = amount / that.amount,
+                     unit = distance)
 
     @JvmName("timesSubstance")
     operator fun <N : Unit<Substance>> times(that: SubstanceAmount<N>) =

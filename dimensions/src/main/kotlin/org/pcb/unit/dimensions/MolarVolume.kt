@@ -24,10 +24,13 @@ object MolarVolume : Dimension
     operator fun div(that: SpecificVolume) = MolarMass
     operator fun times(that: MassDensity) = MolarMass
 
+    operator fun div(that: Volume) = ReciprocalSubstance
+
     operator fun div(that: MolarMass) = SpecificVolume
     operator fun times(that: Molality) = SpecificVolume
 
     operator fun div(that: CatalyticEfficiency) = Time
 
+    operator fun div(that: ReciprocalSubstance) = Volume
     operator fun times(that: Substance) = Volume
 }

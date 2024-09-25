@@ -30,6 +30,7 @@ object Volume : Dimension
     operator fun times(that: MassDensity) = Mass
 
     operator fun div(that: Substance) = MolarVolume
+    operator fun times(that: ReciprocalSubstance) = MolarVolume
 
     operator fun times(that: LinearDensity) = MomentOfInertia
 

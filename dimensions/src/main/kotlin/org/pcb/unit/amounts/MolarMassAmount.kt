@@ -104,6 +104,16 @@ open class MolarMassAmount<M : Unit<Mass>, N : Unit<Substance>>(
 
     // region -> Mass
 
+    @JvmName("divReciprocalSubstance")
+    operator fun <N : Unit<Substance>> div(that: ReciprocalSubstanceAmount<N>) =
+        MassAmount(amount = amount / that.amount
+                            * convert(that.substance to substance),
+                   unit = mass)
+
+    operator fun div(that: ReciprocalSubstanceAmount<N>) =
+        MassAmount(amount = amount / that.amount,
+                   unit = mass)
+
     @JvmName("timesSubstance")
     operator fun <N : Unit<Substance>> times(that: SubstanceAmount<N>) =
         MassAmount(amount = amount * that.amount
@@ -177,6 +187,20 @@ open class MolarMassAmount<M : Unit<Mass>, N : Unit<Substance>>(
     operator fun <L : Unit<Distance>> times(that: SpecificVolumeAmount<L, M>) =
         MolarVolumeAmount(amount = amount * that.amount,
                           unit = that.distance to substance)
+
+    // endregion
+
+    // region -> ReciprocalSubstance
+
+    @JvmName("divMass")
+    operator fun <M : Unit<Mass>> div(that: MassAmount<M>) =
+        ReciprocalSubstanceAmount(amount = amount / that.amount
+                                           / convert(that.mass to mass),
+                                  unit = NUMERIC to substance)
+
+    operator fun div(that: MassAmount<M>) =
+        ReciprocalSubstanceAmount(amount = amount / that.amount,
+                                  unit = NUMERIC to substance)
 
     // endregion
 }
