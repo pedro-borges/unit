@@ -156,6 +156,25 @@ open class ElectricConductivityAmount<L : Unit<Distance>, I : Unit<ElectricCurre
 
     // endregion
 
+    // region -> ElectricCurrentDensity
+
+    @JvmName("timesElectricFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        ElectricCurrentDensityAmount(amount = amount * that.amount
+                                              * convert(that.distance to distance,
+                                                        that.mass to mass)
+                                              / convert(that.electricCurrent to electricCurrent,
+                                                        that.time to time,
+                                                        that.time to time,
+                                                        that.time to time),
+                                     unit = electricCurrent to distance)
+
+    operator fun times(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        ElectricCurrentDensityAmount(amount = amount * that.amount,
+                                     unit = electricCurrent to distance)
+
+    // endregion
+
     // region -> Frequency
 
     @JvmName("divPermittivity")
@@ -176,6 +195,26 @@ open class ElectricConductivityAmount<L : Unit<Distance>, I : Unit<ElectricCurre
     operator fun div(that: PermittivityAmount<L, I, M, T>) =
         FrequencyAmount(amount = amount / that.amount,
                         unit = NUMERIC to time)
+
+    // endregion
+
+    // region -> MagneticFieldStrength
+
+    @JvmName("timesElectricTension")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricTensionAmount<L, I, M, T>) =
+        MagneticFieldStrengthAmount(amount = amount * that.amount
+                                             * convert(that.distance to distance,
+                                                       that.distance to distance,
+                                                       that.mass to mass)
+                                             / convert(that.electricCurrent to electricCurrent,
+                                                       that.time to time,
+                                                       that.time to time,
+                                                       that.time to time),
+                                    unit = electricCurrent to distance)
+
+    operator fun times(that: ElectricTensionAmount<L, I, M, T>) =
+        MagneticFieldStrengthAmount(amount = amount * that.amount,
+                                    unit = electricCurrent to distance)
 
     // endregion
 

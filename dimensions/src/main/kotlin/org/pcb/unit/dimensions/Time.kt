@@ -25,6 +25,8 @@ object Time : Dimension
     operator fun div(that: ElectricResistance) = Capacitance
     operator fun times(that: ElectricConductance) = Capacitance
 
+    operator fun times(that: Pop) = Crackle
+
     operator fun times(that: Rent) = Currency
 
     operator fun times(that: Currency) = Debt
@@ -35,6 +37,8 @@ object Time : Dimension
     operator fun times(that: ElectricCurrent) = ElectricCharge
 
     operator fun div(that: Inductance) = ElectricConductance
+
+    operator fun times(that: ElectricCurrentDensity) = ElectricDisplacementField
 
     operator fun div(that: Capacitance) = ElectricResistance
 
@@ -48,6 +52,8 @@ object Time : Dimension
     operator fun times(that: ElectricResistance) = Inductance
 
     operator fun times(that: Snap) = Jerk
+
+    operator fun times(that: Viscosity) = LinearDensity
 
     operator fun times(that: LuminousFlux) = LuminousEnergy
 
@@ -72,9 +78,13 @@ object Time : Dimension
 
     operator fun times(that: Intensity) = RadiantExposure
 
+    operator fun times(that: Crackle) = Snap
+
     operator fun div(that: Absement) = SpacialFrequency
 
     operator fun times(that: Acceleration) = Speed
+
+    operator fun times(that: EnergyDensity) = Viscosity
 
     operator fun times(that: VolumetricFlow) = Volume
 }

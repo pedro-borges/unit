@@ -130,6 +130,21 @@ open class ElectricResistanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent
 
     // endregion
 
+    // region -> ElectricFieldStrength
+
+    @JvmName("timesMagneticFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> times(that: MagneticFieldStrengthAmount<L, I>) =
+        ElectricFieldStrengthAmount(amount = amount * that.amount
+                                             * convert(that.electricCurrent to electricCurrent)
+                                             / convert(that.distance to distance),
+                                    unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    operator fun times(that: MagneticFieldStrengthAmount<L, I>) =
+        ElectricFieldStrengthAmount(amount = amount * that.amount,
+                                    unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    // endregion
+
     // region -> ElectricTension
 
     @JvmName("timesElectricCurrent")
@@ -200,6 +215,23 @@ open class ElectricResistanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent
     operator fun times(that: ElectricChargeAmount<I, T>) =
         MagneticFluxAmount(amount = amount * that.amount,
                            unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    // endregion
+
+    // region -> MagneticFluxDensity
+
+    @JvmName("timesElectricDisplacementField")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        MagneticFluxDensityAmount(amount = amount * that.amount
+                                           * convert(that.electricCurrent to electricCurrent,
+                                                     that.time to time)
+                                           / convert(that.distance to distance,
+                                                     that.distance to distance),
+                                  unit = mass to U2(electricCurrent, time))
+
+    operator fun times(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        MagneticFluxDensityAmount(amount = amount * that.amount,
+                                  unit = mass to U2(electricCurrent, time))
 
     // endregion
 

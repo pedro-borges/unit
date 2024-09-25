@@ -19,17 +19,23 @@ object Momentum : Dimension
 
     operator fun times(that: Mass) = AngularMomentum
 
+    operator fun div(that: Viscosity) = Area
+
     operator fun div(that: VolumetricFlow) = AreaDensity
 
     operator fun times(that: AngularVelocity) = CentrifugalForce
 
     operator fun div(that: MassFlowRate) = Distance
 
+    operator fun div(that: MagneticFluxDensity) = ElectricDipoleMoment
+
     operator fun div(that: Pace) = Energy
     operator fun times(that: Speed) = Energy
 
     operator fun div(that: Time) = Force
     operator fun times(that: Frequency) = Force
+
+    operator fun div(that: ElectricDipoleMoment) = MagneticFluxDensity
 
     operator fun div(that: Speed) = Mass
     operator fun times(that: Pace) = Mass
@@ -50,6 +56,9 @@ object Momentum : Dimension
     operator fun div(that: Mass) = Speed
 
     operator fun div(that: Force) = Time
+
+    operator fun div(that: Area) = Viscosity
+    operator fun times(that: FuelEfficiency) = Viscosity
 
     operator fun div(that: AreaDensity) = VolumetricFlow
 }

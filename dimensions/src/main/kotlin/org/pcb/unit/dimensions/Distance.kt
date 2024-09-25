@@ -26,7 +26,15 @@ object Distance : Dimension
 
     operator fun times(that: ElectricConductivity) = ElectricConductance
 
+    operator fun times(that: MagneticFieldStrength) = ElectricCurrent
+
+    operator fun times(that: ElectricCharge) = ElectricDipoleMoment
+
+    operator fun times(that: ElectricFieldStrength) = ElectricTension
+
     operator fun times(that: Force) = Energy
+
+    operator fun times(that: EnergyDensityGradient) = EnergyDensity
 
     operator fun times(that: RadiantExposure) = Force
 
@@ -40,7 +48,11 @@ object Distance : Dimension
 
     operator fun times(that: AreaDensity) = LinearDensity
 
+    operator fun times(that: ElectricCurrentDensity) = MagneticFieldStrength
+
     operator fun times(that: LinearDensity) = Mass
+
+    operator fun times(that: Viscosity) = MassFlowRate
 
     operator fun times(that: MassFlowRate) = Momentum
 

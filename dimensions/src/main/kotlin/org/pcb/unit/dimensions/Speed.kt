@@ -22,6 +22,8 @@ object Speed : Dimension
 
     operator fun times(that: Permittivity) = ElectricConductance
 
+    operator fun times(that: MagneticFluxDensity) = ElectricFieldStrength
+
     operator fun times(that: Permeability) = ElectricResistance
 
     operator fun times(that: Momentum) = Energy
@@ -35,6 +37,10 @@ object Speed : Dimension
 
     operator fun times(that: EnergyDensity) = Intensity
 
+    operator fun times(that: ElectricDipoleMoment) = MagneticDipoleMoment
+
+    operator fun times(that: ElectricDisplacementField) = MagneticFieldStrength
+
     operator fun times(that: LinearDensity) = MassFlowRate
 
     operator fun times(that: Mass) = Momentum
@@ -43,10 +49,16 @@ object Speed : Dimension
 
     operator fun times(that: Force) = Power
 
+    operator fun times(that: EnergyDensityGradient) = PowerDensity
+
+    operator fun times(that: Viscosity) = RadiantExposure
+
     operator fun div(that: Pace) = SpecificEnergy
     operator fun times(that: Speed) = SpecificEnergy
 
     operator fun div(that: Acceleration) = Time
+
+    operator fun times(that: AreaDensity) = Viscosity
 
     operator fun div(that: FuelEfficiency) = VolumetricFlow
     operator fun times(that: Area) = VolumetricFlow

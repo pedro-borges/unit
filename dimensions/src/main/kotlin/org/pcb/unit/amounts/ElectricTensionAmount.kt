@@ -110,6 +110,25 @@ open class ElectricTensionAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, 
 
     // endregion
 
+    // region -> Distance
+
+    @JvmName("divElectricFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        DistanceAmount(amount = amount / that.amount
+                                / convert(that.distance to distance,
+                                          that.mass to mass)
+                                * convert(that.electricCurrent to electricCurrent,
+                                          that.time to time,
+                                          that.time to time,
+                                          that.time to time),
+                       unit = distance)
+
+    operator fun div(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        DistanceAmount(amount = amount / that.amount,
+                       unit = distance)
+
+    // endregion
+
     // region -> ElectricCharge
 
     @JvmName("timesCapacitance")
@@ -167,6 +186,30 @@ open class ElectricTensionAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, 
     operator fun div(that: ElectricResistanceAmount<L, I, M, T>) =
         ElectricCurrentAmount(amount = amount / that.amount,
                               unit = electricCurrent)
+
+    // endregion
+
+    // region -> ElectricFieldStrength
+
+    @JvmName("divDistance")
+    operator fun <L : Unit<Distance>> div(that: DistanceAmount<L>) =
+        ElectricFieldStrengthAmount(amount = amount / that.amount
+                                             / convert(that.distance to distance),
+                                    unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    operator fun div(that: DistanceAmount<L>) =
+        ElectricFieldStrengthAmount(amount = amount / that.amount,
+                                    unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    @JvmName("timesSpacialFrequency")
+    operator fun <L : Unit<Distance>> times(that: SpacialFrequencyAmount<L>) =
+        ElectricFieldStrengthAmount(amount = amount * that.amount
+                                             / convert(that.distance to distance),
+                                    unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    operator fun times(that: SpacialFrequencyAmount<L>) =
+        ElectricFieldStrengthAmount(amount = amount * that.amount,
+                                    unit = U2(distance, mass) to U2(electricCurrent, time))
 
     // endregion
 
@@ -234,6 +277,28 @@ open class ElectricTensionAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, 
 
     // endregion
 
+    // region -> MagneticFieldStrength
+
+    @JvmName("timesElectricConductivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricConductivityAmount<L, I, M, T>) =
+        MagneticFieldStrengthAmount(amount = amount * that.amount
+                                             * convert(that.electricCurrent to electricCurrent,
+                                                       that.electricCurrent to electricCurrent,
+                                                       that.time to time,
+                                                       that.time to time,
+                                                       that.time to time)
+                                             / convert(that.distance to distance,
+                                                       that.distance to distance,
+                                                       that.distance to distance,
+                                                       that.mass to mass),
+                                    unit = electricCurrent to distance)
+
+    operator fun times(that: ElectricConductivityAmount<L, I, M, T>) =
+        MagneticFieldStrengthAmount(amount = amount * that.amount,
+                                    unit = electricCurrent to distance)
+
+    // endregion
+
     // region -> MagneticFlux
 
     @JvmName("divFrequency")
@@ -269,6 +334,38 @@ open class ElectricTensionAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, 
     operator fun times(that: ElectricCurrentAmount<I>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> RadiantExposure
+
+    @JvmName("timesElectricDisplacementField")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        RadiantExposureAmount(amount = amount * that.amount
+                                       * convert(that.electricCurrent to electricCurrent,
+                                                 that.time to time)
+                                       / convert(that.distance to distance,
+                                                 that.distance to distance),
+                              unit = mass to time)
+
+    operator fun times(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        RadiantExposureAmount(amount = amount * that.amount,
+                              unit = mass to time)
+
+    // endregion
+
+    // region -> Yank
+
+    @JvmName("timesMagneticFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> times(that: MagneticFieldStrengthAmount<L, I>) =
+        YankAmount(amount = amount * that.amount
+                            * convert(that.electricCurrent to electricCurrent)
+                            / convert(that.distance to distance),
+                   unit = U2(distance, mass) to time)
+
+    operator fun times(that: MagneticFieldStrengthAmount<L, I>) =
+        YankAmount(amount = amount * that.amount,
+                   unit = U2(distance, mass) to time)
 
     // endregion
 }

@@ -17,7 +17,11 @@ object ThermalConductivity : Dimension
 
     operator fun times(that: TemperatureGradient) = Intensity
 
+    operator fun div(that: Viscosity) = SpecificHeatCapacity
+
     operator fun div(that: Yank) = ThermalExpansionCoefficient
+
+    operator fun div(that: SpecificHeatCapacity) = Viscosity
 
     operator fun times(that: ThermalResistance) = Volume
 

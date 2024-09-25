@@ -44,5 +44,9 @@ object Action : Dimension
 
     operator fun div(that: Energy) = Time
 
+    operator fun div(that: Volume) = Viscosity
+
+    operator fun div(that: Viscosity) = Volume
+
     operator fun div(that: LinearDensity) = VolumetricFlow
 }

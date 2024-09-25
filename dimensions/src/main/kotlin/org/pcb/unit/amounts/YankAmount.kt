@@ -11,6 +11,7 @@ import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.Temperature
@@ -152,6 +153,46 @@ open class YankAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> ElectricCurrent
+
+    @JvmName("divElectricFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        ElectricCurrentAmount(amount = amount / that.amount
+                                       / convert(that.distance to distance,
+                                                 that.mass to mass)
+                                       * convert(that.time to time,
+                                                 that.time to time,
+                                                 that.time to time),
+                              unit = that.electricCurrent)
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        ElectricCurrentAmount(amount = amount / that.amount,
+                              unit = that.electricCurrent)
+
+    // endregion
+
+    // region -> ElectricFieldStrength
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<I>) =
+        ElectricFieldStrengthAmount(amount = amount / that.amount,
+                                    unit = U2(distance, mass) to U2(that.electricCurrent, time))
+
+    // endregion
+
+    // region -> ElectricTension
+
+    @JvmName("divMagneticFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: MagneticFieldStrengthAmount<L, I>) =
+        ElectricTensionAmount(amount = amount / that.amount
+                                       * convert(that.distance to distance),
+                              unit = U2(distance, mass) to U2(that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: MagneticFieldStrengthAmount<L, I>) =
+        ElectricTensionAmount(amount = amount / that.amount,
+                              unit = U2(distance, mass) to U2(that.electricCurrent, time))
+
+    // endregion
+
     // region -> Energy
 
     @JvmName("timesAbsement")
@@ -164,6 +205,23 @@ open class YankAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun times(that: AbsementAmount<L, T>) =
         EnergyAmount(amount = amount * that.amount,
                      unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> EnergyDensityGradient
+
+    @JvmName("divVolumetricFlow")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: VolumetricFlowAmount<L, T>) =
+        EnergyDensityGradientAmount(amount = amount / that.amount
+                                             / convert(that.distance to distance,
+                                                       that.distance to distance,
+                                                       that.distance to distance)
+                                             * convert(that.time to time),
+                                    unit = mass to U2(distance, time))
+
+    operator fun div(that: VolumetricFlowAmount<L, T>) =
+        EnergyDensityGradientAmount(amount = amount / that.amount,
+                                    unit = mass to U2(distance, time))
 
     // endregion
 
@@ -243,6 +301,25 @@ open class YankAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: MassAmount<M>) =
         JerkAmount(amount = amount / that.amount,
                    unit = distance to time)
+
+    // endregion
+
+    // region -> MagneticFieldStrength
+
+    @JvmName("divElectricTension")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricTensionAmount<L, I, M, T>) =
+        MagneticFieldStrengthAmount(amount = amount / that.amount
+                                             / convert(that.distance to distance,
+                                                       that.distance to distance,
+                                                       that.mass to mass)
+                                             * convert(that.time to time,
+                                                       that.time to time,
+                                                       that.time to time),
+                                    unit = that.electricCurrent to distance)
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: ElectricTensionAmount<L, I, M, T>) =
+        MagneticFieldStrengthAmount(amount = amount / that.amount,
+                                    unit = that.electricCurrent to distance)
 
     // endregion
 
@@ -392,6 +469,22 @@ open class YankAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> SpecificEnergy
+
+    @JvmName("divViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        SpecificEnergyAmount(amount = amount / that.amount
+                                      / convert(that.mass to mass)
+                                      * convert(that.distance to distance,
+                                                that.time to time),
+                             unit = distance to time)
+
+    operator fun div(that: ViscosityAmount<L, M, T>) =
+        SpecificEnergyAmount(amount = amount / that.amount,
+                             unit = distance to time)
+
+    // endregion
+
     // region -> SpectralIntensity
 
     operator fun <BAC : Unit<Angle>> div(that: SolidAngleAmount<BAC>) =
@@ -443,6 +536,41 @@ open class YankAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun <K : Unit<Temperature>> times(that: ThermalExpansionCoefficientAmount<K>) =
         ThermalConductivityAmount(amount = amount * that.amount,
                                   unit = U2(distance, mass) to U2(that.temperature, time))
+
+    // endregion
+
+    // region -> Viscosity
+
+    @JvmName("divSpecificEnergy")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: SpecificEnergyAmount<L, T>) =
+        ViscosityAmount(amount = amount / that.amount
+                                 / convert(that.distance to distance,
+                                           that.distance to distance)
+                                 * convert(that.time to time,
+                                           that.time to time),
+                        unit = mass to U2(distance, time))
+
+    operator fun div(that: SpecificEnergyAmount<L, T>) =
+        ViscosityAmount(amount = amount / that.amount,
+                        unit = mass to U2(distance, time))
+
+    // endregion
+
+    // region -> VolumetricFlow
+
+    @JvmName("divEnergyDensityGradient")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyDensityGradientAmount<L, M, T>) =
+        VolumetricFlowAmount(amount = amount / that.amount
+                                      / convert(that.mass to mass)
+                                      * convert(that.distance to distance,
+                                                that.distance to distance,
+                                                that.time to time,
+                                                that.time to time),
+                             unit = distance to time)
+
+    operator fun div(that: EnergyDensityGradientAmount<L, M, T>) =
+        VolumetricFlowAmount(amount = amount / that.amount,
+                             unit = distance to time)
 
     // endregion
 }

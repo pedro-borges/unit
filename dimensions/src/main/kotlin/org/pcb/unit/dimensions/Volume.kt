@@ -10,13 +10,21 @@ object Volume : Dimension
 
     operator fun div(that: Volume) = Scalar
 
+    operator fun times(that: Viscosity) = Action
+
     operator fun div(that: Distance) = Area
     operator fun times(that: SpacialFrequency) = Area
 
     operator fun div(that: Area) = Distance
     operator fun times(that: FuelEfficiency) = Distance
 
+    operator fun times(that: ElectricDisplacementField) = ElectricDipoleMoment
+
     operator fun times(that: EnergyDensity) = Energy
+
+    operator fun times(that: EnergyDensityGradient) = Force
+
+    operator fun times(that: MagneticFieldStrength) = MagneticDipoleMoment
 
     operator fun div(that: SpecificVolume) = Mass
     operator fun times(that: MassDensity) = Mass

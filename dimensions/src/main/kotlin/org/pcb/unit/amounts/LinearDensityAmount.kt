@@ -350,4 +350,31 @@ open class LinearDensityAmount<L : Unit<Distance>, M : Unit<Mass>>(
                                unit = NUMERIC to distance)
 
     // endregion
+
+    // region -> Time
+
+    @JvmName("divViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        TimeAmount(amount = amount / that.amount
+                            / convert(that.mass to mass)
+                            * convert(that.distance to distance),
+                   unit = that.time)
+
+    operator fun <T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        TimeAmount(amount = amount / that.amount,
+                   unit = that.time)
+
+    // endregion
+
+    // region -> Viscosity
+
+    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
+        ViscosityAmount(amount = amount * that.amount,
+                        unit = mass to U2(distance, that.time))
+
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        ViscosityAmount(amount = amount / that.amount,
+                        unit = mass to U2(distance, that.time))
+
+    // endregion
 }

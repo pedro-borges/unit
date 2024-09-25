@@ -15,6 +15,8 @@ object RadiantExposure : Dimension
 
     operator fun div(that: LinearDensity) = Acceleration
 
+    operator fun div(that: EnergyDensityGradient) = Area
+
     operator fun div(that: SpecificEnergy) = AreaDensity
 
     operator fun div(that: EnergyDensity) = Distance
@@ -23,11 +25,18 @@ object RadiantExposure : Dimension
 
     operator fun div(that: MagneticFlux) = ElectricCurrentDensity
 
+    operator fun div(that: ElectricTension) = ElectricDisplacementField
+
+    operator fun div(that: ElectricDisplacementField) = ElectricTension
+
     operator fun div(that: FuelEfficiency) = Energy
     operator fun times(that: Area) = Energy
 
     operator fun div(that: Distance) = EnergyDensity
     operator fun times(that: SpacialFrequency) = EnergyDensity
+
+    operator fun div(that: Area) = EnergyDensityGradient
+    operator fun times(that: FuelEfficiency) = EnergyDensityGradient
 
     operator fun div(that: SpacialFrequency) = Force
     operator fun times(that: Distance) = Force
@@ -58,7 +67,12 @@ object RadiantExposure : Dimension
 
     operator fun div(that: AreaDensity) = SpecificEnergy
 
+    operator fun div(that: Viscosity) = Speed
+
     operator fun div(that: Intensity) = Time
+
+    operator fun div(that: Speed) = Viscosity
+    operator fun times(that: Pace) = Viscosity
 
     operator fun div(that: Pace) = Yank
     operator fun times(that: Speed) = Yank

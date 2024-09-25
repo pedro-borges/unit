@@ -3,6 +3,7 @@ package org.pcb.unit.amounts
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
+import org.pcb.unit.U3
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
@@ -172,6 +173,28 @@ open class AbsementAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> ElectricCharge
+
+    @JvmName("timesMagneticFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> times(that: MagneticFieldStrengthAmount<L, I>) =
+        ElectricChargeAmount(amount = amount * that.amount
+                                      / convert(that.distance to distance),
+                             unit = U2(that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>> times(that: MagneticFieldStrengthAmount<L, I>) =
+        ElectricChargeAmount(amount = amount * that.amount,
+                             unit = U2(that.electricCurrent, time))
+
+    // endregion
+
+    // region -> ElectricDipoleMoment
+
+    operator fun <I : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<I>) =
+        ElectricDipoleMomentAmount(amount = amount * that.amount,
+                                   unit = U3(distance, that.electricCurrent, time))
+
+    // endregion
+
     // region -> Energy
 
     @JvmName("timesYank")
@@ -219,6 +242,38 @@ open class AbsementAmount<L : Unit<Distance>, T : Unit<Time>>(
     operator fun <M : Unit<Mass>, K : Unit<Temperature>> times(that: ThermalConductivityAmount<L, M, K, T>) =
         HeatCapacityAmount(amount = amount * that.amount,
                            unit = U2(distance, that.mass) to U2(that.temperature, time))
+
+    // endregion
+
+    // region -> MagneticFlux
+
+    @JvmName("timesElectricFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        MagneticFluxAmount(amount = amount * that.amount
+                                    * convert(that.distance to distance)
+                                    / convert(that.time to time,
+                                              that.time to time,
+                                              that.time to time),
+                           unit = U2(distance, that.mass) to U2(that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>> times(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        MagneticFluxAmount(amount = amount * that.amount,
+                           unit = U2(distance, that.mass) to U2(that.electricCurrent, time))
+
+    // endregion
+
+    // region -> Mass
+
+    @JvmName("timesViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ViscosityAmount<L, M, T>) =
+        MassAmount(amount = amount * that.amount
+                            / convert(that.distance to distance,
+                                      that.time to time),
+                   unit = that.mass)
+
+    operator fun <M : Unit<Mass>> times(that: ViscosityAmount<L, M, T>) =
+        MassAmount(amount = amount * that.amount,
+                   unit = that.mass)
 
     // endregion
 
@@ -349,6 +404,23 @@ open class AbsementAmount<L : Unit<Distance>, T : Unit<Time>>(
     operator fun times(that: SpacialFrequencyAmount<L>) =
         TimeAmount(amount = amount * that.amount,
                    unit = time)
+
+    // endregion
+
+    // region -> Viscosity
+
+    @JvmName("timesEnergyDensityGradient")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityGradientAmount<L, M, T>) =
+        ViscosityAmount(amount = amount * that.amount
+                                 / convert(that.distance to distance,
+                                           that.distance to distance,
+                                           that.time to time,
+                                           that.time to time),
+                        unit = that.mass to U2(distance, time))
+
+    operator fun <M : Unit<Mass>> times(that: EnergyDensityGradientAmount<L, M, T>) =
+        ViscosityAmount(amount = amount * that.amount,
+                        unit = that.mass to U2(distance, time))
 
     // endregion
 

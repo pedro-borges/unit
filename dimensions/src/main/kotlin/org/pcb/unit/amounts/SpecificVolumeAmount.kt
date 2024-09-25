@@ -107,6 +107,22 @@ open class SpecificVolumeAmount<L : Unit<Distance>, M : Unit<Mass>>(
 
     // endregion
 
+    // region -> Acceleration
+
+    @JvmName("timesEnergyDensityGradient")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityGradientAmount<L, M, T>) =
+        AccelerationAmount(amount = amount * that.amount
+                                    * convert(that.mass to mass)
+                                    / convert(that.distance to distance,
+                                              that.distance to distance),
+                           unit = distance to that.time)
+
+    operator fun <T : Unit<Time>> times(that: EnergyDensityGradientAmount<L, M, T>) =
+        AccelerationAmount(amount = amount * that.amount,
+                           unit = distance to that.time)
+
+    // endregion
+
     // region -> Area
 
     @JvmName("timesLinearDensity")

@@ -164,6 +164,20 @@ open class SpacialFrequencyAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> ElectricCharge
+
+    @JvmName("timesElectricDipoleMoment")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricDipoleMomentAmount<L, I, T>) =
+        ElectricChargeAmount(amount = amount * that.amount
+                                      * convert(that.distance to distance),
+                             unit = U2(that.electricCurrent, that.time))
+
+    operator fun <I : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricDipoleMomentAmount<L, I, T>) =
+        ElectricChargeAmount(amount = amount * that.amount,
+                             unit = U2(that.electricCurrent, that.time))
+
+    // endregion
+
     // region -> ElectricConductivity
 
     @JvmName("timesElectricConductance")
@@ -190,6 +204,35 @@ open class SpacialFrequencyAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> ElectricCurrentDensity
+
+    @JvmName("timesMagneticFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> times(that: MagneticFieldStrengthAmount<L, I>) =
+        ElectricCurrentDensityAmount(amount = amount * that.amount
+                                              / convert(that.distance to distance),
+                                     unit = that.electricCurrent to distance)
+
+    operator fun <I : Unit<ElectricCurrent>> times(that: MagneticFieldStrengthAmount<L, I>) =
+        ElectricCurrentDensityAmount(amount = amount * that.amount,
+                                     unit = that.electricCurrent to distance)
+
+    // endregion
+
+    // region -> ElectricFieldStrength
+
+    @JvmName("timesElectricTension")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricTensionAmount<L, I, M, T>) =
+        ElectricFieldStrengthAmount(amount = amount * that.amount
+                                             * convert(that.distance to distance,
+                                                       that.distance to distance),
+                                    unit = U2(distance, that.mass) to U2(that.electricCurrent, that.time))
+
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricTensionAmount<L, I, M, T>) =
+        ElectricFieldStrengthAmount(amount = amount * that.amount,
+                                    unit = U2(distance, that.mass) to U2(that.electricCurrent, that.time))
+
+    // endregion
+
     // region -> ElectricResistance
 
     @JvmName("divElectricConductivity")
@@ -211,6 +254,20 @@ open class SpacialFrequencyAmount<L : Unit<Distance>>(
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: RadiantExposureAmount<M, T>) =
         EnergyDensityAmount(amount = amount * that.amount,
                             unit = that.mass to U2(distance, that.time))
+
+    // endregion
+
+    // region -> EnergyDensityGradient
+
+    @JvmName("timesEnergyDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<L, M, T>) =
+        EnergyDensityGradientAmount(amount = amount * that.amount
+                                             / convert(that.distance to distance),
+                                    unit = that.mass to U2(distance, that.time))
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<L, M, T>) =
+        EnergyDensityGradientAmount(amount = amount * that.amount,
+                                    unit = that.mass to U2(distance, that.time))
 
     // endregion
 
@@ -296,6 +353,14 @@ open class SpacialFrequencyAmount<L : Unit<Distance>>(
     operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
         LinearDensityAmount(amount = amount * that.amount,
                             unit = that.mass to distance)
+
+    // endregion
+
+    // region -> MagneticFieldStrength
+
+    operator fun <I : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<I>) =
+        MagneticFieldStrengthAmount(amount = amount * that.amount,
+                                    unit = that.electricCurrent to distance)
 
     // endregion
 
@@ -459,6 +524,14 @@ open class SpacialFrequencyAmount<L : Unit<Distance>>(
     operator fun <T : Unit<Time>> times(that: AbsementAmount<L, T>) =
         TimeAmount(amount = amount * that.amount,
                    unit = that.time)
+
+    // endregion
+
+    // region -> Viscosity
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: MassFlowRateAmount<M, T>) =
+        ViscosityAmount(amount = amount * that.amount,
+                        unit = that.mass to U2(distance, that.time))
 
     // endregion
 

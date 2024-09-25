@@ -18,7 +18,11 @@ object ElectricConductivity : Dimension
     operator fun div(that: SpacialFrequency) = ElectricConductance
     operator fun times(that: Distance) = ElectricConductance
 
+    operator fun times(that: ElectricFieldStrength) = ElectricCurrentDensity
+
     operator fun div(that: Permittivity) = Frequency
+
+    operator fun times(that: ElectricTension) = MagneticFieldStrength
 
     operator fun div(that: Molarity) = MolarConductivity
     operator fun times(that: MolarVolume) = MolarConductivity

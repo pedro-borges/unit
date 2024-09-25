@@ -357,6 +357,38 @@ open class ActionAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Viscosity
+
+    @JvmName("divVolume")
+    operator fun <L : Unit<Distance>> div(that: VolumeAmount<L>) =
+        ViscosityAmount(amount = amount / that.amount
+                                 / convert(that.distance to distance,
+                                           that.distance to distance,
+                                           that.distance to distance),
+                        unit = mass to U2(distance, time))
+
+    operator fun div(that: VolumeAmount<L>) =
+        ViscosityAmount(amount = amount / that.amount,
+                        unit = mass to U2(distance, time))
+
+    // endregion
+
+    // region -> Volume
+
+    @JvmName("divViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        VolumeAmount(amount = amount / that.amount
+                              / convert(that.mass to mass)
+                              * convert(that.distance to distance,
+                                        that.time to time),
+                     unit = distance)
+
+    operator fun div(that: ViscosityAmount<L, M, T>) =
+        VolumeAmount(amount = amount / that.amount,
+                     unit = distance)
+
+    // endregion
+
     // region -> VolumetricFlow
 
     @JvmName("divLinearDensity")

@@ -16,15 +16,30 @@ object EnergyDensity : Dimension
 
     operator fun div(that: Acceleration) = AreaDensity
 
+    operator fun div(that: EnergyDensityGradient) = Distance
+
+    operator fun div(that: ElectricFieldStrength) = ElectricDisplacementField
+
+    operator fun div(that: ElectricDisplacementField) = ElectricFieldStrength
+
     operator fun times(that: Volume) = Energy
+
+    operator fun div(that: Distance) = EnergyDensityGradient
+    operator fun times(that: SpacialFrequency) = EnergyDensityGradient
 
     operator fun div(that: FuelEfficiency) = Force
     operator fun times(that: Area) = Force
+
+    operator fun div(that: Viscosity) = Frequency
 
     operator fun div(that: Force) = FuelEfficiency
 
     operator fun div(that: Pace) = Intensity
     operator fun times(that: Speed) = Intensity
+
+    operator fun div(that: MagneticFluxDensity) = MagneticFieldStrength
+
+    operator fun div(that: MagneticFieldStrength) = MagneticFluxDensity
 
     operator fun div(that: SpecificEnergy) = MassDensity
 
@@ -51,4 +66,7 @@ object EnergyDensity : Dimension
     operator fun times(that: SpecificVolume) = SpecificEnergy
 
     operator fun div(that: PowerDensity) = Time
+
+    operator fun div(that: Frequency) = Viscosity
+    operator fun times(that: Time) = Viscosity
 }

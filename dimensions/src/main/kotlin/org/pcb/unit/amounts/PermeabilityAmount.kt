@@ -157,6 +157,21 @@ open class PermeabilityAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M :
 
     // endregion
 
+    // region -> MagneticFluxDensity
+
+    @JvmName("timesMagneticFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> times(that: MagneticFieldStrengthAmount<L, I>) =
+        MagneticFluxDensityAmount(amount = amount * that.amount
+                                           * convert(that.electricCurrent to electricCurrent)
+                                           / convert(that.distance to distance),
+                                  unit = mass to U2(electricCurrent, time))
+
+    operator fun times(that: MagneticFieldStrengthAmount<L, I>) =
+        MagneticFluxDensityAmount(amount = amount * that.amount,
+                                  unit = mass to U2(electricCurrent, time))
+
+    // endregion
+
     // region -> Pace
 
     @JvmName("timesElectricConductance")

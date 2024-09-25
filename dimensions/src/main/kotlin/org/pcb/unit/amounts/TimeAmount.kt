@@ -186,6 +186,25 @@ open class TimeAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> Crackle
+
+    @JvmName("timesPop")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: PopAmount<L, T>) =
+        CrackleAmount(amount = amount * that.amount
+                               / convert(that.time to time,
+                                         that.time to time,
+                                         that.time to time,
+                                         that.time to time,
+                                         that.time to time,
+                                         that.time to time),
+                      unit = that.distance to time)
+
+    operator fun <L : Unit<Distance>> times(that: PopAmount<L, T>) =
+        CrackleAmount(amount = amount * that.amount,
+                      unit = that.distance to time)
+
+    // endregion
+
     // region -> Currency
 
     @JvmName("timesRent")
@@ -252,6 +271,14 @@ open class TimeAmount<T : Unit<Time>>(
     operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>> div(that: InductanceAmount<L, I, M, T>) =
         ElectricConductanceAmount(amount = amount / that.amount,
                                   unit = U2(time, that.electricCurrent) to U2(that.mass, that.distance))
+
+    // endregion
+
+    // region -> ElectricDisplacementField
+
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> times(that: ElectricCurrentDensityAmount<L, I>) =
+        ElectricDisplacementFieldAmount(amount = amount * that.amount,
+                                        unit = U2(that.electricCurrent, time) to that.distance)
 
     // endregion
 
@@ -362,6 +389,20 @@ open class TimeAmount<T : Unit<Time>>(
     operator fun <L : Unit<Distance>> times(that: SnapAmount<L, T>) =
         JerkAmount(amount = amount * that.amount,
                    unit = that.distance to time)
+
+    // endregion
+
+    // region -> LinearDensity
+
+    @JvmName("timesViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ViscosityAmount<L, M, T>) =
+        LinearDensityAmount(amount = amount * that.amount
+                                     / convert(that.time to time),
+                            unit = that.mass to that.distance)
+
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: ViscosityAmount<L, M, T>) =
+        LinearDensityAmount(amount = amount * that.amount,
+                            unit = that.mass to that.distance)
 
     // endregion
 
@@ -519,6 +560,24 @@ open class TimeAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> Snap
+
+    @JvmName("timesCrackle")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: CrackleAmount<L, T>) =
+        SnapAmount(amount = amount * that.amount
+                            / convert(that.time to time,
+                                      that.time to time,
+                                      that.time to time,
+                                      that.time to time,
+                                      that.time to time),
+                   unit = that.distance to time)
+
+    operator fun <L : Unit<Distance>> times(that: CrackleAmount<L, T>) =
+        SnapAmount(amount = amount * that.amount,
+                   unit = that.distance to time)
+
+    // endregion
+
     // region -> SpacialFrequency
 
     @JvmName("divAbsement")
@@ -545,6 +604,21 @@ open class TimeAmount<T : Unit<Time>>(
     operator fun <L : Unit<Distance>> times(that: AccelerationAmount<L, T>) =
         SpeedAmount(amount = amount * that.amount,
                     unit = that.distance to time)
+
+    // endregion
+
+    // region -> Viscosity
+
+    @JvmName("timesEnergyDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<L, M, T>) =
+        ViscosityAmount(amount = amount * that.amount
+                                 / convert(that.time to time,
+                                           that.time to time),
+                        unit = that.mass to U2(that.distance, time))
+
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: EnergyDensityAmount<L, M, T>) =
+        ViscosityAmount(amount = amount * that.amount,
+                        unit = that.mass to U2(that.distance, time))
 
     // endregion
 

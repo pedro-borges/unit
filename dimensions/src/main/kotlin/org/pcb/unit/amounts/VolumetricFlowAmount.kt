@@ -159,6 +159,21 @@ open class VolumetricFlowAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Energy
+
+    @JvmName("timesViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ViscosityAmount<L, M, T>) =
+        EnergyAmount(amount = amount * that.amount
+                              / convert(that.distance to distance,
+                                        that.time to time),
+                     unit = U2(distance, that.mass) to time)
+
+    operator fun <M : Unit<Mass>> times(that: ViscosityAmount<L, M, T>) =
+        EnergyAmount(amount = amount * that.amount,
+                     unit = U2(distance, that.mass) to time)
+
+    // endregion
+
     // region -> Frequency
 
     @JvmName("divVolume")
@@ -327,6 +342,23 @@ open class VolumetricFlowAmount<L : Unit<Distance>, T : Unit<Time>>(
     operator fun times(that: TimeAmount<T>) =
         VolumeAmount(amount = amount * that.amount,
                      unit = distance)
+
+    // endregion
+
+    // region -> Yank
+
+    @JvmName("timesEnergyDensityGradient")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityGradientAmount<L, M, T>) =
+        YankAmount(amount = amount * that.amount
+                            / convert(that.distance to distance,
+                                      that.distance to distance,
+                                      that.time to time,
+                                      that.time to time),
+                   unit = U2(distance, that.mass) to time)
+
+    operator fun <M : Unit<Mass>> times(that: EnergyDensityGradientAmount<L, M, T>) =
+        YankAmount(amount = amount * that.amount,
+                   unit = U2(distance, that.mass) to time)
 
     // endregion
 }

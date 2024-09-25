@@ -43,4 +43,9 @@ object LinearDensity : Dimension
     operator fun times(that: Acceleration) = RadiantExposure
 
     operator fun div(that: Mass) = SpacialFrequency
+
+    operator fun div(that: Viscosity) = Time
+
+    operator fun div(that: Time) = Viscosity
+    operator fun times(that: Frequency) = Viscosity
 }

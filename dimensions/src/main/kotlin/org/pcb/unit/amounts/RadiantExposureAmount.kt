@@ -123,6 +123,22 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Area
+
+    @JvmName("divEnergyDensityGradient")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyDensityGradientAmount<L, M, T>) =
+        AreaAmount(amount = amount / that.amount
+                            / convert(that.mass to mass)
+                            * convert(that.time to time,
+                                      that.time to time),
+                   unit = that.distance)
+
+    operator fun <L : Unit<Distance>> div(that: EnergyDensityGradientAmount<L, M, T>) =
+        AreaAmount(amount = amount / that.amount,
+                   unit = that.distance)
+
+    // endregion
+
     // region -> AreaDensity
 
     @JvmName("divSpecificEnergy")
@@ -186,6 +202,37 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> ElectricDisplacementField
+
+    @JvmName("divElectricTension")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricTensionAmount<L, I, M, T>) =
+        ElectricDisplacementFieldAmount(amount = amount / that.amount
+                                                 / convert(that.mass to mass)
+                                                 * convert(that.time to time,
+                                                           that.time to time,
+                                                           that.time to time),
+                                        unit = U2(that.electricCurrent, time) to that.distance)
+
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: ElectricTensionAmount<L, I, M, T>) =
+        ElectricDisplacementFieldAmount(amount = amount / that.amount,
+                                        unit = U2(that.electricCurrent, time) to that.distance)
+
+    // endregion
+
+    // region -> ElectricTension
+
+    @JvmName("divElectricDisplacementField")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        ElectricTensionAmount(amount = amount / that.amount
+                                       / convert(that.time to time),
+                              unit = U2(that.distance, mass) to U2(that.electricCurrent, time))
+
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        ElectricTensionAmount(amount = amount / that.amount,
+                              unit = U2(that.distance, mass) to U2(that.electricCurrent, time))
+
+    // endregion
+
     // region -> Energy
 
     operator fun <L : Unit<Distance>> times(that: AreaAmount<L>) =
@@ -207,6 +254,18 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
     operator fun <L : Unit<Distance>> times(that: SpacialFrequencyAmount<L>) =
         EnergyDensityAmount(amount = amount * that.amount,
                             unit = mass to U2(that.distance, time))
+
+    // endregion
+
+    // region -> EnergyDensityGradient
+
+    operator fun <L : Unit<Distance>> div(that: AreaAmount<L>) =
+        EnergyDensityGradientAmount(amount = amount / that.amount,
+                                    unit = mass to U2(that.distance, time))
+
+    operator fun <L : Unit<Distance>> times(that: FuelEfficiencyAmount<L>) =
+        EnergyDensityGradientAmount(amount = amount * that.amount,
+                                    unit = mass to U2(that.distance, time))
 
     // endregion
 
@@ -407,6 +466,21 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Speed
+
+    @JvmName("divViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        SpeedAmount(amount = amount / that.amount
+                             / convert(that.mass to mass)
+                             * convert(that.time to time),
+                    unit = that.distance to time)
+
+    operator fun <L : Unit<Distance>> div(that: ViscosityAmount<L, M, T>) =
+        SpeedAmount(amount = amount / that.amount,
+                    unit = that.distance to time)
+
+    // endregion
+
     // region -> Time
 
     @JvmName("divIntensity")
@@ -421,6 +495,30 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: IntensityAmount<M, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = time)
+
+    // endregion
+
+    // region -> Viscosity
+
+    @JvmName("timesPace")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<L, T>) =
+        ViscosityAmount(amount = amount * that.amount
+                                 * convert(that.time to time),
+                        unit = mass to U2(that.distance, time))
+
+    operator fun <L : Unit<Distance>> times(that: PaceAmount<L, T>) =
+        ViscosityAmount(amount = amount * that.amount,
+                        unit = mass to U2(that.distance, time))
+
+    @JvmName("divSpeed")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
+        ViscosityAmount(amount = amount / that.amount
+                                 * convert(that.time to time),
+                        unit = mass to U2(that.distance, time))
+
+    operator fun <L : Unit<Distance>> div(that: SpeedAmount<L, T>) =
+        ViscosityAmount(amount = amount / that.amount,
+                        unit = mass to U2(that.distance, time))
 
     // endregion
 

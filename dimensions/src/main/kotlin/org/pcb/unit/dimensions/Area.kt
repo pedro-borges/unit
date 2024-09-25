@@ -19,6 +19,8 @@ object Area : Dimension
     operator fun div(that: Distance) = Distance
     operator fun times(that: SpacialFrequency) = Distance
 
+    operator fun times(that: ElectricDisplacementField) = ElectricCharge
+
     operator fun times(that: ElectricCurrentDensity) = ElectricCurrent
 
     operator fun times(that: RadiantExposure) = Energy
@@ -32,15 +34,21 @@ object Area : Dimension
 
     operator fun times(that: Luminance) = LuminousIntensity
 
+    operator fun times(that: ElectricCurrent) = MagneticDipoleMoment
+
     operator fun times(that: MagneticFluxDensity) = MagneticFlux
 
     operator fun times(that: AreaDensity) = Mass
 
     operator fun times(that: Mass) = MomentOfInertia
 
+    operator fun times(that: Viscosity) = Momentum
+
     operator fun div(that: VolumetricFlow) = Pace
 
     operator fun times(that: Intensity) = Power
+
+    operator fun times(that: EnergyDensityGradient) = RadiantExposure
 
     operator fun div(that: Volume) = SpacialFrequency
 

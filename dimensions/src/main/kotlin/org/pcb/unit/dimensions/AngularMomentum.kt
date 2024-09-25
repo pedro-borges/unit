@@ -18,5 +18,9 @@ object AngularMomentum : Dimension
 
     operator fun div(that: Momentum) = Mass
 
+    operator fun div(that: Viscosity) = MomentOfInertia
+
     operator fun div(that: Mass) = Momentum
+
+    operator fun div(that: MomentOfInertia) = Viscosity
 }

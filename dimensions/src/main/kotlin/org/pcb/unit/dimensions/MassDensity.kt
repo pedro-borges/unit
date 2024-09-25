@@ -17,6 +17,8 @@ object MassDensity : Dimension
 
     operator fun times(that: SpecificEnergy) = EnergyDensity
 
+    operator fun times(that: Acceleration) = EnergyDensityGradient
+
     operator fun div(that: LinearDensity) = FuelEfficiency
 
     operator fun div(that: FuelEfficiency) = LinearDensity

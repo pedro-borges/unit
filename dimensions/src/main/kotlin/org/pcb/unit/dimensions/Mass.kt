@@ -10,6 +10,8 @@ object Mass : Dimension
 
     operator fun div(that: Mass) = Scalar
 
+    operator fun div(that: Viscosity) = Absement
+
     operator fun times(that: Momentum) = AngularMomentum
 
     operator fun div(that: AreaDensity) = Area
@@ -49,6 +51,8 @@ object Mass : Dimension
     operator fun times(that: Molality) = Substance
 
     operator fun div(that: MassFlowRate) = Time
+
+    operator fun div(that: Absement) = Viscosity
 
     operator fun div(that: MassDensity) = Volume
     operator fun times(that: SpecificVolume) = Volume

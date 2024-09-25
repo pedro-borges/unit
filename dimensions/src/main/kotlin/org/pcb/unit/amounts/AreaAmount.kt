@@ -152,6 +152,21 @@ open class AreaAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> ElectricCharge
+
+    @JvmName("timesElectricDisplacementField")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        ElectricChargeAmount(amount = amount * that.amount
+                                      / convert(that.distance to distance,
+                                                that.distance to distance),
+                             unit = U2(that.electricCurrent, that.time))
+
+    operator fun <I : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        ElectricChargeAmount(amount = amount * that.amount,
+                             unit = U2(that.electricCurrent, that.time))
+
+    // endregion
+
     // region -> ElectricCurrent
 
     @JvmName("timesElectricCurrentDensity")
@@ -247,6 +262,14 @@ open class AreaAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> MagneticDipoleMoment
+
+    operator fun <I : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<I>) =
+        MagneticDipoleMomentAmount(amount = amount * that.amount,
+                                   unit = U2(distance, that.electricCurrent))
+
+    // endregion
+
     // region -> MagneticFlux
 
     operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: MagneticFluxDensityAmount<I, M, T>) =
@@ -278,6 +301,20 @@ open class AreaAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> Momentum
+
+    @JvmName("timesViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ViscosityAmount<L, M, T>) =
+        MomentumAmount(amount = amount * that.amount
+                                / convert(that.distance to distance),
+                       unit = U2(distance, that.mass) to that.time)
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ViscosityAmount<L, M, T>) =
+        MomentumAmount(amount = amount * that.amount,
+                       unit = U2(distance, that.mass) to that.time)
+
+    // endregion
+
     // region -> Pace
 
     @JvmName("divVolumetricFlow")
@@ -299,6 +336,21 @@ open class AreaAmount<L : Unit<Distance>>(
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: IntensityAmount<M, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, that.mass) to that.time)
+
+    // endregion
+
+    // region -> RadiantExposure
+
+    @JvmName("timesEnergyDensityGradient")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityGradientAmount<L, M, T>) =
+        RadiantExposureAmount(amount = amount * that.amount
+                                       / convert(that.distance to distance,
+                                                 that.distance to distance),
+                              unit = that.mass to that.time)
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityGradientAmount<L, M, T>) =
+        RadiantExposureAmount(amount = amount * that.amount,
+                              unit = that.mass to that.time)
 
     // endregion
 

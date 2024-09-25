@@ -72,6 +72,20 @@ open class MassAmount<M : Unit<Mass>>(
 
     // endregion
 
+    // region -> Absement
+
+    @JvmName("divViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        AbsementAmount(amount = amount / that.amount
+                                / convert(that.mass to mass),
+                       unit = U2(that.distance, that.time))
+
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        AbsementAmount(amount = amount / that.amount,
+                       unit = U2(that.distance, that.time))
+
+    // endregion
+
     // region -> AngularMomentum
 
     @JvmName("timesMomentum")
@@ -277,6 +291,14 @@ open class MassAmount<M : Unit<Mass>>(
     operator fun <T : Unit<Time>> div(that: MassFlowRateAmount<M, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = that.time)
+
+    // endregion
+
+    // region -> Viscosity
+
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        ViscosityAmount(amount = amount / that.amount,
+                        unit = mass to U2(that.distance, that.time))
 
     // endregion
 

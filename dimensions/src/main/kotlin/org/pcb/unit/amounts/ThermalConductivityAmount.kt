@@ -137,6 +137,22 @@ open class ThermalConductivityAmount<L : Unit<Distance>, M : Unit<Mass>, K : Uni
 
     // endregion
 
+    // region -> SpecificHeatCapacity
+
+    @JvmName("divViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        SpecificHeatCapacityAmount(amount = amount / that.amount
+                                            / convert(that.mass to mass)
+                                            * convert(that.distance to distance,
+                                                      that.time to time),
+                                   unit = distance to U2(temperature, time))
+
+    operator fun div(that: ViscosityAmount<L, M, T>) =
+        SpecificHeatCapacityAmount(amount = amount / that.amount,
+                                   unit = distance to U2(temperature, time))
+
+    // endregion
+
     // region -> ThermalExpansionCoefficient
 
     @JvmName("divYank")
@@ -152,6 +168,24 @@ open class ThermalConductivityAmount<L : Unit<Distance>, M : Unit<Mass>, K : Uni
     operator fun div(that: YankAmount<L, M, T>) =
         ThermalExpansionCoefficientAmount(amount = amount / that.amount,
                                           unit = NUMERIC to temperature)
+
+    // endregion
+
+    // region -> Viscosity
+
+    @JvmName("divSpecificHeatCapacity")
+    operator fun <L : Unit<Distance>, K : Unit<Temperature>, T : Unit<Time>> div(that: SpecificHeatCapacityAmount<L, K, T>) =
+        ViscosityAmount(amount = amount / that.amount
+                                 / convert(that.distance to distance,
+                                           that.distance to distance)
+                                 * convert(that.temperature to temperature,
+                                           that.time to time,
+                                           that.time to time),
+                        unit = mass to U2(distance, time))
+
+    operator fun div(that: SpecificHeatCapacityAmount<L, K, T>) =
+        ViscosityAmount(amount = amount / that.amount,
+                        unit = mass to U2(distance, time))
 
     // endregion
 

@@ -26,7 +26,11 @@ object ElectricConductance : Dimension
 
     operator fun times(that: ElectricTension) = ElectricCurrent
 
+    operator fun times(that: MagneticFluxDensity) = ElectricDisplacementField
+
     operator fun div(that: Capacitance) = Frequency
+
+    operator fun times(that: ElectricFieldStrength) = MagneticFieldStrength
 
     operator fun times(that: Permeability) = Pace
 

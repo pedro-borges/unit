@@ -13,6 +13,8 @@ object MagneticFlux : Dimension
 
     operator fun div(that: MagneticFlux) = Scalar
 
+    operator fun div(that: ElectricFieldStrength) = Absement
+
     operator fun times(that: ElectricCharge) = Action
 
     operator fun div(that: MagneticFluxDensity) = Area
@@ -22,6 +24,8 @@ object MagneticFlux : Dimension
 
     operator fun div(that: Inductance) = ElectricCurrent
 
+    operator fun div(that: Absement) = ElectricFieldStrength
+
     operator fun div(that: ElectricCharge) = ElectricResistance
 
     operator fun div(that: Time) = ElectricTension
@@ -29,10 +33,14 @@ object MagneticFlux : Dimension
 
     operator fun times(that: ElectricCurrent) = Energy
 
+    operator fun times(that: MagneticFieldStrength) = Force
+
     operator fun div(that: ElectricCurrent) = Inductance
 
     operator fun div(that: Area) = MagneticFluxDensity
     operator fun times(that: FuelEfficiency) = MagneticFluxDensity
+
+    operator fun times(that: ElectricDisplacementField) = MassFlowRate
 
     operator fun times(that: ElectricCurrentDensity) = RadiantExposure
 

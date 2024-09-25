@@ -14,6 +14,8 @@ object ElectricResistance : Dimension
     operator fun div(that: ElectricResistance) = Scalar
     operator fun times(that: ElectricConductance) = Scalar
 
+    operator fun times(that: MagneticFieldStrength) = ElectricFieldStrength
+
     operator fun times(that: ElectricCurrent) = ElectricTension
 
     operator fun div(that: Inductance) = Frequency
@@ -22,6 +24,8 @@ object ElectricResistance : Dimension
     operator fun times(that: Time) = Inductance
 
     operator fun times(that: ElectricCharge) = MagneticFlux
+
+    operator fun times(that: ElectricDisplacementField) = MagneticFluxDensity
 
     operator fun times(that: Permittivity) = Pace
 

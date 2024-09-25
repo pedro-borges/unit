@@ -23,6 +23,8 @@ object Frequency : Dimension
     operator fun div(that: Molarity) = CatalyticEfficiency
     operator fun times(that: MolarVolume) = CatalyticEfficiency
 
+    operator fun times(that: Snap) = Crackle
+
     operator fun times(that: Debt) = Currency
 
     operator fun times(that: Absement) = Distance
@@ -33,11 +35,15 @@ object Frequency : Dimension
 
     operator fun times(that: ElectricCharge) = ElectricCurrent
 
+    operator fun times(that: ElectricDisplacementField) = ElectricCurrentDensity
+
     operator fun times(that: Inductance) = ElectricResistance
 
     operator fun times(that: MagneticFlux) = ElectricTension
 
     operator fun times(that: Action) = Energy
+
+    operator fun times(that: Viscosity) = EnergyDensity
 
     operator fun times(that: Momentum) = Force
 
@@ -54,6 +60,8 @@ object Frequency : Dimension
     operator fun div(that: CatalyticEfficiency) = Molarity
 
     operator fun div(that: Acceleration) = Pace
+
+    operator fun times(that: Crackle) = Pop
 
     operator fun times(that: Energy) = Power
 
@@ -73,6 +81,8 @@ object Frequency : Dimension
 
     operator fun div(that: SpacialFrequency) = Speed
     operator fun times(that: Distance) = Speed
+
+    operator fun times(that: LinearDensity) = Viscosity
 
     operator fun times(that: Volume) = VolumetricFlow
 

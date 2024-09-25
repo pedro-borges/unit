@@ -13,6 +13,8 @@ object MolarEnergy : Dimension
 
     operator fun div(that: MolarEnergy) = Scalar
 
+    operator fun div(that: Viscosity) = CatalyticEfficiency
+
     operator fun times(that: Substance) = Energy
 
     operator fun div(that: MolarVolume) = EnergyDensity
@@ -31,4 +33,6 @@ object MolarEnergy : Dimension
     operator fun times(that: Molality) = SpecificEnergy
 
     operator fun div(that: MolarHeatCapacity) = Temperature
+
+    operator fun div(that: CatalyticEfficiency) = Viscosity
 }

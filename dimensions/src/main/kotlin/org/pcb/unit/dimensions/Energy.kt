@@ -25,6 +25,10 @@ object Energy : Dimension
 
     operator fun div(that: MagneticFlux) = ElectricCurrent
 
+    operator fun div(that: ElectricFieldStrength) = ElectricDipoleMoment
+
+    operator fun div(that: ElectricDipoleMoment) = ElectricFieldStrength
+
     operator fun div(that: ElectricCharge) = ElectricTension
 
     operator fun div(that: Volume) = EnergyDensity
@@ -37,7 +41,11 @@ object Energy : Dimension
     operator fun div(that: Temperature) = HeatCapacity
     operator fun times(that: ThermalExpansionCoefficient) = HeatCapacity
 
+    operator fun div(that: MagneticFluxDensity) = MagneticDipoleMoment
+
     operator fun div(that: ElectricCurrent) = MagneticFlux
+
+    operator fun div(that: MagneticDipoleMoment) = MagneticFluxDensity
 
     operator fun div(that: SpecificEnergy) = Mass
 
@@ -62,7 +70,11 @@ object Energy : Dimension
 
     operator fun div(that: Power) = Time
 
+    operator fun div(that: VolumetricFlow) = Viscosity
+
     operator fun div(that: EnergyDensity) = Volume
+
+    operator fun div(that: Viscosity) = VolumetricFlow
 
     operator fun div(that: Absement) = Yank
 }

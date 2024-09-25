@@ -22,6 +22,8 @@ object Permittivity : Dimension
     operator fun div(that: Time) = ElectricConductivity
     operator fun times(that: Frequency) = ElectricConductivity
 
+    operator fun times(that: ElectricFieldStrength) = ElectricDisplacementField
+
     operator fun times(that: CatalyticEfficiency) = MolarConductivity
 
     operator fun div(that: ElectricConductance) = Pace

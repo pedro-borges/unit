@@ -16,7 +16,11 @@ object MassFlowRate : Dimension
     operator fun div(that: FuelEfficiency) = Action
     operator fun times(that: Area) = Action
 
+    operator fun div(that: Viscosity) = Distance
+
     operator fun div(that: MagneticFluxDensity) = ElectricCharge
+
+    operator fun div(that: MagneticFlux) = ElectricDisplacementField
 
     operator fun div(that: Absement) = EnergyDensity
 
@@ -29,6 +33,8 @@ object MassFlowRate : Dimension
 
     operator fun div(that: Speed) = LinearDensity
     operator fun times(that: Pace) = LinearDensity
+
+    operator fun div(that: ElectricDisplacementField) = MagneticFlux
 
     operator fun div(that: ElectricCharge) = MagneticFluxDensity
 
@@ -52,6 +58,9 @@ object MassFlowRate : Dimension
     operator fun div(that: LinearDensity) = Speed
 
     operator fun div(that: RadiantExposure) = Time
+
+    operator fun div(that: Distance) = Viscosity
+    operator fun times(that: SpacialFrequency) = Viscosity
 
     operator fun div(that: MassDensity) = VolumetricFlow
     operator fun times(that: SpecificVolume) = VolumetricFlow

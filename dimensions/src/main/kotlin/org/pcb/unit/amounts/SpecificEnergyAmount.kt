@@ -360,4 +360,19 @@ open class SpecificEnergyAmount<L : Unit<Distance>, T : Unit<Time>>(
                              unit = distance to time)
 
     // endregion
+
+    // region -> Yank
+
+    @JvmName("timesViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ViscosityAmount<L, M, T>) =
+        YankAmount(amount = amount * that.amount
+                            / convert(that.distance to distance,
+                                      that.time to time),
+                   unit = U2(distance, that.mass) to time)
+
+    operator fun <M : Unit<Mass>> times(that: ViscosityAmount<L, M, T>) =
+        YankAmount(amount = amount * that.amount,
+                   unit = U2(distance, that.mass) to time)
+
+    // endregion
 }

@@ -13,10 +13,15 @@ object ElectricTension : Dimension
 
     operator fun div(that: ElectricTension) = Scalar
 
+    operator fun div(that: ElectricFieldStrength) = Distance
+
     operator fun times(that: Capacitance) = ElectricCharge
 
     operator fun div(that: ElectricResistance) = ElectricCurrent
     operator fun times(that: ElectricConductance) = ElectricCurrent
+
+    operator fun div(that: Distance) = ElectricFieldStrength
+    operator fun times(that: SpacialFrequency) = ElectricFieldStrength
 
     operator fun div(that: ElectricCurrent) = ElectricResistance
 
@@ -26,8 +31,14 @@ object ElectricTension : Dimension
 
     operator fun times(that: ElectricCurrentDensity) = Intensity
 
+    operator fun times(that: ElectricConductivity) = MagneticFieldStrength
+
     operator fun div(that: Frequency) = MagneticFlux
     operator fun times(that: Time) = MagneticFlux
 
     operator fun times(that: ElectricCurrent) = Power
+
+    operator fun times(that: ElectricDisplacementField) = RadiantExposure
+
+    operator fun times(that: MagneticFieldStrength) = Yank
 }

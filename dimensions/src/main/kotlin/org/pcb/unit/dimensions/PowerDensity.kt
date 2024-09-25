@@ -14,8 +14,15 @@ object PowerDensity : Dimension
 
     operator fun div(that: Jerk) = AreaDensity
 
+    operator fun div(that: ElectricFieldStrength) = ElectricCurrentDensity
+
+    operator fun div(that: ElectricCurrentDensity) = ElectricFieldStrength
+
     operator fun div(that: Frequency) = EnergyDensity
     operator fun times(that: Time) = EnergyDensity
+
+    operator fun div(that: Speed) = EnergyDensityGradient
+    operator fun times(that: Pace) = EnergyDensityGradient
 
     operator fun div(that: EnergyDensity) = Frequency
 
@@ -35,6 +42,8 @@ object PowerDensity : Dimension
     operator fun div(that: MolarEnergy) = ReactionRate
 
     operator fun div(that: Intensity) = SpacialFrequency
+
+    operator fun div(that: EnergyDensityGradient) = Speed
 
     operator fun div(that: FuelEfficiency) = Yank
     operator fun times(that: Area) = Yank

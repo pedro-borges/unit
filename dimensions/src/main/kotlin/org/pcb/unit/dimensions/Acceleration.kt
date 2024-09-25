@@ -13,10 +13,15 @@ object Acceleration : Dimension
 
     operator fun times(that: AreaDensity) = EnergyDensity
 
+    operator fun div(that: SpecificVolume) = EnergyDensityGradient
+    operator fun times(that: MassDensity) = EnergyDensityGradient
+
     operator fun times(that: Mass) = Force
 
     operator fun div(that: Speed) = Frequency
     operator fun times(that: Pace) = Frequency
+
+    operator fun times(that: Viscosity) = Intensity
 
     operator fun div(that: Time) = Jerk
     operator fun times(that: Frequency) = Jerk
@@ -31,6 +36,8 @@ object Acceleration : Dimension
     operator fun times(that: Distance) = SpecificEnergy
 
     operator fun div(that: TemperatureGradient) = SpecificHeatCapacity
+
+    operator fun div(that: EnergyDensityGradient) = SpecificVolume
 
     operator fun div(that: Frequency) = Speed
     operator fun times(that: Time) = Speed

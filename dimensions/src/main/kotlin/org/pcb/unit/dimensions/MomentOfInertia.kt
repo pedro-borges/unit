@@ -16,6 +16,8 @@ object MomentOfInertia : Dimension
     operator fun div(that: Time) = Action
     operator fun times(that: Frequency) = Action
 
+    operator fun times(that: Viscosity) = AngularMomentum
+
     operator fun div(that: Mass) = Area
 
     operator fun div(that: Volume) = LinearDensity

@@ -10,6 +10,7 @@ import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.EnergyDensity
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
@@ -130,6 +131,58 @@ open class EnergyDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
 
     // endregion
 
+    // region -> Distance
+
+    @JvmName("divEnergyDensityGradient")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyDensityGradientAmount<L, M, T>) =
+        DistanceAmount(amount = amount / that.amount
+                                / convert(that.mass to mass)
+                                * convert(that.distance to distance,
+                                          that.distance to distance,
+                                          that.time to time,
+                                          that.time to time),
+                       unit = distance)
+
+    operator fun div(that: EnergyDensityGradientAmount<L, M, T>) =
+        DistanceAmount(amount = amount / that.amount,
+                       unit = distance)
+
+    // endregion
+
+    // region -> ElectricDisplacementField
+
+    @JvmName("divElectricFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        ElectricDisplacementFieldAmount(amount = amount / that.amount
+                                                 / convert(that.distance to distance,
+                                                           that.mass to mass)
+                                                 * convert(that.time to time,
+                                                           that.time to time,
+                                                           that.time to time),
+                                        unit = U2(that.electricCurrent, time) to distance)
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        ElectricDisplacementFieldAmount(amount = amount / that.amount,
+                                        unit = U2(that.electricCurrent, time) to distance)
+
+    // endregion
+
+    // region -> ElectricFieldStrength
+
+    @JvmName("divElectricDisplacementField")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        ElectricFieldStrengthAmount(amount = amount / that.amount
+                                             / convert(that.time to time)
+                                             * convert(that.distance to distance,
+                                                       that.distance to distance),
+                                    unit = U2(distance, mass) to U2(that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        ElectricFieldStrengthAmount(amount = amount / that.amount,
+                                    unit = U2(distance, mass) to U2(that.electricCurrent, time))
+
+    // endregion
+
     // region -> Energy
 
     @JvmName("timesVolume")
@@ -143,6 +196,30 @@ open class EnergyDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
     operator fun times(that: VolumeAmount<L>) =
         EnergyAmount(amount = amount * that.amount,
                      unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> EnergyDensityGradient
+
+    @JvmName("divDistance")
+    operator fun <L : Unit<Distance>> div(that: DistanceAmount<L>) =
+        EnergyDensityGradientAmount(amount = amount / that.amount
+                                             / convert(that.distance to distance),
+                                    unit = mass to U2(distance, time))
+
+    operator fun div(that: DistanceAmount<L>) =
+        EnergyDensityGradientAmount(amount = amount / that.amount,
+                                    unit = mass to U2(distance, time))
+
+    @JvmName("timesSpacialFrequency")
+    operator fun <L : Unit<Distance>> times(that: SpacialFrequencyAmount<L>) =
+        EnergyDensityGradientAmount(amount = amount * that.amount
+                                             / convert(that.distance to distance),
+                                    unit = mass to U2(distance, time))
+
+    operator fun times(that: SpacialFrequencyAmount<L>) =
+        EnergyDensityGradientAmount(amount = amount * that.amount,
+                                    unit = mass to U2(distance, time))
 
     // endregion
 
@@ -169,6 +246,22 @@ open class EnergyDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
     operator fun div(that: FuelEfficiencyAmount<L>) =
         ForceAmount(amount = amount / that.amount,
                     unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> Frequency
+
+    @JvmName("divViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        FrequencyAmount(amount = amount / that.amount
+                                 / convert(that.mass to mass)
+                                 * convert(that.distance to distance,
+                                           that.time to time),
+                        unit = NUMERIC to time)
+
+    operator fun div(that: ViscosityAmount<L, M, T>) =
+        FrequencyAmount(amount = amount / that.amount,
+                        unit = NUMERIC to time)
 
     // endregion
 
@@ -212,6 +305,36 @@ open class EnergyDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
     operator fun times(that: SpeedAmount<L, T>) =
         IntensityAmount(amount = amount * that.amount,
                         unit = mass to time)
+
+    // endregion
+
+    // region -> MagneticFieldStrength
+
+    @JvmName("divMagneticFluxDensity")
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: MagneticFluxDensityAmount<I, M, T>) =
+        MagneticFieldStrengthAmount(amount = amount / that.amount
+                                             / convert(that.mass to mass)
+                                             * convert(that.time to time,
+                                                       that.time to time),
+                                    unit = that.electricCurrent to distance)
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: MagneticFluxDensityAmount<I, M, T>) =
+        MagneticFieldStrengthAmount(amount = amount / that.amount,
+                                    unit = that.electricCurrent to distance)
+
+    // endregion
+
+    // region -> MagneticFluxDensity
+
+    @JvmName("divMagneticFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: MagneticFieldStrengthAmount<L, I>) =
+        MagneticFluxDensityAmount(amount = amount / that.amount
+                                           * convert(that.distance to distance),
+                                  unit = mass to U2(that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: MagneticFieldStrengthAmount<L, I>) =
+        MagneticFluxDensityAmount(amount = amount / that.amount,
+                                  unit = mass to U2(that.electricCurrent, time))
 
     // endregion
 
@@ -436,6 +559,30 @@ open class EnergyDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
     operator fun div(that: PowerDensityAmount<L, M, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = time)
+
+    // endregion
+
+    // region -> Viscosity
+
+    @JvmName("divFrequency")
+    operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
+        ViscosityAmount(amount = amount / that.amount
+                                 * convert(that.time to time),
+                        unit = mass to U2(distance, time))
+
+    operator fun div(that: FrequencyAmount<T>) =
+        ViscosityAmount(amount = amount / that.amount,
+                        unit = mass to U2(distance, time))
+
+    @JvmName("timesTime")
+    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
+        ViscosityAmount(amount = amount * that.amount
+                                 * convert(that.time to time),
+                        unit = mass to U2(distance, time))
+
+    operator fun times(that: TimeAmount<T>) =
+        ViscosityAmount(amount = amount * that.amount,
+                        unit = mass to U2(distance, time))
 
     // endregion
 }

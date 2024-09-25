@@ -20,6 +20,8 @@ object VolumetricFlow : Dimension
 
     operator fun div(that: Substance) = CatalyticEfficiency
 
+    operator fun times(that: Viscosity) = Energy
+
     operator fun div(that: Volume) = Frequency
 
     operator fun div(that: SpecificVolume) = MassFlowRate
@@ -40,4 +42,6 @@ object VolumetricFlow : Dimension
 
     operator fun div(that: Frequency) = Volume
     operator fun times(that: Time) = Volume
+
+    operator fun times(that: EnergyDensityGradient) = Yank
 }

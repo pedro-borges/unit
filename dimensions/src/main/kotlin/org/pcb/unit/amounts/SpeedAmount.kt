@@ -182,6 +182,21 @@ open class SpeedAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> ElectricFieldStrength
+
+    @JvmName("timesMagneticFluxDensity")
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: MagneticFluxDensityAmount<I, M, T>) =
+        ElectricFieldStrengthAmount(amount = amount * that.amount
+                                             / convert(that.time to time,
+                                                       that.time to time),
+                                    unit = U2(distance, that.mass) to U2(that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>> times(that: MagneticFluxDensityAmount<I, M, T>) =
+        ElectricFieldStrengthAmount(amount = amount * that.amount,
+                                    unit = U2(distance, that.mass) to U2(that.electricCurrent, time))
+
+    // endregion
+
     // region -> ElectricResistance
 
     @JvmName("timesPermeability")
@@ -284,6 +299,37 @@ open class SpeedAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> MagneticDipoleMoment
+
+    @JvmName("timesElectricDipoleMoment")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricDipoleMomentAmount<L, I, T>) =
+        MagneticDipoleMomentAmount(amount = amount * that.amount
+                                            * convert(that.distance to distance,
+                                                      that.time to time),
+                                   unit = U2(distance, that.electricCurrent))
+
+    operator fun <I : Unit<ElectricCurrent>> times(that: ElectricDipoleMomentAmount<L, I, T>) =
+        MagneticDipoleMomentAmount(amount = amount * that.amount,
+                                   unit = U2(distance, that.electricCurrent))
+
+    // endregion
+
+    // region -> MagneticFieldStrength
+
+    @JvmName("timesElectricDisplacementField")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        MagneticFieldStrengthAmount(amount = amount * that.amount
+                                             * convert(that.time to time)
+                                             / convert(that.distance to distance,
+                                                       that.distance to distance),
+                                    unit = that.electricCurrent to distance)
+
+    operator fun <I : Unit<ElectricCurrent>> times(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        MagneticFieldStrengthAmount(amount = amount * that.amount,
+                                    unit = that.electricCurrent to distance)
+
+    // endregion
+
     // region -> MassFlowRate
 
     @JvmName("timesLinearDensity")
@@ -339,6 +385,38 @@ open class SpeedAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> PowerDensity
+
+    @JvmName("timesEnergyDensityGradient")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityGradientAmount<L, M, T>) =
+        PowerDensityAmount(amount = amount * that.amount
+                                    / convert(that.distance to distance,
+                                              that.distance to distance,
+                                              that.time to time,
+                                              that.time to time),
+                           unit = that.mass to U2(distance, time))
+
+    operator fun <M : Unit<Mass>> times(that: EnergyDensityGradientAmount<L, M, T>) =
+        PowerDensityAmount(amount = amount * that.amount,
+                           unit = that.mass to U2(distance, time))
+
+    // endregion
+
+    // region -> RadiantExposure
+
+    @JvmName("timesViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ViscosityAmount<L, M, T>) =
+        RadiantExposureAmount(amount = amount * that.amount
+                                       / convert(that.distance to distance,
+                                                 that.time to time),
+                              unit = that.mass to time)
+
+    operator fun <M : Unit<Mass>> times(that: ViscosityAmount<L, M, T>) =
+        RadiantExposureAmount(amount = amount * that.amount,
+                              unit = that.mass to time)
+
+    // endregion
+
     // region -> SpecificEnergy
 
     @JvmName("divPace")
@@ -378,6 +456,21 @@ open class SpeedAmount<L : Unit<Distance>, T : Unit<Time>>(
     operator fun div(that: AccelerationAmount<L, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = time)
+
+    // endregion
+
+    // region -> Viscosity
+
+    @JvmName("timesAreaDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: AreaDensityAmount<L, M>) =
+        ViscosityAmount(amount = amount * that.amount
+                                 / convert(that.distance to distance,
+                                           that.distance to distance),
+                        unit = that.mass to U2(distance, time))
+
+    operator fun <M : Unit<Mass>> times(that: AreaDensityAmount<L, M>) =
+        ViscosityAmount(amount = amount * that.amount,
+                        unit = that.mass to U2(distance, time))
 
     // endregion
 

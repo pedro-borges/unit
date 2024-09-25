@@ -106,6 +106,34 @@ open class AccelerationAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> EnergyDensityGradient
+
+    @JvmName("timesMassDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> times(that: MassDensityAmount<L, M>) =
+        EnergyDensityGradientAmount(amount = amount * that.amount
+                                             / convert(that.distance to distance,
+                                                       that.distance to distance,
+                                                       that.distance to distance),
+                                    unit = that.mass to U2(distance, time))
+
+    operator fun <M : Unit<Mass>> times(that: MassDensityAmount<L, M>) =
+        EnergyDensityGradientAmount(amount = amount * that.amount,
+                                    unit = that.mass to U2(distance, time))
+
+    @JvmName("divSpecificVolume")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: SpecificVolumeAmount<L, M>) =
+        EnergyDensityGradientAmount(amount = amount / that.amount
+                                             / convert(that.distance to distance,
+                                                       that.distance to distance,
+                                                       that.distance to distance),
+                                    unit = that.mass to U2(distance, time))
+
+    operator fun <M : Unit<Mass>> div(that: SpecificVolumeAmount<L, M>) =
+        EnergyDensityGradientAmount(amount = amount / that.amount,
+                                    unit = that.mass to U2(distance, time))
+
+    // endregion
+
     // region -> Force
 
     operator fun <M : Unit<Mass>> times(that: MassAmount<M>) =
@@ -137,6 +165,21 @@ open class AccelerationAmount<L : Unit<Distance>, T : Unit<Time>>(
     operator fun div(that: SpeedAmount<L, T>) =
         FrequencyAmount(amount = amount / that.amount,
                         unit = NUMERIC to time)
+
+    // endregion
+
+    // region -> Intensity
+
+    @JvmName("timesViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ViscosityAmount<L, M, T>) =
+        IntensityAmount(amount = amount * that.amount
+                                 / convert(that.distance to distance,
+                                           that.time to time),
+                        unit = that.mass to time)
+
+    operator fun <M : Unit<Mass>> times(that: ViscosityAmount<L, M, T>) =
+        IntensityAmount(amount = amount * that.amount,
+                        unit = that.mass to time)
 
     // endregion
 
@@ -245,6 +288,23 @@ open class AccelerationAmount<L : Unit<Distance>, T : Unit<Time>>(
     operator fun <K : Unit<Temperature>> div(that: TemperatureGradientAmount<L, K>) =
         SpecificHeatCapacityAmount(amount = amount / that.amount,
                                    unit = distance to U2(that.temperature, time))
+
+    // endregion
+
+    // region -> SpecificVolume
+
+    @JvmName("divEnergyDensityGradient")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyDensityGradientAmount<L, M, T>) =
+        SpecificVolumeAmount(amount = amount / that.amount
+                                      * convert(that.distance to distance,
+                                                that.distance to distance,
+                                                that.time to time,
+                                                that.time to time),
+                             unit = distance to that.mass)
+
+    operator fun <M : Unit<Mass>> div(that: EnergyDensityGradientAmount<L, M, T>) =
+        SpecificVolumeAmount(amount = amount / that.amount,
+                             unit = distance to that.mass)
 
     // endregion
 

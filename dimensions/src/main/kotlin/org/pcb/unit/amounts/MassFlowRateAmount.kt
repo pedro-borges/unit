@@ -117,6 +117,21 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Distance
+
+    @JvmName("divViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        DistanceAmount(amount = amount / that.amount
+                                / convert(that.mass to mass)
+                                * convert(that.time to time),
+                       unit = that.distance)
+
+    operator fun <L : Unit<Distance>> div(that: ViscosityAmount<L, M, T>) =
+        DistanceAmount(amount = amount / that.amount,
+                       unit = that.distance)
+
+    // endregion
+
     // region -> ElectricCharge
 
     @JvmName("divMagneticFluxDensity")
@@ -130,6 +145,22 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
     operator fun <I : Unit<ElectricCurrent>> div(that: MagneticFluxDensityAmount<I, M, T>) =
         ElectricChargeAmount(amount = amount / that.amount,
                              unit = U2(that.electricCurrent, time))
+
+    // endregion
+
+    // region -> ElectricDisplacementField
+
+    @JvmName("divMagneticFlux")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: MagneticFluxAmount<L, I, M, T>) =
+        ElectricDisplacementFieldAmount(amount = amount / that.amount
+                                                 / convert(that.mass to mass)
+                                                 * convert(that.time to time,
+                                                           that.time to time),
+                                        unit = U2(that.electricCurrent, time) to that.distance)
+
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: MagneticFluxAmount<L, I, M, T>) =
+        ElectricDisplacementFieldAmount(amount = amount / that.amount,
+                                        unit = U2(that.electricCurrent, time) to that.distance)
 
     // endregion
 
@@ -221,6 +252,20 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
     operator fun <L : Unit<Distance>> div(that: SpeedAmount<L, T>) =
         LinearDensityAmount(amount = amount / that.amount,
                             unit = mass to that.distance)
+
+    // endregion
+
+    // region -> MagneticFlux
+
+    @JvmName("divElectricDisplacementField")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        MagneticFluxAmount(amount = amount / that.amount
+                                    / convert(that.time to time),
+                           unit = U2(that.distance, mass) to U2(that.electricCurrent, time))
+
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        MagneticFluxAmount(amount = amount / that.amount,
+                           unit = U2(that.distance, mass) to U2(that.electricCurrent, time))
 
     // endregion
 
@@ -385,6 +430,18 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: RadiantExposureAmount<M, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = time)
+
+    // endregion
+
+    // region -> Viscosity
+
+    operator fun <L : Unit<Distance>> div(that: DistanceAmount<L>) =
+        ViscosityAmount(amount = amount / that.amount,
+                        unit = mass to U2(that.distance, time))
+
+    operator fun <L : Unit<Distance>> times(that: SpacialFrequencyAmount<L>) =
+        ViscosityAmount(amount = amount * that.amount,
+                        unit = mass to U2(that.distance, time))
 
     // endregion
 

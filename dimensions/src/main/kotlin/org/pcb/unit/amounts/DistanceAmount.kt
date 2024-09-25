@@ -3,6 +3,7 @@ package org.pcb.unit.amounts
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
+import org.pcb.unit.U3
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
@@ -193,6 +194,42 @@ open class DistanceAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> ElectricCurrent
+
+    @JvmName("timesMagneticFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> times(that: MagneticFieldStrengthAmount<L, I>) =
+        ElectricCurrentAmount(amount = amount * that.amount
+                                       / convert(that.distance to distance),
+                              unit = that.electricCurrent)
+
+    operator fun <I : Unit<ElectricCurrent>> times(that: MagneticFieldStrengthAmount<L, I>) =
+        ElectricCurrentAmount(amount = amount * that.amount,
+                              unit = that.electricCurrent)
+
+    // endregion
+
+    // region -> ElectricDipoleMoment
+
+    operator fun <I : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricChargeAmount<I, T>) =
+        ElectricDipoleMomentAmount(amount = amount * that.amount,
+                                   unit = U3(distance, that.electricCurrent, that.time))
+
+    // endregion
+
+    // region -> ElectricTension
+
+    @JvmName("timesElectricFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        ElectricTensionAmount(amount = amount * that.amount
+                                       * convert(that.distance to distance),
+                              unit = U2(distance, that.mass) to U2(that.electricCurrent, that.time))
+
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        ElectricTensionAmount(amount = amount * that.amount,
+                              unit = U2(distance, that.mass) to U2(that.electricCurrent, that.time))
+
+    // endregion
+
     // region -> Energy
 
     @JvmName("timesForce")
@@ -204,6 +241,21 @@ open class DistanceAmount<L : Unit<Distance>>(
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<L, M, T>) =
         EnergyAmount(amount = amount * that.amount,
                      unit = U2(distance, that.mass) to that.time)
+
+    // endregion
+
+    // region -> EnergyDensity
+
+    @JvmName("timesEnergyDensityGradient")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityGradientAmount<L, M, T>) =
+        EnergyDensityAmount(amount = amount * that.amount
+                                     / convert(that.distance to distance,
+                                               that.distance to distance),
+                            unit = that.mass to U2(distance, that.time))
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityGradientAmount<L, M, T>) =
+        EnergyDensityAmount(amount = amount * that.amount,
+                            unit = that.mass to U2(distance, that.time))
 
     // endregion
 
@@ -288,6 +340,21 @@ open class DistanceAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> MagneticFieldStrength
+
+    @JvmName("timesElectricCurrentDensity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> times(that: ElectricCurrentDensityAmount<L, I>) =
+        MagneticFieldStrengthAmount(amount = amount * that.amount
+                                             / convert(that.distance to distance,
+                                                       that.distance to distance),
+                                    unit = that.electricCurrent to distance)
+
+    operator fun <I : Unit<ElectricCurrent>> times(that: ElectricCurrentDensityAmount<L, I>) =
+        MagneticFieldStrengthAmount(amount = amount * that.amount,
+                                    unit = that.electricCurrent to distance)
+
+    // endregion
+
     // region -> Mass
 
     @JvmName("timesLinearDensity")
@@ -299,6 +366,20 @@ open class DistanceAmount<L : Unit<Distance>>(
     operator fun <M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
         MassAmount(amount = amount * that.amount,
                    unit = that.mass)
+
+    // endregion
+
+    // region -> MassFlowRate
+
+    @JvmName("timesViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ViscosityAmount<L, M, T>) =
+        MassFlowRateAmount(amount = amount * that.amount
+                                    / convert(that.distance to distance),
+                           unit = that.mass to that.time)
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ViscosityAmount<L, M, T>) =
+        MassFlowRateAmount(amount = amount * that.amount,
+                           unit = that.mass to that.time)
 
     // endregion
 

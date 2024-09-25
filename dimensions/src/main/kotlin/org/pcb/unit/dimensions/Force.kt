@@ -24,11 +24,17 @@ object Force : Dimension
 
     operator fun div(that: RadiantExposure) = Distance
 
+    operator fun div(that: ElectricFieldStrength) = ElectricCharge
+
+    operator fun div(that: ElectricCharge) = ElectricFieldStrength
+
     operator fun div(that: SpacialFrequency) = Energy
     operator fun times(that: Distance) = Energy
 
     operator fun div(that: Area) = EnergyDensity
     operator fun times(that: FuelEfficiency) = EnergyDensity
+
+    operator fun div(that: Volume) = EnergyDensityGradient
 
     operator fun div(that: Momentum) = Frequency
 
@@ -37,6 +43,10 @@ object Force : Dimension
     operator fun div(that: Absement) = Intensity
 
     operator fun div(that: SpecificEnergy) = LinearDensity
+
+    operator fun div(that: MagneticFlux) = MagneticFieldStrength
+
+    operator fun div(that: MagneticFieldStrength) = MagneticFlux
 
     operator fun div(that: Acceleration) = Mass
 
@@ -63,6 +73,8 @@ object Force : Dimension
     operator fun div(that: HeatCapacity) = TemperatureGradient
 
     operator fun div(that: Yank) = Time
+
+    operator fun div(that: EnergyDensityGradient) = Volume
 
     operator fun div(that: Time) = Yank
     operator fun times(that: Frequency) = Yank

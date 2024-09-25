@@ -147,6 +147,20 @@ open class MassDensityAmount<L : Unit<Distance>, M : Unit<Mass>>(
 
     // endregion
 
+    // region -> EnergyDensityGradient
+
+    @JvmName("timesAcceleration")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AccelerationAmount<L, T>) =
+        EnergyDensityGradientAmount(amount = amount * that.amount
+                                             * convert(that.distance to distance),
+                                    unit = mass to U2(distance, that.time))
+
+    operator fun <T : Unit<Time>> times(that: AccelerationAmount<L, T>) =
+        EnergyDensityGradientAmount(amount = amount * that.amount,
+                                    unit = mass to U2(distance, that.time))
+
+    // endregion
+
     // region -> FuelEfficiency
 
     @JvmName("divLinearDensity")

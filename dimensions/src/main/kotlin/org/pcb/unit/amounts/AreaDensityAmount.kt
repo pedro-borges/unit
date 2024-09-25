@@ -239,6 +239,21 @@ open class AreaDensityAmount<L : Unit<Distance>, M : Unit<Mass>>(
 
     // endregion
 
+    // region -> Pace
+
+    @JvmName("divViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        PaceAmount(amount = amount / that.amount
+                            / convert(that.mass to mass)
+                            * convert(that.distance to distance),
+                   unit = that.time to distance)
+
+    operator fun <T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        PaceAmount(amount = amount / that.amount,
+                   unit = that.time to distance)
+
+    // endregion
+
     // region -> PowerDensity
 
     @JvmName("timesJerk")
@@ -280,6 +295,30 @@ open class AreaDensityAmount<L : Unit<Distance>, M : Unit<Mass>>(
     operator fun div(that: LinearDensityAmount<L, M>) =
         SpacialFrequencyAmount(amount = amount / that.amount,
                                unit = NUMERIC to distance)
+
+    // endregion
+
+    // region -> Viscosity
+
+    @JvmName("divPace")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<L, T>) =
+        ViscosityAmount(amount = amount / that.amount
+                                 * convert(that.distance to distance),
+                        unit = mass to U2(distance, that.time))
+
+    operator fun <T : Unit<Time>> div(that: PaceAmount<L, T>) =
+        ViscosityAmount(amount = amount / that.amount,
+                        unit = mass to U2(distance, that.time))
+
+    @JvmName("timesSpeed")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
+        ViscosityAmount(amount = amount * that.amount
+                                 * convert(that.distance to distance),
+                        unit = mass to U2(distance, that.time))
+
+    operator fun <T : Unit<Time>> times(that: SpeedAmount<L, T>) =
+        ViscosityAmount(amount = amount * that.amount,
+                        unit = mass to U2(distance, that.time))
 
     // endregion
 }

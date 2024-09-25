@@ -11,9 +11,13 @@ object Intensity : Dimension
 
     operator fun div(that: Intensity) = Scalar
 
+    operator fun div(that: Viscosity) = Acceleration
+
     operator fun div(that: PowerDensity) = Distance
 
     operator fun div(that: ElectricTension) = ElectricCurrentDensity
+
+    operator fun div(that: MagneticFieldStrength) = ElectricFieldStrength
 
     operator fun div(that: ElectricCurrentDensity) = ElectricTension
 
@@ -29,6 +33,8 @@ object Intensity : Dimension
     operator fun div(that: LinearDensity) = Jerk
 
     operator fun div(that: Jerk) = LinearDensity
+
+    operator fun div(that: ElectricFieldStrength) = MagneticFieldStrength
 
     operator fun div(that: FuelEfficiency) = Power
     operator fun times(that: Area) = Power
@@ -46,6 +52,8 @@ object Intensity : Dimension
     operator fun div(that: ThermalConductivity) = TemperatureGradient
 
     operator fun div(that: TemperatureGradient) = ThermalConductivity
+
+    operator fun div(that: Acceleration) = Viscosity
 
     operator fun div(that: SpacialFrequency) = Yank
     operator fun times(that: Distance) = Yank

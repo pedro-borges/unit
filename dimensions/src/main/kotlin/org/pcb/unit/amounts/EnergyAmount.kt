@@ -3,6 +3,7 @@ package org.pcb.unit.amounts
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
+import org.pcb.unit.U3
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Gram.GRAM
 import org.pcb.unit.amounts.base.Meter.METER
@@ -215,6 +216,39 @@ open class EnergyAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> ElectricDipoleMoment
+
+    @JvmName("divElectricFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        ElectricDipoleMomentAmount(amount = amount / that.amount
+                                            / convert(that.distance to distance,
+                                                      that.mass to mass)
+                                            * convert(that.time to time,
+                                                      that.time to time,
+                                                      that.time to time),
+                                   unit = U3(distance, that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        ElectricDipoleMomentAmount(amount = amount / that.amount,
+                                   unit = U3(distance, that.electricCurrent, time))
+
+    // endregion
+
+    // region -> ElectricFieldStrength
+
+    @JvmName("divElectricDipoleMoment")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricDipoleMomentAmount<L, I, T>) =
+        ElectricFieldStrengthAmount(amount = amount / that.amount
+                                             / convert(that.distance to distance,
+                                                       that.time to time),
+                                    unit = U2(distance, mass) to U2(that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: ElectricDipoleMomentAmount<L, I, T>) =
+        ElectricFieldStrengthAmount(amount = amount / that.amount,
+                                    unit = U2(distance, mass) to U2(that.electricCurrent, time))
+
+    // endregion
+
     // region -> ElectricTension
 
     @JvmName("divElectricCharge")
@@ -298,11 +332,42 @@ open class EnergyAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> MagneticDipoleMoment
+
+    @JvmName("divMagneticFluxDensity")
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: MagneticFluxDensityAmount<I, M, T>) =
+        MagneticDipoleMomentAmount(amount = amount / that.amount
+                                            / convert(that.mass to mass)
+                                            * convert(that.time to time,
+                                                      that.time to time),
+                                   unit = U2(distance, that.electricCurrent))
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: MagneticFluxDensityAmount<I, M, T>) =
+        MagneticDipoleMomentAmount(amount = amount / that.amount,
+                                   unit = U2(distance, that.electricCurrent))
+
+    // endregion
+
     // region -> MagneticFlux
 
     operator fun <I : Unit<ElectricCurrent>> div(that: ElectricCurrentAmount<I>) =
         MagneticFluxAmount(amount = amount / that.amount,
                            unit = U2(distance, mass) to U2(that.electricCurrent, time))
+
+    // endregion
+
+    // region -> MagneticFluxDensity
+
+    @JvmName("divMagneticDipoleMoment")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: MagneticDipoleMomentAmount<L, I>) =
+        MagneticFluxDensityAmount(amount = amount / that.amount
+                                           / convert(that.distance to distance,
+                                                     that.distance to distance),
+                                  unit = mass to U2(that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: MagneticDipoleMomentAmount<L, I>) =
+        MagneticFluxDensityAmount(amount = amount / that.amount,
+                                  unit = mass to U2(that.electricCurrent, time))
 
     // endregion
 
@@ -492,6 +557,23 @@ open class EnergyAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Viscosity
+
+    @JvmName("divVolumetricFlow")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: VolumetricFlowAmount<L, T>) =
+        ViscosityAmount(amount = amount / that.amount
+                                 / convert(that.distance to distance,
+                                           that.distance to distance,
+                                           that.distance to distance)
+                                 * convert(that.time to time),
+                        unit = mass to U2(distance, time))
+
+    operator fun div(that: VolumetricFlowAmount<L, T>) =
+        ViscosityAmount(amount = amount / that.amount,
+                        unit = mass to U2(distance, time))
+
+    // endregion
+
     // region -> Volume
 
     @JvmName("divEnergyDensity")
@@ -506,6 +588,22 @@ open class EnergyAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: EnergyDensityAmount<L, M, T>) =
         VolumeAmount(amount = amount / that.amount,
                      unit = distance)
+
+    // endregion
+
+    // region -> VolumetricFlow
+
+    @JvmName("divViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        VolumetricFlowAmount(amount = amount / that.amount
+                                      / convert(that.mass to mass)
+                                      * convert(that.distance to distance,
+                                                that.time to time),
+                             unit = distance to time)
+
+    operator fun div(that: ViscosityAmount<L, M, T>) =
+        VolumetricFlowAmount(amount = amount / that.amount,
+                             unit = distance to time)
 
     // endregion
 

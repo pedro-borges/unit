@@ -179,6 +179,21 @@ open class SpecificHeatCapacityAmount<L : Unit<Distance>, K : Unit<Temperature>,
 
     // endregion
 
+    // region -> ThermalConductivity
+
+    @JvmName("timesViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ViscosityAmount<L, M, T>) =
+        ThermalConductivityAmount(amount = amount * that.amount
+                                           / convert(that.distance to distance,
+                                                     that.time to time),
+                                  unit = U2(distance, that.mass) to U2(temperature, time))
+
+    operator fun <M : Unit<Mass>> times(that: ViscosityAmount<L, M, T>) =
+        ThermalConductivityAmount(amount = amount * that.amount,
+                                  unit = U2(distance, that.mass) to U2(temperature, time))
+
+    // endregion
+
     // region -> ThermalExpansionCoefficient
 
     @JvmName("divSpecificEnergy")

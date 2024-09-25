@@ -19,6 +19,8 @@ object Permeability : Dimension
     operator fun div(that: SpacialFrequency) = Inductance
     operator fun times(that: Distance) = Inductance
 
+    operator fun times(that: MagneticFieldStrength) = MagneticFluxDensity
+
     operator fun div(that: ElectricResistance) = Pace
     operator fun times(that: ElectricConductance) = Pace
 

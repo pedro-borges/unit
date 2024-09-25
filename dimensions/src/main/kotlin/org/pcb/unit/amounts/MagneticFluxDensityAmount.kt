@@ -116,6 +116,121 @@ open class MagneticFluxDensityAmount<I : Unit<ElectricCurrent>, M : Unit<Mass>, 
 
     // endregion
 
+    // region -> ElectricDisplacementField
+
+    @JvmName("timesElectricConductance")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricConductanceAmount<L, I, M, T>) =
+        ElectricDisplacementFieldAmount(amount = amount * that.amount
+                                                 * convert(that.electricCurrent to electricCurrent,
+                                                           that.electricCurrent to electricCurrent,
+                                                           that.time to time,
+                                                           that.time to time,
+                                                           that.time to time)
+                                                 / convert(that.mass to mass),
+                                        unit = U2(electricCurrent, time) to that.distance)
+
+    operator fun <L : Unit<Distance>> times(that: ElectricConductanceAmount<L, I, M, T>) =
+        ElectricDisplacementFieldAmount(amount = amount * that.amount,
+                                        unit = U2(electricCurrent, time) to that.distance)
+
+    @JvmName("divElectricResistance")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricResistanceAmount<L, I, M, T>) =
+        ElectricDisplacementFieldAmount(amount = amount / that.amount
+                                                 / convert(that.mass to mass)
+                                                 * convert(that.electricCurrent to electricCurrent,
+                                                           that.electricCurrent to electricCurrent,
+                                                           that.time to time,
+                                                           that.time to time,
+                                                           that.time to time),
+                                        unit = U2(electricCurrent, time) to that.distance)
+
+    operator fun <L : Unit<Distance>> div(that: ElectricResistanceAmount<L, I, M, T>) =
+        ElectricDisplacementFieldAmount(amount = amount / that.amount,
+                                        unit = U2(electricCurrent, time) to that.distance)
+
+    // endregion
+
+    // region -> ElectricFieldStrength
+
+    @JvmName("divPace")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: PaceAmount<L, T>) =
+        ElectricFieldStrengthAmount(amount = amount / that.amount
+                                             / convert(that.time to time),
+                                    unit = U2(that.distance, mass) to U2(electricCurrent, time))
+
+    operator fun <L : Unit<Distance>> div(that: PaceAmount<L, T>) =
+        ElectricFieldStrengthAmount(amount = amount / that.amount,
+                                    unit = U2(that.distance, mass) to U2(electricCurrent, time))
+
+    @JvmName("timesSpeed")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: SpeedAmount<L, T>) =
+        ElectricFieldStrengthAmount(amount = amount * that.amount
+                                             / convert(that.time to time),
+                                    unit = U2(that.distance, mass) to U2(electricCurrent, time))
+
+    operator fun <L : Unit<Distance>> times(that: SpeedAmount<L, T>) =
+        ElectricFieldStrengthAmount(amount = amount * that.amount,
+                                    unit = U2(that.distance, mass) to U2(electricCurrent, time))
+
+    // endregion
+
+    // region -> ElectricResistance
+
+    @JvmName("divElectricDisplacementField")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        ElectricResistanceAmount(amount = amount / that.amount
+                                          / convert(that.electricCurrent to electricCurrent,
+                                                    that.time to time),
+                                 unit = U2(that.distance, mass) to U2(electricCurrent, time))
+
+    operator fun <L : Unit<Distance>> div(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        ElectricResistanceAmount(amount = amount / that.amount,
+                                 unit = U2(that.distance, mass) to U2(electricCurrent, time))
+
+    // endregion
+
+    // region -> Energy
+
+    @JvmName("timesMagneticDipoleMoment")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> times(that: MagneticDipoleMomentAmount<L, I>) =
+        EnergyAmount(amount = amount * that.amount
+                              * convert(that.electricCurrent to electricCurrent),
+                     unit = U2(that.distance, mass) to time)
+
+    operator fun <L : Unit<Distance>> times(that: MagneticDipoleMomentAmount<L, I>) =
+        EnergyAmount(amount = amount * that.amount,
+                     unit = U2(that.distance, mass) to time)
+
+    // endregion
+
+    // region -> EnergyDensity
+
+    @JvmName("timesMagneticFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> times(that: MagneticFieldStrengthAmount<L, I>) =
+        EnergyDensityAmount(amount = amount * that.amount
+                                     * convert(that.electricCurrent to electricCurrent),
+                            unit = mass to U2(that.distance, time))
+
+    operator fun <L : Unit<Distance>> times(that: MagneticFieldStrengthAmount<L, I>) =
+        EnergyDensityAmount(amount = amount * that.amount,
+                            unit = mass to U2(that.distance, time))
+
+    // endregion
+
+    // region -> EnergyDensityGradient
+
+    @JvmName("timesElectricCurrentDensity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> times(that: ElectricCurrentDensityAmount<L, I>) =
+        EnergyDensityGradientAmount(amount = amount * that.amount
+                                             * convert(that.electricCurrent to electricCurrent),
+                                    unit = mass to U2(that.distance, time))
+
+    operator fun <L : Unit<Distance>> times(that: ElectricCurrentDensityAmount<L, I>) =
+        EnergyDensityGradientAmount(amount = amount * that.amount,
+                                    unit = mass to U2(that.distance, time))
+
+    // endregion
+
     // region -> FuelEfficiency
 
     @JvmName("divMagneticFlux")
@@ -147,6 +262,24 @@ open class MagneticFluxDensityAmount<I : Unit<ElectricCurrent>, M : Unit<Mass>, 
 
     // endregion
 
+    // region -> MagneticFieldStrength
+
+    @JvmName("divPermeability")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: PermeabilityAmount<L, I, M, T>) =
+        MagneticFieldStrengthAmount(amount = amount / that.amount
+                                             / convert(that.mass to mass)
+                                             * convert(that.electricCurrent to electricCurrent,
+                                                       that.electricCurrent to electricCurrent,
+                                                       that.time to time,
+                                                       that.time to time),
+                                    unit = electricCurrent to that.distance)
+
+    operator fun <L : Unit<Distance>> div(that: PermeabilityAmount<L, I, M, T>) =
+        MagneticFieldStrengthAmount(amount = amount / that.amount,
+                                    unit = electricCurrent to that.distance)
+
+    // endregion
+
     // region -> MagneticFlux
 
     operator fun <L : Unit<Distance>> times(that: AreaAmount<L>) =
@@ -171,6 +304,53 @@ open class MagneticFluxDensityAmount<I : Unit<ElectricCurrent>, M : Unit<Mass>, 
     operator fun times(that: ElectricChargeAmount<I, T>) =
         MassFlowRateAmount(amount = amount * that.amount,
                            unit = mass to time)
+
+    // endregion
+
+    // region -> Momentum
+
+    @JvmName("timesElectricDipoleMoment")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricDipoleMomentAmount<L, I, T>) =
+        MomentumAmount(amount = amount * that.amount
+                                * convert(that.electricCurrent to electricCurrent,
+                                          that.time to time),
+                       unit = U2(that.distance, mass) to time)
+
+    operator fun <L : Unit<Distance>> times(that: ElectricDipoleMomentAmount<L, I, T>) =
+        MomentumAmount(amount = amount * that.amount,
+                       unit = U2(that.distance, mass) to time)
+
+    // endregion
+
+    // region -> Pace
+
+    @JvmName("divElectricFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        PaceAmount(amount = amount / that.amount
+                            / convert(that.mass to mass)
+                            * convert(that.electricCurrent to electricCurrent,
+                                      that.time to time,
+                                      that.time to time,
+                                      that.time to time),
+                   unit = time to that.distance)
+
+    operator fun <L : Unit<Distance>> div(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        PaceAmount(amount = amount / that.amount,
+                   unit = time to that.distance)
+
+    // endregion
+
+    // region -> Permeability
+
+    @JvmName("divMagneticFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: MagneticFieldStrengthAmount<L, I>) =
+        PermeabilityAmount(amount = amount / that.amount
+                                    / convert(that.electricCurrent to electricCurrent),
+                           unit = U2(that.distance, mass) to U2(electricCurrent, time))
+
+    operator fun <L : Unit<Distance>> div(that: MagneticFieldStrengthAmount<L, I>) =
+        PermeabilityAmount(amount = amount / that.amount,
+                           unit = U2(that.distance, mass) to U2(electricCurrent, time))
 
     // endregion
 

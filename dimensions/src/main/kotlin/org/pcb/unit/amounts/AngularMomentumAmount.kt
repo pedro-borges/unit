@@ -145,6 +145,22 @@ open class AngularMomentumAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Ti
 
     // endregion
 
+    // region -> MomentOfInertia
+
+    @JvmName("divViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        MomentOfInertiaAmount(amount = amount / that.amount
+                                       / convert(that.mass to mass)
+                                       * convert(that.distance to distance,
+                                                 that.time to time),
+                              unit = U2(distance, mass))
+
+    operator fun div(that: ViscosityAmount<L, M, T>) =
+        MomentOfInertiaAmount(amount = amount / that.amount,
+                              unit = U2(distance, mass))
+
+    // endregion
+
     // region -> Momentum
 
     @JvmName("divMass")
@@ -156,6 +172,22 @@ open class AngularMomentumAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Ti
     operator fun div(that: MassAmount<M>) =
         MomentumAmount(amount = amount / that.amount,
                        unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> Viscosity
+
+    @JvmName("divMomentOfInertia")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>> div(that: MomentOfInertiaAmount<L, M>) =
+        ViscosityAmount(amount = amount / that.amount
+                                 / convert(that.distance to distance,
+                                           that.distance to distance,
+                                           that.mass to mass),
+                        unit = mass to U2(distance, time))
+
+    operator fun div(that: MomentOfInertiaAmount<L, M>) =
+        ViscosityAmount(amount = amount / that.amount,
+                        unit = mass to U2(distance, time))
 
     // endregion
 }

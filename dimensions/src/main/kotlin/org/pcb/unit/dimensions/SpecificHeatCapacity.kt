@@ -24,5 +24,7 @@ object SpecificHeatCapacity : Dimension
     operator fun div(that: ThermalExpansionCoefficient) = SpecificEnergy
     operator fun times(that: Temperature) = SpecificEnergy
 
+    operator fun times(that: Viscosity) = ThermalConductivity
+
     operator fun div(that: SpecificEnergy) = ThermalExpansionCoefficient
 }

@@ -12,6 +12,7 @@ import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.Force
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
@@ -187,6 +188,38 @@ open class ForceAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> ElectricCharge
+
+    @JvmName("divElectricFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        ElectricChargeAmount(amount = amount / that.amount
+                                      / convert(that.distance to distance,
+                                                that.mass to mass)
+                                      * convert(that.time to time,
+                                                that.time to time,
+                                                that.time to time),
+                             unit = U2(that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        ElectricChargeAmount(amount = amount / that.amount,
+                             unit = U2(that.electricCurrent, time))
+
+    // endregion
+
+    // region -> ElectricFieldStrength
+
+    @JvmName("divElectricCharge")
+    operator fun <I : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricChargeAmount<I, T>) =
+        ElectricFieldStrengthAmount(amount = amount / that.amount
+                                             / convert(that.time to time),
+                                    unit = U2(distance, mass) to U2(that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: ElectricChargeAmount<I, T>) =
+        ElectricFieldStrengthAmount(amount = amount / that.amount,
+                                    unit = U2(distance, mass) to U2(that.electricCurrent, time))
+
+    // endregion
+
     // region -> Energy
 
     @JvmName("timesDistance")
@@ -234,6 +267,22 @@ open class ForceAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun times(that: FuelEfficiencyAmount<L>) =
         EnergyDensityAmount(amount = amount * that.amount,
                             unit = mass to U2(distance, time))
+
+    // endregion
+
+    // region -> EnergyDensityGradient
+
+    @JvmName("divVolume")
+    operator fun <L : Unit<Distance>> div(that: VolumeAmount<L>) =
+        EnergyDensityGradientAmount(amount = amount / that.amount
+                                             / convert(that.distance to distance,
+                                                       that.distance to distance,
+                                                       that.distance to distance),
+                                    unit = mass to U2(distance, time))
+
+    operator fun div(that: VolumeAmount<L>) =
+        EnergyDensityGradientAmount(amount = amount / that.amount,
+                                    unit = mass to U2(distance, time))
 
     // endregion
 
@@ -296,6 +345,38 @@ open class ForceAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: SpecificEnergyAmount<L, T>) =
         LinearDensityAmount(amount = amount / that.amount,
                             unit = mass to distance)
+
+    // endregion
+
+    // region -> MagneticFieldStrength
+
+    @JvmName("divMagneticFlux")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: MagneticFluxAmount<L, I, M, T>) =
+        MagneticFieldStrengthAmount(amount = amount / that.amount
+                                             / convert(that.distance to distance,
+                                                       that.distance to distance,
+                                                       that.mass to mass)
+                                             * convert(that.time to time,
+                                                       that.time to time),
+                                    unit = that.electricCurrent to distance)
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: MagneticFluxAmount<L, I, M, T>) =
+        MagneticFieldStrengthAmount(amount = amount / that.amount,
+                                    unit = that.electricCurrent to distance)
+
+    // endregion
+
+    // region -> MagneticFlux
+
+    @JvmName("divMagneticFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: MagneticFieldStrengthAmount<L, I>) =
+        MagneticFluxAmount(amount = amount / that.amount
+                                    * convert(that.distance to distance),
+                           unit = U2(distance, mass) to U2(that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: MagneticFieldStrengthAmount<L, I>) =
+        MagneticFluxAmount(amount = amount / that.amount,
+                           unit = U2(distance, mass) to U2(that.electricCurrent, time))
 
     // endregion
 
@@ -515,6 +596,24 @@ open class ForceAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: YankAmount<L, M, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = time)
+
+    // endregion
+
+    // region -> Volume
+
+    @JvmName("divEnergyDensityGradient")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyDensityGradientAmount<L, M, T>) =
+        VolumeAmount(amount = amount / that.amount
+                              / convert(that.mass to mass)
+                              * convert(that.distance to distance,
+                                        that.distance to distance,
+                                        that.time to time,
+                                        that.time to time),
+                     unit = distance)
+
+    operator fun div(that: EnergyDensityGradientAmount<L, M, T>) =
+        VolumeAmount(amount = amount / that.amount,
+                     unit = distance)
 
     // endregion
 

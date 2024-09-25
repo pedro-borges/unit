@@ -12,6 +12,7 @@ import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Momentum
 import org.pcb.unit.dimensions.Scalar
@@ -150,6 +151,22 @@ open class MomentumAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Area
+
+    @JvmName("divViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        AreaAmount(amount = amount / that.amount
+                            / convert(that.mass to mass)
+                            * convert(that.distance to distance,
+                                      that.time to time),
+                   unit = distance)
+
+    operator fun div(that: ViscosityAmount<L, M, T>) =
+        AreaAmount(amount = amount / that.amount,
+                   unit = distance)
+
+    // endregion
+
     // region -> AreaDensity
 
     @JvmName("divVolumetricFlow")
@@ -193,6 +210,22 @@ open class MomentumAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: MassFlowRateAmount<M, T>) =
         DistanceAmount(amount = amount / that.amount,
                        unit = distance)
+
+    // endregion
+
+    // region -> ElectricDipoleMoment
+
+    @JvmName("divMagneticFluxDensity")
+    operator fun <I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: MagneticFluxDensityAmount<I, M, T>) =
+        ElectricDipoleMomentAmount(amount = amount / that.amount
+                                            / convert(that.mass to mass)
+                                            * convert(that.time to time,
+                                                      that.time to time),
+                                   unit = U3(distance, that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: MagneticFluxDensityAmount<I, M, T>) =
+        ElectricDipoleMomentAmount(amount = amount / that.amount,
+                                   unit = U3(distance, that.electricCurrent, time))
 
     // endregion
 
@@ -243,6 +276,21 @@ open class MomentumAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: TimeAmount<T>) =
         ForceAmount(amount = amount / that.amount,
                     unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> MagneticFluxDensity
+
+    @JvmName("divElectricDipoleMoment")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, T : Unit<Time>> div(that: ElectricDipoleMomentAmount<L, I, T>) =
+        MagneticFluxDensityAmount(amount = amount / that.amount
+                                           / convert(that.distance to distance,
+                                                     that.time to time),
+                                  unit = mass to U2(that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: ElectricDipoleMomentAmount<L, I, T>) =
+        MagneticFluxDensityAmount(amount = amount / that.amount,
+                                  unit = mass to U2(that.electricCurrent, time))
 
     // endregion
 
@@ -405,6 +453,32 @@ open class MomentumAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: ForceAmount<L, M, T>) =
         TimeAmount(amount = amount / that.amount,
                    unit = time)
+
+    // endregion
+
+    // region -> Viscosity
+
+    @JvmName("divArea")
+    operator fun <L : Unit<Distance>> div(that: AreaAmount<L>) =
+        ViscosityAmount(amount = amount / that.amount
+                                 / convert(that.distance to distance,
+                                           that.distance to distance),
+                        unit = mass to U2(distance, time))
+
+    operator fun div(that: AreaAmount<L>) =
+        ViscosityAmount(amount = amount / that.amount,
+                        unit = mass to U2(distance, time))
+
+    @JvmName("timesFuelEfficiency")
+    operator fun <L : Unit<Distance>> times(that: FuelEfficiencyAmount<L>) =
+        ViscosityAmount(amount = amount * that.amount
+                                 / convert(that.distance to distance,
+                                           that.distance to distance),
+                        unit = mass to U2(distance, time))
+
+    operator fun times(that: FuelEfficiencyAmount<L>) =
+        ViscosityAmount(amount = amount * that.amount,
+                        unit = mass to U2(distance, time))
 
     // endregion
 

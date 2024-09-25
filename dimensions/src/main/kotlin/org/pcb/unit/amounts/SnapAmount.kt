@@ -94,6 +94,30 @@ open class SnapAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Crackle
+
+    @JvmName("timesFrequency")
+    operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
+        CrackleAmount(amount = amount * that.amount
+                               / convert(that.time to time),
+                      unit = distance to time)
+
+    operator fun times(that: FrequencyAmount<T>) =
+        CrackleAmount(amount = amount * that.amount,
+                      unit = distance to time)
+
+    @JvmName("divTime")
+    operator fun <T : Unit<Time>> div(that: TimeAmount<T>) =
+        CrackleAmount(amount = amount / that.amount
+                               / convert(that.time to time),
+                      unit = distance to time)
+
+    operator fun div(that: TimeAmount<T>) =
+        CrackleAmount(amount = amount / that.amount,
+                      unit = distance to time)
+
+    // endregion
+
     // region -> Frequency
 
     @JvmName("divJerk")
@@ -132,6 +156,25 @@ open class SnapAmount<L : Unit<Distance>, T : Unit<Time>>(
     operator fun times(that: TimeAmount<T>) =
         JerkAmount(amount = amount * that.amount,
                    unit = distance to time)
+
+    // endregion
+
+    // region -> Time
+
+    @JvmName("divCrackle")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: CrackleAmount<L, T>) =
+        TimeAmount(amount = amount / that.amount
+                            / convert(that.distance to distance)
+                            * convert(that.time to time,
+                                      that.time to time,
+                                      that.time to time,
+                                      that.time to time,
+                                      that.time to time),
+                   unit = time)
+
+    operator fun div(that: CrackleAmount<L, T>) =
+        TimeAmount(amount = amount / that.amount,
+                   unit = time)
 
     // endregion
 }

@@ -121,11 +121,34 @@ open class FuelEfficiencyAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> ElectricCurrent
+
+    @JvmName("timesMagneticDipoleMoment")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> times(that: MagneticDipoleMomentAmount<L, I>) =
+        ElectricCurrentAmount(amount = amount * that.amount
+                                       * convert(that.distance to distance,
+                                                 that.distance to distance),
+                              unit = that.electricCurrent)
+
+    operator fun <I : Unit<ElectricCurrent>> times(that: MagneticDipoleMomentAmount<L, I>) =
+        ElectricCurrentAmount(amount = amount * that.amount,
+                              unit = that.electricCurrent)
+
+    // endregion
+
     // region -> ElectricCurrentDensity
 
     operator fun <I : Unit<ElectricCurrent>> times(that: ElectricCurrentAmount<I>) =
         ElectricCurrentDensityAmount(amount = amount * that.amount,
                                      unit = that.electricCurrent to distance)
+
+    // endregion
+
+    // region -> ElectricDisplacementField
+
+    operator fun <I : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricChargeAmount<I, T>) =
+        ElectricDisplacementFieldAmount(amount = amount * that.amount,
+                                        unit = U2(that.electricCurrent, that.time) to distance)
 
     // endregion
 
@@ -140,6 +163,14 @@ open class FuelEfficiencyAmount<L : Unit<Distance>>(
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ForceAmount<L, M, T>) =
         EnergyDensityAmount(amount = amount * that.amount,
                             unit = that.mass to U2(distance, that.time))
+
+    // endregion
+
+    // region -> EnergyDensityGradient
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: RadiantExposureAmount<M, T>) =
+        EnergyDensityGradientAmount(amount = amount * that.amount,
+                                    unit = that.mass to U2(distance, that.time))
 
     // endregion
 
@@ -313,6 +344,20 @@ open class FuelEfficiencyAmount<L : Unit<Distance>>(
     operator fun <T : Unit<Time>> times(that: VolumetricFlowAmount<L, T>) =
         SpeedAmount(amount = amount * that.amount,
                     unit = distance to that.time)
+
+    // endregion
+
+    // region -> Viscosity
+
+    @JvmName("timesMomentum")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: MomentumAmount<L, M, T>) =
+        ViscosityAmount(amount = amount * that.amount
+                                 * convert(that.distance to distance),
+                        unit = that.mass to U2(distance, that.time))
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: MomentumAmount<L, M, T>) =
+        ViscosityAmount(amount = amount * that.amount,
+                        unit = that.mass to U2(distance, that.time))
 
     // endregion
 }

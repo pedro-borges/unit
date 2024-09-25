@@ -10,6 +10,7 @@ import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.amounts.base.Second.SECOND
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.PowerDensity
 import org.pcb.unit.dimensions.Scalar
@@ -118,6 +119,39 @@ open class PowerDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>
 
     // endregion
 
+    // region -> ElectricCurrentDensity
+
+    @JvmName("divElectricFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        ElectricCurrentDensityAmount(amount = amount / that.amount
+                                              / convert(that.distance to distance,
+                                                        that.mass to mass)
+                                              * convert(that.time to time,
+                                                        that.time to time,
+                                                        that.time to time),
+                                     unit = that.electricCurrent to distance)
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        ElectricCurrentDensityAmount(amount = amount / that.amount,
+                                     unit = that.electricCurrent to distance)
+
+    // endregion
+
+    // region -> ElectricFieldStrength
+
+    @JvmName("divElectricCurrentDensity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: ElectricCurrentDensityAmount<L, I>) =
+        ElectricFieldStrengthAmount(amount = amount / that.amount
+                                             * convert(that.distance to distance,
+                                                       that.distance to distance),
+                                    unit = U2(distance, mass) to U2(that.electricCurrent, time))
+
+    operator fun <I : Unit<ElectricCurrent>> div(that: ElectricCurrentDensityAmount<L, I>) =
+        ElectricFieldStrengthAmount(amount = amount / that.amount,
+                                    unit = U2(distance, mass) to U2(that.electricCurrent, time))
+
+    // endregion
+
     // region -> EnergyDensity
 
     @JvmName("divFrequency")
@@ -139,6 +173,32 @@ open class PowerDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>
     operator fun times(that: TimeAmount<T>) =
         EnergyDensityAmount(amount = amount * that.amount,
                             unit = mass to U2(distance, time))
+
+    // endregion
+
+    // region -> EnergyDensityGradient
+
+    @JvmName("timesPace")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<L, T>) =
+        EnergyDensityGradientAmount(amount = amount * that.amount
+                                             * convert(that.time to time)
+                                             / convert(that.distance to distance),
+                                    unit = mass to U2(distance, time))
+
+    operator fun times(that: PaceAmount<L, T>) =
+        EnergyDensityGradientAmount(amount = amount * that.amount,
+                                    unit = mass to U2(distance, time))
+
+    @JvmName("divSpeed")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
+        EnergyDensityGradientAmount(amount = amount / that.amount
+                                             / convert(that.distance to distance)
+                                             * convert(that.time to time),
+                                    unit = mass to U2(distance, time))
+
+    operator fun div(that: SpeedAmount<L, T>) =
+        EnergyDensityGradientAmount(amount = amount / that.amount,
+                                    unit = mass to U2(distance, time))
 
     // endregion
 
@@ -297,6 +357,24 @@ open class PowerDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>
     operator fun div(that: IntensityAmount<M, T>) =
         SpacialFrequencyAmount(amount = amount / that.amount,
                                unit = NUMERIC to distance)
+
+    // endregion
+
+    // region -> Speed
+
+    @JvmName("divEnergyDensityGradient")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyDensityGradientAmount<L, M, T>) =
+        SpeedAmount(amount = amount / that.amount
+                             / convert(that.mass to mass)
+                             * convert(that.distance to distance,
+                                       that.distance to distance,
+                                       that.time to time,
+                                       that.time to time),
+                    unit = distance to time)
+
+    operator fun div(that: EnergyDensityGradientAmount<L, M, T>) =
+        SpeedAmount(amount = amount / that.amount,
+                    unit = distance to time)
 
     // endregion
 

@@ -29,9 +29,14 @@ object AreaDensity : Dimension
 
     operator fun times(that: VolumetricFlow) = Momentum
 
+    operator fun div(that: Viscosity) = Pace
+
     operator fun times(that: Jerk) = PowerDensity
 
     operator fun times(that: SpecificEnergy) = RadiantExposure
 
     operator fun div(that: LinearDensity) = SpacialFrequency
+
+    operator fun div(that: Pace) = Viscosity
+    operator fun times(that: Speed) = Viscosity
 }

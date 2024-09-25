@@ -3,6 +3,7 @@ package org.pcb.unit.amounts
 import org.pcb.unit.Amount
 import org.pcb.unit.CompositeUnit
 import org.pcb.unit.U2
+import org.pcb.unit.U3
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
@@ -85,6 +86,20 @@ open class ElectricCurrentAmount<I : Unit<ElectricCurrent>>(
 
     // endregion
 
+    // region -> Distance
+
+    @JvmName("divMagneticFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: MagneticFieldStrengthAmount<L, I>) =
+        DistanceAmount(amount = amount / that.amount
+                                / convert(that.electricCurrent to electricCurrent),
+                       unit = that.distance)
+
+    operator fun <L : Unit<Distance>> div(that: MagneticFieldStrengthAmount<L, I>) =
+        DistanceAmount(amount = amount / that.amount,
+                       unit = that.distance)
+
+    // endregion
+
     // region -> ElectricCharge
 
     operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
@@ -120,6 +135,14 @@ open class ElectricCurrentAmount<I : Unit<ElectricCurrent>>(
     operator fun <L : Unit<Distance>> times(that: FuelEfficiencyAmount<L>) =
         ElectricCurrentDensityAmount(amount = amount * that.amount,
                                      unit = electricCurrent to that.distance)
+
+    // endregion
+
+    // region -> ElectricDipoleMoment
+
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        ElectricDipoleMomentAmount(amount = amount * that.amount,
+                                   unit = U3(that.distance, electricCurrent, that.time))
 
     // endregion
 
@@ -177,6 +200,44 @@ open class ElectricCurrentAmount<I : Unit<ElectricCurrent>>(
 
     // endregion
 
+    // region -> FuelEfficiency
+
+    @JvmName("divMagneticDipoleMoment")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: MagneticDipoleMomentAmount<L, I>) =
+        FuelEfficiencyAmount(amount = amount / that.amount
+                                      / convert(that.electricCurrent to electricCurrent),
+                             unit = NUMERIC to that.distance)
+
+    operator fun <L : Unit<Distance>> div(that: MagneticDipoleMomentAmount<L, I>) =
+        FuelEfficiencyAmount(amount = amount / that.amount,
+                             unit = NUMERIC to that.distance)
+
+    // endregion
+
+    // region -> MagneticDipoleMoment
+
+    operator fun <L : Unit<Distance>> times(that: AreaAmount<L>) =
+        MagneticDipoleMomentAmount(amount = amount * that.amount,
+                                   unit = U2(that.distance, electricCurrent))
+
+    operator fun <L : Unit<Distance>> div(that: FuelEfficiencyAmount<L>) =
+        MagneticDipoleMomentAmount(amount = amount / that.amount,
+                                   unit = U2(that.distance, electricCurrent))
+
+    // endregion
+
+    // region -> MagneticFieldStrength
+
+    operator fun <L : Unit<Distance>> div(that: DistanceAmount<L>) =
+        MagneticFieldStrengthAmount(amount = amount / that.amount,
+                                    unit = electricCurrent to that.distance)
+
+    operator fun <L : Unit<Distance>> times(that: SpacialFrequencyAmount<L>) =
+        MagneticFieldStrengthAmount(amount = amount * that.amount,
+                                    unit = electricCurrent to that.distance)
+
+    // endregion
+
     // region -> MagneticFlux
 
     @JvmName("timesInductance")
@@ -217,6 +278,20 @@ open class ElectricCurrentAmount<I : Unit<ElectricCurrent>>(
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: MagneticFluxDensityAmount<I, M, T>) =
         RadiantExposureAmount(amount = amount * that.amount,
                               unit = that.mass to that.time)
+
+    // endregion
+
+    // region -> Yank
+
+    @JvmName("timesElectricFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        YankAmount(amount = amount * that.amount
+                            / convert(that.electricCurrent to electricCurrent),
+                   unit = U2(that.distance, that.mass) to that.time)
+
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        YankAmount(amount = amount * that.amount,
+                   unit = U2(that.distance, that.mass) to that.time)
 
     // endregion
 }

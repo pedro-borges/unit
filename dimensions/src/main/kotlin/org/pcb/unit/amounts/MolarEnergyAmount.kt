@@ -109,6 +109,22 @@ open class MolarEnergyAmount<L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substa
 
     // endregion
 
+    // region -> CatalyticEfficiency
+
+    @JvmName("divViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        CatalyticEfficiencyAmount(amount = amount / that.amount
+                                           / convert(that.mass to mass)
+                                           * convert(that.distance to distance,
+                                                     that.time to time),
+                                  unit = distance to U2(substance, time))
+
+    operator fun div(that: ViscosityAmount<L, M, T>) =
+        CatalyticEfficiencyAmount(amount = amount / that.amount,
+                                  unit = distance to U2(substance, time))
+
+    // endregion
+
     // region -> Energy
 
     @JvmName("timesSubstance")
@@ -259,6 +275,24 @@ open class MolarEnergyAmount<L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substa
     operator fun <K : Unit<Temperature>> div(that: MolarHeatCapacityAmount<L, M, N, K, T>) =
         TemperatureAmount(amount = amount / that.amount,
                           unit = that.temperature)
+
+    // endregion
+
+    // region -> Viscosity
+
+    @JvmName("divCatalyticEfficiency")
+    operator fun <L : Unit<Distance>, N : Unit<Substance>, T : Unit<Time>> div(that: CatalyticEfficiencyAmount<L, N, T>) =
+        ViscosityAmount(amount = amount / that.amount
+                                 / convert(that.distance to distance,
+                                           that.distance to distance,
+                                           that.distance to distance)
+                                 * convert(that.substance to substance,
+                                           that.time to time),
+                        unit = mass to U2(distance, time))
+
+    operator fun div(that: CatalyticEfficiencyAmount<L, N, T>) =
+        ViscosityAmount(amount = amount / that.amount,
+                        unit = mass to U2(distance, time))
 
     // endregion
 }

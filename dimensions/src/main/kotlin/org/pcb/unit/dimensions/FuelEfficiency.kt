@@ -15,9 +15,15 @@ object FuelEfficiency : Dimension
 
     operator fun times(that: Volume) = Distance
 
+    operator fun times(that: MagneticDipoleMoment) = ElectricCurrent
+
     operator fun times(that: ElectricCurrent) = ElectricCurrentDensity
 
+    operator fun times(that: ElectricCharge) = ElectricDisplacementField
+
     operator fun times(that: Force) = EnergyDensity
+
+    operator fun times(that: RadiantExposure) = EnergyDensityGradient
 
     operator fun times(that: LuminousFlux) = Illuminance
 
@@ -43,4 +49,6 @@ object FuelEfficiency : Dimension
     operator fun times(that: Distance) = SpacialFrequency
 
     operator fun times(that: VolumetricFlow) = Speed
+
+    operator fun times(that: Momentum) = Viscosity
 }

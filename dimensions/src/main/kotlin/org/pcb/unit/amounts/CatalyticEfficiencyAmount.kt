@@ -151,6 +151,21 @@ open class CatalyticEfficiencyAmount<L : Unit<Distance>, N : Unit<Substance>, T 
 
     // endregion
 
+    // region -> MolarEnergy
+
+    @JvmName("timesViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ViscosityAmount<L, M, T>) =
+        MolarEnergyAmount(amount = amount * that.amount
+                                   / convert(that.distance to distance,
+                                             that.time to time),
+                          unit = U2(distance, that.mass) to U2(substance, time))
+
+    operator fun <M : Unit<Mass>> times(that: ViscosityAmount<L, M, T>) =
+        MolarEnergyAmount(amount = amount * that.amount,
+                          unit = U2(distance, that.mass) to U2(substance, time))
+
+    // endregion
+
     // region -> MolarVolume
 
     @JvmName("divFrequency")

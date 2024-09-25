@@ -9,6 +9,7 @@ import org.pcb.unit.amounts.base.Meter.METER
 import org.pcb.unit.amounts.base.Numeric.NUMERIC
 import org.pcb.unit.convert
 import org.pcb.unit.dimensions.Distance
+import org.pcb.unit.dimensions.ElectricCurrent
 import org.pcb.unit.dimensions.Mass
 import org.pcb.unit.dimensions.Scalar
 import org.pcb.unit.dimensions.Substance
@@ -88,6 +89,20 @@ open class VolumeAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> Action
+
+    @JvmName("timesViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: ViscosityAmount<L, M, T>) =
+        ActionAmount(amount = amount * that.amount
+                              / convert(that.distance to distance),
+                     unit = U2(distance, that.mass) to that.time)
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: ViscosityAmount<L, M, T>) =
+        ActionAmount(amount = amount * that.amount,
+                     unit = U2(distance, that.mass) to that.time)
+
+    // endregion
+
     // region -> Area
 
     @JvmName("divDistance")
@@ -138,6 +153,21 @@ open class VolumeAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> ElectricDipoleMoment
+
+    @JvmName("timesElectricDisplacementField")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        ElectricDipoleMomentAmount(amount = amount * that.amount
+                                            / convert(that.distance to distance,
+                                                      that.distance to distance),
+                                   unit = U3(distance, that.electricCurrent, that.time))
+
+    operator fun <I : Unit<ElectricCurrent>, T : Unit<Time>> times(that: ElectricDisplacementFieldAmount<L, I, T>) =
+        ElectricDipoleMomentAmount(amount = amount * that.amount,
+                                   unit = U3(distance, that.electricCurrent, that.time))
+
+    // endregion
+
     // region -> Energy
 
     @JvmName("timesEnergyDensity")
@@ -149,6 +179,35 @@ open class VolumeAmount<L : Unit<Distance>>(
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityAmount<L, M, T>) =
         EnergyAmount(amount = amount * that.amount,
                      unit = U2(distance, that.mass) to that.time)
+
+    // endregion
+
+    // region -> Force
+
+    @JvmName("timesEnergyDensityGradient")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityGradientAmount<L, M, T>) =
+        ForceAmount(amount = amount * that.amount
+                             / convert(that.distance to distance,
+                                       that.distance to distance),
+                    unit = U2(distance, that.mass) to that.time)
+
+    operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: EnergyDensityGradientAmount<L, M, T>) =
+        ForceAmount(amount = amount * that.amount,
+                    unit = U2(distance, that.mass) to that.time)
+
+    // endregion
+
+    // region -> MagneticDipoleMoment
+
+    @JvmName("timesMagneticFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> times(that: MagneticFieldStrengthAmount<L, I>) =
+        MagneticDipoleMomentAmount(amount = amount * that.amount
+                                            / convert(that.distance to distance),
+                                   unit = U2(distance, that.electricCurrent))
+
+    operator fun <I : Unit<ElectricCurrent>> times(that: MagneticFieldStrengthAmount<L, I>) =
+        MagneticDipoleMomentAmount(amount = amount * that.amount,
+                                   unit = U2(distance, that.electricCurrent))
 
     // endregion
 

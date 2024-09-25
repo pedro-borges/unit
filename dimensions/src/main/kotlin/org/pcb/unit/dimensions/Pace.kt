@@ -17,13 +17,21 @@ object Pace : Dimension
 
     operator fun times(that: VolumetricFlow) = Area
 
+    operator fun times(that: Viscosity) = AreaDensity
+
     operator fun div(that: Permeability) = ElectricConductance
 
     operator fun div(that: Inductance) = ElectricConductivity
 
+    operator fun times(that: MagneticDipoleMoment) = ElectricDipoleMoment
+
+    operator fun times(that: MagneticFieldStrength) = ElectricDisplacementField
+
     operator fun div(that: Permittivity) = ElectricResistance
 
     operator fun times(that: Intensity) = EnergyDensity
+
+    operator fun times(that: PowerDensity) = EnergyDensityGradient
 
     operator fun times(that: Power) = Force
 
@@ -34,6 +42,8 @@ object Pace : Dimension
     operator fun div(that: ElectricConductivity) = Inductance
 
     operator fun times(that: MassFlowRate) = LinearDensity
+
+    operator fun times(that: ElectricFieldStrength) = MagneticFluxDensity
 
     operator fun times(that: Momentum) = Mass
 
@@ -56,4 +66,6 @@ object Pace : Dimension
 
     operator fun div(that: SpacialFrequency) = Time
     operator fun times(that: Distance) = Time
+
+    operator fun times(that: RadiantExposure) = Viscosity
 }

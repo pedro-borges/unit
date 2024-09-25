@@ -47,4 +47,6 @@ object SpecificEnergy : Dimension
     operator fun div(that: SpecificHeatCapacity) = Temperature
 
     operator fun times(that: Absement) = VolumetricFlow
+
+    operator fun times(that: Viscosity) = Yank
 }

@@ -96,6 +96,21 @@ open class IntensityAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Acceleration
+
+    @JvmName("divViscosity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ViscosityAmount<L, M, T>) =
+        AccelerationAmount(amount = amount / that.amount
+                                    / convert(that.mass to mass)
+                                    * convert(that.time to time),
+                           unit = that.distance to time)
+
+    operator fun <L : Unit<Distance>> div(that: ViscosityAmount<L, M, T>) =
+        AccelerationAmount(amount = amount / that.amount,
+                           unit = that.distance to time)
+
+    // endregion
+
     // region -> Distance
 
     @JvmName("divPowerDensity")
@@ -127,6 +142,14 @@ open class IntensityAmount<M : Unit<Mass>, T : Unit<Time>>(
     operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: ElectricTensionAmount<L, I, M, T>) =
         ElectricCurrentDensityAmount(amount = amount / that.amount,
                                      unit = that.electricCurrent to that.distance)
+
+    // endregion
+
+    // region -> ElectricFieldStrength
+
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: MagneticFieldStrengthAmount<L, I>) =
+        ElectricFieldStrengthAmount(amount = amount / that.amount,
+                                    unit = U2(that.distance, mass) to U2(that.electricCurrent, time))
 
     // endregion
 
@@ -239,6 +262,23 @@ open class IntensityAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> MagneticFieldStrength
+
+    @JvmName("divElectricFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        MagneticFieldStrengthAmount(amount = amount / that.amount
+                                             / convert(that.mass to mass)
+                                             * convert(that.time to time,
+                                                       that.time to time,
+                                                       that.time to time),
+                                    unit = that.electricCurrent to that.distance)
+
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>> div(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        MagneticFieldStrengthAmount(amount = amount / that.amount,
+                                    unit = that.electricCurrent to that.distance)
+
+    // endregion
+
     // region -> Power
 
     operator fun <L : Unit<Distance>> times(that: AreaAmount<L>) =
@@ -342,6 +382,21 @@ open class IntensityAmount<M : Unit<Mass>, T : Unit<Time>>(
     operator fun <L : Unit<Distance>, K : Unit<Temperature>> div(that: TemperatureGradientAmount<L, K>) =
         ThermalConductivityAmount(amount = amount / that.amount,
                                   unit = U2(that.distance, mass) to U2(that.temperature, time))
+
+    // endregion
+
+    // region -> Viscosity
+
+    @JvmName("divAcceleration")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AccelerationAmount<L, T>) =
+        ViscosityAmount(amount = amount / that.amount
+                                 * convert(that.time to time,
+                                           that.time to time),
+                        unit = mass to U2(that.distance, time))
+
+    operator fun <L : Unit<Distance>> div(that: AccelerationAmount<L, T>) =
+        ViscosityAmount(amount = amount / that.amount,
+                        unit = mass to U2(that.distance, time))
 
     // endregion
 

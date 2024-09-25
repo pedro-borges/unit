@@ -21,11 +21,19 @@ object Absement : Dimension
     operator fun div(that: Time) = Distance
     operator fun times(that: Frequency) = Distance
 
+    operator fun times(that: MagneticFieldStrength) = ElectricCharge
+
+    operator fun times(that: ElectricCurrent) = ElectricDipoleMoment
+
     operator fun times(that: Yank) = Energy
 
     operator fun times(that: Intensity) = Force
 
     operator fun times(that: ThermalConductivity) = HeatCapacity
+
+    operator fun times(that: ElectricFieldStrength) = MagneticFlux
+
+    operator fun times(that: Viscosity) = Mass
 
     operator fun times(that: EnergyDensity) = MassFlowRate
 
@@ -42,6 +50,8 @@ object Absement : Dimension
 
     operator fun div(that: Distance) = Time
     operator fun times(that: SpacialFrequency) = Time
+
+    operator fun times(that: EnergyDensityGradient) = Viscosity
 
     operator fun times(that: SpecificEnergy) = VolumetricFlow
 }

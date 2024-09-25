@@ -18,7 +18,15 @@ object Yank : Dimension
 
     operator fun div(that: Intensity) = Distance
 
+    operator fun div(that: ElectricFieldStrength) = ElectricCurrent
+
+    operator fun div(that: ElectricCurrent) = ElectricFieldStrength
+
+    operator fun div(that: MagneticFieldStrength) = ElectricTension
+
     operator fun times(that: Absement) = Energy
+
+    operator fun div(that: VolumetricFlow) = EnergyDensityGradient
 
     operator fun div(that: Frequency) = Force
     operator fun times(that: Time) = Force
@@ -29,6 +37,8 @@ object Yank : Dimension
     operator fun times(that: SpacialFrequency) = Intensity
 
     operator fun div(that: Mass) = Jerk
+
+    operator fun div(that: ElectricTension) = MagneticFieldStrength
 
     operator fun div(that: Jerk) = Mass
 
@@ -47,6 +57,8 @@ object Yank : Dimension
 
     operator fun div(that: Power) = SpacialFrequency
 
+    operator fun div(that: Viscosity) = SpecificEnergy
+
     operator fun div(that: SolidAngle) = SpectralIntensity
 
     operator fun div(that: RadiantExposure) = Speed
@@ -55,4 +67,8 @@ object Yank : Dimension
 
     operator fun div(that: Temperature) = ThermalConductivity
     operator fun times(that: ThermalExpansionCoefficient) = ThermalConductivity
+
+    operator fun div(that: SpecificEnergy) = Viscosity
+
+    operator fun div(that: EnergyDensityGradient) = VolumetricFlow
 }

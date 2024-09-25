@@ -194,6 +194,25 @@ open class PermittivityAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M :
 
     // endregion
 
+    // region -> ElectricDisplacementField
+
+    @JvmName("timesElectricFieldStrength")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> times(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        ElectricDisplacementFieldAmount(amount = amount * that.amount
+                                                 * convert(that.distance to distance,
+                                                           that.mass to mass)
+                                                 / convert(that.electricCurrent to electricCurrent,
+                                                           that.time to time,
+                                                           that.time to time,
+                                                           that.time to time),
+                                        unit = U2(electricCurrent, time) to distance)
+
+    operator fun times(that: ElectricFieldStrengthAmount<L, I, M, T>) =
+        ElectricDisplacementFieldAmount(amount = amount * that.amount,
+                                        unit = U2(electricCurrent, time) to distance)
+
+    // endregion
+
     // region -> MolarConductivity
 
     @JvmName("timesCatalyticEfficiency")

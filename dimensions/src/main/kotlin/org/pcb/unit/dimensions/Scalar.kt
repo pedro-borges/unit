@@ -33,6 +33,8 @@ object Scalar : Dimension
 
     operator fun times(that: CentrifugalForce) = CentrifugalForce
 
+    operator fun times(that: Crackle) = Crackle
+
     operator fun times(that: Currency) = Currency
 
     operator fun times(that: Debt) = Debt
@@ -51,6 +53,12 @@ object Scalar : Dimension
 
     operator fun times(that: ElectricCurrentDensity) = ElectricCurrentDensity
 
+    operator fun times(that: ElectricDipoleMoment) = ElectricDipoleMoment
+
+    operator fun times(that: ElectricDisplacementField) = ElectricDisplacementField
+
+    operator fun times(that: ElectricFieldStrength) = ElectricFieldStrength
+
     operator fun div(that: ElectricConductance) = ElectricResistance
     operator fun times(that: ElectricResistance) = ElectricResistance
 
@@ -59,6 +67,8 @@ object Scalar : Dimension
     operator fun times(that: Energy) = Energy
 
     operator fun times(that: EnergyDensity) = EnergyDensity
+
+    operator fun times(that: EnergyDensityGradient) = EnergyDensityGradient
 
     operator fun times(that: Force) = Force
 
@@ -87,6 +97,10 @@ object Scalar : Dimension
     operator fun times(that: LuminousFlux) = LuminousFlux
 
     operator fun times(that: LuminousIntensity) = LuminousIntensity
+
+    operator fun times(that: MagneticDipoleMoment) = MagneticDipoleMoment
+
+    operator fun times(that: MagneticFieldStrength) = MagneticFieldStrength
 
     operator fun times(that: MagneticFlux) = MagneticFlux
 
@@ -127,6 +141,8 @@ object Scalar : Dimension
     operator fun times(that: Permeability) = Permeability
 
     operator fun times(that: Permittivity) = Permittivity
+
+    operator fun times(that: Pop) = Pop
 
     operator fun times(that: Power) = Power
 
@@ -175,6 +191,8 @@ object Scalar : Dimension
 
     operator fun div(that: Frequency) = Time
     operator fun times(that: Time) = Time
+
+    operator fun times(that: Viscosity) = Viscosity
 
     operator fun times(that: Volume) = Volume
 

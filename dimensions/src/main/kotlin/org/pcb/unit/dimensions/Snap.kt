@@ -11,8 +11,13 @@ object Snap : Dimension
 
     operator fun div(that: Snap) = Scalar
 
+    operator fun div(that: Time) = Crackle
+    operator fun times(that: Frequency) = Crackle
+
     operator fun div(that: Jerk) = Frequency
 
     operator fun div(that: Frequency) = Jerk
     operator fun times(that: Time) = Jerk
+
+    operator fun div(that: Crackle) = Time
 }

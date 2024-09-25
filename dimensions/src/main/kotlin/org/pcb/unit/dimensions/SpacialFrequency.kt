@@ -20,12 +20,20 @@ object SpacialFrequency : Dimension
     operator fun div(that: FuelEfficiency) = Distance
     operator fun times(that: Area) = Distance
 
+    operator fun times(that: ElectricDipoleMoment) = ElectricCharge
+
     operator fun div(that: ElectricResistance) = ElectricConductivity
     operator fun times(that: ElectricConductance) = ElectricConductivity
+
+    operator fun times(that: MagneticFieldStrength) = ElectricCurrentDensity
+
+    operator fun times(that: ElectricTension) = ElectricFieldStrength
 
     operator fun div(that: ElectricConductivity) = ElectricResistance
 
     operator fun times(that: RadiantExposure) = EnergyDensity
+
+    operator fun times(that: EnergyDensity) = EnergyDensityGradient
 
     operator fun times(that: Energy) = Force
 
@@ -38,6 +46,8 @@ object SpacialFrequency : Dimension
     operator fun times(that: Yank) = Intensity
 
     operator fun times(that: Mass) = LinearDensity
+
+    operator fun times(that: ElectricCurrent) = MagneticFieldStrength
 
     operator fun times(that: AreaDensity) = MassDensity
 
@@ -64,6 +74,8 @@ object SpacialFrequency : Dimension
     operator fun div(that: TemperatureGradient) = ThermalExpansionCoefficient
 
     operator fun times(that: Absement) = Time
+
+    operator fun times(that: MassFlowRate) = Viscosity
 
     operator fun times(that: Power) = Yank
 }
