@@ -95,6 +95,23 @@ open class SpecificEnergyAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Absement
+
+    @JvmName("divJerk")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: JerkAmount<L, T>) =
+        AbsementAmount(amount = amount / that.amount
+                                / convert(that.distance to distance)
+                                * convert(that.time to time,
+                                          that.time to time,
+                                          that.time to time),
+                       unit = U2(distance, time))
+
+    operator fun div(that: JerkAmount<L, T>) =
+        AbsementAmount(amount = amount / that.amount,
+                       unit = U2(distance, time))
+
+    // endregion
+
     // region -> Acceleration
 
     @JvmName("divDistance")
@@ -182,6 +199,21 @@ open class SpecificEnergyAmount<L : Unit<Distance>, T : Unit<Time>>(
     operator fun <M : Unit<Mass>> times(that: LinearDensityAmount<L, M>) =
         ForceAmount(amount = amount * that.amount,
                     unit = U2(distance, that.mass) to time)
+
+    // endregion
+
+    // region -> Jerk
+
+    @JvmName("divAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        JerkAmount(amount = amount / that.amount
+                            / convert(that.distance to distance,
+                                      that.time to time),
+                   unit = distance to time)
+
+    operator fun div(that: AbsementAmount<L, T>) =
+        JerkAmount(amount = amount / that.amount,
+                   unit = distance to time)
 
     // endregion
 
@@ -311,6 +343,21 @@ open class SpecificEnergyAmount<L : Unit<Distance>, T : Unit<Time>>(
     operator fun <K : Unit<Temperature>> div(that: SpecificHeatCapacityAmount<L, K, T>) =
         TemperatureAmount(amount = amount / that.amount,
                           unit = that.temperature)
+
+    // endregion
+
+    // region -> VolumetricFlow
+
+    @JvmName("timesAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        VolumetricFlowAmount(amount = amount * that.amount
+                                      * convert(that.distance to distance,
+                                                that.time to time),
+                             unit = distance to time)
+
+    operator fun times(that: AbsementAmount<L, T>) =
+        VolumetricFlowAmount(amount = amount * that.amount,
+                             unit = distance to time)
 
     // endregion
 }

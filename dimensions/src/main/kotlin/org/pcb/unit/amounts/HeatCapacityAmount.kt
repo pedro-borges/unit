@@ -109,6 +109,25 @@ open class HeatCapacityAmount<L : Unit<Distance>, M : Unit<Mass>, K : Unit<Tempe
 
     // endregion
 
+    // region -> Absement
+
+    @JvmName("divThermalConductivity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, K : Unit<Temperature>, T : Unit<Time>> div(that: ThermalConductivityAmount<L, M, K, T>) =
+        AbsementAmount(amount = amount / that.amount
+                                / convert(that.distance to distance,
+                                          that.mass to mass)
+                                * convert(that.temperature to temperature,
+                                          that.time to time,
+                                          that.time to time,
+                                          that.time to time),
+                       unit = U2(distance, time))
+
+    operator fun div(that: ThermalConductivityAmount<L, M, K, T>) =
+        AbsementAmount(amount = amount / that.amount,
+                       unit = U2(distance, time))
+
+    // endregion
+
     // region -> Energy
 
     @JvmName("timesTemperature")
@@ -204,6 +223,21 @@ open class HeatCapacityAmount<L : Unit<Distance>, M : Unit<Mass>, K : Unit<Tempe
     operator fun <N : Unit<Substance>> div(that: MolarHeatCapacityAmount<L, M, N, K, T>) =
         SubstanceAmount(amount = amount / that.amount,
                         unit = that.substance)
+
+    // endregion
+
+    // region -> ThermalConductivity
+
+    @JvmName("divAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        ThermalConductivityAmount(amount = amount / that.amount
+                                           / convert(that.distance to distance,
+                                                     that.time to time),
+                                  unit = U2(distance, mass) to U2(temperature, time))
+
+    operator fun div(that: AbsementAmount<L, T>) =
+        ThermalConductivityAmount(amount = amount / that.amount,
+                                  unit = U2(distance, mass) to U2(temperature, time))
 
     // endregion
 

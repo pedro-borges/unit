@@ -11,6 +11,9 @@ object Area : Dimension
     operator fun div(that: Area) = Scalar
     operator fun times(that: FuelEfficiency) = Scalar
 
+    operator fun div(that: Speed) = Absement
+    operator fun times(that: Pace) = Absement
+
     operator fun times(that: MassFlowRate) = Action
 
     operator fun div(that: Distance) = Distance
@@ -40,6 +43,8 @@ object Area : Dimension
     operator fun div(that: Volume) = SpacialFrequency
 
     operator fun div(that: LinearDensity) = SpecificVolume
+
+    operator fun div(that: Absement) = Speed
 
     operator fun div(that: SpacialFrequency) = Volume
     operator fun times(that: Distance) = Volume

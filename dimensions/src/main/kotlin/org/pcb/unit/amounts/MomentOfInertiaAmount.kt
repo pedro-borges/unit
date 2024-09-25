@@ -89,6 +89,21 @@ open class MomentOfInertiaAmount<L : Unit<Distance>, M : Unit<Mass>>(
 
     // endregion
 
+    // region -> Absement
+
+    @JvmName("divMomentum")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: MomentumAmount<L, M, T>) =
+        AbsementAmount(amount = amount / that.amount
+                                / convert(that.distance to distance,
+                                          that.mass to mass),
+                       unit = U2(distance, that.time))
+
+    operator fun <T : Unit<Time>> div(that: MomentumAmount<L, M, T>) =
+        AbsementAmount(amount = amount / that.amount,
+                       unit = U2(distance, that.time))
+
+    // endregion
+
     // region -> Action
 
     operator fun <T : Unit<Time>> times(that: FrequencyAmount<T>) =
@@ -154,6 +169,20 @@ open class MomentOfInertiaAmount<L : Unit<Distance>, M : Unit<Mass>>(
     operator fun times(that: FuelEfficiencyAmount<L>) =
         MassAmount(amount = amount * that.amount,
                    unit = mass)
+
+    // endregion
+
+    // region -> Momentum
+
+    @JvmName("divAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        MomentumAmount(amount = amount / that.amount
+                                / convert(that.distance to distance),
+                       unit = U2(distance, mass) to that.time)
+
+    operator fun <T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        MomentumAmount(amount = amount / that.amount,
+                       unit = U2(distance, mass) to that.time)
 
     // endregion
 

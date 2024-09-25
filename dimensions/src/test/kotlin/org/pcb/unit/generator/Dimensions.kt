@@ -8,6 +8,7 @@ object Dimensions
                      val composite: Composite)
 
     val DIMENSIONS = listOf(
+        Definition("Absement", Composite(distance = 1, time = 1)),
         Definition("Acceleration", Composite(distance = 1, time = -2)),
         Definition("Action", Composite(distance = 2, mass = 1, time = -1)),
         Definition("Angle", Composite(angle = 1)),

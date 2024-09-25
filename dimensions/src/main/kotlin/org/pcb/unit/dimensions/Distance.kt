@@ -11,6 +11,9 @@ object Distance : Dimension
     operator fun div(that: Distance) = Scalar
     operator fun times(that: SpacialFrequency) = Scalar
 
+    operator fun div(that: Frequency) = Absement
+    operator fun times(that: Time) = Absement
+
     operator fun times(that: Momentum) = Action
 
     operator fun div(that: SpacialFrequency) = Area
@@ -26,6 +29,8 @@ object Distance : Dimension
     operator fun times(that: Force) = Energy
 
     operator fun times(that: RadiantExposure) = Force
+
+    operator fun div(that: Absement) = Frequency
 
     operator fun div(that: Volume) = FuelEfficiency
 

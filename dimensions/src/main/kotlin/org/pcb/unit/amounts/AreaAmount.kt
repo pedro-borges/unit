@@ -96,6 +96,30 @@ open class AreaAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> Absement
+
+    @JvmName("timesPace")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: PaceAmount<L, T>) =
+        AbsementAmount(amount = amount * that.amount
+                                / convert(that.distance to distance),
+                       unit = U2(distance, that.time))
+
+    operator fun <T : Unit<Time>> times(that: PaceAmount<L, T>) =
+        AbsementAmount(amount = amount * that.amount,
+                       unit = U2(distance, that.time))
+
+    @JvmName("divSpeed")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: SpeedAmount<L, T>) =
+        AbsementAmount(amount = amount / that.amount
+                                / convert(that.distance to distance),
+                       unit = U2(distance, that.time))
+
+    operator fun <T : Unit<Time>> div(that: SpeedAmount<L, T>) =
+        AbsementAmount(amount = amount / that.amount,
+                       unit = U2(distance, that.time))
+
+    // endregion
+
     // region -> Action
 
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: MassFlowRateAmount<M, T>) =
@@ -290,6 +314,20 @@ open class AreaAmount<L : Unit<Distance>>(
     operator fun <M : Unit<Mass>> div(that: LinearDensityAmount<L, M>) =
         SpecificVolumeAmount(amount = amount / that.amount,
                              unit = distance to that.mass)
+
+    // endregion
+
+    // region -> Speed
+
+    @JvmName("divAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        SpeedAmount(amount = amount / that.amount
+                             / convert(that.distance to distance),
+                    unit = distance to that.time)
+
+    operator fun <T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        SpeedAmount(amount = amount / that.amount,
+                    unit = distance to that.time)
 
     // endregion
 

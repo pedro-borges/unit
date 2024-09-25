@@ -117,6 +117,21 @@ open class ElectricConductivityAmount<L : Unit<Distance>, I : Unit<ElectricCurre
 
     // endregion
 
+    // region -> Capacitance
+
+    @JvmName("timesAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        CapacitanceAmount(amount = amount * that.amount
+                                   * convert(that.distance to distance,
+                                             that.time to time),
+                          unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    operator fun times(that: AbsementAmount<L, T>) =
+        CapacitanceAmount(amount = amount * that.amount,
+                          unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    // endregion
+
     // region -> ElectricConductance
 
     @JvmName("timesDistance")

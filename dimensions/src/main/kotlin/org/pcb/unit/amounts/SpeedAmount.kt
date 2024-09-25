@@ -123,6 +123,21 @@ open class SpeedAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Area
+
+    @JvmName("timesAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        AreaAmount(amount = amount * that.amount
+                            * convert(that.distance to distance,
+                                      that.time to time),
+                   unit = distance)
+
+    operator fun times(that: AbsementAmount<L, T>) =
+        AreaAmount(amount = amount * that.amount,
+                   unit = distance)
+
+    // endregion
+
     // region -> Distance
 
     @JvmName("divFrequency")

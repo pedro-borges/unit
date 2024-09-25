@@ -11,6 +11,8 @@ object SpecificEnergy : Dimension
 
     operator fun div(that: SpecificEnergy) = Scalar
 
+    operator fun div(that: Jerk) = Absement
+
     operator fun div(that: Distance) = Acceleration
     operator fun times(that: SpacialFrequency) = Acceleration
 
@@ -22,6 +24,8 @@ object SpecificEnergy : Dimension
     operator fun times(that: MassDensity) = EnergyDensity
 
     operator fun times(that: LinearDensity) = Force
+
+    operator fun div(that: Absement) = Jerk
 
     operator fun div(that: MolarEnergy) = Molality
 
@@ -41,4 +45,6 @@ object SpecificEnergy : Dimension
     operator fun times(that: Pace) = Speed
 
     operator fun div(that: SpecificHeatCapacity) = Temperature
+
+    operator fun times(that: Absement) = VolumetricFlow
 }

@@ -12,7 +12,11 @@ object Force : Dimension
 
     operator fun div(that: Force) = Scalar
 
+    operator fun div(that: Intensity) = Absement
+
     operator fun div(that: Mass) = Acceleration
+
+    operator fun times(that: Absement) = Action
 
     operator fun div(that: EnergyDensity) = Area
 
@@ -27,6 +31,8 @@ object Force : Dimension
     operator fun div(that: Momentum) = Frequency
 
     operator fun div(that: TemperatureGradient) = HeatCapacity
+
+    operator fun div(that: Absement) = Intensity
 
     operator fun div(that: SpecificEnergy) = LinearDensity
 

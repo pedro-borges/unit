@@ -8,6 +8,8 @@ object Scalar : Dimension
     operator fun div(that: Scalar) = Scalar
     operator fun times(that: Scalar) = Scalar
 
+    operator fun times(that: Absement) = Absement
+
     operator fun times(that: Acceleration) = Acceleration
 
     operator fun times(that: Action) = Action

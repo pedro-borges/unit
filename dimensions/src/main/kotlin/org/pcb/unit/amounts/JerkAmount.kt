@@ -186,6 +186,21 @@ open class JerkAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> SpecificEnergy
+
+    @JvmName("timesAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        SpecificEnergyAmount(amount = amount * that.amount
+                                      * convert(that.distance to distance,
+                                                that.time to time),
+                             unit = distance to time)
+
+    operator fun times(that: AbsementAmount<L, T>) =
+        SpecificEnergyAmount(amount = amount * that.amount,
+                             unit = distance to time)
+
+    // endregion
+
     // region -> Time
 
     @JvmName("divSnap")

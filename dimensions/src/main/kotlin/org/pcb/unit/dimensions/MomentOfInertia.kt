@@ -11,6 +11,8 @@ object MomentOfInertia : Dimension
 
     operator fun div(that: MomentOfInertia) = Scalar
 
+    operator fun div(that: Momentum) = Absement
+
     operator fun div(that: Time) = Action
     operator fun times(that: Frequency) = Action
 
@@ -20,6 +22,8 @@ object MomentOfInertia : Dimension
 
     operator fun div(that: Area) = Mass
     operator fun times(that: FuelEfficiency) = Mass
+
+    operator fun div(that: Absement) = Momentum
 
     operator fun div(that: Action) = Time
 

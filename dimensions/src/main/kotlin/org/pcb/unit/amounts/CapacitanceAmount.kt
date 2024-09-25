@@ -116,6 +116,28 @@ open class CapacitanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M : 
 
     // endregion
 
+    // region -> Absement
+
+    @JvmName("divElectricConductivity")
+    operator fun <L : Unit<Distance>, I : Unit<ElectricCurrent>, M : Unit<Mass>, T : Unit<Time>> div(that: ElectricConductivityAmount<L, I, M, T>) =
+        AbsementAmount(amount = amount / that.amount
+                                / convert(that.electricCurrent to electricCurrent,
+                                          that.electricCurrent to electricCurrent,
+                                          that.time to time,
+                                          that.time to time,
+                                          that.time to time)
+                                * convert(that.distance to distance,
+                                          that.distance to distance,
+                                          that.distance to distance,
+                                          that.mass to mass),
+                       unit = U2(distance, time))
+
+    operator fun div(that: ElectricConductivityAmount<L, I, M, T>) =
+        AbsementAmount(amount = amount / that.amount,
+                       unit = U2(distance, time))
+
+    // endregion
+
     // region -> Distance
 
     @JvmName("divPermittivity")
@@ -180,6 +202,21 @@ open class CapacitanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M : 
     operator fun div(that: TimeAmount<T>) =
         ElectricConductanceAmount(amount = amount / that.amount,
                                   unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    // endregion
+
+    // region -> ElectricConductivity
+
+    @JvmName("divAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        ElectricConductivityAmount(amount = amount / that.amount
+                                            / convert(that.distance to distance,
+                                                      that.time to time),
+                                   unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    operator fun div(that: AbsementAmount<L, T>) =
+        ElectricConductivityAmount(amount = amount / that.amount,
+                                   unit = U2(time, electricCurrent) to U2(mass, distance))
 
     // endregion
 

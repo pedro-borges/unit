@@ -12,6 +12,8 @@ object Energy : Dimension
 
     operator fun div(that: Energy) = Scalar
 
+    operator fun div(that: Yank) = Absement
+
     operator fun div(that: Frequency) = Action
     operator fun times(that: Time) = Action
 
@@ -61,4 +63,6 @@ object Energy : Dimension
     operator fun div(that: Power) = Time
 
     operator fun div(that: EnergyDensity) = Volume
+
+    operator fun div(that: Absement) = Yank
 }

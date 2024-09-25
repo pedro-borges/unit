@@ -11,6 +11,8 @@ object RadiantExposure : Dimension
 
     operator fun div(that: RadiantExposure) = Scalar
 
+    operator fun div(that: PowerDensity) = Absement
+
     operator fun div(that: LinearDensity) = Acceleration
 
     operator fun div(that: SpecificEnergy) = AreaDensity
@@ -42,7 +44,11 @@ object RadiantExposure : Dimension
     operator fun div(that: Frequency) = MassFlowRate
     operator fun times(that: Time) = MassFlowRate
 
+    operator fun times(that: Absement) = Momentum
+
     operator fun div(that: Yank) = Pace
+
+    operator fun div(that: Absement) = PowerDensity
 
     operator fun div(that: Force) = SpacialFrequency
 

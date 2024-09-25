@@ -136,6 +136,20 @@ open class IntensityAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Force
+
+    @JvmName("timesAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        ForceAmount(amount = amount * that.amount
+                             * convert(that.time to time),
+                    unit = U2(that.distance, mass) to time)
+
+    operator fun <L : Unit<Distance>> times(that: AbsementAmount<L, T>) =
+        ForceAmount(amount = amount * that.amount,
+                    unit = U2(that.distance, mass) to time)
+
+    // endregion
+
     // region -> Frequency
 
     @JvmName("divRadiantExposure")

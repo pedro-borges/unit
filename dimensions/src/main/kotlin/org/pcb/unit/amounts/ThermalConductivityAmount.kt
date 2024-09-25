@@ -107,6 +107,21 @@ open class ThermalConductivityAmount<L : Unit<Distance>, M : Unit<Mass>, K : Uni
 
     // endregion
 
+    // region -> HeatCapacity
+
+    @JvmName("timesAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        HeatCapacityAmount(amount = amount * that.amount
+                                    * convert(that.distance to distance,
+                                              that.time to time),
+                           unit = U2(distance, mass) to U2(temperature, time))
+
+    operator fun times(that: AbsementAmount<L, T>) =
+        HeatCapacityAmount(amount = amount * that.amount,
+                           unit = U2(distance, mass) to U2(temperature, time))
+
+    // endregion
+
     // region -> Intensity
 
     @JvmName("timesTemperatureGradient")

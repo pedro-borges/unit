@@ -11,6 +11,9 @@ object Time : Dimension
     operator fun div(that: Time) = Scalar
     operator fun times(that: Frequency) = Scalar
 
+    operator fun div(that: SpacialFrequency) = Absement
+    operator fun times(that: Distance) = Absement
+
     operator fun times(that: Jerk) = Acceleration
 
     operator fun times(that: Energy) = Action
@@ -68,6 +71,8 @@ object Time : Dimension
     operator fun times(that: ElectricConductivity) = Permittivity
 
     operator fun times(that: Intensity) = RadiantExposure
+
+    operator fun div(that: Absement) = SpacialFrequency
 
     operator fun times(that: Acceleration) = Speed
 

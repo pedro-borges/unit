@@ -99,6 +99,32 @@ open class PaceAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Absement
+
+    @JvmName("timesArea")
+    operator fun <L : Unit<Distance>> times(that: AreaAmount<L>) =
+        AbsementAmount(amount = amount * that.amount
+                                * convert(that.distance to distance,
+                                          that.distance to distance),
+                       unit = U2(distance, time))
+
+    operator fun times(that: AreaAmount<L>) =
+        AbsementAmount(amount = amount * that.amount,
+                       unit = U2(distance, time))
+
+    @JvmName("divFuelEfficiency")
+    operator fun <L : Unit<Distance>> div(that: FuelEfficiencyAmount<L>) =
+        AbsementAmount(amount = amount / that.amount
+                                * convert(that.distance to distance,
+                                          that.distance to distance),
+                       unit = U2(distance, time))
+
+    operator fun div(that: FuelEfficiencyAmount<L>) =
+        AbsementAmount(amount = amount / that.amount,
+                       unit = U2(distance, time))
+
+    // endregion
+
     // region -> Area
 
     @JvmName("timesVolumetricFlow")
@@ -216,6 +242,21 @@ open class PaceAmount<L : Unit<Distance>, T : Unit<Time>>(
     operator fun times(that: AccelerationAmount<L, T>) =
         FrequencyAmount(amount = amount * that.amount,
                         unit = NUMERIC to time)
+
+    // endregion
+
+    // region -> FuelEfficiency
+
+    @JvmName("divAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        FuelEfficiencyAmount(amount = amount / that.amount
+                                      / convert(that.distance to distance,
+                                                that.time to time),
+                             unit = NUMERIC to distance)
+
+    operator fun div(that: AbsementAmount<L, T>) =
+        FuelEfficiencyAmount(amount = amount / that.amount,
+                             unit = NUMERIC to distance)
 
     // endregion
 

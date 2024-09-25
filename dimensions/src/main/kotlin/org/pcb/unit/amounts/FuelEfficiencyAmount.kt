@@ -225,6 +225,20 @@ open class FuelEfficiencyAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> Pace
+
+    @JvmName("timesAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        PaceAmount(amount = amount * that.amount
+                            * convert(that.distance to distance),
+                   unit = that.time to distance)
+
+    operator fun <T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        PaceAmount(amount = amount * that.amount,
+                   unit = that.time to distance)
+
+    // endregion
+
     // region -> PowerDensity
 
     @JvmName("timesYank")

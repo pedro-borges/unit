@@ -13,6 +13,8 @@ object ElectricConductivity : Dimension
 
     operator fun div(that: ElectricConductivity) = Scalar
 
+    operator fun times(that: Absement) = Capacitance
+
     operator fun div(that: SpacialFrequency) = ElectricConductance
     operator fun times(that: Distance) = ElectricConductance
 

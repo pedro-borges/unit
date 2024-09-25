@@ -15,6 +15,8 @@ object Speed : Dimension
     operator fun div(that: Time) = Acceleration
     operator fun times(that: Frequency) = Acceleration
 
+    operator fun times(that: Absement) = Area
+
     operator fun div(that: Frequency) = Distance
     operator fun times(that: Time) = Distance
 

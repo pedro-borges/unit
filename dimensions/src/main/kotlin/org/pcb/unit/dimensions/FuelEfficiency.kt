@@ -31,6 +31,8 @@ object FuelEfficiency : Dimension
 
     operator fun times(that: Action) = MassFlowRate
 
+    operator fun times(that: Absement) = Pace
+
     operator fun times(that: Yank) = PowerDensity
 
     operator fun times(that: Energy) = RadiantExposure

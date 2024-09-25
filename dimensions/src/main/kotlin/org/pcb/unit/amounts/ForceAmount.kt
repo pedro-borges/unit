@@ -98,6 +98,23 @@ open class ForceAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Absement
+
+    @JvmName("divIntensity")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: IntensityAmount<M, T>) =
+        AbsementAmount(amount = amount / that.amount
+                                / convert(that.mass to mass)
+                                * convert(that.time to time,
+                                          that.time to time,
+                                          that.time to time),
+                       unit = U2(distance, time))
+
+    operator fun div(that: IntensityAmount<M, T>) =
+        AbsementAmount(amount = amount / that.amount,
+                       unit = U2(distance, time))
+
+    // endregion
+
     // region -> Acceleration
 
     @JvmName("divMass")
@@ -109,6 +126,21 @@ open class ForceAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: MassAmount<M>) =
         AccelerationAmount(amount = amount / that.amount,
                            unit = distance to time)
+
+    // endregion
+
+    // region -> Action
+
+    @JvmName("timesAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        ActionAmount(amount = amount * that.amount
+                              * convert(that.distance to distance,
+                                        that.time to time),
+                     unit = U2(distance, mass) to time)
+
+    operator fun times(that: AbsementAmount<L, T>) =
+        ActionAmount(amount = amount * that.amount,
+                     unit = U2(distance, mass) to time)
 
     // endregion
 
@@ -222,6 +254,21 @@ open class ForceAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun <K : Unit<Temperature>> div(that: TemperatureGradientAmount<L, K>) =
         HeatCapacityAmount(amount = amount / that.amount,
                            unit = U2(distance, mass) to U2(that.temperature, time))
+
+    // endregion
+
+    // region -> Intensity
+
+    @JvmName("divAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        IntensityAmount(amount = amount / that.amount
+                                 / convert(that.distance to distance,
+                                           that.time to time),
+                        unit = mass to time)
+
+    operator fun div(that: AbsementAmount<L, T>) =
+        IntensityAmount(amount = amount / that.amount,
+                        unit = mass to time)
 
     // endregion
 

@@ -25,6 +25,8 @@ object Frequency : Dimension
 
     operator fun times(that: Debt) = Currency
 
+    operator fun times(that: Absement) = Distance
+
     operator fun times(that: Capacitance) = ElectricConductance
 
     operator fun times(that: Permittivity) = ElectricConductivity

@@ -12,6 +12,8 @@ object Action : Dimension
 
     operator fun div(that: Action) = Scalar
 
+    operator fun div(that: Force) = Absement
+
     operator fun times(that: LinearDensity) = AngularMomentum
 
     operator fun div(that: MassFlowRate) = Area
@@ -22,6 +24,8 @@ object Action : Dimension
 
     operator fun div(that: Time) = Energy
     operator fun times(that: Frequency) = Energy
+
+    operator fun div(that: Absement) = Force
 
     operator fun div(that: MomentOfInertia) = Frequency
 

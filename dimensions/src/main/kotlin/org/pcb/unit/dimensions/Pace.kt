@@ -12,6 +12,9 @@ object Pace : Dimension
     operator fun div(that: Pace) = Scalar
     operator fun times(that: Speed) = Scalar
 
+    operator fun div(that: FuelEfficiency) = Absement
+    operator fun times(that: Area) = Absement
+
     operator fun times(that: VolumetricFlow) = Area
 
     operator fun div(that: Permeability) = ElectricConductance
@@ -25,6 +28,8 @@ object Pace : Dimension
     operator fun times(that: Power) = Force
 
     operator fun times(that: Acceleration) = Frequency
+
+    operator fun div(that: Absement) = FuelEfficiency
 
     operator fun div(that: ElectricConductivity) = Inductance
 

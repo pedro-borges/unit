@@ -18,6 +18,8 @@ object Yank : Dimension
 
     operator fun div(that: Intensity) = Distance
 
+    operator fun times(that: Absement) = Energy
+
     operator fun div(that: Frequency) = Force
     operator fun times(that: Time) = Force
 

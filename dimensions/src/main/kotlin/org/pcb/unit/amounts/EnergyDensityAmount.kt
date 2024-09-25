@@ -232,6 +232,21 @@ open class EnergyDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
 
     // endregion
 
+    // region -> MassFlowRate
+
+    @JvmName("timesAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        MassFlowRateAmount(amount = amount * that.amount
+                                    * convert(that.distance to distance,
+                                              that.time to time),
+                           unit = mass to time)
+
+    operator fun times(that: AbsementAmount<L, T>) =
+        MassFlowRateAmount(amount = amount * that.amount,
+                           unit = mass to time)
+
+    // endregion
+
     // region -> MolarEnergy
 
     @JvmName("timesMolarVolume")

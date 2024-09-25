@@ -250,6 +250,21 @@ open class PowerDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>
 
     // endregion
 
+    // region -> RadiantExposure
+
+    @JvmName("timesAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        RadiantExposureAmount(amount = amount * that.amount
+                                       * convert(that.distance to distance,
+                                                 that.time to time),
+                              unit = mass to time)
+
+    operator fun times(that: AbsementAmount<L, T>) =
+        RadiantExposureAmount(amount = amount * that.amount,
+                              unit = mass to time)
+
+    // endregion
+
     // region -> ReactionRate
 
     @JvmName("divMolarEnergy")

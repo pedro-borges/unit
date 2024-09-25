@@ -13,6 +13,8 @@ object ThermalConductivity : Dimension
 
     operator fun div(that: ThermalConductivity) = Scalar
 
+    operator fun times(that: Absement) = HeatCapacity
+
     operator fun times(that: TemperatureGradient) = Intensity
 
     operator fun div(that: Yank) = ThermalExpansionCoefficient

@@ -448,6 +448,20 @@ open class SpacialFrequencyAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> Time
+
+    @JvmName("timesAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        TimeAmount(amount = amount * that.amount
+                            * convert(that.distance to distance),
+                   unit = that.time)
+
+    operator fun <T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        TimeAmount(amount = amount * that.amount,
+                   unit = that.time)
+
+    // endregion
+
     // region -> Yank
 
     @JvmName("timesPower")

@@ -23,6 +23,8 @@ object Jerk : Dimension
     operator fun div(that: Time) = Snap
     operator fun times(that: Frequency) = Snap
 
+    operator fun times(that: Absement) = SpecificEnergy
+
     operator fun div(that: Snap) = Time
 
     operator fun times(that: Mass) = Yank

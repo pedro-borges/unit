@@ -98,6 +98,23 @@ open class ActionAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Absement
+
+    @JvmName("divForce")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: ForceAmount<L, M, T>) =
+        AbsementAmount(amount = amount / that.amount
+                                / convert(that.distance to distance,
+                                          that.mass to mass)
+                                * convert(that.time to time,
+                                          that.time to time),
+                       unit = U2(distance, time))
+
+    operator fun div(that: ForceAmount<L, M, T>) =
+        AbsementAmount(amount = amount / that.amount,
+                       unit = U2(distance, time))
+
+    // endregion
+
     // region -> AngularMomentum
 
     @JvmName("timesLinearDensity")
@@ -183,6 +200,21 @@ open class ActionAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: TimeAmount<T>) =
         EnergyAmount(amount = amount / that.amount,
                      unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> Force
+
+    @JvmName("divAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        ForceAmount(amount = amount / that.amount
+                             / convert(that.distance to distance,
+                                       that.time to time),
+                    unit = U2(distance, mass) to time)
+
+    operator fun div(that: AbsementAmount<L, T>) =
+        ForceAmount(amount = amount / that.amount,
+                    unit = U2(distance, mass) to time)
 
     // endregion
 

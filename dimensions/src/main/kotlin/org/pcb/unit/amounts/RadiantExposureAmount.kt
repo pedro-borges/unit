@@ -92,6 +92,23 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Absement
+
+    @JvmName("divPowerDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: PowerDensityAmount<L, M, T>) =
+        AbsementAmount(amount = amount / that.amount
+                                / convert(that.mass to mass)
+                                * convert(that.time to time,
+                                          that.time to time,
+                                          that.time to time),
+                       unit = U2(that.distance, time))
+
+    operator fun <L : Unit<Distance>> div(that: PowerDensityAmount<L, M, T>) =
+        AbsementAmount(amount = amount / that.amount,
+                       unit = U2(that.distance, time))
+
+    // endregion
+
     // region -> Acceleration
 
     @JvmName("divLinearDensity")
@@ -291,6 +308,20 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Momentum
+
+    @JvmName("timesAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        MomentumAmount(amount = amount * that.amount
+                                * convert(that.time to time),
+                       unit = U2(that.distance, mass) to time)
+
+    operator fun <L : Unit<Distance>> times(that: AbsementAmount<L, T>) =
+        MomentumAmount(amount = amount * that.amount,
+                       unit = U2(that.distance, mass) to time)
+
+    // endregion
+
     // region -> Pace
 
     @JvmName("divYank")
@@ -305,6 +336,20 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
     operator fun <L : Unit<Distance>> div(that: YankAmount<L, M, T>) =
         PaceAmount(amount = amount / that.amount,
                    unit = time to that.distance)
+
+    // endregion
+
+    // region -> PowerDensity
+
+    @JvmName("divAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        PowerDensityAmount(amount = amount / that.amount
+                                    / convert(that.time to time),
+                           unit = mass to U2(that.distance, time))
+
+    operator fun <L : Unit<Distance>> div(that: AbsementAmount<L, T>) =
+        PowerDensityAmount(amount = amount / that.amount,
+                           unit = mass to U2(that.distance, time))
 
     // endregion
 

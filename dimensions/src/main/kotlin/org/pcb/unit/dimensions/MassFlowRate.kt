@@ -11,10 +11,14 @@ object MassFlowRate : Dimension
 
     operator fun div(that: MassFlowRate) = Scalar
 
+    operator fun div(that: EnergyDensity) = Absement
+
     operator fun div(that: FuelEfficiency) = Action
     operator fun times(that: Area) = Action
 
     operator fun div(that: MagneticFluxDensity) = ElectricCharge
+
+    operator fun div(that: Absement) = EnergyDensity
 
     operator fun div(that: Pace) = Force
     operator fun times(that: Speed) = Force

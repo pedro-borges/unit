@@ -152,6 +152,21 @@ open class YankAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Energy
+
+    @JvmName("timesAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        EnergyAmount(amount = amount * that.amount
+                              * convert(that.distance to distance,
+                                        that.time to time),
+                     unit = U2(distance, mass) to time)
+
+    operator fun times(that: AbsementAmount<L, T>) =
+        EnergyAmount(amount = amount * that.amount,
+                     unit = U2(distance, mass) to time)
+
+    // endregion
+
     // region -> Force
 
     @JvmName("divFrequency")

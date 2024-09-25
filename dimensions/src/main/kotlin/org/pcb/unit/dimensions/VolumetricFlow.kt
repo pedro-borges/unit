@@ -11,6 +11,8 @@ object VolumetricFlow : Dimension
 
     operator fun div(that: VolumetricFlow) = Scalar
 
+    operator fun div(that: SpecificEnergy) = Absement
+
     operator fun times(that: LinearDensity) = Action
 
     operator fun div(that: Speed) = Area
@@ -26,6 +28,8 @@ object VolumetricFlow : Dimension
     operator fun times(that: AreaDensity) = Momentum
 
     operator fun times(that: EnergyDensity) = Power
+
+    operator fun div(that: Absement) = SpecificEnergy
 
     operator fun div(that: MassFlowRate) = SpecificVolume
 

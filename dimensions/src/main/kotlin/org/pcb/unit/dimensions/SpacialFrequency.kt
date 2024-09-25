@@ -63,5 +63,7 @@ object SpacialFrequency : Dimension
 
     operator fun div(that: TemperatureGradient) = ThermalExpansionCoefficient
 
+    operator fun times(that: Absement) = Time
+
     operator fun times(that: Power) = Yank
 }

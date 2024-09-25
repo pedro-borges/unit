@@ -94,6 +94,22 @@ open class MomentumAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Absement
+
+    @JvmName("divRadiantExposure")
+    operator fun <M : Unit<Mass>, T : Unit<Time>> div(that: RadiantExposureAmount<M, T>) =
+        AbsementAmount(amount = amount / that.amount
+                                / convert(that.mass to mass)
+                                * convert(that.time to time,
+                                          that.time to time),
+                       unit = U2(distance, time))
+
+    operator fun div(that: RadiantExposureAmount<M, T>) =
+        AbsementAmount(amount = amount / that.amount,
+                       unit = U2(distance, time))
+
+    // endregion
+
     // region -> Action
 
     @JvmName("timesDistance")
@@ -264,6 +280,21 @@ open class MomentumAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> MomentOfInertia
+
+    @JvmName("timesAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        MomentOfInertiaAmount(amount = amount * that.amount
+                                       * convert(that.distance to distance,
+                                                 that.time to time),
+                              unit = U2(distance, mass))
+
+    operator fun times(that: AbsementAmount<L, T>) =
+        MomentOfInertiaAmount(amount = amount * that.amount,
+                              unit = U2(distance, mass))
+
+    // endregion
+
     // region -> Pace
 
     @JvmName("divEnergy")
@@ -295,6 +326,21 @@ open class MomentumAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun times(that: AccelerationAmount<L, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, mass) to time)
+
+    // endregion
+
+    // region -> RadiantExposure
+
+    @JvmName("divAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        RadiantExposureAmount(amount = amount / that.amount
+                                       / convert(that.distance to distance,
+                                                 that.time to time),
+                              unit = mass to time)
+
+    operator fun div(that: AbsementAmount<L, T>) =
+        RadiantExposureAmount(amount = amount / that.amount,
+                              unit = mass to time)
 
     // endregion
 

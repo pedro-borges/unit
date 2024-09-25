@@ -30,6 +30,8 @@ object PowerDensity : Dimension
 
     operator fun times(that: Volume) = Power
 
+    operator fun times(that: Absement) = RadiantExposure
+
     operator fun div(that: MolarEnergy) = ReactionRate
 
     operator fun div(that: Intensity) = SpacialFrequency

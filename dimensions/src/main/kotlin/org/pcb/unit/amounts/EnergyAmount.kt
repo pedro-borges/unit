@@ -103,6 +103,24 @@ open class EnergyAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Absement
+
+    @JvmName("divYank")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: YankAmount<L, M, T>) =
+        AbsementAmount(amount = amount / that.amount
+                                / convert(that.distance to distance,
+                                          that.mass to mass)
+                                * convert(that.time to time,
+                                          that.time to time,
+                                          that.time to time),
+                       unit = U2(distance, time))
+
+    operator fun div(that: YankAmount<L, M, T>) =
+        AbsementAmount(amount = amount / that.amount,
+                       unit = U2(distance, time))
+
+    // endregion
+
     // region -> Action
 
     @JvmName("divFrequency")
@@ -488,6 +506,21 @@ open class EnergyAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
     operator fun div(that: EnergyDensityAmount<L, M, T>) =
         VolumeAmount(amount = amount / that.amount,
                      unit = distance)
+
+    // endregion
+
+    // region -> Yank
+
+    @JvmName("divAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        YankAmount(amount = amount / that.amount
+                            / convert(that.distance to distance,
+                                      that.time to time),
+                   unit = U2(distance, mass) to time)
+
+    operator fun div(that: AbsementAmount<L, T>) =
+        YankAmount(amount = amount / that.amount,
+                   unit = U2(distance, mass) to time)
 
     // endregion
 }

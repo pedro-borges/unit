@@ -175,6 +175,20 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // endregion
 
+    // region -> Distance
+
+    @JvmName("timesAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> times(that: AbsementAmount<L, T>) =
+        DistanceAmount(amount = amount * that.amount
+                                * convert(that.time to time),
+                       unit = that.distance)
+
+    operator fun <L : Unit<Distance>> times(that: AbsementAmount<L, T>) =
+        DistanceAmount(amount = amount * that.amount,
+                       unit = that.distance)
+
+    // endregion
+
     // region -> ElectricConductance
 
     @JvmName("timesCapacitance")

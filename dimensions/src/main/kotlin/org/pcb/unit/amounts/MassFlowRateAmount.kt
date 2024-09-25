@@ -89,6 +89,22 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Absement
+
+    @JvmName("divEnergyDensity")
+    operator fun <L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>> div(that: EnergyDensityAmount<L, M, T>) =
+        AbsementAmount(amount = amount / that.amount
+                                / convert(that.mass to mass)
+                                * convert(that.time to time,
+                                          that.time to time),
+                       unit = U2(that.distance, time))
+
+    operator fun <L : Unit<Distance>> div(that: EnergyDensityAmount<L, M, T>) =
+        AbsementAmount(amount = amount / that.amount,
+                       unit = U2(that.distance, time))
+
+    // endregion
+
     // region -> Action
 
     operator fun <L : Unit<Distance>> times(that: AreaAmount<L>) =
@@ -114,6 +130,20 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
     operator fun <I : Unit<ElectricCurrent>> div(that: MagneticFluxDensityAmount<I, M, T>) =
         ElectricChargeAmount(amount = amount / that.amount,
                              unit = U2(that.electricCurrent, time))
+
+    // endregion
+
+    // region -> EnergyDensity
+
+    @JvmName("divAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        EnergyDensityAmount(amount = amount / that.amount
+                                     / convert(that.time to time),
+                            unit = mass to U2(that.distance, time))
+
+    operator fun <L : Unit<Distance>> div(that: AbsementAmount<L, T>) =
+        EnergyDensityAmount(amount = amount / that.amount,
+                            unit = mass to U2(that.distance, time))
 
     // endregion
 

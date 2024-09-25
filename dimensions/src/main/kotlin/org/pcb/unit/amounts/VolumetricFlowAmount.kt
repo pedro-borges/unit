@@ -94,6 +94,23 @@ open class VolumetricFlowAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // endregion
 
+    // region -> Absement
+
+    @JvmName("divSpecificEnergy")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: SpecificEnergyAmount<L, T>) =
+        AbsementAmount(amount = amount / that.amount
+                                / convert(that.distance to distance,
+                                          that.distance to distance)
+                                * convert(that.time to time,
+                                          that.time to time),
+                       unit = U2(distance, time))
+
+    operator fun div(that: SpecificEnergyAmount<L, T>) =
+        AbsementAmount(amount = amount / that.amount,
+                       unit = U2(distance, time))
+
+    // endregion
+
     // region -> Action
 
     @JvmName("timesLinearDensity")
@@ -214,6 +231,21 @@ open class VolumetricFlowAmount<L : Unit<Distance>, T : Unit<Time>>(
     operator fun <M : Unit<Mass>> times(that: EnergyDensityAmount<L, M, T>) =
         PowerAmount(amount = amount * that.amount,
                     unit = U2(distance, that.mass) to time)
+
+    // endregion
+
+    // region -> SpecificEnergy
+
+    @JvmName("divAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        SpecificEnergyAmount(amount = amount / that.amount
+                                      / convert(that.distance to distance,
+                                                that.time to time),
+                             unit = distance to time)
+
+    operator fun div(that: AbsementAmount<L, T>) =
+        SpecificEnergyAmount(amount = amount / that.amount,
+                             unit = distance to time)
 
     // endregion
 

@@ -12,6 +12,8 @@ object Momentum : Dimension
 
     operator fun div(that: Momentum) = Scalar
 
+    operator fun div(that: RadiantExposure) = Absement
+
     operator fun div(that: SpacialFrequency) = Action
     operator fun times(that: Distance) = Action
 
@@ -33,9 +35,13 @@ object Momentum : Dimension
     operator fun div(that: Distance) = MassFlowRate
     operator fun times(that: SpacialFrequency) = MassFlowRate
 
+    operator fun times(that: Absement) = MomentOfInertia
+
     operator fun div(that: Energy) = Pace
 
     operator fun times(that: Acceleration) = Power
+
+    operator fun div(that: Absement) = RadiantExposure
 
     operator fun div(that: Action) = SpacialFrequency
 

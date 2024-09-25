@@ -83,6 +83,18 @@ open class DistanceAmount<L : Unit<Distance>>(
 
     // endregion
 
+    // region -> Absement
+
+    operator fun <T : Unit<Time>> div(that: FrequencyAmount<T>) =
+        AbsementAmount(amount = amount / that.amount,
+                       unit = U2(distance, that.time))
+
+    operator fun <T : Unit<Time>> times(that: TimeAmount<T>) =
+        AbsementAmount(amount = amount * that.amount,
+                       unit = U2(distance, that.time))
+
+    // endregion
+
     // region -> Action
 
     @JvmName("timesMomentum")
@@ -200,6 +212,20 @@ open class DistanceAmount<L : Unit<Distance>>(
     operator fun <M : Unit<Mass>, T : Unit<Time>> times(that: RadiantExposureAmount<M, T>) =
         ForceAmount(amount = amount * that.amount,
                     unit = U2(distance, that.mass) to that.time)
+
+    // endregion
+
+    // region -> Frequency
+
+    @JvmName("divAbsement")
+    operator fun <L : Unit<Distance>, T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        FrequencyAmount(amount = amount / that.amount
+                                 / convert(that.distance to distance),
+                        unit = NUMERIC to that.time)
+
+    operator fun <T : Unit<Time>> div(that: AbsementAmount<L, T>) =
+        FrequencyAmount(amount = amount / that.amount,
+                        unit = NUMERIC to that.time)
 
     // endregion
 

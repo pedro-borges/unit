@@ -16,6 +16,8 @@ object Intensity : Dimension
     operator fun div(that: Speed) = EnergyDensity
     operator fun times(that: Pace) = EnergyDensity
 
+    operator fun times(that: Absement) = Force
+
     operator fun div(that: RadiantExposure) = Frequency
 
     operator fun div(that: Power) = FuelEfficiency
