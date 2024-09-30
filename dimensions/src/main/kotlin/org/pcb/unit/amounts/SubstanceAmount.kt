@@ -28,11 +28,11 @@ open class SubstanceAmount<N : Unit<Substance>>(
 
     // region -> Substance
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         SubstanceAmount(amount = amount * that.toBigDecimal(),
                         unit = substance)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         SubstanceAmount(amount = amount / that.toBigDecimal(),
                         unit = substance)
 

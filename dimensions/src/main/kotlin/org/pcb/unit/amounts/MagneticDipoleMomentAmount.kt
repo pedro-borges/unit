@@ -40,11 +40,11 @@ open class MagneticDipoleMomentAmount<L : Unit<Distance>, I : Unit<ElectricCurre
 
     // region -> MagneticDipoleMoment
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         MagneticDipoleMomentAmount(amount = amount * that.toBigDecimal(),
                                    unit = U2(distance, electricCurrent))
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         MagneticDipoleMomentAmount(amount = amount / that.toBigDecimal(),
                                    unit = U2(distance, electricCurrent))
 

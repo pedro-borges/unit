@@ -39,11 +39,11 @@ open class MomentOfInertiaAmount<L : Unit<Distance>, M : Unit<Mass>>(
 
     // region -> MomentOfInertia
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         MomentOfInertiaAmount(amount = amount * that.toBigDecimal(),
                               unit = U2(distance, mass))
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         MomentOfInertiaAmount(amount = amount / that.toBigDecimal(),
                               unit = U2(distance, mass))
 

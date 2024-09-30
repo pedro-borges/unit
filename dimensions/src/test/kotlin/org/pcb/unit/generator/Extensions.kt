@@ -1,7 +1,6 @@
 package org.pcb.unit.generator
 
 import kotlin.math.absoluteValue
-import org.pcb.unit.Composite
 import org.pcb.unit.generator.Dimensions.max
 import org.pcb.unit.generator.Dimensions.min
 

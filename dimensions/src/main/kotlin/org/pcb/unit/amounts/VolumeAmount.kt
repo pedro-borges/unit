@@ -39,11 +39,11 @@ open class VolumeAmount<L : Unit<Distance>>(
 
     // region -> Volume
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         VolumeAmount(amount = amount * that.toBigDecimal(),
                      unit = distance)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         VolumeAmount(amount = amount / that.toBigDecimal(),
                      unit = distance)
 

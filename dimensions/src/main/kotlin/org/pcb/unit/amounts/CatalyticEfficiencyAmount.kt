@@ -45,11 +45,11 @@ open class CatalyticEfficiencyAmount<L : Unit<Distance>, N : Unit<Substance>, T 
 
     // region -> CatalyticEfficiency
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         CatalyticEfficiencyAmount(amount = amount * that.toBigDecimal(),
                                   unit = distance to U2(substance, time))
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         CatalyticEfficiencyAmount(amount = amount / that.toBigDecimal(),
                                   unit = distance to U2(substance, time))
 

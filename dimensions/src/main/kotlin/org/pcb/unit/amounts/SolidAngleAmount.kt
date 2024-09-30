@@ -37,11 +37,11 @@ open class SolidAngleAmount<BAC : Unit<Angle>>(
 
     // region -> SolidAngle
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         SolidAngleAmount(amount = amount * that.toBigDecimal(),
                          unit = angle)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         SolidAngleAmount(amount = amount / that.toBigDecimal(),
                          unit = angle)
 

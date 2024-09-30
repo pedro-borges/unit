@@ -2,7 +2,7 @@ package org.pcb.unit
 
 import kotlin.test.Test
 
-class MagnitudeTest
+class SIMagnitudeTest
 {
     @Test
     fun test()

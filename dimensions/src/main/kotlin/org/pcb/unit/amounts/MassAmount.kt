@@ -28,11 +28,11 @@ open class MassAmount<M : Unit<Mass>>(
 
     // region -> Mass
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         MassAmount(amount = amount * that.toBigDecimal(),
                    unit = mass)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         MassAmount(amount = amount / that.toBigDecimal(),
                    unit = mass)
 

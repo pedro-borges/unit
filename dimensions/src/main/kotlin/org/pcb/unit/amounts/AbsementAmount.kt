@@ -41,11 +41,11 @@ open class AbsementAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // region -> Absement
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         AbsementAmount(amount = amount * that.toBigDecimal(),
                        unit = U2(distance, time))
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         AbsementAmount(amount = amount / that.toBigDecimal(),
                        unit = U2(distance, time))
 

@@ -42,11 +42,11 @@ open class MolarVolumeAmount<L : Unit<Distance>, N : Unit<Substance>>(
 
     // region -> MolarVolume
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         MolarVolumeAmount(amount = amount * that.toBigDecimal(),
                           unit = distance to substance)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         MolarVolumeAmount(amount = amount / that.toBigDecimal(),
                           unit = distance to substance)
 

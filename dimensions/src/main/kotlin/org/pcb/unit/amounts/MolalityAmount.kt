@@ -43,11 +43,11 @@ open class MolalityAmount<M : Unit<Mass>, N : Unit<Substance>>(
 
     // region -> Molality
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         MolalityAmount(amount = amount * that.toBigDecimal(),
                        unit = substance to mass)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         MolalityAmount(amount = amount / that.toBigDecimal(),
                        unit = substance to mass)
 

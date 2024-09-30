@@ -30,11 +30,11 @@ open class DistanceAmount<L : Unit<Distance>>(
 
     // region -> Distance
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         DistanceAmount(amount = amount * that.toBigDecimal(),
                        unit = distance)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         DistanceAmount(amount = amount / that.toBigDecimal(),
                        unit = distance)
 

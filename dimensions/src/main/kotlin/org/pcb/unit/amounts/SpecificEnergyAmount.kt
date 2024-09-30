@@ -42,11 +42,11 @@ open class SpecificEnergyAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // region -> SpecificEnergy
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         SpecificEnergyAmount(amount = amount * that.toBigDecimal(),
                              unit = distance to time)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         SpecificEnergyAmount(amount = amount / that.toBigDecimal(),
                              unit = distance to time)
 

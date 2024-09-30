@@ -39,11 +39,11 @@ open class ThermalExpansionCoefficientAmount<K : Unit<Temperature>>(
 
     // region -> ThermalExpansionCoefficient
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         ThermalExpansionCoefficientAmount(amount = amount * that.toBigDecimal(),
                                           unit = NUMERIC to temperature)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         ThermalExpansionCoefficientAmount(amount = amount / that.toBigDecimal(),
                                           unit = NUMERIC to temperature)
 

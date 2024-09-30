@@ -44,11 +44,11 @@ open class AngularMomentumAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Ti
 
     // region -> AngularMomentum
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         AngularMomentumAmount(amount = amount * that.toBigDecimal(),
                               unit = U2(mass, distance) to time)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         AngularMomentumAmount(amount = amount / that.toBigDecimal(),
                               unit = U2(mass, distance) to time)
 

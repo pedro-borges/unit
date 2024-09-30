@@ -13,11 +13,11 @@ open class Amount<D : Dimension>(val amount: BigDecimal,
                                  val unit: CompositeUnit<D>)
     : Comparable<Amount<D>>
 {
-    open operator fun <S : Unit<Scalar>> times(that: Number) =
+    open operator fun times(that: Number) =
         Amount(amount = amount * that.toBigDecimal(),
                unit = unit)
 
-    open operator fun <S : Unit<Scalar>> div(that: Number) =
+    open operator fun div(that: Number) =
         Amount(amount = amount / that.toBigDecimal(),
                unit = unit)
 

@@ -41,11 +41,11 @@ open class FrequencyAmount<T : Unit<Time>>(
 
     // region -> Frequency
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         FrequencyAmount(amount = amount * that.toBigDecimal(),
                         unit = NUMERIC to time)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         FrequencyAmount(amount = amount / that.toBigDecimal(),
                         unit = NUMERIC to time)
 

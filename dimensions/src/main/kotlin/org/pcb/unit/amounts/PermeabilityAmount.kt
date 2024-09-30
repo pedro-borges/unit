@@ -48,11 +48,11 @@ open class PermeabilityAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M :
 
     // region -> Permeability
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         PermeabilityAmount(amount = amount * that.toBigDecimal(),
                            unit = U2(distance, mass) to U2(electricCurrent, time))
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         PermeabilityAmount(amount = amount / that.toBigDecimal(),
                            unit = U2(distance, mass) to U2(electricCurrent, time))
 

@@ -1,7 +1,5 @@
 package org.pcb.unit.generator
 
-import org.pcb.unit.Composite
-
 object Dimensions
 {
     class Definition(val name: String,

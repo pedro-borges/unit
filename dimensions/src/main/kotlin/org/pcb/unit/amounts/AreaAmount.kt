@@ -38,11 +38,11 @@ open class AreaAmount<L : Unit<Distance>>(
 
     // region -> Area
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         AreaAmount(amount = amount * that.toBigDecimal(),
                    unit = distance)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         AreaAmount(amount = amount / that.toBigDecimal(),
                    unit = distance)
 

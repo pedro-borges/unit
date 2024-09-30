@@ -38,11 +38,11 @@ open class SnapAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // region -> Snap
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         SnapAmount(amount = amount * that.toBigDecimal(),
                    unit = distance to time)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         SnapAmount(amount = amount / that.toBigDecimal(),
                    unit = distance to time)
 

@@ -53,11 +53,11 @@ open class MolarHeatCapacityAmount<L : Unit<Distance>, M : Unit<Mass>, N : Unit<
 
     // region -> MolarHeatCapacity
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         MolarHeatCapacityAmount(amount = amount * that.toBigDecimal(),
                                 unit = U2(distance, mass) to U3(substance, temperature, time))
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         MolarHeatCapacityAmount(amount = amount / that.toBigDecimal(),
                                 unit = U2(distance, mass) to U3(substance, temperature, time))
 

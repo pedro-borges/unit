@@ -42,11 +42,11 @@ open class MolarityAmount<L : Unit<Distance>, N : Unit<Substance>>(
 
     // region -> Molarity
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         MolarityAmount(amount = amount * that.toBigDecimal(),
                        unit = substance to distance)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         MolarityAmount(amount = amount / that.toBigDecimal(),
                        unit = substance to distance)
 

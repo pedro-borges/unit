@@ -6,8 +6,6 @@ import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 import org.pcb.unit.generator.Dimensions.DIMENSIONS
 import org.pcb.unit.generator.Dimensions.Definition
-import org.pcb.unit.minus
-import org.pcb.unit.plus
 
 @Ignore
 class GenerateAmountsTest
@@ -30,11 +28,11 @@ class GenerateAmountsTest
         val major = dimension.composite.positives()
         val minor = dimension.composite.negatives()
 
-        code += "\toverride operator fun <S : Unit<Scalar>> times(that: Number) =\n"
+        code += "\toverride operator fun times(that: Number) =\n"
         code += "\t\t${dimension.name}Amount(amount = amount * that.toBigDecimal(),"
         code += "\n\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
 
-        code += "\toverride operator fun <S : Unit<Scalar>> div(that: Number) =\n"
+        code += "\toverride operator fun div(that: Number) =\n"
         code += "\t\t${dimension.name}Amount(amount = amount / that.toBigDecimal(),"
         code += "\n\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
 

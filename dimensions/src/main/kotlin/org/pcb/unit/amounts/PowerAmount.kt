@@ -46,11 +46,11 @@ open class PowerAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> Power
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         PowerAmount(amount = amount * that.toBigDecimal(),
                     unit = U2(distance, mass) to time)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         PowerAmount(amount = amount / that.toBigDecimal(),
                     unit = U2(distance, mass) to time)
 

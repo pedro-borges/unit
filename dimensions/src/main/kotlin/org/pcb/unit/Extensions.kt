@@ -4,6 +4,7 @@ import java.math.BigDecimal
 import java.math.MathContext
 import kotlin.math.sign
 import org.pcb.unit.config.Configuration.calculationMathContext
+import org.pcb.unit.dimensions.Dimension
 
 fun Number.toBigDecimal(): BigDecimal =
     when
@@ -36,15 +37,6 @@ fun BigDecimal.power(power: Int): BigDecimal
     return result
 }
 
-fun Collection<Pair<Unit<*>, Int>>.sumToMap(): Map<Unit<*>, Int>
-{
-    val result = HashMap<Unit<*>, Int>()
-
-    forEach { result[it.first] = (result[it.first] ?: 0) + it.second }
-
-    return result
-}
-
 fun convert(vararg units: Pair<Unit<*>, Unit<*>>): BigDecimal =
     units.fold(1.toBigDecimal()) { acc, unit ->
         (acc * unit.first.scale).toBigDecimal()
@@ -65,32 +57,38 @@ fun convert(units: Pair<CompositeUnit<*>, CompositeUnit<*>>): BigDecimal
             val first = main[unit.dimension]?.let { it to main.units[it]!! }
             val second = unit to that.units[unit]!!
 
-            if (first == null)
+            when
             {
-
-            } else if (first.second.sign == 1 && second.second.sign == 1)
-            {
-                for (i in 1..second.second)
+                first == null                                       ->
                 {
-                    result /= convert(second.first to first.first)
                 }
-            } else if (first.second.sign == 1 && second.second.sign == -1)
-            {
-                for (i in 1 downTo second.second)
+                first.second.sign == 1 && second.second.sign == 1   ->
                 {
-                    result *= convert(second.first to first.first)
+                    for (i in 1..second.second)
+                    {
+                        result /= convert(second.first to first.first)
+                    }
                 }
-            } else if (first.second.sign == -1 && second.second.sign == 1)
-            {
-                for (i in -1..second.second)
+                first.second.sign == 1 && second.second.sign == -1  ->
                 {
-                    result /= convert(second.first to first.first)
+                    for (i in 1 downTo second.second)
+                    {
+                        result *= convert(second.first to first.first)
+                    }
                 }
-            } else if (first.second.sign == -1 && second.second.sign == -1)
-            {
-                for (i in -1 downTo second.second)
+                first.second.sign == -1 && second.second.sign == 1  ->
                 {
-                    result *= convert(second.first to first.first)
+                    for (i in -1..second.second)
+                    {
+                        result /= convert(second.first to first.first)
+                    }
+                }
+                first.second.sign == -1 && second.second.sign == -1 ->
+                {
+                    for (i in -1 downTo second.second)
+                    {
+                        result *= convert(second.first to first.first)
+                    }
                 }
             }
         }
@@ -98,8 +96,13 @@ fun convert(units: Pair<CompositeUnit<*>, CompositeUnit<*>>): BigDecimal
     return result
 }
 
-operator fun Number.times(other: BigDecimal): BigDecimal = toBigDecimal().multiply(other, calculationMathContext).stripTrailingZeros()
-operator fun Number.div(other: BigDecimal): BigDecimal = toBigDecimal().divide(other, calculationMathContext).stripTrailingZeros()
+operator fun Number.times(other: Number): BigDecimal = toBigDecimal().multiply(other.toBigDecimal(), calculationMathContext).stripTrailingZeros()
+operator fun Number.div(other: Number): BigDecimal = toBigDecimal().divide(other.toBigDecimal(), calculationMathContext).stripTrailingZeros()
+fun max(value: BigDecimal, vararg values: BigDecimal) = (values.toList() + value).maxOf { it }
+fun min(value: BigDecimal, vararg values: BigDecimal) = (values.toList() + value).minOf { it }
+
+fun <A : Amount<D>, D : Dimension> max(value: A, vararg values: A) = (values.toList() + value).maxOf { it }
+fun <A : Amount<D>, D : Dimension> min(value: A, vararg values: A) = (values.toList() + value).minOf { it }
 
 val <A, B> Pair<A, B>.major: A get() = first
 val <A, B> Pair<A, B>.minor get() = second

@@ -40,11 +40,11 @@ open class LuminanceAmount<L : Unit<Distance>, J : Unit<LuminousIntensity>>(
 
     // region -> Luminance
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         LuminanceAmount(amount = amount * that.toBigDecimal(),
                         unit = luminousIntensity to distance)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         LuminanceAmount(amount = amount / that.toBigDecimal(),
                         unit = luminousIntensity to distance)
 

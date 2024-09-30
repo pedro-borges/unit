@@ -41,11 +41,11 @@ open class AreaDensityAmount<L : Unit<Distance>, M : Unit<Mass>>(
 
     // region -> AreaDensity
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         AreaDensityAmount(amount = amount * that.toBigDecimal(),
                           unit = mass to distance)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         AreaDensityAmount(amount = amount / that.toBigDecimal(),
                           unit = mass to distance)
 

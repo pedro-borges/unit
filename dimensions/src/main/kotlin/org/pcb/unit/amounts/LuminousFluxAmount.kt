@@ -40,11 +40,11 @@ open class LuminousFluxAmount<BAC : Unit<Angle>, J : Unit<LuminousIntensity>>(
 
     // region -> LuminousFlux
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         LuminousFluxAmount(amount = amount * that.toBigDecimal(),
                            unit = U2(angle, luminousIntensity))
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         LuminousFluxAmount(amount = amount / that.toBigDecimal(),
                            unit = U2(angle, luminousIntensity))
 

@@ -46,11 +46,11 @@ open class PowerDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>
 
     // region -> PowerDensity
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         PowerDensityAmount(amount = amount * that.toBigDecimal(),
                            unit = mass to U2(distance, time))
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         PowerDensityAmount(amount = amount / that.toBigDecimal(),
                            unit = mass to U2(distance, time))
 

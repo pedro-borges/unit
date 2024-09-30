@@ -49,11 +49,11 @@ open class CentrifugalForceAmount<BAC : Unit<Angle>, L : Unit<Distance>, M : Uni
 
     // region -> CentrifugalForce
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         CentrifugalForceAmount(amount = amount * that.toBigDecimal(),
                                unit = U3(angle, distance, mass) to time)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         CentrifugalForceAmount(amount = amount / that.toBigDecimal(),
                                unit = U3(angle, distance, mass) to time)
 

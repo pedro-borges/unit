@@ -5,7 +5,6 @@ enum class Element(
         val atomicMass: Number,
         val electroNegativity: Number)
 {
-    /* SYMBOL NAME ATOMIC_WEIGHT ELECTRONEGATIVITY */
     H("Hydrogen", 1.00794, 2.1),
     He("Helium", 4.0026, 0),
     Li("Lithium", 6.941, 0.98),

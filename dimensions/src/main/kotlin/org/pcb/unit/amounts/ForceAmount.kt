@@ -48,11 +48,11 @@ open class ForceAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> Force
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         ForceAmount(amount = amount * that.toBigDecimal(),
                     unit = U2(distance, mass) to time)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         ForceAmount(amount = amount / that.toBigDecimal(),
                     unit = U2(distance, mass) to time)
 

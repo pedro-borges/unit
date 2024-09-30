@@ -1,4 +1,4 @@
-package org.pcb.unit
+package org.pcb.unit.generator
 
 data class Composite(
         val substance: Int = 0,

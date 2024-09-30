@@ -39,11 +39,11 @@ open class FuelEfficiencyAmount<L : Unit<Distance>>(
 
     // region -> FuelEfficiency
 
-    override operator fun <S : Unit<Scalar>> times(that: Number) =
+    override operator fun times(that: Number) =
         FuelEfficiencyAmount(amount = amount * that.toBigDecimal(),
                              unit = NUMERIC to distance)
 
-    override operator fun <S : Unit<Scalar>> div(that: Number) =
+    override operator fun div(that: Number) =
         FuelEfficiencyAmount(amount = amount / that.toBigDecimal(),
                              unit = NUMERIC to distance)
 
