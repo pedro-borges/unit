@@ -30,6 +30,14 @@ class GenerateAmountsTest
         val major = dimension.composite.positives()
         val minor = dimension.composite.negatives()
 
+        code += "\toverride operator fun <S : Unit<Scalar>> times(that: Number) =\n"
+        code += "\t\t${dimension.name}Amount(amount = amount * that.toBigDecimal(),"
+        code += "\n\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
+
+        code += "\toverride operator fun <S : Unit<Scalar>> div(that: Number) =\n"
+        code += "\t\t${dimension.name}Amount(amount = amount / that.toBigDecimal(),"
+        code += "\n\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
+
         code += "\toverride operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =\n"
         code += "\t\t${dimension.name}Amount(amount = amount * that.amount * convert(that.scalar to NUMERIC),"
         code += "\n\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"

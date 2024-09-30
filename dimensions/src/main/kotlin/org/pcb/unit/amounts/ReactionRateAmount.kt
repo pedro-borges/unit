@@ -44,6 +44,14 @@ open class ReactionRateAmount<L : Unit<Distance>, N : Unit<Substance>, T : Unit<
 
     // region -> ReactionRate
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        ReactionRateAmount(amount = amount * that.toBigDecimal(),
+                           unit = substance to U2(time, distance))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        ReactionRateAmount(amount = amount / that.toBigDecimal(),
+                           unit = substance to U2(time, distance))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ReactionRateAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                            unit = substance to U2(time, distance))

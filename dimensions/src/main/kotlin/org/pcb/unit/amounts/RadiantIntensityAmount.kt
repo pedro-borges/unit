@@ -48,6 +48,14 @@ open class RadiantIntensityAmount<BAC : Unit<Angle>, L : Unit<Distance>, M : Uni
 
     // region -> RadiantIntensity
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        RadiantIntensityAmount(amount = amount * that.toBigDecimal(),
+                               unit = U2(distance, mass) to U2(angle, time))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        RadiantIntensityAmount(amount = amount / that.toBigDecimal(),
+                               unit = U2(distance, mass) to U2(angle, time))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         RadiantIntensityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                unit = U2(distance, mass) to U2(angle, time))

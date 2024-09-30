@@ -48,6 +48,14 @@ open class EnergyAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> Energy
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        EnergyAmount(amount = amount * that.toBigDecimal(),
+                     unit = U2(distance, mass) to time)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        EnergyAmount(amount = amount / that.toBigDecimal(),
+                     unit = U2(distance, mass) to time)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         EnergyAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                      unit = U2(distance, mass) to time)

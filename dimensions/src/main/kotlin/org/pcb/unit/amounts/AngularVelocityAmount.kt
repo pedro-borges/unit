@@ -41,6 +41,14 @@ open class AngularVelocityAmount<BAC : Unit<Angle>, T : Unit<Time>>(
 
     // region -> AngularVelocity
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        AngularVelocityAmount(amount = amount * that.toBigDecimal(),
+                              unit = angle to time)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        AngularVelocityAmount(amount = amount / that.toBigDecimal(),
+                              unit = angle to time)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         AngularVelocityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                               unit = angle to time)

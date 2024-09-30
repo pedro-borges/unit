@@ -45,6 +45,14 @@ open class ElectricDisplacementFieldAmount<L : Unit<Distance>, I : Unit<Electric
 
     // region -> ElectricDisplacementField
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        ElectricDisplacementFieldAmount(amount = amount * that.toBigDecimal(),
+                                        unit = U2(electricCurrent, time) to distance)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        ElectricDisplacementFieldAmount(amount = amount / that.toBigDecimal(),
+                                        unit = U2(electricCurrent, time) to distance)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricDisplacementFieldAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                         unit = U2(electricCurrent, time) to distance)

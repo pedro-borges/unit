@@ -48,6 +48,14 @@ open class MagneticFluxAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M :
 
     // region -> MagneticFlux
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        MagneticFluxAmount(amount = amount * that.toBigDecimal(),
+                           unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        MagneticFluxAmount(amount = amount / that.toBigDecimal(),
+                           unit = U2(distance, mass) to U2(electricCurrent, time))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MagneticFluxAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                            unit = U2(distance, mass) to U2(electricCurrent, time))

@@ -45,6 +45,14 @@ open class MagneticFluxDensityAmount<I : Unit<ElectricCurrent>, M : Unit<Mass>, 
 
     // region -> MagneticFluxDensity
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        MagneticFluxDensityAmount(amount = amount * that.toBigDecimal(),
+                                  unit = mass to U2(electricCurrent, time))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        MagneticFluxDensityAmount(amount = amount / that.toBigDecimal(),
+                                  unit = mass to U2(electricCurrent, time))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MagneticFluxDensityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                   unit = mass to U2(electricCurrent, time))

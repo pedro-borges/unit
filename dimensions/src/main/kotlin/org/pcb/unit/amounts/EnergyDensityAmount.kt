@@ -46,6 +46,14 @@ open class EnergyDensityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time
 
     // region -> EnergyDensity
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        EnergyDensityAmount(amount = amount * that.toBigDecimal(),
+                            unit = mass to U2(distance, time))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        EnergyDensityAmount(amount = amount / that.toBigDecimal(),
+                            unit = mass to U2(distance, time))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         EnergyDensityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                             unit = mass to U2(distance, time))

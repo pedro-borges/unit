@@ -41,6 +41,14 @@ open class SpecificVolumeAmount<L : Unit<Distance>, M : Unit<Mass>>(
 
     // region -> SpecificVolume
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        SpecificVolumeAmount(amount = amount * that.toBigDecimal(),
+                             unit = distance to mass)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        SpecificVolumeAmount(amount = amount / that.toBigDecimal(),
+                             unit = distance to mass)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         SpecificVolumeAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                              unit = distance to mass)

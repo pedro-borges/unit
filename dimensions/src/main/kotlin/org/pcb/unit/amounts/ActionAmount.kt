@@ -45,6 +45,14 @@ open class ActionAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> Action
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        ActionAmount(amount = amount * that.toBigDecimal(),
+                     unit = U2(distance, mass) to time)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        ActionAmount(amount = amount / that.toBigDecimal(),
+                     unit = U2(distance, mass) to time)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ActionAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                      unit = U2(distance, mass) to time)

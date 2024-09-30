@@ -32,6 +32,14 @@ open class TimeAmount<T : Unit<Time>>(
 
     // region -> Time
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        TimeAmount(amount = amount * that.toBigDecimal(),
+                   unit = time)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        TimeAmount(amount = amount / that.toBigDecimal(),
+                   unit = time)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         TimeAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                    unit = time)

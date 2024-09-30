@@ -40,6 +40,14 @@ open class ElectricChargeAmount<I : Unit<ElectricCurrent>, T : Unit<Time>>(
 
     // region -> ElectricCharge
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        ElectricChargeAmount(amount = amount * that.toBigDecimal(),
+                             unit = U2(electricCurrent, time))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        ElectricChargeAmount(amount = amount / that.toBigDecimal(),
+                             unit = U2(electricCurrent, time))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricChargeAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                              unit = U2(electricCurrent, time))

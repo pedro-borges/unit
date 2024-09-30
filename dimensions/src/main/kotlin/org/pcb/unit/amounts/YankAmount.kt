@@ -47,6 +47,14 @@ open class YankAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> Yank
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        YankAmount(amount = amount * that.toBigDecimal(),
+                   unit = U2(distance, mass) to time)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        YankAmount(amount = amount / that.toBigDecimal(),
+                   unit = U2(distance, mass) to time)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         YankAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                    unit = U2(distance, mass) to time)

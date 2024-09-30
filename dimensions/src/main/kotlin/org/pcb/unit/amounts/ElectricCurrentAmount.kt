@@ -28,6 +28,14 @@ open class ElectricCurrentAmount<I : Unit<ElectricCurrent>>(
 
     // region -> ElectricCurrent
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        ElectricCurrentAmount(amount = amount * that.toBigDecimal(),
+                              unit = electricCurrent)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        ElectricCurrentAmount(amount = amount / that.toBigDecimal(),
+                              unit = electricCurrent)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricCurrentAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                               unit = electricCurrent)

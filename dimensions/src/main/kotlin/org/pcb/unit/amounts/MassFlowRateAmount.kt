@@ -42,6 +42,14 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> MassFlowRate
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        MassFlowRateAmount(amount = amount * that.toBigDecimal(),
+                           unit = mass to time)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        MassFlowRateAmount(amount = amount / that.toBigDecimal(),
+                           unit = mass to time)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MassFlowRateAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                            unit = mass to time)

@@ -28,6 +28,14 @@ open class TemperatureAmount<K : Unit<Temperature>>(
 
     // region -> Temperature
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        TemperatureAmount(amount = amount * that.toBigDecimal(),
+                          unit = temperature)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        TemperatureAmount(amount = amount / that.toBigDecimal(),
+                          unit = temperature)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         TemperatureAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                           unit = temperature)

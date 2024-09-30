@@ -41,6 +41,14 @@ open class TemperatureGradientAmount<L : Unit<Distance>, K : Unit<Temperature>>(
 
     // region -> TemperatureGradient
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        TemperatureGradientAmount(amount = amount * that.toBigDecimal(),
+                                  unit = temperature to distance)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        TemperatureGradientAmount(amount = amount / that.toBigDecimal(),
+                                  unit = temperature to distance)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         TemperatureGradientAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                   unit = temperature to distance)

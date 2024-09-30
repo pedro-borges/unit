@@ -48,6 +48,14 @@ open class ElectricFieldStrengthAmount<L : Unit<Distance>, I : Unit<ElectricCurr
 
     // region -> ElectricFieldStrength
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        ElectricFieldStrengthAmount(amount = amount * that.toBigDecimal(),
+                                    unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        ElectricFieldStrengthAmount(amount = amount / that.toBigDecimal(),
+                                    unit = U2(distance, mass) to U2(electricCurrent, time))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricFieldStrengthAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                     unit = U2(distance, mass) to U2(electricCurrent, time))

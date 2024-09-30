@@ -42,6 +42,14 @@ open class PaceAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // region -> Pace
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        PaceAmount(amount = amount * that.toBigDecimal(),
+                   unit = time to distance)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        PaceAmount(amount = amount / that.toBigDecimal(),
+                   unit = time to distance)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         PaceAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                    unit = time to distance)

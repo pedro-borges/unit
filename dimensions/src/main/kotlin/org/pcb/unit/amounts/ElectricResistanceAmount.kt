@@ -48,6 +48,14 @@ open class ElectricResistanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent
 
     // region -> ElectricResistance
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        ElectricResistanceAmount(amount = amount * that.toBigDecimal(),
+                                 unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        ElectricResistanceAmount(amount = amount / that.toBigDecimal(),
+                                 unit = U2(distance, mass) to U2(electricCurrent, time))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricResistanceAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                  unit = U2(distance, mass) to U2(electricCurrent, time))

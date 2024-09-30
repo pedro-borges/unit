@@ -46,6 +46,14 @@ open class ViscosityAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> Viscosity
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        ViscosityAmount(amount = amount * that.toBigDecimal(),
+                        unit = mass to U2(distance, time))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        ViscosityAmount(amount = amount / that.toBigDecimal(),
+                        unit = mass to U2(distance, time))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ViscosityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                         unit = mass to U2(distance, time))

@@ -48,6 +48,14 @@ open class SpectralIntensityAmount<BAC : Unit<Angle>, L : Unit<Distance>, M : Un
 
     // region -> SpectralIntensity
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        SpectralIntensityAmount(amount = amount * that.toBigDecimal(),
+                                unit = U2(distance, mass) to U2(angle, time))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        SpectralIntensityAmount(amount = amount / that.toBigDecimal(),
+                                unit = U2(distance, mass) to U2(angle, time))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         SpectralIntensityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                 unit = U2(distance, mass) to U2(angle, time))

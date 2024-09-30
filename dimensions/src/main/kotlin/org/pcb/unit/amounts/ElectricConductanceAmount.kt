@@ -48,6 +48,14 @@ open class ElectricConductanceAmount<L : Unit<Distance>, I : Unit<ElectricCurren
 
     // region -> ElectricConductance
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        ElectricConductanceAmount(amount = amount * that.toBigDecimal(),
+                                  unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        ElectricConductanceAmount(amount = amount / that.toBigDecimal(),
+                                  unit = U2(time, electricCurrent) to U2(mass, distance))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricConductanceAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                   unit = U2(time, electricCurrent) to U2(mass, distance))

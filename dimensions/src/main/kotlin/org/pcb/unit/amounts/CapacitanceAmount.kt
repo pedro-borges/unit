@@ -48,6 +48,14 @@ open class CapacitanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M : 
 
     // region -> Capacitance
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        CapacitanceAmount(amount = amount * that.toBigDecimal(),
+                          unit = U2(time, electricCurrent) to U2(mass, distance))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        CapacitanceAmount(amount = amount / that.toBigDecimal(),
+                          unit = U2(time, electricCurrent) to U2(mass, distance))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         CapacitanceAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                           unit = U2(time, electricCurrent) to U2(mass, distance))

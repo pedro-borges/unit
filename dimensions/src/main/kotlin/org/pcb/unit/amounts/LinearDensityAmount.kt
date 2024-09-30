@@ -41,6 +41,14 @@ open class LinearDensityAmount<L : Unit<Distance>, M : Unit<Mass>>(
 
     // region -> LinearDensity
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        LinearDensityAmount(amount = amount * that.toBigDecimal(),
+                            unit = mass to distance)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        LinearDensityAmount(amount = amount / that.toBigDecimal(),
+                            unit = mass to distance)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         LinearDensityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                             unit = mass to distance)

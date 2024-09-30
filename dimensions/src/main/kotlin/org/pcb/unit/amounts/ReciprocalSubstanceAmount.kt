@@ -39,6 +39,14 @@ open class ReciprocalSubstanceAmount<N : Unit<Substance>>(
 
     // region -> ReciprocalSubstance
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        ReciprocalSubstanceAmount(amount = amount * that.toBigDecimal(),
+                                  unit = NUMERIC to substance)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        ReciprocalSubstanceAmount(amount = amount / that.toBigDecimal(),
+                                  unit = NUMERIC to substance)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ReciprocalSubstanceAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                   unit = NUMERIC to substance)

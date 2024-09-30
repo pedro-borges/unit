@@ -48,6 +48,14 @@ open class InductanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M : U
 
     // region -> Inductance
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        InductanceAmount(amount = amount * that.toBigDecimal(),
+                         unit = U2(distance, mass) to U2(electricCurrent, time))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        InductanceAmount(amount = amount / that.toBigDecimal(),
+                         unit = U2(distance, mass) to U2(electricCurrent, time))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         InductanceAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                          unit = U2(distance, mass) to U2(electricCurrent, time))

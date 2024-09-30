@@ -50,6 +50,14 @@ open class HeatCapacityAmount<L : Unit<Distance>, M : Unit<Mass>, K : Unit<Tempe
 
     // region -> HeatCapacity
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        HeatCapacityAmount(amount = amount * that.toBigDecimal(),
+                           unit = U2(distance, mass) to U2(temperature, time))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        HeatCapacityAmount(amount = amount / that.toBigDecimal(),
+                           unit = U2(distance, mass) to U2(temperature, time))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         HeatCapacityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                            unit = U2(distance, mass) to U2(temperature, time))

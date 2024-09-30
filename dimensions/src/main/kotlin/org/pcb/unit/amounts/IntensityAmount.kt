@@ -43,6 +43,14 @@ open class IntensityAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> Intensity
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        IntensityAmount(amount = amount * that.toBigDecimal(),
+                        unit = mass to time)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        IntensityAmount(amount = amount / that.toBigDecimal(),
+                        unit = mass to time)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         IntensityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                         unit = mass to time)

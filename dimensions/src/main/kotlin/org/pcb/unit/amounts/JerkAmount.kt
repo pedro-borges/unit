@@ -40,6 +40,14 @@ open class JerkAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // region -> Jerk
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        JerkAmount(amount = amount * that.toBigDecimal(),
+                   unit = distance to time)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        JerkAmount(amount = amount / that.toBigDecimal(),
+                   unit = distance to time)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         JerkAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                    unit = distance to time)

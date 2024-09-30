@@ -29,6 +29,14 @@ open class RentAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     // region -> Rent
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        RentAmount(amount = amount * that.toBigDecimal(),
+                   unit = currency to time)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        RentAmount(amount = amount / that.toBigDecimal(),
+                   unit = currency to time)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         RentAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                    unit = currency to time)

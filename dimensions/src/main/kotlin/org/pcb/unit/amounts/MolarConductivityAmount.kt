@@ -49,6 +49,14 @@ open class MolarConductivityAmount<I : Unit<ElectricCurrent>, M : Unit<Mass>, N 
 
     // region -> MolarConductivity
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        MolarConductivityAmount(amount = amount * that.toBigDecimal(),
+                                unit = U2(time, electricCurrent) to U2(mass, substance))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        MolarConductivityAmount(amount = amount / that.toBigDecimal(),
+                                unit = U2(time, electricCurrent) to U2(mass, substance))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MolarConductivityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                 unit = U2(time, electricCurrent) to U2(mass, substance))

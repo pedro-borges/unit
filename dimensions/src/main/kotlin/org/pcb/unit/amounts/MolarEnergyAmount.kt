@@ -50,6 +50,14 @@ open class MolarEnergyAmount<L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substa
 
     // region -> MolarEnergy
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        MolarEnergyAmount(amount = amount * that.toBigDecimal(),
+                          unit = U2(distance, mass) to U2(substance, time))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        MolarEnergyAmount(amount = amount / that.toBigDecimal(),
+                          unit = U2(distance, mass) to U2(substance, time))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MolarEnergyAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                           unit = U2(distance, mass) to U2(substance, time))

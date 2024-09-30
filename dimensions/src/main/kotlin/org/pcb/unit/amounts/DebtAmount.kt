@@ -28,6 +28,14 @@ open class DebtAmount<C : Unit<Currency>, T : Unit<Time>>(
 
     // region -> Debt
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        DebtAmount(amount = amount * that.toBigDecimal(),
+                   unit = U2(currency, time))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        DebtAmount(amount = amount / that.toBigDecimal(),
+                   unit = U2(currency, time))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         DebtAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                    unit = U2(currency, time))

@@ -41,6 +41,14 @@ open class VolumetricFlowAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // region -> VolumetricFlow
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        VolumetricFlowAmount(amount = amount * that.toBigDecimal(),
+                             unit = distance to time)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        VolumetricFlowAmount(amount = amount / that.toBigDecimal(),
+                             unit = distance to time)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         VolumetricFlowAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                              unit = distance to time)

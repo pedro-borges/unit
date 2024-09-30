@@ -39,6 +39,14 @@ open class SpacialFrequencyAmount<L : Unit<Distance>>(
 
     // region -> SpacialFrequency
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        SpacialFrequencyAmount(amount = amount * that.toBigDecimal(),
+                               unit = NUMERIC to distance)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        SpacialFrequencyAmount(amount = amount / that.toBigDecimal(),
+                               unit = NUMERIC to distance)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         SpacialFrequencyAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                unit = NUMERIC to distance)

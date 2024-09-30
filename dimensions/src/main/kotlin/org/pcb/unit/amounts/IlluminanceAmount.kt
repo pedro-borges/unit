@@ -43,6 +43,14 @@ open class IlluminanceAmount<BAC : Unit<Angle>, L : Unit<Distance>, J : Unit<Lum
 
     // region -> Illuminance
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        IlluminanceAmount(amount = amount * that.toBigDecimal(),
+                          unit = U2(angle, luminousIntensity) to distance)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        IlluminanceAmount(amount = amount / that.toBigDecimal(),
+                          unit = U2(angle, luminousIntensity) to distance)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         IlluminanceAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                           unit = U2(angle, luminousIntensity) to distance)

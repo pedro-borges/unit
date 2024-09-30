@@ -38,6 +38,14 @@ open class CrackleAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // region -> Crackle
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        CrackleAmount(amount = amount * that.toBigDecimal(),
+                      unit = distance to time)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        CrackleAmount(amount = amount / that.toBigDecimal(),
+                      unit = distance to time)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         CrackleAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                       unit = distance to time)

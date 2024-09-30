@@ -25,6 +25,14 @@ open class CurrencyAmount<C : Unit<Currency>>(
 
     // region -> Currency
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        CurrencyAmount(amount = amount * that.toBigDecimal(),
+                       unit = currency)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        CurrencyAmount(amount = amount / that.toBigDecimal(),
+                       unit = currency)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         CurrencyAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                        unit = currency)

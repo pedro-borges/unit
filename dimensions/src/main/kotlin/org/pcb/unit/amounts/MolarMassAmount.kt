@@ -44,6 +44,14 @@ open class MolarMassAmount<M : Unit<Mass>, N : Unit<Substance>>(
 
     // region -> MolarMass
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        MolarMassAmount(amount = amount * that.toBigDecimal(),
+                        unit = mass to substance)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        MolarMassAmount(amount = amount / that.toBigDecimal(),
+                        unit = mass to substance)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MolarMassAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                         unit = mass to substance)

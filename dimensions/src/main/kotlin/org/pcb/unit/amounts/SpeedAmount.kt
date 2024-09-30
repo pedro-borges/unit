@@ -41,6 +41,14 @@ open class SpeedAmount<L : Unit<Distance>, T : Unit<Time>>(
 
     // region -> Speed
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        SpeedAmount(amount = amount * that.toBigDecimal(),
+                    unit = distance to time)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        SpeedAmount(amount = amount / that.toBigDecimal(),
+                    unit = distance to time)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         SpeedAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                     unit = distance to time)

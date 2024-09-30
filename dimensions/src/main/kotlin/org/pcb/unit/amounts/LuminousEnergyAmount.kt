@@ -42,6 +42,14 @@ open class LuminousEnergyAmount<BAC : Unit<Angle>, J : Unit<LuminousIntensity>, 
 
     // region -> LuminousEnergy
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        LuminousEnergyAmount(amount = amount * that.toBigDecimal(),
+                             unit = U3(angle, luminousIntensity, time))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        LuminousEnergyAmount(amount = amount / that.toBigDecimal(),
+                             unit = U3(angle, luminousIntensity, time))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         LuminousEnergyAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                              unit = U3(angle, luminousIntensity, time))

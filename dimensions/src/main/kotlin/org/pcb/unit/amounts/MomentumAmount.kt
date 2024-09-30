@@ -47,6 +47,14 @@ open class MomentumAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> Momentum
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        MomentumAmount(amount = amount * that.toBigDecimal(),
+                       unit = U2(distance, mass) to time)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        MomentumAmount(amount = amount / that.toBigDecimal(),
+                       unit = U2(distance, mass) to time)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MomentumAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                        unit = U2(distance, mass) to time)

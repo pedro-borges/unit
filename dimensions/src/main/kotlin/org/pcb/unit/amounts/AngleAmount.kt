@@ -27,6 +27,14 @@ open class AngleAmount<BAC : Unit<Angle>>(
 
     // region -> Angle
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        AngleAmount(amount = amount * that.toBigDecimal(),
+                    unit = angle)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        AngleAmount(amount = amount / that.toBigDecimal(),
+                    unit = angle)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         AngleAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                     unit = angle)

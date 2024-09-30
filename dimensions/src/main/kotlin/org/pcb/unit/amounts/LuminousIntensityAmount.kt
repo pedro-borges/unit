@@ -26,6 +26,14 @@ open class LuminousIntensityAmount<J : Unit<LuminousIntensity>>(
 
     // region -> LuminousIntensity
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        LuminousIntensityAmount(amount = amount * that.toBigDecimal(),
+                                unit = luminousIntensity)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        LuminousIntensityAmount(amount = amount / that.toBigDecimal(),
+                                unit = luminousIntensity)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         LuminousIntensityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                 unit = luminousIntensity)

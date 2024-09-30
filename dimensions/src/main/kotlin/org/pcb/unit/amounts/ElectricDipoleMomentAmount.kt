@@ -43,6 +43,14 @@ open class ElectricDipoleMomentAmount<L : Unit<Distance>, I : Unit<ElectricCurre
 
     // region -> ElectricDipoleMoment
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        ElectricDipoleMomentAmount(amount = amount * that.toBigDecimal(),
+                                   unit = U3(distance, electricCurrent, time))
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        ElectricDipoleMomentAmount(amount = amount / that.toBigDecimal(),
+                                   unit = U3(distance, electricCurrent, time))
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricDipoleMomentAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                    unit = U3(distance, electricCurrent, time))

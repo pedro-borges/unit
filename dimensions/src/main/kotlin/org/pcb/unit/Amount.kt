@@ -12,6 +12,14 @@ import org.pcb.unit.dimensions.Scalar
 open class Amount<D : Dimension>(val amount: BigDecimal,
                                  val unit: CompositeUnit<D>)
 {
+    open operator fun <S : Unit<Scalar>> times(that: Number) =
+        Amount(amount = amount * that.toBigDecimal(),
+               unit = unit)
+
+    open operator fun <S : Unit<Scalar>> div(that: Number) =
+        Amount(amount = amount / that.toBigDecimal(),
+               unit = unit)
+
     open operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         Amount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                unit = unit)

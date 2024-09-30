@@ -41,6 +41,14 @@ open class MagneticFieldStrengthAmount<L : Unit<Distance>, I : Unit<ElectricCurr
 
     // region -> MagneticFieldStrength
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        MagneticFieldStrengthAmount(amount = amount * that.toBigDecimal(),
+                                    unit = electricCurrent to distance)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        MagneticFieldStrengthAmount(amount = amount / that.toBigDecimal(),
+                                    unit = electricCurrent to distance)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         MagneticFieldStrengthAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                     unit = electricCurrent to distance)

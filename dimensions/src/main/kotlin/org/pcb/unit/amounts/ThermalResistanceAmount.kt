@@ -48,6 +48,14 @@ open class ThermalResistanceAmount<L : Unit<Distance>, M : Unit<Mass>, K : Unit<
 
     // region -> ThermalResistance
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        ThermalResistanceAmount(amount = amount * that.toBigDecimal(),
+                                unit = U3(time, distance, temperature) to mass)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        ThermalResistanceAmount(amount = amount / that.toBigDecimal(),
+                                unit = U3(time, distance, temperature) to mass)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ThermalResistanceAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                 unit = U3(time, distance, temperature) to mass)

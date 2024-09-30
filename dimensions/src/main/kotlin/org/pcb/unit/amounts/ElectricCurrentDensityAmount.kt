@@ -41,6 +41,14 @@ open class ElectricCurrentDensityAmount<L : Unit<Distance>, I : Unit<ElectricCur
 
     // region -> ElectricCurrentDensity
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        ElectricCurrentDensityAmount(amount = amount * that.toBigDecimal(),
+                                     unit = electricCurrent to distance)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        ElectricCurrentDensityAmount(amount = amount / that.toBigDecimal(),
+                                     unit = electricCurrent to distance)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         ElectricCurrentDensityAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                                      unit = electricCurrent to distance)

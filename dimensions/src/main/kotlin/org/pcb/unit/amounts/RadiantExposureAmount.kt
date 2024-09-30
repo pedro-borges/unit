@@ -42,6 +42,14 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
 
     // region -> RadiantExposure
 
+    override operator fun <S : Unit<Scalar>> times(that: Number) =
+        RadiantExposureAmount(amount = amount * that.toBigDecimal(),
+                              unit = mass to time)
+
+    override operator fun <S : Unit<Scalar>> div(that: Number) =
+        RadiantExposureAmount(amount = amount / that.toBigDecimal(),
+                              unit = mass to time)
+
     override operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =
         RadiantExposureAmount(amount = amount * that.amount * convert(that.scalar to NUMERIC),
                               unit = mass to time)
