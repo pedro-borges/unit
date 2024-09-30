@@ -11,6 +11,7 @@ import org.pcb.unit.dimensions.Scalar
 
 open class Amount<D : Dimension>(val amount: BigDecimal,
                                  val unit: CompositeUnit<D>)
+    : Comparable<Amount<D>>
 {
     open operator fun <S : Unit<Scalar>> times(that: Number) =
         Amount(amount = amount * that.toBigDecimal(),
@@ -64,4 +65,11 @@ open class Amount<D : Dimension>(val amount: BigDecimal,
         (amount * unit.scale)
             .movePointRight(unit.magnitude.power)
             .setScale(displayMathContext)
+
+    // region Comparable
+
+    override fun compareTo(other: Amount<D>) =
+        (this.amount - other.amount * convert(other.unit to this.unit)).signum()
+
+    // endregion
 }
