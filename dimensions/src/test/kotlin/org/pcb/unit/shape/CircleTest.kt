@@ -1,9 +1,9 @@
 package org.pcb.unit.shape
 
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import org.junit.jupiter.api.Nested
 import org.pcb.unit.base.Meter
+import org.pcb.unit.units.test.assertEquals
 import org.pcb.unit.units.test.assertZero
 
 class CircleTest
@@ -11,19 +11,18 @@ class CircleTest
     @Nested
     inner class Positive
     {
-        private val radius = Meter(2)
-        private val sut = Circle(radius)
+        private val sut = Circle(Meter(2))
 
         @Test
         fun narrowest()
         {
-            assertEquals(radius * 2, sut.narrowest)
+            assertEquals(4, sut.narrowest.amount)
         }
 
         @Test
         fun widest()
         {
-            assertEquals(radius * 2, sut.widest)
+            assertEquals(4, sut.widest.amount)
         }
 
         @Test

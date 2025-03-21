@@ -12,6 +12,7 @@
     <modules>
         <module>dimensions</module>
         <module>units</module>
+        <module>world</module>
     </modules>
 
     <properties>

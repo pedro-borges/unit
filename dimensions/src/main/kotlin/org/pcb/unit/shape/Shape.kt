@@ -11,4 +11,6 @@ interface Shape<D : Unit<Distance>>
     val widest: DistanceAmount<D>
     val perimeter: DistanceAmount<D>
     val area: AreaAmount<D>
+    val edges: Int
+    val vertices: Int
 }

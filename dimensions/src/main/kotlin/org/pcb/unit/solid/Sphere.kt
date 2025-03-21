@@ -19,4 +19,7 @@ class Sphere<L : Unit<Distance>>(val radius: DistanceAmount<L>)
                                    unit = radius.distance)
     override val volume = VolumeAmount(amount = PI * radius.amount.power(3) * 4 / 3,
                                        unit = radius.distance)
+    override val faces = 1
+    override val edges = 0
+    override val vertices = 0
 }

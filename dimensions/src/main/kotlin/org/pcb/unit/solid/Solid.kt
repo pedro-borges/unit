@@ -12,4 +12,7 @@ interface Solid<D : Unit<Distance>>
     val widest: DistanceAmount<D>
     val area: AreaAmount<D>
     val volume: VolumeAmount<D>
+    val faces: Int
+    val edges: Int
+    val vertices: Int
 }

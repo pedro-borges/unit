@@ -37,6 +37,7 @@ object Dimensions
         Definition("Force", Composite(distance = 1, mass = 1, time = -2)),
         Definition("Frequency", Composite(time = -1)),
         Definition("FuelEfficiency", Composite(distance = -2)),
+        Definition("Gas", Composite(mass = 1, distance = 2, time = -2, temperature = -1, substance = -1)),
         Definition("HeatCapacity", Composite(distance = 2, mass = 1, temperature = -1, time = -2)),
         Definition("Illuminance", Composite(luminousIntensity = 1, angle = 2, distance = -2)),
         Definition("Inductance", Composite(distance = 2, mass = 1, electricCurrent = -2, time = -2)),

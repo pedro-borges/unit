@@ -1,10 +1,9 @@
 package org.pcb.unit.shape
 
 import kotlin.test.Test
-import kotlin.test.assertEquals
 import org.junit.jupiter.api.Nested
 import org.pcb.unit.base.Meter
-import org.pcb.unit.config.Configuration.calculationMathContext
+import org.pcb.unit.units.test.assertEquals
 import org.pcb.unit.units.test.assertZero
 
 class SquareTest
@@ -12,31 +11,30 @@ class SquareTest
     @Nested
     inner class Positive
     {
-        private val side = Meter(2)
-        private val sut = Square(side)
+        private val sut = Square(Meter(2))
 
         @Test
         fun narrowest()
         {
-            assertEquals(side, sut.narrowest)
+            assertEquals(2, sut.narrowest.amount)
         }
 
         @Test
         fun widest()
         {
-            assertEquals(side * 2.toBigDecimal().sqrt(calculationMathContext), sut.widest)
+            assertEquals("2.8284271247461900976033774484193961571393437507538961463533594759815".toBigDecimal(), sut.widest.amount)
         }
 
         @Test
         fun perimeter()
         {
-            assertEquals(8.toBigDecimal(), sut.perimeter.amount)
+            assertEquals(8, sut.perimeter.amount)
         }
 
         @Test
         fun area()
         {
-            assertEquals(4.toBigDecimal(), sut.area.amount)
+            assertEquals(4, sut.area.amount)
         }
     }
 

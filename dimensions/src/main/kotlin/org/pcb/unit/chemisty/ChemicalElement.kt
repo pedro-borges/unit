@@ -1,9 +1,14 @@
-package org.pcb.unit
+package org.pcb.unit.chemisty
 
-enum class Element(
-        val fullName: String,
-        val atomicMass: Number,
+import org.pcb.unit.amounts.MolarMassAmount
+import org.pcb.unit.base.Gram.GRAM
+import org.pcb.unit.base.Mole.MOLE
+
+enum class ChemicalElement(
+        private val fullName: String,
+        private val _atomicMass: Number,
         val electroNegativity: Number)
+    : ProvidesAtomicMass
 {
     H("Hydrogen", 1.00794, 2.1),
     He("Helium", 4.0026, 0),
@@ -118,9 +123,11 @@ enum class Element(
     Uuu("unununium", 272, 0),
     Uub("ununbium", 277, 0);
 
+    val symbol = name
+
     val atomicNumber = ordinal + 1
 
-    val symbol = name
+    override val atomicMass = MolarMassAmount(_atomicMass, GRAM to MOLE)
 
     operator fun get(atomicNumber: Int) = entries.toTypedArray()[atomicNumber - 1]
 }
