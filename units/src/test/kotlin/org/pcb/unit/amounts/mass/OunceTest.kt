@@ -15,13 +15,12 @@ class OunceTest
     @Test
     fun scales()
     {
-        Ounce(1) equivalent Gram(0.028349523125, KILO)
-
-        Ounce(1) equivalent Drachm(16)
-        Ounce(1) equivalent Ounce(1)
-        Ounce(16) equivalent Pound(1)
-        Ounce(16 * 14) equivalent Stone(1)
-
         Ounce(1) equivalent MassAmount(1, OUNCE)
+
+        assertEquals(Ounce(1), Drachm(16).convertTo(OUNCE))
+        assertEquals(Ounce(1), Ounce(1).convertTo(OUNCE))
+        assertEquals(Ounce(16), Pound(1).convertTo(OUNCE))
+        assertEquals(Ounce(16 * 14), Stone(1).convertTo(OUNCE))
+        assertEquals(Ounce(1), Gram(0.028349523125, KILO).convertTo(OUNCE))
     }
 }

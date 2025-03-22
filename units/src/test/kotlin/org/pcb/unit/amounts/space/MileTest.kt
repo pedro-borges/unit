@@ -14,18 +14,17 @@ class MileTest
     @Test
     fun scales()
     {
-        Mile(1) equivalent Meter(1609.344)
-
-        Mile(1) equivalent Thou(8 * 10 * 22 * 3 * 3 * 4 * 1000)
-        Mile(1) equivalent Inch(8 * 10 * 22 * 3 * 3 * 4)
-        Mile(1) equivalent Hand(8 * 10 * 22 * 3 * 3)
-        Mile(1) equivalent Foot(8 * 10 * 22 * 3)
-        Mile(1) equivalent Yard(8 * 10 * 22)
-        Mile(1) equivalent Chain(8 * 10)
-        Mile(1) equivalent Furlong(8)
-        Mile(1) equivalent Mile(1)
-        Mile(3) equivalent League(1)
-
         Mile(1) equivalent DistanceAmount(1, MILE)
+
+        assertEquals(Mile(1), Thou(8 * 10 * 22 * 3 * 3 * 4 * 1000).convertTo(MILE))
+        assertEquals(Mile(1), Inch(8 * 10 * 22 * 3 * 3 * 4).convertTo(MILE))
+        assertEquals(Mile(1), Hand(8 * 10 * 22 * 3 * 3).convertTo(MILE))
+        assertEquals(Mile(1), Foot(8 * 10 * 22 * 3).convertTo(MILE))
+        assertEquals(Mile(1), Yard(8 * 10 * 22).convertTo(MILE))
+        assertEquals(Mile(1), Chain(8 * 10).convertTo(MILE))
+        assertEquals(Mile(1), Furlong(8).convertTo(MILE))
+        assertEquals(Mile(1), Mile(1).convertTo(MILE))
+        assertEquals(Mile(3), League(1).convertTo(MILE))
+        assertEquals(Mile(1), Meter(1609.344).convertTo(MILE))
     }
 }

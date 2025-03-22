@@ -20,6 +20,7 @@ class DrachmTest
     fun scales()
     {
         Drachm(1) equivalent MassAmount(1, DRACHM)
+
         assertEquals(Drachm(1), Drachm(1).convertTo(DRACHM))
         assertEquals(Ounce(1), Drachm(16).convertTo(OUNCE))
         assertEquals(Pound(1), Drachm(16 * 16).convertTo(POUND))

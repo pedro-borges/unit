@@ -14,11 +14,11 @@ class HourTest
     @Test
     fun scales()
     {
-        Hour(1) equivalent Second(60 * 60)
-        Hour(1) equivalent Minute(60)
-        Hour(1) equivalent Hour(1)
-        Hour(24) equivalent Day(1)
-
         Hour(1) equivalent TimeAmount(1, HOUR)
+
+        assertEquals(Hour(24), Day(1).convertTo(HOUR))
+        assertEquals(Hour(1), Hour(1).convertTo(HOUR))
+        assertEquals(Hour(1), Minute(60).convertTo(HOUR))
+        assertEquals(Hour(1), Second(60 * 60).convertTo(HOUR))
     }
 }

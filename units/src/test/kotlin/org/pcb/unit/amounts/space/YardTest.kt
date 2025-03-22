@@ -14,18 +14,17 @@ class YardTest
     @Test
     fun scales()
     {
-        Yard(1) equivalent Meter(0.9144)
-
-        Yard(1) equivalent Thou(3 * 3 * 4 * 1000)
-        Yard(1) equivalent Inch(3 * 3 * 4)
-        Yard(1) equivalent Hand(3 * 3)
-        Yard(1) equivalent Foot(3)
-        Yard(1) equivalent Yard(1)
-        Yard(22) equivalent Chain(1)
-        Yard(22 * 10) equivalent Furlong(1)
-        Yard(22 * 10 * 8) equivalent Mile(1)
-        Yard(22 * 10 * 8 * 3) equivalent League(1)
-
         Yard(1) equivalent DistanceAmount(1, YARD)
+
+        assertEquals(Yard(1), Thou(3 * 3 * 4 * 1000).convertTo(YARD))
+        assertEquals(Yard(1), Inch(3 * 3 * 4).convertTo(YARD))
+        assertEquals(Yard(1), Hand(3 * 3).convertTo(YARD))
+        assertEquals(Yard(1), Foot(3).convertTo(YARD))
+        assertEquals(Yard(1), Yard(1).convertTo(YARD))
+        assertEquals(Yard(22), Chain(1).convertTo(YARD))
+        assertEquals(Yard(22 * 10), Furlong(1).convertTo(YARD))
+        assertEquals(Yard(22 * 10 * 8), Mile(1).convertTo(YARD))
+        assertEquals(Yard(22 * 10 * 8 * 3), League(1).convertTo(YARD))
+        assertEquals(Yard(1), Meter(0.9144).convertTo(YARD))
     }
 }

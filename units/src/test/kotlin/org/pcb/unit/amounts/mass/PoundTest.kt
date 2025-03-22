@@ -15,13 +15,12 @@ class PoundTest
     @Test
     fun scales()
     {
-        Pound(1) equivalent Gram(0.45359237, KILO)
-
-        Pound(1) equivalent Drachm(16 * 16)
-        Pound(1) equivalent Ounce(16)
-        Pound(1) equivalent Pound(1)
-        Pound(14) equivalent Stone(1)
-
         Pound(1) equivalent MassAmount(1, POUND)
+
+        assertEquals(Pound(1), Drachm(16 * 16).convertTo(POUND))
+        assertEquals(Pound(1), Ounce(16).convertTo(POUND))
+        assertEquals(Pound(1), Pound(1).convertTo(POUND))
+        assertEquals(Pound(14), Stone(1).convertTo(POUND))
+        assertEquals(Pound(1), Gram(0.45359237, KILO).convertTo(POUND))
     }
 }

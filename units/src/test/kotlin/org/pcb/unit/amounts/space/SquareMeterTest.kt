@@ -17,7 +17,7 @@ import org.pcb.unit.base.Candela
 import org.pcb.unit.base.Meter
 import org.pcb.unit.base.Meter.METER
 
-class RectangleMeterTest
+class SquareMeterTest
 {
     private infix fun SquareMeter.equivalent(other: AreaAmount<*>) =
         assertEquals(this, other)

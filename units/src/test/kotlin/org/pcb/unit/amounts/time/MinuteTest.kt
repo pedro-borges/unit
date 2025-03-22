@@ -14,11 +14,11 @@ class MinuteTest
     @Test
     fun scales()
     {
-        Minute(1) equivalent Second(60)
-        Minute(1) equivalent Minute(1)
-        Minute(60) equivalent Hour(1)
-        Minute(60 * 24) equivalent Day(1)
-
         Minute(1) equivalent TimeAmount(1, MINUTE)
+
+        assertEquals(Minute(1), Second(60).convertTo(MINUTE))
+        assertEquals(Minute(1), Minute(1).convertTo(MINUTE))
+        assertEquals(Minute(60), Hour(1).convertTo(MINUTE))
+        assertEquals(Minute(60 * 24), Day(1).convertTo(MINUTE))
     }
 }

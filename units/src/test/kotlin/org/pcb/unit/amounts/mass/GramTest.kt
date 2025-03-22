@@ -16,7 +16,6 @@ class GramTest
     fun scales()
     {
         Gram(1) equivalent Gram(0.001, KILO)
-
         Gram(1) equivalent MassAmount(1, GRAM)
     }
 }

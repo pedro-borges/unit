@@ -14,18 +14,17 @@ class ThouTest
     @Test
     fun scales()
     {
-        Thou(1) equivalent Meter(0.0000254)
-
-        Thou(1) equivalent Thou(1)
-        Thou(1000) equivalent Inch(1)
-        Thou(1000 * 4) equivalent Hand(1)
-        Thou(1000 * 4 * 3) equivalent Foot(1)
-        Thou(1000 * 4 * 3 * 3) equivalent Yard(1)
-        Thou(1000 * 4 * 3 * 3 * 22) equivalent Chain(1)
-        Thou(1000 * 4 * 3 * 3 * 22 * 10) equivalent Furlong(1)
-        Thou(1000 * 4 * 3 * 3 * 22 * 10 * 8) equivalent Mile(1)
-        Thou(1000 * 4 * 3 * 3 * 22 * 10 * 8 * 3) equivalent League(1)
-
         Thou(1) equivalent DistanceAmount(1, THOU)
+
+        assertEquals(Thou(1), Thou(1).convertTo(THOU))
+        assertEquals(Thou(1000), Inch(1).convertTo(THOU))
+        assertEquals(Thou(1000 * 4), Hand(1).convertTo(THOU))
+        assertEquals(Thou(1000 * 4 * 3), Foot(1).convertTo(THOU))
+        assertEquals(Thou(1000 * 4 * 3 * 3), Yard(1).convertTo(THOU))
+        assertEquals(Thou(1000 * 4 * 3 * 3 * 22), Chain(1).convertTo(THOU))
+        assertEquals(Thou(1000 * 4 * 3 * 3 * 22 * 10), Furlong(1).convertTo(THOU))
+        assertEquals(Thou(1000 * 4 * 3 * 3 * 22 * 10 * 8), Mile(1).convertTo(THOU))
+        assertEquals(Thou(1000 * 4 * 3 * 3 * 22 * 10 * 8 * 3), League(1).convertTo(THOU))
+        assertEquals(Thou(1), Meter(0.0000254).convertTo(THOU))
     }
 }

@@ -14,18 +14,17 @@ class FootTest
     @Test
     fun scales()
     {
-        Foot(1) equivalent Meter(0.3048)
-
-        Foot(1) equivalent Thou(3 * 4 * 1000)
-        Foot(1) equivalent Inch(3 * 4)
-        Foot(1) equivalent Hand(3)
-        Foot(1) equivalent Foot(1)
-        Foot(3) equivalent Yard(1)
-        Foot(3 * 22) equivalent Chain(1)
-        Foot(3 * 22 * 10) equivalent Furlong(1)
-        Foot(3 * 22 * 10 * 8) equivalent Mile(1)
-        Foot(3 * 22 * 10 * 8 * 3) equivalent League(1)
-
         Foot(1) equivalent DistanceAmount(1, FOOT)
+
+        assertEquals(Foot(1), Thou(3 * 4 * 1000).convertTo(FOOT))
+        assertEquals(Foot(1), Inch(3 * 4).convertTo(FOOT))
+        assertEquals(Foot(1), Hand(3).convertTo(FOOT))
+        assertEquals(Foot(1), Foot(1).convertTo(FOOT))
+        assertEquals(Foot(3), Yard(1).convertTo(FOOT))
+        assertEquals(Foot(3 * 22), Chain(1).convertTo(FOOT))
+        assertEquals(Foot(3 * 22 * 10), Furlong(1).convertTo(FOOT))
+        assertEquals(Foot(3 * 22 * 10 * 8), Mile(1).convertTo(FOOT))
+        assertEquals(Foot(3 * 22 * 10 * 8 * 3), League(1).convertTo(FOOT))
+        assertEquals(Foot(1), Meter(0.3048).convertTo(FOOT))
     }
 }

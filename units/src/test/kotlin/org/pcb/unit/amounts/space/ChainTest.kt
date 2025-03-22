@@ -14,18 +14,17 @@ class ChainTest
     @Test
     fun scales()
     {
-        Chain(1) equivalent Meter(20.1168)
-
-        Chain(1) equivalent Thou(22 * 3 * 3 * 4 * 1000)
-        Chain(1) equivalent Inch(22 * 3 * 3 * 4)
-        Chain(1) equivalent Hand(22 * 3 * 3)
-        Chain(1) equivalent Foot(22 * 3)
-        Chain(1) equivalent Yard(22)
-        Chain(1) equivalent Chain(1)
-        Chain(10) equivalent Furlong(1)
-        Chain(10 * 8) equivalent Mile(1)
-        Chain(10 * 8 * 3) equivalent League(1)
-
         Chain(1) equivalent DistanceAmount(1, CHAIN)
+
+        assertEquals(Chain(1), Thou(22 * 3 * 3 * 4 * 1000).convertTo(CHAIN))
+        assertEquals(Chain(1), Inch(22 * 3 * 3 * 4).convertTo(CHAIN))
+        assertEquals(Chain(1), Hand(22 * 3 * 3).convertTo(CHAIN))
+        assertEquals(Chain(1), Foot(22 * 3).convertTo(CHAIN))
+        assertEquals(Chain(1), Yard(22).convertTo(CHAIN))
+        assertEquals(Chain(1), Chain(1).convertTo(CHAIN))
+        assertEquals(Chain(10), Furlong(1).convertTo(CHAIN))
+        assertEquals(Chain(10 * 8), Mile(1).convertTo(CHAIN))
+        assertEquals(Chain(10 * 8 * 3), League(1).convertTo(CHAIN))
+        assertEquals(Chain(1), Meter(20.1168).convertTo(CHAIN))
     }
 }

@@ -25,12 +25,12 @@ class SecondTest
     @Test
     fun scales()
     {
-        Second(1) equivalent Second(1)
-        Second(60) equivalent Minute(1)
-        Second(60 * 60) equivalent Hour(1)
-        Second(60 * 60 * 24) equivalent Day(1)
-
         Second(1) equivalent TimeAmount(1, SECOND)
+
+        assertEquals(Second(1), Second(1).convertTo(SECOND))
+        assertEquals(Second(60), Minute(1).convertTo(SECOND))
+        assertEquals(Second(60 * 60), Hour(1).convertTo(SECOND))
+        assertEquals(Second(60 * 60 * 24), Day(1).convertTo(SECOND))
     }
 
     @Test

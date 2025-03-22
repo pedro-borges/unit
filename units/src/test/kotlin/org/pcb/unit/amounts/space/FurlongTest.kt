@@ -14,18 +14,17 @@ class FurlongTest
     @Test
     fun scales()
     {
-        Furlong(1) equivalent Meter(201.168)
-
-        Furlong(1) equivalent Thou(10 * 22 * 3 * 3 * 4 * 1000)
-        Furlong(1) equivalent Inch(10 * 22 * 3 * 3 * 4)
-        Furlong(1) equivalent Hand(10 * 22 * 3 * 3)
-        Furlong(1) equivalent Foot(10 * 22 * 3)
-        Furlong(1) equivalent Yard(10 * 22)
-        Furlong(1) equivalent Chain(10)
-        Furlong(1) equivalent Furlong(1)
-        Furlong(8) equivalent Mile(1)
-        Furlong(8 * 3) equivalent League(1)
-
         Furlong(1) equivalent DistanceAmount(1, FURLONG)
+
+        assertEquals(Furlong(1), Thou(10 * 22 * 3 * 3 * 4 * 1000).convertTo(FURLONG))
+        assertEquals(Furlong(1), Inch(10 * 22 * 3 * 3 * 4).convertTo(FURLONG))
+        assertEquals(Furlong(1), Hand(10 * 22 * 3 * 3).convertTo(FURLONG))
+        assertEquals(Furlong(1), Foot(10 * 22 * 3).convertTo(FURLONG))
+        assertEquals(Furlong(1), Yard(10 * 22).convertTo(FURLONG))
+        assertEquals(Furlong(1), Chain(10).convertTo(FURLONG))
+        assertEquals(Furlong(1), Furlong(1).convertTo(FURLONG))
+        assertEquals(Furlong(8), Mile(1).convertTo(FURLONG))
+        assertEquals(Furlong(8 * 3), League(1).convertTo(FURLONG))
+        assertEquals(Furlong(1), Meter(201.168).convertTo(FURLONG))
     }
 }

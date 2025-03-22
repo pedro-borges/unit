@@ -14,18 +14,17 @@ class HandTest
     @Test
     fun scales()
     {
-        Hand(1) equivalent Meter(0.1016)
-
-        Hand(1) equivalent Thou(4 * 1000)
-        Hand(1) equivalent Inch(4)
-        Hand(1) equivalent Hand(1)
-        Hand(3) equivalent Foot(1)
-        Hand(3 * 3) equivalent Yard(1)
-        Hand(3 * 3 * 22) equivalent Chain(1)
-        Hand(3 * 3 * 22 * 10) equivalent Furlong(1)
-        Hand(3 * 3 * 22 * 10 * 8) equivalent Mile(1)
-        Hand(3 * 3 * 22 * 10 * 8 * 3) equivalent League(1)
-
         Hand(1) equivalent DistanceAmount(1, HAND)
+
+        assertEquals(Hand(1), Thou(4 * 1000).convertTo(HAND))
+        assertEquals(Hand(1), Inch(4).convertTo(HAND))
+        assertEquals(Hand(1), Hand(1).convertTo(HAND))
+        assertEquals(Hand(3), Foot(1).convertTo(HAND))
+        assertEquals(Hand(3 * 3), Yard(1).convertTo(HAND))
+        assertEquals(Hand(3 * 3 * 22), Chain(1).convertTo(HAND))
+        assertEquals(Hand(3 * 3 * 22 * 10), Furlong(1).convertTo(HAND))
+        assertEquals(Hand(3 * 3 * 22 * 10 * 8), Mile(1).convertTo(HAND))
+        assertEquals(Hand(3 * 3 * 22 * 10 * 8 * 3), League(1).convertTo(HAND))
+        assertEquals(Hand(1), Meter(0.1016).convertTo(HAND))
     }
 }
