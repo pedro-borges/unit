@@ -48,6 +48,14 @@ open class MolarEnergyAmount<L : Unit<Distance>, M : Unit<Mass>, N : Unit<Substa
                               unit = U2(METER, kilo(GRAM)) to U2(MOLE, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<MolarEnergy>) =
+        MolarEnergyAmount(amount = amount * convert(this.unit to unit),
+                          unit = unit)
+
+    // endregion
+
     // region -> MolarEnergy
 
     override operator fun times(that: Number) =

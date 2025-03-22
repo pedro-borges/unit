@@ -44,6 +44,14 @@ open class SpecificHeatCapacityAmount<L : Unit<Distance>, K : Unit<Temperature>,
                                        unit = METER to U2(KELVIN, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<SpecificHeatCapacity>) =
+        SpecificHeatCapacityAmount(amount = amount * convert(this.unit to unit),
+                                   unit = unit)
+
+    // endregion
+
     // region -> SpecificHeatCapacity
 
     override operator fun times(that: Number) =

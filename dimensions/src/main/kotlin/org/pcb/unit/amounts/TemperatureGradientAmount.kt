@@ -39,6 +39,14 @@ open class TemperatureGradientAmount<L : Unit<Distance>, K : Unit<Temperature>>(
                                       unit = KELVIN to METER)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<TemperatureGradient>) =
+        TemperatureGradientAmount(amount = amount * convert(this.unit to unit),
+                                  unit = unit)
+
+    // endregion
+
     // region -> TemperatureGradient
 
     override operator fun times(that: Number) =

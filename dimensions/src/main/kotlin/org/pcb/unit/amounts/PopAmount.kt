@@ -36,6 +36,14 @@ open class PopAmount<L : Unit<Distance>, T : Unit<Time>>(
                       unit = METER to SECOND)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Pop>) =
+        PopAmount(amount = amount * convert(this.unit to unit),
+                  unit = unit)
+
+    // endregion
+
     // region -> Pop
 
     override operator fun times(that: Number) =

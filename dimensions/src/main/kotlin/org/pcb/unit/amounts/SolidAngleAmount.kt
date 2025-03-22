@@ -35,6 +35,14 @@ open class SolidAngleAmount<BAC : Unit<Angle>>(
                              unit = RADIAN)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<SolidAngle>) =
+        SolidAngleAmount(amount = amount * convert(this.unit to unit),
+                         unit = unit)
+
+    // endregion
+
     // region -> SolidAngle
 
     override operator fun times(that: Number) =

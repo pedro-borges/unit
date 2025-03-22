@@ -41,6 +41,14 @@ open class ElectricDipoleMomentAmount<L : Unit<Distance>, I : Unit<ElectricCurre
                                        unit = U3(METER, AMPERE, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<ElectricDipoleMoment>) =
+        ElectricDipoleMomentAmount(amount = amount * convert(this.unit to unit),
+                                   unit = unit)
+
+    // endregion
+
     // region -> ElectricDipoleMoment
 
     override operator fun times(that: Number) =

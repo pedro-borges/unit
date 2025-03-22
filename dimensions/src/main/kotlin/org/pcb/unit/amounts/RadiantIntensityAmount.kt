@@ -46,6 +46,14 @@ open class RadiantIntensityAmount<BAC : Unit<Angle>, L : Unit<Distance>, M : Uni
                                    unit = U2(METER, kilo(GRAM)) to U2(RADIAN, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<RadiantIntensity>) =
+        RadiantIntensityAmount(amount = amount * convert(this.unit to unit),
+                               unit = unit)
+
+    // endregion
+
     // region -> RadiantIntensity
 
     override operator fun times(that: Number) =

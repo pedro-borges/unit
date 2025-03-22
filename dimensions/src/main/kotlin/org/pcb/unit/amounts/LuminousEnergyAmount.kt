@@ -40,6 +40,14 @@ open class LuminousEnergyAmount<BAC : Unit<Angle>, J : Unit<LuminousIntensity>, 
                                  unit = U3(RADIAN, CANDELA, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<LuminousEnergy>) =
+        LuminousEnergyAmount(amount = amount * convert(this.unit to unit),
+                             unit = unit)
+
+    // endregion
+
     // region -> LuminousEnergy
 
     override operator fun times(that: Number) =

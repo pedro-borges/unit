@@ -42,6 +42,14 @@ open class ReactionRateAmount<L : Unit<Distance>, N : Unit<Substance>, T : Unit<
                                unit = MOLE to U2(SECOND, METER))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<ReactionRate>) =
+        ReactionRateAmount(amount = amount * convert(this.unit to unit),
+                           unit = unit)
+
+    // endregion
+
     // region -> ReactionRate
 
     override operator fun times(that: Number) =

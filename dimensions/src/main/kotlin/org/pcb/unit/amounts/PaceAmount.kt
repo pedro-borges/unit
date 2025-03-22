@@ -40,6 +40,14 @@ open class PaceAmount<L : Unit<Distance>, T : Unit<Time>>(
                        unit = SECOND to METER)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Pace>) =
+        PaceAmount(amount = amount * convert(this.unit to unit),
+                   unit = unit)
+
+    // endregion
+
     // region -> Pace
 
     override operator fun times(that: Number) =

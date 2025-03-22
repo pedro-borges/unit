@@ -24,6 +24,14 @@ open class LuminousIntensityAmount<J : Unit<LuminousIntensity>>(
 {
     val luminousIntensity = unit
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<LuminousIntensity>) =
+        LuminousIntensityAmount(amount = amount * convert(this.unit to unit),
+                                unit = unit)
+
+    // endregion
+
     // region -> LuminousIntensity
 
     override operator fun times(that: Number) =

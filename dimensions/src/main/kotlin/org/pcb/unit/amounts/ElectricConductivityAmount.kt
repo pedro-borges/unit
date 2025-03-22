@@ -47,6 +47,14 @@ open class ElectricConductivityAmount<L : Unit<Distance>, I : Unit<ElectricCurre
                                        unit = U2(SECOND, AMPERE) to U2(kilo(GRAM), METER))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<ElectricConductivity>) =
+        ElectricConductivityAmount(amount = amount * convert(this.unit to unit),
+                                   unit = unit)
+
+    // endregion
+
     // region -> ElectricConductivity
 
     override operator fun times(that: Number) =

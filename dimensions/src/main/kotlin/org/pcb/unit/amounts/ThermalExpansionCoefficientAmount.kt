@@ -37,6 +37,14 @@ open class ThermalExpansionCoefficientAmount<K : Unit<Temperature>>(
                                               unit = NUMERIC to KELVIN)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<ThermalExpansionCoefficient>) =
+        ThermalExpansionCoefficientAmount(amount = amount * convert(this.unit to unit),
+                                          unit = unit)
+
+    // endregion
+
     // region -> ThermalExpansionCoefficient
 
     override operator fun times(that: Number) =

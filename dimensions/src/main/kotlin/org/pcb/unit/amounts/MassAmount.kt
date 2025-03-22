@@ -26,6 +26,14 @@ open class MassAmount<M : Unit<Mass>>(
 {
     val mass = unit
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Mass>) =
+        MassAmount(amount = amount * convert(this.unit to unit),
+                   unit = unit)
+
+    // endregion
+
     // region -> Mass
 
     override operator fun times(that: Number) =

@@ -42,6 +42,14 @@ open class AngularMomentumAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Ti
                                   unit = U2(kilo(GRAM), METER) to SECOND)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<AngularMomentum>) =
+        AngularMomentumAmount(amount = amount * convert(this.unit to unit),
+                              unit = unit)
+
+    // endregion
+
     // region -> AngularMomentum
 
     override operator fun times(that: Number) =

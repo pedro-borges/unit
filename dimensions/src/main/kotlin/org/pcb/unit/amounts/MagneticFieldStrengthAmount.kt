@@ -39,6 +39,14 @@ open class MagneticFieldStrengthAmount<L : Unit<Distance>, I : Unit<ElectricCurr
                                         unit = AMPERE to METER)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<MagneticFieldStrength>) =
+        MagneticFieldStrengthAmount(amount = amount * convert(this.unit to unit),
+                                    unit = unit)
+
+    // endregion
+
     // region -> MagneticFieldStrength
 
     override operator fun times(that: Number) =

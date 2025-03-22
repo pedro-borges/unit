@@ -39,6 +39,14 @@ open class AngularVelocityAmount<BAC : Unit<Angle>, T : Unit<Time>>(
                                   unit = RADIAN to SECOND)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<AngularVelocity>) =
+        AngularVelocityAmount(amount = amount * convert(this.unit to unit),
+                              unit = unit)
+
+    // endregion
+
     // region -> AngularVelocity
 
     override operator fun times(that: Number) =

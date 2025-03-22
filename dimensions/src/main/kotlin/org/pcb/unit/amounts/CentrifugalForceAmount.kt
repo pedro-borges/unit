@@ -47,6 +47,14 @@ open class CentrifugalForceAmount<BAC : Unit<Angle>, L : Unit<Distance>, M : Uni
                                    unit = U3(RADIAN, METER, kilo(GRAM)) to SECOND)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<CentrifugalForce>) =
+        CentrifugalForceAmount(amount = amount * convert(this.unit to unit),
+                               unit = unit)
+
+    // endregion
+
     // region -> CentrifugalForce
 
     override operator fun times(that: Number) =

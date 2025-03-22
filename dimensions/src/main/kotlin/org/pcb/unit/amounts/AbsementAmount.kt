@@ -39,6 +39,14 @@ open class AbsementAmount<L : Unit<Distance>, T : Unit<Time>>(
                            unit = U2(METER, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Absement>) =
+        AbsementAmount(amount = amount * convert(this.unit to unit),
+                       unit = unit)
+
+    // endregion
+
     // region -> Absement
 
     override operator fun times(that: Number) =

@@ -46,6 +46,14 @@ open class MagneticFluxAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M :
                                unit = U2(METER, kilo(GRAM)) to U2(AMPERE, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<MagneticFlux>) =
+        MagneticFluxAmount(amount = amount * convert(this.unit to unit),
+                           unit = unit)
+
+    // endregion
+
     // region -> MagneticFlux
 
     override operator fun times(that: Number) =

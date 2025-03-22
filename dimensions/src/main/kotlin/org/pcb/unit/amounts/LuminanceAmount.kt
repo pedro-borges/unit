@@ -38,6 +38,14 @@ open class LuminanceAmount<L : Unit<Distance>, J : Unit<LuminousIntensity>>(
                             unit = CANDELA to METER)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Luminance>) =
+        LuminanceAmount(amount = amount * convert(this.unit to unit),
+                        unit = unit)
+
+    // endregion
+
     // region -> Luminance
 
     override operator fun times(that: Number) =

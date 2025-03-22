@@ -39,6 +39,14 @@ open class SpecificVolumeAmount<L : Unit<Distance>, M : Unit<Mass>>(
                                  unit = METER to kilo(GRAM))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<SpecificVolume>) =
+        SpecificVolumeAmount(amount = amount * convert(this.unit to unit),
+                             unit = unit)
+
+    // endregion
+
     // region -> SpecificVolume
 
     override operator fun times(that: Number) =

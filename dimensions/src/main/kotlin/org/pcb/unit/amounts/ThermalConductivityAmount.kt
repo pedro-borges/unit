@@ -46,6 +46,14 @@ open class ThermalConductivityAmount<L : Unit<Distance>, M : Unit<Mass>, K : Uni
                                       unit = U2(METER, kilo(GRAM)) to U2(KELVIN, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<ThermalConductivity>) =
+        ThermalConductivityAmount(amount = amount * convert(this.unit to unit),
+                                  unit = unit)
+
+    // endregion
+
     // region -> ThermalConductivity
 
     override operator fun times(that: Number) =

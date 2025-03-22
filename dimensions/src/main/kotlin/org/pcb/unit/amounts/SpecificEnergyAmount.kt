@@ -40,6 +40,14 @@ open class SpecificEnergyAmount<L : Unit<Distance>, T : Unit<Time>>(
                                  unit = METER to SECOND)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<SpecificEnergy>) =
+        SpecificEnergyAmount(amount = amount * convert(this.unit to unit),
+                             unit = unit)
+
+    // endregion
+
     // region -> SpecificEnergy
 
     override operator fun times(that: Number) =

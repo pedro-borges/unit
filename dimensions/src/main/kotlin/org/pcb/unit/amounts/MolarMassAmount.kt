@@ -42,6 +42,14 @@ open class MolarMassAmount<M : Unit<Mass>, N : Unit<Substance>>(
                             unit = kilo(GRAM) to MOLE)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<MolarMass>) =
+        MolarMassAmount(amount = amount * convert(this.unit to unit),
+                        unit = unit)
+
+    // endregion
+
     // region -> MolarMass
 
     override operator fun times(that: Number) =

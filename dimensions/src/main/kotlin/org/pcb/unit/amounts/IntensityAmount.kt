@@ -41,6 +41,14 @@ open class IntensityAmount<M : Unit<Mass>, T : Unit<Time>>(
                             unit = kilo(GRAM) to SECOND)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Intensity>) =
+        IntensityAmount(amount = amount * convert(this.unit to unit),
+                        unit = unit)
+
+    // endregion
+
     // region -> Intensity
 
     override operator fun times(that: Number) =

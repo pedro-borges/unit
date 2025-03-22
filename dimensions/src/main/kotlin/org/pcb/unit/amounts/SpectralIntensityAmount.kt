@@ -46,6 +46,14 @@ open class SpectralIntensityAmount<BAC : Unit<Angle>, L : Unit<Distance>, M : Un
                                     unit = U2(METER, kilo(GRAM)) to U2(RADIAN, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<SpectralIntensity>) =
+        SpectralIntensityAmount(amount = amount * convert(this.unit to unit),
+                                unit = unit)
+
+    // endregion
+
     // region -> SpectralIntensity
 
     override operator fun times(that: Number) =

@@ -43,6 +43,14 @@ open class ElectricDisplacementFieldAmount<L : Unit<Distance>, I : Unit<Electric
                                             unit = U2(AMPERE, SECOND) to METER)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<ElectricDisplacementField>) =
+        ElectricDisplacementFieldAmount(amount = amount * convert(this.unit to unit),
+                                        unit = unit)
+
+    // endregion
+
     // region -> ElectricDisplacementField
 
     override operator fun times(that: Number) =

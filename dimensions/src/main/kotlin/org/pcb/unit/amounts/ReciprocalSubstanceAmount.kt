@@ -37,6 +37,14 @@ open class ReciprocalSubstanceAmount<N : Unit<Substance>>(
                                       unit = NUMERIC to MOLE)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<ReciprocalSubstance>) =
+        ReciprocalSubstanceAmount(amount = amount * convert(this.unit to unit),
+                                  unit = unit)
+
+    // endregion
+
     // region -> ReciprocalSubstance
 
     override operator fun times(that: Number) =

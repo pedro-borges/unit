@@ -44,6 +44,14 @@ open class PowerAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                         unit = U2(METER, kilo(GRAM)) to SECOND)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Power>) =
+        PowerAmount(amount = amount * convert(this.unit to unit),
+                    unit = unit)
+
+    // endregion
+
     // region -> Power
 
     override operator fun times(that: Number) =

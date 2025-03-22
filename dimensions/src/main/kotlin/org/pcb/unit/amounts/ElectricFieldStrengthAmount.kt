@@ -46,6 +46,14 @@ open class ElectricFieldStrengthAmount<L : Unit<Distance>, I : Unit<ElectricCurr
                                         unit = U2(METER, kilo(GRAM)) to U2(AMPERE, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<ElectricFieldStrength>) =
+        ElectricFieldStrengthAmount(amount = amount * convert(this.unit to unit),
+                                    unit = unit)
+
+    // endregion
+
     // region -> ElectricFieldStrength
 
     override operator fun times(that: Number) =

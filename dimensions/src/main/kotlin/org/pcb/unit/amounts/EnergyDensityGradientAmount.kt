@@ -43,6 +43,14 @@ open class EnergyDensityGradientAmount<L : Unit<Distance>, M : Unit<Mass>, T : U
                                         unit = kilo(GRAM) to U2(METER, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<EnergyDensityGradient>) =
+        EnergyDensityGradientAmount(amount = amount * convert(this.unit to unit),
+                                    unit = unit)
+
+    // endregion
+
     // region -> EnergyDensityGradient
 
     override operator fun times(that: Number) =

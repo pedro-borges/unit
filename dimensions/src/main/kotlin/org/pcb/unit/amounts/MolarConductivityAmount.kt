@@ -47,6 +47,14 @@ open class MolarConductivityAmount<I : Unit<ElectricCurrent>, M : Unit<Mass>, N 
                                     unit = U2(SECOND, AMPERE) to U2(kilo(GRAM), MOLE))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<MolarConductivity>) =
+        MolarConductivityAmount(amount = amount * convert(this.unit to unit),
+                                unit = unit)
+
+    // endregion
+
     // region -> MolarConductivity
 
     override operator fun times(that: Number) =

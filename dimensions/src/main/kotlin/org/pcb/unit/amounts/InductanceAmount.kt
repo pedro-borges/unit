@@ -46,6 +46,14 @@ open class InductanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M : U
                              unit = U2(METER, kilo(GRAM)) to U2(AMPERE, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Inductance>) =
+        InductanceAmount(amount = amount * convert(this.unit to unit),
+                         unit = unit)
+
+    // endregion
+
     // region -> Inductance
 
     override operator fun times(that: Number) =

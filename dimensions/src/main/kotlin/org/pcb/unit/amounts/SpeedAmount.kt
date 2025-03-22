@@ -39,6 +39,14 @@ open class SpeedAmount<L : Unit<Distance>, T : Unit<Time>>(
                         unit = METER to SECOND)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Speed>) =
+        SpeedAmount(amount = amount * convert(this.unit to unit),
+                    unit = unit)
+
+    // endregion
+
     // region -> Speed
 
     override operator fun times(that: Number) =

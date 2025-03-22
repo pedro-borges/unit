@@ -39,6 +39,14 @@ open class LinearDensityAmount<L : Unit<Distance>, M : Unit<Mass>>(
                                 unit = kilo(GRAM) to METER)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<LinearDensity>) =
+        LinearDensityAmount(amount = amount * convert(this.unit to unit),
+                            unit = unit)
+
+    // endregion
+
     // region -> LinearDensity
 
     override operator fun times(that: Number) =

@@ -38,6 +38,14 @@ open class LuminousFluxAmount<BAC : Unit<Angle>, J : Unit<LuminousIntensity>>(
                                unit = U2(RADIAN, CANDELA))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<LuminousFlux>) =
+        LuminousFluxAmount(amount = amount * convert(this.unit to unit),
+                           unit = unit)
+
+    // endregion
+
     // region -> LuminousFlux
 
     override operator fun times(that: Number) =

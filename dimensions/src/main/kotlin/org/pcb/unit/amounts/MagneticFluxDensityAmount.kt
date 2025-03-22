@@ -43,6 +43,14 @@ open class MagneticFluxDensityAmount<I : Unit<ElectricCurrent>, M : Unit<Mass>, 
                                       unit = kilo(GRAM) to U2(AMPERE, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<MagneticFluxDensity>) =
+        MagneticFluxDensityAmount(amount = amount * convert(this.unit to unit),
+                                  unit = unit)
+
+    // endregion
+
     // region -> MagneticFluxDensity
 
     override operator fun times(that: Number) =

@@ -38,6 +38,14 @@ open class MagneticDipoleMomentAmount<L : Unit<Distance>, I : Unit<ElectricCurre
                                        unit = U2(METER, AMPERE))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<MagneticDipoleMoment>) =
+        MagneticDipoleMomentAmount(amount = amount * convert(this.unit to unit),
+                                   unit = unit)
+
+    // endregion
+
     // region -> MagneticDipoleMoment
 
     override operator fun times(that: Number) =

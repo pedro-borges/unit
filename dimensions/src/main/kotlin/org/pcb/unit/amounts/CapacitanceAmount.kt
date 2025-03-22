@@ -46,6 +46,14 @@ open class CapacitanceAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M : 
                               unit = U2(SECOND, AMPERE) to U2(kilo(GRAM), METER))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Capacitance>) =
+        CapacitanceAmount(amount = amount * convert(this.unit to unit),
+                          unit = unit)
+
+    // endregion
+
     // region -> Capacitance
 
     override operator fun times(that: Number) =

@@ -39,6 +39,14 @@ open class ElectricCurrentDensityAmount<L : Unit<Distance>, I : Unit<ElectricCur
                                          unit = AMPERE to METER)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<ElectricCurrentDensity>) =
+        ElectricCurrentDensityAmount(amount = amount * convert(this.unit to unit),
+                                     unit = unit)
+
+    // endregion
+
     // region -> ElectricCurrentDensity
 
     override operator fun times(that: Number) =

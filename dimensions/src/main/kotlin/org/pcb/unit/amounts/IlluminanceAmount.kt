@@ -41,6 +41,14 @@ open class IlluminanceAmount<BAC : Unit<Angle>, L : Unit<Distance>, J : Unit<Lum
                               unit = U2(RADIAN, CANDELA) to METER)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Illuminance>) =
+        IlluminanceAmount(amount = amount * convert(this.unit to unit),
+                          unit = unit)
+
+    // endregion
+
     // region -> Illuminance
 
     override operator fun times(that: Number) =

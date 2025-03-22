@@ -28,6 +28,14 @@ open class DistanceAmount<L : Unit<Distance>>(
 {
     val distance = unit
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Distance>) =
+        DistanceAmount(amount = amount * convert(this.unit to unit),
+                       unit = unit)
+
+    // endregion
+
     // region -> Distance
 
     override operator fun times(that: Number) =

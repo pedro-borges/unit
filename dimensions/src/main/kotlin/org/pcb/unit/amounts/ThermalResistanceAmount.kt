@@ -46,6 +46,14 @@ open class ThermalResistanceAmount<L : Unit<Distance>, M : Unit<Mass>, K : Unit<
                                     unit = U3(SECOND, METER, KELVIN) to kilo(GRAM))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<ThermalResistance>) =
+        ThermalResistanceAmount(amount = amount * convert(this.unit to unit),
+                                unit = unit)
+
+    // endregion
+
     // region -> ThermalResistance
 
     override operator fun times(that: Number) =

@@ -40,6 +40,14 @@ open class RadiantExposureAmount<M : Unit<Mass>, T : Unit<Time>>(
                                   unit = kilo(GRAM) to SECOND)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<RadiantExposure>) =
+        RadiantExposureAmount(amount = amount * convert(this.unit to unit),
+                              unit = unit)
+
+    // endregion
+
     // region -> RadiantExposure
 
     override operator fun times(that: Number) =

@@ -43,6 +43,14 @@ open class CatalyticEfficiencyAmount<L : Unit<Distance>, N : Unit<Substance>, T 
                                       unit = METER to U2(MOLE, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<CatalyticEfficiency>) =
+        CatalyticEfficiencyAmount(amount = amount * convert(this.unit to unit),
+                                  unit = unit)
+
+    // endregion
+
     // region -> CatalyticEfficiency
 
     override operator fun times(that: Number) =

@@ -38,6 +38,14 @@ open class JerkAmount<L : Unit<Distance>, T : Unit<Time>>(
                        unit = METER to SECOND)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Jerk>) =
+        JerkAmount(amount = amount * convert(this.unit to unit),
+                   unit = unit)
+
+    // endregion
+
     // region -> Jerk
 
     override operator fun times(that: Number) =

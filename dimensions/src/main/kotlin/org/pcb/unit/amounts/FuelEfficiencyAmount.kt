@@ -37,6 +37,14 @@ open class FuelEfficiencyAmount<L : Unit<Distance>>(
                                  unit = NUMERIC to METER)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<FuelEfficiency>) =
+        FuelEfficiencyAmount(amount = amount * convert(this.unit to unit),
+                             unit = unit)
+
+    // endregion
+
     // region -> FuelEfficiency
 
     override operator fun times(that: Number) =

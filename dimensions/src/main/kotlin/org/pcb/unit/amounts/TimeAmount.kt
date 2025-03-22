@@ -30,6 +30,14 @@ open class TimeAmount<T : Unit<Time>>(
 {
     val time = unit
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Time>) =
+        TimeAmount(amount = amount * convert(this.unit to unit),
+                   unit = unit)
+
+    // endregion
+
     // region -> Time
 
     override operator fun times(that: Number) =

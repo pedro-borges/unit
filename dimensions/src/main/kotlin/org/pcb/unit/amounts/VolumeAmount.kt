@@ -37,6 +37,14 @@ open class VolumeAmount<L : Unit<Distance>>(
                          unit = METER)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Volume>) =
+        VolumeAmount(amount = amount * convert(this.unit to unit),
+                     unit = unit)
+
+    // endregion
+
     // region -> Volume
 
     override operator fun times(that: Number) =

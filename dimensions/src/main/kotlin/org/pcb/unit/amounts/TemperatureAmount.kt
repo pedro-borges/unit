@@ -26,6 +26,14 @@ open class TemperatureAmount<K : Unit<Temperature>>(
 {
     val temperature = unit
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Temperature>) =
+        TemperatureAmount(amount = amount * convert(this.unit to unit),
+                          unit = unit)
+
+    // endregion
+
     // region -> Temperature
 
     override operator fun times(that: Number) =

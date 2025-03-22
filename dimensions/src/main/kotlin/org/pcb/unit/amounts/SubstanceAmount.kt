@@ -26,6 +26,14 @@ open class SubstanceAmount<N : Unit<Substance>>(
 {
     val substance = unit
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Substance>) =
+        SubstanceAmount(amount = amount * convert(this.unit to unit),
+                        unit = unit)
+
+    // endregion
+
     // region -> Substance
 
     override operator fun times(that: Number) =

@@ -40,6 +40,14 @@ open class MolarityAmount<L : Unit<Distance>, N : Unit<Substance>>(
                            unit = MOLE to METER)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Molarity>) =
+        MolarityAmount(amount = amount * convert(this.unit to unit),
+                       unit = unit)
+
+    // endregion
+
     // region -> Molarity
 
     override operator fun times(that: Number) =

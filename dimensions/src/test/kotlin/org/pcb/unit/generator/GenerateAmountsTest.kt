@@ -24,47 +24,58 @@ class GenerateAmountsTest
 
         val regions = HashMap<String, String>()
 
+        if (dimension.name !in (setOf("Debt", "Rent")))
+        {
+            var converter = regions["Convert"] ?: ""
+
+            converter += "\tfun convertTo(unit: Unit<${dimension.name}>) =\n"
+            converter += "\t\t${dimension.name}Amount(amount = amount * convert(this.unit to unit),\n"
+            converter += "\t\t\tunit = unit)\n\n"
+
+            regions["Convert"] = converter
+        }
+
         var code = regions[dimension.name] ?: ""
         val major = dimension.composite.positives()
         val minor = dimension.composite.negatives()
 
         code += "\toverride operator fun times(that: Number) =\n"
-        code += "\t\t${dimension.name}Amount(amount = amount * that.toBigDecimal(),"
-        code += "\n\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
+        code += "\t\t${dimension.name}Amount(amount = amount * that.toBigDecimal(),\n"
+        code += "\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
 
         code += "\toverride operator fun div(that: Number) =\n"
-        code += "\t\t${dimension.name}Amount(amount = amount / that.toBigDecimal(),"
-        code += "\n\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
+        code += "\t\t${dimension.name}Amount(amount = amount / that.toBigDecimal(),\n"
+        code += "\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
 
         code += "\toverride operator fun <S : Unit<Scalar>> times(that: ScalarAmount<S>) =\n"
-        code += "\t\t${dimension.name}Amount(amount = amount * that.amount * convert(that.scalar to NUMERIC),"
-        code += "\n\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
+        code += "\t\t${dimension.name}Amount(amount = amount * that.amount * convert(that.scalar to NUMERIC),\n"
+        code += "\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
 
         code += "\toverride operator fun <S : Unit<Scalar>> div(that: ScalarAmount<S>) =\n"
-        code += "\t\t${dimension.name}Amount(amount = amount / that.amount / convert(that.scalar to NUMERIC),"
-        code += "\n\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
+        code += "\t\t${dimension.name}Amount(amount = amount / that.amount / convert(that.scalar to NUMERIC),\n"
+        code += "\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
 
         code += "\t@JvmName(\"plus${dimension.name}\")\n"
         code += "\toperator fun ${dimension.composite.buildGenericDeclaration()} plus(that: ${dimension.name}Amount${dimension.composite.buildGenericReceiver()}) =\n"
         code += "\t\t${dimension.name}Amount(amount = amount + that.amount"
-        if (major.count() > 0) code += "\n\t\t* convert(${major.buildConvert()})"
-        if (minor.count() > 0) code += "\n\t\t/ convert(${minor.buildConvert()})"
-        code += ",\n\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
+        if (major.count() > 0) code += "\n\t\t* convert(${major.buildConvert()}),\n"
+        if (minor.count() > 0) code += "\n\t\t/ convert(${minor.buildConvert()}),\n"
+        code += "\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
 
         code += "\toperator fun plus(that: ${dimension.name}Amount${dimension.composite.buildGenericReceiver()}) =\n"
-        code += "\t\t${dimension.name}Amount(amount = amount + that.amount"
-        code += ",\n\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
+        code += "\t\t${dimension.name}Amount(amount = amount + that.amount,\n"
+        code += "\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
 
         code += "\t@JvmName(\"minus${dimension.name}\")\n"
         code += "\toperator fun ${dimension.composite.buildGenericDeclaration()} minus(that: ${dimension.name}Amount${dimension.composite.buildGenericReceiver()}) =\n"
         code += "\t\t${dimension.name}Amount(amount = amount - that.amount"
-        if (major.count() > 0) code += "\n\t\t* convert(${major.buildConvert()})"
-        if (minor.count() > 0) code += "\n\t\t/ convert(${minor.buildConvert()})"
-        code += ",\n\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
+        if (major.count() > 0) code += "\n\t\t* convert(${major.buildConvert()}),\n"
+        if (minor.count() > 0) code += "\n\t\t/ convert(${minor.buildConvert()}),\n"
+        code += "\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
 
         code += "\toperator fun  minus(that: ${dimension.name}Amount${dimension.composite.buildGenericReceiver()}) =\n"
-        code += "\t\t${dimension.name}Amount(amount = amount - that.amount"
-        code += ",\n\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
+        code += "\t\t${dimension.name}Amount(amount = amount - that.amount,\n"
+        code += "\t\t\tunit = ${dimension.composite.buildUnit(dimension.composite)})\n\n"
 
         regions[dimension.name] = code
 
@@ -122,11 +133,12 @@ class GenerateAmountsTest
                     }
             }
 
-        val operatorCode = regions.keys
+        val generatedCode = regions.keys
             .asSequence()
             .sorted()
             .sortedBy { it != "Scalar" }
             .sortedBy { it != dimension.name }
+            .sortedBy { it != "Convert" }
             .map {
                 "\t// region -> ${it}\n\n" + regions[it] + "\t// endregion"
             }
@@ -169,7 +181,7 @@ class GenerateAmountsTest
             dimension.composite.buildVariables() +
             dimension.composite.buildConstructor(dimension.name) +
             "\n" +
-            "$operatorCode\n" +
+            "$generatedCode\n" +
             "}\n"
 
         val stub = this.javaClass.classLoader.getResource("package")!!

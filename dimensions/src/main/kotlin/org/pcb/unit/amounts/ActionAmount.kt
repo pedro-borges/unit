@@ -43,6 +43,14 @@ open class ActionAmount<L : Unit<Distance>, M : Unit<Mass>, T : Unit<Time>>(
                          unit = U2(METER, kilo(GRAM)) to SECOND)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Action>) =
+        ActionAmount(amount = amount * convert(this.unit to unit),
+                     unit = unit)
+
+    // endregion
+
     // region -> Action
 
     override operator fun times(that: Number) =

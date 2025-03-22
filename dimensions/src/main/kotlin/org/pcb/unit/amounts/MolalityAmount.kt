@@ -41,6 +41,14 @@ open class MolalityAmount<M : Unit<Mass>, N : Unit<Substance>>(
                            unit = MOLE to kilo(GRAM))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Molality>) =
+        MolalityAmount(amount = amount * convert(this.unit to unit),
+                       unit = unit)
+
+    // endregion
+
     // region -> Molality
 
     override operator fun times(that: Number) =

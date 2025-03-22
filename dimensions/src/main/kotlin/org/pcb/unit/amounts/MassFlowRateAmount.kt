@@ -40,6 +40,14 @@ open class MassFlowRateAmount<M : Unit<Mass>, T : Unit<Time>>(
                                unit = kilo(GRAM) to SECOND)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<MassFlowRate>) =
+        MassFlowRateAmount(amount = amount * convert(this.unit to unit),
+                           unit = unit)
+
+    // endregion
+
     // region -> MassFlowRate
 
     override operator fun times(that: Number) =

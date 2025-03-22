@@ -38,6 +38,14 @@ open class ElectricChargeAmount<I : Unit<ElectricCurrent>, T : Unit<Time>>(
                                  unit = U2(AMPERE, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<ElectricCharge>) =
+        ElectricChargeAmount(amount = amount * convert(this.unit to unit),
+                             unit = unit)
+
+    // endregion
+
     // region -> ElectricCharge
 
     override operator fun times(that: Number) =

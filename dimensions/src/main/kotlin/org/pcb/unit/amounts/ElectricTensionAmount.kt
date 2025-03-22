@@ -46,6 +46,14 @@ open class ElectricTensionAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, 
                                   unit = U2(METER, kilo(GRAM)) to U2(AMPERE, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<ElectricTension>) =
+        ElectricTensionAmount(amount = amount * convert(this.unit to unit),
+                              unit = unit)
+
+    // endregion
+
     // region -> ElectricTension
 
     override operator fun times(that: Number) =

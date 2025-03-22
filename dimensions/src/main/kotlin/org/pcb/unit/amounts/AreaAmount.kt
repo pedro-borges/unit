@@ -36,6 +36,14 @@ open class AreaAmount<L : Unit<Distance>>(
                        unit = METER)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Area>) =
+        AreaAmount(amount = amount * convert(this.unit to unit),
+                   unit = unit)
+
+    // endregion
+
     // region -> Area
 
     override operator fun times(that: Number) =

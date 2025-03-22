@@ -39,6 +39,14 @@ open class FrequencyAmount<T : Unit<Time>>(
                             unit = NUMERIC to SECOND)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Frequency>) =
+        FrequencyAmount(amount = amount * convert(this.unit to unit),
+                        unit = unit)
+
+    // endregion
+
     // region -> Frequency
 
     override operator fun times(that: Number) =

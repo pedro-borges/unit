@@ -26,6 +26,14 @@ open class ElectricCurrentAmount<I : Unit<ElectricCurrent>>(
 {
     val electricCurrent = unit
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<ElectricCurrent>) =
+        ElectricCurrentAmount(amount = amount * convert(this.unit to unit),
+                              unit = unit)
+
+    // endregion
+
     // region -> ElectricCurrent
 
     override operator fun times(that: Number) =

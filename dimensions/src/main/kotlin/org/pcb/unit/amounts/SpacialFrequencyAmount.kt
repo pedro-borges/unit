@@ -37,6 +37,14 @@ open class SpacialFrequencyAmount<L : Unit<Distance>>(
                                    unit = NUMERIC to METER)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<SpacialFrequency>) =
+        SpacialFrequencyAmount(amount = amount * convert(this.unit to unit),
+                               unit = unit)
+
+    // endregion
+
     // region -> SpacialFrequency
 
     override operator fun times(that: Number) =

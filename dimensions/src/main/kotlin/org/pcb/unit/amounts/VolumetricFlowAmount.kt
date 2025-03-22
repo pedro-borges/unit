@@ -39,6 +39,14 @@ open class VolumetricFlowAmount<L : Unit<Distance>, T : Unit<Time>>(
                                  unit = METER to SECOND)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<VolumetricFlow>) =
+        VolumetricFlowAmount(amount = amount * convert(this.unit to unit),
+                             unit = unit)
+
+    // endregion
+
     // region -> VolumetricFlow
 
     override operator fun times(that: Number) =

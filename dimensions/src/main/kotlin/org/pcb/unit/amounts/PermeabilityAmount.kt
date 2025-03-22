@@ -46,6 +46,14 @@ open class PermeabilityAmount<L : Unit<Distance>, I : Unit<ElectricCurrent>, M :
                                unit = U2(METER, kilo(GRAM)) to U2(AMPERE, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Permeability>) =
+        PermeabilityAmount(amount = amount * convert(this.unit to unit),
+                           unit = unit)
+
+    // endregion
+
     // region -> Permeability
 
     override operator fun times(that: Number) =

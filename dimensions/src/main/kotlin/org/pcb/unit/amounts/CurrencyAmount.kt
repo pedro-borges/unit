@@ -23,6 +23,14 @@ open class CurrencyAmount<C : Unit<Currency>>(
 {
     val currency = unit
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Currency>) =
+        CurrencyAmount(amount = amount * convert(this.unit to unit),
+                       unit = unit)
+
+    // endregion
+
     // region -> Currency
 
     override operator fun times(that: Number) =

@@ -40,6 +40,14 @@ open class MassDensityAmount<L : Unit<Distance>, M : Unit<Mass>>(
                               unit = kilo(GRAM) to METER)
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<MassDensity>) =
+        MassDensityAmount(amount = amount * convert(this.unit to unit),
+                          unit = unit)
+
+    // endregion
+
     // region -> MassDensity
 
     override operator fun times(that: Number) =

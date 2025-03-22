@@ -25,6 +25,14 @@ open class AngleAmount<BAC : Unit<Angle>>(
 {
     val angle = unit
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<Angle>) =
+        AngleAmount(amount = amount * convert(this.unit to unit),
+                    unit = unit)
+
+    // endregion
+
     // region -> Angle
 
     override operator fun times(that: Number) =

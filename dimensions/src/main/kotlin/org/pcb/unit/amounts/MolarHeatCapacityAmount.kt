@@ -51,6 +51,14 @@ open class MolarHeatCapacityAmount<L : Unit<Distance>, M : Unit<Mass>, N : Unit<
                                     unit = U2(METER, kilo(GRAM)) to U3(MOLE, KELVIN, SECOND))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<MolarHeatCapacity>) =
+        MolarHeatCapacityAmount(amount = amount * convert(this.unit to unit),
+                                unit = unit)
+
+    // endregion
+
     // region -> MolarHeatCapacity
 
     override operator fun times(that: Number) =

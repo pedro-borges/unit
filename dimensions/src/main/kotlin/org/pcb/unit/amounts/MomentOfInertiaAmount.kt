@@ -37,6 +37,14 @@ open class MomentOfInertiaAmount<L : Unit<Distance>, M : Unit<Mass>>(
                                   unit = U2(METER, kilo(GRAM)))
     }
 
+    // region -> Convert
+
+    fun convertTo(unit: Unit<MomentOfInertia>) =
+        MomentOfInertiaAmount(amount = amount * convert(this.unit to unit),
+                              unit = unit)
+
+    // endregion
+
     // region -> MomentOfInertia
 
     override operator fun times(that: Number) =
