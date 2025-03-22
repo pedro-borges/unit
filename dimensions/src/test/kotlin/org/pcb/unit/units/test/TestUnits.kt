@@ -2,9 +2,9 @@ package org.pcb.unit.units.test
 
 import java.math.BigDecimal.TEN
 import org.pcb.unit.Magnitude
-import org.pcb.unit.Magnitude.Companion.UNI
 import org.pcb.unit.SIScale.DECA
 import org.pcb.unit.SIScale.DECI
+import org.pcb.unit.SIScale.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.dimensions.Angle
 import org.pcb.unit.dimensions.Currency

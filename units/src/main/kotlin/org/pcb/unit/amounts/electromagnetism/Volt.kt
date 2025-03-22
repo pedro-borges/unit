@@ -1,7 +1,7 @@
 package org.pcb.unit.amounts.electromagnetism
 
 import org.pcb.unit.Magnitude
-import org.pcb.unit.Magnitude.Companion.UNI
+import org.pcb.unit.SIScale.UNI
 import org.pcb.unit.U2
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.ElectricTensionAmount

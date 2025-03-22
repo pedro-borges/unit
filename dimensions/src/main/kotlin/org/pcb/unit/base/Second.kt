@@ -1,7 +1,7 @@
 package org.pcb.unit.base
 
 import org.pcb.unit.Magnitude
-import org.pcb.unit.Magnitude.Companion.UNI
+import org.pcb.unit.SIScale.UNI
 import org.pcb.unit.Unit
 import org.pcb.unit.amounts.TimeAmount
 import org.pcb.unit.dimensions.Time

@@ -36,15 +36,6 @@ interface Magnitude
 
     operator fun times(that: Magnitude) =
         get(power + that.power)
-
-    companion object
-    {
-        val UNI = object : Magnitude
-        {
-            override val symbol = ""
-            override val power = 0
-        }
-    }
 }
 
 class Scale(override val symbol: String,
@@ -66,6 +57,7 @@ enum class SIScale(override val symbol: String,
     HECTO("h", 2),
     DECA("da", 1),
     DECI("d", -1),
+    UNI("", 0),
     CENTI("c", -2),
     MILLI("m", -3),
     MICRO("μ", -6),

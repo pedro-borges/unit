@@ -1,7 +1,7 @@
 package org.pcb.unit.amounts.thermodynamics
 
 import org.pcb.unit.Magnitude
-import org.pcb.unit.Magnitude.Companion.UNI
+import org.pcb.unit.SIScale.UNI
 import org.pcb.unit.U2
 import org.pcb.unit.U3
 import org.pcb.unit.Unit
