@@ -32,6 +32,6 @@ class ExtensionsTest
     @MethodSource("getCompensations")
     fun testCompensation(pair: Pair<Int, Int>)
     {
-        assertEquals(pair.second, pair.first.compensation())
+        assertEquals(pair.second, pair.first.compensationForEngineeringNotation())
     }
 }

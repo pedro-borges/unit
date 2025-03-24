@@ -1,12 +1,10 @@
-package org.pcb.unit.amounts.chemistry
+package org.pcb.unit.chemisty
 
 import org.pcb.unit.amounts.MolarMassAmount
 import org.pcb.unit.base.Gram.GRAM
 import org.pcb.unit.base.Mole.MOLE
-import org.pcb.unit.chemisty.ChemicalElement
-import org.pcb.unit.chemisty.ProvidesAtomicMass
 
-class Molecule(vararg elements: Pair<ChemicalElement, Int>)
+class Molecule(name: String, vararg elements: Pair<ChemicalElement, Int>)
     : ProvidesAtomicMass
 {
     override val atomicMass =

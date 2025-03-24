@@ -1,16 +1,5 @@
 package org.pcb.unit
 
-import org.pcb.unit.Molecules.CH4
-import org.pcb.unit.Molecules.CO
-import org.pcb.unit.Molecules.CO2
-import org.pcb.unit.Molecules.H2
-import org.pcb.unit.Molecules.I2
-import org.pcb.unit.Molecules.N2
-import org.pcb.unit.Molecules.N2O
-import org.pcb.unit.Molecules.NH3
-import org.pcb.unit.Molecules.NO2
-import org.pcb.unit.Molecules.O2
-import org.pcb.unit.Molecules.O3
 import org.pcb.unit.amounts.MolarMassAmount
 import org.pcb.unit.amounts.thermodynamics.Gas
 import org.pcb.unit.base.Gram.GRAM
@@ -20,6 +9,17 @@ import org.pcb.unit.chemisty.ChemicalElement.He
 import org.pcb.unit.chemisty.ChemicalElement.Kr
 import org.pcb.unit.chemisty.ChemicalElement.Ne
 import org.pcb.unit.chemisty.ChemicalElement.Xe
+import org.pcb.unit.chemisty.Molecules.CH4
+import org.pcb.unit.chemisty.Molecules.CO
+import org.pcb.unit.chemisty.Molecules.CO2
+import org.pcb.unit.chemisty.Molecules.H2
+import org.pcb.unit.chemisty.Molecules.I2
+import org.pcb.unit.chemisty.Molecules.N2
+import org.pcb.unit.chemisty.Molecules.N2O
+import org.pcb.unit.chemisty.Molecules.NH3
+import org.pcb.unit.chemisty.Molecules.NO2
+import org.pcb.unit.chemisty.Molecules.O2
+import org.pcb.unit.chemisty.Molecules.O3
 
 object Earth
 {
